@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "restaurant_id": 1,
+    "category_id": 10,
+    "name": "Burger de Frango",
+    "price": 20.50,
+    "image_url": "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "stock": 15,
+    "discount": 0
+  },
+  {
+    "id": 2,
+    "restaurant_id": 1,
+    "category_id": 11,
+    "name": "Pizza Margherita",
+    "price": 30.00,
+    "image_url": "https://images.pexels.com/photos/2147491/pexels-photo-2147491.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "stock": 8,
+    "discount": 10
+  },
+  {
+    "id": 3,
+    "restaurant_id": 1,
+    "category_id": 12,
+    "name": "Lasagna",
+    "price": 32.75,
+    "image_url": "https://images.pexels.com/photos/5949909/pexels-photo-5949909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "stock": 6,
+    "discount": 0
+  },
+  {
+    "id": 4,
+    "restaurant_id": 1,
+    "category_id": 13,
+    "name": "Wrap Vegetariano",
+    "price": 18.90,
+    "image_url": "https://images.pexels.com/photos/2955819/pexels-photo-2955819.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "stock": 10,
+    "discount": 5
+  },
+  {
+    "id": 5,
+    "restaurant_id": 1,
+    "category_id": 14,
+    "name": "Risoto de Camarão",
+    "price": 42.30,
+    "image_url": "https://images.pexels.com/photos/13998891/pexels-photo-13998891.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "stock": 4,
+    "discount": 15
+  }
+]

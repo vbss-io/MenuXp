@@ -1,0 +1,58 @@
+[
+  {
+    "id": 501,
+    "order_id": 101,
+    "template_name": "order_received",
+    "status": "sent",
+    "timestamp": "2025-06-04T10:16:00Z"
+  },
+  {
+    "id": 502,
+    "order_id": 102,
+    "template_name": "order_confirmed",
+    "status": "delivered",
+    "timestamp": "2025-06-04T10:21:00Z"
+  },
+  {
+    "id": 503,
+    "order_id": 103,
+    "template_name": "order_in_production",
+    "status": "read",
+    "timestamp": "2025-06-04T10:27:00Z"
+  },
+  {
+    "id": 504,
+    "order_id": 104,
+    "template_name": "order_ready",
+    "status": "delivered",
+    "timestamp": "2025-06-04T10:35:00Z"
+  },
+  {
+    "id": 505,
+    "order_id": 105,
+    "template_name": "order_received",
+    "status": "sent",
+    "timestamp": "2025-06-04T09:46:00Z"
+  },
+  {
+    "id": 506,
+    "order_id": 105,
+    "template_name": "order_confirmed",
+    "status": "delivered",
+    "timestamp": "2025-06-04T09:48:00Z"
+  },
+  {
+    "id": 507,
+    "order_id": 105,
+    "template_name": "order_in_production",
+    "status": "read",
+    "timestamp": "2025-06-04T09:55:00Z"
+  },
+  {
+    "id": 508,
+    "order_id": 105,
+    "template_name": "order_ready",
+    "status": "read",
+    "timestamp": "2025-06-04T10:10:00Z"
+  }
+]
