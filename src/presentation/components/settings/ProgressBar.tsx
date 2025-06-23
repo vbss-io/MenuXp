@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Trophy } from 'lucide-react';
-import { Settings } from '../../contexts/AppContext';
+import { Settings } from '../../presentation/contexts/AppContext';
 
 interface ProgressBarProps {
   settings: Settings;

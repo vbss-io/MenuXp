@@ -1,6 +1,6 @@
 import React from 'react';
 import { X, ArrowRight } from 'lucide-react';
-import { Order } from '../../contexts/AppContext';
+import { Order } from '../../presentation/contexts/AppContext';
 
 interface StatusConfirmModalProps {
   order: Order;

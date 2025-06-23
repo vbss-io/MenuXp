@@ -1,57 +1,53 @@
-import React, { useState, useContext } from 'react';
-import { Pencil, Trash2, Plus, Printer, Percent } from 'lucide-react';
-import { AppContext, MenuItem } from '../../contexts/AppContext';
-import MenuModalForm from './MenuModalForm';
-import PrintMenuModal from './PrintMenuModal';
-import BulkDiscountModal from './BulkDiscountModal';
+import React, { useState, useContext } from 'react'
+import { Pencil, Trash2, Plus, Printer, Percent } from 'lucide-react'
+import { AppContext, type MenuItem } from '@/presentation/contexts/AppContext'
+import MenuModalForm from './MenuModalForm'
+import PrintMenuModal from './PrintMenuModal'
+import BulkDiscountModal from './BulkDiscountModal'
 
 export default function MenuDataTable() {
-  const { menuItems, deleteMenuItem } = useContext(AppContext);
-  const [showModal, setShowModal] = useState(false);
-  const [showPrintModal, setShowPrintModal] = useState(false);
-  const [showBulkDiscountModal, setShowBulkDiscountModal] = useState(false);
-  const [editItem, setEditItem] = useState<MenuItem | null>(null);
-  const [showConfirmDelete, setShowConfirmDelete] = useState<number | null>(null);
-  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const { menuItems, deleteMenuItem } = useContext(AppContext)
+  const [showModal, setShowModal] = useState(false)
+  const [showPrintModal, setShowPrintModal] = useState(false)
+  const [showBulkDiscountModal, setShowBulkDiscountModal] = useState(false)
+  const [editItem, setEditItem] = useState<MenuItem | null>(null)
+  const [showConfirmDelete, setShowConfirmDelete] = useState<number | null>(null)
+  const [selectedItems, setSelectedItems] = useState<number[]>([])
 
   function handleEditClick(item: MenuItem) {
-    setEditItem(item);
-    setShowModal(true);
+    setEditItem(item)
+    setShowModal(true)
   }
 
   function handleDeleteClick(id: number) {
-    setShowConfirmDelete(id);
+    setShowConfirmDelete(id)
   }
 
   function confirmDelete(id: number) {
-    deleteMenuItem(id);
-    setShowConfirmDelete(null);
+    deleteMenuItem(id)
+    setShowConfirmDelete(null)
   }
 
   function closeModal() {
-    setShowModal(false);
-    setEditItem(null);
+    setShowModal(false)
+    setEditItem(null)
   }
 
   function handleSelectItem(id: number) {
-    setSelectedItems(prev => 
-      prev.includes(id) 
-        ? prev.filter(itemId => itemId !== id)
-        : [...prev, id]
-    );
+    setSelectedItems((prev) => (prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]))
   }
 
   function handleSelectAll() {
     if (selectedItems.length === menuItems.length) {
-      setSelectedItems([]);
+      setSelectedItems([])
     } else {
-      setSelectedItems(menuItems.map(item => item.id));
+      setSelectedItems(menuItems.map((item) => item.id))
     }
   }
 
   const calculateDiscountedPrice = (price: number, discount: number) => {
-    return price - (price * discount / 100);
-  };
+    return price - (price * discount) / 100
+  }
 
   return (
     <div className="p-6">
@@ -67,17 +63,11 @@ export default function MenuDataTable() {
               Aplicar Desconto ({selectedItems.length})
             </button>
           )}
-          <button
-            onClick={() => setShowPrintModal(true)}
-            className="btn-secondary"
-          >
+          <button onClick={() => setShowPrintModal(true)} className="btn-secondary">
             <Printer size={18} className="mr-1" />
             Imprimir
           </button>
-          <button
-            onClick={() => setShowModal(true)}
-            className="btn-primary bg-accent-2-500 hover:bg-accent-2-600"
-          >
+          <button onClick={() => setShowModal(true)} className="btn-primary bg-accent-2-500 hover:bg-accent-2-600">
             <Plus size={18} className="mr-1" />
             Novo Item
           </button>
@@ -97,25 +87,46 @@ export default function MenuDataTable() {
                     className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
                   />
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider"
+                >
                   Imagem
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider"
+                >
                   Nome
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider"
+                >
                   Preço
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider"
+                >
                   Desconto
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider"
+                >
                   Preço Final
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider"
+                >
                   Estoque
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider">
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-nav font-medium text-text-invert uppercase tracking-wider"
+                >
                   Ações
                 </th>
               </tr>
@@ -132,10 +143,10 @@ export default function MenuDataTable() {
                     />
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <img 
-                      src={item.image_url} 
-                      alt={item.name} 
-                      className="h-10 w-10 rounded-sm object-cover border border-black" 
+                    <img
+                      src={item.image_url}
+                      alt={item.name}
+                      className="h-10 w-10 rounded-sm object-cover border border-black"
                     />
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -147,9 +158,7 @@ export default function MenuDataTable() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {item.discount > 0 ? (
-                      <span className="badge-level bg-primary-100 text-primary-800">
-                        {item.discount}% OFF
-                      </span>
+                      <span className="badge-level bg-primary-100 text-primary-800">{item.discount}% OFF</span>
                     ) : (
                       <span className="text-gray-400 text-subtitle">-</span>
                     )}
@@ -159,36 +168,38 @@ export default function MenuDataTable() {
                       R$ {calculateDiscountedPrice(item.price, item.discount).toFixed(2)}
                     </div>
                     {item.discount > 0 && (
-                      <div className="text-subtitle text-gray-500 line-through">
-                        R$ {item.price.toFixed(2)}
-                      </div>
+                      <div className="text-subtitle text-gray-500 line-through">R$ {item.price.toFixed(2)}</div>
                     )}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <div className={`inline-flex px-2 py-1 text-subtitle rounded-sm border border-black ${
-                      item.stock > 10 ? 'bg-accent-2-100 text-accent-2-800' : 
-                      item.stock > 5 ? 'bg-warning-100 text-warning-800' : 
-                      'bg-error-100 text-error-800'
-                    }`}>
+                    <div
+                      className={`inline-flex px-2 py-1 text-subtitle rounded-sm border border-black ${
+                        item.stock > 10
+                          ? 'bg-accent-2-100 text-accent-2-800'
+                          : item.stock > 5
+                            ? 'bg-warning-100 text-warning-800'
+                            : 'bg-error-100 text-error-800'
+                      }`}
+                    >
                       {item.stock} unidades
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-subtitle font-medium">
-                    <button 
-                      onClick={() => handleEditClick(item)} 
+                    <button
+                      onClick={() => handleEditClick(item)}
                       className="text-info-600 hover:text-info-900 mr-3 transition-colors"
                       aria-label={`Edit ${item.name}`}
                     >
                       <Pencil size={18} />
                     </button>
-                    <button 
+                    <button
                       onClick={() => handleDeleteClick(item.id)}
                       className="text-error-600 hover:text-error-900 transition-colors"
                       aria-label={`Delete ${item.name}`}
                     >
                       <Trash2 size={18} />
                     </button>
-                    
+
                     {showConfirmDelete === item.id && (
                       <div className="modal-overlay">
                         <div className="modal-content max-w-md mx-auto">
@@ -197,13 +208,11 @@ export default function MenuDataTable() {
                           </div>
                           <div className="p-6">
                             <p className="mb-6 text-body text-text-secondary">
-                              Tem certeza que deseja excluir <strong>{item.name}</strong>? Esta ação não pode ser desfeita.
+                              Tem certeza que deseja excluir <strong>{item.name}</strong>? Esta ação não pode ser
+                              desfeita.
                             </p>
                             <div className="flex justify-end space-x-3">
-                              <button
-                                onClick={() => setShowConfirmDelete(null)}
-                                className="btn-secondary"
-                              >
+                              <button onClick={() => setShowConfirmDelete(null)} className="btn-secondary">
                                 Cancelar
                               </button>
                               <button
@@ -224,29 +233,20 @@ export default function MenuDataTable() {
           </table>
         </div>
       </div>
-      
-      {showModal && (
-        <MenuModalForm 
-          item={editItem} 
-          onClose={closeModal}
-        />
-      )}
 
-      {showPrintModal && (
-        <PrintMenuModal 
-          onClose={() => setShowPrintModal(false)}
-        />
-      )}
+      {showModal && <MenuModalForm item={editItem} onClose={closeModal} />}
+
+      {showPrintModal && <PrintMenuModal onClose={() => setShowPrintModal(false)} />}
 
       {showBulkDiscountModal && (
         <BulkDiscountModal
           selectedItems={selectedItems}
           onClose={() => {
-            setShowBulkDiscountModal(false);
-            setSelectedItems([]);
+            setShowBulkDiscountModal(false)
+            setSelectedItems([])
           }}
         />
       )}
     </div>
-  );
+  )
 }

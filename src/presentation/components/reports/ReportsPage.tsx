@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { FileText, Download, Calendar, TrendingUp, Package, DollarSign } from 'lucide-react';
-import { AppContext } from '../../contexts/AppContext';
+import { AppContext } from '@/presentation/contexts/AppContext';
 
 export default function ReportsPage() {
   const { operationReports, generateReport } = useContext(AppContext);

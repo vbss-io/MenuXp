@@ -1,73 +1,71 @@
-import React, { useState, useContext } from 'react';
-import { QrCode, Trophy } from 'lucide-react';
-import { Settings, AppContext } from '../../contexts/AppContext';
-import ProgressBar from './ProgressBar';
+import React, { useState, useContext } from 'react'
+import { QrCode, Trophy } from 'lucide-react'
+import { type Settings, AppContext } from '@/presentation/contexts/AppContext'
+import ProgressBar from './ProgressBar'
 
 export default function SettingsForm() {
-  const { settings, updateSettings } = useContext(AppContext);
-  const [formData, setFormData] = useState<Settings>(settings);
-  const [activeTab, setActiveTab] = useState<'brand' | 'hours' | 'templates' | 'operations'>('brand');
+  const { settings, updateSettings } = useContext(AppContext)
+  const [formData, setFormData] = useState<Settings>(settings)
+  const [activeTab, setActiveTab] = useState<'brand' | 'hours' | 'templates' | 'operations'>('brand')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target;
-    
+    const { name, value, type } = e.target
+
     // Handle checkboxes for arrays
     if (type === 'checkbox') {
-      const checked = (e.target as HTMLInputElement).checked;
+      const checked = (e.target as HTMLInputElement).checked
       if (name === 'payment_methods' || name === 'operation_types') {
-        const currentArray = formData[name as keyof Settings] as string[];
-        const newArray = checked 
-          ? [...currentArray, value]
-          : currentArray.filter(item => item !== value);
-        setFormData(prev => ({ ...prev, [name]: newArray }));
+        const currentArray = formData[name as keyof Settings] as string[]
+        const newArray = checked ? [...currentArray, value] : currentArray.filter((item) => item !== value)
+        setFormData((prev) => ({ ...prev, [name]: newArray }))
       }
-      return;
+      return
     }
-    
+
     // Handle nested properties
     if (name.includes('.')) {
-      const [parent, child] = name.split('.');
-      setFormData(prev => ({
+      const [parent, child] = name.split('.')
+      setFormData((prev) => ({
         ...prev,
         [parent]: {
           ...prev[parent as keyof Settings],
           [child]: value
         }
-      }));
+      }))
     } else if (Object.keys(settings.templates).includes(name)) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
         templates: {
           ...prev.templates,
           [name]: value
         }
-      }));
+      }))
     } else {
-      setFormData(prev => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({ ...prev, [name]: value }))
     }
-  };
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    updateSettings(formData);
-  };
+    e.preventDefault()
+    updateSettings(formData)
+  }
 
   const generateQRCode = () => {
-    const menuUrl = `https://menuxp.com/menu/${formData.restaurant_id}`;
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(menuUrl)}`;
-    setFormData(prev => ({ ...prev, qr_code_url: qrUrl }));
-  };
+    const menuUrl = `https://menuxp.com/menu/${formData.restaurant_id}`
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(menuUrl)}`
+    setFormData((prev) => ({ ...prev, qr_code_url: qrUrl }))
+  }
 
   const downloadQRCode = () => {
     if (formData.qr_code_url) {
-      const link = document.createElement('a');
-      link.href = formData.qr_code_url;
-      link.download = 'qr-code-cardapio.png';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const link = document.createElement('a')
+      link.href = formData.qr_code_url
+      link.download = 'qr-code-cardapio.png'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
     }
-  };
+  }
 
   return (
     <div className="p-6">
@@ -75,13 +73,13 @@ export default function SettingsForm() {
         <h1 className="text-section font-bold text-text-primary">Configurações</h1>
         <ProgressBar settings={formData} />
       </div>
-      
+
       <div className="card-basic overflow-hidden">
         <div className="border-b border-black">
           <nav className="flex -mb-px">
             <button
               className={`px-4 py-3 font-medium text-nav border-b-2 transition-colors ${
-                activeTab === 'brand' 
+                activeTab === 'brand'
                   ? 'border-primary-500 text-primary-600'
                   : 'border-transparent text-text-secondary hover:text-text-primary hover:border-gray-300'
               }`}
@@ -91,7 +89,7 @@ export default function SettingsForm() {
             </button>
             <button
               className={`px-4 py-3 font-medium text-nav border-b-2 transition-colors ${
-                activeTab === 'operations' 
+                activeTab === 'operations'
                   ? 'border-primary-500 text-primary-600'
                   : 'border-transparent text-text-secondary hover:text-text-primary hover:border-gray-300'
               }`}
@@ -101,7 +99,7 @@ export default function SettingsForm() {
             </button>
             <button
               className={`px-4 py-3 font-medium text-nav border-b-2 transition-colors ${
-                activeTab === 'hours' 
+                activeTab === 'hours'
                   ? 'border-primary-500 text-primary-600'
                   : 'border-transparent text-text-secondary hover:text-text-primary hover:border-gray-300'
               }`}
@@ -111,7 +109,7 @@ export default function SettingsForm() {
             </button>
             <button
               className={`px-4 py-3 font-medium text-nav border-b-2 transition-colors ${
-                activeTab === 'templates' 
+                activeTab === 'templates'
                   ? 'border-primary-500 text-primary-600'
                   : 'border-transparent text-text-secondary hover:text-text-primary hover:border-gray-300'
               }`}
@@ -121,7 +119,7 @@ export default function SettingsForm() {
             </button>
           </nav>
         </div>
-        
+
         <form onSubmit={handleSubmit} className="p-6">
           {activeTab === 'brand' && (
             <div className="space-y-6">
@@ -138,7 +136,7 @@ export default function SettingsForm() {
                   className="input-base w-full"
                 />
               </div>
-              
+
               <div>
                 <label htmlFor="logo_url" className="block text-subtitle font-medium text-text-primary mb-1">
                   Logo URL
@@ -153,15 +151,15 @@ export default function SettingsForm() {
                 />
                 {formData.logo_url && (
                   <div className="mt-2">
-                    <img 
-                      src={formData.logo_url} 
-                      alt="Logo Preview" 
-                      className="h-16 object-contain border border-black rounded-sm" 
+                    <img
+                      src={formData.logo_url}
+                      alt="Logo Preview"
+                      className="h-16 object-contain border border-black rounded-sm"
                     />
                   </div>
                 )}
               </div>
-              
+
               <div>
                 <label htmlFor="theme_color" className="block text-subtitle font-medium text-text-primary mb-1">
                   Cor do Tema
@@ -184,7 +182,7 @@ export default function SettingsForm() {
                   />
                 </div>
               </div>
-              
+
               <div>
                 <label htmlFor="whatsapp_number" className="block text-subtitle font-medium text-text-primary mb-1">
                   Número WhatsApp
@@ -201,9 +199,7 @@ export default function SettingsForm() {
               </div>
 
               <div>
-                <label className="block text-subtitle font-medium text-text-primary mb-1">
-                  QR Code do Cardápio
-                </label>
+                <label className="block text-subtitle font-medium text-text-primary mb-1">QR Code do Cardápio</label>
                 <div className="bg-bg-light p-4 rounded-sm border border-black">
                   <div className="flex items-start space-x-4">
                     <div className="flex-1">
@@ -232,10 +228,10 @@ export default function SettingsForm() {
                     </div>
                     {formData.qr_code_url && (
                       <div className="flex-shrink-0">
-                        <img 
-                          src={formData.qr_code_url} 
-                          alt="QR Code do Cardápio" 
-                          className="w-24 h-24 border border-black rounded-sm" 
+                        <img
+                          src={formData.qr_code_url}
+                          alt="QR Code do Cardápio"
+                          className="w-24 h-24 border border-black rounded-sm"
                         />
                       </div>
                     )}
@@ -248,9 +244,7 @@ export default function SettingsForm() {
           {activeTab === 'operations' && (
             <div className="space-y-6">
               <div>
-                <label className="block text-subtitle font-medium text-text-primary mb-3">
-                  Tipos de Operação
-                </label>
+                <label className="block text-subtitle font-medium text-text-primary mb-3">Tipos de Operação</label>
                 <div className="space-y-2">
                   {[
                     { value: 'delivery', label: 'Delivery', icon: '🚚' },
@@ -319,13 +313,13 @@ export default function SettingsForm() {
               </div>
             </div>
           )}
-          
+
           {activeTab === 'hours' && (
             <div className="space-y-4">
               <p className="text-subtitle text-text-secondary mb-4">
                 Configure os horários de funcionamento do seu estabelecimento.
               </p>
-              
+
               {Object.entries(formData.business_hours).map(([day, hours]) => (
                 <div key={day} className="flex items-center">
                   <label htmlFor={`hours-${day}`} className="w-1/3 block text-subtitle font-medium text-text-primary">
@@ -344,21 +338,25 @@ export default function SettingsForm() {
               ))}
             </div>
           )}
-          
+
           {activeTab === 'templates' && (
             <div className="space-y-6">
               <p className="text-subtitle text-text-secondary mb-4">
-                Configure as mensagens enviadas automaticamente para seus clientes.
-                Use as tags <code className="bg-bg-light px-1 rounded-sm border border-black">#{'{'}order_id{'}'}</code> e <code className="bg-bg-light px-1 rounded-sm border border-black">#{'{'}cancel_reason{'}'}</code> que serão substituídas pelos valores reais.
+                Configure as mensagens enviadas automaticamente para seus clientes. Use as tags{' '}
+                <code className="bg-bg-light px-1 rounded-sm border border-black">
+                  #{'{'}order_id{'}'}
+                </code>{' '}
+                e{' '}
+                <code className="bg-bg-light px-1 rounded-sm border border-black">
+                  #{'{'}cancel_reason{'}'}
+                </code>{' '}
+                que serão substituídas pelos valores reais.
               </p>
-              
+
               {Object.entries(formData.templates).map(([key, value]) => (
                 <div key={key}>
-                  <label 
-                    htmlFor={key} 
-                    className="block text-subtitle font-medium text-text-primary mb-1"
-                  >
-                    {key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                  <label htmlFor={key} className="block text-subtitle font-medium text-text-primary mb-1">
+                    {key.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())}
                   </label>
                   <textarea
                     id={key}
@@ -372,17 +370,14 @@ export default function SettingsForm() {
               ))}
             </div>
           )}
-          
+
           <div className="mt-6 flex justify-end">
-            <button
-              type="submit"
-              className="btn-primary bg-primary-500 hover:bg-primary-600"
-            >
+            <button type="submit" className="btn-primary bg-primary-500 hover:bg-primary-600">
               Salvar Configurações
             </button>
           </div>
         </form>
       </div>
     </div>
-  );
+  )
 }

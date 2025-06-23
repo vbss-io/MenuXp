@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { RefreshCw, Check, CheckCheck, AlertCircle } from 'lucide-react';
-import { AppContext, Message } from '../../contexts/AppContext';
+import { AppContext, Message } from '@/presentation/contexts/AppContext';
 
 export default function MessagesTimeline() {
   const { messages, resendMessage } = useContext(AppContext);

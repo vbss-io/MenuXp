@@ -1,53 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AppProvider } from './contexts/AppContext';
-import Sidebar from './components/layout/Sidebar';
-import TopAppBar from './components/layout/TopAppBar';
-import Dashboard from './components/dashboard/Dashboard';
-import OrdersKanban from './components/orders/OrdersKanban';
-import MenuDataTable from './components/menu/MenuDataTable';
-import SettingsForm from './components/settings/SettingsForm';
-import MessagesTimeline from './components/messages/MessagesTimeline';
-import ReportsPage from './components/reports/ReportsPage';
-import MissionsPage from './components/missions/MissionsPage';
-import Notification from './components/ui/Notification';
+import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { AppProvider } from './presentation/contexts/AppContext'
+import Sidebar from '@/presentation/components/layout/Sidebar'
+import TopAppBar from '@/presentation/components/layout/TopAppBar'
+import Dashboard from '@/presentation/components/dashboard/Dashboard'
+import OrdersKanban from '@/presentation/components/orders/OrdersKanban'
+import MenuDataTable from '@/presentation/components/menu/MenuDataTable'
+import SettingsForm from '@/presentation/components/settings/SettingsForm'
+import MessagesTimeline from '@/presentation/components/messages/MessagesTimeline'
+import ReportsPage from '@/presentation/components/reports/ReportsPage'
+import MissionsPage from '@/presentation/components/missions/MissionsPage'
+import Notification from './presentation/components/ui/Notification'
 
 function App() {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-  
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+
   // Handle responsive sidebar
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
-        setSidebarCollapsed(true);
+        setSidebarCollapsed(true)
       } else {
-        setSidebarCollapsed(false);
+        setSidebarCollapsed(false)
       }
-    };
-    
+    }
+
     // Set initial state
-    handleResize();
-    
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-  
+    handleResize()
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const toggleSidebar = () => {
-    setSidebarCollapsed(!sidebarCollapsed);
-  };
+    setSidebarCollapsed(!sidebarCollapsed)
+  }
 
   return (
     <Router>
       <AppProvider>
         <div className="flex bg-gray-100 min-h-screen">
-          <Sidebar 
-            collapsed={sidebarCollapsed} 
-            toggleSidebar={toggleSidebar} 
-          />
-          
+          <Sidebar collapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
+
           <div className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? 'ml-16' : 'ml-60'}`}>
             <TopAppBar onMenuClick={toggleSidebar} />
-            
+
             <main className="pt-16">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
@@ -60,12 +57,12 @@ function App() {
               </Routes>
             </main>
           </div>
-          
+
           <Notification />
         </div>
       </AppProvider>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

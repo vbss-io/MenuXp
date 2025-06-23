@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Menu, Search, Bell, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../../contexts/AppContext';
+import { AppContext } from '@/presentation/contexts/AppContext';
 
 interface TopAppBarProps {
   onMenuClick: () => void;

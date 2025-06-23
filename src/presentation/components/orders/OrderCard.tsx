@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Clock, MapPin, User, CreditCard, Banknote, Smartphone, DollarSign, MessageCircle, X, ChevronRight } from 'lucide-react';
-import { Order } from '../../contexts/AppContext';
+import { Order } from '../../presentation/contexts/AppContext';
 import OrderDetailModal from './OrderDetailModal';
 
 interface OrderCardProps {

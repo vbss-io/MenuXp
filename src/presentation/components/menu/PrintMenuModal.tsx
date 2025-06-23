@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
-import { X, Download } from 'lucide-react';
-import { AppContext } from '../../contexts/AppContext';
+import React, { useContext, useState } from 'react'
+import { X, Download } from 'lucide-react'
+import { AppContext } from '@/presentation/contexts/AppContext'
 
 interface PrintMenuModalProps {
-  onClose: () => void;
+  onClose: () => void
 }
 
 const categories = {
@@ -12,11 +12,11 @@ const categories = {
   12: 'Sobremesas & Doces',
   13: 'Combos e Promoções',
   14: 'Complementos'
-};
+}
 
 export default function PrintMenuModal({ onClose }: PrintMenuModalProps) {
-  const { menuItems, settings } = useContext(AppContext);
-  const [selectedTemplate, setSelectedTemplate] = useState('simple');
+  const { menuItems, settings } = useContext(AppContext)
+  const [selectedTemplate, setSelectedTemplate] = useState('simple')
 
   const templates = [
     {
@@ -39,21 +39,24 @@ export default function PrintMenuModal({ onClose }: PrintMenuModalProps) {
       name: 'Promocional',
       description: 'Destaca itens com desconto'
     }
-  ];
+  ]
 
   const calculateDiscountedPrice = (price: number, discount: number) => {
-    return price - (price * discount / 100);
-  };
+    return price - (price * discount) / 100
+  }
 
   const generateMenuHTML = () => {
-    const itemsByCategory = menuItems.reduce((acc, item) => {
-      const categoryName = categories[item.category_id] || 'Outros';
-      if (!acc[categoryName]) {
-        acc[categoryName] = [];
-      }
-      acc[categoryName].push(item);
-      return acc;
-    }, {} as Record<string, typeof menuItems>);
+    const itemsByCategory = menuItems.reduce(
+      (acc, item) => {
+        const categoryName = categories[item.category_id] || 'Outros'
+        if (!acc[categoryName]) {
+          acc[categoryName] = []
+        }
+        acc[categoryName].push(item)
+        return acc
+      },
+      {} as Record<string, typeof menuItems>
+    )
 
     let html = `
       <!DOCTYPE html>
@@ -158,12 +161,12 @@ export default function PrintMenuModal({ onClose }: PrintMenuModalProps) {
           <div class="restaurant-name">${settings.name}</div>
           <div>Cardápio Atualizado em ${new Date().toLocaleDateString('pt-BR')}</div>
         </div>
-    `;
+    `
 
     if (selectedTemplate === 'simple') {
-      html += '<div class="simple-menu">';
-      menuItems.forEach(item => {
-        const finalPrice = calculateDiscountedPrice(item.price, item.discount);
+      html += '<div class="simple-menu">'
+      menuItems.forEach((item) => {
+        const finalPrice = calculateDiscountedPrice(item.price, item.discount)
         html += `
           <div class="item">
             <div class="item-header">
@@ -175,13 +178,13 @@ export default function PrintMenuModal({ onClose }: PrintMenuModalProps) {
               </span>
             </div>
           </div>
-        `;
-      });
-      html += '</div>';
+        `
+      })
+      html += '</div>'
     } else if (selectedTemplate === 'detailed') {
-      html += '<div class="detailed-menu">';
-      menuItems.forEach(item => {
-        const finalPrice = calculateDiscountedPrice(item.price, item.discount);
+      html += '<div class="detailed-menu">'
+      menuItems.forEach((item) => {
+        const finalPrice = calculateDiscountedPrice(item.price, item.discount)
         html += `
           <div class="item">
             <img src="${item.image_url}" alt="${item.name}" class="item-image">
@@ -197,17 +200,17 @@ export default function PrintMenuModal({ onClose }: PrintMenuModalProps) {
               <div class="stock-info">Estoque: ${item.stock} unidades</div>
             </div>
           </div>
-        `;
-      });
-      html += '</div>';
+        `
+      })
+      html += '</div>'
     } else if (selectedTemplate === 'categories') {
       Object.entries(itemsByCategory).forEach(([categoryName, items]) => {
         html += `
           <div class="category">
             <div class="category-title">${categoryName}</div>
-        `;
-        items.forEach(item => {
-          const finalPrice = calculateDiscountedPrice(item.price, item.discount);
+        `
+        items.forEach((item) => {
+          const finalPrice = calculateDiscountedPrice(item.price, item.discount)
           html += `
             <div class="item">
               <div class="item-header">
@@ -219,21 +222,21 @@ export default function PrintMenuModal({ onClose }: PrintMenuModalProps) {
                 </span>
               </div>
             </div>
-          `;
-        });
-        html += '</div>';
-      });
+          `
+        })
+        html += '</div>'
+      })
     } else if (selectedTemplate === 'promotional') {
-      const itemsWithDiscount = menuItems.filter(item => item.discount > 0);
-      const itemsWithoutDiscount = menuItems.filter(item => item.discount === 0);
+      const itemsWithDiscount = menuItems.filter((item) => item.discount > 0)
+      const itemsWithoutDiscount = menuItems.filter((item) => item.discount === 0)
 
       if (itemsWithDiscount.length > 0) {
         html += `
           <div class="category">
             <div class="category-title">🔥 PROMOÇÕES</div>
-        `;
-        itemsWithDiscount.forEach(item => {
-          const finalPrice = calculateDiscountedPrice(item.price, item.discount);
+        `
+        itemsWithDiscount.forEach((item) => {
+          const finalPrice = calculateDiscountedPrice(item.price, item.discount)
           html += `
             <div class="item">
               <img src="${item.image_url}" alt="${item.name}" class="item-image">
@@ -248,17 +251,17 @@ export default function PrintMenuModal({ onClose }: PrintMenuModalProps) {
                 </div>
               </div>
             </div>
-          `;
-        });
-        html += '</div>';
+          `
+        })
+        html += '</div>'
       }
 
       if (itemsWithoutDiscount.length > 0) {
         html += `
           <div class="category">
             <div class="category-title">CARDÁPIO REGULAR</div>
-        `;
-        itemsWithoutDiscount.forEach(item => {
+        `
+        itemsWithoutDiscount.forEach((item) => {
           html += `
             <div class="item">
               <div class="item-header">
@@ -266,57 +269,53 @@ export default function PrintMenuModal({ onClose }: PrintMenuModalProps) {
                 <span class="item-price">R$ ${item.price.toFixed(2)}</span>
               </div>
             </div>
-          `;
-        });
-        html += '</div>';
+          `
+        })
+        html += '</div>'
       }
     }
 
     html += `
         </body>
       </html>
-    `;
+    `
 
-    return html;
-  };
+    return html
+  }
 
   const handlePrint = () => {
-    const menuHTML = generateMenuHTML();
-    const printWindow = window.open('', '_blank');
+    const menuHTML = generateMenuHTML()
+    const printWindow = window.open('', '_blank')
     if (printWindow) {
-      printWindow.document.write(menuHTML);
-      printWindow.document.close();
-      printWindow.focus();
+      printWindow.document.write(menuHTML)
+      printWindow.document.close()
+      printWindow.focus()
       setTimeout(() => {
-        printWindow.print();
-      }, 500);
+        printWindow.print()
+      }, 500)
     }
-  };
+  }
 
   const handleDownloadPDF = () => {
-    const menuHTML = generateMenuHTML();
-    const printWindow = window.open('', '_blank');
+    const menuHTML = generateMenuHTML()
+    const printWindow = window.open('', '_blank')
     if (printWindow) {
-      printWindow.document.write(menuHTML);
-      printWindow.document.close();
-      printWindow.focus();
+      printWindow.document.write(menuHTML)
+      printWindow.document.close()
+      printWindow.focus()
     }
-  };
+  }
 
   return (
     <div className="modal-overlay">
       <div className="modal-content max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="modal-header flex justify-between items-center">
           <h2 className="text-body font-semibold text-text-primary">Imprimir Cardápio</h2>
-          <button
-            onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 transition-colors"
-            aria-label="Fechar"
-          >
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 transition-colors" aria-label="Fechar">
             <X size={24} />
           </button>
         </div>
-        
+
         <div className="p-6">
           <div className="mb-6">
             <h3 className="text-body font-medium mb-4 text-text-primary">Escolha um template:</h3>
@@ -349,11 +348,11 @@ export default function PrintMenuModal({ onClose }: PrintMenuModalProps) {
           <div className="bg-bg-light p-4 rounded-sm border border-black mb-6">
             <h4 className="font-medium mb-2 text-text-primary text-subtitle">Prévia do Template</h4>
             <p className="text-subtitle text-text-secondary mb-3">
-              {templates.find(t => t.id === selectedTemplate)?.description}
+              {templates.find((t) => t.id === selectedTemplate)?.description}
             </p>
             <div className="text-subtitle text-gray-500">
-              Total de itens: {menuItems.length} | 
-              Itens com desconto: {menuItems.filter(item => item.discount > 0).length}
+              Total de itens: {menuItems.length} | Itens com desconto:{' '}
+              {menuItems.filter((item) => item.discount > 0).length}
             </div>
           </div>
 
@@ -365,16 +364,13 @@ export default function PrintMenuModal({ onClose }: PrintMenuModalProps) {
               <Download size={18} className="mr-2" />
               Abrir para Impressão
             </button>
-            
-            <button
-              onClick={onClose}
-              className="btn-secondary flex-1"
-            >
+
+            <button onClick={onClose} className="btn-secondary flex-1">
               Cancelar
             </button>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }

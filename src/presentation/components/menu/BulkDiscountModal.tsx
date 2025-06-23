@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { X, Percent } from 'lucide-react';
-import { AppContext } from '../../contexts/AppContext';
+import { AppContext } from '@/presentation/contexts/AppContext';
 
 interface BulkDiscountModalProps {
   selectedItems: number[];

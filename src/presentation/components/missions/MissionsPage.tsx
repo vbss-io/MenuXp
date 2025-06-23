@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Trophy, Star, Gift, Target, Clock, TrendingUp, CheckCircle, Calendar } from 'lucide-react';
-import { AppContext } from '../../contexts/AppContext';
+import { AppContext } from '@/presentation/contexts/AppContext';
 
 interface CompletedMission {
   id: string;
