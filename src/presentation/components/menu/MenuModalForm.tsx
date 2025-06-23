@@ -1,4 +1,5 @@
-import { AppContext, type MenuItem } from '@/presentation/contexts/AppContext'
+import type { MenuItem } from '@/domain/models/menu-item.model'
+import { AppContext } from '@/presentation/contexts/AppContext'
 import { X } from 'lucide-react'
 import React, { useContext, useEffect, useState } from 'react'
 

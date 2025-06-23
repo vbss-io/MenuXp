@@ -1,6 +1,7 @@
-import React, { useState, useContext } from 'react'
-import { X, MessageCircle, MapPin, User, CreditCard, Banknote, Smartphone, DollarSign } from 'lucide-react'
-import { type Order, AppContext } from '@/presentation/contexts/AppContext'
+import type { Order } from '@/domain/models/order.model'
+import { AppContext } from '@/presentation/contexts/AppContext'
+import { Banknote, CreditCard, DollarSign, MapPin, MessageCircle, Smartphone, User, X } from 'lucide-react'
+import { useContext, useState } from 'react'
 
 interface OrderDetailModalProps {
   order: Order

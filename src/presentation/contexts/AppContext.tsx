@@ -1,92 +1,15 @@
-import { createContext, useState, useEffect, type ReactNode } from 'react'
-import mockOrdersData from '@/application/data/mockOrders.json'
 import mockMenuItemsData from '@/application/data/mockMenuItems.json'
-import mockSettingsData from '@/application/data/mockSettings.json'
 import mockMessagesData from '@/application/data/mockMessages.json'
-
-// Define types
-export interface OrderItem {
-  name: string
-  qty: number
-  price: number
-}
-
-export interface Order {
-  id: number
-  restaurant_id: number
-  status: string
-  total: number
-  customer_phone: string
-  customer_name: string
-  order_type: string
-  table_id?: number
-  payment_method: string
-  items: OrderItem[]
-  timestamp: string
-  sla_start: string
-  cancel_reason?: string
-  delivery_address?: string
-}
-
-export interface MenuItem {
-  id: number
-  restaurant_id: number
-  category_id: number
-  name: string
-  price: number
-  image_url: string
-  stock: number
-  discount: number
-}
-
-export interface Template {
-  [key: string]: string
-}
-
-export interface BusinessHours {
-  [key: string]: string
-}
-
-export interface Settings {
-  restaurant_id: number
-  name: string
-  logo_url: string
-  theme_color: string
-  whatsapp_number: string
-  qr_code_url: string
-  business_hours: BusinessHours
-  templates: Template
-  operation_types: string[]
-  payment_methods: string[]
-  delivery_fee: number
-}
-
-export interface Message {
-  id: number
-  order_id: number
-  template_name: string
-  status: string
-  timestamp: string
-}
-
-export interface Notification {
-  id: number
-  type: 'success' | 'error' | 'warning' | 'info'
-  message: string
-}
-
-export interface OperationReport {
-  id: string
-  date: string
-  startTime: string
-  endTime: string
-  duration: string
-  totalOrders: number
-  completedOrders: number
-  canceledOrders: number
-  revenue: number
-  orders: Order[]
-}
+import mockOrdersData from '@/application/data/mockOrders.json'
+import mockSettingsData from '@/application/data/mockSettings.json'
+import { NotificationsType } from '@/domain/enums/notifications-type.enum'
+import type { MenuItem } from '@/domain/models/menu-item.model'
+import type { Message } from '@/domain/models/message.model'
+import type { Notification } from '@/domain/models/notification.model'
+import type { OperationReport } from '@/domain/models/operation-report.model'
+import type { Order } from '@/domain/models/order.model'
+import type { Settings } from '@/domain/models/settings.model'
+import { createContext, useEffect, useState, type ReactNode } from 'react'
 
 interface AppContextType {
   orders: Order[]
@@ -210,7 +133,7 @@ export function AppProvider({ children }: AppProviderProps) {
       if (diffHours >= 24) {
         endOperation()
         addNotification({
-          type: 'warning',
+          type: NotificationsType.WARNING,
           message: 'Operação encerrada automaticamente após 24 horas. Relatório gerado.'
         })
       }
@@ -248,7 +171,7 @@ export function AppProvider({ children }: AppProviderProps) {
     setOrders(mockOrdersData)
 
     addNotification({
-      type: 'success',
+      type: NotificationsType.SUCCESS,
       message: 'Operação iniciada! Seu restaurante está online e pronto para receber pedidos.'
     })
   }
@@ -257,7 +180,7 @@ export function AppProvider({ children }: AppProviderProps) {
     setOperationStatus('paused')
 
     addNotification({
-      type: 'warning',
+      type: NotificationsType.WARNING,
       message: 'Operação pausada. Novos pedidos não serão aceitos temporariamente.'
     })
   }
@@ -270,7 +193,7 @@ export function AppProvider({ children }: AppProviderProps) {
     setOrders([])
 
     addNotification({
-      type: 'info',
+      type: NotificationsType.INFO,
       message: `Operação encerrada. Relatório do dia gerado com ${report.totalOrders} pedidos.`
     })
   }
@@ -302,7 +225,7 @@ export function AppProvider({ children }: AppProviderProps) {
     setCompletedMissions((prev) => [...prev, missionId])
 
     addNotification({
-      type: 'success',
+      type: NotificationsType.SUCCESS,
       message: 'Missão concluída! Recompensa resgatada com sucesso.'
     })
   }
@@ -338,7 +261,7 @@ export function AppProvider({ children }: AppProviderProps) {
       setMessages((prev) => [...prev, newMessage])
 
       addNotification({
-        type: 'success',
+        type: NotificationsType.SUCCESS,
         message: `Pedido #${orderId} ${newStatus.toLowerCase()} e mensagem enviada.`
       })
     }
@@ -366,7 +289,7 @@ export function AppProvider({ children }: AppProviderProps) {
     setMessages((prev) => [...prev, newMessage])
 
     addNotification({
-      type: 'warning',
+      type: NotificationsType.WARNING,
       message: `Pedido #${orderId} cancelado. Motivo: ${reason}`
     })
   }
@@ -375,7 +298,7 @@ export function AppProvider({ children }: AppProviderProps) {
     setMenuItems((prev) => prev.map((menuItem) => (menuItem.id === item.id ? { ...item } : menuItem)))
 
     addNotification({
-      type: 'success',
+      type: NotificationsType.SUCCESS,
       message: `Item "${item.name}" atualizado com sucesso.`
     })
   }
@@ -390,7 +313,7 @@ export function AppProvider({ children }: AppProviderProps) {
     setMenuItems((prev) => [...prev, newItem])
 
     addNotification({
-      type: 'success',
+      type: NotificationsType.SUCCESS,
       message: `Item "${item.name}" criado com sucesso.`
     })
   }
@@ -402,7 +325,7 @@ export function AppProvider({ children }: AppProviderProps) {
 
     if (itemToDelete) {
       addNotification({
-        type: 'info',
+        type: NotificationsType.INFO,
         message: `Item "${itemToDelete.name}" removido.`
       })
     }
@@ -412,7 +335,7 @@ export function AppProvider({ children }: AppProviderProps) {
     setMenuItems((prev) => prev.map((item) => (itemIds.includes(item.id) ? { ...item, discount } : item)))
 
     addNotification({
-      type: 'success',
+      type: NotificationsType.SUCCESS,
       message: `Desconto de ${discount}% aplicado a ${itemIds.length} itens.`
     })
   }
@@ -424,7 +347,7 @@ export function AppProvider({ children }: AppProviderProps) {
     document.documentElement.style.setProperty('--theme-color', newSettings.theme_color)
 
     addNotification({
-      type: 'success',
+      type: NotificationsType.SUCCESS,
       message: 'Configurações salvas com sucesso.'
     })
   }
@@ -443,7 +366,7 @@ export function AppProvider({ children }: AppProviderProps) {
     )
 
     addNotification({
-      type: 'success',
+      type: NotificationsType.SUCCESS,
       message: 'Mensagem reenviada com sucesso.'
     })
   }

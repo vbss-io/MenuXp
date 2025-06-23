@@ -37,7 +37,7 @@ export const Messages = () => {
 
     try {
       await resendMessage(messageId)
-    } catch (error) {
+    } catch {
       setError('Falha ao reenviar mensagem. Tente novamente.')
     } finally {
       setResending(null)

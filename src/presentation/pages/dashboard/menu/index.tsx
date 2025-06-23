@@ -1,7 +1,8 @@
+import type { MenuItem } from '@/domain/models/menu-item.model'
 import BulkDiscountModal from '@/presentation/components/menu/BulkDiscountModal'
 import MenuModalForm from '@/presentation/components/menu/MenuModalForm'
 import PrintMenuModal from '@/presentation/components/menu/PrintMenuModal'
-import { AppContext, type MenuItem } from '@/presentation/contexts/AppContext'
+import { AppContext } from '@/presentation/contexts/AppContext'
 import { Pencil, Percent, Plus, Printer, Trash2 } from 'lucide-react'
 import { useContext, useState } from 'react'
 

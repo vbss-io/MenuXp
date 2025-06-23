@@ -1,4 +1,4 @@
-import type { Settings } from '@/presentation/contexts/AppContext'
+import type { Settings } from '@/domain/models/settings.model'
 import { Trophy } from 'lucide-react'
 import { useState } from 'react'
 

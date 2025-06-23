@@ -1,4 +1,4 @@
-import type { Order } from '@/presentation/contexts/AppContext'
+import type { Order } from '@/domain/models/order.model'
 import {
   Banknote,
   ChevronRight,
