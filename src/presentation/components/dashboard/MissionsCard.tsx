@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
-import { Target, Gift, Star, CheckCircle, Clock, Users, TrendingUp } from 'lucide-react'
 import { AppContext } from '@/presentation/contexts/AppContext'
+import { CheckCircle, Clock, Gift, Star, Target, TrendingUp } from 'lucide-react'
+import React, { useContext } from 'react'
 
 interface Mission {
   id: string

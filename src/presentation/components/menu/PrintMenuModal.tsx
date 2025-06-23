@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
-import { X, Download } from 'lucide-react'
 import { AppContext } from '@/presentation/contexts/AppContext'
+import { Download, X } from 'lucide-react'
+import { useContext, useState } from 'react'
 
 interface PrintMenuModalProps {
   onClose: () => void

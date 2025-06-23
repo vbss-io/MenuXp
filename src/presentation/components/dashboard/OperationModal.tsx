@@ -1,10 +1,9 @@
-import React from 'react';
-import { X, Play, Pause, Square, AlertTriangle } from 'lucide-react';
+import { AlertTriangle, Pause, Play, Square, X } from 'lucide-react'
 
 interface OperationModalProps {
-  action: 'start' | 'pause' | 'end';
-  onConfirm: () => void;
-  onCancel: () => void;
+  action: 'start' | 'pause' | 'end'
+  onConfirm: () => void
+  onCancel: () => void
 }
 
 export default function OperationModal({ action, onConfirm, onCancel }: OperationModalProps) {
@@ -18,18 +17,19 @@ export default function OperationModal({ action, onConfirm, onCancel }: Operatio
           confirmText: 'Iniciar Operação',
           confirmClass: 'btn-primary bg-accent-2-500 hover:bg-accent-2-600',
           warning: null
-        };
-      
+        }
+
       case 'pause':
         return {
           title: 'Pausar Operação',
           icon: <Pause className="h-8 w-8 text-warning-600" />,
-          message: 'Ao pausar a operação, seu restaurante ficará temporariamente indisponível para novos pedidos. Pedidos em andamento continuarão normalmente.',
+          message:
+            'Ao pausar a operação, seu restaurante ficará temporariamente indisponível para novos pedidos. Pedidos em andamento continuarão normalmente.',
           confirmText: 'Pausar Operação',
           confirmClass: 'btn-primary bg-warning-500 hover:bg-warning-600',
           warning: 'Clientes não poderão fazer novos pedidos durante a pausa.'
-        };
-      
+        }
+
       case 'end':
         return {
           title: 'Encerrar Operação',
@@ -38,15 +38,15 @@ export default function OperationModal({ action, onConfirm, onCancel }: Operatio
           confirmText: 'Encerrar Operação',
           confirmClass: 'btn-primary bg-error-500 hover:bg-error-600',
           warning: 'Esta ação não pode ser desfeita. Certifique-se de que todos os pedidos foram finalizados.'
-        };
-      
-      default:
-        return null;
-    }
-  };
+        }
 
-  const content = getModalContent();
-  if (!content) return null;
+      default:
+        return null
+    }
+  }
+
+  const content = getModalContent()
+  if (!content) return null
 
   return (
     <div className="modal-overlay">
@@ -61,17 +61,15 @@ export default function OperationModal({ action, onConfirm, onCancel }: Operatio
             <X size={24} />
           </button>
         </div>
-        
+
         <div className="p-6">
           <div className="text-center mb-6">
             <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-sm bg-bg-light mb-4 border border-black">
               {content.icon}
             </div>
-            
-            <p className="text-body text-text-secondary mb-4">
-              {content.message}
-            </p>
-            
+
+            <p className="text-body text-text-secondary mb-4">{content.message}</p>
+
             {content.warning && (
               <div className="bg-warning-50 border border-warning-200 rounded-sm p-3 mb-4">
                 <div className="flex items-center">
@@ -83,22 +81,16 @@ export default function OperationModal({ action, onConfirm, onCancel }: Operatio
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            <button
-              onClick={onCancel}
-              className="btn-secondary flex-1"
-            >
+            <button onClick={onCancel} className="btn-secondary flex-1">
               Cancelar
             </button>
-            
-            <button
-              onClick={onConfirm}
-              className={`flex-1 ${content.confirmClass}`}
-            >
+
+            <button onClick={onConfirm} className={`flex-1 ${content.confirmClass}`}>
               {content.confirmText}
             </button>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
