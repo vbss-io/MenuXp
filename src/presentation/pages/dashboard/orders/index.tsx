@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
-import { useLocation } from 'react-router-dom'
+import OrderCard from '@/presentation/components/orders/OrderCard'
+import OrderDetailModal from '@/presentation/components/orders/OrderDetailModal'
+import StatusConfirmModal from '@/presentation/components/orders/StatusConfirmModal'
 import { AppContext } from '@/presentation/contexts/AppContext'
-import OrderCard from './OrderCard'
-import StatusConfirmModal from './StatusConfirmModal'
-import OrderDetailModal from './OrderDetailModal'
+import { useContext, useEffect, useState } from 'react'
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd'
+import { useLocation } from 'react-router-dom'
 
 const columnsOrder = ['Recebido', 'Confirmado', 'Em Produção', 'Pronto', 'Saiu para Entrega', 'Entregue']
 const columnColors = {
@@ -16,7 +16,7 @@ const columnColors = {
   Entregue: 'from-gray-50 to-gray-100 border-gray-500'
 }
 
-export default function OrdersKanban() {
+export const Orders = () => {
   const { orders, updateOrderStatus } = useContext(AppContext)
   const [isProcessing, setIsProcessing] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -78,20 +78,6 @@ export default function OrdersKanban() {
     const newStatus = columnsOrder[parseInt(destination.droppableId)]
 
     handleStatusChange(orderId, newStatus)
-  }
-
-  const retryStatusUpdate = async (orderId: number, newStatus: string) => {
-    setIsProcessing(true)
-    setErrorMessage(null)
-
-    try {
-      await updateOrderStatus(orderId, newStatus)
-    } catch (error) {
-      console.error('Failed to retry update:', error)
-      setErrorMessage(`Falha ao atualizar status. Por favor tente novamente mais tarde.`)
-    } finally {
-      setIsProcessing(false)
-    }
   }
 
   // Include canceled orders in a separate section

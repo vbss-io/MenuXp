@@ -1,23 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
-import {
-  Clock,
-  Package,
-  AlertCircle,
-  TrendingUp,
-  Truck,
-  CheckCircle,
-  Play,
-  Pause,
-  Square,
-  Target,
-  Gift,
-  Star
-} from 'lucide-react'
-import InfoCard from './InfoCard'
-import MissionsCard from './MissionsCard'
-import OperationModal from './OperationModal'
+import { AlertCircle, CheckCircle, Clock, Package, Pause, Play, Square, TrendingUp, Truck } from 'lucide-react'
+import { useContext, useEffect, useState } from 'react'
+
+import InfoCard from '@/presentation/components/dashboard/InfoCard'
+import MissionsCard from '@/presentation/components/dashboard/MissionsCard'
+import OperationModal from '@/presentation/components/dashboard/OperationModal'
+import { Sidebar } from '@/presentation/components/ui/sidebar'
 import { AppContext } from '@/presentation/contexts/AppContext'
-import { Order } from '@/presentation/contexts/AppContext'
 
 interface KPIs {
   totalOrders: number
@@ -28,7 +16,7 @@ interface KPIs {
   delivered: number
 }
 
-export default function Dashboard() {
+export const Dashboard = () => {
   const { orders, operationStatus, startOperation, pauseOperation, endOperation, settings } = useContext(AppContext)
   const [kpis, setKpis] = useState<KPIs>({
     totalOrders: 0,
@@ -170,6 +158,7 @@ export default function Dashboard() {
 
   return (
     <div className="p-6">
+      <Sidebar />
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-section font-bold">Dashboard</h1>
         {operationStatus !== 'stopped' && (

@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
-import { FileText, Download, Calendar, TrendingUp, Package, DollarSign } from 'lucide-react';
-import { AppContext } from '@/presentation/contexts/AppContext';
+import { AppContext } from '@/presentation/contexts/AppContext'
+import { Calendar, DollarSign, Download, FileText, Package, TrendingUp } from 'lucide-react'
+import { useContext, useState } from 'react'
 
-export default function ReportsPage() {
-  const { operationReports, generateReport } = useContext(AppContext);
-  const [selectedReport, setSelectedReport] = useState<any>(null);
+export const Reports = () => {
+  const { operationReports } = useContext(AppContext)
+  const [selectedReport, setSelectedReport] = useState<any>(null)
 
   const handleDownloadReport = (report: any) => {
     // In a real app, this would generate and download a PDF
@@ -28,52 +28,54 @@ FINANCEIRO:
 - Ticket Médio: R$ ${(report.revenue / report.completedOrders).toFixed(2)}
 
 DETALHES DOS PEDIDOS:
-${report.orders.map((order: any) => `
+${report.orders
+  .map(
+    (order: any) => `
 - Pedido #${order.id} - ${order.status} - R$ ${order.total.toFixed(2)}
   Cliente: ${order.customer_name} (${order.customer_phone})
   Tipo: ${order.order_type} | Pagamento: ${order.payment_method}
-`).join('')}
-    `;
+`
+  )
+  .join('')}
+    `
 
-    const blob = new Blob([reportContent], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `relatorio-${report.date}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
+    const blob = new Blob([reportContent], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `relatorio-${report.date}.txt`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('pt-BR', {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric'
-    });
-  };
+    })
+  }
 
   const formatTime = (timeString: string) => {
     return new Date(timeString).toLocaleTimeString('pt-BR', {
       hour: '2-digit',
       minute: '2-digit'
-    });
-  };
+    })
+  }
 
   return (
     <div className="p-6">
       <h1 className="text-section font-bold mb-6 text-text-primary">Relatórios</h1>
-      
+
       {operationReports.length === 0 ? (
         <div className="text-center py-20">
           <div className="max-w-md mx-auto">
             <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-sm bg-bg-light mb-4 border border-black">
               <FileText className="h-8 w-8 text-text-secondary" />
             </div>
-            <h2 className="text-body font-semibold text-text-primary mb-2">
-              Nenhum Relatório Disponível
-            </h2>
+            <h2 className="text-body font-semibold text-text-primary mb-2">Nenhum Relatório Disponível</h2>
             <p className="text-body text-text-secondary">
               Os relatórios serão gerados automaticamente ao encerrar as operações diárias.
             </p>
@@ -84,7 +86,7 @@ ${report.orders.map((order: any) => `
           <div className="px-6 py-4 border-b border-black">
             <h2 className="text-body font-medium text-text-primary">Relatórios Disponíveis</h2>
           </div>
-          
+
           <div className="divide-y divide-gray-200">
             {operationReports.map((report) => (
               <div key={report.id} className="p-6 hover:bg-bg-light transition-colors">
@@ -96,7 +98,7 @@ ${report.orders.map((order: any) => `
                         Relatório do dia {formatDate(report.date)}
                       </h3>
                     </div>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
                       <div className="flex items-center">
                         <Package className="h-4 w-4 text-info-500 mr-2" />
@@ -105,7 +107,7 @@ ${report.orders.map((order: any) => `
                           <p className="font-semibold text-text-primary text-subtitle">{report.totalOrders}</p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center">
                         <TrendingUp className="h-4 w-4 text-accent-2-500 mr-2" />
                         <div>
@@ -113,15 +115,17 @@ ${report.orders.map((order: any) => `
                           <p className="font-semibold text-text-primary text-subtitle">{report.completedOrders}</p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center">
                         <DollarSign className="h-4 w-4 text-accent-500 mr-2" />
                         <div>
                           <p className="text-subtitle text-text-secondary">Faturamento</p>
-                          <p className="font-semibold text-text-primary text-subtitle">R$ {report.revenue.toFixed(2)}</p>
+                          <p className="font-semibold text-text-primary text-subtitle">
+                            R$ {report.revenue.toFixed(2)}
+                          </p>
                         </div>
                       </div>
-                      
+
                       <div className="flex items-center">
                         <div>
                           <p className="text-subtitle text-text-secondary">Operação</p>
@@ -131,24 +135,19 @@ ${report.orders.map((order: any) => `
                         </div>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center text-subtitle text-text-secondary">
                       <span>Duração: {report.duration}</span>
                       <span className="mx-2">•</span>
-                      <span>
-                        Taxa de Sucesso: {((report.completedOrders / report.totalOrders) * 100).toFixed(1)}%
-                      </span>
+                      <span>Taxa de Sucesso: {((report.completedOrders / report.totalOrders) * 100).toFixed(1)}%</span>
                     </div>
                   </div>
-                  
+
                   <div className="ml-6 flex space-x-3">
-                    <button
-                      onClick={() => setSelectedReport(report)}
-                      className="btn-secondary"
-                    >
+                    <button onClick={() => setSelectedReport(report)} className="btn-secondary">
                       Visualizar
                     </button>
-                    
+
                     <button
                       onClick={() => handleDownloadReport(report)}
                       className="btn-primary bg-primary-500 hover:bg-primary-600 inline-flex items-center"
@@ -178,7 +177,7 @@ ${report.orders.map((order: any) => `
                 ×
               </button>
             </div>
-            
+
             <div className="p-6">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 <div className="bg-info-50 p-4 rounded-sm border border-black">
@@ -186,13 +185,13 @@ ${report.orders.map((order: any) => `
                   <p className="text-section font-bold text-info-600">{selectedReport.totalOrders}</p>
                   <p className="text-subtitle text-info-700">Total de pedidos</p>
                 </div>
-                
+
                 <div className="bg-accent-2-50 p-4 rounded-sm border border-black">
                   <h3 className="font-medium text-accent-2-900 mb-2 text-subtitle">Faturamento</h3>
                   <p className="text-section font-bold text-accent-2-600">R$ {selectedReport.revenue.toFixed(2)}</p>
                   <p className="text-subtitle text-accent-2-700">Receita total</p>
                 </div>
-                
+
                 <div className="bg-accent-50 p-4 rounded-sm border border-black">
                   <h3 className="font-medium text-accent-900 mb-2 text-subtitle">Ticket Médio</h3>
                   <p className="text-section font-bold text-accent-600">
@@ -201,7 +200,7 @@ ${report.orders.map((order: any) => `
                   <p className="text-subtitle text-accent-700">Por pedido concluído</p>
                 </div>
               </div>
-              
+
               <div className="mb-6">
                 <h3 className="text-body font-medium mb-4 text-text-primary">Detalhes dos Pedidos</h3>
                 <div className="overflow-x-auto">
@@ -232,11 +231,15 @@ ${report.orders.map((order: any) => `
                             {order.customer_name}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`inline-flex px-2 py-1 text-subtitle rounded-sm border border-black ${
-                              order.status === 'Entregue' ? 'status-delivered' :
-                              order.status === 'Cancelado' ? 'status-canceled' :
-                              'status-received'
-                            }`}>
+                            <span
+                              className={`inline-flex px-2 py-1 text-subtitle rounded-sm border border-black ${
+                                order.status === 'Entregue'
+                                  ? 'status-delivered'
+                                  : order.status === 'Cancelado'
+                                    ? 'status-canceled'
+                                    : 'status-received'
+                              }`}
+                            >
                               {order.status}
                             </span>
                           </td>
@@ -254,5 +257,5 @@ ${report.orders.map((order: any) => `
         </div>
       )}
     </div>
-  );
+  )
 }

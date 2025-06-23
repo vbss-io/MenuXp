@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react'
-import { Pencil, Trash2, Plus, Printer, Percent } from 'lucide-react'
+import BulkDiscountModal from '@/presentation/components/menu/BulkDiscountModal'
+import MenuModalForm from '@/presentation/components/menu/MenuModalForm'
+import PrintMenuModal from '@/presentation/components/menu/PrintMenuModal'
 import { AppContext, type MenuItem } from '@/presentation/contexts/AppContext'
-import MenuModalForm from './MenuModalForm'
-import PrintMenuModal from './PrintMenuModal'
-import BulkDiscountModal from './BulkDiscountModal'
+import { Pencil, Percent, Plus, Printer, Trash2 } from 'lucide-react'
+import { useContext, useState } from 'react'
 
-export default function MenuDataTable() {
+export const Menu = () => {
   const { menuItems, deleteMenuItem } = useContext(AppContext)
   const [showModal, setShowModal] = useState(false)
   const [showPrintModal, setShowPrintModal] = useState(false)

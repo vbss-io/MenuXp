@@ -1,20 +1,16 @@
-import React, { useContext } from 'react';
-import { Trophy, Star, Gift, Target, Clock, TrendingUp, CheckCircle, Calendar } from 'lucide-react';
-import { AppContext } from '@/presentation/contexts/AppContext';
+import { Calendar, CheckCircle, Clock, Gift, Star, Target, TrendingUp, Trophy } from 'lucide-react'
 
 interface CompletedMission {
-  id: string;
-  title: string;
-  description: string;
-  reward: string;
-  completedAt: string;
-  xpEarned: number;
-  category: 'sales' | 'efficiency' | 'promotion' | 'customer';
+  id: string
+  title: string
+  description: string
+  reward: string
+  completedAt: string
+  xpEarned: number
+  category: 'sales' | 'efficiency' | 'promotion' | 'customer'
 }
 
-export default function MissionsPage() {
-  const { completedMissions } = useContext(AppContext);
-
+export const Missions = () => {
   // Mock completed missions data
   const completedMissionsData: CompletedMission[] = [
     {
@@ -44,29 +40,39 @@ export default function MissionsPage() {
       xpEarned: 150,
       category: 'promotion'
     }
-  ];
+  ]
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'sales': return <TrendingUp className="h-5 w-5" />;
-      case 'efficiency': return <Clock className="h-5 w-5" />;
-      case 'promotion': return <Gift className="h-5 w-5" />;
-      case 'customer': return <Star className="h-5 w-5" />;
-      default: return <Target className="h-5 w-5" />;
+      case 'sales':
+        return <TrendingUp className="h-5 w-5" />
+      case 'efficiency':
+        return <Clock className="h-5 w-5" />
+      case 'promotion':
+        return <Gift className="h-5 w-5" />
+      case 'customer':
+        return <Star className="h-5 w-5" />
+      default:
+        return <Target className="h-5 w-5" />
     }
-  };
+  }
 
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case 'sales': return 'bg-accent-2-100 text-accent-2-800';
-      case 'efficiency': return 'bg-info-100 text-info-800';
-      case 'promotion': return 'bg-accent-100 text-accent-800';
-      case 'customer': return 'bg-warning-100 text-warning-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'sales':
+        return 'bg-accent-2-100 text-accent-2-800'
+      case 'efficiency':
+        return 'bg-info-100 text-info-800'
+      case 'promotion':
+        return 'bg-accent-100 text-accent-800'
+      case 'customer':
+        return 'bg-warning-100 text-warning-800'
+      default:
+        return 'bg-gray-100 text-gray-800'
     }
-  };
+  }
 
-  const totalXP = completedMissionsData.reduce((sum, mission) => sum + mission.xpEarned, 0);
+  const totalXP = completedMissionsData.reduce((sum, mission) => sum + mission.xpEarned, 0)
 
   return (
     <div className="p-6">
@@ -81,16 +87,13 @@ export default function MissionsPage() {
           </div>
         </div>
       </div>
-
       {completedMissionsData.length === 0 ? (
         <div className="text-center py-20">
           <div className="max-w-md mx-auto">
             <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-sm bg-bg-light mb-4 border border-black">
               <Trophy className="h-8 w-8 text-text-secondary" />
             </div>
-            <h2 className="text-body font-semibold text-text-primary mb-2">
-              Nenhuma Missão Concluída
-            </h2>
+            <h2 className="text-body font-semibold text-text-primary mb-2">Nenhuma Missão Concluída</h2>
             <p className="text-body text-text-secondary">
               Complete missões no dashboard para ver suas conquistas aqui.
             </p>
@@ -111,7 +114,6 @@ export default function MissionsPage() {
                 </div>
               </div>
             </div>
-
             <div className="card-basic">
               <div className="flex items-center">
                 <div className="p-3 rounded-sm bg-warning-100 mr-4 border border-black">
@@ -123,7 +125,6 @@ export default function MissionsPage() {
                 </div>
               </div>
             </div>
-
             <div className="card-basic">
               <div className="flex items-center">
                 <div className="p-3 rounded-sm bg-accent-100 mr-4 border border-black">
@@ -135,7 +136,6 @@ export default function MissionsPage() {
                 </div>
               </div>
             </div>
-
             <div className="card-basic">
               <div className="flex items-center">
                 <div className="p-3 rounded-sm bg-info-100 mr-4 border border-black">
@@ -144,22 +144,21 @@ export default function MissionsPage() {
                 <div>
                   <p className="text-subtitle text-text-secondary">Última Conquista</p>
                   <p className="text-subtitle font-medium text-text-primary">
-                    {completedMissionsData.length > 0 
-                      ? new Date(completedMissionsData[completedMissionsData.length - 1].completedAt).toLocaleDateString('pt-BR')
-                      : 'Nenhuma'
-                    }
+                    {completedMissionsData.length > 0
+                      ? new Date(
+                          completedMissionsData[completedMissionsData.length - 1].completedAt
+                        ).toLocaleDateString('pt-BR')
+                      : 'Nenhuma'}
                   </p>
                 </div>
               </div>
             </div>
           </div>
-
           {/* Completed Missions List */}
           <div className="card-basic overflow-hidden">
             <div className="px-6 py-4 border-b border-black">
               <h2 className="text-body font-medium text-text-primary">Histórico de Conquistas</h2>
             </div>
-            
             <div className="divide-y divide-gray-200">
               {completedMissionsData
                 .sort((a, b) => new Date(b.completedAt).getTime() - new Date(a.completedAt).getTime())
@@ -170,24 +169,28 @@ export default function MissionsPage() {
                         <div className={`p-3 rounded-sm border border-black ${getCategoryColor(mission.category)}`}>
                           {getCategoryIcon(mission.category)}
                         </div>
-                        
                         <div className="flex-1">
                           <div className="flex items-center space-x-3 mb-2">
                             <h3 className="text-body font-medium text-text-primary">{mission.title}</h3>
-                            <span className={`inline-flex items-center px-2.5 py-0.5 rounded-sm text-subtitle font-medium border border-black ${getCategoryColor(mission.category)}`}>
-                              {mission.category === 'sales' ? 'Vendas' :
-                               mission.category === 'efficiency' ? 'Eficiência' :
-                               mission.category === 'promotion' ? 'Promoção' : 'Cliente'}
+                            <span
+                              className={`inline-flex items-center px-2.5 py-0.5 rounded-sm text-subtitle font-medium border border-black ${getCategoryColor(mission.category)}`}
+                            >
+                              {mission.category === 'sales'
+                                ? 'Vendas'
+                                : mission.category === 'efficiency'
+                                  ? 'Eficiência'
+                                  : mission.category === 'promotion'
+                                    ? 'Promoção'
+                                    : 'Cliente'}
                             </span>
                           </div>
-                          
                           <p className="text-body text-text-secondary mb-3">{mission.description}</p>
-                          
                           <div className="flex items-center space-x-4 text-subtitle text-text-secondary">
                             <div className="flex items-center">
                               <Calendar className="h-4 w-4 mr-1" />
                               <span>
-                                Concluída em {new Date(mission.completedAt).toLocaleDateString('pt-BR', {
+                                Concluída em{' '}
+                                {new Date(mission.completedAt).toLocaleDateString('pt-BR', {
                                   day: '2-digit',
                                   month: '2-digit',
                                   year: 'numeric',
@@ -199,38 +202,36 @@ export default function MissionsPage() {
                           </div>
                         </div>
                       </div>
-                      
                       <div className="text-right">
                         <div className="bg-gradient-to-r from-warning-400 to-warning-600 text-text-invert px-3 py-1 rounded-sm text-subtitle font-medium mb-2 border border-black">
                           +{mission.xpEarned} XP
                         </div>
-                        <div className="text-subtitle text-text-secondary">
-                          {mission.reward}
-                        </div>
+                        <div className="text-subtitle text-text-secondary">{mission.reward}</div>
                       </div>
                     </div>
                   </div>
                 ))}
             </div>
           </div>
-
           {/* Achievement Showcase */}
           <div className="mt-8 bg-gradient-to-r from-info-50 to-accent-50 rounded-sm p-6 border border-black">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-body font-medium text-text-primary mb-2">Próximo Nível</h3>
-                <p className="text-body text-text-secondary">Continue completando missões para desbloquear novos badges e recompensas!</p>
+                <p className="text-body text-text-secondary">
+                  Continue completando missões para desbloquear novos badges e recompensas!
+                </p>
               </div>
               <div className="text-6xl">🏆</div>
             </div>
-            
+
             <div className="mt-4">
               <div className="flex justify-between text-subtitle text-text-secondary mb-1">
                 <span>Progresso para o próximo nível</span>
                 <span>{totalXP}/1000 XP</span>
               </div>
               <div className="progress-linear">
-                <div 
+                <div
                   className="bg-gradient-to-r from-info-500 to-accent-500 h-2 rounded-sm transition-all duration-500"
                   style={{ width: `${Math.min((totalXP / 1000) * 100, 100)}%` }}
                 ></div>
@@ -240,5 +241,5 @@ export default function MissionsPage() {
         </>
       )}
     </div>
-  );
+  )
 }

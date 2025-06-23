@@ -10,8 +10,16 @@
     "payment_method": "pix",
     "delivery_address": "Rua das Flores, 123 - Vila Madalena, São Paulo - SP",
     "items": [
-      { "name": "Burger de Frango", "qty": 2, "price": 20.50 },
-      { "name": "Fritas", "qty": 1, "price": 4.50 }
+      {
+        "name": "Burger de Frango",
+        "qty": 2,
+        "price": 20.50
+      },
+      {
+        "name": "Fritas",
+        "qty": 1,
+        "price": 4.50
+      }
     ],
     "timestamp": "2025-06-04T10:15:00Z",
     "sla_start": "2025-06-04T10:15:00Z"
@@ -27,8 +35,16 @@
     "payment_method": "cartao_credito",
     "table_id": 12,
     "items": [
-      { "name": "Pizza Margherita", "qty": 1, "price": 25.00 },
-      { "name": "Refrigerante", "qty": 2, "price": 2.50 }
+      {
+        "name": "Pizza Margherita",
+        "qty": 1,
+        "price": 25.00
+      },
+      {
+        "name": "Refrigerante",
+        "qty": 2,
+        "price": 2.50
+      }
     ],
     "timestamp": "2025-06-04T10:20:00Z",
     "sla_start": "2025-06-04T10:20:00Z"
@@ -43,9 +59,21 @@
     "order_type": "balcao",
     "payment_method": "dinheiro",
     "items": [
-      { "name": "Lasagna", "qty": 1, "price": 32.75 },
-      { "name": "Salada", "qty": 1, "price": 15.00 },
-      { "name": "Suco Natural", "qty": 1, "price": 8.00 }
+      {
+        "name": "Lasagna",
+        "qty": 1,
+        "price": 32.75
+      },
+      {
+        "name": "Salada",
+        "qty": 1,
+        "price": 15.00
+      },
+      {
+        "name": "Suco Natural",
+        "qty": 1,
+        "price": 8.00
+      }
     ],
     "timestamp": "2025-06-04T10:25:00Z",
     "sla_start": "2025-06-04T10:25:00Z"
@@ -61,8 +89,16 @@
     "payment_method": "cartao_debito",
     "delivery_address": "Av. Paulista, 1000 - Bela Vista, São Paulo - SP",
     "items": [
-      { "name": "Wrap Vegetariano", "qty": 1, "price": 18.90 },
-      { "name": "Água Mineral", "qty": 1, "price": 10.00 }
+      {
+        "name": "Wrap Vegetariano",
+        "qty": 1,
+        "price": 18.90
+      },
+      {
+        "name": "Água Mineral",
+        "qty": 1,
+        "price": 10.00
+      }
     ],
     "timestamp": "2025-06-04T10:10:00Z",
     "sla_start": "2025-06-04T10:10:00Z"
@@ -78,9 +114,21 @@
     "payment_method": "pix",
     "delivery_address": "Rua Augusta, 500 - Consolação, São Paulo - SP",
     "items": [
-      { "name": "Risoto de Camarão", "qty": 1, "price": 42.30 },
-      { "name": "Vinho", "qty": 1, "price": 15.00 },
-      { "name": "Sobremesa", "qty": 1, "price": 5.00 }
+      {
+        "name": "Risoto de Camarão",
+        "qty": 1,
+        "price": 42.30
+      },
+      {
+        "name": "Vinho",
+        "qty": 1,
+        "price": 15.00
+      },
+      {
+        "name": "Sobremesa",
+        "qty": 1,
+        "price": 5.00
+      }
     ],
     "timestamp": "2025-06-04T09:45:00Z",
     "sla_start": "2025-06-04T09:45:00Z"
@@ -97,8 +145,16 @@
     "delivery_address": "Rua da Consolação, 200 - Centro, São Paulo - SP",
     "cancel_reason": "Cliente solicitou cancelamento - mudança de endereço",
     "items": [
-      { "name": "Pizza Calabresa", "qty": 1, "price": 28.00 },
-      { "name": "Refrigerante", "qty": 2, "price": 3.50 }
+      {
+        "name": "Pizza Calabresa",
+        "qty": 1,
+        "price": 28.00
+      },
+      {
+        "name": "Refrigerante",
+        "qty": 2,
+        "price": 3.50
+      }
     ],
     "timestamp": "2025-06-04T09:30:00Z",
     "sla_start": "2025-06-04T09:30:00Z"

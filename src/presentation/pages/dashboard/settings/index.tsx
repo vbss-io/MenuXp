@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react'
-import { QrCode, Trophy } from 'lucide-react'
-import { type Settings, AppContext } from '@/presentation/contexts/AppContext'
-import ProgressBar from './ProgressBar'
+import { type Settings as SettingModel, AppContext } from '@/presentation/contexts/AppContext'
+import { QrCode } from 'lucide-react'
+import React, { useContext, useState } from 'react'
+import ProgressBar from '../../../components/settings/ProgressBar'
 
-export default function SettingsForm() {
+export const Settings = () => {
   const { settings, updateSettings } = useContext(AppContext)
-  const [formData, setFormData] = useState<Settings>(settings)
+  const [formData, setFormData] = useState<SettingModel>(settings)
   const [activeTab, setActiveTab] = useState<'brand' | 'hours' | 'templates' | 'operations'>('brand')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -15,7 +15,7 @@ export default function SettingsForm() {
     if (type === 'checkbox') {
       const checked = (e.target as HTMLInputElement).checked
       if (name === 'payment_methods' || name === 'operation_types') {
-        const currentArray = formData[name as keyof Settings] as string[]
+        const currentArray = formData[name as keyof SettingModel] as string[]
         const newArray = checked ? [...currentArray, value] : currentArray.filter((item) => item !== value)
         setFormData((prev) => ({ ...prev, [name]: newArray }))
       }
@@ -28,7 +28,7 @@ export default function SettingsForm() {
       setFormData((prev) => ({
         ...prev,
         [parent]: {
-          ...prev[parent as keyof Settings],
+          ...prev[parent as keyof SettingModel],
           [child]: value
         }
       }))

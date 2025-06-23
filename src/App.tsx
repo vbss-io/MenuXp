@@ -1,67 +1,65 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { AppProvider } from './presentation/contexts/AppContext'
-import Sidebar from '@/presentation/components/layout/Sidebar'
-import TopAppBar from '@/presentation/components/layout/TopAppBar'
-import Dashboard from '@/presentation/components/dashboard/Dashboard'
-import OrdersKanban from '@/presentation/components/orders/OrdersKanban'
-import MenuDataTable from '@/presentation/components/menu/MenuDataTable'
-import SettingsForm from '@/presentation/components/settings/SettingsForm'
-import MessagesTimeline from '@/presentation/components/messages/MessagesTimeline'
-import ReportsPage from '@/presentation/components/reports/ReportsPage'
-import MissionsPage from '@/presentation/components/missions/MissionsPage'
-import Notification from './presentation/components/ui/Notification'
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
+import { Toaster } from 'react-hot-toast'
+import { styled, ThemeProvider } from 'styled-components'
+
+import { registerDependencies } from '@/infra/dependency-injection/register'
+import { AppProvider } from '@/presentation/contexts/AppContext'
+import { SidebarProvider } from '@/presentation/providers/sidebar-provider'
+import { Router } from '@/presentation/router'
+import { GlobalStyle } from '@/presentation/styles/global'
+import { theme } from '@/presentation/styles/theme'
+
+const AppContainer = styled.div`
+  min-height: calc(100vh - 5rem);
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+`
 
 function App() {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
-
-  // Handle responsive sidebar
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setSidebarCollapsed(true)
-      } else {
-        setSidebarCollapsed(false)
-      }
-    }
-
-    // Set initial state
-    handleResize()
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  const toggleSidebar = () => {
-    setSidebarCollapsed(!sidebarCollapsed)
-  }
+  registerDependencies()
 
   return (
-    <Router>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Toaster
+        position="bottom-right"
+        toastOptions={{
+          duration: 6000,
+          style: {
+            background: theme.colors.background,
+            color: theme.colors.text,
+            fontSize: '0.75rem',
+            padding: '1rem',
+            border: '2px solid',
+            textAlign: 'center',
+            minWidth: '240px',
+            maxWidth: '400px',
+            lineHeight: '1.5',
+            borderRadius: '0'
+          },
+          success: {
+            style: {
+              borderColor: theme.colors.primary
+            },
+            icon: <CheckCircleIcon color={theme.colors.primary} size={24} weight="duotone" />
+          },
+          error: {
+            style: {
+              borderColor: theme.colors.red
+            },
+            icon: <XCircleIcon color={theme.colors.red} size={24} weight="duotone" />
+          }
+        }}
+      />
       <AppProvider>
-        <div className="flex bg-gray-100 min-h-screen">
-          <Sidebar collapsed={sidebarCollapsed} toggleSidebar={toggleSidebar} />
-
-          <div className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? 'ml-16' : 'ml-60'}`}>
-            <TopAppBar onMenuClick={toggleSidebar} />
-
-            <main className="pt-16">
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/orders" element={<OrdersKanban />} />
-                <Route path="/menu" element={<MenuDataTable />} />
-                <Route path="/reports" element={<ReportsPage />} />
-                <Route path="/settings" element={<SettingsForm />} />
-                <Route path="/messages" element={<MessagesTimeline />} />
-                <Route path="/missions" element={<MissionsPage />} />
-              </Routes>
-            </main>
-          </div>
-
-          <Notification />
-        </div>
+        <SidebarProvider>
+          <AppContainer>
+            <Router />
+          </AppContainer>
+        </SidebarProvider>
       </AppProvider>
-    </Router>
+    </ThemeProvider>
   )
 }
 

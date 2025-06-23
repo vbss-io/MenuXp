@@ -5,8 +5,17 @@
   "theme_color": "#3B82F6",
   "whatsapp_number": "+55 11 90000-0000",
   "qr_code_url": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://menuxp.com/menu",
-  "operation_types": ["delivery", "balcao", "mesa"],
-  "payment_methods": ["cartao_credito", "cartao_debito", "pix", "dinheiro"],
+  "operation_types": [
+    "delivery",
+    "balcao",
+    "mesa"
+  ],
+  "payment_methods": [
+    "cartao_credito",
+    "cartao_debito",
+    "pix",
+    "dinheiro"
+  ],
   "delivery_fee": 5.00,
   "business_hours": {
     "monday": "11:00-22:00",
