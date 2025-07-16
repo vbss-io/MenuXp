@@ -14,7 +14,7 @@ export const NotFound = () => {
           <RocketIcon size={48} weight="duotone" />
         </S.TitleContainer>
         <S.Message>
-          Ops! Parece que você encontrou um glitch na matrix. Esta página não existe ou foi movida para outro level.
+          Ops! Parece que você encontrou um glitch na matrix. Esta página não existe ou foi movida para outro lugar.
         </S.Message>
         <S.ButtonContainer>
           <Button onClick={() => navigate('/')}>

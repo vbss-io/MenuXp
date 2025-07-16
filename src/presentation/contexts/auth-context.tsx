@@ -8,7 +8,7 @@ export interface Login {
 }
 
 export interface UpdateProfile {
-  name?: string
+  name: string
   avatar?: string
 }
 

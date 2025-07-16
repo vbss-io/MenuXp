@@ -23,7 +23,7 @@ const TermsContainer = styled.div`
 
 const registerSchema = z
   .object({
-    username: z.string().min(3, 'Nome de usuário deve ter pelo menos 3 caracteres'),
+    name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
     email: z.string().email('E-mail inválido'),
     password: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
     confirmPassword: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
@@ -65,7 +65,7 @@ export const Register = () => {
     const registerUsecase = new RegisterUsecase()
     try {
       await registerUsecase.execute({
-        username: data.username,
+        name: data.name,
         email: data.email,
         password: data.password,
         passwordConfirm: data.confirmPassword
@@ -90,12 +90,12 @@ export const Register = () => {
           <S.CardTitle>Cadastre-se</S.CardTitle>
           <S.Form onSubmit={handleSubmit(onSubmit)}>
             <Input
-              label="Nome de usuário"
+              label="Nome"
               type="text"
-              error={errors.username?.message}
+              error={errors.name?.message}
               placeholder="Escolha um nome de usuário"
               fontSize="sm"
-              {...register('username')}
+              {...register('name')}
             />
             <Input
               label="E-mail"

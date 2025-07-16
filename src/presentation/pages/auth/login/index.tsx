@@ -10,11 +10,9 @@ import { z } from 'zod'
 
 import { LoginUsecase } from '@/application/auth/login.usecase'
 import { ResentConfirmationEmailUsecase } from '@/application/auth/resent-confirmation-email.usecase'
-import { GetRestaurantByIdUsecase } from '@/application/operation/get-restaurant-by-id.usecase'
 import { Loading } from '@/presentation/components/ui/loading'
 import type { Login as LoginType } from '@/presentation/contexts/auth-context'
 import { useAuth } from '@/presentation/hooks/use-auth'
-import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
 import * as S from '../styles'
 
@@ -24,7 +22,7 @@ const ForgotPasswordContainer = styled.div`
 `
 
 const loginSchema = z.object({
-  username: z.string().min(1, 'Nome de usuário é obrigatório'),
+  email: z.string().email('E-mail inválido').min(1, 'O E-mail é obrigatório'),
   password: z.string().min(1, 'Senha é obrigatória')
 })
 
@@ -33,7 +31,6 @@ type LoginFormData = z.infer<typeof loginSchema>
 export const Login = () => {
   const navigate = useNavigate()
   const { user, login } = useAuth()
-  const { setRestaurant } = useRestaurant()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [timer, setTimer] = useState(0)
   const [isResendDisabled, setIsResendDisabled] = useState(false)
@@ -96,16 +93,6 @@ export const Login = () => {
         return
       }
       login(response as LoginType)
-      if (response.restaurants && response.restaurants.length > 0) {
-        const selected = response.restaurants.find((r) => r.default) ?? response.restaurants[0]
-        if (selected) {
-          const getRestaurantById = new GetRestaurantByIdUsecase()
-          const restaurant = await getRestaurantById.execute({ id: selected.id })
-          if (restaurant) setRestaurant(restaurant)
-        }
-      } else {
-        setRestaurant(null)
-      }
       navigate('/dashboard')
     } catch {
       toast.error('Nome de usuário ou senha inválidos')
@@ -127,11 +114,11 @@ export const Login = () => {
           <S.CardTitle>Entrar</S.CardTitle>
           <S.Form onSubmit={handleSubmit(onSubmit)}>
             <Input
-              label="Nome de usuário"
-              error={errors.username?.message}
-              placeholder="Digite seu nome de usuário"
+              label="E-mail"
+              error={errors.email?.message}
+              placeholder="Digite seu E-mail"
               fontSize="sm"
-              {...register('username')}
+              {...register('email')}
             />
             <Input
               label="Senha"

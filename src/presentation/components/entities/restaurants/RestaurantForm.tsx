@@ -1,4 +1,4 @@
-import { RegisterRestaurantUsecase } from '@/application/operation/register-restaurant.usecase'
+import { RegisterRestaurantUsecase } from '@/application/restaurants/register-restaurant.usecase'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 import { zodResolver } from '@hookform/resolvers/zod'

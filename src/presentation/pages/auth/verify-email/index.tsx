@@ -50,11 +50,6 @@ export const VerifyEmail = () => {
         <S.Text>Estamos verificando seu endereço de email.</S.Text>
       </S.LeftColumn>
       <S.RightColumn>
-        <S.ImageContainer>
-          <S.ImageWrapper maskImage="/masks/pixel-mask-3.svg">
-            <img src="/images/image-3.jpg" alt="RetroTrack Illustration" />
-          </S.ImageWrapper>
-        </S.ImageContainer>
         <S.Card>
           <S.CardTitle>
             <S.IconWrapper>

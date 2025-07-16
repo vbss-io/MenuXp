@@ -2,7 +2,6 @@ import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
 import { Toaster } from 'react-hot-toast'
 import { styled, ThemeProvider } from 'styled-components'
 
-import { AppProvider } from '@/@old/contexts/AppContext'
 import { registerDependencies } from '@/infra/dependency-injection/register'
 import { Header } from '@/presentation/components/ui/header'
 import { AuthProvider } from '@/presentation/providers/auth-provider'
@@ -55,18 +54,16 @@ function App() {
           }
         }}
       />
-      <AppProvider>
-        <RestaurantProvider>
-          <AuthProvider>
-            <SidebarProvider>
-              <Header />
-              <AppContainer>
-                <Router />
-              </AppContainer>
-            </SidebarProvider>
-          </AuthProvider>
-        </RestaurantProvider>
-      </AppProvider>
+      <RestaurantProvider>
+        <AuthProvider>
+          <SidebarProvider>
+            <Header />
+            <AppContainer>
+              <Router />
+            </AppContainer>
+          </SidebarProvider>
+        </AuthProvider>
+      </RestaurantProvider>
     </ThemeProvider>
   )
 }
