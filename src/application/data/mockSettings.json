@@ -1,8 +1,9 @@
 {
-  "restaurant_id": 1,
+  "restaurant_id": "123456789",
   "name": "MenuXP Restaurante",
   "logo_url": "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  "theme_color": "#3B82F6",
+  "primary_color": "#3B82F6",
+  "secondary_color": "#60A5FA",
   "whatsapp_number": "+55 11 90000-0000",
   "qr_code_url": "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://menuxp.com/menu",
   "operation_types": [

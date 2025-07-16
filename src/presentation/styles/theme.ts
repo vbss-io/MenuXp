@@ -59,9 +59,9 @@ export const theme: DefaultTheme = {
   ...basicTheme,
   colors: {
     ...basicColors,
-    primary: 'hsl(252, 61%, 53%)',
-    secondary: 'hsl(42, 100%, 66%)',
-    highlight: 'hsl(187, 64%, 53%)',
+    primary: 'hsl(10, 90%, 50%)',
+    secondary: 'hsl(45, 100%, 51%)',
+    highlight: 'hsl(30, 100%, 60%)',
     background: 'hsl(240, 17%, 96%)',
     text: 'hsl(0, 0%, 10%)',
     textAlt: 'hsl(0, 0%, 100%)'
