@@ -20,6 +20,7 @@
     "@vbss-ui/input": "^1.0.0",
     "@vbss-ui/popover": "^1.0.0",
     "@vbss-ui/switch": "^1.0.0",
+    "@vbss-ui/textarea": "^1.0.0",
     "axios": "^1.9.0",
     "crypto-js": "^4.2.0",
     "framer-motion": "^12.19.1",

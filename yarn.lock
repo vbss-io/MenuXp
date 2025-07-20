@@ -1315,6 +1315,14 @@
     "@vbss-ui/lib" "*"
     class-variance-authority "^0.7.0"
 
+"@vbss-ui/textarea@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@vbss-ui/textarea/-/textarea-1.0.0.tgz#85d7b2fc87812109b844367caa6ac1f4258250e6"
+  integrity sha512-6VmGrgJ1n0Io1CUCv9gPH2jbhFtxvkQY3W4ZIaYZ/Oi/2fiJfwvvY/VlyF/PCz0GMedaaXDk85oJOMjX6v3eQA==
+  dependencies:
+    "@vbss-ui/lib" "*"
+    class-variance-authority "^0.7.0"
+
 "@vitejs/plugin-react@^4.3.1":
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-react/-/plugin-react-4.7.0.tgz#647af4e7bb75ad3add578e762ad984b90f4a24b9"
