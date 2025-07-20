@@ -10,6 +10,7 @@ export interface LoginUsecaseInput {
 export interface LoginUsecaseOutput {
   token?: string
   user?: User
+  restaurantId?: string
   pendingUser?: string
 }
 
