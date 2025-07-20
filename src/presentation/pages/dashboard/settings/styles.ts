@@ -28,7 +28,6 @@ export const Title = styled.h1`
 
 export const Subtitle = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.secondary};
   margin: 0;
 `
 
