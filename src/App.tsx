@@ -54,16 +54,16 @@ function App() {
           }
         }}
       />
-      <RestaurantProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <RestaurantProvider>
           <SidebarProvider>
             <Header />
             <AppContainer>
               <Router />
             </AppContainer>
           </SidebarProvider>
-        </AuthProvider>
-      </RestaurantProvider>
+        </RestaurantProvider>
+      </AuthProvider>
     </ThemeProvider>
   )
 }
