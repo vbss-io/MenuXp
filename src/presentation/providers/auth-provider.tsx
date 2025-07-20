@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const [token, setToken] = useState<string | null>(localStorage.get('token'))
   const [user, setUser] = useState<User | null>(localStorage.get('user'))
+  const [restaurantId, setRestaurantId] = useState<string | null>(localStorage.get('restaurantId'))
 
   useEffect(() => {
     window.addEventListener('Logout', logout)
@@ -24,12 +25,16 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const login = async ({ token, user }: Login) => {
+  const login = async ({ token, user, restaurantId }: Login) => {
     try {
       setToken(token)
       localStorage.set('token', token)
       setUser(user)
       localStorage.set('user', user)
+      if (restaurantId) {
+        setRestaurantId(restaurantId)
+        localStorage.set('restaurantId', restaurantId)
+      }
     } catch {
       toast.error('Falha ao fazer login. Por favor, tente novamente.')
       logout()
@@ -46,15 +51,38 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }
 
+  const updateSubscription = async ({ planId, features }: User['subscription']) => {
+    try {
+      const previousUser = user as User
+      const updatedUser = { ...previousUser, subscription: { planId, features } }
+      setUser(updatedUser)
+      localStorage.set('user', updatedUser)
+    } catch {
+      toast.error('Falha ao atualizar subscription')
+    }
+  }
+
+  const updateRestaurantId = async (restaurantId: string) => {
+    setRestaurantId(restaurantId)
+    localStorage.set('restaurantId', restaurantId)
+  }
+
   const logout = () => {
     if (!user) return
     // localStorage.clear()
     localStorage.remove('token')
     localStorage.remove('user')
+    localStorage.remove('restaurantId')
     setToken('')
     setUser(null)
     window.location.assign('/')
   }
 
-  return <AuthContext.Provider value={{ token, user, login, updateProfile, logout }}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider
+      value={{ token, user, login, updateProfile, updateSubscription, updateRestaurantId, logout, restaurantId }}
+    >
+      {children}
+    </AuthContext.Provider>
+  )
 }
