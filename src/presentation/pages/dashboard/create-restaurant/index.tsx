@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckIcon, SpinnerIcon, WarningIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
 import { Input } from '@vbss-ui/input'
+import { Textarea } from '@vbss-ui/textarea'
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -177,7 +178,7 @@ export const CreateRestaurant = () => {
             fontSize="sm"
             {...register('name')}
           />
-          <Input
+          <Textarea
             label="Descrição *"
             type="text"
             error={errors.description?.message}

@@ -67,6 +67,7 @@ export const LogoContainer = styled(motion.div)`
   display: flex;
   align-items: flex-start;
   gap: ${({ theme }) => theme.spacing.md};
+  margin-top: ${({ theme }) => theme.spacing.md};
 `
 
 export const LogoPreview = styled(motion.div)`
