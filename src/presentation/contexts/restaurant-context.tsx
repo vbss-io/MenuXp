@@ -1,9 +1,17 @@
-import type { Restaurant } from '@/domain/models/restaurant.model'
 import { createContext } from 'react'
 
-export const RestaurantContext = createContext(
-  {} as {
-    restaurant: Restaurant | null
-    setRestaurant: (restaurant: Restaurant | null) => void
-  }
-)
+import type { Restaurant } from '@/domain/models/restaurant.model'
+import type { RestaurantConfigValidation } from '@/application/restaurants/get-restaurant-by-id.usecase'
+
+export interface RestaurantContextData {
+  restaurant: Restaurant | null
+  configValidation: RestaurantConfigValidation | null
+  isLoading: boolean
+  error: string | null
+  setRestaurant: (restaurant: Restaurant) => void
+  updateRestaurant: (updates: Partial<Restaurant>) => void
+  clearRestaurant: () => void
+  refreshRestaurant: () => Promise<void>
+}
+
+export const RestaurantContext = createContext<RestaurantContextData>({} as RestaurantContextData)
