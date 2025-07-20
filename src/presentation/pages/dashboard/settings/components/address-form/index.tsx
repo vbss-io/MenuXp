@@ -205,7 +205,7 @@ export const AddressForm = () => {
       <S.SubmitSection>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Button type="submit" disabled={isLoading} variant="primary" size="lg">
-            {isLoading ? <Loading /> : 'Salvar Endereço'}
+            {isLoading ? <Loading /> : 'Salvar'}
           </Button>
         </motion.div>
       </S.SubmitSection>
