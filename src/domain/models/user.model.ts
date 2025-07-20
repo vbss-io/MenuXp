@@ -1,3 +1,5 @@
+import type { PlanFeatures } from '@/domain/models/plan.model'
+
 export interface User {
   id: string
   name: string
@@ -5,8 +7,9 @@ export interface User {
   role: string
   status: string
   avatar?: string
-  restaurants: Array<{
-    id: string
-    default: boolean
-  }>
+  restaurantId?: string
+  subscription: {
+    planId: string
+    features: PlanFeatures
+  }
 }
