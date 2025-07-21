@@ -24,15 +24,15 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
   const { restaurantId } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+  const [subToDelete, setSubToDelete] = useState<Category | null>(null)
+  const [isSubDeleteDialogOpen, setIsSubDeleteDialogOpen] = useState(false)
 
   const handleToggleStatus = async () => {
     if (!restaurantId) return
-
     setIsLoading(true)
     try {
       const toggleStatusUsecase = new ToggleCategoryStatusUsecase()
       await toggleStatusUsecase.execute({ categoryId: category.id })
-
       toast.success(`Categoria ${category.isActive ? 'desativada' : 'ativada'} com sucesso!`)
       onRefresh()
     } catch (error) {
@@ -45,12 +45,10 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
 
   const handleDelete = async () => {
     if (!restaurantId) return
-
     setIsLoading(true)
     try {
       const deleteCategoryUsecase = new DeleteCategoryUsecase()
       await deleteCategoryUsecase.execute({ categoryId: category.id })
-
       toast.success('Categoria excluída com sucesso!')
       onDelete(category.id)
     } catch (error) {
@@ -59,6 +57,24 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
     } finally {
       setIsLoading(false)
       setIsDeleteDialogOpen(false)
+    }
+  }
+
+  const handleDeleteSub = async () => {
+    if (!restaurantId || !subToDelete) return
+    setIsLoading(true)
+    try {
+      const deleteCategoryUsecase = new DeleteCategoryUsecase()
+      await deleteCategoryUsecase.execute({ categoryId: subToDelete.id })
+      toast.success('Subcategoria excluída com sucesso!')
+      setSubToDelete(null)
+      onRefresh()
+    } catch (error) {
+      toast.error('Erro ao excluir subcategoria')
+      console.error(error)
+    } finally {
+      setIsLoading(false)
+      setIsSubDeleteDialogOpen(false)
     }
   }
 
@@ -81,6 +97,8 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
     }
   }
 
+  const hasSubCategories = Array.isArray(category.subCategories) && category.subCategories.length > 0
+
   return (
     <S.Card variants={cardVariants} initial="hidden" animate="visible" exit="exit" whileHover={{ y: -2 }}>
       <S.CardHeader>
@@ -90,13 +108,28 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
         </Chip>
       </S.CardHeader>
       {category.description && <S.CardDescription>{category.description}</S.CardDescription>}
-      {Array.isArray(category.subCategories) && category.subCategories.length > 0 && (
+      {hasSubCategories && (
         <div style={{ marginBottom: 16 }}>
           <strong style={{ fontSize: 13, color: '#888' }}>Sub Categorias:</strong>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 8 }}>
-            {category.subCategories.map((sub) => (
-              <Chip key={sub.id} variant="outline" size="md" style={{ cursor: 'pointer' }} onClick={() => onEdit(sub)}>
+            {(category.subCategories ?? []).map((sub) => (
+              <Chip
+                key={sub.id}
+                variant="outline"
+                size="md"
+                style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
+                onClick={() => onEdit(sub)}
+              >
                 {sub.name}
+                <TrashIcon
+                  size={14}
+                  style={{ marginLeft: 4, color: '#e57373', cursor: 'pointer' }}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setSubToDelete(sub)
+                    setIsSubDeleteDialogOpen(true)
+                  }}
+                />
               </Chip>
             ))}
           </div>
@@ -110,13 +143,46 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
             title="Excluir Categoria"
             variant="outline"
             disableTextColor
-            description={`Tem certeza que deseja excluir a categoria "${category.name}"? Essa ação não poderá ser desfeita.`}
+            description={
+              hasSubCategories
+                ? 'Exclua todas as subcategorias antes de excluir esta categoria.'
+                : `Tem certeza que deseja excluir a categoria "${category.name}"? Essa ação não poderá ser desfeita.`
+            }
             footer={
               <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
                 <Button variant="ghost" onClick={() => setIsDeleteDialogOpen(false)} disabled={isLoading}>
                   Cancelar
                 </Button>
-                <Button variant="primary" $danger onClick={handleDelete} loading={isLoading}>
+                <Button
+                  variant="primary"
+                  $danger
+                  onClick={handleDelete}
+                  loading={isLoading}
+                  disabled={hasSubCategories}
+                  title={hasSubCategories ? 'Exclua as subcategorias primeiro' : ''}
+                >
+                  Confirmar Exclusão
+                </Button>
+              </div>
+            }
+          />
+          <Dialog
+            open={isSubDeleteDialogOpen}
+            onOpenChange={setIsSubDeleteDialogOpen}
+            title="Excluir Subcategoria"
+            variant="outline"
+            disableTextColor
+            description={
+              subToDelete && subToDelete.name
+                ? `Tem certeza que deseja excluir a subcategoria "${subToDelete.name}"? Essa ação não poderá ser desfeita.`
+                : ''
+            }
+            footer={
+              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+                <Button variant="ghost" onClick={() => setIsSubDeleteDialogOpen(false)} disabled={isLoading}>
+                  Cancelar
+                </Button>
+                <Button variant="primary" $danger onClick={handleDeleteSub} loading={isLoading}>
                   Confirmar Exclusão
                 </Button>
               </div>
@@ -130,7 +196,13 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
             {getStatusIcon()}
             {category.isActive ? 'Desativar' : 'Ativar'}
           </Button>
-          <Button variant="ghost" size="sm" onClick={() => setIsDeleteDialogOpen(true)} disabled={isLoading}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsDeleteDialogOpen(true)}
+            disabled={isLoading || hasSubCategories}
+            title={hasSubCategories ? 'Exclua as subcategorias primeiro' : ''}
+          >
             <TrashIcon size={16} />
             Excluir
           </Button>
