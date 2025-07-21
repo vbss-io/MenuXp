@@ -1,5 +1,4 @@
 import { lazy } from 'react'
-import { NotFound } from '../pages/not-found'
 
 const Dashboard = lazy(() => import('@/presentation/pages/dashboard').then((module) => ({ default: module.Dashboard })))
 const CreateRestaurant = lazy(() =>
@@ -10,6 +9,36 @@ const CreateRestaurant = lazy(() =>
 const Settings = lazy(() =>
   import('@/presentation/pages/dashboard/settings/index.tsx').then((module) => ({
     default: module.SettingsPage
+  }))
+)
+const Orders = lazy(() =>
+  import('@/presentation/pages/dashboard/orders').then((module) => ({
+    default: module.OrdersPage
+  }))
+)
+const MenuItems = lazy(() =>
+  import('@/presentation/pages/dashboard/menu-items').then((module) => ({
+    default: module.MenuItemsPage
+  }))
+)
+const Categories = lazy(() =>
+  import('@/presentation/pages/dashboard/categories').then((module) => ({
+    default: module.CategoriesPage
+  }))
+)
+const Reports = lazy(() =>
+  import('@/presentation/pages/dashboard/reports').then((module) => ({
+    default: module.ReportsPage
+  }))
+)
+const Missions = lazy(() =>
+  import('@/presentation/pages/dashboard/missions').then((module) => ({
+    default: module.MissionsPage
+  }))
+)
+const Messages = lazy(() =>
+  import('@/presentation/pages/dashboard/messages').then((module) => ({
+    default: module.MessagesPage
   }))
 )
 
@@ -24,15 +53,19 @@ export const dashboardRoutes = [
       },
       {
         path: 'orders',
-        element: <NotFound />
+        element: <Orders />
       },
       {
         path: 'menu',
-        element: <NotFound />
+        element: <MenuItems />
+      },
+      {
+        path: 'categories',
+        element: <Categories />
       },
       {
         path: 'reports',
-        element: <NotFound />
+        element: <Reports />
       },
       {
         path: 'settings',
@@ -40,15 +73,11 @@ export const dashboardRoutes = [
       },
       {
         path: 'messages',
-        element: <NotFound />
-      },
-      {
-        path: 'reports',
-        element: <NotFound />
+        element: <Messages />
       },
       {
         path: 'missions',
-        element: <NotFound />
+        element: <Missions />
       }
     ]
   }
