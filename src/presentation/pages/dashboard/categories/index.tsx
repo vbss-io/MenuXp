@@ -12,6 +12,7 @@ import { Filters, type CategoryFilters } from '@/presentation/components/entitie
 import { CategoryModal } from '@/presentation/components/entities/categories/category-modal'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { Loading } from '@/presentation/components/ui/loading'
+import { Pagination } from '@/presentation/components/ui/pagination'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
 
@@ -24,6 +25,8 @@ export const CategoriesPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingCategory, setEditingCategory] = useState<Category | undefined>()
   const [isFiltersExpanded, setIsFiltersExpanded] = useState(false)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalItems, setTotalItems] = useState(0)
 
   const [filters, setFilters] = useState<CategoryFilters>({
     searchMask: '',
@@ -35,7 +38,7 @@ export const CategoriesPage = () => {
 
   const debouncedSearchMask = useDebounce(filters.searchMask, 500)
 
-  const loadCategories = async () => {
+  const loadCategories = async (page = currentPage) => {
     if (!restaurantId) return
     setIsLoading(true)
     try {
@@ -46,9 +49,11 @@ export const CategoriesPage = () => {
         includeInactive: filters.includeInactive,
         sortField: filters.sortField,
         sortOrder: filters.sortOrder,
-        rowsPerPage: filters.rowsPerPage
+        rowsPerPage: filters.rowsPerPage,
+        page
       })
       setCategories(categoriesData)
+      setTotalItems(categoriesData.length)
     } catch (error) {
       toast.error('Erro ao carregar categorias')
       console.error(error)
@@ -59,7 +64,8 @@ export const CategoriesPage = () => {
 
   useEffect(() => {
     if (restaurantId) {
-      loadCategories()
+      loadCategories(1)
+      setCurrentPage(1)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
@@ -70,6 +76,11 @@ export const CategoriesPage = () => {
     filters.sortOrder,
     filters.rowsPerPage
   ])
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+    loadCategories(page)
+  }
 
   const handleCreateCategory = () => {
     setEditingCategory(undefined)
@@ -148,43 +159,51 @@ export const CategoriesPage = () => {
           </S.LoadingWrapper>
         </S.Container>
       ) : (
-        <motion.div variants={containerVariants} initial="hidden" animate="visible">
-          {categories.length > 0 ? (
-            <S.CategoriesGrid>
-              <AnimatePresence>
-                {categories.map((category) => (
-                  <CategoryCard
-                    key={category.id}
-                    category={category}
-                    onEdit={handleEditCategory}
-                    onDelete={handleDeleteCategory}
-                    onRefresh={loadCategories}
-                  />
-                ))}
-              </AnimatePresence>
-            </S.CategoriesGrid>
-          ) : (
-            <S.EmptyState>
-              <S.EmptyStateIcon>
-                <FolderIcon size={48} />
-              </S.EmptyStateIcon>
-              <S.EmptyStateTitle>
-                {filters.searchMask ? 'Nenhuma categoria encontrada' : 'Nenhuma categoria criada'}
-              </S.EmptyStateTitle>
-              <S.EmptyStateText>
-                {filters.searchMask
-                  ? 'Tente ajustar os termos de busca'
-                  : 'Crie sua primeira categoria para organizar os produtos do seu restaurante'}
-              </S.EmptyStateText>
-              {!filters.searchMask && (
-                <Button variant="primary" onClick={handleCreateCategory} size="md" style={{ marginTop: '16px' }}>
-                  <PlusIcon size={16} />
-                  Criar Primeira Categoria
-                </Button>
-              )}
-            </S.EmptyState>
-          )}
-        </motion.div>
+        <>
+          <motion.div variants={containerVariants} initial="hidden" animate="visible">
+            {categories.length > 0 ? (
+              <S.CategoriesGrid>
+                <AnimatePresence>
+                  {categories.map((category) => (
+                    <CategoryCard
+                      key={category.id}
+                      category={category}
+                      onEdit={handleEditCategory}
+                      onDelete={handleDeleteCategory}
+                      onRefresh={loadCategories}
+                    />
+                  ))}
+                </AnimatePresence>
+              </S.CategoriesGrid>
+            ) : (
+              <S.EmptyState>
+                <S.EmptyStateIcon>
+                  <FolderIcon size={48} />
+                </S.EmptyStateIcon>
+                <S.EmptyStateTitle>
+                  {filters.searchMask ? 'Nenhuma categoria encontrada' : 'Nenhuma categoria criada'}
+                </S.EmptyStateTitle>
+                <S.EmptyStateText>
+                  {filters.searchMask
+                    ? 'Tente ajustar os termos de busca'
+                    : 'Crie sua primeira categoria para organizar os produtos do seu restaurante'}
+                </S.EmptyStateText>
+                {!filters.searchMask && (
+                  <Button variant="primary" onClick={handleCreateCategory} size="md" style={{ marginTop: '16px' }}>
+                    <PlusIcon size={16} />
+                    Criar Primeira Categoria
+                  </Button>
+                )}
+              </S.EmptyState>
+            )}
+          </motion.div>
+          <Pagination
+            currentPage={currentPage}
+            totalItems={totalItems}
+            itemsPerPage={filters.rowsPerPage}
+            onPageChange={handlePageChange}
+          />
+        </>
       )}
       <CategoryModal
         isOpen={isModalOpen}
