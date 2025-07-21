@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@vbss-ui/button'
-import { Input } from '@vbss-ui/input'
+import { Textarea } from '@vbss-ui/textarea'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -182,9 +182,8 @@ export const TemplatesForm = () => {
               </S.TemplateHeader>
               <S.TemplateInputGroup>
                 <S.TemplateLabel htmlFor={templateKey}>Mensagem</S.TemplateLabel>
-                <Input
+                <Textarea
                   id={templateKey}
-                  as="textarea"
                   placeholder={templateExamples[templateKey]}
                   error={errors[templateKey]?.message}
                   fontSize="sm"

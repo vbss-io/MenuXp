@@ -29,8 +29,8 @@ export const SectionDescription = styled.p`
 `
 
 export const TemplatesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: ${({ theme }) => theme.spacing.md};
 `
 
