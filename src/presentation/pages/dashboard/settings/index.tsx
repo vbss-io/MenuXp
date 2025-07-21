@@ -1,4 +1,4 @@
-import { ClockIcon, FileTextIcon, GearIcon, MapPinLineIcon, PaletteIcon } from '@phosphor-icons/react'
+import { ClockIcon, FileTextIcon, GearIcon, MapPinLineIcon, PaletteIcon, UsersIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
@@ -11,7 +11,7 @@ import { TemplatesForm } from '@/presentation/pages/dashboard/settings/component
 
 import * as S from './styles'
 
-type TabType = 'branding' | 'address' | 'operations' | 'hours' | 'templates'
+type TabType = 'branding' | 'address' | 'operations' | 'hours' | 'templates' | 'users'
 
 export const SettingsPage = () => {
   const [isLoading, _setIsLoading] = useState(false)
@@ -22,7 +22,8 @@ export const SettingsPage = () => {
     { id: 'address' as const, label: 'Endereço', icon: <MapPinLineIcon size={20} /> },
     { id: 'operations' as const, label: 'Operações', icon: <GearIcon size={20} /> },
     { id: 'hours' as const, label: 'Horários', icon: <ClockIcon size={20} /> },
-    { id: 'templates' as const, label: 'Templates', icon: <FileTextIcon size={20} /> }
+    { id: 'templates' as const, label: 'Templates', icon: <FileTextIcon size={20} /> },
+    { id: 'users' as const, label: 'Usuários', icon: <UsersIcon size={20} /> }
   ]
 
   const getTabContent = (tabId: TabType) => {
@@ -46,6 +47,10 @@ export const SettingsPage = () => {
       templates: {
         title: 'Templates de Mensagens',
         description: 'Configure mensagens automáticas para diferentes status de pedidos'
+      },
+      users: {
+        title: 'Usuários',
+        description: 'Gerencie os usuários do seu restaurante'
       }
     }
     return content[tabId]
