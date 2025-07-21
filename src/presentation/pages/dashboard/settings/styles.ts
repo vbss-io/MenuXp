@@ -81,7 +81,6 @@ export const TabPlaceholder = styled.div`
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  color: ${({ theme }) => theme.colors.secondary};
   text-align: center;
 `
 
