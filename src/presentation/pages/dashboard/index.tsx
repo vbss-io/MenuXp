@@ -6,6 +6,7 @@ import { useSidebar } from '@/presentation/hooks/use-sidebar'
 import { useEffect } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { OperationPage } from '@/presentation/pages/dashboard/operation'
 
 const Container = styled.div`
   min-height: calc(100vh - 5rem);
@@ -47,7 +48,7 @@ export const Dashboard = () => {
       {isCreatingRestaurant ? null : <Sidebar />}
       <Main $isSidebarOpen={isOpen} $isCreatingRestaurant={isCreatingRestaurant}>
         <RestaurantPendingBanner />
-        {location.pathname === '/dashboard' ? <div>Dashboard</div> : <Outlet />}
+        {location.pathname === '/dashboard' ? <OperationPage /> : <Outlet />}
       </Main>
     </Container>
   )
