@@ -16,11 +16,11 @@ export const Avatar = ({ showName = false, avatarSize = 32, direction = 'row' }:
   return (
     <S.AvatarWrapper direction={direction} className="avatar-wrapper">
       {user?.avatar ? (
-        <S.AvatarImg src={user.avatar} alt={`${user.username} avatar`} size={avatarSize} />
+        <S.AvatarImg src={user.avatar} alt={`${user.name} avatar`} size={avatarSize} />
       ) : (
         <UserCircleIcon size={avatarSize} className="avatar-icon" />
       )}
-      {showName && <S.AvatarName>{user?.name ?? user?.username}</S.AvatarName>}
+      {showName && <S.AvatarName>{user?.name ?? user?.name}</S.AvatarName>}
     </S.AvatarWrapper>
   )
 }

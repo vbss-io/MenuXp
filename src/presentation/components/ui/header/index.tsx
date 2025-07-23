@@ -59,7 +59,7 @@ export const Header = () => {
             >
               <S.UserActions>
                 <S.UserInfo>
-                  <div>{user?.name ?? user.username}</div>
+                  <div>{user?.name}</div>
                   <S.UserEmail>{user.email}</S.UserEmail>
                 </S.UserInfo>
                 <S.MenuItem
