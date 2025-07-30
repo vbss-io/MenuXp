@@ -1,61 +1,66 @@
 import { motion } from 'framer-motion'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+const chipsStyles = css`
+  .active {
+    background-color: ${({ theme }) => theme.colors.green} !important;
+    border: 1px solid ${({ theme }) => theme.colors.green} !important;
+    color: white !important;
+  }
+
+  .inactive {
+    background-color: ${({ theme }) => theme.colors.red} !important;
+    border: 1px solid ${({ theme }) => theme.colors.red} !important;
+    color: white !important;
+  }
+`
 
 export const Card = styled(motion.div)`
-  background: ${({ theme }) => theme.colors.background};
-  border: 1px solid ${({ theme }) => theme.colors.secondary};
+  background: white;
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.md};
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.primary};
-    box-shadow: 0 4px 12px ${({ theme }) => theme.colors.primary}10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
+
+  ${chipsStyles}
 `
 
 export const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
-
-  .active {
-    background-color: ${({ theme }) => theme.colors.green};
-    border-color: ${({ theme }) => theme.colors.green};
-    color: ${({ theme }) => theme.colors.text};
-  }
-
-  .inactive {
-    background-color: ${({ theme }) => theme.colors.red};
-    border-color: ${({ theme }) => theme.colors.red};
-    color: ${({ theme }) => theme.colors.text};
-  }
+  margin-bottom: 12px;
+  gap: 12px;
 `
 
 export const CardTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.text};
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
   margin: 0;
   flex: 1;
 `
 
 export const CardDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.textSecondary};
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
 `
 
 export const CardFooter = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #e5e7eb;
 `
 
 export const ActionsContainer = styled.div`
   display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
   justify-content: flex-end;
-  gap: ${({ theme }) => theme.spacing.sm};
 `

@@ -30,3 +30,51 @@ export const Subtitle = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   margin: 0;
 `
+
+export const ActionsRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.md};
+  width: 100%;
+
+  > div:first-child {
+    flex: 1;
+  }
+
+  > div:nth-child(2) {
+    flex: 1;
+  }
+`
+
+export const MenuItemsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${({ theme }) => theme.spacing.md};
+`
+
+export const EmptyState = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: ${({ theme }) => theme.spacing.xxxl};
+  text-align: center;
+`
+
+export const EmptyStateIcon = styled.div`
+  font-size: 48px;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  opacity: 0.5;
+`
+
+export const EmptyStateTitle = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  margin: 0 0 ${({ theme }) => theme.spacing.sm} 0;
+`
+
+export const EmptyStateText = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  margin: 0;
+  line-height: 1.5;
+`

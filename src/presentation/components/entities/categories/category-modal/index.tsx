@@ -9,9 +9,10 @@ import toast from 'react-hot-toast'
 import { z } from 'zod'
 
 import { CreateCategoryUsecase } from '@/application/categories/create-category.usecase'
-import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
+import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { UpdateCategoryUsecase } from '@/application/categories/update-category.usecase'
 import type { Category } from '@/domain/models/category.model'
+import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 
@@ -35,13 +36,13 @@ interface CategoryModalProps {
 export const CategoryModal = ({ isOpen, onClose, category, onSuccess }: CategoryModalProps) => {
   const { restaurantId } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
-  const [categories, setCategories] = useState<Category[]>([])
+  const [selectedMainCategory, setSelectedMainCategory] = useState<string>('')
   const isEditing = !!category
   const {
     register,
     handleSubmit,
     reset,
-    watch,
+    setValue,
     formState: { errors }
   } = useForm<CategoryFormData>({
     resolver: zodResolver(categorySchema),
@@ -54,32 +55,47 @@ export const CategoryModal = ({ isOpen, onClose, category, onSuccess }: Category
 
   useEffect(() => {
     if (isOpen) {
-      loadCategories()
       if (category) {
         reset({
           name: category.name,
           description: category.description || '',
           mainCategoryId: category.mainCategoryId || ''
         })
+        setSelectedMainCategory(category.mainCategoryId || '')
       } else {
         reset({
           name: '',
           description: '',
           mainCategoryId: ''
         })
+        setSelectedMainCategory('')
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, category, reset])
 
-  const loadCategories = async () => {
-    if (!restaurantId) return
+  const handleMainCategoryChange = (value: string) => {
+    setSelectedMainCategory(value)
+    setValue('mainCategoryId', value)
+  }
+
+  const handleMainCategorySearch = async (searchTerm: string): Promise<ComboboxOption[]> => {
     try {
-      const getCategoriesUsecase = new GetCategoriesUsecase()
-      const categoriesData = await getCategoriesUsecase.execute({ restaurantId })
-      setCategories(categoriesData)
+      const getCategoriesNamesUsecase = new GetCategoriesNamesUsecase()
+      const categoriesData = await getCategoriesNamesUsecase.execute({
+        restaurantId: restaurantId!,
+        searchMask: searchTerm,
+        removeSubCategories: true
+      })
+
+      return categoriesData
+        .filter((cat) => cat.id !== category?.id)
+        .map((cat) => ({
+          label: cat.name,
+          value: cat.id
+        }))
     } catch (error) {
-      console.error('Erro ao carregar categorias:', error)
+      console.error('Erro ao buscar categorias:', error)
+      return []
     }
   }
 
@@ -121,6 +137,8 @@ export const CategoryModal = ({ isOpen, onClose, category, onSuccess }: Category
     if (isLoading) return <Loading />
     return isEditing ? 'Atualizar' : 'Criar'
   }
+
+  const isDisabled = Array.isArray(category?.subCategories) && category.subCategories.length > 0
 
   return (
     <Dialog
@@ -164,26 +182,15 @@ export const CategoryModal = ({ isOpen, onClose, category, onSuccess }: Category
           />
         </S.FormGroup>
         <S.FormGroup>
-          <S.Label htmlFor="mainCategoryId">Categoria Pai</S.Label>
-          <S.Select
-            id="mainCategoryId"
-            {...register('mainCategoryId')}
-            value={watch('mainCategoryId') || ''}
-            disabled={Array.isArray(category?.subCategories) && category.subCategories.length > 0}
-          >
-            <option value="" style={{ color: '#6B7280', fontStyle: 'italic' }}>
-              Selecione uma categoria pai (opcional)
-            </option>
-            {Array.isArray(categories) &&
-              categories
-                .filter((cat) => cat.id !== category?.id && cat.isActive)
-                .map((cat) => (
-                  <option key={cat.id} value={cat.id} style={{ color: '#000' }}>
-                    {cat.name}
-                  </option>
-                ))}
-          </S.Select>
-          {Array.isArray(category?.subCategories) && category.subCategories.length > 0 && (
+          <S.Label>Categoria Pai</S.Label>
+          <Combobox
+            placeholder="Selecione uma categoria pai (opcional)"
+            value={selectedMainCategory}
+            onChange={handleMainCategoryChange}
+            onSearch={handleMainCategorySearch}
+            disabled={isDisabled}
+          />
+          {isDisabled && (
             <span style={{ color: '#e57373', fontSize: 12, marginTop: 4 }}>
               Categorias com subcategorias não podem receber uma categoria pai.
             </span>

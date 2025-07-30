@@ -35,7 +35,6 @@ export const ActionsRow = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
-  margin-bottom: ${({ theme }) => theme.spacing.md};
   width: 100%;
 
   > div:first-child {
