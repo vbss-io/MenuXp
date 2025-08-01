@@ -11,15 +11,17 @@ import { Router } from '@/presentation/router'
 import { GlobalStyle } from '@/presentation/styles/global'
 import { theme } from '@/presentation/styles/theme'
 
-const AppContainer = styled.div`
-  min-height: calc(100vh - 5rem);
-  margin-top: 5rem;
+const AppContainer = styled.div<{ $isDashboard: boolean }>`
+  min-height: calc(100vh - ${({ $isDashboard }) => ($isDashboard ? '0' : '5rem')});
+  margin-top: ${({ $isDashboard }) => ($isDashboard ? '0' : '5rem')};
   display: flex;
   flex-direction: column;
 `
 
 function App() {
   registerDependencies()
+  const location = window.location.pathname
+  const isDashboard = location.includes('/dashboard')
 
   return (
     <ThemeProvider theme={theme}>
@@ -57,8 +59,8 @@ function App() {
       <AuthProvider>
         <RestaurantProvider>
           <SidebarProvider>
-            <Header />
-            <AppContainer>
+            <Header isDashboard={isDashboard} />
+            <AppContainer $isDashboard={isDashboard}>
               <Router />
             </AppContainer>
           </SidebarProvider>

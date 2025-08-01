@@ -35,6 +35,18 @@ export const Sidebar = () => {
     { icon: <GearIcon size={24} weight="fill" />, label: 'Configurações', path: '/dashboard/settings' }
   ]
 
+  const logoVariants = {
+    initial: { scale: 1 },
+    hover: {
+      scale: 1.05,
+      transition: {
+        type: 'spring' as const,
+        stiffness: 400,
+        damping: 17
+      }
+    }
+  }
+
   return (
     <motion.div
       initial={{ width: 80 }}
@@ -42,18 +54,28 @@ export const Sidebar = () => {
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       style={{
         position: 'fixed',
-        top: 'calc(5rem + 4px)',
         left: 0,
         zIndex: 10,
         overflow: 'hidden'
       }}
     >
       <S.SidebarContainer>
-        <S.ToggleButton onClick={toggleSidebar} $isOpen={isOpen}>
-          <motion.div animate={{ rotate: isOpen ? 0 : 180 }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
-            <CaretLeftIcon size={24} weight="bold" />
+        <S.HeaderSection $isOpen={isOpen}>
+          <motion.div variants={logoVariants} initial="initial" whileHover="hover">
+            <S.Logo onClick={() => window.location.assign('/')} $isOpen={isOpen}>
+              {isOpen ? (
+                <img src="https://placehold.co/120x40?text=Logo" alt="Logo Placeholder" />
+              ) : (
+                <img src="https://placehold.co/40x40?text=L" alt="Logo Placeholder" />
+              )}
+            </S.Logo>
           </motion.div>
-        </S.ToggleButton>
+          <S.ToggleButton onClick={toggleSidebar} $isOpen={isOpen}>
+            <motion.div animate={{ rotate: isOpen ? 0 : 180 }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
+              <CaretLeftIcon size={24} weight="bold" />
+            </motion.div>
+          </S.ToggleButton>
+        </S.HeaderSection>
         <S.MenuContainer>
           {menuItems.map((item, index) => (
             <S.MenuItem

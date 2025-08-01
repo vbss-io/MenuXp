@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const SidebarContainer = styled.div`
-  height: calc(100vh - 5rem - 4px);
+  height: 100vh;
   background-color: ${({ theme }) => theme.colors.primary};
   flex-direction: column;
   display: none;
@@ -13,11 +13,46 @@ export const SidebarContainer = styled.div`
   }
 `
 
+export const HeaderSection = styled.div<{ $isOpen: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: ${({ $isOpen }) => ($isOpen ? 'space-between' : 'center')};
+  flex-direction: ${({ $isOpen }) => ($isOpen ? 'row' : 'column')};
+  gap: ${({ $isOpen, theme }) => ($isOpen ? '0' : theme.spacing.sm)};
+  padding: ${({ theme }) => theme.spacing.md};
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  min-height: 80px;
+
+  > *:nth-child(2) {
+    order: ${({ $isOpen }) => ($isOpen ? '2' : '1')};
+  }
+
+  > *:nth-child(1) {
+    order: ${({ $isOpen }) => ($isOpen ? '1' : '2')};
+  }
+`
+
+export const Logo = styled.div<{ $isOpen: boolean }>`
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: ${({ $isOpen }) => ($isOpen ? 'flex-start' : 'center')};
+  transition: all 0.2s ease;
+  flex: ${({ $isOpen }) => ($isOpen ? '1' : 'none')};
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: ${({ theme }) => theme.borderRadius.sm};
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+`
+
 export const ToggleButton = styled.button<{ $isOpen: boolean }>`
-  position: absolute;
-  top: ${({ theme }) => theme.spacing.md};
-  right: ${({ $isOpen, theme }) => ($isOpen ? theme.spacing.md : '50%')};
-  transform: ${({ $isOpen }) => ($isOpen ? 'none' : 'translateX(50%)')};
   border: 1px solid ${({ theme }) => theme.colors.secondary};
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
@@ -26,19 +61,19 @@ export const ToggleButton = styled.button<{ $isOpen: boolean }>`
   justify-content: center;
   cursor: pointer;
   color: ${({ theme }) => theme.colors.secondary};
-  z-index: 101;
   transition: all 0.2s ease;
   box-shadow: 1px 1px 0px ${({ theme }) => theme.colors.white};
   width: 32px;
   height: 32px;
+  flex-shrink: 0;
 
   &:hover {
-    transform: ${({ $isOpen }) => ($isOpen ? 'translate(-1px, -1px)' : 'translateX(50%) translate(-1px, -1px)')};
+    transform: translate(-1px, -1px);
     box-shadow: 2px 2px 0px ${({ theme }) => theme.colors.white};
   }
 
   &:active {
-    transform: ${({ $isOpen }) => ($isOpen ? 'translate(1px, 1px)' : 'translateX(50%) translate(1px, 1px)')};
+    transform: translate(1px, 1px);
     box-shadow: 0px 0px 0px ${({ theme }) => theme.colors.white};
   }
 `
@@ -49,7 +84,6 @@ export const MenuContainer = styled.div`
   align-items: stretch;
   gap: ${({ theme }) => theme.spacing.sm};
   padding: ${({ theme }) => theme.spacing.md};
-  margin-top: ${({ theme }) => theme.spacing.xxl};
   flex: 1;
 `
 
