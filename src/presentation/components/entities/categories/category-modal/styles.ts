@@ -45,3 +45,9 @@ export const ModalFooter = styled.div`
   padding-top: ${({ theme }) => theme.spacing.md};
   border-top: 1px solid ${({ theme }) => theme.colors.secondary};
 `
+
+export const WarningText = styled.span`
+  color: ${({ theme }) => theme.colors.red};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  margin-top: ${({ theme }) => theme.spacing.xs};
+`

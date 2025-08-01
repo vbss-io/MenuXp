@@ -24,6 +24,7 @@ export const CategoriesPage = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingCategory, setEditingCategory] = useState<Category | undefined>()
+  const [parentCategoryId, setParentCategoryId] = useState<string | undefined>()
   const [currentPage, setCurrentPage] = useState(1)
   const [totalItems, setTotalItems] = useState(0)
 
@@ -74,6 +75,13 @@ export const CategoriesPage = () => {
 
   const handleCreateCategory = () => {
     setEditingCategory(undefined)
+    setParentCategoryId(undefined)
+    setIsModalOpen(true)
+  }
+
+  const handleCreateSubCategory = (parentCategoryId: string) => {
+    setEditingCategory(undefined)
+    setParentCategoryId(parentCategoryId)
     setIsModalOpen(true)
   }
 
@@ -151,6 +159,7 @@ export const CategoriesPage = () => {
                       onEdit={handleEditCategory}
                       onDelete={handleDeleteCategory}
                       onRefresh={loadCategories}
+                      onCreateSubCategory={handleCreateSubCategory}
                     />
                   ))}
                 </AnimatePresence>
@@ -189,6 +198,7 @@ export const CategoriesPage = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         category={editingCategory}
+        parentCategoryId={parentCategoryId}
         onSuccess={handleModalSuccess}
       />
     </S.Container>

@@ -1,4 +1,4 @@
-import { EyeIcon, EyeSlashIcon, PencilIcon, TrashIcon } from '@phosphor-icons/react'
+import { EyeIcon, EyeSlashIcon, PencilIcon, TrashIcon, PlusIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
 import { Chip } from '@vbss-ui/chip'
 import { Dialog } from '@vbss-ui/dialog'
@@ -18,9 +18,10 @@ interface CategoryCardProps {
   onEdit: (category: Category) => void
   onDelete: (categoryId: string) => void
   onRefresh: () => void
+  onCreateSubCategory: (parentCategoryId: string) => void
 }
 
-export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: CategoryCardProps) => {
+export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSubCategory }: CategoryCardProps) => {
   const { restaurantId } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
@@ -107,27 +108,42 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
           {category.isActive ? 'Ativa' : 'Inativa'}
         </Chip>
       </S.CardHeader>
-      {category.description && <S.CardDescription>{category.description}</S.CardDescription>}
-      {hasSubCategories && (
+      <S.CardContent>
+        {category.description && <S.CardDescription>{category.description}</S.CardDescription>}
         <S.SubCategoriesContainer>
-          <strong>Sub Categorias:</strong>
-          <S.SubCategoriesList>
-            {(category.subCategories ?? []).map((sub) => (
-              <Chip key={sub.id} variant="outline" size="md" onClick={() => onEdit(sub)}>
-                {sub.name}
-                <TrashIcon
-                  size={14}
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setSubToDelete(sub)
-                    setIsSubDeleteDialogOpen(true)
-                  }}
-                />
-              </Chip>
-            ))}
-          </S.SubCategoriesList>
+          <S.SubCategoriesHeader>
+            <strong>Sub Categorias:</strong>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => onCreateSubCategory(category.id)}
+              style={{ padding: '4px 8px', fontSize: 12 }}
+            >
+              <PlusIcon size={14} />
+              Adicionar
+            </Button>
+          </S.SubCategoriesHeader>
+          {hasSubCategories ? (
+            <S.SubCategoriesList>
+              {(category.subCategories ?? []).map((sub) => (
+                <Chip key={sub.id} variant="outline" size="md" onClick={() => onEdit(sub)}>
+                  {sub.name}
+                  <TrashIcon
+                    size={14}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      setSubToDelete(sub)
+                      setIsSubDeleteDialogOpen(true)
+                    }}
+                  />
+                </Chip>
+              ))}
+            </S.SubCategoriesList>
+          ) : (
+            <S.EmptySubCategoriesText>Nenhuma subcategoria criada</S.EmptySubCategoriesText>
+          )}
         </S.SubCategoriesContainer>
-      )}
+      </S.CardContent>
       <S.CardFooter>
         <S.ActionsContainer>
           <Dialog

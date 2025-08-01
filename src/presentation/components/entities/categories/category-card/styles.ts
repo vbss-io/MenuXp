@@ -21,6 +21,10 @@ export const Card = styled(motion.div)`
   padding: ${({ theme }) => theme.spacing.md};
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 200px;
 
   &:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -43,15 +47,23 @@ export const CardTitle = styled.h3`
   flex: 1;
 `
 
+export const CardContent = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`
+
 export const CardDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.gray[600]};
   margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
+  flex-shrink: 0;
 `
 
 export const CardFooter = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.md};
+  margin-top: auto;
   padding-top: ${({ theme }) => theme.spacing.md};
+  flex-shrink: 0;
 `
 
 export const ActionsContainer = styled.div`
@@ -86,6 +98,18 @@ export const SubCategoriesContainer = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.sm};
     color: ${({ theme }) => theme.colors.gray};
   }
+`
+
+export const SubCategoriesHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+export const EmptySubCategoriesText = styled.span`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.gray[500]};
+  font-style: italic;
 `
 
 export const SubCategoriesList = styled.div`

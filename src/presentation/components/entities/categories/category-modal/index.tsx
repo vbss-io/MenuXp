@@ -30,10 +30,11 @@ interface CategoryModalProps {
   isOpen: boolean
   onClose: () => void
   category?: Category
+  parentCategoryId?: string
   onSuccess: () => void
 }
 
-export const CategoryModal = ({ isOpen, onClose, category, onSuccess }: CategoryModalProps) => {
+export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onSuccess }: CategoryModalProps) => {
   const { restaurantId } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const [selectedMainCategory, setSelectedMainCategory] = useState<string>('')
@@ -66,12 +67,12 @@ export const CategoryModal = ({ isOpen, onClose, category, onSuccess }: Category
         reset({
           name: '',
           description: '',
-          mainCategoryId: ''
+          mainCategoryId: parentCategoryId || ''
         })
-        setSelectedMainCategory('')
+        setSelectedMainCategory(parentCategoryId || '')
       }
     }
-  }, [isOpen, category, reset])
+  }, [isOpen, category, parentCategoryId, reset])
 
   const handleMainCategoryChange = (value: string) => {
     setSelectedMainCategory(value)
@@ -191,9 +192,7 @@ export const CategoryModal = ({ isOpen, onClose, category, onSuccess }: Category
             disabled={isDisabled}
           />
           {isDisabled && (
-            <span style={{ color: '#e57373', fontSize: 12, marginTop: 4 }}>
-              Categorias com subcategorias não podem receber uma categoria pai.
-            </span>
+            <S.WarningText>Categorias com subcategorias não podem receber uma categoria pai.</S.WarningText>
           )}
         </S.FormGroup>
       </S.Form>
