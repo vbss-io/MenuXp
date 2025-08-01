@@ -1,51 +1,21 @@
 import styled from 'styled-components'
 
-export const FiltersContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: ${({ theme }) => theme.spacing.md};
-  background: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.secondary};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-`
-
-export const FiltersContent = styled.div`
+export const FilterContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.md};
-  align-items: space-between;
-  justify-content: center;
 `
 
-export const FilterRow = styled.div`
+export const SearchContainer = styled.div`
   display: flex;
-  gap: ${({ theme }) => theme.spacing.lg};
+  gap: ${({ theme }) => theme.spacing.sm};
+  align-items: center;
 `
 
-export const FilterGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing.xs};
-  min-width: 200px;
-  width: 100%;
-`
-
-export const FilterLabel = styled.label`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.text};
-`
-
-export const SortOrderContainer = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.spacing.xs};
-`
-
-export const Select = styled.select`
-  width: 100%;
+export const SearchInput = styled.input`
+  flex: 1;
   padding: ${({ theme }) => theme.spacing.sm};
-  border: 1px solid ${({ theme }) => theme.colors.secondary};
+  border: 1px solid ${({ theme }) => theme.colors.gray};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.text};
@@ -58,7 +28,41 @@ export const Select = styled.select`
     box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.primary}20;
   }
 
-  option {
-    padding: ${({ theme }) => theme.spacing.sm};
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.gray};
+  }
+`
+
+export const PopoverContent = styled.div`
+  padding: ${({ theme }) => theme.spacing.md};
+  min-width: 200px;
+`
+
+export const PopoverTitle = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.text};
+  margin: 0 0 ${({ theme }) => theme.spacing.sm} 0;
+`
+
+export const PopoverOptions = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xs};
+`
+
+export const PopoverOption = styled.div<{ active?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: ${({ theme }) => theme.spacing.sm};
+  border-radius: ${({ theme }) => theme.borderRadius.xs};
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background: ${({ active, theme }) => (active ? `${theme.colors.primary}10` : 'transparent')};
+  color: ${({ active, theme }) => (active ? theme.colors.primary : theme.colors.text)};
+
+  &:hover {
+    background: ${({ theme }) => `${theme.colors.primary}05`};
   }
 `

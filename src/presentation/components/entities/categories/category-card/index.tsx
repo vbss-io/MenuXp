@@ -109,21 +109,14 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
       </S.CardHeader>
       {category.description && <S.CardDescription>{category.description}</S.CardDescription>}
       {hasSubCategories && (
-        <div style={{ marginBottom: 16 }}>
-          <strong style={{ fontSize: 13, color: '#888' }}>Sub Categorias:</strong>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 8 }}>
+        <S.SubCategoriesContainer>
+          <strong>Sub Categorias:</strong>
+          <S.SubCategoriesList>
             {(category.subCategories ?? []).map((sub) => (
-              <Chip
-                key={sub.id}
-                variant="outline"
-                size="md"
-                style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 4 }}
-                onClick={() => onEdit(sub)}
-              >
+              <Chip key={sub.id} variant="outline" size="md" onClick={() => onEdit(sub)}>
                 {sub.name}
                 <TrashIcon
                   size={14}
-                  style={{ marginLeft: 4, color: '#e57373', cursor: 'pointer' }}
                   onClick={(e) => {
                     e.stopPropagation()
                     setSubToDelete(sub)
@@ -132,8 +125,8 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
                 />
               </Chip>
             ))}
-          </div>
-        </div>
+          </S.SubCategoriesList>
+        </S.SubCategoriesContainer>
       )}
       <S.CardFooter>
         <S.ActionsContainer>
@@ -149,7 +142,7 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
                 : `Tem certeza que deseja excluir a categoria "${category.name}"? Essa ação não poderá ser desfeita.`
             }
             footer={
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+              <S.ModalFooter>
                 <Button variant="ghost" onClick={() => setIsDeleteDialogOpen(false)} disabled={isLoading}>
                   Cancelar
                 </Button>
@@ -163,7 +156,7 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
                 >
                   Confirmar Exclusão
                 </Button>
-              </div>
+              </S.ModalFooter>
             }
           />
           <Dialog
@@ -178,14 +171,14 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh }: Category
                 : ''
             }
             footer={
-              <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+              <S.ModalFooter>
                 <Button variant="ghost" onClick={() => setIsSubDeleteDialogOpen(false)} disabled={isLoading}>
                   Cancelar
                 </Button>
                 <Button variant="primary" $danger onClick={handleDeleteSub} loading={isLoading}>
                   Confirmar Exclusão
                 </Button>
-              </div>
+              </S.ModalFooter>
             }
           />
           <Button variant="ghost" size="sm" onClick={() => onEdit(category)} disabled={isLoading}>

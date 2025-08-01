@@ -1,4 +1,4 @@
-import { FolderIcon, FunnelIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
+import { FolderIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
 import { Input } from '@vbss-ui/input'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -24,7 +24,6 @@ export const CategoriesPage = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingCategory, setEditingCategory] = useState<Category | undefined>()
-  const [isFiltersExpanded, setIsFiltersExpanded] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [totalItems, setTotalItems] = useState(0)
 
@@ -32,8 +31,7 @@ export const CategoriesPage = () => {
     searchMask: '',
     includeInactive: false,
     sortField: 'name',
-    sortOrder: 'asc',
-    rowsPerPage: 20
+    sortOrder: 'asc'
   })
 
   const debouncedSearchMask = useDebounce(filters.searchMask, 500)
@@ -49,7 +47,6 @@ export const CategoriesPage = () => {
         includeInactive: filters.includeInactive,
         sortField: filters.sortField,
         sortOrder: filters.sortOrder,
-        rowsPerPage: filters.rowsPerPage,
         page
       })
       setCategories(categoriesData)
@@ -68,14 +65,7 @@ export const CategoriesPage = () => {
       setCurrentPage(1)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    restaurantId,
-    debouncedSearchMask,
-    filters.includeInactive,
-    filters.sortField,
-    filters.sortOrder,
-    filters.rowsPerPage
-  ])
+  }, [restaurantId, debouncedSearchMask, filters.includeInactive, filters.sortField, filters.sortOrder])
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
@@ -125,33 +115,23 @@ export const CategoriesPage = () => {
           fontSize="sm"
           icon={<MagnifyingGlassIcon size={16} />}
         />
-        <Button
-          variant="outline"
-          size="md"
-          onClick={() => setIsFiltersExpanded((prev) => !prev)}
-          icon={<FunnelIcon size={18} />}
-        >
-          Mais Opções
-        </Button>
+        <Filters
+          filters={filters}
+          onFiltersChange={setFilters}
+          onReset={() =>
+            setFilters({
+              searchMask: '',
+              includeInactive: false,
+              sortField: 'name',
+              sortOrder: 'asc'
+            })
+          }
+        />
         <Button variant="primary" onClick={handleCreateCategory} size="md">
           <PlusIcon size={16} />
           Nova Categoria
         </Button>
       </S.ActionsRow>
-      <Filters
-        filters={filters}
-        onFiltersChange={setFilters}
-        onReset={() =>
-          setFilters({
-            searchMask: '',
-            includeInactive: false,
-            sortField: 'name',
-            sortOrder: 'asc',
-            rowsPerPage: 20
-          })
-        }
-        isExpanded={isFiltersExpanded}
-      />
       {isLoading ? (
         <S.Container>
           <S.LoadingWrapper>
@@ -200,7 +180,7 @@ export const CategoriesPage = () => {
           <Pagination
             currentPage={currentPage}
             totalItems={totalItems}
-            itemsPerPage={filters.rowsPerPage}
+            itemsPerPage={20}
             onPageChange={handlePageChange}
           />
         </>
