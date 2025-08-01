@@ -1,6 +1,6 @@
 import type { LocalStorage } from '@/domain/storage/local-storage'
-import { Registry } from '@/infra/dependency-injection/registry'
 import type { DataEncryption } from '@/infra/adapters/auth/cripto-js-adapter'
+import { Registry } from '@/infra/dependency-injection/registry'
 
 export class LocalStorageAdapter implements LocalStorage {
   private readonly dataEncryption: DataEncryption

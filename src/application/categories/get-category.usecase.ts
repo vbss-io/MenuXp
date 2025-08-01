@@ -1,6 +1,6 @@
 import type { HttpClient } from '@/domain/http/http-client'
-import { Registry } from '@/infra/dependency-injection/registry'
 import type { Category } from '@/domain/models/category.model'
+import { Registry } from '@/infra/dependency-injection/registry'
 
 export interface GetCategoryUsecaseInput {
   categoryId: string

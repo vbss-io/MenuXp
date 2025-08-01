@@ -1,6 +1,6 @@
 import type { HttpClient } from '@/domain/http/http-client'
-import { Registry } from '@/infra/dependency-injection/registry'
 import type { Restaurant } from '@/domain/models/restaurant.model'
+import { Registry } from '@/infra/dependency-injection/registry'
 
 export interface GetRestaurantByIdUsecaseInput {
   restaurantId: string
