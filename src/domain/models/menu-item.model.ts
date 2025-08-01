@@ -9,6 +9,7 @@ export interface MenuItem {
   name: string
   description?: string
   categoryId: string
+  categoryName: string
   restaurantId: string
   price: number
   stock: number

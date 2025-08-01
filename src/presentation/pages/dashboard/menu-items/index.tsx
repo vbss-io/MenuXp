@@ -1,4 +1,4 @@
-import { BowlFoodIcon, FunnelIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
+import { BowlFoodIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
 import { Input } from '@vbss-ui/input'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -30,7 +30,6 @@ export const MenuItemsPage = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingMenuItem, setEditingMenuItem] = useState<MenuItem | undefined>()
-  const [isFiltersExpanded, setIsFiltersExpanded] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [totalItems, setTotalItems] = useState(0)
   const [selectedCategory, setSelectedCategory] = useState<string>('')
@@ -40,8 +39,7 @@ export const MenuItemsPage = () => {
     includeInactive: false,
     categoryId: undefined,
     sortField: 'name',
-    sortOrder: 'asc',
-    rowsPerPage: 20
+    sortOrder: 'asc'
   })
 
   const debouncedSearchMask = useDebounce(filters.searchMask, 500)
@@ -57,7 +55,6 @@ export const MenuItemsPage = () => {
         includeInactive: filters.includeInactive,
         categoryId: filters.categoryId,
         page,
-        rowsPerPage: filters.rowsPerPage,
         sortField: filters.sortField as 'name' | 'createdAt' | 'updatedAt',
         sortOrder: filters.sortOrder
       })
@@ -83,8 +80,7 @@ export const MenuItemsPage = () => {
     filters.includeInactive,
     filters.categoryId,
     filters.sortField,
-    filters.sortOrder,
-    filters.rowsPerPage
+    filters.sortOrder
   ])
 
   useEffect(() => {
@@ -127,11 +123,10 @@ export const MenuItemsPage = () => {
         searchMask: searchTerm,
         removeSubCategories: false
       })
-
       return categoriesData.map((cat) => ({
-        label: cat.name, // Sempre mostra apenas o nome da categoria
+        label: cat.name,
         value: cat.id,
-        displayLabel: cat.mainCategoryName ? `${cat.mainCategoryName} → ${cat.name}` : cat.name // Label completo para exibição na lista
+        displayLabel: cat.mainCategoryName ? `${cat.mainCategoryName} → ${cat.name}` : cat.name
       }))
     } catch (error) {
       console.error('Erro ao buscar categorias:', error)
@@ -170,34 +165,24 @@ export const MenuItemsPage = () => {
           onChange={handleCategoryChange}
           onSearch={handleCategorySearch}
         />
-        <Button
-          variant="outline"
-          size="md"
-          onClick={() => setIsFiltersExpanded((prev) => !prev)}
-          icon={<FunnelIcon size={18} />}
-        >
-          Mais Opções
-        </Button>
+        <MenuItemFilters
+          filters={filters}
+          onFiltersChange={setFilters}
+          onReset={() =>
+            setFilters({
+              searchMask: '',
+              includeInactive: false,
+              categoryId: undefined,
+              sortField: 'name',
+              sortOrder: 'asc'
+            })
+          }
+        />
         <Button variant="primary" onClick={handleCreateMenuItem} size="md">
           <PlusIcon size={16} />
           Novo Item
         </Button>
       </S.ActionsRow>
-      <MenuItemFilters
-        filters={filters}
-        onFiltersChange={setFilters}
-        onReset={() =>
-          setFilters({
-            searchMask: '',
-            includeInactive: false,
-            categoryId: undefined,
-            sortField: 'name',
-            sortOrder: 'asc',
-            rowsPerPage: 20
-          })
-        }
-        isExpanded={isFiltersExpanded}
-      />
       {isLoading ? (
         <S.Container>
           <S.LoadingWrapper>
@@ -246,7 +231,7 @@ export const MenuItemsPage = () => {
           <Pagination
             currentPage={currentPage}
             totalItems={totalItems}
-            itemsPerPage={filters.rowsPerPage}
+            itemsPerPage={20}
             onPageChange={handlePageChange}
           />
         </>

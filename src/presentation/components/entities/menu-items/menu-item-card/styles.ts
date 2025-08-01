@@ -1,118 +1,127 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { motion } from 'framer-motion'
 
-// Estilos globais para o Chip
-const globalStyles = `
+const chipsStyles = css`
   .active {
-    background-color: #10b981 !important;
+    background-color: ${({ theme }) => theme.colors.green} !important;
+    border: 1px solid ${({ theme }) => theme.colors.green} !important;
     color: white !important;
   }
-  
+
   .inactive {
-    background-color: #ef4444 !important;
-    color: white !important;
+    background-color: ${({ theme }) => theme.colors.red} !important;
+    border: 1px solid ${({ theme }) => theme.colors.red} !important;
+    color: ${({ theme }) => theme.colors.white} !important;
   }
 `
 
 export const Card = styled(motion.div)`
-  background: white;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 16px;
+  background: ${({ theme }) => theme.colors.white};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  padding: ${({ theme }) => theme.spacing.md};
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 200px;
 
   &:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  ${globalStyles}
+  ${chipsStyles}
 `
 
 export const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 12px;
-  gap: 12px;
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  gap: ${({ theme }) => theme.spacing.md};
 `
 
 export const CardTitle = styled.h3`
-  font-size: 16px;
-  font-weight: 600;
-  color: #111827;
-  margin: 0;
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   flex: 1;
 `
 
 export const CardDescription = styled.p`
-  font-size: 14px;
-  color: #6b7280;
-  margin: 0 0 12px 0;
-  line-height: 1.4;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.gray};
+  flex-shrink: 0;
 `
 
 export const CardInfo = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 16px;
-  font-size: 13px;
-  color: #374151;
+  gap: ${({ theme }) => theme.spacing.md};
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.gray};
 
   span {
-    background: #f3f4f6;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: 500;
+    background: ${({ theme }) => theme.colors.primary};
+    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+    color: ${({ theme }) => theme.colors.white};
+    border-radius: ${({ theme }) => theme.borderRadius.sm};
+    font-weight: ${({ theme }) => theme.fontWeights.medium};
   }
 `
 
 export const CardFooter = styled.div`
-  margin-top: 16px;
-  padding-top: 12px;
-  border-top: 1px solid #e5e7eb;
+  margin-top: auto;
+  padding-top: ${({ theme }) => theme.spacing.md};
+  flex-shrink: 0;
 `
 
 export const ActionsContainer = styled.div`
   display: flex;
-  gap: 8px;
+  gap: ${({ theme }) => theme.spacing.sm};
   flex-wrap: wrap;
   justify-content: flex-end;
+
+  .button {
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.primary};
+      color: white;
+    }
+  }
 `
 
-export const ImagesContainer = styled.div`
-  margin-bottom: 16px;
+export const ModalFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: ${({ theme }) => theme.spacing.sm};
 `
+
+export const ImagesContainer = styled.div``
 
 export const ImageWrapper = styled.div`
-  width: 60px;
-  height: 60px;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid #e5e7eb;
-  flex-shrink: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
 `
 
 export const OptionalsSection = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  flex-shrink: 0;
 `
 
 export const OptionalsList = styled.div`
-  margin-top: 8px;
-  padding: 12px;
-  background: #f9fafb;
-  border-radius: 6px;
-  border: 1px solid #e5e7eb;
+  padding: ${({ theme }) => theme.spacing.xxs} ${({ theme }) => theme.spacing.sm};
 `
 
 export const OptionalItem = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 0;
-  font-size: 13px;
-  border-bottom: 1px solid #f3f4f6;
+  padding: ${({ theme }) => theme.spacing.xxs} 0;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
 
   &:last-child {
     border-bottom: none;

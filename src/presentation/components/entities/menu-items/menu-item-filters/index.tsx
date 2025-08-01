@@ -1,6 +1,7 @@
-import { SortAscendingIcon, SortDescendingIcon } from '@phosphor-icons/react'
+import { FunnelSimpleIcon, SortAscendingIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
 import { Checkbox } from '@vbss-ui/checkbox'
+import { Popover } from '@vbss-ui/popover'
 
 import * as S from './styles'
 
@@ -10,107 +11,103 @@ export interface MenuItemFilters {
   categoryId?: string
   sortField: 'name' | 'price' | 'createdAt' | 'updatedAt'
   sortOrder: 'asc' | 'desc'
-  rowsPerPage: number
 }
 
 interface FiltersProps {
   filters: MenuItemFilters
   onFiltersChange: (filters: MenuItemFilters) => void
   onReset: () => void
-  isExpanded: boolean
 }
 
 const sortFieldOptions = [
   { value: 'name', label: 'Nome' },
   { value: 'price', label: 'Preço' },
-  { value: 'createdAt', label: 'Data de Criação' },
-  { value: 'updatedAt', label: 'Data de Atualização' }
+  { value: 'createdAt', label: 'Criação' },
+  { value: 'updatedAt', label: 'Atualização' }
 ]
 
-const rowsPerPageOptions = [
-  { value: 10, label: '10 por página' },
-  { value: 20, label: '20 por página' },
-  { value: 50, label: '50 por página' },
-  { value: 100, label: '100 por página' }
-]
-
-export const MenuItemFilters = ({ filters, onFiltersChange, onReset, isExpanded }: FiltersProps) => {
-  const handleFilterChange = (key: keyof MenuItemFilters, value: string | number | boolean | undefined) => {
+export const MenuItemFilters = ({ filters, onFiltersChange, onReset }: FiltersProps) => {
+  const handleFilterChange = (key: keyof MenuItemFilters, value: string | boolean | undefined) => {
     onFiltersChange({
       ...filters,
       [key]: value
     })
   }
 
-  if (!isExpanded) return null
-
   return (
-    <S.FiltersContainer>
-      <S.FiltersContent>
-        <S.FilterRow>
-          <S.FilterGroup>
-            <S.FilterLabel>Ordenar por</S.FilterLabel>
-            <S.Select
-              value={filters.sortField}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleFilterChange('sortField', e.target.value)}
-            >
+    <S.FilterContainer>
+      <S.SearchContainer>
+        <Popover
+          variant="outline"
+          side="left"
+          trigger={
+            <Button variant="outlineSolid" size="md" as="div">
+              <SortAscendingIcon size={20} weight="bold" />
+            </Button>
+          }
+        >
+          <S.PopoverContent>
+            <S.PopoverTitle>Ordenar por:</S.PopoverTitle>
+            <S.PopoverOptions>
               {sortFieldOptions.map((option) => (
-                <option key={option.value} value={option.value}>
+                <S.PopoverOption
+                  key={option.value}
+                  onClick={() => {
+                    if (filters.sortField === option.value) {
+                      const newSortOrder = filters.sortOrder === 'asc' ? 'desc' : 'asc'
+                      onFiltersChange({
+                        ...filters,
+                        sortOrder: newSortOrder
+                      })
+                    } else {
+                      onFiltersChange({
+                        ...filters,
+                        sortField: option.value as 'name' | 'price' | 'createdAt' | 'updatedAt',
+                        sortOrder: 'asc'
+                      })
+                    }
+                  }}
+                  active={filters.sortField === option.value}
+                >
                   {option.label}
-                </option>
+                  {filters.sortField === option.value && (
+                    <SortAscendingIcon
+                      size={16}
+                      weight="bold"
+                      style={{ transform: `rotate(${filters.sortOrder === 'asc' ? '0' : '180'}deg)` }}
+                    />
+                  )}
+                </S.PopoverOption>
               ))}
-            </S.Select>
-          </S.FilterGroup>
-          <S.FilterGroup>
-            <S.FilterLabel>Ordem</S.FilterLabel>
-            <S.SortOrderContainer>
-              <Button
-                variant={filters.sortOrder === 'asc' ? 'primary' : 'ghost'}
-                size="sm"
-                onClick={() => handleFilterChange('sortOrder', 'asc')}
-                icon={<SortAscendingIcon size={16} />}
-              >
-                Crescente
-              </Button>
-              <Button
-                variant={filters.sortOrder === 'desc' ? 'primary' : 'ghost'}
-                size="sm"
-                onClick={() => handleFilterChange('sortOrder', 'desc')}
-                icon={<SortDescendingIcon size={16} />}
-              >
-                Decrescente
-              </Button>
-            </S.SortOrderContainer>
-          </S.FilterGroup>
-          <S.FilterGroup>
-            <S.FilterLabel>Itens por página</S.FilterLabel>
-            <S.Select
-              value={filters.rowsPerPage}
-              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                handleFilterChange('rowsPerPage', Number(e.target.value))
-              }
-            >
-              {rowsPerPageOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </S.Select>
-          </S.FilterGroup>
-        </S.FilterRow>
-        <S.FilterRow>
-          <S.FilterGroup>
-            <Checkbox
-              checked={filters.includeInactive}
-              onCheckedChange={(checked) => handleFilterChange('includeInactive', checked)}
-              label="Incluir itens inativos"
-            />
-          </S.FilterGroup>
-        </S.FilterRow>
-        <Button variant="outline" size="sm" onClick={onReset} style={{ alignSelf: 'flex-end' }}>
-          Limpar
-        </Button>
-      </S.FiltersContent>
-    </S.FiltersContainer>
+            </S.PopoverOptions>
+          </S.PopoverContent>
+        </Popover>
+        <Popover
+          variant="outline"
+          side="left"
+          trigger={
+            <Button variant="outlineSolid" size="md" as="div">
+              <FunnelSimpleIcon size={20} weight="bold" />
+            </Button>
+          }
+        >
+          <S.PopoverContent>
+            <S.PopoverTitle>Filtros adicionais:</S.PopoverTitle>
+            <S.PopoverOptions>
+              <S.PopoverOption>
+                <Checkbox
+                  checked={filters.includeInactive}
+                  onCheckedChange={(checked) => handleFilterChange('includeInactive', checked)}
+                  label="Incluir itens inativos"
+                />
+              </S.PopoverOption>
+            </S.PopoverOptions>
+            <Button variant="outlineSolid" size="sm" onClick={onReset} style={{ marginTop: '1rem', width: '100%' }}>
+              Limpar
+            </Button>
+          </S.PopoverContent>
+        </Popover>
+      </S.SearchContainer>
+    </S.FilterContainer>
   )
 }

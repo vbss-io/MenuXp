@@ -109,6 +109,7 @@ export const MenuItemCard = ({ menuItem, onEdit, onDelete, onRefresh }: MenuItem
         )}
 
         <S.CardInfo>
+          <span>{menuItem.categoryName}</span>
           <span>Preço: R$ {menuItem.price.toFixed(2)}</span>
           <span>Estoque: {menuItem.stock}</span>
           {menuItem.discount > 0 && <span>Desconto: {menuItem.discount}%</span>}

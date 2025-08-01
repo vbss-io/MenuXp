@@ -104,7 +104,6 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
     }
   }, [isOpen, menuItem, reset])
 
-  // Definir o valor da categoria no formulário quando selectedCategory mudar
   useEffect(() => {
     setValue('categoryId', selectedCategory)
   }, [selectedCategory, setValue])
@@ -147,15 +146,12 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
   const validateOptionals = (): string | null => {
     for (let i = 0; i < optionals.length; i++) {
       const optional = optionals[i]
-
       if (!optional.name.trim()) {
         return `Nome do opcional ${i + 1} é obrigatório`
       }
-
       if (typeof optional.price !== 'number' || optional.price < 0) {
         return `Preço do opcional "${optional.name}" deve ser maior ou igual a 0`
       }
-
       if (
         optional.maxQuantity !== undefined &&
         (typeof optional.maxQuantity !== 'number' || optional.maxQuantity < 0)
@@ -168,14 +164,11 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
 
   const onSubmit = async (data: MenuItemFormData) => {
     if (!restaurantId) return
-
-    // Validar opcionais
     const optionalsError = validateOptionals()
     if (optionalsError) {
       toast.error(optionalsError)
       return
     }
-
     setIsLoading(true)
     try {
       if (isEditing && menuItem) {
@@ -219,7 +212,7 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
       disableTextColor
       style={{ width: '90%', maxWidth: '1200px' }}
       footer={
-        <S.ButtonGroup>
+        <S.ModalFooter>
           <Button type="button" variant="ghost" onClick={onClose} disabled={isLoading}>
             Cancelar
           </Button>
@@ -230,11 +223,10 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
               return 'Criar'
             })()}
           </Button>
-        </S.ButtonGroup>
+        </S.ModalFooter>
       }
     >
       <S.Form>
-        {/* Linha 1: Nome | Categoria */}
         <S.FormRow>
           <S.FormGroup>
             <S.Label htmlFor="name">Nome *</S.Label>
@@ -248,7 +240,6 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
               disabled={isLoading}
             />
           </S.FormGroup>
-
           <S.FormGroup>
             <S.Label htmlFor="categoryId">Categoria *</S.Label>
             <Combobox
@@ -261,8 +252,6 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
             />
           </S.FormGroup>
         </S.FormRow>
-
-        {/* Linha 2: Descrição (largura total) */}
         <S.FormGroupFull>
           <S.Label htmlFor="description">Descrição</S.Label>
           <Textarea
@@ -275,8 +264,6 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
           />
           {errors.description && <S.ErrorMessage>{errors.description.message}</S.ErrorMessage>}
         </S.FormGroupFull>
-
-        {/* Linha 3: Preço | Estoque */}
         <S.FormRow>
           <S.FormGroup>
             <S.Label htmlFor="price">Preço *</S.Label>
@@ -292,7 +279,6 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
               disabled={isLoading}
             />
           </S.FormGroup>
-
           <S.FormGroup>
             <S.Label htmlFor="stock">Estoque *</S.Label>
             <Input
@@ -307,8 +293,6 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
             />
           </S.FormGroup>
         </S.FormRow>
-
-        {/* Linha 4: Imagens/Vídeos (largura total) */}
         <S.FormGroupFull>
           <MultipleImageUploader
             label="Imagens/Vídeos"
@@ -318,8 +302,6 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
             error={errors.medias?.message?.toString()}
           />
         </S.FormGroupFull>
-
-        {/* Linha 5: Adicionais (largura total) */}
         <S.FormGroupFull>
           <OptionalsSection optionals={optionals} setOptionals={setOptionals} disabled={isLoading} />
         </S.FormGroupFull>
