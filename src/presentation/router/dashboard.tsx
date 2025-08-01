@@ -41,6 +41,11 @@ const Messages = lazy(() =>
     default: module.MessagesPage
   }))
 )
+const Menu = lazy(() =>
+  import('@/presentation/pages/dashboard/menu').then((module) => ({
+    default: module.MenuPage
+  }))
+)
 
 export const dashboardRoutes = [
   {
@@ -57,6 +62,10 @@ export const dashboardRoutes = [
       },
       {
         path: 'menu',
+        element: <Menu />
+      },
+      {
+        path: 'menu-items',
         element: <MenuItems />
       },
       {

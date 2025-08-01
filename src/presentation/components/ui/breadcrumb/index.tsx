@@ -15,7 +15,8 @@ export const Breadcrumb = ({ lastPath }: BreadcrumbProps) => {
     const titles: Record<string, string> = {
       dashboard: 'Dashboard',
       orders: 'Pedidos',
-      menu: 'Menu',
+      menu: 'Cardápio',
+      'menu-items': 'Items do Menu',
       categories: 'Categorias',
       reports: 'Relatórios',
       missions: 'Missões',

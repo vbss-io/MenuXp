@@ -8,7 +8,8 @@ import {
   ShoppingCartIcon,
   SignOutIcon,
   GearIcon,
-  ListIcon
+  ListIcon,
+  ScrollIcon
 } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -27,8 +28,9 @@ export const Sidebar = () => {
   const menuItems = [
     { icon: <HouseIcon size={24} weight="fill" />, label: 'Operação', path: '/dashboard' },
     { icon: <ShoppingCartIcon size={24} weight="fill" />, label: 'Pedidos', path: '/dashboard/orders' },
-    { icon: <BowlFoodIcon size={24} weight="fill" />, label: 'Menu', path: '/dashboard/menu' },
     { icon: <ListIcon size={24} weight="fill" />, label: 'Categorias', path: '/dashboard/categories' },
+    { icon: <BowlFoodIcon size={24} weight="fill" />, label: 'Items do Menu', path: '/dashboard/menu-items' },
+    { icon: <ScrollIcon size={24} weight="fill" />, label: 'Cardápio', path: '/dashboard/menu' },
     { icon: <GraphIcon size={24} weight="fill" />, label: 'Relatórios', path: '/dashboard/reports' },
     { icon: <GameControllerIcon size={24} weight="fill" />, label: 'Missões', path: '/dashboard/missions' },
     { icon: <ChatCenteredDotsIcon size={24} weight="fill" />, label: 'Mensagens', path: '/dashboard/messages' },

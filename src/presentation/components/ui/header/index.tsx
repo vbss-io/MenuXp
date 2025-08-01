@@ -2,7 +2,7 @@ import { ChartPieIcon, ListIcon, SignOutIcon, UserIcon } from '@phosphor-icons/r
 import { Button } from '@vbss-ui/button'
 import { Popover } from '@vbss-ui/popover'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Avatar } from '@/presentation/components/entities/users/avatar'
 import { MobileHeader } from '@/presentation/components/ui/header/mobile'
@@ -39,6 +39,7 @@ export const Header = ({ isDashboard = false }: HeaderProps) => {
     window.addEventListener('resize', checkIsMobile)
     return () => window.removeEventListener('resize', checkIsMobile)
   }, [])
+
   if (isDashboard && !isMobile) {
     return null
   }
