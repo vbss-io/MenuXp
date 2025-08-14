@@ -1,15 +1,17 @@
 import type { HttpClient } from '@/domain/http/http-client'
 import { Registry } from '@/infra/dependency-injection/registry'
 
+export interface UpdateMenuLayoutUsecaseSection {
+  id?: string
+  type: string
+  config: Record<string, unknown>
+}
+
 export interface UpdateMenuLayoutUsecaseInput {
   layoutId: string
   name?: string
   description?: string
-  sections?: Array<{
-    id?: string
-    type: string
-    config: Record<string, unknown>
-  }>
+  sections?: Array<UpdateMenuLayoutUsecaseSection>
   files?: File[]
   removeMedias?: string[]
 }
