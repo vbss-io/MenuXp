@@ -6,6 +6,7 @@ export interface Category {
   mainCategoryId?: string
   isActive: boolean
   subCategories?: Category[]
+  icon?: string
   createdAt: string
   updatedAt: string
 }
