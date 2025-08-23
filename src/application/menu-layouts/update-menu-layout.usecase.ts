@@ -1,19 +1,11 @@
 import type { HttpClient } from '@/domain/http/http-client'
 import { Registry } from '@/infra/dependency-injection/registry'
 
-export interface UpdateMenuLayoutUsecaseSection {
-  id?: string
-  type: string
-  config: Record<string, unknown>
-}
-
 export interface UpdateMenuLayoutUsecaseInput {
   layoutId: string
   name?: string
   description?: string
-  sections?: Array<UpdateMenuLayoutUsecaseSection>
-  files?: File[]
-  removeMedias?: string[]
+  layout?: string
 }
 
 export interface UpdateMenuLayoutUsecaseOutput {
@@ -21,7 +13,7 @@ export interface UpdateMenuLayoutUsecaseOutput {
 }
 
 export class UpdateMenuLayoutUsecase {
-  protected url = `${import.meta.env.VITE_BACKEND}/menu-layouts/:id`
+  protected url = `${import.meta.env.VITE_BACKEND}/menu-layouts/:id/basic-info`
   private readonly httpClient: HttpClient
 
   constructor() {
@@ -29,30 +21,13 @@ export class UpdateMenuLayoutUsecase {
   }
 
   async execute(params: UpdateMenuLayoutUsecaseInput): Promise<UpdateMenuLayoutUsecaseOutput> {
-    const formData = new FormData()
-    if (params.name) {
-      formData.append('name', params.name)
-    }
-    if (params.description) {
-      formData.append('description', params.description)
-    }
-    if (params.sections) {
-      formData.append('sections', JSON.stringify(params.sections))
-    }
-    if (params.files) {
-      params.files.forEach((file) => {
-        formData.append('files', file)
-      })
-    }
-    if (params.removeMedias && params.removeMedias.length > 0) {
-      formData.append('removeMedias', JSON.stringify(params.removeMedias))
-    }
+    const body: Record<string, unknown> = {}
+    if (params.name) body.name = params.name
+    if (params.description) body.description = params.description
+    if (params.layout) body.layout = params.layout
     const response = await this.httpClient.put<UpdateMenuLayoutUsecaseOutput>({
       url: this.url.replace(':id', params.layoutId),
-      body: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
+      body
     })
     return response.data
   }

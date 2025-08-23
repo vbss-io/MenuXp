@@ -6,6 +6,7 @@ export interface CreateCategoryUsecaseInput {
   description?: string
   restaurantId?: string
   mainCategoryId?: string
+  icon?: string
 }
 
 export interface CreateCategoryUsecaseOutput {
@@ -26,6 +27,7 @@ export class CreateCategoryUsecase {
     if (params.description) formData.append('description', params.description)
     if (params.restaurantId) formData.append('restaurantId', params.restaurantId)
     if (params.mainCategoryId) formData.append('mainCategoryId', params.mainCategoryId)
+    if (params.icon) formData.append('icon', params.icon)
     const response = await this.httpClient.post<CreateCategoryUsecaseOutput>({
       url: this.url,
       body: formData

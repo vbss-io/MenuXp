@@ -4,6 +4,9 @@ import { Registry } from '@/infra/dependency-injection/registry'
 export interface UpdateBannerSectionUsecaseInput {
   layoutId: string
   sectionId: string
+  tag?: string
+  title?: string
+  subtitle?: string
   files?: File[]
 }
 
@@ -22,6 +25,9 @@ export class UpdateBannerSectionUsecase {
 
   async execute(params: UpdateBannerSectionUsecaseInput): Promise<UpdateBannerSectionUsecaseOutput> {
     const formData = new FormData()
+    if (params.tag) formData.append('tag', params.tag)
+    if (params.title) formData.append('title', params.title)
+    if (params.subtitle) formData.append('subtitle', params.subtitle)
     if (params.files && params.files.length > 0) {
       formData.append('files', params.files[0])
     }

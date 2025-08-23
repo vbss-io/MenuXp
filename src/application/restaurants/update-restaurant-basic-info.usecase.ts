@@ -6,6 +6,8 @@ export interface UpdateRestaurantBasicInfoUsecaseInput {
   name: string
   description: string
   slug: string
+  primaryColor?: string
+  secondaryColor?: string
   files?: File[]
 }
 
@@ -22,6 +24,8 @@ export class UpdateRestaurantBasicInfoUsecase {
     formData.append('name', params.name)
     formData.append('description', params.description)
     formData.append('slug', params.slug)
+    if (params.primaryColor) formData.append('primaryColor', params.primaryColor)
+    if (params.secondaryColor) formData.append('secondaryColor', params.secondaryColor)
     if (params.files && params.files.length > 0) formData.append('files', params.files[0])
     await this.httpClient.patch({
       url: `${this.url.replace(':id', params.restaurantId)}`,

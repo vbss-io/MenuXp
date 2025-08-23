@@ -4,7 +4,9 @@ import { Registry } from '@/infra/dependency-injection/registry'
 export interface UpdateMenuItemsSectionUsecaseInput {
   layoutId: string
   sectionId: string
-  menuItemIds: string[] | null
+  type?: 'custom' | 'best_sellers' | 'discounts'
+  title?: string
+  menuItemIds?: string[] | null
 }
 
 export interface UpdateMenuItemsSectionUsecaseOutput {
@@ -21,11 +23,13 @@ export class UpdateMenuItemsSectionUsecase {
   }
 
   async execute(params: UpdateMenuItemsSectionUsecaseInput): Promise<UpdateMenuItemsSectionUsecaseOutput> {
+    const body: Record<string, unknown> = {}
+    if (params.type !== undefined) body.type = params.type
+    if (params.title !== undefined) body.title = params.title
+    if (params.menuItemIds !== undefined) body.menuItemIds = params.menuItemIds
     const response = await this.httpClient.put<UpdateMenuItemsSectionUsecaseOutput>({
       url: this.url.replace(':layoutId', params.layoutId).replace(':sectionId', params.sectionId),
-      body: {
-        menuItemIds: params.menuItemIds
-      }
+      body
     })
     return response.data
   }

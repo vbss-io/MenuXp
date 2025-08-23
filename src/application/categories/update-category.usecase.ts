@@ -7,6 +7,7 @@ export interface UpdateCategoryUsecaseInput {
   description?: string
   mainCategoryId?: string
   isActive?: boolean
+  icon?: string
 }
 
 export class UpdateCategoryUsecase {
@@ -23,6 +24,7 @@ export class UpdateCategoryUsecase {
     if (params.description !== undefined) formData.append('description', params.description)
     if (params.mainCategoryId !== undefined) formData.append('mainCategoryId', params.mainCategoryId)
     if (params.isActive !== undefined) formData.append('isActive', params.isActive.toString())
+    if (params.icon !== undefined) formData.append('icon', params.icon)
     await this.httpClient.put({
       url: this.url.replace(':id', params.categoryId),
       body: formData

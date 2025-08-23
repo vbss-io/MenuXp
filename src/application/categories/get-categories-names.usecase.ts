@@ -11,6 +11,7 @@ interface CategoryName {
   id: string
   name: string
   mainCategoryName?: string
+  icon?: string
 }
 
 export class GetCategoriesNamesUsecase {

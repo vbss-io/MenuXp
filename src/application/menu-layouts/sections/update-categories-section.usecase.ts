@@ -21,8 +21,9 @@ export class UpdateCategoriesSectionUsecase {
   }
 
   async execute(params: UpdateCategoriesSectionUsecaseInput): Promise<UpdateCategoriesSectionUsecaseOutput> {
+    const url = this.url.replace(':layoutId', params.layoutId).replace(':sectionId', params.sectionId)
     const response = await this.httpClient.put<UpdateCategoriesSectionUsecaseOutput>({
-      url: this.url.replace(':layoutId', params.layoutId).replace(':sectionId', params.sectionId),
+      url,
       body: {
         categoryIds: params.categoryIds
       }

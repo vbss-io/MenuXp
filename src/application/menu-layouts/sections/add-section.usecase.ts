@@ -2,14 +2,12 @@ import type { HttpClient } from '@/domain/http/http-client'
 import type { MenuSectionConfig } from '@/domain/models/menu-layout.model'
 import { Registry } from '@/infra/dependency-injection/registry'
 
-export interface AddSectionUsecaseSection {
-  type: string
-  config: MenuSectionConfig
-}
-
 export interface AddSectionUsecaseInput {
   layoutId: string
-  section: AddSectionUsecaseSection
+  section: {
+    type: string
+    config: MenuSectionConfig
+  }
   position?: number
   files?: File[]
 }
