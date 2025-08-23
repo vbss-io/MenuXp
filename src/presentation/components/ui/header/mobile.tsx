@@ -7,21 +7,20 @@ import {
   ListIcon,
   ScrollIcon,
   ShoppingCartIcon,
-  SignOutIcon,
   UserIcon,
   XIcon
 } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect } from 'react'
 
-import { Avatar } from '@/presentation/components/entities/users/avatar'
+import { Button } from '@/presentation/components/ui/button'
 import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 
 interface MobileHeaderProps {
   setShowMobile: (show: boolean) => void
+  isHome?: boolean
 }
 
 const mobileVariants = {
@@ -64,19 +63,42 @@ const logoVariants = {
   }
 }
 
-export const MobileHeader = ({ setShowMobile }: MobileHeaderProps) => {
-  const { user, logout } = useAuth()
+export const MobileHeader = ({ setShowMobile, isHome = false }: MobileHeaderProps) => {
+  const { user } = useAuth()
 
   useEffect(() => {
+    const originalStyle = window.getComputedStyle(document.body).overflow
     document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.width = '100%'
     return () => {
-      document.body.style.overflow = 'unset'
+      document.body.style.overflow = originalStyle
+      document.body.style.position = ''
+      document.body.style.width = ''
     }
   }, [])
 
   const goTo = (path: string) => {
     window.location.assign(path)
   }
+
+  const handleHomeLinkClick = (href: string) => {
+    setShowMobile(false)
+    setTimeout(() => {
+      const element = document.querySelector(href)
+      if (element) {
+        const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80
+        window.scrollTo({ top: offsetTop, behavior: 'smooth' })
+      }
+    }, 100)
+  }
+
+  const homeNavLinks = [
+    { label: 'Funcionalidades', href: '#features' },
+    { label: 'Gamificação', href: '#gamificacao' },
+    { label: 'Gestão', href: '#kanban' },
+    { label: 'FAQ', href: '#faq' }
+  ]
 
   const menuItems = [
     { icon: <HouseIcon size={24} weight="fill" />, label: 'Operação', path: '/dashboard' },
@@ -92,76 +114,67 @@ export const MobileHeader = ({ setShowMobile }: MobileHeaderProps) => {
   return (
     <AnimatePresence>
       <S.MobileContainer variants={mobileVariants} initial="initial" animate="animate" exit="exit">
-        <Button className="close-menu" size="icon-xs" onClick={() => setShowMobile(false)}>
-          <XIcon />
-        </Button>
-        <S.MobileContent>
-          <motion.div variants={logoVariants} initial="initial" whileHover="hover">
-            <S.Logo onClick={() => window.location.assign('/')}>
-              <img src="https://placehold.co/120x40?text=Logo" alt="Logo Placeholder" />
-            </S.Logo>
-          </motion.div>
+        <S.CloseButton onClick={() => setShowMobile(false)}>
+          <XIcon size={24} weight="bold" />
+        </S.CloseButton>
+        <S.MobileContent className="mobile-header-content">
+          <S.MobileHeaderSection>
+            <motion.div variants={logoVariants} initial="initial" whileHover="hover">
+              <S.MobileLogo onClick={() => window.location.assign('/')}>
+                <img src="public/images/menuxp-logo.svg" alt="MenuXP" />
+              </S.MobileLogo>
+            </motion.div>
+          </S.MobileHeaderSection>
+          {isHome && (
+            <S.HomeNavSection>
+              <S.HomeNavTitle>Navegação</S.HomeNavTitle>
+              <S.HomeNavLinks>
+                {homeNavLinks.map((link) => (
+                  <S.HomeNavLink
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                      e.preventDefault()
+                      handleHomeLinkClick(link.href)
+                    }}
+                  >
+                    {link.label}
+                  </S.HomeNavLink>
+                ))}
+              </S.HomeNavLinks>
+            </S.HomeNavSection>
+          )}
           {!user ? (
             <S.MobileButtonsContainer>
-              <Button onClick={() => goTo('/login')}>Entrar</Button>
-              <Button onClick={() => goTo('/register')}>Cadastrar</Button>
+              <Button onClick={() => goTo('/login')} variant="white" size="md">
+                Entrar
+              </Button>
+              <Button onClick={() => goTo('/register')} variant="primary" size="md">
+                Cadastrar
+              </Button>
             </S.MobileButtonsContainer>
           ) : (
-            <S.UserActions>
-              <Avatar avatarSize={72} direction="column" showName />
+            <S.MobileMenuItems>
               {menuItems.map((item, index) => (
-                <S.MenuItem
+                <S.MobileMenuItem
                   key={index}
-                  as={motion.div}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                   onClick={() => goTo(item.path)}
                   $isActive={window.location.pathname === item.path}
                 >
-                  <S.IconWrapper>{item.icon}</S.IconWrapper>
-                  <motion.span
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    {item.label}
-                  </motion.span>
-                </S.MenuItem>
+                  <S.MobileIconWrapper>{item.icon}</S.MobileIconWrapper>
+                  <span>{item.label}</span>
+                </S.MobileMenuItem>
               ))}
-              <S.MenuItem
-                as={motion.div}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <S.MobileMenuItem
                 onClick={() => goTo('/dashboard/profile')}
                 $isActive={window.location.pathname === '/dashboard/profile'}
               >
-                <S.IconWrapper>
+                <S.MobileIconWrapper>
                   <UserIcon size={24} weight="fill" />
-                </S.IconWrapper>
-                <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  Perfil
-                </motion.span>
-              </S.MenuItem>
-              <S.LogoutButton as={motion.div} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={logout}>
-                <S.IconWrapper>
-                  <SignOutIcon size={24} weight="fill" />
-                </S.IconWrapper>
-                <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  Sair
-                </motion.span>
-              </S.LogoutButton>
-            </S.UserActions>
+                </S.MobileIconWrapper>
+                <span>Perfil</span>
+              </S.MobileMenuItem>
+            </S.MobileMenuItems>
           )}
         </S.MobileContent>
       </S.MobileContainer>

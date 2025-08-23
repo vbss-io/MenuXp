@@ -3,31 +3,56 @@ import styled, { css } from 'styled-components'
 
 const chipsStyles = css`
   .active {
-    background-color: ${({ theme }) => theme.colors.green} !important;
-    border: 1px solid ${({ theme }) => theme.colors.green} !important;
-    color: white !important;
+    background-color: ${({ theme }) => theme.colors.mx.success} !important;
+    border: 2px solid ${({ theme }) => theme.colors.mx.black} !important;
+    color: ${({ theme }) => theme.colors.mx.white} !important;
   }
 
   .inactive {
-    background-color: ${({ theme }) => theme.colors.red} !important;
-    border: 1px solid ${({ theme }) => theme.colors.red} !important;
-    color: ${({ theme }) => theme.colors.white} !important;
+    background-color: ${({ theme }) => theme.colors.mx.error} !important;
+    border: 2px solid ${({ theme }) => theme.colors.mx.black} !important;
+    color: ${({ theme }) => theme.colors.mx.white} !important;
   }
 `
 
 export const Card = styled(motion.div)`
-  background: ${({ theme }) => theme.colors.white};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  padding: ${({ theme }) => theme.spacing.md};
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  padding: ${({ theme }) => theme.spacing.lg};
+  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
   display: flex;
   flex-direction: column;
   height: 100%;
   min-height: 200px;
+  position: relative;
+  overflow: hidden;
 
   &:hover {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+  }
+
+  &:active {
+    transform: translateY(0px);
+    box-shadow: ${({ theme }) => theme.shadows.sm};
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      ${({ theme }) => theme.colors.mx.yellow} 0%,
+      ${({ theme }) => theme.colors.mx.red} 100%
+    );
+    opacity: 0.02;
+    pointer-events: none;
   }
 
   ${chipsStyles}
@@ -39,31 +64,58 @@ export const CardHeader = styled.div`
   align-items: flex-start;
   margin-bottom: ${({ theme }) => theme.spacing.md};
   gap: ${({ theme }) => theme.spacing.md};
+  position: relative;
+  z-index: 1;
+`
+
+export const CardTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  flex: 1;
+`
+
+export const CardIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.mx.red};
+  flex-shrink: 0;
 `
 
 export const CardTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-family: ${({ theme }) => theme.typography.fonts.title};
+  color: ${({ theme }) => theme.colors.mx.black};
   flex: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `
 
 export const CardContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 `
 
 export const CardDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.gray[600]};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
   flex-shrink: 0;
+  line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
 `
 
 export const CardFooter = styled.div`
   margin-top: auto;
   padding-top: ${({ theme }) => theme.spacing.md};
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 `
 
 export const ActionsContainer = styled.div`
@@ -73,11 +125,12 @@ export const ActionsContainer = styled.div`
   justify-content: flex-end;
 
   .button {
-    transition: all 0.2s ease;
+    transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
 
     &:hover {
-      background-color: ${({ theme }) => theme.colors.primary};
-      color: white;
+      background-color: ${({ theme }) => theme.colors.mx.red};
+      color: ${({ theme }) => theme.colors.mx.white};
+      transform: translateY(-1px);
     }
   }
 `
@@ -95,8 +148,12 @@ export const SubCategoriesContainer = styled.div`
   gap: ${({ theme }) => theme.spacing.sm};
 
   strong {
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-    color: ${({ theme }) => theme.colors.gray};
+    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    font-family: ${({ theme }) => theme.typography.fonts.title};
+    color: ${({ theme }) => theme.colors.mx.black};
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 `
 
@@ -107,8 +164,9 @@ export const SubCategoriesHeader = styled.div`
 `
 
 export const EmptySubCategoriesText = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.gray[500]};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.text.muted};
   font-style: italic;
 `
 
@@ -122,13 +180,15 @@ export const SubCategoriesList = styled.div`
     align-items: center;
     gap: ${({ theme }) => theme.spacing.sm};
     cursor: pointer;
+    transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
 
     &:hover {
-      background-color: ${({ theme }) => theme.colors.primary};
-      color: ${({ theme }) => theme.colors.white};
+      background-color: ${({ theme }) => theme.colors.mx.red};
+      color: ${({ theme }) => theme.colors.mx.white};
+      transform: translateY(-1px);
 
       svg {
-        color: ${({ theme }) => theme.colors.white};
+        color: ${({ theme }) => theme.colors.mx.white};
       }
     }
   }

@@ -26,6 +26,8 @@ interface LoadingProps {
   size?: number
 }
 
+// To-Do: Recaftor styles
+
 export const Loading = ({ size }: LoadingProps) => {
   return (
     <Container>

@@ -1,6 +1,7 @@
 import type { MenuLayoutStatus } from '@/domain/enums/menu-layouts/menu-layout-status.enum'
 import type { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 
+// To-Do: Padronize with backend ?
 export interface MenuSectionConfig {
   imagePath?: string
   tag?: string

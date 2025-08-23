@@ -20,6 +20,7 @@ const Content = styled.div`
   gap: ${({ theme }) => theme.spacing.md};
 `
 
+// To-Do: Update styles
 export const LoadingPage = () => {
   const navigate = useNavigate()
 

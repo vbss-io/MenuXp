@@ -8,6 +8,7 @@ interface ImageCarouselProps {
   images: string[]
 }
 
+// To-Do: Update Styles to match new design
 export const ImageCarousel = ({ images }: ImageCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)

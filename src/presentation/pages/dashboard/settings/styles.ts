@@ -69,10 +69,6 @@ export const TabButton = styled.button<{ $isActive: boolean }>`
 export const TabContent = styled.div`
   min-height: 400px;
   padding: ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme }) => theme.colors.background};
-  border: 1px solid ${({ theme }) => theme.colors.secondary};
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
-  background-color: ${({ theme }) => theme.colors.white};
 `
 
 export const TabPlaceholder = styled.div`

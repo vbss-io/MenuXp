@@ -1,7 +1,8 @@
 import { FunnelSimpleIcon, SortAscendingIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
-import { Checkbox } from '@vbss-ui/checkbox'
 import { Popover } from '@vbss-ui/popover'
+
+import { FormCheckbox } from '@/presentation/components/ui/form-checkbox'
 
 import * as S from './styles'
 
@@ -93,10 +94,12 @@ export const Filters = ({ filters, onFiltersChange, onReset }: FiltersProps) => 
             <S.PopoverTitle>Filtros adicionais:</S.PopoverTitle>
             <S.PopoverOptions>
               <S.PopoverOption>
-                <Checkbox
+                <FormCheckbox
+                  id="includeInactive"
+                  label="Incluir categorias inativas"
                   checked={filters.includeInactive}
                   onCheckedChange={(checked) => handleFilterChange('includeInactive', checked)}
-                  label="Incluir categorias inativas"
+                  fontSize="sm"
                 />
               </S.PopoverOption>
             </S.PopoverOptions>

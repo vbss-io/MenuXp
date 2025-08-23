@@ -1,6 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@vbss-ui/button'
-import { Input } from '@vbss-ui/input'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -8,6 +6,8 @@ import toast from 'react-hot-toast'
 import { z } from 'zod'
 
 import { UpdateRestaurantAddressUsecase } from '@/application/restaurants/update-restaurant-address.usecase'
+import { Button } from '@/presentation/components/ui/button'
+import { FormInput } from '@/presentation/components/ui/form-input'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
@@ -113,91 +113,82 @@ export const AddressForm = () => {
         <S.SectionDescription>Configure o endereço físico do seu restaurante</S.SectionDescription>
         <S.FormGrid>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="street">Rua *</S.Label>
-            <Input
+            <FormInput
               id="street"
-              type="text"
-              error={errors.street?.message}
+              label="Rua"
               placeholder="Rua das Flores"
-              fontSize="sm"
-              {...register('street')}
+              error={errors.street?.message}
+              required
+              register={register}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="number">Número *</S.Label>
-            <Input
+            <FormInput
               id="number"
-              type="text"
-              error={errors.number?.message}
+              label="Número"
               placeholder="123"
-              fontSize="sm"
-              {...register('number')}
+              error={errors.number?.message}
+              required
+              register={register}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="complement">Complemento</S.Label>
-            <Input
+            <FormInput
               id="complement"
-              type="text"
-              error={errors.complement?.message}
+              label="Complemento"
               placeholder="Apto 45, Loja 2"
-              fontSize="sm"
-              {...register('complement')}
+              error={errors.complement?.message}
+              register={register}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="neighborhood">Bairro *</S.Label>
-            <Input
+            <FormInput
               id="neighborhood"
-              type="text"
-              error={errors.neighborhood?.message}
+              label="Bairro"
               placeholder="Centro"
-              fontSize="sm"
-              {...register('neighborhood')}
+              error={errors.neighborhood?.message}
+              required
+              register={register}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="city">Cidade *</S.Label>
-            <Input
+            <FormInput
               id="city"
-              type="text"
-              error={errors.city?.message}
+              label="Cidade"
               placeholder="São Paulo"
-              fontSize="sm"
-              {...register('city')}
+              error={errors.city?.message}
+              required
+              register={register}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="state">Estado *</S.Label>
-            <Input
+            <FormInput
               id="state"
-              type="text"
-              error={errors.state?.message}
+              label="Estado"
               placeholder="SP"
-              fontSize="sm"
-              {...register('state')}
+              error={errors.state?.message}
+              required
+              register={register}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="zipCode">CEP *</S.Label>
-            <Input
+            <FormInput
               id="zipCode"
-              type="text"
-              error={errors.zipCode?.message}
+              label="CEP"
               placeholder="01234-567"
-              fontSize="sm"
-              {...register('zipCode')}
+              error={errors.zipCode?.message}
+              required
+              register={register}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="country">País *</S.Label>
-            <Input
+            <FormInput
               id="country"
-              type="text"
-              error={errors.country?.message}
+              label="País"
               placeholder="Brasil"
-              fontSize="sm"
-              {...register('country')}
+              error={errors.country?.message}
+              required
+              register={register}
             />
           </S.FormGroup>
         </S.FormGrid>
@@ -205,7 +196,7 @@ export const AddressForm = () => {
       <S.SubmitSection>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Button type="submit" disabled={isLoading} variant="primary" size="lg">
-            {isLoading ? <Loading /> : 'Salvar'}
+            {isLoading ? <Loading /> : 'Salvar Endereço'}
           </Button>
         </motion.div>
       </S.SubmitSection>

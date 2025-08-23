@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckIcon, SpinnerIcon, WarningIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
 import { Input } from '@vbss-ui/input'
-import { Textarea } from '@vbss-ui/textarea'
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -11,6 +10,7 @@ import { z } from 'zod'
 
 import { CheckSlugAvailableUsecase } from '@/application/restaurants/check-slug-available.usecase'
 import { CreateRestaurantUsecase } from '@/application/restaurants/create-restaurant.usecase'
+import { FormTextarea } from '@/presentation/components/ui/form-textarea'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 
@@ -42,6 +42,7 @@ type CreateRestaurantFormData = z.infer<typeof createRestaurantSchema>
 
 type SlugStatus = 'empty' | 'checking' | 'available' | 'unavailable' | 'invalid'
 
+// To-Do: Update Styles
 export const CreateRestaurant = () => {
   const navigate = useNavigate()
   const { updateRestaurantId } = useAuth()
@@ -178,13 +179,13 @@ export const CreateRestaurant = () => {
             fontSize="sm"
             {...register('name')}
           />
-          <Textarea
-            label="Descrição *"
-            type="text"
-            error={errors.description?.message}
+          <FormTextarea
+            id="description"
+            label="Descrição"
             placeholder="Descreva seu restaurante"
-            fontSize="sm"
-            {...register('description')}
+            error={errors.description?.message}
+            required
+            register={register('description')}
           />
           <S.InputWrapper>
             <Input

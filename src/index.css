@@ -2,12 +2,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* MenuXP Design System Tokens */
+// To-Do: Remove unecessary styles after pages and components refactors
+
 :root {
   --mx-black: #000000;
   --mx-yellow: #FEBA0C;
@@ -16,16 +18,14 @@
   --mx-white: #FFFFFF;
 }
 
-/* Typography */
 .font-title {
-  font-family: 'Tanker', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 .font-body {
   font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Brutalist Components */
 .btn-brut {
   border: 1px solid var(--mx-black);
   border-radius: 50px;
@@ -150,12 +150,10 @@
   outline-offset: 2px;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }

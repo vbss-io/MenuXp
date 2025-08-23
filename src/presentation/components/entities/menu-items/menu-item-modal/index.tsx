@@ -5,7 +5,6 @@ import { z } from 'zod'
 import { Button } from '@vbss-ui/button'
 import { Input } from '@vbss-ui/input'
 import { Dialog } from '@vbss-ui/dialog'
-import { Textarea } from '@vbss-ui/textarea'
 import toast from 'react-hot-toast'
 
 import type { MenuItem } from '@/domain/models/menu-item.model'
@@ -13,6 +12,7 @@ import { CreateMenuItemUsecase } from '@/application/menu-items/create-menu-item
 import { UpdateMenuItemUsecase } from '@/application/menu-items/update-menu-item.usecase'
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
+import { FormTextarea } from '@/presentation/components/ui/form-textarea'
 import { MultipleImageUploader } from '@/presentation/components/ui/multiple-image-uploader'
 import { OptionalsSection, type MenuItemOptional } from '@/presentation/components/ui/optionals'
 import { useAuth } from '@/presentation/hooks/use-auth'
@@ -120,7 +120,8 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
       return categoriesData.map((cat) => ({
         label: cat.name,
         value: cat.id,
-        displayLabel: cat.mainCategoryName ? `${cat.mainCategoryName} → ${cat.name}` : cat.name
+        displayLabel: cat.mainCategoryName ? `${cat.mainCategoryName} → ${cat.name}` : cat.name,
+        icon: cat.icon
       }))
     } catch (error) {
       console.error('Erro ao buscar categorias:', error)
@@ -253,16 +254,14 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
           </S.FormGroup>
         </S.FormRow>
         <S.FormGroupFull>
-          <S.Label htmlFor="description">Descrição</S.Label>
-          <Textarea
+          <FormTextarea
             id="description"
-            {...register('description')}
-            error={errors.description?.message}
-            disabled={isLoading}
+            label="Descrição"
             placeholder="Descreva o item..."
-            fontSize="sm"
+            error={errors.description?.message}
+            register={register('description')}
+            disabled={isLoading}
           />
-          {errors.description && <S.ErrorMessage>{errors.description.message}</S.ErrorMessage>}
         </S.FormGroupFull>
         <S.FormRow>
           <S.FormGroup>

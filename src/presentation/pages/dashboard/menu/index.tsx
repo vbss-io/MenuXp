@@ -3,25 +3,24 @@ import { Button } from '@vbss-ui/button'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import {
-  UpdateMenuLayoutUsecase,
-  type UpdateMenuLayoutUsecaseInput,
-  type UpdateMenuLayoutUsecaseSection
-} from '@/application/menu-layouts/update-menu-layout.usecase'
+import { RemoveSectionUsecase } from '@/application/menu-layouts/sections/remove-section.usecase'
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { MenuLayout, MenuSection } from '@/domain/models/menu-layout.model'
 import { AddSectionButton } from '@/presentation/components/entities/menu-layouts/add-section-button'
-import { AddSectionDialog } from '@/presentation/components/entities/menu-layouts/add-section-dialog'
 import { MenuLayoutCard } from '@/presentation/components/entities/menu-layouts/menu-layout-card'
 import { MenuLayoutEditMode } from '@/presentation/components/entities/menu-layouts/menu-layout-edit-mode'
+import { SectionDialog } from '@/presentation/components/entities/menu-layouts/section-dialog'
 import { BannerSection } from '@/presentation/components/entities/menu-layouts/sections/banner-section'
 import { CarouselSection } from '@/presentation/components/entities/menu-layouts/sections/carousel-section'
+import { CategoriesSection } from '@/presentation/components/entities/menu-layouts/sections/categories-section'
+import { MenuItemsSection } from '@/presentation/components/entities/menu-layouts/sections/menu-items-section'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useMenuLayouts } from '@/presentation/hooks/use-menu-layouts'
 
 import * as S from './styles'
 
+// To-Do: Update Styles
 export const MenuPage = () => {
   const {
     layouts,
@@ -32,21 +31,20 @@ export const MenuPage = () => {
     loadLayouts,
     loadLayout,
     loadSections,
+    createLayout,
     updateSelectedLayout
   } = useMenuLayouts()
   const [isEditMode, setIsEditMode] = useState(false)
   const [isSectionEditMode, setIsSectionEditMode] = useState(false)
-  const [pendingSectionUpdates, setPendingSectionUpdates] = useState<Map<number, MenuSection>>(new Map())
-  const [pendingFiles, setPendingFiles] = useState<Map<string, File>>(new Map())
-  const [removeMedias, setRemoveMedias] = useState<string[]>([])
-  const [addSectionDialog, setAddSectionDialog] = useState<{
+  const [sectionDialog, setSectionDialog] = useState<{
     isOpen: boolean
-    sectionType: MenuSectionType | null
-    position: number
+    mode: 'add' | 'edit'
+    sectionType?: MenuSectionType
+    section?: MenuSection
+    position?: number
   }>({
     isOpen: false,
-    sectionType: null,
-    position: 0
+    mode: 'add'
   })
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -117,226 +115,73 @@ export const MenuPage = () => {
     }
   }
 
-  const handleUpdateSection = (sectionIndex: number, updatedSection: MenuSection) => {
+  const handleRemoveSection = async (sectionIndex: number) => {
     if (!selectedLayout) return
-    const updatedSections = [...selectedLayout.sections]
-    updatedSections[sectionIndex] = updatedSection
-    const updatedLayout = {
-      ...selectedLayout,
-      sections: updatedSections
+    const sectionToRemove = selectedLayout.sections[sectionIndex]
+    if (!sectionToRemove.id) {
+      toast.error('Não é possível remover uma seção sem ID')
+      return
     }
-    updateSelectedLayout(updatedLayout)
-    setPendingSectionUpdates((prev) => new Map(prev.set(sectionIndex, updatedSection)))
-  }
-
-  const handleSaveSections = async () => {
-    if (!selectedLayout) return
     try {
-      const filesToUpload: File[] = []
-      const updatedSections = [...selectedLayout.sections]
-      pendingSectionUpdates.forEach((updatedSection, index) => {
-        updatedSections[index] = updatedSection
+      const removeSectionUsecase = new RemoveSectionUsecase()
+      await removeSectionUsecase.execute({
+        layoutId: selectedLayout.id,
+        sectionId: sectionToRemove.id
       })
-      pendingFiles.forEach((file, key) => {
-        const keyStr = key.toString()
-        const isCarousel = keyStr.includes('-')
-        if (isCarousel) {
-          const [sectionIndexStr, imageIndexStr] = keyStr.split('-')
-          const sectionIndex = parseInt(sectionIndexStr, 10)
-          const imageIndex = parseInt(imageIndexStr, 10)
-          const section = updatedSections[sectionIndex]
-
-          if (section && section.id) {
-            const fileExtension = file.name.split('.').pop()
-            const fileName = `${section.id}-${imageIndex}.${fileExtension}`
-            const renamedFile = new File([file], fileName, { type: file.type })
-            filesToUpload.push(renamedFile)
-          }
-        } else {
-          const sectionIndex = parseInt(keyStr, 10)
-          const section = updatedSections[sectionIndex]
-
-          if (section && section.id) {
-            const fileExtension = file.name.split('.').pop()
-            const fileName = `${section.id}.${fileExtension}`
-            const renamedFile = new File([file], fileName, { type: file.type })
-            filesToUpload.push(renamedFile)
-          }
-        }
-      })
-      const updateData: UpdateMenuLayoutUsecaseInput = {
-        layoutId: selectedLayout.id
-      }
-      if (removeMedias.length > 0) {
-        updateData.removeMedias = removeMedias
-      }
-      updateData.sections = updatedSections.map((section) => {
-        const sectionData: UpdateMenuLayoutUsecaseSection = {
-          type: section.type,
-          config: section.config as Record<string, unknown>
-        }
-        if (section.id) {
-          sectionData.id = section.id
-        }
-        return sectionData
-      })
-      if (filesToUpload.length > 0) {
-        updateData.files = filesToUpload
-      }
-      const updateLayoutUsecase = new UpdateMenuLayoutUsecase()
-      await updateLayoutUsecase.execute(updateData)
       await loadLayout(selectedLayout.id)
-      setPendingSectionUpdates(new Map())
-      setPendingFiles(new Map())
-      setRemoveMedias([])
-      setIsSectionEditMode(false)
-      toast.success('Seções salvas com sucesso!')
+      toast.success('Seção removida com sucesso!')
     } catch (error) {
-      console.error('Error saving sections:', error)
-      toast.error('Erro ao salvar seções')
+      console.error('Error removing section:', error)
+      toast.error('Erro ao remover seção')
     }
-  }
-
-  const handlePendingFileChange = (sectionIndex: number, file: File | null, imageIndex?: number) => {
-    if (file) {
-      const key = imageIndex !== undefined ? `${sectionIndex}-${imageIndex}` : sectionIndex.toString()
-      setPendingFiles((prev) => new Map(prev.set(key, file)))
-    } else {
-      setPendingFiles((prev) => {
-        const newMap = new Map(prev)
-        if (imageIndex !== undefined) {
-          const key = `${sectionIndex}-${imageIndex}`
-          newMap.delete(key)
-        } else {
-          newMap.delete(sectionIndex.toString())
-        }
-        return newMap
-      })
-    }
-  }
-
-  const handleRemoveMedia = (mediaUrl: string) => {
-    setRemoveMedias((prev) => {
-      if (!prev.includes(mediaUrl)) {
-        const newRemoveMedias = [...prev, mediaUrl]
-        return newRemoveMedias
-      }
-      return prev
-    })
-  }
-
-  const handleRemoveSection = (sectionIndex: number) => {
-    if (!selectedLayout) return
-    const updatedSections = selectedLayout.sections.filter((_, index) => index !== sectionIndex)
-    const updatedLayout = {
-      ...selectedLayout,
-      sections: updatedSections
-    }
-    updateSelectedLayout(updatedLayout)
-    setPendingSectionUpdates((prev) => {
-      const newMap = new Map()
-      prev.forEach((value, key) => {
-        if (key < sectionIndex) {
-          newMap.set(key, value)
-        } else if (key > sectionIndex) {
-          newMap.set(key - 1, value)
-        }
-      })
-      return newMap
-    })
-    setPendingFiles((prev) => {
-      const newMap = new Map()
-      prev.forEach((value, key) => {
-        if (Number(key) < sectionIndex) {
-          newMap.set(key, value)
-        } else if (Number(key) > sectionIndex) {
-          newMap.set(Number(key) - 1, value)
-        }
-      })
-      return newMap
-    })
-    toast.success('Seção removida com sucesso!')
-  }
-
-  const handleCancelSections = () => {
-    setPendingSectionUpdates(new Map())
-    setPendingFiles(new Map())
-    setIsSectionEditMode(false)
   }
 
   const handleDeleteLayout = (_layoutId: string) => {
     // TODO: Implementar exclusão
   }
 
-  const handleCreateLayout = () => {
-    // TODO: Implementar criação
+  const handleCreateLayout = async () => {
+    try {
+      await createLayout()
+      toast.success('Layout criado com sucesso!')
+    } catch (error) {
+      console.error('Error creating layout:', error)
+      toast.error('Erro ao criar layout')
+    }
   }
 
   const handleAddSection = (sectionType: MenuSectionType, position: number) => {
-    setAddSectionDialog({
+    setSectionDialog({
       isOpen: true,
+      mode: 'add',
       sectionType,
       position
     })
   }
 
-  const handleCloseAddSectionDialog = () => {
-    setAddSectionDialog({
-      isOpen: false,
-      sectionType: null,
-      position: 0
+  const handleEditSection = (section: MenuSection) => {
+    setSectionDialog({
+      isOpen: true,
+      mode: 'edit',
+      section
     })
   }
 
-  const handleConfirmAddSection = async (newSection: MenuSection, files?: File[]) => {
+  const handleCloseSectionDialog = () => {
+    setSectionDialog({
+      isOpen: false,
+      mode: 'add'
+    })
+  }
+
+  const handleSectionUpdated = async () => {
     if (!selectedLayout) return
     try {
-      const updatedSections = [...selectedLayout.sections]
-      updatedSections.splice(addSectionDialog.position, 0, newSection)
-      const updatedLayout = {
-        ...selectedLayout,
-        sections: updatedSections
-      }
-      updateSelectedLayout(updatedLayout)
-      const updateData: {
-        layoutId: string
-        sections: Array<{
-          id?: string
-          type: string
-          config: Record<string, unknown>
-        }>
-        files?: File[]
-      } = {
-        layoutId: selectedLayout.id,
-        sections: updatedSections.map((section) => {
-          const sectionData: UpdateMenuLayoutUsecaseSection = {
-            type: section.type,
-            config: section.config as Record<string, unknown>
-          }
-          if (section.id) {
-            sectionData.id = section.id
-          }
-
-          return sectionData
-        })
-      }
-      if (files && files.length > 0) {
-        updateData.files = files.map((file, index) => {
-          const fileExtension = file.name.split('.').pop()
-          const renamedFile = new File([file], `NEW-${addSectionDialog.position}-${index}.${fileExtension}`, {
-            type: file.type,
-            lastModified: file.lastModified
-          })
-          return renamedFile
-        })
-      }
-      const updateLayoutUsecase = new UpdateMenuLayoutUsecase()
-      await updateLayoutUsecase.execute(updateData)
-      await loadLayout(selectedLayout.id)
-      toast.success('Seção adicionada com sucesso!')
+      await loadLayout(selectedLayout.id!)
+      toast.success('Seção atualizada com sucesso!')
     } catch (error) {
-      console.error('Error adding section:', error)
-      toast.error('Erro ao adicionar seção')
+      console.error('Error loading layout:', error)
+      toast.error('Erro ao atualizar layout')
     }
   }
 
@@ -379,20 +224,13 @@ export const MenuPage = () => {
             <Button variant="outline" size="sm" onClick={() => setIsEditMode(true)}>
               Editar Layout
             </Button>
-            {!isSectionEditMode ? (
-              <Button variant="outline" size="sm" onClick={() => setIsSectionEditMode(true)}>
-                Editar Seções
-              </Button>
-            ) : (
-              <>
-                <Button variant="ghost" size="sm" onClick={handleCancelSections}>
-                  Cancelar
-                </Button>
-                <Button variant="primary" size="sm" onClick={handleSaveSections}>
-                  Salvar
-                </Button>
-              </>
-            )}
+            <Button
+              variant={isSectionEditMode ? 'ghost' : 'outline'}
+              size="sm"
+              onClick={() => setIsSectionEditMode(!isSectionEditMode)}
+            >
+              {isSectionEditMode ? 'Sair da Edição' : 'Editar Seções'}
+            </Button>
           </div>
         )}
       </S.PreviewHeader>
@@ -400,15 +238,20 @@ export const MenuPage = () => {
         <S.EditSection>
           <MenuLayoutEditMode
             layout={selectedLayout}
-            onSave={(_updatedLayout) => {
-              // TODO: Atualizar o layout na lista
+            onSave={(updatedLayout) => {
+              if (selectedLayout) {
+                const newSelectedLayout = {
+                  ...selectedLayout,
+                  ...updatedLayout
+                }
+                updateSelectedLayout(newSelectedLayout)
+              }
               setIsEditMode(false)
             }}
             onCancel={() => setIsEditMode(false)}
           />
         </S.EditSection>
       )}
-
       {selectedLayout && !isEditMode && (
         <S.ResizablePreviewSection ref={containerRef}>
           <S.ResizableHandle onMouseDown={handleMouseDown} />
@@ -427,34 +270,46 @@ export const MenuPage = () => {
                   {section.type === MenuSectionType.BANNER && (
                     <BannerSection
                       section={section}
-                      isEditMode={isSectionEditMode}
-                      onUpdate={
-                        isSectionEditMode ? (updatedSection) => handleUpdateSection(index, updatedSection) : () => {}
-                      }
+                      mode={isSectionEditMode ? 'preview-edit' : 'view'}
                       onRemove={() => handleRemoveSection(index)}
+                      onEdit={isSectionEditMode ? () => handleEditSection(section) : undefined}
+                      onSectionUpdated={handleSectionUpdated}
                       sectionDefinitions={sections}
                       layoutId={selectedLayout.id}
-                      onPendingFileChange={isSectionEditMode ? handlePendingFileChange : () => {}}
-                      sectionIndex={index}
                     />
                   )}
                   {section.type === MenuSectionType.CAROUSEL && (
                     <CarouselSection
                       section={section}
-                      isEditMode={isSectionEditMode}
-                      onUpdate={
-                        isSectionEditMode ? (updatedSection) => handleUpdateSection(index, updatedSection) : () => {}
-                      }
+                      mode={isSectionEditMode ? 'preview-edit' : 'view'}
                       onRemove={() => handleRemoveSection(index)}
+                      onEdit={isSectionEditMode ? () => handleEditSection(section) : undefined}
+                      onSectionUpdated={handleSectionUpdated}
                       sectionDefinitions={sections}
                       layoutId={selectedLayout.id}
-                      onPendingFileChange={
-                        isSectionEditMode
-                          ? (_, file, imageIndex) => handlePendingFileChange(index, file, imageIndex)
-                          : () => {}
-                      }
-                      onRemoveMedia={isSectionEditMode ? handleRemoveMedia : undefined}
-                      sectionIndex={index}
+                    />
+                  )}
+                  {section.type === MenuSectionType.CATEGORIES && (
+                    <CategoriesSection
+                      section={section}
+                      mode={isSectionEditMode ? 'preview-edit' : 'view'}
+                      onRemove={() => handleRemoveSection(index)}
+                      onEdit={isSectionEditMode ? () => handleEditSection(section) : undefined}
+                      onSectionUpdated={handleSectionUpdated}
+                      sectionDefinitions={sections}
+                      layoutId={selectedLayout.id}
+                      menuLayout={selectedLayout.layout}
+                    />
+                  )}
+                  {section.type === MenuSectionType.MENU_ITEMS && (
+                    <MenuItemsSection
+                      section={section}
+                      mode={isSectionEditMode ? 'preview-edit' : 'view'}
+                      onRemove={() => handleRemoveSection(index)}
+                      onEdit={isSectionEditMode ? () => handleEditSection(section) : undefined}
+                      onSectionUpdated={handleSectionUpdated}
+                      sectionDefinitions={sections}
+                      layoutId={selectedLayout.id}
                     />
                   )}
                   {isSectionEditMode && (
@@ -480,14 +335,16 @@ export const MenuPage = () => {
           </S.PreviewContent>
         </S.PreviewSection>
       )}
-      {addSectionDialog.sectionType && (
-        <AddSectionDialog
-          isOpen={addSectionDialog.isOpen}
-          onClose={handleCloseAddSectionDialog}
-          onConfirm={handleConfirmAddSection}
-          sectionType={addSectionDialog.sectionType}
-          sectionDefinitions={sections}
-          position={addSectionDialog.position}
+      {sectionDialog.isOpen && selectedLayout && (
+        <SectionDialog
+          isOpen={sectionDialog.isOpen}
+          onClose={handleCloseSectionDialog}
+          onSectionUpdated={handleSectionUpdated}
+          layoutId={selectedLayout.id}
+          mode={sectionDialog.mode}
+          sectionType={sectionDialog.sectionType}
+          section={sectionDialog.section}
+          position={sectionDialog.position}
         />
       )}
     </S.Container>

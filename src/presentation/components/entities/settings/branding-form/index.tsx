@@ -1,8 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CameraIcon, CheckIcon, SpinnerIcon, WarningIcon, XIcon } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
-import { Input } from '@vbss-ui/input'
-import { Textarea } from '@vbss-ui/textarea'
 import { motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -12,6 +9,10 @@ import { z } from 'zod'
 import { CheckSlugAvailableUsecase } from '@/application/restaurants/check-slug-available.usecase'
 import { UpdateRestaurantBasicInfoUsecase } from '@/application/restaurants/update-restaurant-basic-info.usecase'
 import { UpdateRestaurantContactInfoUsecase } from '@/application/restaurants/update-restaurant-contact-info.usecase'
+import { Button } from '@/presentation/components/ui/button'
+import { ColorInput } from '@/presentation/components/ui/color-input'
+import { FormInput } from '@/presentation/components/ui/form-input'
+import { FormTextarea } from '@/presentation/components/ui/form-textarea'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
@@ -30,7 +31,15 @@ const brandingSchema = z.object({
   website: z.string().url('Website deve ser uma URL válida').optional().or(z.literal('')),
   instagram: z.string().url('Instagram deve ser uma URL válida').optional().or(z.literal('')),
   facebook: z.string().url('Facebook deve ser uma URL válida').optional().or(z.literal('')),
-  whatsapp: z.string().min(1, 'WhatsApp é obrigatório')
+  whatsapp: z.string().min(1, 'WhatsApp é obrigatório'),
+  primaryColor: z
+    .string()
+    .regex(/^#[0-9A-Fa-f]{6}$/, 'Cor primária deve ser uma cor HEX válida')
+    .optional(),
+  secondaryColor: z
+    .string()
+    .regex(/^#[0-9A-Fa-f]{6}$/, 'Cor secundária deve ser uma cor HEX válida')
+    .optional()
 })
 
 type BrandingFormData = z.infer<typeof brandingSchema>
@@ -64,11 +73,15 @@ export const BrandingForm = () => {
       website: restaurant?.contactInfo?.website ?? '',
       instagram: restaurant?.contactInfo?.socialMedia?.instagram ?? '',
       facebook: restaurant?.contactInfo?.socialMedia?.facebook ?? '',
-      whatsapp: restaurant?.contactInfo?.socialMedia?.whatsapp ?? ''
+      whatsapp: restaurant?.contactInfo?.socialMedia?.whatsapp ?? '',
+      primaryColor: restaurant?.style?.primaryColor ?? '#FF0000',
+      secondaryColor: restaurant?.style?.secondaryColor ?? '#FFD700'
     }
   })
 
   const watchedSlug = watch('slug')
+  const watchedPrimaryColor = watch('primaryColor')
+  const watchedSecondaryColor = watch('secondaryColor')
 
   const transformSlug = (value: string): string => {
     return value
@@ -179,6 +192,8 @@ export const BrandingForm = () => {
         name: data.name,
         description: data.description,
         slug: data.slug,
+        primaryColor: data.primaryColor,
+        secondaryColor: data.secondaryColor,
         files: logoFile ? [logoFile] : undefined
       })
       const updateContactInfo = new UpdateRestaurantContactInfoUsecase()
@@ -247,39 +262,37 @@ export const BrandingForm = () => {
       <S.Section variants={sectionVariants}>
         <S.SectionTitle>Informações Básicas</S.SectionTitle>
         <S.SectionDescription>Configure o nome, descrição e identificador do seu restaurante</S.SectionDescription>
-        <S.FormGrid>
+        <S.BasicInfoGrid>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="name">Nome do Restaurante *</S.Label>
-            <Input
+            <FormInput
               id="name"
-              type="text"
-              error={errors.name?.message}
+              label="Nome do Restaurante"
               placeholder="Digite o nome do restaurante"
-              fontSize="sm"
-              {...register('name')}
+              error={errors.name?.message}
+              required
+              register={register('name')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="description">Descrição *</S.Label>
-            <Textarea
+            <FormTextarea
               id="description"
-              error={errors.description?.message}
+              label="Descrição"
               placeholder="Descreva seu restaurante"
-              fontSize="sm"
-              rows={3}
-              {...register('description')}
+              error={errors.description?.message}
+              required
+              register={register('description')}
+              rows={4}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="slug">Slug *</S.Label>
-            <Input
+            <FormInput
               id="slug"
-              type="text"
-              error={errors.slug?.message}
+              label="Slug"
               placeholder="identificador-unico"
-              fontSize="sm"
-              {...register('slug', {
-                onChange: (e) => handleSlugChange(e.target.value)
+              error={errors.slug?.message}
+              required
+              register={register('slug', {
+                onChange: (e: React.ChangeEvent<HTMLInputElement>) => handleSlugChange(e.target.value)
               })}
             />
             <S.HelpText>URL amigável: menuxp.com/{watchedSlug || 'seu-restaurante'}</S.HelpText>
@@ -308,76 +321,89 @@ export const BrandingForm = () => {
               <S.HiddenFileInput ref={fileInputRef} type="file" accept="image/*" onChange={handleLogoChange} />
             </S.LogoContainer>
           </S.FormGroup>
-        </S.FormGrid>
+          <S.FormGroup variants={formGroupVariants}>
+            <S.Label>Cores do Restaurante</S.Label>
+            <S.ColorsGrid>
+              <ColorInput
+                id="primaryColor"
+                label="Cor Primária"
+                value={watchedPrimaryColor}
+                placeholder="#FF0000"
+                error={errors.primaryColor?.message}
+                onChange={(value) => setValue('primaryColor', value)}
+              />
+              <ColorInput
+                id="secondaryColor"
+                label="Cor Secundária"
+                value={watchedSecondaryColor}
+                placeholder="#FFD700"
+                error={errors.secondaryColor?.message}
+                onChange={(value) => setValue('secondaryColor', value)}
+              />
+            </S.ColorsGrid>
+          </S.FormGroup>
+        </S.BasicInfoGrid>
       </S.Section>
       <S.Section variants={sectionVariants}>
         <S.SectionTitle>Informações de Contato</S.SectionTitle>
         <S.SectionDescription>Configure como os clientes podem entrar em contato com você</S.SectionDescription>
         <S.FormGrid>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="phone">Telefone *</S.Label>
-            <Input
+            <FormInput
               id="phone"
-              type="text"
+              label="Telefone"
+              placeholder="(11) 99999-9999"
               error={errors.phone?.message}
-              placeholder="(11) 99999-9999"
-              fontSize="sm"
-              {...register('phone')}
+              required
+              register={register('phone')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="email">Email *</S.Label>
-            <Input
+            <FormInput
               id="email"
-              type="text"
-              error={errors.email?.message}
+              label="Email"
+              type="email"
               placeholder="contato@restaurante.com"
-              fontSize="sm"
-              {...register('email')}
+              error={errors.email?.message}
+              required
+              register={register('email')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="website">Website</S.Label>
-            <Input
+            <FormInput
               id="website"
-              type="text"
-              error={errors.website?.message}
+              label="Website"
               placeholder="https://www.restaurante.com"
-              fontSize="sm"
-              {...register('website')}
+              error={errors.website?.message}
+              register={register('website')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="whatsapp">WhatsApp *</S.Label>
-            <Input
+            <FormInput
               id="whatsapp"
-              type="text"
-              error={errors.whatsapp?.message}
+              label="WhatsApp"
               placeholder="(11) 99999-9999"
-              fontSize="sm"
-              {...register('whatsapp')}
+              error={errors.whatsapp?.message}
+              required
+              register={register('whatsapp')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="instagram">Instagram</S.Label>
-            <Input
+            <FormInput
               id="instagram"
-              type="text"
-              error={errors.instagram?.message}
+              label="Instagram"
               placeholder="https://instagram.com/restaurante"
-              fontSize="sm"
-              {...register('instagram')}
+              error={errors.instagram?.message}
+              register={register('instagram')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="facebook">Facebook</S.Label>
-            <Input
+            <FormInput
               id="facebook"
-              type="text"
-              error={errors.facebook?.message}
+              label="Facebook"
               placeholder="https://facebook.com/restaurante"
-              fontSize="sm"
-              {...register('facebook')}
+              error={errors.facebook?.message}
+              register={register('facebook')}
             />
           </S.FormGroup>
         </S.FormGrid>
@@ -385,7 +411,7 @@ export const BrandingForm = () => {
       <S.SubmitSection>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Button type="submit" disabled={isLoading} variant="primary" size="lg">
-            {isLoading ? <Loading /> : 'Salvar'}
+            {isLoading ? <Loading /> : 'Salvar Marca'}
           </Button>
         </motion.div>
       </S.SubmitSection>

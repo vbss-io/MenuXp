@@ -16,6 +16,8 @@ interface OptionalsSectionProps {
   disabled?: boolean
 }
 
+// To-Do: Recaftor styles
+
 export function OptionalsSection({ optionals, setOptionals, disabled = false }: OptionalsSectionProps) {
   const addOptional = () => {
     setOptionals([...optionals, { name: '', price: 0 }])

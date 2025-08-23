@@ -1,11 +1,11 @@
-import { ChartPieIcon, ListIcon, SignOutIcon, UserIcon } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
-import { Popover } from '@vbss-ui/popover'
+import { ListIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-import { Avatar } from '@/presentation/components/entities/users/avatar'
+import { Button } from '@/presentation/components/ui/button'
 import { MobileHeader } from '@/presentation/components/ui/header/mobile'
+import NavBar from '@/presentation/components/ui/home-navbar'
+import { UserMenu } from '@/presentation/components/ui/user-menu'
 import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
@@ -24,10 +24,11 @@ const logoVariants = {
 
 interface HeaderProps {
   isDashboard?: boolean
+  isHome?: boolean
 }
 
-export const Header = ({ isDashboard = false }: HeaderProps) => {
-  const { user, logout } = useAuth()
+export const Header = ({ isDashboard = false, isHome = false }: HeaderProps) => {
+  const { user } = useAuth()
   const [showMobile, setShowMobile] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -47,101 +48,41 @@ export const Header = ({ isDashboard = false }: HeaderProps) => {
   return (
     <S.HeaderContainer>
       <S.HeaderContent>
-        <motion.div variants={logoVariants} initial="initial" whileHover="hover">
-          <S.Logo onClick={() => window.location.assign('/')}>
-            <img src="https://placehold.co/120x40?text=Logo" alt="Logo Placeholder" />
-          </S.Logo>
-        </motion.div>
+        <S.LeftSection>
+          <motion.div variants={logoVariants} initial="initial" whileHover="hover">
+            <S.Logo onClick={() => window.location.assign('/')}>
+              <img src="public/images/menuxp-logo.svg" alt="MenuXP" />
+            </S.Logo>
+          </motion.div>
+
+          {isHome && (
+            <S.NavBarWrapper>
+              <NavBar />
+            </S.NavBarWrapper>
+          )}
+        </S.LeftSection>
         <S.RightSection>
-          <Button className="menu" size="icon-xs" onClick={() => setShowMobile(!showMobile)}>
-            <ListIcon />
-          </Button>
+          <S.MobileMenuButton onClick={() => setShowMobile(!showMobile)} aria-label="Toggle menu">
+            <ListIcon size={24} weight="bold" />
+          </S.MobileMenuButton>
+
           {!user ? (
             <S.ButtonsContainer>
-              <Button size="sm" as="a" href="/login">
+              <Button size="sm" as="a" href="/login" variant="outline">
                 Entrar
               </Button>
-              <Button size="sm" as="a" href="/register" variant="outline">
+              <Button size="sm" as="a" href="/register" variant="primary">
                 Cadastrar
               </Button>
             </S.ButtonsContainer>
           ) : (
-            <Popover
-              rounded="lg"
-              variant="primary"
-              trigger={<Avatar showName />}
-              side="bottom"
-              align="start"
-              style={{ zIndex: 99999 }}
-              sideOffset={10}
-            >
-              <S.UserActions>
-                <S.UserInfo>
-                  <div>{user?.name}</div>
-                  <S.UserEmail>{user.email}</S.UserEmail>
-                </S.UserInfo>
-                <S.MenuItem
-                  as={motion.div}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => window.location.assign('/dashboard')}
-                  $isActive={window.location.pathname === '/dashboard'}
-                >
-                  <S.IconWrapper>
-                    <ChartPieIcon size={24} weight="fill" />
-                  </S.IconWrapper>
-                  <motion.span
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    Painel
-                  </motion.span>
-                </S.MenuItem>
-                <S.MenuItem
-                  as={motion.div}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => window.location.assign('/dashboard/profile')}
-                  $isActive={window.location.pathname === '/dashboard/profile'}
-                >
-                  <S.IconWrapper>
-                    <UserIcon size={24} weight="fill" />
-                  </S.IconWrapper>
-                  <motion.span
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    Perfil
-                  </motion.span>
-                </S.MenuItem>
-                <S.LogoutButton
-                  as={motion.div}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={logout}
-                >
-                  <S.IconWrapper>
-                    <SignOutIcon size={24} weight="fill" />
-                  </S.IconWrapper>
-                  <motion.span
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    Sair
-                  </motion.span>
-                </S.LogoutButton>
-              </S.UserActions>
-            </Popover>
+            <S.UserMenuWrapper>
+              <UserMenu />
+            </S.UserMenuWrapper>
           )}
         </S.RightSection>
       </S.HeaderContent>
-      {showMobile && <MobileHeader setShowMobile={setShowMobile} />}
+      {showMobile && <MobileHeader setShowMobile={setShowMobile} isHome={isHome} />}
     </S.HeaderContainer>
   )
 }

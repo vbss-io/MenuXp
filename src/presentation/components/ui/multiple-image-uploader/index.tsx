@@ -11,6 +11,8 @@ interface MultipleImageUploaderUploaderProps {
   error?: string
 }
 
+// To-Do: Refactor styles
+
 export const MultipleImageUploader = ({
   label,
   maxImages = 3,

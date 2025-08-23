@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 
+import { CreateMenuLayoutUsecase } from '@/application/menu-layouts/create-menu-layout.usecase'
 import { GetMenuLayoutUsecase } from '@/application/menu-layouts/get-menu-layout.usecase'
 import { GetMenuLayoutsUsecase } from '@/application/menu-layouts/get-menu-layouts.usecase'
 import { GetMenuSectionsUsecase } from '@/application/menu-layouts/get-menu-sections.usecase'
@@ -112,6 +113,24 @@ export const useMenuLayouts = () => {
     }
   }, [])
 
+  const createLayout = useCallback(async () => {
+    if (!restaurantId) return
+    setState((prev) => ({ ...prev, isLoading: true, error: null }))
+    try {
+      const createLayoutUsecase = new CreateMenuLayoutUsecase()
+      await createLayoutUsecase.execute({ restaurantId })
+      await loadLayouts()
+      setState((prev) => ({ ...prev, isLoading: false }))
+    } catch (error) {
+      setState((prev) => ({
+        ...prev,
+        error: 'Erro ao criar layout',
+        isLoading: false
+      }))
+      console.error('Error creating layout:', error)
+    }
+  }, [restaurantId, loadLayouts])
+
   const clearError = useCallback(() => {
     setState((prev) => ({ ...prev, error: null }))
   }, [])
@@ -125,6 +144,7 @@ export const useMenuLayouts = () => {
     loadLayouts,
     loadLayout,
     loadSections,
+    createLayout,
     clearError,
     updateSelectedLayout
   }

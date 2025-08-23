@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@vbss-ui/button'
+import { Button } from '@/presentation/components/ui/button'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -9,6 +9,7 @@ import { z } from 'zod'
 import { UpdateRestaurantSettingsUsecase } from '@/application/restaurants/update-restaurant-settings.usecase'
 import { BusinessWeekDay, businessWeekDayValues } from '@/domain/enums/restaurants/business-week-day.enum'
 import type { BusinessHours } from '@/domain/models/restaurant.model'
+import { FormTimeInput } from '@/presentation/components/ui/form-time-input'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
@@ -171,26 +172,18 @@ export const HoursForm = () => {
               <S.DayRow key={day} variants={formGroupVariants}>
                 <S.DayLabel>{dayLabels[day]}</S.DayLabel>
                 <S.TimeInputs>
-                  <S.TimeInputGroup>
-                    <S.TimeLabel htmlFor={`${day}Start`}>Início</S.TimeLabel>
-                    <S.TimeInput
-                      id={`${day}Start`}
-                      type="time"
-                      {...register(`${day}Start`)}
-                      $hasError={!!(hasStart && !hasEnd)}
-                    />
-                    {hasStart && !hasEnd && <S.FieldError>Horário de fim é obrigatório</S.FieldError>}
-                  </S.TimeInputGroup>
-                  <S.TimeInputGroup>
-                    <S.TimeLabel htmlFor={`${day}End`}>Fim</S.TimeLabel>
-                    <S.TimeInput
-                      id={`${day}End`}
-                      type="time"
-                      {...register(`${day}End`)}
-                      $hasError={!!(hasEnd && !hasStart)}
-                    />
-                    {hasEnd && !hasStart && <S.FieldError>Horário de início é obrigatório</S.FieldError>}
-                  </S.TimeInputGroup>
+                  <FormTimeInput
+                    id={`${day}Start`}
+                    label="Início"
+                    error={hasStart && !hasEnd ? 'Horário de fim é obrigatório' : undefined}
+                    register={register(`${day}Start`)}
+                  />
+                  <FormTimeInput
+                    id={`${day}End`}
+                    label="Fim"
+                    error={hasEnd && !hasStart ? 'Horário de início é obrigatório' : undefined}
+                    register={register(`${day}End`)}
+                  />
                 </S.TimeInputs>
               </S.DayRow>
             )

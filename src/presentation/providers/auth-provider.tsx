@@ -69,7 +69,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const logout = () => {
     if (!user) return
-    // localStorage.clear()
     localStorage.remove('token')
     localStorage.remove('user')
     localStorage.remove('restaurantId')

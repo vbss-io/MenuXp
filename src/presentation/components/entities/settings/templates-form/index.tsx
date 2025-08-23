@@ -1,6 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@vbss-ui/button'
-import { Textarea } from '@vbss-ui/textarea'
+import { Button } from '@/presentation/components/ui/button'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -9,6 +8,7 @@ import { z } from 'zod'
 
 import { UpdateRestaurantSettingsUsecase } from '@/application/restaurants/update-restaurant-settings.usecase'
 import type { Templates } from '@/domain/models/restaurant.model'
+import { FormTextarea } from '@/presentation/components/ui/form-textarea'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
@@ -181,14 +181,13 @@ export const TemplatesForm = () => {
                 <S.TemplateDescription>{templateDescriptions[templateKey]}</S.TemplateDescription>
               </S.TemplateHeader>
               <S.TemplateInputGroup>
-                <S.TemplateLabel htmlFor={templateKey}>Mensagem</S.TemplateLabel>
-                <Textarea
+                <FormTextarea
                   id={templateKey}
+                  label="Mensagem"
                   placeholder={templateExamples[templateKey]}
                   error={errors[templateKey]?.message}
-                  fontSize="sm"
+                  register={register(templateKey)}
                   rows={3}
-                  {...register(templateKey)}
                 />
               </S.TemplateInputGroup>
               <S.TagsInfo>

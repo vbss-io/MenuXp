@@ -18,6 +18,7 @@ import { useDebounce } from '@/presentation/hooks/use-debounce'
 
 import * as S from './styles'
 
+// To-Do: Update Styles
 export const CategoriesPage = () => {
   const { restaurantId } = useAuth()
   const [categories, setCategories] = useState<Category[]>([])

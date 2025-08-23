@@ -3,20 +3,19 @@ import {
   CaretLeftIcon,
   ChatCenteredDotsIcon,
   GameControllerIcon,
+  GearIcon,
   GraphIcon,
   HouseIcon,
-  ShoppingCartIcon,
-  SignOutIcon,
-  GearIcon,
   ListIcon,
-  ScrollIcon
+  ScrollIcon,
+  ShoppingCartIcon,
+  SignOutIcon
 } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { useSidebar } from '@/presentation/hooks/use-sidebar'
-
 import { useAuth } from '@/presentation/hooks/use-auth'
+import { useSidebar } from '@/presentation/hooks/use-sidebar'
 import * as S from './styles'
 
 export const Sidebar = () => {
@@ -49,6 +48,10 @@ export const Sidebar = () => {
     }
   }
 
+  const handleLogoClick = () => {
+    window.location.assign('/')
+  }
+
   return (
     <motion.div
       initial={{ width: 80 }}
@@ -61,17 +64,19 @@ export const Sidebar = () => {
         overflow: 'hidden'
       }}
     >
-      <S.SidebarContainer>
+      <S.SidebarContainer className={!isOpen ? 'sidebar-closed' : ''}>
         <S.HeaderSection $isOpen={isOpen}>
-          <motion.div variants={logoVariants} initial="initial" whileHover="hover">
-            <S.Logo onClick={() => window.location.assign('/')} $isOpen={isOpen}>
-              {isOpen ? (
-                <img src="https://placehold.co/120x40?text=Logo" alt="Logo Placeholder" />
-              ) : (
-                <img src="https://placehold.co/40x40?text=L" alt="Logo Placeholder" />
-              )}
-            </S.Logo>
-          </motion.div>
+          {isOpen && (
+            <motion.div variants={logoVariants} initial="initial" whileHover="hover">
+              <S.Logo onClick={handleLogoClick} $isOpen={isOpen}>
+                <img
+                  src="/images/menuxp-logo.svg"
+                  alt="MenuXP - Seu restaurante merece um app próprio"
+                  style={{ width: '120px', height: 'auto' }}
+                />
+              </S.Logo>
+            </motion.div>
+          )}
           <S.ToggleButton onClick={toggleSidebar} $isOpen={isOpen}>
             <motion.div animate={{ rotate: isOpen ? 0 : 180 }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
               <CaretLeftIcon size={24} weight="bold" />
@@ -92,7 +97,7 @@ export const Sidebar = () => {
           ))}
         </S.MenuContainer>
         <S.BottomSection>
-          <S.LogoutButton onClick={logout}>
+          <S.LogoutButton onClick={logout} $isOpen={isOpen}>
             <S.IconWrapper>
               <SignOutIcon size={24} weight="fill" />
             </S.IconWrapper>

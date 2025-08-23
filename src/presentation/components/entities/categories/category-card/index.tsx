@@ -1,4 +1,4 @@
-import { EyeIcon, EyeSlashIcon, PencilIcon, TrashIcon, PlusIcon } from '@phosphor-icons/react'
+import { EyeIcon, EyeSlashIcon, PencilIcon, TrashIcon, PlusIcon, CircleIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
 import { Chip } from '@vbss-ui/chip'
 import { Dialog } from '@vbss-ui/dialog'
@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { DeleteCategoryUsecase } from '@/application/categories/delete-category.usecase'
 import { ToggleCategoryStatusUsecase } from '@/application/categories/toggle-category-status.usecase'
 import type { Category } from '@/domain/models/category.model'
+import { ICONS, ICONS_KEYS } from '@/domain/consts/icons.const'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import toast from 'react-hot-toast'
@@ -84,6 +85,24 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
     return category.isActive ? <EyeSlashIcon size={16} /> : <EyeIcon size={16} />
   }
 
+  const getCategoryIcon = () => {
+    if (!category.icon) {
+      return <CircleIcon size={20} />
+    }
+
+    const iconKey = ICONS_KEYS[category.icon]
+    if (!iconKey) {
+      return <CircleIcon size={20} />
+    }
+
+    const IconComponent = ICONS[iconKey as keyof typeof ICONS]
+    if (!IconComponent) {
+      return <CircleIcon size={20} />
+    }
+
+    return <IconComponent size={20} />
+  }
+
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -101,15 +120,24 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
   const hasSubCategories = Array.isArray(category.subCategories) && category.subCategories.length > 0
 
   return (
-    <S.Card variants={cardVariants} initial="hidden" animate="visible" exit="exit" whileHover={{ y: -2 }}>
+    <S.Card variants={cardVariants} initial="hidden" animate="visible" exit="exit">
       <S.CardHeader>
-        <S.CardTitle>{category.name}</S.CardTitle>
-        <Chip className={category.isActive ? 'active' : 'inactive'} size="md">
+        <S.CardTitleContainer>
+          <S.CardIcon>{getCategoryIcon()}</S.CardIcon>
+          <S.CardTitle>{category.name}</S.CardTitle>
+        </S.CardTitleContainer>
+        <Chip
+          backgroundColor={category.isActive ? 'hsl(160, 84%, 39%)' : 'hsl(0, 84%, 60%)'}
+          textColor="white"
+          size="md"
+        >
           {category.isActive ? 'Ativa' : 'Inativa'}
         </Chip>
       </S.CardHeader>
+
       <S.CardContent>
         {category.description && <S.CardDescription>{category.description}</S.CardDescription>}
+
         <S.SubCategoriesContainer>
           <S.SubCategoriesHeader>
             <strong>Sub Categorias:</strong>
@@ -123,10 +151,17 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
               Adicionar
             </Button>
           </S.SubCategoriesHeader>
+
           {hasSubCategories ? (
             <S.SubCategoriesList>
               {(category.subCategories ?? []).map((sub) => (
-                <Chip key={sub.id} variant="outline" size="md" onClick={() => onEdit(sub)}>
+                <Chip
+                  key={sub.id}
+                  backgroundColor="hsl(201, 100%, 44%)"
+                  textColor="white"
+                  size="md"
+                  onClick={() => onEdit(sub)}
+                >
                   {sub.name}
                   <TrashIcon
                     size={14}
@@ -144,6 +179,7 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
           )}
         </S.SubCategoriesContainer>
       </S.CardContent>
+
       <S.CardFooter>
         <S.ActionsContainer>
           <Dialog
@@ -175,6 +211,7 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
               </S.ModalFooter>
             }
           />
+
           <Dialog
             open={isSubDeleteDialogOpen}
             onOpenChange={setIsSubDeleteDialogOpen}
@@ -197,14 +234,17 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
               </S.ModalFooter>
             }
           />
+
           <Button variant="ghost" size="sm" onClick={() => onEdit(category)} disabled={isLoading}>
             <PencilIcon size={16} />
             Editar
           </Button>
+
           <Button variant="ghost" size="sm" onClick={handleToggleStatus} disabled={isLoading}>
             {getStatusIcon()}
             {category.isActive ? 'Desativar' : 'Ativar'}
           </Button>
+
           <Button
             variant="ghost"
             size="sm"

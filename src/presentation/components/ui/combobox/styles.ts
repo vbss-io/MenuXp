@@ -123,6 +123,12 @@ export const Option = styled.div`
   }
 `
 
+export const OptionContent = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+`
+
 export const LoadingMessage = styled.div`
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
   font-size: ${({ theme }) => theme.fontSizes.sm};

@@ -6,6 +6,7 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { UpdateMenuLayoutUsecase } from '@/application/menu-layouts/update-menu-layout.usecase'
+import { LAYOUTS } from '@/domain/consts/layouts.const'
 import type { MenuLayout } from '@/domain/models/menu-layout.model'
 
 import * as S from './styles'
@@ -19,7 +20,8 @@ interface MenuLayoutEditModeProps {
 export const MenuLayoutEditMode = ({ layout, onSave, onCancel }: MenuLayoutEditModeProps) => {
   const [formData, setFormData] = useState({
     name: layout.name,
-    description: layout.description || ''
+    description: layout.description || '',
+    layout: layout.layout || 'default'
   })
   const [isLoading, setIsLoading] = useState(false)
 
@@ -34,12 +36,14 @@ export const MenuLayoutEditMode = ({ layout, onSave, onCancel }: MenuLayoutEditM
       await updateLayoutUsecase.execute({
         layoutId: layout.id,
         name: formData.name,
-        description: formData.description || undefined
+        description: formData.description || undefined,
+        layout: formData.layout
       })
       const updatedLayout = {
         ...layout,
         name: formData.name,
-        description: formData.description || undefined
+        description: formData.description || undefined,
+        layout: formData.layout
       }
       onSave(updatedLayout)
       toast.success('Layout atualizado com sucesso!')
@@ -54,7 +58,8 @@ export const MenuLayoutEditMode = ({ layout, onSave, onCancel }: MenuLayoutEditM
   const handleCancel = () => {
     setFormData({
       name: layout.name,
-      description: layout.description || ''
+      description: layout.description || '',
+      layout: layout.layout || 'default'
     })
     onCancel()
   }
@@ -94,6 +99,22 @@ export const MenuLayoutEditMode = ({ layout, onSave, onCancel }: MenuLayoutEditM
             disabled={isLoading}
             rows={3}
           />
+        </S.FormField>
+        <S.FormField>
+          <label>Layout</label>
+          <S.LayoutGrid>
+            {Object.entries(LAYOUTS).map(([key, layoutOption]) => (
+              <S.LayoutOption
+                key={key}
+                selected={formData.layout === key}
+                onClick={() => setFormData((prev) => ({ ...prev, layout: key }))}
+                disabled={isLoading}
+              >
+                <S.LayoutImage src={layoutOption.image} alt={layoutOption.name} />
+                <S.LayoutName>{layoutOption.name}</S.LayoutName>
+              </S.LayoutOption>
+            ))}
+          </S.LayoutGrid>
         </S.FormField>
         <S.WarningContainer>
           <WarningIcon size={16} />

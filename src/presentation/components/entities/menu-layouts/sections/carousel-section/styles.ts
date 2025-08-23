@@ -6,28 +6,30 @@ const spin = keyframes`
 `
 
 export const EditContainer = styled.div`
-  width: 100%;
-  border: 1px solid ${({ theme }) => theme.colors.gray};
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.md};
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
   border-radius: ${({ theme }) => theme.borderRadius.md};
-  background: ${({ theme }) => theme.colors.white};
-  overflow: hidden;
 `
 
 export const EditHeader = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
-  background: ${({ theme }) => theme.colors.background};
+  align-items: center;
+  padding-bottom: ${({ theme }) => theme.spacing.sm};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
 `
 
 export const EditTitle = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text};
+  gap: ${({ theme }) => theme.spacing.xs};
+  font-size: ${({ theme }) => theme.typography.fontSizes.md};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.text.primary};
 
   svg {
     color: ${({ theme }) => theme.colors.primary};
@@ -35,8 +37,10 @@ export const EditTitle = styled.div`
 `
 
 export const EditContent = styled.div`
-  padding: 20px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.md};
 `
 
 export const ImagesGrid = styled.div`
@@ -56,8 +60,8 @@ export const ImageSlot = styled.div`
   aspect-ratio: 16/9;
   border-radius: ${({ theme }) => theme.spacing.xs};
   overflow: hidden;
-  border: 2px dashed ${({ theme }) => theme.colors.gray};
-  background: ${({ theme }) => theme.colors.background};
+  border: 2px dashed ${({ theme }) => theme.colors.mx.gray[300]};
+  background: ${({ theme }) => theme.colors.mx.white};
 `
 
 export const ImagePreview = styled.div`
@@ -96,7 +100,7 @@ export const ImageOverlay = styled.div`
 
   button {
     background: rgba(255, 255, 255, 0.9);
-    color: ${({ theme }) => theme.colors.text};
+    color: ${({ theme }) => theme.colors.text.primary};
     border: none;
 
     &:hover {
@@ -110,31 +114,44 @@ export const UploadArea = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  padding: 16px;
+  gap: ${({ theme }) => theme.spacing.sm};
+  width: 100%;
+  padding: ${({ theme }) => theme.spacing.xl};
+  border: 2px dashed ${({ theme }) => theme.colors.mx.gray[400]};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  background: ${({ theme }) => theme.colors.mx.white};
   cursor: pointer;
   transition: all 0.2s ease;
-  text-align: center;
+  color: ${({ theme }) => theme.colors.mx.gray[600]};
+
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    padding: ${({ theme }) => theme.spacing.lg};
+    gap: ${({ theme }) => theme.spacing.xs};
+  }
+
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    padding: ${({ theme }) => theme.spacing.xl};
+  }
+
+  @media ${({ theme }) => theme.breakpoints.md} {
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.primary};
-    background: ${({ theme }) => theme.colors.primary}10;
-  }
-
-  svg {
-    color: ${({ theme }) => theme.colors.gray};
-    margin-bottom: 8px;
+    color: ${({ theme }) => theme.colors.primary};
+    background: ${({ theme }) => theme.colors.primary}05;
   }
 
   span {
-    color: ${({ theme }) => theme.colors.gray};
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+    text-align: center;
 
     &.subtitle {
-      font-size: 12px;
-      color: ${({ theme }) => theme.colors.gray};
-      margin-top: 4px;
+      font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
+      opacity: 0.7;
     }
   }
 `
@@ -153,32 +170,48 @@ export const ViewContainer = styled.div`
 export const CarouselContainer = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 16/9;
   overflow: hidden;
   border-radius: 12px;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.mx.white};
 `
 
 export const CarouselTrack = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 `
 
 export const CarouselSlide = styled.div`
   flex: 0 0 100%;
   width: 100%;
-  height: 100%;
   position: relative;
 `
 
 export const CarouselImage = styled.img`
   width: 100%;
-  height: 100%;
+  height: auto;
+  display: block;
   object-fit: cover;
-  user-select: none;
-  pointer-events: none;
+
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    max-height: 200px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    max-height: 250px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.md} {
+    max-height: 300px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.lg} {
+    max-height: 350px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.xl} {
+    max-height: 400px;
+  }
 `
 
 export const CarouselButton = styled.button<{ position: 'left' | 'right' }>`
@@ -227,12 +260,12 @@ export const CarouselIndicator = styled.button<{ active: boolean }>`
   height: 12px;
   border-radius: 50%;
   border: none;
-  background: ${({ active, theme }) => (active ? theme.colors.primary : theme.colors.gray)};
+  background: ${({ active, theme }) => (active ? theme.colors.primary : theme.colors.mx.gray[400])};
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    background: ${({ active, theme }) => (active ? theme.colors.primary : theme.colors.highlight)};
+    background: ${({ active, theme }) => (active ? theme.colors.primary : theme.colors.mx.gray[500])};
     transform: scale(1.2);
   }
 
@@ -242,60 +275,95 @@ export const CarouselIndicator = styled.button<{ active: boolean }>`
 `
 
 export const PreviewContainer = styled.div`
-  width: 100%;
-  border: 1px solid ${({ theme }) => theme.colors.gray};
+  display: flex;
+  flex-direction: column;
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
   border-radius: ${({ theme }) => theme.borderRadius.md};
-  background: ${({ theme }) => theme.colors.white};
   overflow: hidden;
 `
 
 export const PreviewHeader = styled.div`
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.gray};
-  background: ${({ theme }) => theme.colors.background};
+  align-items: center;
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
+  background: ${({ theme }) => theme.colors.mx.gray[100]};
 `
 
 export const PreviewTitle = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 500;
-  font-size: 14px;
-  color: ${({ theme }) => theme.colors.text};
-
-  svg {
-    color: ${({ theme }) => theme.colors.primary};
-  }
+  gap: ${({ theme }) => theme.spacing.xs};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.text.primary};
 `
 
 export const FallbackContainer = styled.div`
   width: 100%;
-  aspect-ratio: 16/9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${({ theme }) => theme.colors.background};
-  border-radius: 12px;
-  border: 1px solid ${({ theme }) => theme.colors.gray};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
+
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    min-height: 200px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    min-height: 250px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.md} {
+    min-height: 300px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.lg} {
+    min-height: 350px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.xl} {
+    min-height: 400px;
+  }
 `
 
 export const FallbackContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  color: ${({ theme }) => theme.colors.gray};
-  text-align: center;
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing.md};
+  height: 100%;
+  min-height: 200px;
+  color: ${({ theme }) => theme.colors.mx.gray[500]};
 
-  svg {
-    opacity: 0.5;
+  @media ${({ theme }) => theme.breakpoints.xs} {
+    min-height: 200px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    min-height: 250px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.md} {
+    min-height: 300px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.lg} {
+    min-height: 350px;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.xl} {
+    min-height: 400px;
   }
 
   span {
-    font-size: 14px;
+    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+    text-align: center;
   }
 `
 
@@ -310,21 +378,22 @@ export const UploadingOverlay = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  border-radius: 12px;
+  gap: ${({ theme }) => theme.spacing.sm};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
   z-index: 10;
 
   span {
-    color: ${({ theme }) => theme.colors.text};
-    font-weight: 500;
+    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    color: ${({ theme }) => theme.colors.text.primary};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   }
 `
 
 export const LoadingSpinner = styled.div`
-  width: 32px;
-  height: 32px;
-  border: 3px solid ${({ theme }) => theme.colors.gray};
-  border-top: 3px solid ${({ theme }) => theme.colors.primary};
+  width: 24px;
+  height: 24px;
+  border: 2px solid ${({ theme }) => theme.colors.mx.gray[400]};
+  border-top: 2px solid ${({ theme }) => theme.colors.primary};
   border-radius: 50%;
   animation: ${spin} 1s linear infinite;
 `
@@ -332,22 +401,27 @@ export const LoadingSpinner = styled.div`
 export const ValidationErrors = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 16px;
+  gap: ${({ theme }) => theme.spacing.xs};
+  margin-top: ${({ theme }) => theme.spacing.sm};
 `
 
 export const ValidationError = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px;
-  background: ${({ theme }) => theme.colors.red}20;
-  border: 1px solid ${({ theme }) => theme.colors.red};
-  border-radius: 8px;
-  color: ${({ theme }) => theme.colors.red};
-  font-size: 14px;
+  gap: ${({ theme }) => theme.spacing.xs};
+  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+  background: ${({ theme }) => theme.colors.mx.error}10;
+  border: 1px solid ${({ theme }) => theme.colors.mx.error}30;
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  color: ${({ theme }) => theme.colors.mx.error};
 
   svg {
+    color: ${({ theme }) => theme.colors.mx.error};
     flex-shrink: 0;
+  }
+
+  span {
+    font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   }
 `

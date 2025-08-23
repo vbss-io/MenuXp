@@ -1,8 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@vbss-ui/button'
-import { Dialog } from '@vbss-ui/dialog'
-import { Input } from '@vbss-ui/input'
-import { Textarea } from '@vbss-ui/textarea'
+import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -12,7 +9,12 @@ import { CreateCategoryUsecase } from '@/application/categories/create-category.
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { UpdateCategoryUsecase } from '@/application/categories/update-category.usecase'
 import type { Category } from '@/domain/models/category.model'
+import { Button } from '@/presentation/components/ui/button'
 import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
+import { Dialog } from '@/presentation/components/ui/dialog'
+import { FormInput } from '@/presentation/components/ui/form-input'
+import { FormTextarea } from '@/presentation/components/ui/form-textarea'
+import { IconSelector } from '@/presentation/components/ui/icon-selector'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 
@@ -21,7 +23,8 @@ import * as S from './styles'
 const categorySchema = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),
   description: z.string().optional(),
-  mainCategoryId: z.string().optional()
+  mainCategoryId: z.string().optional(),
+  icon: z.string().optional()
 })
 
 type CategoryFormData = z.infer<typeof categorySchema>
@@ -38,6 +41,7 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
   const { restaurantId } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const [selectedMainCategory, setSelectedMainCategory] = useState<string>('')
+  const [selectedIcon, setSelectedIcon] = useState<string>('')
   const isEditing = !!category
   const {
     register,
@@ -60,16 +64,20 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
         reset({
           name: category.name,
           description: category.description || '',
-          mainCategoryId: category.mainCategoryId || ''
+          mainCategoryId: category.mainCategoryId || '',
+          icon: category.icon || ''
         })
         setSelectedMainCategory(category.mainCategoryId || '')
+        setSelectedIcon(category.icon || '')
       } else {
         reset({
           name: '',
           description: '',
-          mainCategoryId: parentCategoryId || ''
+          mainCategoryId: parentCategoryId || '',
+          icon: ''
         })
         setSelectedMainCategory(parentCategoryId || '')
+        setSelectedIcon('')
       }
     }
   }, [isOpen, category, parentCategoryId, reset])
@@ -77,6 +85,11 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
   const handleMainCategoryChange = (value: string) => {
     setSelectedMainCategory(value)
     setValue('mainCategoryId', value)
+  }
+
+  const handleIconSelect = (icon: string) => {
+    setSelectedIcon(icon)
+    setValue('icon', icon)
   }
 
   const handleMainCategorySearch = async (searchTerm: string): Promise<ComboboxOption[]> => {
@@ -92,7 +105,8 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
         .filter((cat) => cat.id !== category?.id)
         .map((cat) => ({
           label: cat.name,
-          value: cat.id
+          value: cat.id,
+          icon: cat.icon
         }))
     } catch (error) {
       console.error('Erro ao buscar categorias:', error)
@@ -105,13 +119,15 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
     setIsLoading(true)
     try {
       const mainCategoryId = data.mainCategoryId || undefined
+      const icon = data.icon || undefined
       if (isEditing) {
         const updateCategoryUsecase = new UpdateCategoryUsecase()
         await updateCategoryUsecase.execute({
           categoryId: category!.id,
           name: data.name,
           description: data.description,
-          mainCategoryId
+          mainCategoryId,
+          icon
         })
         toast.success('Categoria atualizada com sucesso!')
       } else {
@@ -120,7 +136,8 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
           name: data.name,
           description: data.description,
           restaurantId,
-          mainCategoryId
+          mainCategoryId,
+          icon
         })
         toast.success('Categoria criada com sucesso!')
       }
@@ -141,48 +158,56 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
 
   const isDisabled = Array.isArray(category?.subCategories) && category.subCategories.length > 0
 
+  const formGroupVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 }
+    }
+  }
+
   return (
     <Dialog
       title={isEditing ? 'Editar Categoria' : 'Nova Categoria'}
       description={isEditing ? 'Edite a categoria para atualizar as informações' : 'Crie uma nova categoria'}
       open={isOpen}
       onOpenChange={onClose}
-      variant="outline"
-      disableTextColor
-      footer={
-        <S.ModalFooter>
-          <Button type="button" variant="ghost" onClick={onClose} disabled={isLoading}>
-            Cancelar
-          </Button>
-          <Button type="button" variant="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
-            {getButtonText()}
-          </Button>
-        </S.ModalFooter>
-      }
     >
       <S.Form>
-        <S.FormGroup>
-          <S.Label htmlFor="name">Nome *</S.Label>
-          <Input
+        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
+          <FormInput
             id="name"
+            label="Nome"
             placeholder="Digite o nome da categoria"
             error={errors.name?.message}
+            required
+            register={register('name')}
             fontSize="sm"
-            {...register('name')}
           />
         </S.FormGroup>
-        <S.FormGroup>
-          <S.Label htmlFor="description">Descrição</S.Label>
-          <Textarea
+
+        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
+          <S.Label>Ícone</S.Label>
+          <IconSelector
+            selectedIcon={selectedIcon}
+            onIconSelect={handleIconSelect}
+            placeholder="Selecionar ícone (opcional)"
+          />
+        </S.FormGroup>
+
+        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
+          <FormTextarea
             id="description"
+            label="Descrição"
             placeholder="Digite uma descrição para a categoria"
             error={errors.description?.message}
-            fontSize="sm"
+            register={register('description')}
             rows={3}
-            {...register('description')}
           />
         </S.FormGroup>
-        <S.FormGroup>
+
+        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
           <S.Label>Categoria Pai</S.Label>
           <Combobox
             placeholder="Selecione uma categoria pai (opcional)"
@@ -195,6 +220,17 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
             <S.WarningText>Categorias com subcategorias não podem receber uma categoria pai.</S.WarningText>
           )}
         </S.FormGroup>
+
+        <S.ModalFooter>
+          <Button type="button" variant="ghost" onClick={onClose} disabled={isLoading}>
+            Cancelar
+          </Button>
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button type="button" variant="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+              {getButtonText()}
+            </Button>
+          </motion.div>
+        </S.ModalFooter>
       </S.Form>
     </Dialog>
   )

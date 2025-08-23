@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 
-import type { Restaurant } from '@/domain/models/restaurant.model'
 import type { RestaurantConfigValidation } from '@/application/restaurants/get-restaurant-by-id.usecase'
+import type { Restaurant } from '@/domain/models/restaurant.model'
 
 export interface RestaurantContextData {
   restaurant: Restaurant | null

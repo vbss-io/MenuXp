@@ -7,9 +7,7 @@ import {
   QrCodeIcon,
   StorefrontIcon
 } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
-import { Checkbox } from '@vbss-ui/checkbox'
-import { Input } from '@vbss-ui/input'
+import { Button } from '@/presentation/components/ui/button'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -19,6 +17,8 @@ import { z } from 'zod'
 import { UpdateRestaurantSettingsUsecase } from '@/application/restaurants/update-restaurant-settings.usecase'
 import { OperationType, operationTypes } from '@/domain/enums/restaurants/operation-type.enum'
 import { PaymentMethod, paymentMethods } from '@/domain/enums/restaurants/payment-methods.enum'
+import { FormCheckbox } from '@/presentation/components/ui/form-checkbox'
+import { FormInput } from '@/presentation/components/ui/form-input'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
@@ -192,19 +192,19 @@ export const OperationsForm = () => {
       <S.Section variants={sectionVariants}>
         <S.SectionTitle>Tipos de Operação</S.SectionTitle>
         <S.SectionDescription>Selecione os tipos de operação que seu restaurante oferece</S.SectionDescription>
-        <S.CheckboxGrid>
+        <S.OperationTypesGrid>
           {operationTypes.map((operationType) => (
             <S.CheckboxItem key={operationType} variants={formGroupVariants}>
-              <Checkbox
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                label={operationTypeLabels[operationType] as any}
+              <FormCheckbox
+                id={operationType}
+                label={operationTypeLabels[operationType]}
                 checked={selectedOperationTypes.includes(operationType)}
-                onCheckedChange={(checked) => handleOperationTypeChange(operationType, checked as boolean)}
+                onCheckedChange={(checked) => handleOperationTypeChange(operationType, checked)}
                 fontSize="sm"
               />
             </S.CheckboxItem>
           ))}
-        </S.CheckboxGrid>
+        </S.OperationTypesGrid>
         {errors.operationTypes && <S.ErrorMessage>{errors.operationTypes.message}</S.ErrorMessage>}
       </S.Section>
       {hasDelivery && (
@@ -212,16 +212,15 @@ export const OperationsForm = () => {
           <S.SectionTitle>Taxa de Entrega</S.SectionTitle>
           <S.SectionDescription>Configure a taxa de entrega para pedidos delivery</S.SectionDescription>
           <S.FormGroup variants={formGroupVariants}>
-            <S.Label htmlFor="deliveryFee">Taxa de Entrega (R$)</S.Label>
-            <Input
+            <FormInput
               id="deliveryFee"
+              label="Taxa de Entrega (R$)"
               type="number"
               step="0.01"
               min="0"
-              error={errors.deliveryFee?.message}
               placeholder="0.00"
-              fontSize="sm"
-              {...register('deliveryFee', { valueAsNumber: true })}
+              error={errors.deliveryFee?.message}
+              register={register('deliveryFee', { valueAsNumber: true })}
             />
           </S.FormGroup>
         </S.Section>
@@ -232,11 +231,11 @@ export const OperationsForm = () => {
         <S.CheckboxGrid>
           {paymentMethods.map((paymentMethod) => (
             <S.CheckboxItem key={paymentMethod} variants={formGroupVariants}>
-              <Checkbox
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                label={paymentMethodLabels[paymentMethod] as any}
+              <FormCheckbox
+                id={paymentMethod}
+                label={paymentMethodLabels[paymentMethod]}
                 checked={selectedPaymentMethods.includes(paymentMethod)}
-                onCheckedChange={(checked) => handlePaymentMethodChange(paymentMethod, checked as boolean)}
+                onCheckedChange={(checked) => handlePaymentMethodChange(paymentMethod, checked)}
                 fontSize="sm"
               />
             </S.CheckboxItem>
@@ -247,7 +246,7 @@ export const OperationsForm = () => {
       <S.SubmitSection>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Button type="submit" disabled={isLoading} variant="primary" size="lg">
-            {isLoading ? <Loading /> : 'Salvar'}
+            {isLoading ? <Loading /> : 'Salvar Operações'}
           </Button>
         </motion.div>
       </S.SubmitSection>

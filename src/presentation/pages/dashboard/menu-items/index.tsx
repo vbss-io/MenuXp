@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
+import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
 import type { MenuItem } from '@/domain/models/menu-item.model'
 
 import { MenuItemCard } from '@/presentation/components/entities/menu-items/menu-item-card'
@@ -15,8 +15,8 @@ import {
   type MenuItemFilters as MenuItemFiltersType
 } from '@/presentation/components/entities/menu-items/menu-item-filters'
 import { MenuItemModal } from '@/presentation/components/entities/menu-items/menu-item-modal'
-import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
+import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { Loading } from '@/presentation/components/ui/loading'
 import { Pagination } from '@/presentation/components/ui/pagination'
 import { useAuth } from '@/presentation/hooks/use-auth'
@@ -24,6 +24,7 @@ import { useDebounce } from '@/presentation/hooks/use-debounce'
 
 import * as S from './styles'
 
+// To-Do: Update Styles
 export const MenuItemsPage = () => {
   const { restaurantId } = useAuth()
   const [menuItems, setMenuItems] = useState<MenuItem[]>([])
@@ -126,7 +127,8 @@ export const MenuItemsPage = () => {
       return categoriesData.map((cat) => ({
         label: cat.name,
         value: cat.id,
-        displayLabel: cat.mainCategoryName ? `${cat.mainCategoryName} → ${cat.name}` : cat.name
+        displayLabel: cat.mainCategoryName ? `${cat.mainCategoryName} → ${cat.name}` : cat.name,
+        icon: cat.icon
       }))
     } catch (error) {
       console.error('Erro ao buscar categorias:', error)

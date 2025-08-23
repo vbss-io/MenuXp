@@ -35,6 +35,8 @@ interface PaginationProps {
   onPageChange: (page: number) => void
 }
 
+// To-Do: Refactor styles
+
 export const Pagination: React.FC<PaginationProps> = ({ currentPage, totalItems, itemsPerPage, onPageChange }) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage)
   const hasNextPage = currentPage < totalPages

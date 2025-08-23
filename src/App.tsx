@@ -16,13 +16,16 @@ const AppContainer = styled.div<{ $isDashboard: boolean }>`
   margin-top: ${({ $isDashboard }) => ($isDashboard ? '0' : '5rem')};
   display: flex;
   flex-direction: column;
+  width: 100%;
+  overflow-x: hidden;
 `
 
+// To-Do: Update toast styles
 function App() {
   registerDependencies()
   const location = window.location.pathname
   const isDashboard = location.includes('/dashboard')
-
+  const isHome = location === '/'
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
@@ -32,7 +35,7 @@ function App() {
           duration: 6000,
           style: {
             background: theme.colors.background,
-            color: theme.colors.text,
+            color: theme.colors.text.primary,
             fontSize: '0.75rem',
             padding: '1rem',
             border: '2px solid',
@@ -44,22 +47,22 @@ function App() {
           },
           success: {
             style: {
-              borderColor: theme.colors.primary
+              borderColor: theme.colors.mx.red
             },
-            icon: <CheckCircleIcon color={theme.colors.primary} size={24} weight="duotone" />
+            icon: <CheckCircleIcon color={theme.colors.mx.red} size={24} weight="duotone" />
           },
           error: {
             style: {
-              borderColor: theme.colors.red
+              borderColor: theme.colors.mx.red
             },
-            icon: <XCircleIcon color={theme.colors.red} size={24} weight="duotone" />
+            icon: <XCircleIcon color={theme.colors.mx.red} size={24} weight="duotone" />
           }
         }}
       />
       <AuthProvider>
         <RestaurantProvider>
           <SidebarProvider>
-            <Header isDashboard={isDashboard} />
+            <Header isDashboard={isDashboard} isHome={isHome} />
             <AppContainer $isDashboard={isDashboard}>
               <Router />
             </AppContainer>

@@ -13,6 +13,7 @@ import * as S from './styles'
 
 type TabType = 'branding' | 'address' | 'operations' | 'hours' | 'templates' | 'users'
 
+// To-Do: Update Styles
 export const SettingsPage = () => {
   const [isLoading, _setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState<TabType>('branding')

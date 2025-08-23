@@ -2,12 +2,15 @@ import { CaretDownIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
+import { ICONS, ICONS_KEYS } from '@/domain/consts/icons.const'
+
 import * as S from './styles'
 
 export interface ComboboxOption {
   label: string
   value: string
   displayLabel?: string
+  icon?: string
 }
 
 export interface ComboboxProps {
@@ -21,6 +24,7 @@ export interface ComboboxProps {
   disabled?: boolean
 }
 
+// To-Do: Update Styles to match new design
 export const Combobox = ({
   label,
   error,
@@ -136,6 +140,17 @@ export const Combobox = ({
     }
   }
 
+  const renderIcon = (iconKey?: string) => {
+    if (!iconKey) return null
+
+    const iconName = ICONS_KEYS[iconKey]
+    if (iconName && ICONS[iconName as keyof typeof ICONS]) {
+      const IconComponent = ICONS[iconName as keyof typeof ICONS]
+      return <IconComponent size={16} />
+    }
+    return null
+  }
+
   const renderDropdownContent = () => {
     if (isLoading) {
       return <S.LoadingMessage>Carregando...</S.LoadingMessage>
@@ -147,7 +162,10 @@ export const Combobox = ({
           onClick={() => handleSelectOption(option)}
           className={selectedOption?.value === option.value ? 'selected' : ''}
         >
-          {option.displayLabel || option.label}
+          <S.OptionContent>
+            {renderIcon(option.icon)}
+            <span>{option.displayLabel || option.label}</span>
+          </S.OptionContent>
         </S.Option>
       ))
     }

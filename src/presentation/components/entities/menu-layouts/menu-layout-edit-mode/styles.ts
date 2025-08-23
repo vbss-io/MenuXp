@@ -51,6 +51,48 @@ export const FormField = styled.div`
   }
 `
 
+export const LayoutGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin-top: ${({ theme }) => theme.spacing.xs};
+`
+
+export const LayoutOption = styled.div<{ selected?: boolean; disabled?: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
+  padding: ${({ theme }) => theme.spacing.sm};
+  border: 2px solid ${({ selected, theme }) => (selected ? theme.colors.primary : theme.colors.gray)};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
+  background: ${({ selected, theme }) => (selected ? `${theme.colors.primary}10` : 'transparent')};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  transition: all 0.2s ease;
+  opacity: ${({ disabled }) => (disabled ? 0.6 : 1)};
+
+  &:hover:not(:disabled) {
+    border-color: ${({ theme }) => theme.colors.primary};
+    background: ${({ theme }) => `${theme.colors.primary}05`};
+  }
+`
+
+export const LayoutImage = styled.img`
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.gray}30;
+`
+
+export const LayoutName = styled.span`
+  font-size: ${({ theme }) => theme.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.text};
+  text-align: center;
+  line-height: 1.2;
+`
+
 export const WarningContainer = styled.div`
   display: flex;
   align-items: center;
