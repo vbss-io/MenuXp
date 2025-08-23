@@ -2,18 +2,18 @@ import type { MenuLayoutStatus } from '@/domain/enums/menu-layouts/menu-layout-s
 import type { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 
 export interface MenuSectionConfig {
-  // BANNER
   imagePath?: string
-  // CAROUSEL
-  imagePaths?: string[] // Array de caminhos das imagens (min: 2, max: 5)
-  // CATEGORIES
-  categoryIds?: string[] | null // null = todas as categorias ativas
-  // MENU_ITEMS
-  menuItemIds?: string[] | null // null = todos os itens ativos
+  tag?: string
+  title?: string
+  subtitle?: string
+  imagePaths?: string[]
+  categoryIds?: string[] | null
+  layout?: string
+  menuItemIds?: string[] | null
 }
 
 export interface MenuSection {
-  id?: string // Gerado pelo backend/MongoDB
+  id?: string
   type: MenuSectionType
   config: MenuSectionConfig
 }
@@ -24,6 +24,7 @@ export interface MenuLayout {
   description?: string
   restaurantId: string
   status: MenuLayoutStatus
+  layout: string
   sections: MenuSection[]
   createdAt: string
   updatedAt: string
