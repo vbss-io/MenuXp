@@ -1,7 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckIcon, SpinnerIcon, WarningIcon } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
-import { Input } from '@vbss-ui/input'
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -10,6 +8,8 @@ import { z } from 'zod'
 
 import { CheckSlugAvailableUsecase } from '@/application/restaurants/check-slug-available.usecase'
 import { CreateRestaurantUsecase } from '@/application/restaurants/create-restaurant.usecase'
+import { Button } from '@/presentation/components/ui/button'
+import { FormInput } from '@/presentation/components/ui/form-input'
 import { FormTextarea } from '@/presentation/components/ui/form-textarea'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
@@ -42,7 +42,6 @@ type CreateRestaurantFormData = z.infer<typeof createRestaurantSchema>
 
 type SlugStatus = 'empty' | 'checking' | 'available' | 'unavailable' | 'invalid'
 
-// To-Do: Update Styles
 export const CreateRestaurant = () => {
   const navigate = useNavigate()
   const { updateRestaurantId } = useAuth()
@@ -171,13 +170,13 @@ export const CreateRestaurant = () => {
       <S.Card>
         <S.CardTitle>Criar Restaurante</S.CardTitle>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            label="Nome do Restaurante *"
-            type="text"
-            error={errors.name?.message}
+          <FormInput
+            id="name"
+            label="Nome do Restaurante"
             placeholder="Digite o nome do seu restaurante"
-            fontSize="sm"
-            {...register('name')}
+            error={errors.name?.message}
+            required
+            register={register('name')}
           />
           <FormTextarea
             id="description"
@@ -188,13 +187,13 @@ export const CreateRestaurant = () => {
             register={register('description')}
           />
           <S.InputWrapper>
-            <Input
-              label="Slug (URL amigável) *"
-              type="text"
-              error={errors.slug?.message}
+            <FormInput
+              id="slug"
+              label="Slug (URL amigável)"
               placeholder="meu-restaurante"
-              fontSize="sm"
-              {...register('slug', {
+              error={errors.slug?.message}
+              required
+              register={register('slug', {
                 onChange: (e) => handleSlugChange(e.target.value)
               })}
             />
