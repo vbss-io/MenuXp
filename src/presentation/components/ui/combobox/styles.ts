@@ -8,20 +8,18 @@ export const ComboboxContainer = styled.div`
   position: relative;
 `
 
-export const Label = styled.label`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.text};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-`
-
-export const Required = styled.span`
-  color: ${({ theme }) => theme.colors.red};
-  margin-left: 2px;
-`
-
 export const ComboboxWrapper = styled.div`
   position: relative;
   width: 100%;
+`
+
+export const Label = styled.label`
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-family: ${({ theme }) => theme.typography.fonts.title};
+  color: ${({ theme }) => theme.colors.mx.black};
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `
 
 export const InputWrapper = styled.div`
@@ -33,24 +31,29 @@ export const InputWrapper = styled.div`
 
 export const Input = styled.input`
   width: 100%;
-  padding: ${({ theme }) => theme.spacing.sm};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.text};
-  background: ${({ theme }) => theme.colors.white};
+  height: 2.25rem;
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.375rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: #000000;
+  background: #ffffff;
   transition: border-color 0.2s ease;
   padding-right: ${({ theme }) => theme.spacing.xl};
 
   &:focus {
     outline: none;
-    border-color: ${({ theme }) => theme.colors.primary};
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.primary}20;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px #3b82f620;
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    background: ${({ theme }) => theme.colors.gray}10;
+    background: #f3f4f6;
   }
 `
 
@@ -67,12 +70,12 @@ export const IconButton = styled.button`
   justify-content: center;
   padding: ${({ theme }) => theme.spacing.xs};
   border-radius: ${({ theme }) => theme.borderRadius.xs};
-  transition: all 0.2s ease;
-  color: ${({ theme }) => theme.colors.text};
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+  color: ${({ theme }) => theme.colors.mx.black};
 
   &:hover:not(:disabled) {
-    background-color: ${({ theme }) => theme.colors.primary}10;
-    color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.colors.mx.red}10;
+    color: ${({ theme }) => theme.colors.mx.red};
   }
 
   &:disabled {
@@ -86,10 +89,10 @@ export const Dropdown = styled.div`
   top: 100%;
   left: 0;
   right: 0;
-  background: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.secondary};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  box-shadow: ${({ theme }) => theme.shadows.brutalist};
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;
@@ -99,27 +102,31 @@ export const Dropdown = styled.div`
 export const Option = styled.div`
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
   cursor: pointer;
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.text};
-  transition: background-color 0.2s ease;
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.black};
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+  border-bottom: 1px solid #e5e7eb;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.primary}10;
+    background-color: ${({ theme }) => theme.colors.mx.red}10;
+    color: ${({ theme }) => theme.colors.mx.red};
   }
 
   &.selected {
-    background-color: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.mx.red};
+    color: ${({ theme }) => theme.colors.mx.white};
   }
 
   &:first-child {
-    border-top-left-radius: ${({ theme }) => theme.borderRadius.sm};
-    border-top-right-radius: ${({ theme }) => theme.borderRadius.sm};
+    border-top-left-radius: ${({ theme }) => theme.borderRadius.brutalist};
+    border-top-right-radius: ${({ theme }) => theme.borderRadius.brutalist};
   }
 
   &:last-child {
-    border-bottom-left-radius: ${({ theme }) => theme.borderRadius.sm};
-    border-bottom-right-radius: ${({ theme }) => theme.borderRadius.sm};
+    border-bottom-left-radius: ${({ theme }) => theme.borderRadius.brutalist};
+    border-bottom-right-radius: ${({ theme }) => theme.borderRadius.brutalist};
+    border-bottom: none;
   }
 `
 
@@ -131,21 +138,24 @@ export const OptionContent = styled.div`
 
 export const LoadingMessage = styled.div`
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.text};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: #6b7280;
   text-align: center;
   font-style: italic;
 `
 
 export const EmptyMessage = styled.div`
   padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.text};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: #6b7280;
   text-align: center;
   font-style: italic;
 `
 
 export const ErrorMessage = styled.span`
-  font-size: ${({ theme }) => theme.fontSizes.xs};
-  color: ${({ theme }) => theme.colors.red};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.red};
 `

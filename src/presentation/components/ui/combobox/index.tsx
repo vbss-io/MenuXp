@@ -2,7 +2,7 @@ import { CaretDownIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-import { ICONS, ICONS_KEYS } from '@/domain/consts/icons.const'
+import { ICONS, ICONS_KEYS } from '@/domain/consts/icons.const.tsx'
 
 import * as S from './styles'
 
@@ -24,7 +24,6 @@ export interface ComboboxProps {
   disabled?: boolean
 }
 
-// To-Do: Update Styles to match new design
 export const Combobox = ({
   label,
   error,
@@ -42,7 +41,6 @@ export const Combobox = ({
   const [selectedOption, setSelectedOption] = useState<ComboboxOption | null>(null)
   const [isUserTyping, setIsUserTyping] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
 
   const selectClass = theme || ''
 
@@ -126,7 +124,6 @@ export const Combobox = ({
     } else if (e.key === 'Escape') {
       setIsOpen(false)
       setIsUserTyping(false)
-      inputRef.current?.blur()
     }
   }
 
@@ -134,15 +131,13 @@ export const Combobox = ({
     if (!disabled) {
       setIsOpen(!isOpen)
       if (!isOpen) {
-        inputRef.current?.focus()
         handleSearch(searchTerm)
       }
     }
   }
 
   const renderIcon = (iconKey?: string) => {
-    if (!iconKey) return null
-
+    if (!iconKey || !(iconKey in ICONS_KEYS)) return null
     const iconName = ICONS_KEYS[iconKey]
     if (iconName && ICONS[iconName as keyof typeof ICONS]) {
       const IconComponent = ICONS[iconName as keyof typeof ICONS]
@@ -181,7 +176,6 @@ export const Combobox = ({
       <S.ComboboxWrapper>
         <S.InputWrapper>
           <S.Input
-            ref={inputRef}
             type="text"
             className={selectClass}
             placeholder={placeholder}
