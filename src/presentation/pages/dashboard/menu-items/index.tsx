@@ -16,7 +16,7 @@ import { MenuItemModal } from '@/presentation/components/entities/menu-items/men
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { Button } from '@/presentation/components/ui/button'
 import { FormInput } from '@/presentation/components/ui/form-input'
-import { Combobox, type ComboboxOption } from '@/presentation/@to-do/components/ui/combobox'
+import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { Loading } from '@/presentation/@to-do/components/ui/loading'
 import { Pagination } from '@/presentation/@to-do/components/ui/pagination'
 import { useAuth } from '@/presentation/hooks/use-auth'
