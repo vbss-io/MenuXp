@@ -15,9 +15,7 @@ const brutalistButtonStyles = css`
   justify-content: center;
   gap: ${({ theme }) => theme.spacing.md};
   transition: all 0.2s ease;
-  white-space: normal;
-  word-wrap: break-word;
-  word-break: break-word;
+  white-space: nowrap;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -208,9 +206,11 @@ export const LoadingSpinner = styled.div`
 export const ButtonContent = styled.span<{ loading?: boolean }>`
   display: flex;
   align-items: center;
-  gap: inherit;
+  gap: ${({ theme }) => theme.spacing.md};
   opacity: ${({ loading }) => (loading ? 0 : 1)};
   transition: opacity 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
 `
 
 export const LoadingContent = styled.span`
