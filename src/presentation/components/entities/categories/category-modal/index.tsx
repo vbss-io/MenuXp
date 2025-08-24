@@ -9,13 +9,13 @@ import { CreateCategoryUsecase } from '@/application/categories/create-category.
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { UpdateCategoryUsecase } from '@/application/categories/update-category.usecase'
 import type { Category } from '@/domain/models/category.model'
+import { Combobox, type ComboboxOption } from '@/presentation/@to-do/components/ui/combobox'
+import { Loading } from '@/presentation/@to-do/components/ui/loading'
 import { Button } from '@/presentation/components/ui/button'
-import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { Dialog } from '@/presentation/components/ui/dialog'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { FormTextarea } from '@/presentation/components/ui/form-textarea'
 import { IconSelector } from '@/presentation/components/ui/icon-selector'
-import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
@@ -186,7 +186,6 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
             fontSize="sm"
           />
         </S.FormGroup>
-
         <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
           <S.Label>Ícone</S.Label>
           <IconSelector
@@ -195,7 +194,6 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
             placeholder="Selecionar ícone (opcional)"
           />
         </S.FormGroup>
-
         <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
           <FormTextarea
             id="description"
@@ -206,7 +204,6 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
             rows={3}
           />
         </S.FormGroup>
-
         <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
           <S.Label>Categoria Pai</S.Label>
           <Combobox
@@ -220,7 +217,6 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
             <S.WarningText>Categorias com subcategorias não podem receber uma categoria pai.</S.WarningText>
           )}
         </S.FormGroup>
-
         <S.ModalFooter>
           <Button type="button" variant="ghost" onClick={onClose} disabled={isLoading}>
             Cancelar
