@@ -14,10 +14,10 @@ export const Container = styled.div`
 `
 
 export const Spinner = styled.div<{ size?: number }>`
-  width: ${({ size }) => (size ? `${size}px` : '1.5rem')};
-  height: ${({ size }) => (size ? `${size}px` : '1.5rem')};
-  border: 4px solid ${({ theme }) => theme.colors.secondary};
-  border-top: 4px solid ${({ theme }) => theme.colors.primary};
+  width: ${({ size }) => (size ? `${size}px` : '2rem')};
+  height: ${({ size }) => (size ? `${size}px` : '2rem')};
+  border: 3px solid ${({ theme }) => theme.colors.mx.gray[200]};
+  border-top: 3px solid ${({ theme }) => theme.colors.mx.red};
   border-radius: 50%;
   animation: ${spin} 1s linear infinite;
 `
@@ -25,8 +25,6 @@ export const Spinner = styled.div<{ size?: number }>`
 interface LoadingProps {
   size?: number
 }
-
-// To-Do: Recaftor styles
 
 export const Loading = ({ size }: LoadingProps) => {
   return (

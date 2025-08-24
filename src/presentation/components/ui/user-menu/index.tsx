@@ -2,7 +2,7 @@ import { ChartPieIcon, SignOutIcon, UserIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
 import React from 'react'
 
-import { Avatar } from '@/presentation/components/entities/users/avatar'
+import { Avatar } from '@/presentation/@to-do/components/entities/users/avatar'
 import { Popover } from '@/presentation/components/ui/popover'
 import { useAuth } from '@/presentation/hooks/use-auth'
 

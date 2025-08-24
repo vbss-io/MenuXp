@@ -38,10 +38,10 @@ const Hero: React.FC = () => {
   const prefersReduced = useReducedMotion()
 
   const mockups = [
-    { alt: 'Template Clássico', src: 'public/images/layouts/01.png' },
-    { alt: 'Template Dark', src: 'public/images/layouts/02.png' },
-    { alt: 'Template Clean', src: 'public/images/layouts/03.png' },
-    { alt: 'Template Brutalista', src: 'public/images/layouts/04.png' }
+    { alt: 'Template Clássico', src: 'public/images/menu-layouts/01.png' },
+    { alt: 'Template Dark', src: 'public/images/menu-layouts/02.png' },
+    { alt: 'Template Clean', src: 'public/images/menu-layouts/03.png' },
+    { alt: 'Template Brutalista', src: 'public/images/menu-layouts/04.png' }
   ]
 
   useEffect(() => {
