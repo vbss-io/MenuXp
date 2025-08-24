@@ -13,16 +13,6 @@ export const Header = styled.div`
   gap: ${({ theme }) => theme.spacing.xs};
 `
 
-export const Title = styled.h1`
-  font-family: ${({ theme }) => theme.typography.fonts.title};
-  font-size: ${({ theme }) => theme.typography.fontSizes.xxl};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.mx.black};
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
-`
-
 export const Subtitle = styled.p`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.md};

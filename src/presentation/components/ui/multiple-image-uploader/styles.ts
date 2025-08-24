@@ -8,9 +8,12 @@ export const Container = styled.div`
 `
 
 export const Label = styled.label`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.text};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-family: ${({ theme }) => theme.typography.fonts.title};
+  color: ${({ theme }) => theme.colors.mx.black};
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `
 
 export const ImageGrid = styled.div`
@@ -24,17 +27,16 @@ export const ImageWrapper = styled.div`
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.colors.secondary};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  transition: all 0.2s ease;
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
 
   &:hover {
     .remove-button {
       opacity: 1;
     }
 
-    border-color: ${({ theme }) => theme.colors.primary};
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.primary}20;
+    border-color: ${({ theme }) => theme.colors.mx.red};
   }
 `
 
@@ -42,7 +44,7 @@ export const ImagePreview = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
 `
 
 export const RemoveButton = styled.button`
@@ -51,45 +53,47 @@ export const RemoveButton = styled.button`
   right: ${({ theme }) => theme.spacing.xs};
   width: ${({ theme }) => theme.spacing.lg};
   height: ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme }) => theme.colors.white};
-  border: 1px solid ${({ theme }) => theme.colors.secondary};
-  border-radius: ${({ theme }) => theme.borderRadius.xs};
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   opacity: 0;
-  transition: all 0.2s ease;
-  color: ${({ theme }) => theme.colors.text};
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: ${({ theme }) => theme.borderRadius.lg};
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+  color: ${({ theme }) => theme.colors.mx.black};
+  box-shadow: ${({ theme }) => theme.shadows.brutalist};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.red};
-    border-color: ${({ theme }) => theme.colors.red};
-    color: ${({ theme }) => theme.colors.white};
-    transform: scale(1.05);
+    background: ${({ theme }) => theme.colors.mx.red};
+    border-color: ${({ theme }) => theme.colors.mx.red};
+    color: ${({ theme }) => theme.colors.mx.white};
+    transform: translateY(-2px);
+    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
   }
 
   &:active {
-    transform: scale(0.95);
+    transform: translateY(0);
   }
 `
 
 export const UploadWrapper = styled.div`
   aspect-ratio: 1;
-  border: 2px dashed ${({ theme }) => theme.colors.secondary};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 2px dashed ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
-  background: ${({ theme }) => theme.colors.background};
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+  background: ${({ theme }) => theme.colors.mx.white};
 
   &:hover {
-    border-color: ${({ theme }) => theme.colors.primary};
-    background: ${({ theme }) => theme.colors.primary}05;
+    border-color: ${({ theme }) => theme.colors.mx.red};
+    background: ${({ theme }) => theme.colors.mx.red}10;
+    transform: translateY(-2px);
+    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
   }
 `
 
@@ -104,16 +108,16 @@ export const UploadLabel = styled.label`
   width: 100%;
   height: 100%;
   cursor: pointer;
-  color: ${({ theme }) => theme.colors.secondary};
-  transition: color 0.2s ease;
+  color: ${({ theme }) => theme.colors.mx.black};
+  transition: color ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.mx.red};
   }
 `
 
 export const Error = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.fontWeights.normal};
-  color: ${({ theme }) => theme.colors.red};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.red};
 `
