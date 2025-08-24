@@ -1,6 +1,7 @@
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
-import { Input } from '@vbss-ui/input'
+
+import { Button } from '@/presentation/components/ui/button'
+import { FormInput } from '@/presentation/components/ui/form-input'
 
 import * as S from './styles'
 
@@ -15,8 +16,6 @@ interface OptionalsSectionProps {
   setOptionals: (optionals: MenuItemOptional[]) => void
   disabled?: boolean
 }
-
-// To-Do: Recaftor styles
 
 export function OptionalsSection({ optionals, setOptionals, disabled = false }: OptionalsSectionProps) {
   const addOptional = () => {
@@ -54,8 +53,9 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
         <S.OptionalContainer key={index}>
           <S.OptionalGrid>
             <S.InputGroup>
-              <S.Label>Nome do Opcional *</S.Label>
-              <Input
+              <FormInput
+                id={`optional-name-${index}`}
+                label="Nome do Opcional *"
                 placeholder="Ex: Queijo Extra"
                 value={optional.name}
                 onChange={(e) => updateOptional(index, 'name', e.target.value)}
@@ -64,11 +64,12 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
               />
             </S.InputGroup>
             <S.InputGroup>
-              <S.Label>Quantidade Máxima</S.Label>
-              <Input
+              <FormInput
+                id={`optional-max-${index}`}
+                label="Quantidade Máxima"
                 type="number"
                 placeholder="Deixe vazio para ilimitado"
-                value={optional.maxQuantity || ''}
+                value={optional.maxQuantity?.toString() || ''}
                 onChange={(e) => updateOptional(index, 'maxQuantity', e.target.value)}
                 disabled={disabled}
                 fontSize="sm"
@@ -76,12 +77,13 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
               />
             </S.InputGroup>
             <S.InputGroup>
-              <S.Label>Preço *</S.Label>
-              <Input
+              <FormInput
+                id={`optional-price-${index}`}
+                label="Preço *"
                 type="number"
                 step="0.01"
                 placeholder="0.00"
-                value={optional.price}
+                value={optional.price.toString()}
                 onChange={(e) => updateOptional(index, 'price', e.target.value)}
                 disabled={disabled}
                 fontSize="sm"
@@ -95,7 +97,7 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
                 size="sm"
                 onClick={() => removeOptional(index)}
                 disabled={disabled}
-                icon={<MinusIcon size={16} />}
+                leftIcon={<MinusIcon size={16} />}
               >
                 Remover
               </Button>
@@ -104,8 +106,15 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
         </S.OptionalContainer>
       ))}
       <S.AddButtonContainer>
-        <Button type="button" variant="outlineSolid" size="md" onClick={addOptional} disabled={disabled}>
-          <PlusIcon size={16} /> Adicionar Opcional
+        <Button
+          type="button"
+          variant="outline"
+          size="md"
+          onClick={addOptional}
+          disabled={disabled}
+          leftIcon={<PlusIcon size={16} />}
+        >
+          Adicionar Opcional
         </Button>
       </S.AddButtonContainer>
     </S.Container>
