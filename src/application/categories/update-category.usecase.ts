@@ -1,4 +1,5 @@
 import type { HttpClient } from '@/domain/http/http-client'
+import type { CategoryOptional } from '@/domain/models/category.model'
 import { Registry } from '@/infra/dependency-injection/registry'
 
 export interface UpdateCategoryUsecaseInput {
@@ -8,6 +9,7 @@ export interface UpdateCategoryUsecaseInput {
   mainCategoryId?: string
   isActive?: boolean
   icon?: string
+  optionals?: CategoryOptional[]
 }
 
 export class UpdateCategoryUsecase {
@@ -25,6 +27,7 @@ export class UpdateCategoryUsecase {
     if (params.mainCategoryId !== undefined) formData.append('mainCategoryId', params.mainCategoryId)
     if (params.isActive !== undefined) formData.append('isActive', params.isActive.toString())
     if (params.icon !== undefined) formData.append('icon', params.icon)
+    if (params.optionals) formData.append('optionals', JSON.stringify(params.optionals))
     await this.httpClient.put({
       url: this.url.replace(':id', params.categoryId),
       body: formData

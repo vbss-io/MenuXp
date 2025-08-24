@@ -14,6 +14,7 @@ export interface UpdateMenuItemUsecaseInput {
   removeMedias?: string[]
   medias?: File[]
   optionals?: MenuItemOptional[]
+  useCategoryOptionals?: boolean
   isActive?: boolean
 }
 
@@ -41,6 +42,8 @@ export class UpdateMenuItemUsecase {
       }
     }
     if (params.optionals !== undefined) formData.append('optionals', JSON.stringify(params.optionals))
+    if (params.useCategoryOptionals !== undefined)
+      formData.append('useCategoryOptionals', params.useCategoryOptionals.toString())
     if (params.isActive !== undefined) formData.append('isActive', params.isActive.toString())
     await this.httpClient.put({
       url: this.url.replace(':id', params.menuItemId),

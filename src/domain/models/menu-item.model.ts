@@ -16,6 +16,7 @@ export interface MenuItem {
   discount: number
   medias: string
   optionals: MenuItemOptional[]
+  useCategoryOptionals: boolean
   isActive: boolean
   createdAt: string
   updatedAt: string

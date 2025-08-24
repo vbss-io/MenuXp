@@ -1,4 +1,5 @@
 import type { HttpClient } from '@/domain/http/http-client'
+import type { CategoryOptional } from '@/domain/models/category.model'
 import { Registry } from '@/infra/dependency-injection/registry'
 
 export interface CreateCategoryUsecaseInput {
@@ -7,6 +8,7 @@ export interface CreateCategoryUsecaseInput {
   restaurantId?: string
   mainCategoryId?: string
   icon?: string
+  optionals?: CategoryOptional[]
 }
 
 export interface CreateCategoryUsecaseOutput {
@@ -28,6 +30,7 @@ export class CreateCategoryUsecase {
     if (params.restaurantId) formData.append('restaurantId', params.restaurantId)
     if (params.mainCategoryId) formData.append('mainCategoryId', params.mainCategoryId)
     if (params.icon) formData.append('icon', params.icon)
+    if (params.optionals) formData.append('optionals', JSON.stringify(params.optionals))
     const response = await this.httpClient.post<CreateCategoryUsecaseOutput>({
       url: this.url,
       body: formData

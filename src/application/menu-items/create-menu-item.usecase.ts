@@ -12,6 +12,7 @@ export interface CreateMenuItemUsecaseInput {
   discount?: number
   medias?: File[]
   optionals?: MenuItemOptional[]
+  useCategoryOptionals?: boolean
 }
 
 export interface CreateMenuItemUsecaseOutput {
@@ -41,6 +42,8 @@ export class CreateMenuItemUsecase {
       }
     }
     if (params.optionals) formData.append('optionals', JSON.stringify(params.optionals))
+    if (params.useCategoryOptionals !== undefined)
+      formData.append('useCategoryOptionals', params.useCategoryOptionals.toString())
     const response = await this.httpClient.post<CreateMenuItemUsecaseOutput>({
       url: this.url,
       body: formData
