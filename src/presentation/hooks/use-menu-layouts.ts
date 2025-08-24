@@ -5,34 +5,69 @@ import { GetMenuLayoutUsecase } from '@/application/menu-layouts/get-menu-layout
 import { GetMenuLayoutsUsecase } from '@/application/menu-layouts/get-menu-layouts.usecase'
 import { GetMenuSectionsUsecase } from '@/application/menu-layouts/get-menu-sections.usecase'
 import { MenuLayoutStatus } from '@/domain/enums/menu-layouts/menu-layout-status.enum'
-import type { MenuLayout, MenuSection, MenuSectionConfig } from '@/domain/models/menu-layout.model'
+import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
+import type {
+  BannerConfig,
+  CarouselConfig,
+  CategoriesConfig,
+  MenuItemsConfig,
+  MenuLayout,
+  MenuSection
+} from '@/domain/models/menu-layout.model'
 import type { MenuSectionDefinition } from '@/domain/models/menu-section-definition.model'
 import { useAuth } from './use-auth'
+
+export const getBannerConfig = (section: MenuSection): BannerConfig | null => {
+  if (section.type === MenuSectionType.BANNER) {
+    return section.config as BannerConfig
+  }
+  return null
+}
+
+export const getCarouselConfig = (section: MenuSection): CarouselConfig | null => {
+  if (section.type === MenuSectionType.CAROUSEL) {
+    return section.config as CarouselConfig
+  }
+  return null
+}
+
+export const getCategoriesConfig = (section: MenuSection): CategoriesConfig | null => {
+  if (section.type === MenuSectionType.CATEGORIES) {
+    return section.config as CategoriesConfig
+  }
+  return null
+}
+
+export const getMenuItemsConfig = (section: MenuSection): MenuItemsConfig | null => {
+  if (section.type === MenuSectionType.MENU_ITEMS) {
+    return section.config as MenuItemsConfig
+  }
+  return null
+}
 
 export const validateSection = (section: MenuSection, sectionDefinitions: MenuSectionDefinition[]) => {
   const definition = sectionDefinitions.find((def) => def.type === section.type)
   if (!definition) return { isValid: false, errors: ['Tipo de seção não encontrado'] }
   const errors: string[] = []
-  const config = section.config || {}
-  Object.entries(definition.configSchema).forEach(([key, schema]) => {
-    if (schema.required && !config[key as keyof MenuSectionConfig]) {
-      if (key === 'imagePath') {
+  let config = section.config || {}
+  switch (section.type) {
+    case 'BANNER':
+      if (!(config as BannerConfig)?.imagePath) {
         errors.push('A imagem é obrigatória')
-      } else if (key === 'imagePaths') {
-        errors.push('Pelo menos 2 imagens são obrigatórias')
-      } else {
-        errors.push(`${key} é obrigatório`)
       }
-    }
-  })
-  if (section.type === 'CAROUSEL' && config.imagePaths) {
-    const imagePaths = config.imagePaths as string[]
-    const validImages = imagePaths.filter((path) => path && path.trim())
-    if (validImages.length < 2) {
-      errors.push('Pelo menos 2 imagens são obrigatórias')
-    } else if (validImages.length > 5) {
-      errors.push('Máximo de 5 imagens permitido')
-    }
+      break
+    case 'CAROUSEL':
+      config = config as CarouselConfig
+      if (!config?.imagePaths || config.imagePaths.length < 2) {
+        errors.push('Pelo menos 2 imagens são obrigatórias')
+      } else if (config.imagePaths.length > 5) {
+        errors.push('Máximo de 5 imagens permitido')
+      }
+      break
+    case 'CATEGORIES':
+      break
+    case 'MENU_ITEMS':
+      break
   }
   return {
     isValid: errors.length === 0,
