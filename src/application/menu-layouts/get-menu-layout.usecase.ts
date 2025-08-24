@@ -7,7 +7,7 @@ export interface GetMenuLayoutUsecaseInput {
 }
 
 export class GetMenuLayoutUsecase {
-  protected url = `${import.meta.env.VITE_BACKEND}/menu-layout/:id`
+  protected url = `${import.meta.env.VITE_BACKEND}/menu-layouts/:id`
   private readonly httpClient: HttpClient
 
   constructor() {
