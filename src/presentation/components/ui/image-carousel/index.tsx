@@ -1,6 +1,7 @@
 import { CaretLeftIcon, CaretRightIcon, ImageBrokenIcon } from '@phosphor-icons/react'
-import { Dialog } from '@vbss-ui/dialog'
 import { useState } from 'react'
+
+import { Dialog } from '@/presentation/components/ui/dialog'
 
 import * as S from './styles'
 
@@ -8,7 +9,6 @@ interface ImageCarouselProps {
   images: string[]
 }
 
-// To-Do: Update Styles to match new design
 export const ImageCarousel = ({ images }: ImageCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -48,13 +48,10 @@ export const ImageCarousel = ({ images }: ImageCarouselProps) => {
         </S.ImagesContainer>
       </S.CarouselContainer>
       <Dialog
-        open={isModalOpen}
-        onOpenChange={setIsModalOpen}
         title="Visualizar Imagens"
         description={`Imagem ${currentIndex + 1} de ${images.length}`}
-        variant="outline"
-        disableTextColor
-        style={{ width: '90%', maxWidth: '800px' }}
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
       >
         <S.ModalCarouselContainer>
           <S.ModalImageContainer>

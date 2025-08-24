@@ -17,7 +17,7 @@ import { DeleteCategoryUsecase } from '@/application/categories/delete-category.
 import { ToggleCategoryStatusUsecase } from '@/application/categories/toggle-category-status.usecase'
 import { ICONS, ICONS_KEYS } from '@/domain/consts/icons.const'
 import type { Category } from '@/domain/models/category.model'
-import { Loading } from '@/presentation/@to-do/components/ui/loading'
+import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import toast from 'react-hot-toast'
 

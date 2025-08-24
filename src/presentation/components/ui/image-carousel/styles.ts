@@ -10,10 +10,14 @@ export const CarouselContainer = styled.div`
 export const ImageWrapper = styled.div`
   width: 60px;
   height: 60px;
-  border-radius: ${({ theme }) => theme.spacing.sm};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
   overflow: hidden;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
   flex-shrink: 0;
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.mx.red};
+  }
 `
 
 export const ImagesContainer = styled.div`
@@ -35,8 +39,9 @@ export const ImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  border: 2px solid ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.mx.white};
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
   overflow: hidden;
   cursor: pointer;
 `
@@ -53,15 +58,15 @@ export const Placeholder = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  color: ${({ theme }) => theme.colors.primary};
-  background-color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.mx.red};
+  background-color: ${({ theme }) => theme.colors.mx.white};
 `
 
 export const NavigationButton = styled.button<{ $direction: 'left' | 'right' }>`
   position: absolute;
   top: 50%;
   ${({ $direction }) => ($direction === 'left' ? 'left: 1rem;' : 'right: 1rem;')}
-  color: ${({ theme }) => theme.colors.background};
+  color: ${({ theme }) => theme.colors.mx.white};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,8 +88,9 @@ export const ModalImageContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.mx.white};
   min-height: 0;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 `
 
 export const ModalImage = styled.img`
@@ -99,16 +105,21 @@ export const ModalPlaceholder = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.primary};
+  background-color: ${({ theme }) => theme.colors.mx.white};
+  color: ${({ theme }) => theme.colors.mx.red};
 `
 
 export const ModalNavigationButton = styled(NavigationButton)`
-  background: ${({ theme }) => theme.colors.primary};
-  border-radius: ${({ theme }) => theme.spacing.xxl};
+  background: ${({ theme }) => theme.colors.mx.red};
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
 
   &:hover {
-    background: ${({ theme }) => theme.colors.secondary};
+    background: ${({ theme }) => theme.colors.mx.black};
+    transform: translateY(-2px);
+    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
   }
 `
 
@@ -122,22 +133,19 @@ export const ThumbsContainer = styled.div`
 `
 
 export const Thumb = styled.button<{ $active?: boolean }>`
-  border: 2px solid ${({ $active, theme }) => ($active ? theme.colors.primary : 'transparent')};
-  background: none;
+  border: 2px solid ${({ $active, theme }) => ($active ? theme.colors.mx.red : theme.colors.mx.black)};
+  background: ${({ theme }) => theme.colors.mx.white};
   padding: 0;
-  border-radius: ${({ theme }) => theme.spacing.sm};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
   overflow: hidden;
   width: 64px;
   height: 64px;
   cursor: pointer;
   opacity: ${({ $active }) => ($active ? 1 : 0.7)};
-  transition:
-    border 0.2s,
-    opacity 0.2s;
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
 
   &:hover {
-    opacity: 1;
-    border-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.mx.red};
   }
 
   img {

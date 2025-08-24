@@ -1,3 +1,4 @@
+import { Button } from '@/presentation/components/ui/button'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   CreditCardIcon,
@@ -7,7 +8,6 @@ import {
   QrCodeIcon,
   StorefrontIcon
 } from '@phosphor-icons/react'
-import { Button } from '@/presentation/components/ui/button'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -19,7 +19,7 @@ import { OperationType, operationTypes } from '@/domain/enums/restaurants/operat
 import { PaymentMethod, paymentMethods } from '@/domain/enums/restaurants/payment-methods.enum'
 import { FormCheckbox } from '@/presentation/components/ui/form-checkbox'
 import { FormInput } from '@/presentation/components/ui/form-input'
-import { Loading } from '@/presentation/@to-do/components/ui/loading'
+import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 

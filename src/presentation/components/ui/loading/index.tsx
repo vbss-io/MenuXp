@@ -14,10 +14,10 @@ export const Container = styled.div`
 `
 
 export const Spinner = styled.div<{ size?: number }>`
-  width: ${({ size }) => (size ? `${size}px` : '2rem')};
-  height: ${({ size }) => (size ? `${size}px` : '2rem')};
-  border: 3px solid ${({ theme }) => theme.colors.mx.gray[200]};
-  border-top: 3px solid ${({ theme }) => theme.colors.mx.red};
+  width: ${({ size }) => (size ? `${size}px` : '1.5rem')};
+  height: ${({ size }) => (size ? `${size}px` : '1.5rem')};
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-top: 2px solid ${({ theme }) => theme.colors.mx.red};
   border-radius: 50%;
   animation: ${spin} 1s linear infinite;
 `
