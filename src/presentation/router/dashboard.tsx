@@ -7,7 +7,7 @@ const CreateRestaurant = lazy(() =>
   }))
 )
 const Settings = lazy(() =>
-  import('@/presentation/pages/dashboard/settings/index.tsx').then((module) => ({
+  import('@/presentation/pages/dashboard/settings').then((module) => ({
     default: module.SettingsPage
   }))
 )
@@ -42,7 +42,7 @@ const Messages = lazy(() =>
   }))
 )
 const Menu = lazy(() =>
-  import('@/presentation/pages/dashboard/menu').then((module) => ({
+  import('@/presentation/@to-do/pages/dashboard/menu').then((module) => ({
     default: module.MenuPage
   }))
 )

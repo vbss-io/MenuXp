@@ -7,7 +7,7 @@ import { NotFound } from '@/presentation/pages/not-found'
 import { authRoutes } from '@/presentation/router/auth'
 import { dashboardRoutes } from '@/presentation/router/dashboard'
 
-const Home = lazy(() => import('@/presentation/pages/home').then((module) => ({ default: module.Home })))
+const Home = lazy(() => import('@/presentation/@to-do/pages/home').then((module) => ({ default: module.Home })))
 const RestaurantPage = lazy(() =>
   import('@/presentation/pages/restaurant').then((module) => ({ default: module.RestaurantPage }))
 )

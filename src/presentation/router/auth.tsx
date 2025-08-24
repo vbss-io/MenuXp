@@ -1,20 +1,20 @@
 import { lazy } from 'react'
 
 const Register = lazy(() =>
-  import('@/presentation/pages/auth/register').then((module) => ({ default: module.Register }))
+  import('@/presentation/@to-do/pages/auth/register').then((module) => ({ default: module.Register }))
 )
-const Login = lazy(() => import('@/presentation/pages/auth/login').then((module) => ({ default: module.Login })))
+const Login = lazy(() => import('@/presentation/@to-do/pages/auth/login').then((module) => ({ default: module.Login })))
 const PendingRegister = lazy(() =>
-  import('@/presentation/pages/auth/pending-register').then((module) => ({ default: module.PendingRegister }))
+  import('@/presentation/@to-do/pages/auth/pending-register').then((module) => ({ default: module.PendingRegister }))
 )
 const ForgotPassword = lazy(() =>
-  import('@/presentation/pages/auth/forgot-password').then((module) => ({ default: module.ForgotPassword }))
+  import('@/presentation/@to-do/pages/auth/forgot-password').then((module) => ({ default: module.ForgotPassword }))
 )
 const VerifyEmail = lazy(() =>
-  import('@/presentation/pages/auth/verify-email').then((module) => ({ default: module.VerifyEmail }))
+  import('@/presentation/@to-do/pages/auth/verify-email').then((module) => ({ default: module.VerifyEmail }))
 )
 const ResetPassword = lazy(() =>
-  import('@/presentation/pages/auth/reset-password').then((module) => ({ default: module.ResetPassword }))
+  import('@/presentation/@to-do/pages/auth/reset-password').then((module) => ({ default: module.ResetPassword }))
 )
 
 export const authRoutes = [
