@@ -1,17 +1,28 @@
 import type { MenuLayoutStatus } from '@/domain/enums/menu-layouts/menu-layout-status.enum'
 import type { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 
-// To-Do: Padronize with backend ?
-export interface MenuSectionConfig {
+export interface BannerConfig {
   imagePath?: string
   tag?: string
   title?: string
   subtitle?: string
+}
+
+export interface CarouselConfig {
   imagePaths?: string[]
+}
+
+export interface CategoriesConfig {
   categoryIds?: string[] | null
-  layout?: string
+}
+
+export interface MenuItemsConfig {
+  type?: 'custom' | 'best_sellers' | 'discounts'
+  title?: string
   menuItemIds?: string[] | null
 }
+
+export type MenuSectionConfig = BannerConfig | CarouselConfig | CategoriesConfig | MenuItemsConfig
 
 export interface MenuSection {
   id?: string
