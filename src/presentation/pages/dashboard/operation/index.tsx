@@ -96,7 +96,6 @@ const Container = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.lg};
   padding: ${({ theme }) => theme.spacing.lg};
-  max-width: 1400px;
   margin: 0 auto;
   width: 100%;
 `
