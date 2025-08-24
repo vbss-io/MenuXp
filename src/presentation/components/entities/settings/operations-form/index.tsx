@@ -19,7 +19,7 @@ import { OperationType, operationTypes } from '@/domain/enums/restaurants/operat
 import { PaymentMethod, paymentMethods } from '@/domain/enums/restaurants/payment-methods.enum'
 import { FormCheckbox } from '@/presentation/components/ui/form-checkbox'
 import { FormInput } from '@/presentation/components/ui/form-input'
-import { Loading } from '@/presentation/components/ui/loading'
+import { Loading } from '@/presentation/@to-do/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 

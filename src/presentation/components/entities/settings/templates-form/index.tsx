@@ -9,7 +9,7 @@ import { z } from 'zod'
 import { UpdateRestaurantSettingsUsecase } from '@/application/restaurants/update-restaurant-settings.usecase'
 import type { Templates } from '@/domain/models/restaurant.model'
 import { FormTextarea } from '@/presentation/components/ui/form-textarea'
-import { Loading } from '@/presentation/components/ui/loading'
+import { Loading } from '@/presentation/@to-do/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
