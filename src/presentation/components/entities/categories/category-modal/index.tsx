@@ -16,6 +16,7 @@ import { Dialog } from '@/presentation/components/ui/dialog'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { FormTextarea } from '@/presentation/components/ui/form-textarea'
 import { IconSelector } from '@/presentation/components/ui/icon-selector'
+import { OptionalsSection, type MenuItemOptional } from '@/presentation/components/ui/optionals'
 import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
@@ -24,7 +25,8 @@ const categorySchema = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),
   description: z.string().optional(),
   mainCategoryId: z.string().optional(),
-  icon: z.string().optional()
+  icon: z.string().optional(),
+  optionals: z.any().optional()
 })
 
 type CategoryFormData = z.infer<typeof categorySchema>
@@ -42,6 +44,7 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
   const [isLoading, setIsLoading] = useState(false)
   const [selectedMainCategory, setSelectedMainCategory] = useState<string>('')
   const [selectedIcon, setSelectedIcon] = useState<string>('')
+  const [optionals, setOptionals] = useState<MenuItemOptional[]>([])
   const isEditing = !!category
   const {
     register,
@@ -69,6 +72,7 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
         })
         setSelectedMainCategory(category.mainCategoryId || '')
         setSelectedIcon(category.icon || '')
+        setOptionals(category.optionals || [])
       } else {
         reset({
           name: '',
@@ -78,6 +82,7 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
         })
         setSelectedMainCategory(parentCategoryId || '')
         setSelectedIcon('')
+        setOptionals([])
       }
     }
   }, [isOpen, category, parentCategoryId, reset])
@@ -114,8 +119,32 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
     }
   }
 
+  const validateOptionals = (): string | null => {
+    for (let i = 0; i < optionals.length; i++) {
+      const optional = optionals[i]
+      if (!optional.name.trim()) {
+        return `Nome do opcional ${i + 1} é obrigatório`
+      }
+      if (typeof optional.price !== 'number' || optional.price < 0) {
+        return `Preço do opcional "${optional.name}" deve ser maior ou igual a 0`
+      }
+      if (
+        optional.maxQuantity !== undefined &&
+        (typeof optional.maxQuantity !== 'number' || optional.maxQuantity < 0)
+      ) {
+        return `Quantidade máxima do opcional "${optional.name}" deve ser maior ou igual a 0`
+      }
+    }
+    return null
+  }
+
   const onSubmit = async (data: CategoryFormData) => {
     if (!restaurantId) return
+    const optionalsError = validateOptionals()
+    if (optionalsError) {
+      toast.error(optionalsError)
+      return
+    }
     setIsLoading(true)
     try {
       const mainCategoryId = data.mainCategoryId || undefined
@@ -127,7 +156,8 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
           name: data.name,
           description: data.description,
           mainCategoryId,
-          icon
+          icon,
+          optionals: optionals.length > 0 ? optionals : undefined
         })
         toast.success('Categoria atualizada com sucesso!')
       } else {
@@ -137,7 +167,8 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
           description: data.description,
           restaurantId,
           mainCategoryId,
-          icon
+          icon,
+          optionals: optionals.length > 0 ? optionals : undefined
         })
         toast.success('Categoria criada com sucesso!')
       }
@@ -216,6 +247,9 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
           {isDisabled && (
             <S.WarningText>Categorias com subcategorias não podem receber uma categoria pai.</S.WarningText>
           )}
+        </S.FormGroup>
+        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
+          <OptionalsSection optionals={optionals} setOptionals={setOptionals} disabled={isLoading} />
         </S.FormGroup>
         <S.ModalFooter>
           <Button type="button" variant="ghost" onClick={onClose} disabled={isLoading}>

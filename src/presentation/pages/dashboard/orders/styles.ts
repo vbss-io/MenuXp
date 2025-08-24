@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.lg};
-  padding: ${({ theme }) => theme.spacing.lg};
   margin: 0 auto;
   width: 100%;
 `

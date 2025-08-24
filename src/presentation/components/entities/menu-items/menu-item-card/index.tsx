@@ -1,16 +1,16 @@
 import { CaretDownIcon, CaretUpIcon, EyeIcon, EyeSlashIcon, PencilIcon, TrashIcon } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
-import { Chip } from '@vbss-ui/chip'
-import { Dialog } from '@vbss-ui/dialog'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 
 import { DeleteMenuItemUsecase } from '@/application/menu-items/delete-menu-item.usecase'
 import { ToggleMenuItemStatusUsecase } from '@/application/menu-items/toggle-menu-item-status.usecase'
 import type { MenuItem } from '@/domain/models/menu-item.model'
-import { ImageCarousel } from '@/presentation/components/ui/image-carousel'
-import { Loading } from '@/presentation/components/ui/loading'
+import { ImageCarousel } from '@/presentation/@to-do/components/ui/image-carousel'
+import { Loading } from '@/presentation/@to-do/components/ui/loading'
+import { Button } from '@/presentation/components/ui/button'
+import { Chip } from '@/presentation/components/ui/chip'
+import { Dialog } from '@/presentation/components/ui/dialog'
 import { useAuth } from '@/presentation/hooks/use-auth'
-import toast from 'react-hot-toast'
 
 import * as S from './styles'
 
@@ -85,64 +85,71 @@ export const MenuItemCard = ({ menuItem, onEdit, onDelete, onRefresh }: MenuItem
   const convertedImages = Array.isArray(menuItem.medias)
     ? menuItem.medias.map((media) => {
         if (typeof media === 'string') return media
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return (media as any)?.url || media
       })
-    : [typeof menuItem.medias === 'string' ? menuItem.medias : (menuItem.medias as any)?.url || menuItem.medias]
+    : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      [typeof menuItem.medias === 'string' ? menuItem.medias : (menuItem.medias as any)?.url || menuItem.medias]
 
   return (
     <>
       <S.Card variants={cardVariants} initial="hidden" animate="visible" exit="exit" whileHover={{ y: -2 }}>
         <S.CardHeader>
           <S.CardTitle>{menuItem.name}</S.CardTitle>
-          <Chip className={menuItem.isActive ? 'active' : 'inactive'} size="md">
+          <Chip backgroundColor={menuItem.isActive ? '#22c55e' : '#ef4444'} textColor="white" size="sm">
             {menuItem.isActive ? 'Ativo' : 'Inativo'}
           </Chip>
         </S.CardHeader>
-
-        {menuItem.description && <S.CardDescription>{menuItem.description}</S.CardDescription>}
-
-        {hasImages && (
-          <S.ImagesContainer>
-            <strong style={{ fontSize: 13, color: '#888', marginBottom: 8 }}>Imagens:</strong>
-            <ImageCarousel images={convertedImages} />
-          </S.ImagesContainer>
-        )}
-
-        <S.CardInfo>
-          <span>{menuItem.categoryName}</span>
-          <span>Preço: R$ {menuItem.price.toFixed(2)}</span>
-          <span>Estoque: {menuItem.stock}</span>
-          {menuItem.discount > 0 && <span>Desconto: {menuItem.discount}%</span>}
-        </S.CardInfo>
-
-        {hasOptionals && (
-          <S.OptionalsSection>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowOptionals(!showOptionals)}
-              style={{ padding: '4px 8px', fontSize: 12 }}
-            >
-              {showOptionals ? <CaretUpIcon size={14} /> : <CaretDownIcon size={14} />}
-              Ver Adicionais ({menuItem.optionals.length})
-            </Button>
-
-            {showOptionals && (
-              <S.OptionalsList>
-                {menuItem.optionals.map((optional, index) => (
-                  <S.OptionalItem key={index}>
-                    <span style={{ fontWeight: 500 }}>{optional.name}</span>
-                    <span style={{ color: '#666' }}>
-                      +R$ {optional.price.toFixed(2)}
-                      {optional.maxQuantity && ` (máx: ${optional.maxQuantity})`}
-                    </span>
-                  </S.OptionalItem>
-                ))}
-              </S.OptionalsList>
+        <S.CardContent>
+          {menuItem.description && <S.CardDescription>{menuItem.description}</S.CardDescription>}
+          {hasImages && (
+            <S.ImagesContainer>
+              <S.ImagesLabel>Imagens:</S.ImagesLabel>
+              <ImageCarousel images={convertedImages} />
+            </S.ImagesContainer>
+          )}
+          <S.CardInfo>
+            <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+              {menuItem.categoryName}
+            </Chip>
+            <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+              Preço: R$ {menuItem.price.toFixed(2)}
+            </Chip>
+            <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+              Estoque: {menuItem.stock}
+            </Chip>
+            {menuItem.discount > 0 && (
+              <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+                Desconto: {menuItem.discount}%
+              </Chip>
             )}
-          </S.OptionalsSection>
-        )}
-
+          </S.CardInfo>
+          {hasOptionals && (
+            <S.OptionalsSection>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowOptionals(!showOptionals)}
+                leftIcon={showOptionals ? <CaretUpIcon size={14} /> : <CaretDownIcon size={14} />}
+              >
+                Ver Adicionais ({menuItem.optionals.length})
+              </Button>
+              {showOptionals && (
+                <S.OptionalsList>
+                  {menuItem.optionals.map((optional, index) => (
+                    <S.OptionalItem key={index}>
+                      <span>{optional.name}</span>
+                      <span>
+                        +R$ {optional.price.toFixed(2)}
+                        {optional.maxQuantity && ` (máx: ${optional.maxQuantity})`}
+                      </span>
+                    </S.OptionalItem>
+                  ))}
+                </S.OptionalsList>
+              )}
+            </S.OptionalsSection>
+          )}
+        </S.CardContent>
         <S.CardFooter>
           <S.ActionsContainer>
             <Dialog
@@ -153,26 +160,41 @@ export const MenuItemCard = ({ menuItem, onEdit, onDelete, onRefresh }: MenuItem
               disableTextColor
               description={`Tem certeza que deseja excluir o item "${menuItem.name}"? Essa ação não poderá ser desfeita.`}
               footer={
-                <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-                  <Button variant="ghost" onClick={() => setIsDeleteDialogOpen(false)} disabled={isLoading}>
+                <S.DialogFooter>
+                  <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} disabled={isLoading}>
                     Cancelar
                   </Button>
-                  <Button variant="primary" $danger onClick={handleDelete} loading={isLoading}>
+                  <Button variant="primary" onClick={handleDelete} disabled={isLoading}>
                     Confirmar Exclusão
                   </Button>
-                </div>
+                </S.DialogFooter>
               }
             />
-            <Button variant="ghost" size="sm" onClick={() => onEdit(menuItem)} disabled={isLoading}>
-              <PencilIcon size={16} />
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => onEdit(menuItem)}
+              disabled={isLoading}
+              leftIcon={<PencilIcon size={16} />}
+            >
               Editar
             </Button>
-            <Button variant="ghost" size="sm" onClick={handleToggleStatus} disabled={isLoading}>
-              {getStatusIcon()}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleToggleStatus}
+              disabled={isLoading}
+              leftIcon={getStatusIcon()}
+            >
               {menuItem.isActive ? 'Desativar' : 'Ativar'}
             </Button>
-            <Button variant="ghost" size="sm" onClick={() => setIsDeleteDialogOpen(true)} disabled={isLoading} $danger>
-              <TrashIcon size={16} />
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsDeleteDialogOpen(true)}
+              disabled={isLoading}
+              leftIcon={<TrashIcon size={16} />}
+            >
               Excluir
             </Button>
           </S.ActionsContainer>

@@ -1,8 +1,8 @@
 import { FunnelSimpleIcon, SortAscendingIcon } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
-import { Popover } from '@vbss-ui/popover'
 
+import { Button } from '@/presentation/components/ui/button'
 import { FormCheckbox } from '@/presentation/components/ui/form-checkbox'
+import { Popover } from '@/presentation/components/ui/popover'
 
 import * as S from './styles'
 
@@ -42,9 +42,12 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset }: FiltersPr
           variant="outline"
           side="left"
           trigger={
-            <Button variant="outlineSolid" size="md" as="div">
-              <SortAscendingIcon size={20} weight="bold" />
-            </Button>
+            <Button
+              variant="outline"
+              size="md"
+              as="div"
+              leftIcon={<SortAscendingIcon size={20} weight="bold" />}
+            ></Button>
           }
         >
           <S.PopoverContent>
@@ -87,9 +90,12 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset }: FiltersPr
           variant="outline"
           side="left"
           trigger={
-            <Button variant="outlineSolid" size="md" as="div">
-              <FunnelSimpleIcon size={20} weight="bold" />
-            </Button>
+            <Button
+              variant="outline"
+              size="md"
+              as="div"
+              leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}
+            ></Button>
           }
         >
           <S.PopoverContent>
@@ -105,7 +111,7 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset }: FiltersPr
                 />
               </S.PopoverOption>
             </S.PopoverOptions>
-            <Button variant="outlineSolid" size="sm" onClick={onReset} style={{ marginTop: '1rem', width: '100%' }}>
+            <Button variant="outline" size="sm" onClick={onReset} style={{ marginTop: '1rem', width: '100%' }}>
               Limpar
             </Button>
           </S.PopoverContent>

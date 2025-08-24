@@ -40,9 +40,12 @@ export const Filters = ({ filters, onFiltersChange, onReset }: FiltersProps) => 
           variant="outline"
           side="left"
           trigger={
-            <Button variant="outline" size="md" as="div" leftIcon={<SortAscendingIcon size={20} weight="bold" />}>
-              Ordenar
-            </Button>
+            <Button
+              variant="outline"
+              size="md"
+              as="div"
+              leftIcon={<SortAscendingIcon size={20} weight="bold" />}
+            ></Button>
           }
         >
           <S.PopoverContent>
@@ -85,9 +88,12 @@ export const Filters = ({ filters, onFiltersChange, onReset }: FiltersProps) => 
           variant="outline"
           side="left"
           trigger={
-            <Button variant="outline" size="md" as="div" leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}>
-              Filtros
-            </Button>
+            <Button
+              variant="outline"
+              size="md"
+              as="div"
+              leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}
+            ></Button>
           }
         >
           <S.PopoverContent>

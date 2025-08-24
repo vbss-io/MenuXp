@@ -1,6 +1,15 @@
+import { Button } from '@/presentation/components/ui/button'
 import { Chip } from '@/presentation/components/ui/chip'
-import { CircleIcon, EyeIcon, EyeSlashIcon, PencilIcon, PlusIcon, TrashIcon } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
+import {
+  CaretDownIcon,
+  CaretUpIcon,
+  CircleIcon,
+  EyeIcon,
+  EyeSlashIcon,
+  PencilIcon,
+  PlusIcon,
+  TrashIcon
+} from '@phosphor-icons/react'
 import { Dialog } from '@vbss-ui/dialog'
 import { useState } from 'react'
 
@@ -28,6 +37,7 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const [subToDelete, setSubToDelete] = useState<Category | null>(null)
   const [isSubDeleteDialogOpen, setIsSubDeleteDialogOpen] = useState(false)
+  const [showOptionals, setShowOptionals] = useState(false)
 
   const handleToggleStatus = async () => {
     if (!restaurantId) return
@@ -115,6 +125,7 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
   }
 
   const hasSubCategories = Array.isArray(category.subCategories) && category.subCategories.length > 0
+  const hasOptionals = Array.isArray(category.optionals) && category.optionals.length > 0
 
   return (
     <S.Card variants={cardVariants} initial="hidden" animate="visible" exit="exit">
@@ -133,12 +144,11 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
           <S.SubCategoriesHeader>
             <strong>Sub Categorias:</strong>
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
               onClick={() => onCreateSubCategory(category.id)}
-              style={{ padding: '4px 8px', fontSize: 12 }}
+              leftIcon={<PlusIcon size={14} />}
             >
-              <PlusIcon size={14} />
               Adicionar
             </Button>
           </S.SubCategoriesHeader>
@@ -163,6 +173,33 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
             <S.EmptySubCategoriesText>Nenhuma subcategoria criada</S.EmptySubCategoriesText>
           )}
         </S.SubCategoriesContainer>
+
+        {hasOptionals && (
+          <S.OptionalsSection>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowOptionals(!showOptionals)}
+              leftIcon={showOptionals ? <CaretUpIcon size={14} /> : <CaretDownIcon size={14} />}
+            >
+              Ver Adicionais ({category.optionals?.length || 0})
+            </Button>
+
+            {showOptionals && (
+              <S.OptionalsList>
+                {category.optionals?.map((optional, index) => (
+                  <S.OptionalItem key={index}>
+                    <span>{optional.name}</span>
+                    <span>
+                      +R$ {optional.price.toFixed(2)}
+                      {optional.maxQuantity && ` (máx: ${optional.maxQuantity})`}
+                    </span>
+                  </S.OptionalItem>
+                ))}
+              </S.OptionalsList>
+            )}
+          </S.OptionalsSection>
+        )}
       </S.CardContent>
       <S.CardFooter>
         <S.ActionsContainer>
@@ -179,15 +216,13 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
             }
             footer={
               <S.ModalFooter>
-                <Button variant="ghost" onClick={() => setIsDeleteDialogOpen(false)} disabled={isLoading}>
+                <Button variant="outline" onClick={() => setIsDeleteDialogOpen(false)} disabled={isLoading}>
                   Cancelar
                 </Button>
                 <Button
                   variant="primary"
-                  $danger
                   onClick={handleDelete}
-                  loading={isLoading}
-                  disabled={hasSubCategories}
+                  disabled={isLoading || hasSubCategories}
                   title={hasSubCategories ? 'Exclua as subcategorias primeiro' : ''}
                 >
                   Confirmar Exclusão
@@ -208,31 +243,41 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
             }
             footer={
               <S.ModalFooter>
-                <Button variant="ghost" onClick={() => setIsSubDeleteDialogOpen(false)} disabled={isLoading}>
+                <Button variant="outline" onClick={() => setIsSubDeleteDialogOpen(false)} disabled={isLoading}>
                   Cancelar
                 </Button>
-                <Button variant="primary" $danger onClick={handleDeleteSub} loading={isLoading}>
+                <Button variant="primary" onClick={handleDeleteSub} disabled={isLoading}>
                   Confirmar Exclusão
                 </Button>
               </S.ModalFooter>
             }
           />
-          <Button variant="ghost" size="sm" onClick={() => onEdit(category)} disabled={isLoading}>
-            <PencilIcon size={16} />
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onEdit(category)}
+            disabled={isLoading}
+            leftIcon={<PencilIcon size={16} />}
+          >
             Editar
           </Button>
-          <Button variant="ghost" size="sm" onClick={handleToggleStatus} disabled={isLoading}>
-            {getStatusIcon()}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleToggleStatus}
+            disabled={isLoading}
+            leftIcon={getStatusIcon()}
+          >
             {category.isActive ? 'Desativar' : 'Ativar'}
           </Button>
           <Button
-            variant="ghost"
+            variant="outline"
             size="sm"
             onClick={() => setIsDeleteDialogOpen(true)}
             disabled={isLoading || hasSubCategories}
             title={hasSubCategories ? 'Exclua as subcategorias primeiro' : ''}
+            leftIcon={<TrashIcon size={16} />}
           >
-            <TrashIcon size={16} />
             Excluir
           </Button>
         </S.ActionsContainer>

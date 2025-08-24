@@ -55,6 +55,11 @@ export const Card = styled(motion.div)`
     pointer-events: none;
   }
 
+  @media (max-width: 768px) {
+    padding: ${({ theme }) => theme.spacing.md};
+    min-height: auto;
+  }
+
   ${chipsStyles}
 `
 
@@ -66,6 +71,11 @@ export const CardHeader = styled.div`
   gap: ${({ theme }) => theme.spacing.md};
   position: relative;
   z-index: 1;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `
 
 export const CardTitleContainer = styled.div`
@@ -91,6 +101,10 @@ export const CardTitle = styled.h3`
   flex: 1;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.typography.fontSizes.md};
+  }
 `
 
 export const CardContent = styled.div`
@@ -133,6 +147,11 @@ export const ActionsContainer = styled.div`
       transform: translateY(-1px);
     }
   }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    gap: ${({ theme }) => theme.spacing.xs};
+  }
 `
 
 export const ModalFooter = styled.div`
@@ -146,6 +165,7 @@ export const SubCategoriesContainer = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.sm};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 
   strong {
     font-size: ${({ theme }) => theme.typography.fontSizes.sm};
@@ -217,5 +237,52 @@ export const DeleteIcon = styled.div`
   &:hover {
     background: ${({ theme }) => theme.colors.mx.black}20;
     transform: scale(1.1);
+  }
+`
+
+export const OptionalsSection = styled.div`
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  flex-shrink: 0;
+
+  button {
+    border: none;
+    background: transparent;
+    color: ${({ theme }) => theme.colors.mx.black};
+
+    &:hover {
+      background: ${({ theme }) => theme.colors.mx.gray[100]};
+    }
+  }
+`
+
+export const OptionalsList = styled.div`
+  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.md};
+  margin-top: ${({ theme }) => theme.spacing.sm};
+  background: ${({ theme }) => theme.colors.mx.gray[50]};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+`
+
+export const OptionalItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${({ theme }) => theme.spacing.xs} 0;
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  span:first-child {
+    color: ${({ theme }) => theme.colors.mx.black};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  }
+
+  span:last-child {
+    color: ${({ theme }) => theme.colors.mx.gray[600]};
   }
 `

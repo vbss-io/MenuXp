@@ -1,6 +1,4 @@
 import { BowlFoodIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
-import { Input } from '@vbss-ui/input'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -16,15 +14,16 @@ import {
 } from '@/presentation/components/entities/menu-items/menu-item-filters'
 import { MenuItemModal } from '@/presentation/components/entities/menu-items/menu-item-modal'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
-import { Loading } from '@/presentation/components/ui/loading'
-import { Pagination } from '@/presentation/components/ui/pagination'
+import { Button } from '@/presentation/components/ui/button'
+import { FormInput } from '@/presentation/components/ui/form-input'
+import { Combobox, type ComboboxOption } from '@/presentation/@to-do/components/ui/combobox'
+import { Loading } from '@/presentation/@to-do/components/ui/loading'
+import { Pagination } from '@/presentation/@to-do/components/ui/pagination'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
 
 import * as S from './styles'
 
-// To-Do: Update Styles
 export const MenuItemsPage = () => {
   const { restaurantId } = useAuth()
   const [menuItems, setMenuItems] = useState<MenuItem[]>([])
@@ -153,91 +152,97 @@ export const MenuItemsPage = () => {
         <S.Title>Itens do Menu</S.Title>
         <S.Subtitle>Gerencie os itens do menu do seu restaurante</S.Subtitle>
       </S.Header>
-      <S.ActionsRow>
-        <Input
-          placeholder="Buscar itens..."
-          value={filters.searchMask}
-          onChange={(e) => setFilters((prev) => ({ ...prev, searchMask: e.target.value }))}
-          fontSize="sm"
-          icon={<MagnifyingGlassIcon size={16} />}
-        />
-        <Combobox
-          placeholder="Filtrar por categoria"
-          value={selectedCategory}
-          onChange={handleCategoryChange}
-          onSearch={handleCategorySearch}
-        />
-        <MenuItemFilters
-          filters={filters}
-          onFiltersChange={setFilters}
-          onReset={() =>
-            setFilters({
-              searchMask: '',
-              includeInactive: false,
-              categoryId: undefined,
-              sortField: 'name',
-              sortOrder: 'asc'
-            })
-          }
-        />
-        <Button variant="primary" onClick={handleCreateMenuItem} size="md">
-          <PlusIcon size={16} />
-          Novo Item
-        </Button>
-      </S.ActionsRow>
-      {isLoading ? (
-        <S.Container>
+      <S.Content>
+        <S.ActionsRow>
+          <FormInput
+            id="search"
+            label=""
+            placeholder="Buscar itens..."
+            value={filters.searchMask}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setFilters((prev) => ({ ...prev, searchMask: e.target.value }))
+            }
+            leftIcon={<MagnifyingGlassIcon size={16} />}
+          />
+          <Combobox
+            placeholder="Filtrar por categoria"
+            value={selectedCategory}
+            onChange={handleCategoryChange}
+            onSearch={handleCategorySearch}
+          />
+          <MenuItemFilters
+            filters={filters}
+            onFiltersChange={setFilters}
+            onReset={() =>
+              setFilters({
+                searchMask: '',
+                includeInactive: false,
+                categoryId: undefined,
+                sortField: 'name',
+                sortOrder: 'asc'
+              })
+            }
+          />
+          <Button variant="primary" onClick={handleCreateMenuItem} leftIcon={<PlusIcon size={16} />}>
+            Novo Item
+          </Button>
+        </S.ActionsRow>
+        {isLoading ? (
           <S.LoadingWrapper>
             <Loading />
           </S.LoadingWrapper>
-        </S.Container>
-      ) : (
-        <>
-          <motion.div variants={containerVariants} initial="hidden" animate="visible">
-            {menuItems.length > 0 ? (
-              <S.MenuItemsGrid>
-                <AnimatePresence>
-                  {menuItems.map((menuItem) => (
-                    <MenuItemCard
-                      key={menuItem.id}
-                      menuItem={menuItem}
-                      onEdit={handleEditMenuItem}
-                      onDelete={handleDeleteMenuItem}
-                      onRefresh={loadMenuItems}
-                    />
-                  ))}
-                </AnimatePresence>
-              </S.MenuItemsGrid>
-            ) : (
-              <S.EmptyState>
-                <S.EmptyStateIcon>
-                  <BowlFoodIcon size={48} />
-                </S.EmptyStateIcon>
-                <S.EmptyStateTitle>
-                  {filters.searchMask ? 'Nenhum item encontrado' : 'Nenhum item criado'}
-                </S.EmptyStateTitle>
-                <S.EmptyStateText>
-                  {filters.searchMask
-                    ? 'Tente ajustar os termos de busca'
-                    : 'Crie seu primeiro item para o menu do seu restaurante'}
-                </S.EmptyStateText>
-                {!filters.searchMask && (
-                  <Button variant="primary" onClick={handleCreateMenuItem} size="md" style={{ marginTop: '16px' }}>
-                    <PlusIcon size={16} />
-                    Criar Primeiro Item
-                  </Button>
-                )}
-              </S.EmptyState>
-            )}
-          </motion.div>
-          <Pagination
-            currentPage={currentPage}
-            totalItems={totalItems}
-            itemsPerPage={20}
-            onPageChange={handlePageChange}
-          />
-        </>
-      )}
+        ) : (
+          <>
+            <motion.div variants={containerVariants} initial="hidden" animate="visible">
+              {menuItems.length > 0 ? (
+                <S.MenuItemsGrid>
+                  <AnimatePresence>
+                    {menuItems.map((menuItem) => (
+                      <MenuItemCard
+                        key={menuItem.id}
+                        menuItem={menuItem}
+                        onEdit={handleEditMenuItem}
+                        onDelete={handleDeleteMenuItem}
+                        onRefresh={loadMenuItems}
+                      />
+                    ))}
+                  </AnimatePresence>
+                </S.MenuItemsGrid>
+              ) : (
+                <S.EmptyState>
+                  <S.EmptyStateIcon>
+                    <BowlFoodIcon size={48} />
+                  </S.EmptyStateIcon>
+                  <S.EmptyStateTitle>
+                    {filters.searchMask ? 'Nenhum item encontrado' : 'Nenhum item criado'}
+                  </S.EmptyStateTitle>
+                  <S.EmptyStateText>
+                    {filters.searchMask
+                      ? 'Tente ajustar os termos de busca'
+                      : 'Crie seu primeiro item para o menu do seu restaurante'}
+                  </S.EmptyStateText>
+                  {!filters.searchMask && (
+                    <Button
+                      variant="primary"
+                      onClick={handleCreateMenuItem}
+                      leftIcon={<PlusIcon size={16} />}
+                      style={{ marginTop: '16px' }}
+                    >
+                      Criar Primeiro Item
+                    </Button>
+                  )}
+                </S.EmptyState>
+              )}
+            </motion.div>
+            <Pagination
+              currentPage={currentPage}
+              totalItems={totalItems}
+              itemsPerPage={20}
+              onPageChange={handlePageChange}
+            />
+          </>
+        )}
+      </S.Content>
       <MenuItemModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
