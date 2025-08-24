@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => theme.colors.mx.white};
 `
 
 export const LoadingWrapper = styled.div`
@@ -19,56 +20,86 @@ export const Header = styled.div`
   gap: ${({ theme }) => theme.spacing.xs};
 `
 
-export const Title = styled.h1`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.primary};
-  margin: 0;
-`
-
 export const Subtitle = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  font-size: ${({ theme }) => theme.typography.fontSizes.md};
+  color: ${({ theme }) => theme.colors.text.secondary};
   margin: 0;
+  line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
 `
 
 export const TabsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  overflow: hidden;
 `
 
 export const TabsHeader = styled.div`
   display: flex;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
-  gap: 0;
+  border-bottom: 2px solid ${({ theme }) => theme.colors.mx.black};
+  background: ${({ theme }) => theme.colors.mx.white};
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.colors.mx.white};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.mx.black};
+    border-radius: 2px;
+  }
 `
 
 export const TabButton = styled.button<{ $isActive: boolean }>`
-  background: none;
+  background: ${({ theme, $isActive }) => ($isActive ? theme.colors.mx.red : theme.colors.mx.white)};
   border: none;
-  padding: ${({ theme }) => theme.spacing.md};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  color: ${({ theme, $isActive }) => $isActive && theme.colors.primary};
+  border-right: 2px solid ${({ theme }) => theme.colors.mx.black};
+  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-family: ${({ theme }) => theme.typography.fonts.title};
+  color: ${({ theme, $isActive }) => ($isActive ? theme.colors.mx.white : theme.colors.mx.black)};
   cursor: pointer;
-  border-bottom: 2px solid ${({ theme, $isActive }) => ($isActive ? theme.colors.primary : 'transparent')};
-  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+  white-space: nowrap;
   position: relative;
 
   &:hover {
-    color: ${({ theme, $isActive }) => ($isActive ? theme.colors.primary : theme.colors.text)};
-    background-color: ${({ theme, $isActive }) => ($isActive ? 'transparent' : theme.colors.backgroundHover)};
+    background: ${({ theme, $isActive }) => ($isActive ? theme.colors.mx.red : theme.colors.mx.red)}20;
+    color: ${({ theme, $isActive }) => ($isActive ? theme.colors.mx.white : theme.colors.mx.red)};
+    transform: translateY(-2px);
+    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.primary}40;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.mx.red};
+  }
+
+  &:last-child {
+    border-right: none;
   }
 `
 
 export const TabContent = styled.div`
   min-height: 400px;
   padding: ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => theme.colors.mx.white};
 `
 
 export const TabPlaceholder = styled.div`
@@ -78,24 +109,32 @@ export const TabPlaceholder = styled.div`
   justify-content: center;
   min-height: 300px;
   text-align: center;
+  padding: ${({ theme }) => theme.spacing.xl};
 `
 
 export const TabPlaceholderIcon = styled.div`
   font-size: 48px;
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   opacity: 0.5;
+  color: ${({ theme }) => theme.colors.mx.black};
 `
 
 export const TabPlaceholderTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-family: ${({ theme }) => theme.typography.fonts.title};
   margin: 0 0 ${({ theme }) => theme.spacing.sm} 0;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.mx.black};
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 `
 
 export const TabPlaceholderText = styled.p`
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
   margin: 0;
   max-width: 300px;
   line-height: 1.5;
+  color: ${({ theme }) => theme.colors.mx.black};
+  opacity: 0.8;
 `

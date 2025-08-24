@@ -13,7 +13,6 @@ import * as S from './styles'
 
 type TabType = 'branding' | 'address' | 'operations' | 'hours' | 'templates' | 'users'
 
-// To-Do: Update Styles
 export const SettingsPage = () => {
   const [isLoading, _setIsLoading] = useState(false)
   const [activeTab, setActiveTab] = useState<TabType>('branding')
@@ -73,7 +72,6 @@ export const SettingsPage = () => {
     <S.Container>
       <Breadcrumb lastPath="Configurações" />
       <S.Header>
-        <S.Title>Configurações</S.Title>
         <S.Subtitle>Gerencie as configurações do seu restaurante</S.Subtitle>
       </S.Header>
       <S.TabsContainer>
