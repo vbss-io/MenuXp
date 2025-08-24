@@ -10,7 +10,7 @@ import { z } from 'zod'
 
 import { LoginUsecase } from '@/application/auth/login.usecase'
 import { ResentConfirmationEmailUsecase } from '@/application/auth/resent-confirmation-email.usecase'
-import { Loading } from '@/presentation/@to-do/components/ui/loading'
+import { Loading } from '@/presentation/components/ui/loading'
 import type { Login as LoginType } from '@/presentation/contexts/auth-context'
 import { useAuth } from '@/presentation/hooks/use-auth'
 

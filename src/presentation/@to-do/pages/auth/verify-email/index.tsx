@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 
 import { VerifyEmailUsecase } from '@/application/auth/verify-email.usecase'
-import { Loading } from '@/presentation/@to-do/components/ui/loading'
+import { Loading } from '@/presentation/components/ui/loading'
 
 import * as S from '../styles'
 

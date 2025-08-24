@@ -8,7 +8,7 @@ import toast from 'react-hot-toast'
 import { z } from 'zod'
 
 import { ForgotPasswordUsecase } from '@/application/auth/forgot-password.usecase'
-import { Loading } from '@/presentation/@to-do/components/ui/loading'
+import { Loading } from '@/presentation/components/ui/loading'
 
 import * as S from '../styles'
 

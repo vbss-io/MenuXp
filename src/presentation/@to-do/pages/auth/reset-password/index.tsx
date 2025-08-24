@@ -9,7 +9,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
 import { ResetPasswordUsecase } from '@/application/auth/reset-password.usecase'
-import { Loading } from '@/presentation/@to-do/components/ui/loading'
+import { Loading } from '@/presentation/components/ui/loading'
 
 import * as S from '../styles'
 

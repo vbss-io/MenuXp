@@ -10,7 +10,7 @@ import styled from 'styled-components'
 import { z } from 'zod'
 
 import { RegisterUsecase } from '@/application/auth/register.usecase'
-import { Loading } from '@/presentation/@to-do/components/ui/loading'
+import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from '../styles'
