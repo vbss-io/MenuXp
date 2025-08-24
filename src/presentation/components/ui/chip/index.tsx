@@ -5,7 +5,7 @@ interface ChipProps {
   children: React.ReactNode
   backgroundColor?: string
   textColor?: string
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
   noBorder?: boolean
   padding?: string
 }
@@ -34,7 +34,7 @@ export const Chip: React.FC<ChipProps> = ({
 const ChipContainer = styled.div<{
   $backgroundColor?: string
   $textColor: string
-  $size: 'sm' | 'md' | 'lg'
+  $size: 'xs' | 'sm' | 'md' | 'lg'
   $noBorder: boolean
   $padding?: string
 }>`
@@ -45,8 +45,10 @@ const ChipContainer = styled.div<{
     if ($padding) return $padding
 
     switch ($size) {
+      case 'xs':
+        return '6px 12px'
       case 'sm':
-        return '4px 8px'
+        return '6px 12px'
       case 'md':
         return '6px 12px'
       case 'lg':
@@ -60,12 +62,14 @@ const ChipContainer = styled.div<{
   border-radius: ${({ theme }) => theme.borderRadius.full};
   font-size: ${({ $size, theme }) => {
     switch ($size) {
-      case 'sm':
+      case 'xs':
         return theme.typography.fontSizes.xs
-      case 'md':
+      case 'sm':
         return theme.typography.fontSizes.sm
-      case 'lg':
+      case 'md':
         return theme.typography.fontSizes.md
+      case 'lg':
+        return theme.typography.fontSizes.lg
       default:
         return theme.typography.fontSizes.sm
     }
