@@ -1,6 +1,6 @@
+import { Chip } from '@/presentation/components/ui/chip'
 import { CircleIcon, EyeIcon, EyeSlashIcon, PencilIcon, PlusIcon, TrashIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
-import { Chip } from '@vbss-ui/chip'
 import { Dialog } from '@vbss-ui/dialog'
 import { useState } from 'react'
 
@@ -123,11 +123,7 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
           <S.CardIcon>{getCategoryIcon()}</S.CardIcon>
           <S.CardTitle>{category.name}</S.CardTitle>
         </S.CardTitleContainer>
-        <Chip
-          backgroundColor={category.isActive ? 'hsl(160, 84%, 39%)' : 'hsl(0, 84%, 60%)'}
-          textColor="white"
-          size="md"
-        >
+        <Chip backgroundColor={category.isActive ? '#22c55e' : '#ef4444'} textColor="white" size="sm">
           {category.isActive ? 'Ativa' : 'Inativa'}
         </Chip>
       </S.CardHeader>
@@ -149,23 +145,18 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
           {hasSubCategories ? (
             <S.SubCategoriesList>
               {(category.subCategories ?? []).map((sub) => (
-                <Chip
-                  key={sub.id}
-                  backgroundColor="hsl(201, 100%, 44%)"
-                  textColor="white"
-                  size="md"
-                  onClick={() => onEdit(sub)}
-                >
-                  {sub.name}
-                  <TrashIcon
-                    size={14}
+                <S.SubCategoryChip key={sub.id} onClick={() => onEdit(sub)}>
+                  <span>{sub.name}</span>
+                  <S.DeleteIcon
                     onClick={(e) => {
                       e.stopPropagation()
                       setSubToDelete(sub)
                       setIsSubDeleteDialogOpen(true)
                     }}
-                  />
-                </Chip>
+                  >
+                    <TrashIcon size={12} />
+                  </S.DeleteIcon>
+                </S.SubCategoryChip>
               ))}
             </S.SubCategoriesList>
           ) : (
@@ -204,7 +195,6 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
               </S.ModalFooter>
             }
           />
-
           <Dialog
             open={isSubDeleteDialogOpen}
             onOpenChange={setIsSubDeleteDialogOpen}

@@ -174,22 +174,48 @@ export const SubCategoriesList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.sm};
+`
 
-  .chip {
-    display: flex;
-    align-items: center;
-    gap: ${({ theme }) => theme.spacing.sm};
-    cursor: pointer;
-    transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+export const SubCategoryChip = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+  background: ${({ theme }) => theme.colors.mx.red};
+  color: ${({ theme }) => theme.colors.mx.white};
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-family: ${({ theme }) => theme.typography.fonts.title};
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  white-space: nowrap;
 
-    &:hover {
-      background-color: ${({ theme }) => theme.colors.mx.red};
-      color: ${({ theme }) => theme.colors.mx.white};
-      transform: translateY(-1px);
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+  }
 
-      svg {
-        color: ${({ theme }) => theme.colors.mx.white};
-      }
-    }
+  span {
+    flex: 1;
+  }
+`
+
+export const DeleteIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 50%;
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.mx.black}20;
+    transform: scale(1.1);
   }
 `

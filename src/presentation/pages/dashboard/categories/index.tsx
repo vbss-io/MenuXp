@@ -1,24 +1,23 @@
+import { Button } from '@/presentation/components/ui/button'
+import { FormInput } from '@/presentation/components/ui/form-input'
 import { FolderIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
-import { Input } from '@vbss-ui/input'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
 import type { Category } from '@/domain/models/category.model'
+import { Loading } from '@/presentation/@to-do/components/ui/loading'
+import { Pagination } from '@/presentation/@to-do/components/ui/pagination'
 import { CategoryCard } from '@/presentation/components/entities/categories/category-card'
 import { Filters, type CategoryFilters } from '@/presentation/components/entities/categories/category-filters'
 import { CategoryModal } from '@/presentation/components/entities/categories/category-modal'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Loading } from '@/presentation/components/ui/loading'
-import { Pagination } from '@/presentation/components/ui/pagination'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
 
 import * as S from './styles'
 
-// To-Do: Update Styles
 export const CategoriesPage = () => {
   const { restaurantId } = useAuth()
   const [categories, setCategories] = useState<Category[]>([])
@@ -113,16 +112,18 @@ export const CategoriesPage = () => {
     <S.Container>
       <Breadcrumb lastPath="Categorias" />
       <S.Header>
-        <S.Title>Categorias</S.Title>
         <S.Subtitle>Gerencie as categorias do seu restaurante</S.Subtitle>
       </S.Header>
       <S.ActionsRow>
-        <Input
+        <FormInput
+          id="search"
+          label=""
           placeholder="Buscar categorias..."
           value={filters.searchMask}
-          onChange={(e) => setFilters((prev) => ({ ...prev, searchMask: e.target.value }))}
-          fontSize="sm"
-          icon={<MagnifyingGlassIcon size={16} />}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setFilters((prev) => ({ ...prev, searchMask: e.target.value }))
+          }
+          leftIcon={<MagnifyingGlassIcon size={16} />}
         />
         <Filters
           filters={filters}
@@ -136,17 +137,14 @@ export const CategoriesPage = () => {
             })
           }
         />
-        <Button variant="primary" onClick={handleCreateCategory} size="md">
-          <PlusIcon size={16} />
+        <Button variant="primary" onClick={handleCreateCategory} size="md" leftIcon={<PlusIcon size={16} />}>
           Nova Categoria
         </Button>
       </S.ActionsRow>
       {isLoading ? (
-        <S.Container>
-          <S.LoadingWrapper>
-            <Loading />
-          </S.LoadingWrapper>
-        </S.Container>
+        <S.LoadingWrapper>
+          <Loading />
+        </S.LoadingWrapper>
       ) : (
         <>
           <motion.div variants={containerVariants} initial="hidden" animate="visible">
@@ -179,8 +177,13 @@ export const CategoriesPage = () => {
                     : 'Crie sua primeira categoria para organizar os produtos do seu restaurante'}
                 </S.EmptyStateText>
                 {!filters.searchMask && (
-                  <Button variant="primary" onClick={handleCreateCategory} size="md" style={{ marginTop: '16px' }}>
-                    <PlusIcon size={16} />
+                  <Button
+                    variant="primary"
+                    onClick={handleCreateCategory}
+                    size="md"
+                    style={{ marginTop: '16px' }}
+                    leftIcon={<PlusIcon size={16} />}
+                  >
                     Criar Primeira Categoria
                   </Button>
                 )}
