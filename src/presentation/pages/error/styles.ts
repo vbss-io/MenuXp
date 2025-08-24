@@ -1,13 +1,32 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 5rem);
+  min-height: 100vh;
   background: ${({ theme }) => theme.colors.background};
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      ${({ theme }) => theme.colors.mx.red} 0%,
+      ${({ theme }) => theme.colors.mx.yellow} 100%
+    );
+    opacity: 0.05;
+    pointer-events: none;
+  }
 `
 
-export const ErrorContent = styled.div`
+export const ErrorContent = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,49 +36,70 @@ export const ErrorContent = styled.div`
   width: 100%;
   margin: auto;
   padding: ${({ theme }) => theme.spacing.xl};
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
+  z-index: 1;
 `
 
-export const TitleContainer = styled.div`
+export const TitleContainer = styled(motion.div)`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.spacing.md};
-  flex-direction: column;
-
-  @media ${({ theme }) => theme.breakpoints.md} {
-    flex-direction: row;
-  }
+  gap: ${({ theme }) => theme.spacing.lg};
+  flex-direction: row;
+  margin-bottom: ${({ theme }) => theme.spacing.xl};
 `
 
 export const Title = styled.h1`
-  font-family: ${({ theme }) => theme.fonts.default};
-  color: ${({ theme }) => theme.colors.primary};
+  font-family: ${({ theme }) => theme.typography.fonts.title};
+  color: ${({ theme }) => theme.colors.mx.black};
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0;
-  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xxl};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.extrabold};
+  text-shadow: 2px 2px 0 ${({ theme }) => theme.colors.mx.black}20;
 
   @media ${({ theme }) => theme.breakpoints.md} {
-    font-size: ${({ theme }) => theme.fontSizes.xxl};
+    font-size: ${({ theme }) => theme.typography.fontSizes.xxxl};
   }
 
   @media ${({ theme }) => theme.breakpoints.lg} {
-    font-size: ${({ theme }) => theme.fontSizes.xxxl};
+    font-size: ${({ theme }) => theme.typography.fontSizes.xxxxl};
   }
 `
 
-export const Message = styled.p`
-  font-family: ${({ theme }) => theme.fonts.default};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.text};
-  line-height: 1.5;
-  margin: ${({ theme }) => theme.spacing.md} 0;
+export const Message = styled(motion.p)`
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  font-size: ${({ theme }) => theme.typography.fontSizes.md};
+  color: ${({ theme }) => theme.colors.text.secondary};
+  line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
+  margin: 0 0 ${({ theme }) => theme.spacing.xl} 0;
+  max-width: 500px;
+  padding: ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      ${({ theme }) => theme.colors.mx.yellow} 0%,
+      ${({ theme }) => theme.colors.mx.red} 100%
+    );
+    opacity: 0.05;
+    pointer-events: none;
+    border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  }
 `
 
-export const ButtonContainer = styled.div`
+export const ButtonContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;

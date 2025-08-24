@@ -1,26 +1,10 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
 
-import { Loading } from '@/presentation/components/ui/loading'
+import { Loading } from '@/presentation/@to-do/components/ui/loading'
 
-const Container = styled.div`
-  width: 100%;
-  height: calc(100vh - 5rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${({ theme }) => theme.colors.background};
-`
+import * as S from './styles'
 
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.md};
-`
-
-// To-Do: Update styles
 export const LoadingPage = () => {
   const navigate = useNavigate()
 
@@ -32,11 +16,35 @@ export const LoadingPage = () => {
     return () => clearTimeout(timer)
   }, [navigate])
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.5
+      }
+    }
+  }
+
+  const contentVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        delay: 0.2
+      }
+    }
+  }
+
   return (
-    <Container>
-      <Content>
-        <Loading />
-      </Content>
-    </Container>
+    <S.Container>
+      <S.LoadingContent variants={containerVariants} initial="hidden" animate="visible">
+        <S.LoadingWrapper variants={contentVariants}>
+          <Loading />
+        </S.LoadingWrapper>
+      </S.LoadingContent>
+    </S.Container>
   )
 }
