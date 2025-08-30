@@ -25,9 +25,11 @@ const logoVariants = {
 interface HeaderProps {
   isDashboard?: boolean
   isHome?: boolean
+  isRestaurantPage?: boolean
+  isAuthPages?: boolean
 }
 
-export const Header = ({ isDashboard = false, isHome = false }: HeaderProps) => {
+export const Header = ({ isDashboard, isHome, isRestaurantPage, isAuthPages }: HeaderProps) => {
   const { user } = useAuth()
   const [showMobile, setShowMobile] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -41,7 +43,7 @@ export const Header = ({ isDashboard = false, isHome = false }: HeaderProps) => 
     return () => window.removeEventListener('resize', checkIsMobile)
   }, [])
 
-  if (isDashboard && !isMobile) {
+  if ((isRestaurantPage && !isAuthPages) || (isDashboard && !isMobile)) {
     return null
   }
 
@@ -54,7 +56,6 @@ export const Header = ({ isDashboard = false, isHome = false }: HeaderProps) => 
               <img src="public/images/menuxp-logo.svg" alt="MenuXP" />
             </S.Logo>
           </motion.div>
-
           {isHome && (
             <S.NavBarWrapper>
               <NavBar />
@@ -65,7 +66,6 @@ export const Header = ({ isDashboard = false, isHome = false }: HeaderProps) => 
           <S.MobileMenuButton onClick={() => setShowMobile(!showMobile)} aria-label="Toggle menu">
             <ListIcon size={24} weight="bold" />
           </S.MobileMenuButton>
-
           {!user ? (
             <S.ButtonsContainer>
               <Button size="sm" as="a" href="/login" variant="outline">
