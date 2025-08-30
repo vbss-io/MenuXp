@@ -78,6 +78,12 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
+
+  @media not ${({ theme }) => theme.breakpoints.lg} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: ${({ theme }) => theme.spacing.md};
+  }
 `
 
 const StatusSection = styled.div`

@@ -1,5 +1,9 @@
 import { FinishOperationUsecase } from '@/application/operations/finish-operation.usecase'
 import { GetCurrentOperationUsecase } from '@/application/operations/get-current-operation.usecase'
+import {
+  GetOperationStatisticsUsecase,
+  type OperationStatistics
+} from '@/application/operations/get-operation-statistics.usecase'
 import { PauseOperationUsecase } from '@/application/operations/pause-operation.usecase'
 import { ResumeOperationUsecase } from '@/application/operations/resume-operation.usecase'
 import { StartOperationUsecase } from '@/application/operations/start-operation.usecase'
@@ -13,15 +17,18 @@ const startOperationUsecase = new StartOperationUsecase()
 const pauseOperationUsecase = new PauseOperationUsecase()
 const resumeOperationUsecase = new ResumeOperationUsecase()
 const finishOperationUsecase = new FinishOperationUsecase()
+const getOperationStatisticsUsecase = new GetOperationStatisticsUsecase()
 
 export const useOperation = () => {
   const { restaurantId } = useAuth()
   const [operation, setOperation] = useState<Operation | null>(null)
+  const [statistics, setStatistics] = useState<OperationStatistics | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isStarting, setIsStarting] = useState(false)
   const [isPausing, setIsPausing] = useState(false)
   const [isResuming, setIsResuming] = useState(false)
   const [isFinishing, setIsFinishing] = useState(false)
+  const [isStatisticsLoading, setIsStatisticsLoading] = useState(false)
 
   const fetchOperation = useCallback(async () => {
     if (!restaurantId) return
@@ -37,6 +44,23 @@ export const useOperation = () => {
       setIsLoading(false)
     }
   }, [restaurantId])
+
+  const fetchStatistics = useCallback(async () => {
+    if (!restaurantId || !operation?.id) return
+    try {
+      setIsStatisticsLoading(true)
+      const data = await getOperationStatisticsUsecase.execute({
+        restaurantId,
+        operationId: operation.id
+      })
+      setStatistics(data)
+    } catch (error) {
+      console.error('Erro ao buscar estatísticas:', error)
+      toast.error('Erro ao carregar estatísticas da operação')
+    } finally {
+      setIsStatisticsLoading(false)
+    }
+  }, [restaurantId, operation?.id])
 
   const startOperation = useCallback(async () => {
     if (!restaurantId) return
@@ -105,7 +129,14 @@ export const useOperation = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [restaurantId])
 
+  useEffect(() => {
+    if (operation?.id) {
+      fetchStatistics()
+    }
+  }, [operation?.id, fetchStatistics])
+
   return {
+    // Operation data
     operation,
     isLoading,
     isStarting,
@@ -116,6 +147,19 @@ export const useOperation = () => {
     pauseOperation,
     resumeOperation,
     finishOperation,
-    refreshOperation: fetchOperation
+    refreshOperation: fetchOperation,
+    kpis: statistics
+      ? {
+          dailyOrders: statistics.dailyOrders,
+          averagePreparationTime: statistics.averagePreparationTime,
+          cancellations: statistics.cancellations,
+          dailyRevenue: statistics.dailyRevenue,
+          sentForDelivery: statistics.sentForDelivery,
+          delivered: statistics.delivered
+        }
+      : null,
+    ordersByStatus: statistics?.ordersByStatus || [],
+    isStatisticsLoading,
+    refreshStatistics: fetchStatistics
   }
 }

@@ -7,7 +7,6 @@ import { StartOperationDialog } from '@/presentation/components/entities/operati
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useOperation } from '@/presentation/hooks/use-operation'
-import { useOperationKPIs } from '@/presentation/hooks/use-operation-kpis'
 import { useState } from 'react'
 import styled from 'styled-components'
 
@@ -22,10 +21,12 @@ export const OperationPage = () => {
     startOperation,
     pauseOperation,
     resumeOperation,
-    finishOperation
+    finishOperation,
+    kpis,
+    ordersByStatus,
+    isStatisticsLoading: isKPIsLoading
   } = useOperation()
 
-  const { kpis, ordersByStatus, isLoading: isKPIsLoading } = useOperationKPIs(operation?.id)
   const [showStartDialog, setShowStartDialog] = useState(false)
 
   const handleStartOperation = () => {
