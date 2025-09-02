@@ -85,10 +85,11 @@ export class AuthHttpClient implements HttpClient {
     }
   }
 
-  async delete<T>({ url, params = {}, headers = {} }: HttpClientGetInput): Promise<HttpClientResponse<T>> {
+  async delete<T>({ url, body, params = {}, headers = {} }: HttpClientPostInput): Promise<HttpClientResponse<T>> {
     try {
       const response = await this.httpClient.delete<T>({
         url,
+        body,
         params,
         headers: this.buildHeaders(headers)
       })

@@ -44,8 +44,8 @@ export class AxiosAdapter implements HttpClient {
     return response
   }
 
-  async delete<T>({ url, params = {}, headers = {} }: HttpClientGetInput): Promise<HttpClientResponse<T>> {
-    const response = await axios.delete(url, { params, headers })
+  async delete<T>({ url, body, params = {}, headers = {} }: HttpClientPostInput): Promise<HttpClientResponse<T>> {
+    const response = await axios.delete(url, { data: body, params, headers })
     this.checkStatus<T>(response)
     return response
   }
