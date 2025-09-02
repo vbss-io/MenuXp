@@ -15,7 +15,7 @@ interface RestaurantProviderProps {
   children: React.ReactNode
 }
 
-const validateRestaurantConfig = (restaurant: Restaurant): RestaurantConfigValidation => {
+const validateRestaurantConfig = (restaurant: Restaurant, isClient = false): RestaurantConfigValidation => {
   const missingConfigs: string[] = []
   const hasAddress = !!(
     restaurant.address?.street &&
@@ -39,7 +39,7 @@ const validateRestaurantConfig = (restaurant: Restaurant): RestaurantConfigValid
   if (!hasOperationSettings) missingConfigs.push('Configurações de Operação')
   const hasOperationHours = !!restaurant.settings?.businessHours
   if (!hasOperationHours) missingConfigs.push('Horários de Funcionamento')
-  const hasTemplates = !!restaurant.settings?.templates
+  const hasTemplates = isClient ? true : !!restaurant.settings?.templates
   if (!hasTemplates) missingConfigs.push('Templates de Mensagens')
   const isReadyForOperation = hasAddress && hasContactInfo && hasOperationSettings && hasOperationHours && hasTemplates
   return {
@@ -59,6 +59,7 @@ export const RestaurantProvider = ({ children }: RestaurantProviderProps) => {
   const getRestaurantUsecase = useMemo(() => new GetRestaurantByIdUsecase(), [])
 
   const [restaurant, setRestaurant] = useState<Restaurant | null>(localStorage.get('restaurant'))
+  const [operationId, setOperationId] = useState<string | null>(localStorage.get('operationId'))
   const [configValidation, setConfigValidation] = useState<RestaurantConfigValidation | null>(
     localStorage.get('restaurantConfigValidation')
   )
@@ -83,6 +84,7 @@ export const RestaurantProvider = ({ children }: RestaurantProviderProps) => {
       setRestaurant(restaurant)
       setConfigValidation(validation)
       localStorage.set('restaurant', restaurant)
+      localStorage.set('operationId', restaurant.id)
       localStorage.set('restaurantConfigValidation', validation)
       if (!validation.isReadyForOperation) {
         const missingConfigs = validation.missingConfigs.join(', ')
@@ -116,6 +118,14 @@ export const RestaurantProvider = ({ children }: RestaurantProviderProps) => {
     [restaurant, localStorage]
   )
 
+  const setClientRestaurant = useCallback((clientRestaurant: Restaurant) => {
+    setRestaurant(clientRestaurant)
+    const validation = validateRestaurantConfig(clientRestaurant, true)
+    setConfigValidation(validation)
+    setError(null)
+    setIsLoading(false)
+  }, [])
+
   const clearRestaurant = useCallback(() => {
     setRestaurant(null)
     setConfigValidation(null)
@@ -125,8 +135,10 @@ export const RestaurantProvider = ({ children }: RestaurantProviderProps) => {
   }, [localStorage])
 
   useEffect(() => {
-    fetchRestaurant()
-  }, [fetchRestaurant])
+    if (restaurantId) {
+      fetchRestaurant()
+    }
+  }, [fetchRestaurant, restaurantId])
 
   const contextValue = {
     restaurant,
@@ -134,9 +146,12 @@ export const RestaurantProvider = ({ children }: RestaurantProviderProps) => {
     isLoading,
     error,
     setRestaurant,
+    setClientRestaurant,
     updateRestaurant,
     clearRestaurant,
-    refreshRestaurant: fetchRestaurant
+    refreshRestaurant: fetchRestaurant,
+    operationId,
+    setOperationId
   }
 
   return <RestaurantContext.Provider value={contextValue}>{children}</RestaurantContext.Provider>

@@ -21,11 +21,6 @@ const MenuItems = lazy(() =>
     default: module.MenuItemsPage
   }))
 )
-const Categories = lazy(() =>
-  import('@/presentation/pages/dashboard/categories').then((module) => ({
-    default: module.CategoriesPage
-  }))
-)
 const Reports = lazy(() =>
   import('@/presentation/pages/dashboard/reports').then((module) => ({
     default: module.ReportsPage
@@ -42,7 +37,7 @@ const Messages = lazy(() =>
   }))
 )
 const Menu = lazy(() =>
-  import('@/presentation/@to-do/pages/dashboard/menu').then((module) => ({
+  import('@/presentation/pages/dashboard/menu').then((module) => ({
     default: module.MenuPage
   }))
 )
@@ -67,10 +62,6 @@ export const dashboardRoutes = [
       {
         path: 'menu-items',
         element: <MenuItems />
-      },
-      {
-        path: 'categories',
-        element: <Categories />
       },
       {
         path: 'reports',
