@@ -26,5 +26,5 @@ export interface HttpClient {
   post: <T>({ url, body, params, headers }: HttpClientPostInput) => Promise<HttpClientResponse<T>>
   put: <T>({ url, body, params, headers }: HttpClientPostInput) => Promise<HttpClientResponse<T>>
   patch: <T>({ url, body, params, headers }: HttpClientPostInput) => Promise<HttpClientResponse<T>>
-  delete: <T>({ url, params, headers }: HttpClientGetInput) => Promise<HttpClientResponse<T>>
+  delete: <T>({ url, body, params, headers }: HttpClientPostInput) => Promise<HttpClientResponse<T>>
 }
