@@ -3,6 +3,7 @@ import { Registry } from '@/infra/dependency-injection/registry'
 
 export interface GetRestaurantMenuItemsUsecaseInput {
   restaurantId: string
+  type: 'best_sellers' | 'discounts' | 'custom'
   menuItemIds?: string[]
 }
 
@@ -35,16 +36,10 @@ export class GetRestaurantMenuItemsUsecase {
   }
 
   async execute(params: GetRestaurantMenuItemsUsecaseInput): Promise<GetRestaurantMenuItemsUsecaseOutput> {
-    const queryParams = new URLSearchParams()
-    if (params.menuItemIds && params.menuItemIds.length > 0) {
-      params.menuItemIds.forEach((id) => {
-        queryParams.append('menuItemIds[]', id)
-      })
-    }
     const url = this.url.replace(':restaurantId', params.restaurantId)
-    const fullUrl = queryParams.toString() ? `${url}?${queryParams.toString()}` : url
-    const response = await this.httpClient.get<GetRestaurantMenuItemsUsecaseOutput>({
-      url: fullUrl
+    const response = await this.httpClient.post<GetRestaurantMenuItemsUsecaseOutput>({
+      url,
+      body: params
     })
     return response.data
   }
