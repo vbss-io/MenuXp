@@ -65,6 +65,7 @@ export const useRestaurantMenuItems = ({
     try {
       const usecase = new GetRestaurantMenuItemsUsecase()
       const params: GetRestaurantMenuItemsUsecaseInput = {
+        type: 'custom',
         restaurantId,
         ...(menuItemIds && menuItemIds.length > 0 && { menuItemIds })
       }

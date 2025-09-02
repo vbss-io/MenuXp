@@ -129,9 +129,13 @@ export const CarouselEdit: React.FC<CarouselEditProps> = ({
     try {
       if (isEditing) {
         const updateCarouselUsecase = new UpdateCarouselSectionUsecase()
+        if (!section.id) {
+          toast.error('Erro: informações da seção inválidas')
+          return
+        }
         await updateCarouselUsecase.execute({
           layoutId,
-          sectionId: section!.id,
+          sectionId: section.id,
           files: selectedFiles.length > 0 ? selectedFiles : undefined,
           removeMedias: removedMediaPaths.length > 0 ? removedMediaPaths : undefined
         })
@@ -333,10 +337,7 @@ export const CarouselEdit: React.FC<CarouselEditProps> = ({
             Cancelar
           </Button>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button 
-              onClick={handleSave} 
-              disabled={isLoading || (!isEditing && selectedFiles.length < minImages)}
-            >
+            <Button onClick={handleSave} disabled={isLoading || (!isEditing && selectedFiles.length < minImages)}>
               {getButtonText()}
             </Button>
           </motion.div>
