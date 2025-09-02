@@ -2,7 +2,6 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { XIcon, MapPin, ArrowRight } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useClientAuth } from '@/presentation/hooks/use-client-auth'
 import { useClient } from '@/presentation/hooks/use-client'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
@@ -147,8 +146,7 @@ interface ClientAddressSlideProps {
 }
 
 export const ClientAddressSlide = ({ isOpen, onClose }: ClientAddressSlideProps) => {
-  const { client } = useClient()
-  const { updateClientData, isLoading } = useClientAuth()
+  const { client, updateClientData, isLoading } = useClient()
   const { restaurant } = useRestaurant()
 
   const [formData, setFormData] = useState({

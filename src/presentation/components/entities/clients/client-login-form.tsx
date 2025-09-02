@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { PhoneIcon, ArrowRightIcon } from '@phosphor-icons/react'
-import { useClientAuth } from '@/presentation/hooks/use-client-auth'
+import { useClient } from '@/presentation/hooks/use-client'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
 const FormContainer = styled.div`
@@ -112,7 +112,7 @@ interface ClientLoginFormProps {
 }
 
 export const ClientLoginForm = ({ onModeChange, onSuccess }: ClientLoginFormProps) => {
-  const { loginClient, isLoading } = useClientAuth()
+  const { loginClient, isLoading } = useClient()
   const { restaurant } = useRestaurant()
   const [phone, setPhone] = useState('')
 
