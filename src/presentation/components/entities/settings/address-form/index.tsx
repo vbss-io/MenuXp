@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
@@ -15,14 +15,14 @@ import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 import * as S from './styles'
 
 const addressSchema = z.object({
-  street: z.string().min(1, 'Rua é obrigatória'),
-  number: z.string().min(1, 'Número é obrigatório'),
-  complement: z.string().optional(),
-  neighborhood: z.string().min(1, 'Bairro é obrigatório'),
-  city: z.string().min(1, 'Cidade é obrigatória'),
-  state: z.string().min(1, 'Estado é obrigatório'),
-  zipCode: z.string().min(1, 'CEP é obrigatório'),
-  country: z.string().min(1, 'País é obrigatório')
+  street: z.string().trim().min(1, 'Rua é obrigatória'),
+  number: z.string().trim().min(1, 'Número é obrigatório'),
+  complement: z.string().trim().optional(),
+  neighborhood: z.string().trim().min(1, 'Bairro é obrigatório'),
+  city: z.string().trim().min(1, 'Cidade é obrigatória'),
+  state: z.string().trim().min(1, 'Estado é obrigatório'),
+  zipCode: z.string().trim().min(1, 'CEP é obrigatório'),
+  country: z.string().trim().min(1, 'País é obrigatório')
 })
 
 type AddressFormData = z.infer<typeof addressSchema>
@@ -35,20 +35,37 @@ export const AddressForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm<AddressFormData>({
     resolver: zodResolver(addressSchema),
     defaultValues: {
-      street: restaurant?.address?.street ?? '',
-      number: restaurant?.address?.number ?? '',
-      complement: restaurant?.address?.complement ?? '',
-      neighborhood: restaurant?.address?.neighborhood ?? '',
-      city: restaurant?.address?.city ?? '',
-      state: restaurant?.address?.state ?? '',
-      zipCode: restaurant?.address?.zipCode ?? '',
-      country: restaurant?.address?.country ?? 'Brasil'
+      street: '',
+      number: '',
+      complement: '',
+      neighborhood: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      country: 'Brasil'
     }
   })
+
+  // Atualiza os valores do formulário quando o restaurant for carregado
+  useEffect(() => {
+    if (restaurant?.address) {
+      reset({
+        street: restaurant.address.street || '',
+        number: restaurant.address.number || '',
+        complement: restaurant.address.complement || '',
+        neighborhood: restaurant.address.neighborhood || '',
+        city: restaurant.address.city || '',
+        state: restaurant.address.state || '',
+        zipCode: restaurant.address.zipCode || '',
+        country: restaurant.address.country || 'Brasil'
+      })
+    }
+  }, [restaurant, reset])
 
   const onSubmit = async (data: AddressFormData) => {
     if (!restaurantId) return
@@ -119,7 +136,7 @@ export const AddressForm = () => {
               placeholder="Rua das Flores"
               error={errors.street?.message}
               required
-              register={register}
+              register={register('street')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
@@ -129,7 +146,7 @@ export const AddressForm = () => {
               placeholder="123"
               error={errors.number?.message}
               required
-              register={register}
+              register={register('number')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
@@ -138,7 +155,7 @@ export const AddressForm = () => {
               label="Complemento"
               placeholder="Apto 45, Loja 2"
               error={errors.complement?.message}
-              register={register}
+              register={register('complement')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
@@ -148,7 +165,7 @@ export const AddressForm = () => {
               placeholder="Centro"
               error={errors.neighborhood?.message}
               required
-              register={register}
+              register={register('neighborhood')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
@@ -158,7 +175,7 @@ export const AddressForm = () => {
               placeholder="São Paulo"
               error={errors.city?.message}
               required
-              register={register}
+              register={register('city')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
@@ -168,7 +185,7 @@ export const AddressForm = () => {
               placeholder="SP"
               error={errors.state?.message}
               required
-              register={register}
+              register={register('state')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
@@ -178,7 +195,7 @@ export const AddressForm = () => {
               placeholder="01234-567"
               error={errors.zipCode?.message}
               required
-              register={register}
+              register={register('zipCode')}
             />
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants}>
@@ -188,7 +205,7 @@ export const AddressForm = () => {
               placeholder="Brasil"
               error={errors.country?.message}
               required
-              register={register}
+              register={register('country')}
             />
           </S.FormGroup>
         </S.FormGrid>
