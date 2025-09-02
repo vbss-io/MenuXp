@@ -10,6 +10,11 @@ export const SearchContainer = styled.div`
   display: flex;
   gap: ${({ theme }) => theme.spacing.sm};
   align-items: center;
+  flex-wrap: wrap;
+
+  @media ${({ theme }) => theme.breakpoints.xl} {
+    gap: ${({ theme }) => theme.spacing.xs};
+  }
 `
 
 export const PopoverContent = styled.div`

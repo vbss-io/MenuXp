@@ -42,12 +42,7 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset }: FiltersPr
           variant="outline"
           side="left"
           trigger={
-            <Button
-              variant="outline"
-              size="md"
-              as="div"
-              leftIcon={<SortAscendingIcon size={20} weight="bold" />}
-            ></Button>
+            <Button variant="outline" size="md" as="div" leftIcon={<SortAscendingIcon size={20} weight="bold" />} />
           }
         >
           <S.PopoverContent>
@@ -90,12 +85,7 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset }: FiltersPr
           variant="outline"
           side="left"
           trigger={
-            <Button
-              variant="outline"
-              size="md"
-              as="div"
-              leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}
-            ></Button>
+            <Button variant="outline" size="md" as="div" leftIcon={<FunnelSimpleIcon size={20} weight="bold" />} />
           }
         >
           <S.PopoverContent>
