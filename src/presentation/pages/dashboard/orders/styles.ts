@@ -21,6 +21,16 @@ export const Header = styled.div`
   gap: ${({ theme }) => theme.spacing.xs};
 `
 
+export const Title = styled.h1`
+  font-family: ${({ theme }) => theme.typography.fonts.title};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.mx.black};
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+`
+
 export const Subtitle = styled.p`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.md};
@@ -35,7 +45,7 @@ export const Content = styled.div`
   gap: ${({ theme }) => theme.spacing.xl};
 `
 
-export const PlaceholderCard = styled.div`
+export const EmptyState = styled.div`
   background: ${({ theme }) => theme.colors.mx.white};
   border: 2px solid ${({ theme }) => theme.colors.mx.black};
   border-radius: ${({ theme }) => theme.borderRadius.brutalist};
@@ -62,7 +72,7 @@ export const PlaceholderCard = styled.div`
   }
 `
 
-export const PlaceholderTitle = styled.h3`
+export const EmptyStateTitle = styled.h3`
   font-family: ${({ theme }) => theme.typography.fonts.title};
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
@@ -72,7 +82,7 @@ export const PlaceholderTitle = styled.h3`
   letter-spacing: 0.5px;
 `
 
-export const PlaceholderDescription = styled.p`
+export const EmptyStateDescription = styled.p`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.md};
   color: ${({ theme }) => theme.colors.text.secondary};
