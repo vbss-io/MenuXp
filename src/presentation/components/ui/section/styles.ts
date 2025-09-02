@@ -22,34 +22,35 @@ export const SectionContent = styled.div`
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 ${({ theme }) => theme.spacing.md};
 
-  @media (min-width: 640px) {
-    padding: 0 1.5rem;
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    padding: 0 ${({ theme }) => theme.spacing.lg};
   }
 
-  @media (min-width: 1024px) {
-    padding: 0 2rem;
+  @media ${({ theme }) => theme.breakpoints.lg} {
+    padding: 0 ${({ theme }) => theme.spacing.xl};
   }
 `
 
 export const SectionGrid = styled.div`
   display: grid;
-  gap: 3rem;
+  gap: ${({ theme }) => theme.spacing.xl};
   align-items: center;
   width: 100%;
 
-  @media (min-width: 1024px) {
+  @media ${({ theme }) => theme.breakpoints.lg} {
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: ${({ theme }) => theme.spacing.xxl};
   }
 `
 
 export const SectionTextContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: ${({ theme }) => theme.spacing.xl};
   width: 100%;
+  min-width: 0; /* Permite que o conteúdo quebre */
 `
 
 export const SectionVisualContent = styled.div`
@@ -57,4 +58,5 @@ export const SectionVisualContent = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  min-width: 0; /* Permite que o conteúdo quebre */
 `

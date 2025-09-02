@@ -46,8 +46,7 @@ export const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 2px #3b82f620;
+    border-color: ${({ theme }) => theme.colors.mx.red};
   }
 
   &:disabled {

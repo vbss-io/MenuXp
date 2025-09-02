@@ -16,6 +16,13 @@ const StyledPopover = styled(VbssPopover)`
     overflow-y: auto;
     overflow-x: hidden;
 
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE e Edge */
+
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari e Opera */
+    }
+
     &[data-variant='primary'] {
       background-color: ${({ theme }) => theme.colors.mx.white};
       border: 2px solid ${({ theme }) => theme.colors.mx.black};

@@ -28,7 +28,6 @@ export const Breadcrumb = ({ lastPath }: BreadcrumbProps) => {
       orders: 'Pedidos',
       menu: 'Cardápio',
       'menu-items': 'Items do Menu',
-      categories: 'Categorias',
       reports: 'Relatórios',
       missions: 'Missões',
       messages: 'Mensagens',

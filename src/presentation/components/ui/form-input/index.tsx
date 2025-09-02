@@ -46,11 +46,12 @@ export const FormInput: React.FC<FormInputProps> = ({
         {label} {required && '*'}
       </label>
       <Input
+        id={id}
         type={type}
         error={error}
         placeholder={placeholder}
         fontSize={fontSize}
-        {...(register || { id, value, onChange, ...rest })}
+        {...(register ? register : { value, onChange, ...rest })}
       />
     </div>
   )
