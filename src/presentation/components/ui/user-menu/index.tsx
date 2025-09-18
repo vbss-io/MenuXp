@@ -1,5 +1,4 @@
 import { CaretDownIcon, ChartPieIcon, SignOutIcon, UserIcon } from '@phosphor-icons/react'
-import { Button } from '@vbss-ui/button'
 import React from 'react'
 
 import { Avatar } from '@/presentation/components/ui/avatar'
@@ -17,11 +16,11 @@ interface UserMenuProps {
 }
 
 export const UserMenu: React.FC<UserMenuProps> = ({
-  trigger,
-  side = 'bottom',
-  align = 'start',
-  sideOffset = 10,
-  alignOffset = 0
+  trigger
+  // side = 'bottom',
+  // align = 'start',
+  // sideOffset = 10,
+  // alignOffset = 0
 }) => {
   const { user, logout } = useAuth()
 

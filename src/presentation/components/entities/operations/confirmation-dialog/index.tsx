@@ -1,6 +1,6 @@
 import { Button } from '@/presentation/components/ui/button'
 import { Dialog } from '@/presentation/components/ui/dialog'
-import { WarningIcon, XIcon } from '@phosphor-icons/react'
+import { WarningIcon } from '@phosphor-icons/react'
 import styled from 'styled-components'
 
 interface ConfirmationDialogProps {
@@ -59,13 +59,7 @@ export const ConfirmationDialog = ({
       style={{ width: '95%', maxWidth: '500px' }}
       footer={
         <DialogFooter>
-          <CancelButton
-            type="button"
-            variant="ghost"
-            size="lg"
-            onClick={onClose}
-            disabled={isLoading}
-          >
+          <CancelButton type="button" variant="ghost" size="lg" onClick={onClose} disabled={isLoading}>
             {cancelText}
           </CancelButton>
           <ConfirmButton
