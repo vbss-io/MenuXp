@@ -47,6 +47,26 @@ export const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: ${({ theme }) => theme.typography.fonts.title};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
+    letter-spacing: 0.5px;
+  }
+
+  /* Regra global para fonte TANKER com peso regular - apenas títulos */
+  *[style*="font-family: 'Tanker'"], 
+  *[style*="font-family: Tanker"],
+  .tanker-font {
+    font-family: 'Tanker', ${({ theme }) => theme.typography.fonts.title} !important;
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
+  }
+
+  /* Garantir que inputs usem fonte do body */
+  input, textarea, select {
+    font-family: ${({ theme }) => theme.typography.fonts.body} !important;
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
+  }
+
   #root {
     min-height: 100vh;
     width: 100%;

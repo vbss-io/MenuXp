@@ -22,7 +22,6 @@ export const MissionsPage = () => {
     <S.Container>
       <Breadcrumb lastPath="Missões" />
       <S.Header>
-        <S.Subtitle>Gerencie as missões do seu restaurante</S.Subtitle>
       </S.Header>
       <S.Content>
         <S.PlaceholderCard>

@@ -1,4 +1,5 @@
 import type { OperationKPI } from '@/domain/models/operation.model'
+import { InfoTooltip } from '@/presentation/components/ui/info-tooltip'
 import {
   CheckCircleIcon,
   ClockIcon,
@@ -18,6 +19,7 @@ const kpiConfig = [
   {
     key: 'dailyOrders' as keyof OperationKPI,
     label: 'Pedidos do Dia',
+    description: 'Número total de pedidos recebidos hoje',
     icon: ShoppingCartIcon,
     color: '#3b82f6',
     bgColor: '#dbeafe',
@@ -27,6 +29,7 @@ const kpiConfig = [
   {
     key: 'averagePreparationTime' as keyof OperationKPI,
     label: 'Tempo Médio de Preparo',
+    description: 'Tempo médio que leva para preparar um pedido',
     icon: ClockIcon,
     color: '#f59e0b',
     bgColor: '#fef3c7',
@@ -36,6 +39,7 @@ const kpiConfig = [
   {
     key: 'cancellations' as keyof OperationKPI,
     label: 'Cancelamentos',
+    description: 'Pedidos que foram cancelados por algum motivo',
     icon: XCircleIcon,
     color: '#ef4444',
     bgColor: '#fee2e2',
@@ -45,6 +49,7 @@ const kpiConfig = [
   {
     key: 'dailyRevenue' as keyof OperationKPI,
     label: 'Faturamento Diário',
+    description: 'Valor total arrecadado hoje com todos os pedidos',
     icon: CurrencyDollarIcon,
     color: '#22c55e',
     bgColor: '#dcfce7',
@@ -58,6 +63,7 @@ const kpiConfig = [
   {
     key: 'sentForDelivery' as keyof OperationKPI,
     label: 'Saiu para Entrega',
+    description: 'Pedidos que foram enviados para entrega',
     icon: MotorcycleIcon,
     color: '#8b5cf6',
     bgColor: '#ede9fe',
@@ -67,6 +73,7 @@ const kpiConfig = [
   {
     key: 'delivered' as keyof OperationKPI,
     label: 'Entregue',
+    description: 'Pedidos que foram entregues com sucesso',
     icon: CheckCircleIcon,
     color: '#10b981',
     bgColor: '#d1fae5',
@@ -99,7 +106,10 @@ export const OperationKPIs = ({ kpis, isLoading = false }: OperationKPIsProps) =
               <Icon weight="fill" />
             </KPIIcon>
             <KPIInfo>
-              <KPILabel>{config.label}</KPILabel>
+              <KPILabel>
+                {config.label}
+                <InfoTooltip content={config.description} />
+              </KPILabel>
               <KPIValue>
                 {config.format(value)}
                 {config.unit && <KPIUnit>{config.unit}</KPIUnit>}
@@ -116,15 +126,14 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: ${({ theme }) => theme.spacing.lg};
-  margin-top: ${({ theme }) => theme.spacing.lg};
 `
 
 const KPICard = styled.div`
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.lg};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
@@ -132,7 +141,7 @@ const KPICard = styled.div`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: 0 4px 0px ${({ theme }) => theme.colors.mx.black};
   }
 `
 
@@ -161,12 +170,15 @@ const KPILabel = styled.span`
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   color: ${({ theme }) => theme.colors.text.secondary};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
 `
 
 const KPIValue = styled.div`
   font-family: ${({ theme }) => theme.typography.fonts.title};
   font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   color: ${({ theme }) => theme.colors.mx.black};
   display: flex;
   align-items: baseline;

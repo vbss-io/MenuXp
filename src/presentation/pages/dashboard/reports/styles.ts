@@ -37,10 +37,10 @@ export const Content = styled.div`
 
 export const PlaceholderCard = styled.div`
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.xl};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   text-align: center;
   position: relative;
 
@@ -65,7 +65,7 @@ export const PlaceholderCard = styled.div`
 export const PlaceholderTitle = styled.h3`
   font-family: ${({ theme }) => theme.typography.fonts.title};
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   color: ${({ theme }) => theme.colors.mx.black};
   margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
   text-transform: uppercase;

@@ -33,15 +33,15 @@ export const TabsContainer = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.lg};
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   overflow: hidden;
 `
 
 export const TabsHeader = styled.div`
   display: flex;
-  border-bottom: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mx.black};
   background: ${({ theme }) => theme.colors.mx.white};
   overflow-x: auto;
 
@@ -62,10 +62,10 @@ export const TabsHeader = styled.div`
 export const TabButton = styled.button<{ $isActive: boolean }>`
   background: ${({ theme, $isActive }) => ($isActive ? theme.colors.mx.red : theme.colors.mx.white)};
   border: none;
-  border-right: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border-right: 1px solid ${({ theme }) => theme.colors.mx.black};
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-family: ${({ theme }) => theme.typography.fonts.title};
   color: ${({ theme, $isActive }) => ($isActive ? theme.colors.mx.white : theme.colors.mx.black)};
   cursor: pointer;
@@ -79,7 +79,7 @@ export const TabButton = styled.button<{ $isActive: boolean }>`
     background: ${({ theme, $isActive }) => ($isActive ? theme.colors.mx.red : theme.colors.mx.red)}20;
     color: ${({ theme, $isActive }) => ($isActive ? theme.colors.mx.white : theme.colors.mx.red)};
     transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: 0 4px 0px ${({ theme }) => theme.colors.mx.black};
   }
 
   &:active {
@@ -121,7 +121,7 @@ export const TabPlaceholderIcon = styled.div`
 
 export const TabPlaceholderTitle = styled.h3`
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-family: ${({ theme }) => theme.typography.fonts.title};
   margin: 0 0 ${({ theme }) => theme.spacing.sm} 0;
   color: ${({ theme }) => theme.colors.mx.black};

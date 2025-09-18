@@ -14,7 +14,10 @@ import * as S from '../styles'
 
 const resetPasswordSchema = z
   .object({
-    password: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres'),
+    password: z
+      .string()
+      .min(6, 'A senha deve ter pelo menos 6 caracteres')
+      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/, 'A senha deve conter pelo menos uma letra minúscula, uma maiúscula e um número'),
     passwordConfirm: z.string().min(6, 'A senha deve ter pelo menos 6 caracteres')
   })
   .refine((data) => data.password === data.passwordConfirm, {
@@ -68,26 +71,40 @@ export const ResetPassword = () => {
   return (
     <S.Container>
       <S.LeftColumn>
-        <S.Title>Redefinir Senha</S.Title>
-        <S.Divider />
-        <S.Subtitle>Criar nova senha</S.Subtitle>
-        <S.Text>Digite sua nova senha abaixo.</S.Text>
+        <S.Title>
+          Redefinir <span style={{ color: '#FEBB11' }}>Senha</span>
+        </S.Title>
+        <img 
+          src="/images/img-tela-login.svg" 
+          alt="Food Service Gamificado" 
+          style={{ 
+            width: '100%', 
+            maxWidth: '300px', 
+            margin: '16px 0',
+            height: 'auto'
+          }} 
+        />
+        <S.Text>#1 Food Service Gamificado do Brasil</S.Text>
       </S.LeftColumn>
       <S.RightColumn>
-        <S.Card>
-          <S.CardTitle>
-            <S.IconWrapper>
-              <LockKeyIcon size={48} weight="duotone" />
-            </S.IconWrapper>
-            Redefina sua senha
-          </S.CardTitle>
+        <S.ContentWrapper>
+          <S.LoginLogo>
+            <img src="/images/menuxp-logo.svg" alt="MenuXP" />
+          </S.LoginLogo>
+          <S.Card>
+            <S.CardTitle>
+              <S.IconWrapper>
+                <LockKeyIcon size={48} weight="duotone" />
+              </S.IconWrapper>
+              Redefina sua senha
+            </S.CardTitle>
           <S.Form onSubmit={handleSubmit(onSubmit)}>
             <FormInput
               id="password"
               label="Nova Senha"
               type="password"
               error={errors.password?.message}
-              placeholder="Digite sua nova senha"
+              placeholder="Digite sua senha"
               fontSize="sm"
               required
               register={register('password')}
@@ -97,7 +114,7 @@ export const ResetPassword = () => {
               label="Confirmar Senha"
               type="password"
               error={errors.passwordConfirm?.message}
-              placeholder="Confirme sua nova senha"
+              placeholder="Confirme sua senha"
               fontSize="sm"
               required
               register={register('passwordConfirm')}
@@ -106,6 +123,7 @@ export const ResetPassword = () => {
               type="submit"
               disabled={isSubmitting}
               variant="primary"
+              size="lg"
               loading={isSubmitting}
               loadingText="Redefinindo senha..."
             >
@@ -113,9 +131,10 @@ export const ResetPassword = () => {
             </Button>
           </S.Form>
           <S.InfoText>
-            <S.Link to="/login">Voltar para o login</S.Link>
+            <S.Link to="/login" aria-label="Voltar para a página de login">Voltar para o login</S.Link>
           </S.InfoText>
-        </S.Card>
+          </S.Card>
+        </S.ContentWrapper>
       </S.RightColumn>
     </S.Container>
   )

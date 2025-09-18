@@ -75,21 +75,35 @@ export const Register = () => {
   return (
     <S.Container>
       <S.LeftColumn>
-        <S.Title>Criar Conta</S.Title>
-        <S.Divider />
-        <S.Subtitle>Junte-se a nós hoje</S.Subtitle>
-        <S.Text>Cadastre-se para acessar todos os recursos.</S.Text>
+        <S.Title>
+          <span style={{ color: '#FEBB11' }}>Criar</span> Conta
+        </S.Title>
+        <img 
+          src="/images/img-tela-login.svg" 
+          alt="Food Service Gamificado" 
+          style={{ 
+            width: '100%', 
+            maxWidth: '300px', 
+            margin: '16px 0',
+            height: 'auto'
+          }} 
+        />
+        <S.Text>#1 Food Service Gamificado do Brasil</S.Text>
       </S.LeftColumn>
       <S.RightColumn>
-        <S.Card>
-          <S.CardTitle>Cadastre-se</S.CardTitle>
+        <S.ContentWrapper>
+          <S.LoginLogo>
+            <img src="/images/menuxp-logo.svg" alt="MenuXP" />
+          </S.LoginLogo>
+          <S.Card>
+            <S.CardTitle>Cadastre-se</S.CardTitle>
           <S.Form onSubmit={handleSubmit(onSubmit)}>
             <FormInput
               id="name"
               label="Nome"
               type="text"
               error={errors.name?.message}
-              placeholder="Escolha um nome de usuário"
+              placeholder="Digite seu nome completo"
               fontSize="sm"
               required
               register={register('name')}
@@ -99,7 +113,7 @@ export const Register = () => {
               label="E-mail"
               type="email"
               error={errors.email?.message}
-              placeholder="Digite seu e-mail"
+              placeholder="Digite seu E-mail"
               fontSize="sm"
               required
               register={register('email')}
@@ -109,7 +123,7 @@ export const Register = () => {
               label="Senha"
               type="password"
               error={errors.password?.message}
-              placeholder="Crie uma senha"
+              placeholder="Digite sua senha"
               fontSize="sm"
               required
               register={register('password')}
@@ -130,7 +144,7 @@ export const Register = () => {
                 label={
                   <>
                     Eu aceito os&nbsp;
-                    <S.Link to="/terms" target="_blank">
+                    <S.Link to="/terms" target="_blank" aria-label="Abrir termos e condições em nova aba">
                       termos e condições
                     </S.Link>
                   </>
@@ -147,6 +161,7 @@ export const Register = () => {
               type="submit"
               disabled={isSubmitting}
               variant="primary"
+              size="lg"
               loading={isSubmitting}
               loadingText="Criando conta..."
             >
@@ -154,9 +169,10 @@ export const Register = () => {
             </Button>
           </S.Form>
           <S.InfoText>
-            Já tem uma conta? <S.Link to="/login">Entrar</S.Link>
+            Já tem uma conta? <S.Link to="/login" aria-label="Já tem uma conta? Clique para entrar">Entrar</S.Link>
           </S.InfoText>
-        </S.Card>
+          </S.Card>
+        </S.ContentWrapper>
       </S.RightColumn>
     </S.Container>
   )

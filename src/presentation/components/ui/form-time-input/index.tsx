@@ -25,7 +25,7 @@ const Container = styled.div`
 
 const Label = styled.label`
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-family: ${({ theme }) => theme.typography.fonts.title};
   color: ${({ theme }) => theme.colors.mx.black};
   text-transform: uppercase;
@@ -40,8 +40,8 @@ const TimeInput = styled.input<{ $hasError?: boolean }>`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   color: ${({ theme }) => theme.colors.mx.black};
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme, $hasError }) => ($hasError ? theme.colors.mx.red : theme.colors.mx.black)};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme, $hasError }) => ($hasError ? theme.colors.mx.red : theme.colors.mx.black)};
+  border-radius: ${({ theme }) => theme.borderRadius.xs};
   outline: none;
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
   line-height: ${({ theme }) => theme.typography.lineHeights.normal};

@@ -64,19 +64,33 @@ export const ForgotPassword = () => {
   return (
     <S.Container>
       <S.LeftColumn>
-        <S.Title>Esqueceu a Senha</S.Title>
-        <S.Divider />
-        <S.Subtitle>Redefina sua senha</S.Subtitle>
-        <S.Text>Digite seu endereço de e-mail e enviaremos instruções para redefinir sua senha.</S.Text>
+        <S.Title>
+          Esqueceu a <span style={{ color: '#FEBB11' }}>Senha</span>
+        </S.Title>
+        <img 
+          src="/images/img-tela-login.svg" 
+          alt="Food Service Gamificado" 
+          style={{ 
+            width: '100%', 
+            maxWidth: '300px', 
+            margin: '16px 0',
+            height: 'auto'
+          }} 
+        />
+        <S.Text>#1 Food Service Gamificado do Brasil</S.Text>
       </S.LeftColumn>
       <S.RightColumn>
-        <S.Card>
-          <S.CardTitle>
-            <S.IconWrapper>
-              <EnvelopeSimpleOpenIcon size={48} weight="duotone" />
-            </S.IconWrapper>
-            Redefina sua senha
-          </S.CardTitle>
+        <S.ContentWrapper>
+          <S.LoginLogo>
+            <img src="/images/menuxp-logo.svg" alt="MenuXP" />
+          </S.LoginLogo>
+          <S.Card>
+            <S.CardTitle>
+              <S.IconWrapper>
+                <EnvelopeSimpleOpenIcon size={48} weight="duotone" />
+              </S.IconWrapper>
+              Redefina sua senha
+            </S.CardTitle>
           {isSuccess ? (
             <S.Description>
               <p>Enviamos um link de redefinição de senha para seu e-mail.</p>
@@ -84,9 +98,9 @@ export const ForgotPassword = () => {
               <S.InfoText>
                 Não recebeu o e-mail?{' '}
                 {isResendDisabled ? (
-                  <S.ResendLink disabled>Reenviar disponível em {timer}s</S.ResendLink>
+                  <S.ResendLink disabled aria-label={`Reenviar disponível em ${timer} segundos`}>Reenviar disponível em {timer}s</S.ResendLink>
                 ) : (
-                  <S.ResendLink onClick={handleSubmit(onSubmit)}>clique aqui para reenviar</S.ResendLink>
+                  <S.ResendLink onClick={handleSubmit(onSubmit)} aria-label="Clique aqui para reenviar link de redefinição de senha">clique aqui para reenviar</S.ResendLink>
                 )}
               </S.InfoText>
             </S.Description>
@@ -97,7 +111,7 @@ export const ForgotPassword = () => {
                 label="E-mail"
                 type="email"
                 error={errors.email?.message}
-                placeholder="Digite seu endereço de e-mail"
+                placeholder="Digite seu E-mail"
                 fontSize="sm"
                 required
                 register={register('email')}
@@ -106,6 +120,7 @@ export const ForgotPassword = () => {
                 type="submit"
                 disabled={isSubmitting || isResendDisabled}
                 variant="primary"
+                size="lg"
                 loading={isSubmitting}
                 loadingText="Enviando..."
               >
@@ -117,9 +132,10 @@ export const ForgotPassword = () => {
             </S.Form>
           )}
           <S.InfoText>
-            <S.Link to="/login">Voltar para o login</S.Link>
+            <S.Link to="/login" aria-label="Voltar para a página de login">Voltar para o login</S.Link>
           </S.InfoText>
-        </S.Card>
+          </S.Card>
+        </S.ContentWrapper>
       </S.RightColumn>
     </S.Container>
   )

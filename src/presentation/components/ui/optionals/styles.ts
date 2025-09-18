@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const SectionTitle = styled.h3`
   font-size: ${({ theme }) => theme.typography.fontSizes.md};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-family: ${({ theme }) => theme.typography.fonts.title};
   color: ${({ theme }) => theme.colors.mx.black};
   margin: 0;
@@ -26,16 +26,16 @@ export const Description = styled.p`
 `
 
 export const OptionalContainer = styled.div`
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.md};
   background: ${({ theme }) => theme.colors.mx.white};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
 
   &:hover {
     transform: translateY(-1px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: 0 4px 0px ${({ theme }) => theme.colors.mx.black};
   }
 `
 

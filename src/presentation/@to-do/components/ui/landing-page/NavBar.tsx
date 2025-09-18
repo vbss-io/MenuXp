@@ -41,7 +41,7 @@ const NavBar: React.FC = () => {
             >
               <div className="flex items-center justify-center">
                 <img
-                  src="public/images/menuxp-logo.svg"
+                  src="/images/menuxp-logo.svg"
                   alt="Seu restaurante merece um app próprio."
                   className="w-28 h-auto"
                 />

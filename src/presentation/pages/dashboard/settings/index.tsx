@@ -72,7 +72,6 @@ export const SettingsPage = () => {
     <S.Container>
       <Breadcrumb lastPath="Configurações" />
       <S.Header>
-        <S.Subtitle>Gerencie as configurações do seu restaurante</S.Subtitle>
       </S.Header>
       <S.TabsContainer>
         <S.TabsHeader>

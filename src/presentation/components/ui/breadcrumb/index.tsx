@@ -2,6 +2,8 @@ import { CaretRightIcon, HouseIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
+import { InfoTooltip } from '../info-tooltip'
+import { UserMenu } from '../user-menu'
 import * as S from './styles'
 
 interface BreadcrumbProps {
@@ -37,6 +39,21 @@ export const Breadcrumb = ({ lastPath }: BreadcrumbProps) => {
     return titles[path] || path
   }
 
+  const getPageDescription = (path: string) => {
+    const descriptions: Record<string, string> = {
+      dashboard: 'Gerencie a operação do seu restaurante',
+      orders: 'Visualize e gerencie todos os pedidos recebidos',
+      menu: 'Configure e personalize o cardápio do seu restaurante',
+      'menu-items': 'Adicione e edite os itens disponíveis no seu cardápio',
+      reports: 'Acompanhe relatórios e métricas de performance',
+      missions: 'Complete missões e ganhe recompensas',
+      messages: 'Gerencie mensagens e comunicação com clientes',
+      settings: 'Configure as preferências e configurações do sistema',
+      'create-restaurant': 'Configure os dados básicos do seu restaurante'
+    }
+    return descriptions[path] || 'Informações sobre esta página'
+  }
+
   return (
     <S.Container>
       <S.BreadcrumbList>
@@ -51,21 +68,27 @@ export const Breadcrumb = ({ lastPath }: BreadcrumbProps) => {
               <S.BreadcrumbItem>
                 <CaretRightIcon size={16} weight="bold" />
                 <S.CurrentPage>{lastPath || getPageTitle(pathnames[pathnames.length - 1])}</S.CurrentPage>
+                <InfoTooltip 
+                  content={getPageDescription(pathnames[pathnames.length - 1])}
+                  position="right"
+                />
               </S.BreadcrumbItem>
             )
-          : pathnames.map((value, index) => {
-              const to = `/${pathnames.slice(0, index + 1).join('/')}`
-              const isLast = index === pathnames.length - 1
-              const displayValue = isLast && lastPath ? lastPath : getPageTitle(value)
-
-              return (
-                <S.BreadcrumbItem key={to}>
-                  <CaretRightIcon size={16} weight="bold" />
-                  {isLast ? <S.CurrentPage>{displayValue}</S.CurrentPage> : <Link to={to}>{displayValue}</Link>}
-                </S.BreadcrumbItem>
-              )
-            })}
+          : pathnames.length > 0 && (
+              <S.BreadcrumbItem>
+                <CaretRightIcon size={16} weight="bold" />
+                <S.CurrentPage>{lastPath || getPageTitle(pathnames[pathnames.length - 1])}</S.CurrentPage>
+                <InfoTooltip 
+                  content={getPageDescription(pathnames[pathnames.length - 1])}
+                  position="right"
+                />
+              </S.BreadcrumbItem>
+            )}
       </S.BreadcrumbList>
+      
+      <S.UserMenuWrapper>
+        <UserMenu />
+      </S.UserMenuWrapper>
     </S.Container>
   )
 }
