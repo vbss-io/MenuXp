@@ -3,8 +3,8 @@ import { motion } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
+import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
 import { AddSectionUsecase } from '@/application/menu-layouts/sections/add-section.usecase'
 import { UpdateCategoriesSectionUsecase } from '@/application/menu-layouts/sections/update-categories-section.usecase'
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
@@ -13,7 +13,7 @@ import type { MenuSectionDefinition } from '@/domain/models/menu-section-definit
 import { Button } from '@/presentation/components/ui/button'
 import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { Loading } from '@/presentation/components/ui/loading'
-import { validateSection, getCategoriesConfig } from '@/presentation/hooks/use-menu-layouts'
+import { getCategoriesConfig, validateSection } from '@/presentation/hooks/use-menu-layouts'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
 import * as S from '../styles'

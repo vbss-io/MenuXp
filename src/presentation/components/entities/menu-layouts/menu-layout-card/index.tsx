@@ -1,4 +1,4 @@
-import { TrashIcon, CheckIcon } from '@phosphor-icons/react'
+import { CheckIcon, TrashIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 
 import { MenuLayoutStatus } from '@/domain/enums/menu-layouts/menu-layout-status.enum'

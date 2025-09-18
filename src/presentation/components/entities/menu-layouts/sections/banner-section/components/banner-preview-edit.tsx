@@ -2,7 +2,7 @@ import { ImageIcon, PencilIcon, TrashIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
-import type { MenuSection, BannerConfig } from '@/domain/models/menu-layout.model'
+import type { BannerConfig, MenuSection } from '@/domain/models/menu-layout.model'
 import { Button } from '@/presentation/components/ui/button'
 
 import * as S from '../styles'
