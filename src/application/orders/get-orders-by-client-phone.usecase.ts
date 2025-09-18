@@ -17,7 +17,6 @@ export class GetOrdersByClientPhoneUsecase {
 
   async execute(params: GetOrdersByClientPhoneUsecaseInput): Promise<Order[]> {
     const url = this.url.replace(':phone', params.phone).replace(':restaurantId', params.restaurantId)
-
     const response = await this.httpClient.get<Order[]>({
       url
     })

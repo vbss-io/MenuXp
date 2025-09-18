@@ -17,7 +17,6 @@ export class GetOrderBySlugAndCodeUsecase {
 
   async execute(params: GetOrderBySlugAndCodeUsecaseInput): Promise<Order> {
     const url = this.url.replace(':restaurantSlug', params.restaurantSlug).replace(':orderCode', params.orderCode)
-
     const response = await this.httpClient.get<Order>({
       url
     })

@@ -51,7 +51,6 @@ export const AddressForm = () => {
     }
   })
 
-  // Atualiza os valores do formulário quando o restaurant for carregado
   useEffect(() => {
     if (restaurant?.address) {
       reset({

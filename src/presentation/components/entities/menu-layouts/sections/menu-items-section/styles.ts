@@ -84,15 +84,15 @@ export const MenuItemsSelectionGrid = styled.div`
 `
 
 export const MenuItemCard = styled.div<{
-  selected?: boolean
-  layout?: string
-  primaryColor?: string
-  secondaryColor?: string
+  $selected?: boolean
+  $layout?: string
+  $primaryColor?: string
+  $secondaryColor?: string
 }>`
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ selected, theme }) => (selected ? theme.colors.mx.blue : theme.colors.mx.gray[300])};
+  border: 2px solid ${({ $selected, theme }) => ($selected ? theme.colors.mx.blue : theme.colors.mx.gray[300])};
   border-radius: ${({ theme }) => theme.borderRadius.brutalist};
   overflow: hidden;
   cursor: pointer;
@@ -108,8 +108,8 @@ export const MenuItemCard = styled.div<{
     box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
   }
 
-  ${({ layout }) =>
-    layout === 'default' &&
+  ${({ $layout }) =>
+    $layout === 'default' &&
     `
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -121,8 +121,8 @@ export const MenuItemCard = styled.div<{
       max-width: 280px;
     }
   `}
-  ${({ layout }) =>
-    layout === 'dark' &&
+  ${({ $layout }) =>
+    $layout === 'dark' &&
     `
     background: #1A1A1F;
     border: none;
@@ -136,11 +136,11 @@ export const MenuItemCard = styled.div<{
       max-width: 280px;
     }
   `}
-  ${({ layout, theme, primaryColor }) =>
-    layout === 'clean' &&
+  ${({ $layout, theme, $primaryColor }) =>
+    $layout === 'clean' &&
     `
     background: ${theme.colors.mx.white};
-    border: 1px solid ${primaryColor || theme.colors.mx.gray[200]};
+    border: 1px solid ${$primaryColor || theme.colors.mx.gray[200]};
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     min-width: 260px;
@@ -151,8 +151,8 @@ export const MenuItemCard = styled.div<{
       max-width: 260px;
     }
   `}
-  ${({ layout }) =>
-    layout === 'square' &&
+  ${({ $layout }) =>
+    $layout === 'square' &&
     `
     border-radius: 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -167,14 +167,14 @@ export const MenuItemCard = styled.div<{
 `
 
 export const DiscountChip = styled.div<{
-  layout?: string
-  primaryColor?: string
-  secondaryColor?: string
+  $layout?: string
+  $primaryColor?: string
+  $secondaryColor?: string
 }>`
   position: absolute;
   top: 8px;
   left: 8px;
-  background: ${({ primaryColor }) => primaryColor || '#FF6B00'};
+  background: ${({ $primaryColor }) => $primaryColor || '#FF6B00'};
   color: white;
   padding: 4px 8px;
   border-radius: 12px;
@@ -185,55 +185,55 @@ export const DiscountChip = styled.div<{
   align-items: center;
   gap: 4px;
 
-  ${({ layout }) =>
-    layout === 'default' &&
+  ${({ $layout }) =>
+    $layout === 'default' &&
     `
     background: #9933FF;
     border-radius: 12px;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'dark' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'dark' &&
     `
-    background: ${primaryColor || '#FF6B00'};
+    background: ${$primaryColor || '#FF6B00'};
     border-radius: 12px;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'clean' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'clean' &&
     `
-    background: ${primaryColor || '#FF6B00'};
+    background: ${$primaryColor || '#FF6B00'};
     border-radius: 8px;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'square' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'square' &&
     `
-    background: ${primaryColor || '#FF6B00'};
+    background: ${$primaryColor || '#FF6B00'};
     border-radius: 0;
   `}
 `
 
-export const MenuItemImage = styled.img<{ layout?: string }>`
+export const MenuItemImage = styled.div<{ $layout?: string }>`
   width: 100%;
   height: 200px;
   object-fit: cover;
   background: ${({ theme }) => theme.colors.mx.gray[100]};
 
-  ${({ layout }) =>
-    layout === 'default' &&
+  ${({ $layout }) =>
+    $layout === 'default' &&
     `
     border-radius: 12px 12px 0 0;
   `}
-  ${({ layout }) =>
-    layout === 'dark' &&
+  ${({ $layout }) =>
+    $layout === 'dark' &&
     `
     border-radius: 12px 12px 0 0;
   `}
-  ${({ layout }) =>
-    layout === 'clean' &&
+  ${({ $layout }) =>
+    $layout === 'clean' &&
     `
     border-radius: 8px 8px 0 0;
   `}
-  ${({ layout }) =>
-    layout === 'square' &&
+  ${({ $layout }) =>
+    $layout === 'square' &&
     `
     border-radius: 0;
   `}
@@ -246,7 +246,7 @@ export const MenuItemInfo = styled.div`
   flex-direction: column;
 `
 
-export const MenuItemContent = styled.div<{ layout?: string }>`
+export const MenuItemContent = styled.div<{ $layout?: string }>`
   flex: 1;
   min-width: 0;
   display: flex;
@@ -254,33 +254,33 @@ export const MenuItemContent = styled.div<{ layout?: string }>`
   gap: ${({ theme }) => theme.spacing.sm};
   padding: ${({ theme }) => theme.spacing.md};
 
-  ${({ layout }) =>
-    layout === 'default' &&
+  ${({ $layout }) =>
+    $layout === 'default' &&
     `
     padding: 16px;
   `}
-  ${({ layout }) =>
-    layout === 'dark' &&
+  ${({ $layout }) =>
+    $layout === 'dark' &&
     `
     padding: 16px;
     background: #1A1A1F;
   `}
-  ${({ layout }) =>
-    layout === 'clean' &&
+  ${({ $layout }) =>
+    $layout === 'clean' &&
     `
     padding: 12px;
   `}
-  ${({ layout }) =>
-    layout === 'square' &&
+  ${({ $layout }) =>
+    $layout === 'square' &&
     `
     padding: 16px;
   `}
 `
 
 export const MenuItemName = styled.div<{
-  layout?: string
-  primaryColor?: string
-  secondaryColor?: string
+  $layout?: string
+  $primaryColor?: string
+  $secondaryColor?: string
 }>`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
@@ -289,37 +289,37 @@ export const MenuItemName = styled.div<{
   margin-bottom: ${({ theme }) => theme.spacing.xs};
   word-break: break-word;
 
-  ${({ layout, primaryColor }) =>
-    layout === 'default' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'default' &&
     `
-    color: ${primaryColor || '#FF8C00'};
+    color: ${$primaryColor || '#FF8C00'};
     font-size: 18px;
     font-weight: bold;
   `}
-  ${({ layout }) =>
-    layout === 'dark' &&
+  ${({ $layout }) =>
+    $layout === 'dark' &&
     `
     color: white;
     font-size: 18px;
     font-weight: bold;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'clean' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'clean' &&
     `
-    color: ${primaryColor || '#333'};
+    color: ${$primaryColor || '#333'};
     font-size: 16px;
     font-weight: 600;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'square' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'square' &&
     `
-    color: ${primaryColor || '#333'};
+    color: ${$primaryColor || '#333'};
     font-size: 18px;
     font-weight: bold;
   `}
 `
 
-export const MenuItemDescription = styled.div<{ layout?: string }>`
+export const MenuItemDescription = styled.div<{ $layout?: string }>`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   color: ${({ theme }) => theme.colors.text.secondary};
@@ -331,26 +331,26 @@ export const MenuItemDescription = styled.div<{ layout?: string }>`
   overflow: hidden;
   flex: 1;
 
-  ${({ layout }) =>
-    layout === 'default' &&
+  ${({ $layout }) =>
+    $layout === 'default' &&
     `
     color: #666;
     font-size: 14px;
   `}
-  ${({ layout }) =>
-    layout === 'dark' &&
+  ${({ $layout }) =>
+    $layout === 'dark' &&
     `
     color: #CCC;
     font-size: 14px;
   `}
-  ${({ layout }) =>
-    layout === 'clean' &&
+  ${({ $layout }) =>
+    $layout === 'clean' &&
     `
     color: #666;
     font-size: 14px;
   `}
-  ${({ layout }) =>
-    layout === 'square' &&
+  ${({ $layout }) =>
+    $layout === 'square' &&
     `
     color: #666;
     font-size: 14px;
@@ -374,7 +374,7 @@ export const MenuItemCategory = styled.div`
   }
 `
 
-export const MenuItemFooter = styled.div<{ layout?: string }>`
+export const MenuItemFooter = styled.div<{ $layout?: string }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -383,143 +383,143 @@ export const MenuItemFooter = styled.div<{ layout?: string }>`
 `
 
 export const MenuItemPrice = styled.div<{
-  layout?: string
-  primaryColor?: string
-  secondaryColor?: string
+  $layout?: string
+  $primaryColor?: string
+  $secondaryColor?: string
 }>`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
   flex-wrap: wrap;
 
-  ${({ layout }) =>
-    layout === 'default' &&
+  ${({ $layout }) =>
+    $layout === 'default' &&
     `
     gap: 8px;
   `}
-  ${({ layout }) =>
-    layout === 'dark' &&
+  ${({ $layout }) =>
+    $layout === 'dark' &&
     `
     gap: 8px;
   `}
-  ${({ layout }) =>
-    layout === 'clean' &&
+  ${({ $layout }) =>
+    $layout === 'clean' &&
     `
     gap: 8px;
   `}
-  ${({ layout }) =>
-    layout === 'square' &&
+  ${({ $layout }) =>
+    $layout === 'square' &&
     `
     gap: 8px;
   `}
 `
 
 export const CurrentPrice = styled.span<{
-  layout?: string
-  primaryColor?: string
-  secondaryColor?: string
+  $layout?: string
+  $primaryColor?: string
+  $secondaryColor?: string
 }>`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: 18px;
   font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-  color: ${({ primaryColor }) => primaryColor || '#FF8C00'};
+  color: ${({ $primaryColor }) => $primaryColor || '#FF8C00'};
 
-  ${({ layout, primaryColor }) =>
-    layout === 'default' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'default' &&
     `
-    color: ${primaryColor || '#FF8C00'};
+    color: ${$primaryColor || '#FF8C00'};
     font-size: 20px;
     font-weight: bold;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'dark' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'dark' &&
     `
-    color: ${primaryColor || '#FF8C00'};
+    color: ${$primaryColor || '#FF8C00'};
     font-size: 20px;
     font-weight: bold;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'clean' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'clean' &&
     `
-    color: ${primaryColor || '#FF8C00'};
+    color: ${$primaryColor || '#FF8C00'};
     font-size: 18px;
     font-weight: 600;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'square' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'square' &&
     `
-    color: ${primaryColor || '#FF8C00'};
+    color: ${$primaryColor || '#FF8C00'};
     font-size: 20px;
     font-weight: bold;
   `}
 `
 
 export const DiscountPrice = styled.span<{
-  layout?: string
-  primaryColor?: string
-  secondaryColor?: string
+  $layout?: string
+  $primaryColor?: string
+  $secondaryColor?: string
 }>`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: 18px;
   font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-  color: ${({ primaryColor }) => primaryColor || '#FF8C00'};
+  color: ${({ $primaryColor }) => $primaryColor || '#FF8C00'};
 
-  ${({ layout, primaryColor }) =>
-    layout === 'default' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'default' &&
     `
-    color: ${primaryColor || '#FF8C00'};
+    color: ${$primaryColor || '#FF8C00'};
     font-size: 20px;
     font-weight: bold;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'dark' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'dark' &&
     `
-    color: ${primaryColor || '#FF8C00'};
+    color: ${$primaryColor || '#FF8C00'};
     font-size: 20px;
     font-weight: bold;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'clean' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'clean' &&
     `
-    color: ${primaryColor || '#FF8C00'};
+    color: ${$primaryColor || '#FF8C00'};
     font-size: 18px;
     font-weight: 600;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'square' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'square' &&
     `
-    color: ${primaryColor || '#FF8C00'};
+    color: ${$primaryColor || '#FF8C00'};
     font-size: 20px;
     font-weight: bold;
   `}
 `
 
-export const OriginalPrice = styled.span<{ layout?: string }>`
+export const OriginalPrice = styled.span<{ $layout?: string }>`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   color: ${({ theme }) => theme.colors.text.secondary};
   text-decoration: line-through;
 
-  ${({ layout }) =>
-    layout === 'default' &&
+  ${({ $layout }) =>
+    $layout === 'default' &&
     `
     color: #999;
     font-size: 14px;
   `}
-  ${({ layout }) =>
-    layout === 'dark' &&
+  ${({ $layout }) =>
+    $layout === 'dark' &&
     `
     color: #FF0000;
     font-size: 14px;
   `}
-  ${({ layout }) =>
-    layout === 'clean' &&
+  ${({ $layout }) =>
+    $layout === 'clean' &&
     `
     color: #999;
     font-size: 14px;
   `}
-  ${({ layout }) =>
-    layout === 'square' &&
+  ${({ $layout }) =>
+    $layout === 'square' &&
     `
     color: #999;
     font-size: 14px;
@@ -527,9 +527,9 @@ export const OriginalPrice = styled.span<{ layout?: string }>`
 `
 
 export const AddToCartButton = styled.button<{
-  layout?: string
-  primaryColor?: string
-  secondaryColor?: string
+  $layout?: string
+  $primaryColor?: string
+  $secondaryColor?: string
 }>`
   display: flex;
   align-items: center;
@@ -538,41 +538,41 @@ export const AddToCartButton = styled.button<{
   height: 40px;
   border: none;
   border-radius: 8px;
-  background: ${({ primaryColor }) => primaryColor || '#FF8C00'};
+  background: ${({ $primaryColor }) => $primaryColor || '#FF8C00'};
   color: white;
   cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
 
   &:hover {
-    background: ${({ secondaryColor }) => secondaryColor || '#FF6B00'};
+    background: ${({ $secondaryColor }) => $secondaryColor || '#FF6B00'};
     transform: scale(1.05);
   }
 
-  ${({ layout, primaryColor }) =>
-    layout === 'default' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'default' &&
     `
-    background: ${primaryColor || '#FF8C00'};
+    background: ${$primaryColor || '#FF8C00'};
     border-radius: 8px;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'dark' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'dark' &&
     `
-    background: ${primaryColor || '#FF8C00'};
+    background: ${$primaryColor || '#FF8C00'};
     border-radius: 8px;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'clean' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'clean' &&
     `
     background: white;
-    border: 1px solid ${primaryColor || '#FF8C00'};
-    color: ${primaryColor || '#FF8C00'};
+    border: 1px solid ${$primaryColor || '#FF8C00'};
+    color: ${$primaryColor || '#FF8C00'};
     border-radius: 8px;
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'square' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'square' &&
     `
-    background: ${primaryColor || '#FF8C00'};
+    background: ${$primaryColor || '#FF8C00'};
     border-radius: 0;
   `}
 `
@@ -703,7 +703,6 @@ export const ModalFooter = styled.div`
   border-top: 2px solid ${({ theme }) => theme.colors.mx.gray[300]};
 `
 
-// Preview Components
 export const PreviewContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -746,7 +745,6 @@ export const PreviewContent = styled.div`
   padding: 0;
 `
 
-// View Components
 export const ViewContainer = styled.div`
   background: ${({ theme }) => theme.colors.mx.white};
   border-radius: ${({ theme }) => theme.borderRadius.brutalist};
@@ -769,7 +767,7 @@ export const SectionTitle = styled.div`
   }
 `
 
-export const MenuItemsGrid = styled.div<{ layout?: string; isDragging?: boolean }>`
+export const MenuItemsGrid = styled.div<{ $layout?: string; isDragging?: boolean }>`
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
@@ -783,8 +781,8 @@ export const MenuItemsGrid = styled.div<{ layout?: string; isDragging?: boolean 
     display: none;
   }
 
-  ${({ layout }) => {
-    switch (layout) {
+  ${({ $layout }) => {
+    switch ($layout) {
       case 'default':
         return `
           gap: 16px;
@@ -841,7 +839,6 @@ export const EmptyStateDescription = styled.p`
   line-height: 1.5;
 `
 
-// Slide View Components
 export const SlideOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -920,4 +917,104 @@ export const SlideGrid = styled.div`
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
+`
+
+export const MenuItemsPreviewList = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  overflow-x: auto;
+  padding: ${({ theme }) => theme.spacing.sm} 0;
+`
+
+export const MenuItemPreviewItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
+  min-width: 80px;
+  flex-shrink: 0;
+`
+
+export const MenuItemPreviewImage = styled.div`
+  width: 60px;
+  height: 60px;
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  overflow: hidden;
+  background: ${({ theme }) => theme.colors.mx.gray[100]};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  div {
+    font-family: ${({ theme }) => theme.typography.fonts.body};
+    font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+    color: ${({ theme }) => theme.colors.text.secondary};
+    text-align: center;
+    padding: ${({ theme }) => theme.spacing.xs};
+  }
+`
+
+export const MenuItemPreviewName = styled.div`
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  color: ${({ theme }) => theme.colors.text.primary};
+  text-align: center;
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
+export const MoreItemsIndicator = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  background: ${({ theme }) => theme.colors.mx.gray[200]};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  color: ${({ theme }) => theme.colors.text.secondary};
+`
+
+export const ConfigurationPreview = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing.md};
+  background: ${({ theme }) => theme.colors.mx.gray[50]};
+  border: 2px solid ${({ theme }) => theme.colors.mx.gray[300]};
+  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+`
+
+export const ConfigurationItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+`
+
+export const ConfigurationLabel = styled.span`
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.text.secondary};
+`
+
+export const ConfigurationValue = styled.span`
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  color: ${({ theme }) => theme.colors.text.primary};
 `

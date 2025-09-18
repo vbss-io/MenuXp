@@ -8,8 +8,8 @@ import {
 import type { Restaurant } from '@/domain/models/restaurant.model'
 import type { LocalStorage } from '@/domain/storage/local-storage'
 import { Registry } from '@/infra/dependency-injection/registry'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { RestaurantContext } from '@/presentation/contexts/restaurant-context'
+import { useAuth } from '@/presentation/hooks/use-auth'
 
 interface RestaurantProviderProps {
   children: React.ReactNode
@@ -118,14 +118,6 @@ export const RestaurantProvider = ({ children }: RestaurantProviderProps) => {
     [restaurant, localStorage]
   )
 
-  const setClientRestaurant = useCallback((clientRestaurant: Restaurant) => {
-    setRestaurant(clientRestaurant)
-    const validation = validateRestaurantConfig(clientRestaurant, true)
-    setConfigValidation(validation)
-    setError(null)
-    setIsLoading(false)
-  }, [])
-
   const clearRestaurant = useCallback(() => {
     setRestaurant(null)
     setConfigValidation(null)
@@ -146,7 +138,6 @@ export const RestaurantProvider = ({ children }: RestaurantProviderProps) => {
     isLoading,
     error,
     setRestaurant,
-    setClientRestaurant,
     updateRestaurant,
     clearRestaurant,
     refreshRestaurant: fetchRestaurant,

@@ -459,3 +459,61 @@ export const ModalFooter = styled.div`
   padding-top: ${({ theme }) => theme.spacing.lg};
   border-top: 2px solid ${({ theme }) => theme.colors.mx.black};
 `
+
+export const ConfigurationPreview = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing.md};
+  background: ${({ theme }) => theme.colors.mx.gray[50]};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+`
+
+export const ConfigurationItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${({ theme }) => theme.spacing.xs} 0;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+
+  &:last-child {
+    border-bottom: none;
+  }
+`
+
+export const ConfigurationLabel = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.gray[700]};
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+`
+
+export const ConfigurationValue = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.black};
+  max-width: 60%;
+  text-align: right;
+  word-break: break-word;
+`
+
+export const ImagePreviewContainer = styled.div`
+  width: 100%;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  overflow: hidden;
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+  background: ${({ theme }) => theme.colors.mx.gray[50]};
+`
+
+export const ImagePreviewThumbnail = styled.img`
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+`

@@ -9,8 +9,10 @@ import { RemoveSectionUsecase } from '@/application/menu-layouts/sections/remove
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { MenuLayout, MenuSection } from '@/domain/models/menu-layout.model'
 import { AddSectionButton } from '@/presentation/components/entities/menu-layouts/add-section-button'
+import { ClientPreviewIframe } from '@/presentation/components/entities/menu-layouts/client-preview-iframe'
 import { MenuLayoutCard } from '@/presentation/components/entities/menu-layouts/menu-layout-card'
 import { MenuLayoutEditMode } from '@/presentation/components/entities/menu-layouts/menu-layout-edit-mode'
+import { ReorderSections } from '@/presentation/components/entities/menu-layouts/reorder-sections'
 import { SectionDialog } from '@/presentation/components/entities/menu-layouts/section-dialog'
 import { BannerSection } from '@/presentation/components/entities/menu-layouts/sections/banner-section'
 import { CarouselSection } from '@/presentation/components/entities/menu-layouts/sections/carousel-section'
@@ -20,6 +22,7 @@ import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { Button } from '@/presentation/components/ui/button'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useMenuLayouts } from '@/presentation/hooks/use-menu-layouts'
+import { useSectionReorder } from '@/presentation/hooks/use-section-reorder'
 
 import * as S from './styles'
 
@@ -38,6 +41,7 @@ export const MenuPage = () => {
   } = useMenuLayouts()
   const [isEditMode, setIsEditMode] = useState(false)
   const [isSectionEditMode, setIsSectionEditMode] = useState(false)
+  const [isReorderMode, setIsReorderMode] = useState(false)
   const [sectionDialog, setSectionDialog] = useState<{
     isOpen: boolean
     mode: 'add' | 'edit'
@@ -51,6 +55,24 @@ export const MenuPage = () => {
 
   const containerRef = useRef<HTMLDivElement>(null)
   const [isResizing, setIsResizing] = useState(false)
+
+  const {
+    reorderedSections,
+    isLoading: isReorderLoading,
+    handleReorder,
+    handleSaveOrder
+  } = useSectionReorder({
+    sections: selectedLayout?.sections || [],
+    layoutId: selectedLayout?.id || '',
+    onSectionsReordered: (newSections) => {
+      if (selectedLayout) {
+        updateSelectedLayout({
+          ...selectedLayout,
+          sections: newSections
+        })
+      }
+    }
+  })
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
@@ -202,6 +224,16 @@ export const MenuPage = () => {
     }
   }
 
+  const handleSaveReorder = useCallback(async () => {
+    await handleSaveOrder()
+    setIsReorderMode(false)
+  }, [handleSaveOrder])
+
+  const getReorderButtonText = () => {
+    if (isReorderLoading) return 'Salvando...'
+    return isReorderMode ? 'Sair da Ordenação' : 'Ordenar Seções'
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -259,6 +291,14 @@ export const MenuPage = () => {
               >
                 {isSectionEditMode ? 'Sair da Edição' : 'Editar Seções'}
               </Button>
+              <Button
+                variant={isReorderMode ? 'secondary' : 'outline'}
+                size="sm"
+                onClick={isReorderMode ? handleSaveReorder : () => setIsReorderMode(true)}
+                disabled={isReorderLoading}
+              >
+                {getReorderButtonText()}
+              </Button>
             </S.PreviewActions>
           )}
         </S.PreviewHeader>
@@ -280,78 +320,83 @@ export const MenuPage = () => {
             />
           </S.EditSection>
         )}
-        {selectedLayout && !isEditMode && (
+        {selectedLayout && isReorderMode && (
+          <S.EditSection>
+            <ReorderSections sections={reorderedSections} onReorder={handleReorder} />
+          </S.EditSection>
+        )}
+        {selectedLayout && !isEditMode && !isReorderMode && (
           <S.ResizablePreviewSection ref={containerRef}>
             <S.ResizableHandle onMouseDown={handleMouseDown} />
             <S.PreviewContent>
-              <S.SectionsContainer>
-                {isSectionEditMode && (
+              {isSectionEditMode ? (
+                <S.SectionsContainer>
                   <AddSectionButton
                     onAddSection={handleAddSection}
                     position={0}
                     disabled={isLoading}
                     availableSections={sections}
                   />
-                )}
-                {selectedLayout.sections.map((section, index) => (
-                  <React.Fragment key={`${section.type}-${index}`}>
-                    {section.type === MenuSectionType.BANNER && (
-                      <BannerSection
-                        section={section}
-                        mode={isSectionEditMode ? 'preview-edit' : 'view'}
-                        onRemove={() => handleRemoveSection(index)}
-                        onEdit={isSectionEditMode ? () => handleEditSection(section) : undefined}
-                        onSectionUpdated={handleSectionUpdated}
-                        sectionDefinitions={sections}
-                        layoutId={selectedLayout.id}
-                      />
-                    )}
-                    {section.type === MenuSectionType.CAROUSEL && (
-                      <CarouselSection
-                        section={section}
-                        mode={isSectionEditMode ? 'preview-edit' : 'view'}
-                        onRemove={() => handleRemoveSection(index)}
-                        onEdit={isSectionEditMode ? () => handleEditSection(section) : undefined}
-                        onSectionUpdated={handleSectionUpdated}
-                        sectionDefinitions={sections}
-                        layoutId={selectedLayout.id}
-                      />
-                    )}
-                    {section.type === MenuSectionType.CATEGORIES && (
-                      <CategoriesSection
-                        section={section}
-                        mode={isSectionEditMode ? 'preview-edit' : 'view'}
-                        onRemove={() => handleRemoveSection(index)}
-                        onEdit={isSectionEditMode ? () => handleEditSection(section) : undefined}
-                        onSectionUpdated={handleSectionUpdated}
-                        sectionDefinitions={sections}
-                        layoutId={selectedLayout.id}
-                        menuLayout={selectedLayout.layout}
-                      />
-                    )}
-                    {section.type === MenuSectionType.MENU_ITEMS && (
-                      <MenuItemsSection
-                        section={section}
-                        mode={isSectionEditMode ? 'preview-edit' : 'view'}
-                        onRemove={() => handleRemoveSection(index)}
-                        onEdit={isSectionEditMode ? () => handleEditSection(section) : undefined}
-                        onSectionUpdated={handleSectionUpdated}
-                        sectionDefinitions={sections}
-                        layoutId={selectedLayout.id}
-                        menuLayout={selectedLayout.layout}
-                      />
-                    )}
-                    {isSectionEditMode && (
+                  {selectedLayout.sections.map((section, index) => (
+                    <React.Fragment key={`${section.type}-${index}`}>
+                      {section.type === MenuSectionType.BANNER && (
+                        <BannerSection
+                          section={section}
+                          mode="preview-edit"
+                          onRemove={() => handleRemoveSection(index)}
+                          onEdit={() => handleEditSection(section)}
+                          onSectionUpdated={handleSectionUpdated}
+                          sectionDefinitions={sections}
+                          layoutId={selectedLayout.id}
+                        />
+                      )}
+                      {section.type === MenuSectionType.CAROUSEL && (
+                        <CarouselSection
+                          section={section}
+                          mode="preview-edit"
+                          onRemove={() => handleRemoveSection(index)}
+                          onEdit={() => handleEditSection(section)}
+                          onSectionUpdated={handleSectionUpdated}
+                          sectionDefinitions={sections}
+                          layoutId={selectedLayout.id}
+                        />
+                      )}
+                      {section.type === MenuSectionType.CATEGORIES && (
+                        <CategoriesSection
+                          section={section}
+                          mode="preview-edit"
+                          onRemove={() => handleRemoveSection(index)}
+                          onEdit={() => handleEditSection(section)}
+                          onSectionUpdated={handleSectionUpdated}
+                          sectionDefinitions={sections}
+                          layoutId={selectedLayout.id}
+                          menuLayout={selectedLayout.layout}
+                        />
+                      )}
+                      {section.type === MenuSectionType.MENU_ITEMS && (
+                        <MenuItemsSection
+                          section={section}
+                          mode="preview-edit"
+                          onRemove={() => handleRemoveSection(index)}
+                          onEdit={() => handleEditSection(section)}
+                          onSectionUpdated={handleSectionUpdated}
+                          sectionDefinitions={sections}
+                          layoutId={selectedLayout.id}
+                          menuLayout={selectedLayout.layout}
+                        />
+                      )}
                       <AddSectionButton
                         onAddSection={handleAddSection}
                         position={index + 1}
                         disabled={isLoading}
                         availableSections={sections}
                       />
-                    )}
-                  </React.Fragment>
-                ))}
-              </S.SectionsContainer>
+                    </React.Fragment>
+                  ))}
+                </S.SectionsContainer>
+              ) : (
+                <ClientPreviewIframe />
+              )}
             </S.PreviewContent>
           </S.ResizablePreviewSection>
         )}

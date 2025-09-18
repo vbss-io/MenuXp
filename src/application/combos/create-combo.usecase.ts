@@ -47,7 +47,6 @@ export class CreateComboUsecase {
     if (params.useCategoryOptionals !== undefined) {
       formData.append('useCategoryOptionals', params.useCategoryOptionals.toString())
     }
-
     const response = await this.httpClient.post<CreateComboUsecaseOutput>({
       url: this.url,
       body: formData

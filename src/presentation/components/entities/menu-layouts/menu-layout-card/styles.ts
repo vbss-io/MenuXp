@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-export const Card = styled.div<{ isSelected?: boolean }>`
+export const Card = styled.div<{ $isSelected?: boolean }>`
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ isSelected, theme }) => (isSelected ? theme.colors.primary : theme.colors.mx.black)};
+  border: 2px solid ${({ $isSelected, theme }) => ($isSelected ? theme.colors.primary : theme.colors.mx.black)};
   border-radius: ${({ theme }) => theme.borderRadius.brutalist};
   padding: ${({ theme }) => theme.spacing.md};
   cursor: pointer;

@@ -35,7 +35,7 @@ export const MenuLayoutCard = ({ layout, onSelect, onDelete, onActivate, isSelec
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
     >
-      <S.Card onClick={() => onSelect(layout)} isSelected={isSelected}>
+      <S.Card onClick={() => onSelect(layout)} $isSelected={isSelected}>
         <S.CardHeader>
           <S.CardTitle>{layout.name}</S.CardTitle>
         </S.CardHeader>

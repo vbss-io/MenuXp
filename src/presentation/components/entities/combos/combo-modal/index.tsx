@@ -6,9 +6,9 @@ import toast from 'react-hot-toast'
 import { z } from 'zod'
 
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
-import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
 import { CreateComboUsecase } from '@/application/combos/create-combo.usecase'
 import { UpdateComboUsecase } from '@/application/combos/update-combo.usecase'
+import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
 import type { Combo, ComboItem, ComboOptional } from '@/domain/models/combo.model'
 import { Button } from '@/presentation/components/ui/button'
 import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
@@ -61,7 +61,7 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
   const [optionals, setOptionals] = useState<ComboOptional[]>([])
   const [comboItems, setComboItems] = useState<ComboItem[]>([])
   const [useCategoryOptionals, setUseCategoryOptionals] = useState(false)
-  const [menuItemsCache, setMenuItemsCache] = useState<any[]>([])
+  const [menuItemsCache, setMenuItemsCache] = useState<{ id: string; name: string; price: number }[]>([])
   const isEditing = !!combo
   const {
     register,
@@ -260,7 +260,6 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
           items: comboItems,
           optionals: optionals.length > 0 ? optionals : undefined,
           useCategoryOptionals
-          // removedMedias: removedMedias.length > 0 ? removedMedias : undefined
         })
         toast.success('Combo atualizado com sucesso!')
       } else {
@@ -420,18 +419,15 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
                     newItems[index].menuItemId = menuItemId
 
                     if (menuItemId) {
-                      // Buscar o item no cache primeiro
                       const selectedMenuItem = menuItemsCache.find((item) => item.id === menuItemId)
                       if (selectedMenuItem) {
                         newItems[index].name = selectedMenuItem.name
                         newItems[index].price = selectedMenuItem.price
                       } else {
-                        // Se não está no cache, limpar os dados
                         newItems[index].name = ''
                         newItems[index].price = 0
                       }
                     } else {
-                      // Se não há menuItemId selecionado, limpar os dados
                       newItems[index].name = ''
                       newItems[index].price = 0
                     }

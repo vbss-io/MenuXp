@@ -1,12 +1,12 @@
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
 
-import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Loading } from '@/presentation/components/ui/loading'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { GetOrdersUsecase } from '@/application/orders/get-orders.usecase'
 import { UpdateOrderUsecase } from '@/application/orders/update-order.usecase'
 import type { Order, OrderStatus } from '@/domain/models/order.model'
+import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
+import { Loading } from '@/presentation/components/ui/loading'
+import { useAuth } from '@/presentation/hooks/use-auth'
 import { OrderDetailDialog } from './components/order-detail-dialog'
 import { OrdersKanban } from './components/orders-kanban'
 
@@ -27,7 +27,6 @@ export const OrdersPage = () => {
       const updateOrderUsecase = new UpdateOrderUsecase()
       await updateOrderUsecase.execute({ orderId, status: newStatus })
 
-      // Atualizar o pedido na lista local
       setOrders((prevOrders) =>
         prevOrders.map((order) =>
           order.id === orderId ? { ...order, status: newStatus, updatedAt: new Date() } : order

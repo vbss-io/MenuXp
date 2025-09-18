@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { GetRestaurantMenuCategoriesUsecase } from '@/application/clients-menu/get-restaurant-menu-categories.usecase'
+import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { AddSectionUsecase } from '@/application/menu-layouts/sections/add-section.usecase'
 import { UpdateCategoriesSectionUsecase } from '@/application/menu-layouts/sections/update-categories-section.usecase'
@@ -75,11 +75,13 @@ export const CategoriesEdit: React.FC<CategoriesEditProps> = ({
 
     setIsLoading(true)
     try {
-      const getCategoriesUsecase = new GetRestaurantMenuCategoriesUsecase()
+      const getCategoriesUsecase = new GetCategoriesUsecase()
       const result = await getCategoriesUsecase.execute({
-        restaurantId: restaurant.id
+        restaurantId: restaurant.id,
+        includeInactive: false
       })
-      setCategories(result.categories)
+      const allCategories = result.flatMap((category) => [category, ...(category.subCategories || [])])
+      setCategories(allCategories)
     } catch {
       toast.error('Erro ao carregar categorias')
     } finally {
@@ -131,12 +133,14 @@ export const CategoriesEdit: React.FC<CategoriesEditProps> = ({
     if (!restaurant?.id || !categoriesData?.categoryIds || categoriesData.categoryIds.length === 0) return
 
     try {
-      const getCategoriesUsecase = new GetRestaurantMenuCategoriesUsecase()
+      const getCategoriesUsecase = new GetCategoriesUsecase()
       const result = await getCategoriesUsecase.execute({
         restaurantId: restaurant.id,
-        categoryIds: categoriesData.categoryIds
+        includeInactive: false
       })
-      setSelectedCategories(result.categories)
+      const allCategories = result.flatMap((category) => [category, ...(category.subCategories || [])])
+      const selectedCategories = allCategories.filter((cat) => categoriesData.categoryIds?.includes(cat.id))
+      setSelectedCategories(selectedCategories)
     } catch {
       toast.error('Erro ao carregar categorias selecionadas')
     }
@@ -201,12 +205,14 @@ export const CategoriesEdit: React.FC<CategoriesEditProps> = ({
   }
 
   const handleSelectAllCategories = () => {
+    if (tempIsAllCategories) return
     setTempIsAllCategories(true)
     setTempSelectedCategoryIds([])
     setSelectedCategories([])
   }
 
   const handleSelectSpecificCategories = () => {
+    if (!tempIsAllCategories) return
     setTempIsAllCategories(false)
     setTempSelectedCategoryIds([])
     setSelectedCategories([])
@@ -249,7 +255,7 @@ export const CategoriesEdit: React.FC<CategoriesEditProps> = ({
             <S.SelectionButtons>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button
-                  variant={tempIsAllCategories ? 'primary' : 'secondary'}
+                  variant={tempIsAllCategories ? 'secondary' : 'primary'}
                   size="sm"
                   onClick={handleSelectAllCategories}
                   disabled={isLoading}
@@ -259,7 +265,7 @@ export const CategoriesEdit: React.FC<CategoriesEditProps> = ({
               </motion.div>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button
-                  variant={!tempIsAllCategories ? 'primary' : 'secondary'}
+                  variant={!tempIsAllCategories ? 'secondary' : 'primary'}
                   size="sm"
                   onClick={handleSelectSpecificCategories}
                   disabled={isLoading}

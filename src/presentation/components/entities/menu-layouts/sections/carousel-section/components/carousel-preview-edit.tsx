@@ -1,4 +1,4 @@
-import { ImageIcon, PencilIcon, TrashIcon, WarningIcon } from '@phosphor-icons/react'
+import { ImageIcon, PencilIcon, TrashIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo } from 'react'
 
@@ -6,7 +6,6 @@ import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.e
 import type { CarouselConfig, MenuSection } from '@/domain/models/menu-layout.model'
 import { Button } from '@/presentation/components/ui/button'
 
-import { CarouselView } from './carousel-view'
 import * as S from '../styles'
 
 interface CarouselPreviewEditProps {
@@ -25,67 +24,6 @@ export const CarouselPreviewEdit: React.FC<CarouselPreviewEditProps> = ({ sectio
 
   const validImages = imagePaths.filter((path) => path)
 
-  // Se não tem imagens
-  if (!imagePaths.length || imagePaths.every((path) => !path)) {
-    return (
-      <S.PreviewContainer>
-        <S.PreviewHeader>
-          <S.PreviewTitle>
-            <ImageIcon size={20} />
-            <span>Carousel</span>
-          </S.PreviewTitle>
-          <S.ActionButtons>
-            {onEdit && (
-              <Button variant="outline" size="sm" onClick={onEdit}>
-                <PencilIcon size={16} />
-              </Button>
-            )}
-            {onRemove && (
-              <Button variant="outline" size="sm" onClick={onRemove}>
-                <TrashIcon size={16} />
-              </Button>
-            )}
-          </S.ActionButtons>
-        </S.PreviewHeader>
-        <S.FallbackContainer>
-          <S.FallbackContent>
-            <ImageIcon size={48} />
-            <span>Carousel sem imagens</span>
-          </S.FallbackContent>
-        </S.FallbackContainer>
-      </S.PreviewContainer>
-    )
-  }
-  if (!validImages.length) {
-    return (
-      <S.PreviewContainer>
-        <S.PreviewHeader>
-          <S.PreviewTitle>
-            <ImageIcon size={20} />
-            <span>Carousel</span>
-          </S.PreviewTitle>
-          <S.ActionButtons>
-            {onEdit && (
-              <Button variant="outline" size="sm" onClick={onEdit}>
-                <PencilIcon size={16} />
-              </Button>
-            )}
-            {onRemove && (
-              <Button variant="outline" size="sm" onClick={onRemove}>
-                <TrashIcon size={16} />
-              </Button>
-            )}
-          </S.ActionButtons>
-        </S.PreviewHeader>
-        <S.FallbackContainer>
-          <S.FallbackContent>
-            <WarningIcon size={48} />
-            <span>Imagens não disponíveis</span>
-          </S.FallbackContent>
-        </S.FallbackContainer>
-      </S.PreviewContainer>
-    )
-  }
   return (
     <AnimatePresence>
       <motion.div
@@ -114,7 +52,29 @@ export const CarouselPreviewEdit: React.FC<CarouselPreviewEditProps> = ({ sectio
             </S.ActionButtons>
           </S.PreviewHeader>
           <S.PreviewContent>
-            <CarouselView section={section} />
+            {validImages.length > 0 && (
+              <S.ImagePreviewGrid>
+                {validImages.slice(0, 4).map((imagePath, index) => (
+                  <S.ImagePreviewThumbnail
+                    key={index}
+                    src={imagePath}
+                    alt={`Carousel ${index + 1}`}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                    }}
+                  />
+                ))}
+                {validImages.length > 4 && <S.MoreImagesIndicator>+{validImages.length - 4}</S.MoreImagesIndicator>}
+              </S.ImagePreviewGrid>
+            )}
+            <S.ConfigurationPreview>
+              <S.ConfigurationItem>
+                <S.ConfigurationLabel>Imagens:</S.ConfigurationLabel>
+                <S.ConfigurationValue>
+                  {validImages.length > 0 ? `${validImages.length} configuradas` : '✗ Nenhuma imagem'}
+                </S.ConfigurationValue>
+              </S.ConfigurationItem>
+            </S.ConfigurationPreview>
           </S.PreviewContent>
         </S.PreviewContainer>
       </motion.div>

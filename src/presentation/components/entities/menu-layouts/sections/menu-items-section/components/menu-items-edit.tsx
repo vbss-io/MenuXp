@@ -25,7 +25,7 @@ interface MenuItemData {
   price: number
   discount: number
   categoryName?: string
-  medias?: string
+  medias?: string[]
 }
 
 interface MenuItemsEditProps {
@@ -113,7 +113,13 @@ export const MenuItemsEdit: React.FC<MenuItemsEditProps> = ({
         includeInactive: false
       })
 
-      const selectedItems = result.menuItems.filter((item) => menuItemsData?.menuItemIds?.includes(item.id))
+      const selectedItems = result.menuItems
+        .filter((item) => menuItemsData?.menuItemIds?.includes(item.id))
+        .map((item) => ({
+          ...item,
+          medias: typeof item.medias === 'string' ? [item.medias] : item.medias
+        }))
+
       setTempSelectedMenuItems(selectedItems)
     } catch {
       toast.error('Erro ao carregar itens do menu')
@@ -130,7 +136,12 @@ export const MenuItemsEdit: React.FC<MenuItemsEditProps> = ({
         restaurantId: restaurant.id,
         includeInactive: false
       })
-      setMenuItems(result.menuItems)
+      const processedMenuItems = result.menuItems.map((item) => ({
+        ...item,
+        medias: typeof item.medias === 'string' ? [item.medias] : item.medias
+      }))
+
+      setMenuItems(processedMenuItems)
     } catch {
       toast.error('Erro ao carregar itens do menu')
     } finally {
@@ -222,11 +233,21 @@ export const MenuItemsEdit: React.FC<MenuItemsEditProps> = ({
 
       return result.menuItems
         .filter((item) => !tempSelectedMenuItemIds.includes(item.id))
-        .map((item) => ({
-          label: item.name,
-          value: item.id,
-          displayLabel: `${item.name} - ${formatPrice(item.price, item.discount)}`
-        }))
+        .map((item) => {
+          let firstImage: string | undefined
+          if (Array.isArray(item.medias) && item.medias.length > 0) {
+            firstImage = item.medias[0]
+          } else if (typeof item.medias === 'string') {
+            firstImage = item.medias
+          }
+
+          return {
+            label: item.name,
+            value: item.id,
+            displayLabel: `${item.name} - ${formatPrice(item.price, item.discount)}`,
+            icon: firstImage
+          }
+        })
     } catch (error) {
       console.error('Erro ao buscar itens do menu:', error)
       return []
@@ -285,7 +306,7 @@ export const MenuItemsEdit: React.FC<MenuItemsEditProps> = ({
             <S.SelectionButtons>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button
-                  variant={tempType === 'custom' ? 'primary' : 'secondary'}
+                  variant={tempType === 'custom' ? 'secondary' : 'primary'}
                   size="sm"
                   onClick={() => handleTypeChange('custom')}
                   disabled={isLoading}
@@ -295,7 +316,7 @@ export const MenuItemsEdit: React.FC<MenuItemsEditProps> = ({
               </motion.div>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button
-                  variant={tempType === 'best_sellers' ? 'primary' : 'secondary'}
+                  variant={tempType === 'best_sellers' ? 'secondary' : 'primary'}
                   size="sm"
                   onClick={() => handleTypeChange('best_sellers')}
                   disabled={isLoading}
@@ -305,7 +326,7 @@ export const MenuItemsEdit: React.FC<MenuItemsEditProps> = ({
               </motion.div>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button
-                  variant={tempType === 'discounts' ? 'primary' : 'secondary'}
+                  variant={tempType === 'discounts' ? 'secondary' : 'primary'}
                   size="sm"
                   onClick={() => handleTypeChange('discounts')}
                   disabled={isLoading}
@@ -353,9 +374,9 @@ export const MenuItemsEdit: React.FC<MenuItemsEditProps> = ({
                         }}
                       >
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
-                          {item.medias && (
+                          {item.medias && item.medias.length > 0 && (
                             <img
-                              src={item.medias}
+                              src={item.medias[0]}
                               alt={item.name}
                               style={{
                                 width: '40px',

@@ -4,7 +4,6 @@ export default {
   theme: {
     extend: {
       colors: {
-        // New Design System Colors
         primary: {
           50: '#FEF2F2',
           100: '#FEE2E2',
@@ -88,7 +87,6 @@ export default {
           secondary: '#6B7280',
           invert: '#FFFFFF',
         },
-        // Status colors
         status: {
           received: '#F59E0B',
           confirmed: '#3B82F6',
@@ -105,7 +103,6 @@ export default {
         display: ['Roboto Mono', 'monospace'],
       },
       fontSize: {
-        // New typography scale
         'hero': ['48px', { lineHeight: '1.1' }],
         'section': ['32px', { lineHeight: '1.2' }],
         'body': ['16px', { lineHeight: '1.5' }],
@@ -114,7 +111,6 @@ export default {
         'button': ['14px', { lineHeight: '1.4' }],
         'testimonial': ['16px', { lineHeight: '1.5' }],
         'footer': ['14px', { lineHeight: '1.4' }],
-        // Keep existing for compatibility
         xs: ['12px', { lineHeight: '1.4' }],
         sm: ['14px', { lineHeight: '1.4' }],
         base: ['16px', { lineHeight: '1.5' }],
@@ -130,7 +126,6 @@ export default {
         'l': '24px',
         'xl': '32px',
         'xxl': '64px',
-        // Keep existing for compatibility
         '0': '0px',
         '1': '4px',
         '2': '8px',

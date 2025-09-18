@@ -29,7 +29,6 @@ export class GetMenuItemsUsecase {
   async execute(params: GetMenuItemsUsecaseInput): Promise<GetMenuItemsResponse> {
     const queryParams = new URLSearchParams()
     queryParams.append('restaurantId', params.restaurantId)
-
     if (params.categoryId) queryParams.append('categoryId', params.categoryId)
     if (params.searchMask) queryParams.append('searchMask', params.searchMask)
     if (params.includeInactive !== undefined) queryParams.append('includeInactive', params.includeInactive.toString())

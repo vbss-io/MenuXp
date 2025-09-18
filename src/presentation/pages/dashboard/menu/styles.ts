@@ -108,7 +108,7 @@ export const ResizablePreviewSection = styled.div`
   min-height: 400px;
   overflow: auto;
   max-width: 100%;
-  min-width: 300px;
+  min-width: 400px;
   width: 100%;
   position: relative;
 `

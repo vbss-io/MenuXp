@@ -8,8 +8,6 @@
 @tailwind components;
 @tailwind utilities;
 
-// To-Do: Remove unecessary styles after pages and components refactors
-
 :root {
   --mx-black: #000000;
   --mx-yellow: #FEBA0C;

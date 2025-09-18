@@ -3,9 +3,8 @@ import type { MenuSectionDefinition } from '@/domain/models/menu-section-definit
 
 import { CarouselEdit } from './components/carousel-edit'
 import { CarouselPreviewEdit } from './components/carousel-preview-edit'
-import { CarouselView } from './components/carousel-view'
 
-type CarouselSectionMode = 'view' | 'preview-edit' | 'edit' | 'add'
+type CarouselSectionMode = 'preview-edit' | 'edit' | 'add'
 
 interface CarouselSectionProps {
   section?: MenuSection
@@ -30,11 +29,6 @@ export const CarouselSection: React.FC<CarouselSectionProps> = ({
   layoutId,
   position
 }) => {
-  if (mode === 'view') {
-    if (!section) return null
-    return <CarouselView section={section} />
-  }
-
   if (mode === 'preview-edit') {
     if (!section) return null
     return <CarouselPreviewEdit section={section} onEdit={onEdit} onRemove={onRemove} />

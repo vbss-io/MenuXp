@@ -136,7 +136,6 @@ export const useOperation = () => {
   }, [operation?.id, fetchStatistics])
 
   return {
-    // Operation data
     operation,
     isLoading,
     isStarting,

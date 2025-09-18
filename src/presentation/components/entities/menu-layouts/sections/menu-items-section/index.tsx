@@ -3,9 +3,8 @@ import type { MenuSectionDefinition } from '@/domain/models/menu-section-definit
 
 import { MenuItemsEdit } from './components/menu-items-edit'
 import { MenuItemsPreviewEdit } from './components/menu-items-preview-edit'
-import { MenuItemsView } from './components/menu-items-view'
 
-type MenuItemsSectionMode = 'view' | 'preview-edit' | 'edit' | 'add'
+type MenuItemsSectionMode = 'preview-edit' | 'edit' | 'add'
 
 interface MenuItemsSectionProps {
   section?: MenuSection
@@ -18,7 +17,6 @@ interface MenuItemsSectionProps {
   layoutId?: string
   position?: number
   menuLayout?: string
-  isClientView?: boolean
 }
 
 export const MenuItemsSection: React.FC<MenuItemsSectionProps> = ({
@@ -31,25 +29,11 @@ export const MenuItemsSection: React.FC<MenuItemsSectionProps> = ({
   sectionDefinitions = [],
   layoutId,
   position,
-  menuLayout,
-  isClientView
+  menuLayout
 }) => {
-  if (mode === 'view') {
-    if (!section) return null
-    return <MenuItemsView section={section} menuLayout={menuLayout} isClientView={isClientView} />
-  }
-
   if (mode === 'preview-edit') {
     if (!section) return null
-    return (
-      <MenuItemsPreviewEdit
-        section={section}
-        onEdit={onEdit}
-        onRemove={onRemove}
-        menuLayout={menuLayout}
-        isClientView={isClientView}
-      />
-    )
+    return <MenuItemsPreviewEdit section={section} onEdit={onEdit} onRemove={onRemove} menuLayout={menuLayout} />
   }
 
   if (mode === 'edit') {

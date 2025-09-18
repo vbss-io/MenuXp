@@ -5,7 +5,6 @@ import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.e
 import type { MenuSection, BannerConfig } from '@/domain/models/menu-layout.model'
 import { Button } from '@/presentation/components/ui/button'
 
-import { BannerView } from './banner-view'
 import * as S from '../styles'
 
 interface BannerPreviewEditProps {
@@ -21,39 +20,6 @@ export const BannerPreviewEdit: React.FC<BannerPreviewEditProps> = ({ section, o
   }
 
   const bannerData = getBannerData()
-
-  if (!bannerData?.imagePath) {
-    return (
-      <S.PreviewContainer>
-        <S.PreviewHeader>
-          <S.PreviewTitle>
-            <ImageIcon size={20} />
-            <span>Banner</span>
-          </S.PreviewTitle>
-          <S.ActionButtons>
-            {onEdit && (
-              <Button variant="outline" size="sm" onClick={onEdit}>
-                <PencilIcon size={16} />
-              </Button>
-            )}
-            {onRemove && (
-              <Button variant="outline" size="sm" onClick={onRemove}>
-                <TrashIcon size={16} />
-              </Button>
-            )}
-          </S.ActionButtons>
-        </S.PreviewHeader>
-        <S.FallbackContainer>
-          <S.FallbackContent>
-            <>
-              <ImageIcon size={48} />
-              <span>Banner sem imagem</span>
-            </>
-          </S.FallbackContent>
-        </S.FallbackContainer>
-      </S.PreviewContainer>
-    )
-  }
 
   return (
     <AnimatePresence>
@@ -83,7 +49,49 @@ export const BannerPreviewEdit: React.FC<BannerPreviewEditProps> = ({ section, o
             </S.ActionButtons>
           </S.PreviewHeader>
           <S.PreviewContent>
-            <BannerView section={section} />
+            {bannerData?.imagePath && (
+              <S.ImagePreviewContainer>
+                <S.ImagePreviewThumbnail
+                  src={bannerData.imagePath}
+                  alt="Banner preview"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none'
+                  }}
+                />
+              </S.ImagePreviewContainer>
+            )}
+            <S.ConfigurationPreview>
+              <S.ConfigurationItem>
+                <S.ConfigurationLabel>Imagem:</S.ConfigurationLabel>
+                <S.ConfigurationValue>
+                  {bannerData?.imagePath ? '✓ Configurada' : '✗ Não configurada'}
+                </S.ConfigurationValue>
+              </S.ConfigurationItem>
+              {bannerData?.tag && (
+                <S.ConfigurationItem>
+                  <S.ConfigurationLabel>Tag:</S.ConfigurationLabel>
+                  <S.ConfigurationValue>"{bannerData.tag}"</S.ConfigurationValue>
+                </S.ConfigurationItem>
+              )}
+              {bannerData?.title && (
+                <S.ConfigurationItem>
+                  <S.ConfigurationLabel>Título:</S.ConfigurationLabel>
+                  <S.ConfigurationValue>"{bannerData.title}"</S.ConfigurationValue>
+                </S.ConfigurationItem>
+              )}
+              {bannerData?.subtitle && (
+                <S.ConfigurationItem>
+                  <S.ConfigurationLabel>Subtítulo:</S.ConfigurationLabel>
+                  <S.ConfigurationValue>"{bannerData.subtitle}"</S.ConfigurationValue>
+                </S.ConfigurationItem>
+              )}
+              {!bannerData?.tag && !bannerData?.title && !bannerData?.subtitle && (
+                <S.ConfigurationItem>
+                  <S.ConfigurationLabel>Texto:</S.ConfigurationLabel>
+                  <S.ConfigurationValue>✗ Nenhum texto configurado</S.ConfigurationValue>
+                </S.ConfigurationItem>
+              )}
+            </S.ConfigurationPreview>
           </S.PreviewContent>
         </S.PreviewContainer>
       </motion.div>

@@ -199,7 +199,6 @@ export const ModalFooter = styled.div`
   border-top: 2px solid ${({ theme }) => theme.colors.mx.gray[300]};
 `
 
-// Preview Components
 export const PreviewContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -242,7 +241,6 @@ export const PreviewContent = styled.div`
   padding: 0;
 `
 
-// View Components
 export const ViewContainer = styled.div`
   background: ${({ theme }) => theme.colors.mx.white};
   border-radius: ${({ theme }) => theme.borderRadius.brutalist};
@@ -274,7 +272,7 @@ export const EmptyStateDescription = styled.p`
   line-height: 1.5;
 `
 
-export const CategoriesGrid = styled.div<{ layout?: string; isDragging?: boolean }>`
+export const CategoriesGrid = styled.div<{ $layout?: string; isDragging?: boolean }>`
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
@@ -286,8 +284,8 @@ export const CategoriesGrid = styled.div<{ layout?: string; isDragging?: boolean
     display: none;
   }
 
-  ${({ layout }) => {
-    switch (layout) {
+  ${({ $layout }) => {
+    switch ($layout) {
       case 'default':
         return `
         `
@@ -309,9 +307,9 @@ export const CategoriesGrid = styled.div<{ layout?: string; isDragging?: boolean
 
 export const CategoryCard = styled.div<{
   selected?: boolean
-  layout?: string
-  primaryColor?: string
-  secondaryColor?: string
+  $layout?: string
+  $primaryColor?: string
+  $secondaryColor?: string
 }>`
   display: flex;
   align-items: center;
@@ -327,30 +325,30 @@ export const CategoryCard = styled.div<{
     transform: translateY(-2px);
   }
 
-  ${({ layout, theme }) =>
-    layout === 'default' &&
+  ${({ $layout, theme }) =>
+    $layout === 'default' &&
     `
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding-top: ${theme.spacing.xs};
   `}
-  ${({ layout, theme }) =>
-    layout === 'dark' &&
+  ${({ $layout, theme }) =>
+    $layout === 'dark' &&
     `
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding-top: ${theme.spacing.xs};
   `}
-  ${({ layout, theme, primaryColor, secondaryColor }) =>
-    layout === 'clean' &&
+  ${({ $layout, theme, $primaryColor, $secondaryColor }) =>
+    $layout === 'clean' &&
     `
     flex-direction: column;
     align-items: center;
     text-align: center;
     justify-content: center;
-    border: 1px solid ${primaryColor};
+    border: 1px solid ${$primaryColor};
     width: 100px;
     height: 100px;
     margin-right: ${theme.spacing.xs};
@@ -358,21 +356,21 @@ export const CategoryCard = styled.div<{
     background: ${theme.colors.mx.white};
 
     svg {
-      color: ${primaryColor};
+      color: ${$primaryColor};
     }
 
     &:hover {
-      border-color: ${secondaryColor};
+      border-color: ${$secondaryColor};
       div {
-        color: ${secondaryColor};
+        color: ${$secondaryColor};
       }
       svg {
-        color: ${secondaryColor};
+        color: ${$secondaryColor};
       }
     }
   `}
-  ${({ layout, theme }) =>
-    layout === 'square' &&
+  ${({ $layout, theme }) =>
+    $layout === 'square' &&
     `
     flex-direction: column;
     align-items: center;
@@ -381,7 +379,7 @@ export const CategoryCard = styled.div<{
 `}
 `
 
-export const CategoryIcon = styled.span<{ layout?: string; primaryColor?: string; secondaryColor?: string }>`
+export const CategoryIcon = styled.span<{ $layout?: string; $primaryColor?: string; $secondaryColor?: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -394,8 +392,8 @@ export const CategoryIcon = styled.span<{ layout?: string; primaryColor?: string
     color: ${({ theme }) => theme.colors.mx.blue};
   }
 
-  ${({ layout, theme, primaryColor }) =>
-    layout === 'default' &&
+  ${({ $layout, theme, $primaryColor }) =>
+    $layout === 'default' &&
     `
     width: 60px;
     height: 60px;
@@ -413,19 +411,19 @@ export const CategoryIcon = styled.span<{ layout?: string; primaryColor?: string
     }
 
     &:hover {
-      border-color: ${primaryColor};
+      border-color: ${$primaryColor};
       svg {
-        color: ${primaryColor} !important;
+        color: ${$primaryColor} !important;
       }
     }
   `}
-  ${({ layout, theme, primaryColor, secondaryColor }) =>
-    layout === 'dark' &&
+  ${({ $layout, theme, $primaryColor, $secondaryColor }) =>
+    $layout === 'dark' &&
     `
     width: 60px;
     height: 60px;
-    background: ${primaryColor}20;
-    border: 2px solid ${primaryColor};
+    background: ${$primaryColor}20;
+    border: 2px solid ${$primaryColor};
     border-radius: 25%;
     margin-bottom: ${theme.spacing.xs};
     min-width: 60px;
@@ -433,18 +431,18 @@ export const CategoryIcon = styled.span<{ layout?: string; primaryColor?: string
     svg {
       width: 30px;
       height: 30px;
-      color: ${primaryColor};
+      color: ${$primaryColor};
     }
 
     &:hover {
-      border-color: ${secondaryColor};
+      border-color: ${$secondaryColor};
       svg {
-        color: ${secondaryColor} !important;
+        color: ${$secondaryColor} !important;
       }
     }
   `}
-  ${({ layout, primaryColor }) =>
-    layout === 'clean' &&
+  ${({ $layout, $primaryColor }) =>
+    $layout === 'clean' &&
     `
     width: 40px;
     height: 40px;
@@ -452,11 +450,11 @@ export const CategoryIcon = styled.span<{ layout?: string; primaryColor?: string
     svg {
       width: 40px;
       height: 40px;
-      color: ${primaryColor};
+      color: ${$primaryColor};
     }
   `}
-  ${({ layout, theme, primaryColor, secondaryColor }) =>
-    layout === 'square' &&
+  ${({ $layout, theme, $primaryColor, $secondaryColor }) =>
+    $layout === 'square' &&
     `
     width: 60px;
     height: 60px;
@@ -467,45 +465,128 @@ export const CategoryIcon = styled.span<{ layout?: string; primaryColor?: string
     svg {
       width: 30px;
       height: 30px;
-      color: ${primaryColor};
+      color: ${$primaryColor};
     }
 
     &:hover {
-      border-color: ${secondaryColor};
+      border-color: ${$secondaryColor};
       svg {
-        color: ${secondaryColor} !important;
+        color: ${$secondaryColor} !important;
       }
     }
   `}
 `
 
-export const CategoryName = styled.div<{ layout?: string; primaryColor?: string; secondaryColor?: string }>`
+export const CategoryName = styled.div<{ $layout?: string; $primaryColor?: string; $secondaryColor?: string }>`
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.xs};
 
-  ${({ layout, theme }) =>
-    layout === 'default' &&
+  ${({ $layout, theme }) =>
+    $layout === 'default' &&
     `
     font-weight: ${theme.typography.fontWeights.regular};
   `}
-  ${({ layout, theme }) =>
-    layout === 'dark' &&
+  ${({ $layout, theme }) =>
+    $layout === 'dark' &&
     `
     color: ${theme.colors.mx.white};
     font-weight: ${theme.typography.fontWeights.bold};
   `}
-  ${({ layout, primaryColor, theme }) =>
-    layout === 'clean' &&
+  ${({ $layout, $primaryColor, theme }) =>
+    $layout === 'clean' &&
     `
-    color: ${primaryColor};
+    color: ${$primaryColor};
     padding: 0 ${theme.spacing.xs};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   `}
-  ${({ layout }) =>
-    layout === 'square' &&
+  ${({ $layout }) =>
+    $layout === 'square' &&
     `
   `}
+`
+
+export const CategoriesPreviewList = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing.sm};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.sm};
+  background: ${({ theme }) => theme.colors.mx.gray[50]};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`
+
+export const CategoryPreviewItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
+  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  flex-shrink: 0;
+  white-space: nowrap;
+`
+
+export const CategoryPreviewIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${({ theme }) => theme.colors.mx.gray[600]};
+`
+
+export const CategoryPreviewName = styled.span`
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.mx.black};
+`
+
+export const ConfigurationPreview = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing.md};
+  background: ${({ theme }) => theme.colors.mx.gray[50]};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+`
+
+export const ConfigurationItem = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${({ theme }) => theme.spacing.xs} 0;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+
+  &:last-child {
+    border-bottom: none;
+  }
+`
+
+export const ConfigurationLabel = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.gray[700]};
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+`
+
+export const ConfigurationValue = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.black};
+  max-width: 60%;
+  text-align: right;
+  word-break: break-word;
 `

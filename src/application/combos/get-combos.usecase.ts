@@ -25,13 +25,11 @@ export class GetCombosUsecase {
 
   async execute(params: GetCombosUsecaseInput): Promise<GetCombosResponse> {
     const queryParams = new URLSearchParams()
-
     if (params.restaurantId) queryParams.append('restaurantId', params.restaurantId)
     if (params.categoryId) queryParams.append('categoryId', params.categoryId)
     if (params.page) queryParams.append('page', params.page.toString())
     if (params.rowsPerPage) queryParams.append('rowsPerPage', params.rowsPerPage.toString())
     if (params.isActive !== undefined) queryParams.append('isActive', params.isActive.toString())
-
     const response = await this.httpClient.get<GetCombosResponse>({
       url: `${this.url}?${queryParams.toString()}`
     })

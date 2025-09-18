@@ -3,9 +3,8 @@ import type { MenuSectionDefinition } from '@/domain/models/menu-section-definit
 
 import { BannerEdit } from './components/banner-edit'
 import { BannerPreviewEdit } from './components/banner-preview-edit'
-import { BannerView } from './components/banner-view'
 
-type BannerSectionMode = 'view' | 'preview-edit' | 'edit' | 'add'
+type BannerSectionMode = 'preview-edit' | 'edit' | 'add'
 
 interface BannerSectionProps {
   section?: MenuSection
@@ -30,11 +29,6 @@ export const BannerSection: React.FC<BannerSectionProps> = ({
   layoutId,
   position
 }) => {
-  if (mode === 'view') {
-    if (!section) return null
-    return <BannerView section={section} />
-  }
-
   if (mode === 'preview-edit') {
     if (!section) return null
     return <BannerPreviewEdit section={section} onEdit={onEdit} onRemove={onRemove} />

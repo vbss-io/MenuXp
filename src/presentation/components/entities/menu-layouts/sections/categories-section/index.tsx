@@ -3,9 +3,8 @@ import type { MenuSectionDefinition } from '@/domain/models/menu-section-definit
 
 import { CategoriesEdit } from './components/categories-edit'
 import { CategoriesPreviewEdit } from './components/categories-preview-edit'
-import { CategoriesView } from './components/categories-view'
 
-type CategoriesSectionMode = 'view' | 'preview-edit' | 'edit' | 'add'
+type CategoriesSectionMode = 'preview-edit' | 'edit' | 'add'
 
 interface CategoriesSectionProps {
   section?: MenuSection
@@ -18,7 +17,6 @@ interface CategoriesSectionProps {
   layoutId?: string
   position?: number
   menuLayout?: string
-  isClientView?: boolean
 }
 
 export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
@@ -31,14 +29,8 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({
   sectionDefinitions = [],
   layoutId,
   position,
-  menuLayout,
-  isClientView = false
+  menuLayout
 }) => {
-  if (mode === 'view') {
-    if (!section) return null
-    return <CategoriesView section={section} menuLayout={menuLayout} isClientView={isClientView} />
-  }
-
   if (mode === 'preview-edit') {
     if (!section) return null
     return <CategoriesPreviewEdit section={section} onEdit={onEdit} onRemove={onRemove} menuLayout={menuLayout} />

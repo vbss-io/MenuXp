@@ -25,11 +25,10 @@ const logoVariants = {
 interface HeaderProps {
   isDashboard?: boolean
   isHome?: boolean
-  isRestaurantPage?: boolean
-  isAuthPages?: boolean
+  shouldShowHeader?: boolean
 }
 
-export const Header = ({ isDashboard, isHome, isRestaurantPage, isAuthPages }: HeaderProps) => {
+export const Header = ({ isDashboard, isHome, shouldShowHeader }: HeaderProps) => {
   const { user } = useAuth()
   const [showMobile, setShowMobile] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -43,7 +42,11 @@ export const Header = ({ isDashboard, isHome, isRestaurantPage, isAuthPages }: H
     return () => window.removeEventListener('resize', checkIsMobile)
   }, [])
 
-  if ((isRestaurantPage && !isAuthPages) || (isDashboard && !isMobile)) {
+  if (isDashboard && !isMobile) {
+    return null
+  }
+
+  if (!shouldShowHeader) {
     return null
   }
 
