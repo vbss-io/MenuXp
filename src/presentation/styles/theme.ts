@@ -34,7 +34,7 @@ const menuXpColors = {
 
 const typography = {
   fonts: {
-    title: "'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+    title: "'Tanker', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
     body: "'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
     mono: "'Roboto Mono', 'Courier New', monospace",
     game: "'Press Start 2P', monospace"
@@ -155,7 +155,7 @@ export const theme: DefaultTheme = {
     secondary: menuXpColors.yellow,
     accent: menuXpColors.blue,
     neutral: menuXpColors.black,
-    background: menuXpColors.white,
+    background: menuXpColors.gray[50],
 
     mx: menuXpColors,
 
@@ -166,7 +166,7 @@ export const theme: DefaultTheme = {
 
     text: {
       primary: menuXpColors.black,
-      secondary: menuXpColors.gray[600],
+      secondary: menuXpColors.black,
       muted: menuXpColors.gray[500],
       inverse: menuXpColors.white
     },

@@ -133,8 +133,8 @@ const getTimeAgo = (date: Date): string => {
 const S = {
   Card: styled.div<{ $isDragging: boolean; $isUpdatingStatus: boolean }>`
     background: ${({ theme }) => theme.colors.mx.white};
-    border: 2px solid ${({ theme }) => theme.colors.mx.black};
-    border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+    border: 1px solid ${({ theme }) => theme.colors.mx.black};
+    border-radius: ${({ theme }) => theme.borderRadius.sm};
     padding: ${({ theme }) => theme.spacing.md};
     cursor: ${({ $isUpdatingStatus }) => ($isUpdatingStatus ? 'not-allowed' : 'pointer')};
     transition: all 0.2s ease;
@@ -169,7 +169,7 @@ const S = {
   OrderCode: styled.span`
     font-family: ${({ theme }) => theme.typography.fonts.title};
     font-size: ${({ theme }) => theme.typography.fontSizes.md};
-    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
     color: ${({ theme }) => theme.colors.mx.black};
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -254,7 +254,7 @@ const S = {
   OrderTotal: styled.span`
     font-family: ${({ theme }) => theme.typography.fonts.title};
     font-size: ${({ theme }) => theme.typography.fontSizes.md};
-    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
     color: ${({ theme }) => theme.colors.mx.black};
   `,
 

@@ -12,26 +12,80 @@ import {
 } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
 
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useSidebar } from '@/presentation/hooks/use-sidebar'
+
 import * as S from './styles'
+
+interface MenuItem {
+  icon: React.ReactNode
+  label: string
+  path: string
+  badge?: number
+  isActive?: boolean
+}
 
 export const Sidebar = () => {
   const { logout } = useAuth()
   const { isOpen, toggleSidebar } = useSidebar()
   const navigate = useNavigate()
   const location = useLocation()
+  const sidebarRef = useRef<HTMLDivElement>(null)
 
-  const menuItems = [
-    { icon: <HouseIcon size={24} weight="fill" />, label: 'Operação', path: '/dashboard' },
-    { icon: <ShoppingCartIcon size={24} weight="fill" />, label: 'Pedidos', path: '/dashboard/orders' },
-    { icon: <BowlFoodIcon size={24} weight="fill" />, label: 'Items do Menu', path: '/dashboard/menu-items' },
-    { icon: <ScrollIcon size={24} weight="fill" />, label: 'Cardápio', path: '/dashboard/menu' },
-    { icon: <GraphIcon size={24} weight="fill" />, label: 'Relatórios', path: '/dashboard/reports' },
-    { icon: <GameControllerIcon size={24} weight="fill" />, label: 'Missões', path: '/dashboard/missions' },
-    { icon: <ChatCenteredDotsIcon size={24} weight="fill" />, label: 'Mensagens', path: '/dashboard/messages' },
-    { icon: <GearIcon size={24} weight="fill" />, label: 'Configurações', path: '/dashboard/settings' }
+  // Lista simplificada dos itens do menu
+  const menuItems: MenuItem[] = [
+    { 
+      icon: <HouseIcon size={20} weight="fill" />, 
+      label: 'Dashboard', 
+      path: '/dashboard',
+      isActive: location.pathname === '/dashboard'
+    },
+    { 
+      icon: <ShoppingCartIcon size={20} weight="fill" />, 
+      label: 'Pedidos', 
+      path: '/dashboard/orders',
+      badge: 3, // Exemplo de badge
+      isActive: location.pathname === '/dashboard/orders'
+    },
+    { 
+      icon: <BowlFoodIcon size={20} weight="fill" />, 
+      label: 'Items do Menu', 
+      path: '/dashboard/menu-items',
+      isActive: location.pathname === '/dashboard/menu-items'
+    },
+    { 
+      icon: <ScrollIcon size={20} weight="fill" />, 
+      label: 'Cardápio', 
+      path: '/dashboard/menu',
+      isActive: location.pathname === '/dashboard/menu'
+    },
+    { 
+      icon: <GraphIcon size={20} weight="fill" />, 
+      label: 'Relatórios', 
+      path: '/dashboard/reports',
+      isActive: location.pathname === '/dashboard/reports'
+    },
+    { 
+      icon: <GameControllerIcon size={20} weight="fill" />, 
+      label: 'Missões', 
+      path: '/dashboard/missions',
+      isActive: location.pathname === '/dashboard/missions'
+    },
+    { 
+      icon: <ChatCenteredDotsIcon size={20} weight="fill" />, 
+      label: 'Mensagens', 
+      path: '/dashboard/messages',
+      badge: 5,
+      isActive: location.pathname === '/dashboard/messages'
+    },
+    { 
+      icon: <GearIcon size={20} weight="fill" />, 
+      label: 'Configurações', 
+      path: '/dashboard/settings',
+      isActive: location.pathname === '/dashboard/settings'
+    }
   ]
 
   const logoVariants = {
@@ -50,8 +104,29 @@ export const Sidebar = () => {
     window.location.assign('/')
   }
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'Escape' && isOpen) {
+      toggleSidebar()
+    }
+  }
+
+
+  // Navegação por teclado
+  useEffect(() => {
+    const handleGlobalKeyDown = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key === 'b') {
+        event.preventDefault()
+        toggleSidebar()
+      }
+    }
+
+    document.addEventListener('keydown', handleGlobalKeyDown)
+    return () => document.removeEventListener('keydown', handleGlobalKeyDown)
+  }, [toggleSidebar])
+
   return (
     <motion.div
+      ref={sidebarRef}
       initial={{ width: 80 }}
       animate={{ width: isOpen ? 280 : 80 }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
@@ -61,12 +136,26 @@ export const Sidebar = () => {
         zIndex: 10,
         overflow: 'hidden'
       }}
+      onKeyDown={handleKeyDown}
+      tabIndex={-1}
     >
-      <S.SidebarContainer className={!isOpen ? 'sidebar-closed' : ''}>
+      <S.SidebarContainer 
+        className={!isOpen ? 'sidebar-closed' : ''}
+        role="navigation"
+        aria-label="Menu principal"
+      >
+        {/* Header Section */}
         <S.HeaderSection $isOpen={isOpen}>
           {isOpen && (
             <motion.div variants={logoVariants} initial="initial" whileHover="hover">
-              <S.Logo onClick={handleLogoClick} $isOpen={isOpen}>
+              <S.Logo 
+                onClick={handleLogoClick} 
+                $isOpen={isOpen}
+                role="button"
+                tabIndex={0}
+                aria-label="Ir para página inicial"
+                onKeyDown={(e) => e.key === 'Enter' && handleLogoClick()}
+              >
                 <img
                   src="/images/menuxp-logo.svg"
                   alt="MenuXP - Seu restaurante merece um app próprio"
@@ -75,29 +164,59 @@ export const Sidebar = () => {
               </S.Logo>
             </motion.div>
           )}
-          <S.ToggleButton onClick={toggleSidebar} $isOpen={isOpen}>
-            <motion.div animate={{ rotate: isOpen ? 0 : 180 }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
-              <CaretLeftIcon size={24} weight="bold" />
+          
+          <S.ToggleButton 
+            onClick={toggleSidebar} 
+            $isOpen={isOpen}
+            aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+            title={`${isOpen ? 'Fechar' : 'Abrir'} menu (Ctrl+B)`}
+          >
+            <motion.div 
+              animate={{ rotate: isOpen ? 0 : 180 }} 
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+            >
+              <CaretLeftIcon size={20} weight="bold" />
             </motion.div>
           </S.ToggleButton>
         </S.HeaderSection>
+
+        {/* Navigation Menu */}
         <S.MenuContainer>
           {menuItems.map((item, index) => (
             <S.MenuItem
               key={index}
               onClick={() => navigate(item.path)}
-              $isActive={location.pathname === item.path}
+              $isActive={item.isActive}
               $isOpen={isOpen}
+              role="menuitem"
+              tabIndex={0}
+              aria-label={item.label}
+              title={!isOpen ? item.label : undefined}
             >
               <S.IconWrapper>{item.icon}</S.IconWrapper>
-              {isOpen && <span>{item.label}</span>}
+              {isOpen && (
+                <>
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <S.Badge>{item.badge}</S.Badge>
+                  )}
+                </>
+              )}
             </S.MenuItem>
           ))}
         </S.MenuContainer>
+
+        {/* Footer Section */}
         <S.BottomSection>
-          <S.LogoutButton onClick={logout} $isOpen={isOpen}>
+          <S.LogoutButton 
+            onClick={logout} 
+            $isOpen={isOpen}
+            role="button"
+            tabIndex={0}
+            aria-label="Sair da conta"
+          >
             <S.IconWrapper>
-              <SignOutIcon size={24} weight="fill" />
+              <SignOutIcon size={20} weight="fill" />
             </S.IconWrapper>
             {isOpen && <span>Sair</span>}
           </S.LogoutButton>

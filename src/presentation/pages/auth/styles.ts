@@ -4,19 +4,24 @@ import styled from 'styled-components'
 export const Container = styled.div`
   flex: 1;
   display: flex;
-  gap: ${({ theme }) => theme.spacing.md};
+  gap: 0;
   overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
+  
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    height: 100vh;
+  }
 `
 
 export const LeftColumn = styled.div`
-  width: 90%;
+  flex: 1 1 50%;
   background: ${({ theme }) => theme.colors.mx.red};
   display: none;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  text-align: center;
   padding: ${({ theme }) => theme.spacing.xxxl};
   overflow: hidden;
   position: relative;
@@ -44,32 +49,75 @@ export const LeftColumn = styled.div`
 
 export const RightColumn = styled.div`
   width: 100%;
+  flex: 1 1 50%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: ${({ theme }) => theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.sm};
   position: relative;
   overflow: hidden;
   background-color: ${({ theme }) => theme.colors.mx.white};
 
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/food-pattern.svg');
+    background-repeat: repeat;
+    background-size: 120px auto;
+    opacity: 0.06;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    padding: ${({ theme }) => theme.spacing.md};
+  }
+
   @media ${({ theme }) => theme.breakpoints.lg} {
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: flex-start;
+    padding: ${({ theme }) => theme.spacing.md};
+  }
+`
+
+export const LoginLogo = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: ${({ theme }) => theme.spacing.md};
+
+  img {
+    width: 132px; /* ~33% de 400px (largura máxima do Card) - aumentado 10% */
+    max-width: 33%;
+    height: auto;
+    display: block;
   }
 `
 
 export const Card = styled.div`
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  padding: ${({ theme }) => theme.spacing.xl};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  padding: ${({ theme }) => theme.spacing.md};
   width: 100%;
   max-width: 400px;
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.md};
   position: relative;
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border-radius: ${({ theme }) => theme.borderRadius.md};
   box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
   z-index: 1;
+
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    padding: ${({ theme }) => theme.spacing.lg};
+  }
+
+  @media ${({ theme }) => theme.breakpoints.md} {
+    padding: ${({ theme }) => theme.spacing.xl};
+  }
 `
 
 export const ContentWrapper = styled.div`
@@ -77,15 +125,30 @@ export const ContentWrapper = styled.div`
   z-index: 1;
   width: 100%;
   max-width: 400px;
+  margin: 0 auto;
+
+  @media ${({ theme }) => theme.breakpoints.lg} {
+    margin-left: ${({ theme }) => theme.spacing.xl};
+    margin-right: 0;
+  }
 `
 
 export const Title = styled.h1`
   color: ${({ theme }) => theme.colors.mx.white};
-  font-size: ${({ theme }) => theme.typography.fontSizes.xxl};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-  line-height: ${({ theme }) => theme.typography.lineHeights.tight};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   font-family: ${({ theme }) => theme.typography.fonts.title};
-  text-shadow: 2px 2px 0 ${({ theme }) => theme.colors.mx.black};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
+  line-height: ${({ theme }) => theme.typography.lineHeights.tight};
+  text-align: center;
+  margin-bottom: ${({ theme }) => theme.spacing.sm};
+
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    font-size: ${({ theme }) => theme.typography.fontSizes.xxl};
+  }
+
+  @media ${({ theme }) => theme.breakpoints.md} {
+    font-size: ${({ theme }) => theme.typography.fontSizes.xxxl};
+  }
 `
 
 export const Divider = styled.div`
@@ -100,19 +163,22 @@ export const Divider = styled.div`
 export const Subtitle = styled.h2`
   color: ${({ theme }) => theme.colors.mx.yellow};
   font-size: ${({ theme }) => theme.typography.fontSizes.md};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   line-height: ${({ theme }) => theme.typography.lineHeights.tight};
-  font-family: ${({ theme }) => theme.typography.fonts.title};
-  text-shadow: 1px 1px 0 ${({ theme }) => theme.colors.mx.black};
 `
 
 export const Text = styled.p`
   color: ${({ theme }) => theme.colors.mx.white};
-  font-size: ${({ theme }) => theme.typography.fontSizes.md};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   font-family: ${({ theme }) => theme.typography.fonts.body};
   line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
   opacity: 0.95;
-  text-shadow: 1px 1px 0 ${({ theme }) => theme.colors.mx.black};
+  text-align: center;
+  margin-top: ${({ theme }) => theme.spacing.sm};
+
+  @media ${({ theme }) => theme.breakpoints.sm} {
+    font-size: ${({ theme }) => theme.typography.fontSizes.md};
+  }
 `
 
 export const IconWrapper = styled.div`
@@ -124,11 +190,11 @@ export const IconWrapper = styled.div`
 
 export const CardTitle = styled.h2`
   color: ${({ theme }) => theme.colors.mx.black};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-family: ${({ theme }) => theme.typography.fonts.title};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   text-align: center;
   line-height: ${({ theme }) => theme.typography.lineHeights.tight};
-  font-family: ${({ theme }) => theme.typography.fonts.title};
   text-transform: uppercase;
   letter-spacing: 0.5px;
 `
@@ -159,17 +225,29 @@ export const ResendLink = styled.button`
   background: none;
   border: none;
   color: ${({ theme }) => theme.colors.mx.red};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   cursor: pointer;
   padding: 0;
   font-size: inherit;
   text-decoration: underline;
   font-family: ${({ theme }) => theme.typography.fonts.body};
   transition: all ${({ theme }) => theme.animations.durations.fast} ${({ theme }) => theme.animations.easings.easeInOut};
+  outline: none;
+  border-radius: 2px;
 
   &:hover {
     color: ${({ theme }) => theme.colors.mx.yellow};
     transform: translateY(-1px);
+  }
+
+  &:focus {
+    outline: 2px solid ${({ theme }) => theme.colors.mx.yellow};
+    outline-offset: 2px;
+  }
+
+  &:active {
+    color: ${({ theme }) => theme.colors.mx.yellow};
+    transform: translateY(0);
   }
 
   &:disabled {
@@ -177,19 +255,32 @@ export const ResendLink = styled.button`
     cursor: not-allowed;
     text-decoration: none;
     transform: none;
+    outline: none;
   }
 `
 
 export const Link = styled(RouterLink)`
   color: ${({ theme }) => theme.colors.mx.red};
   text-decoration: underline;
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-family: ${({ theme }) => theme.typography.fonts.body};
   transition: all ${({ theme }) => theme.animations.durations.fast} ${({ theme }) => theme.animations.easings.easeInOut};
+  outline: none;
+  border-radius: 2px;
 
   &:hover {
     color: ${({ theme }) => theme.colors.mx.yellow};
     transform: translateY(-1px);
+  }
+
+  &:focus {
+    outline: 2px solid ${({ theme }) => theme.colors.mx.yellow};
+    outline-offset: 2px;
+  }
+
+  &:active {
+    color: ${({ theme }) => theme.colors.mx.yellow};
+    transform: translateY(0);
   }
 `
 
@@ -220,7 +311,7 @@ export const TermsContainer = styled.div`
 
 export const EmailHighlight = styled.span`
   color: ${({ theme }) => theme.colors.mx.red};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   white-space: nowrap;
   font-family: ${({ theme }) => theme.typography.fonts.body};
 `

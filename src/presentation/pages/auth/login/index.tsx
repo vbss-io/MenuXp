@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
+import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react'
 
 import { LoginUsecase } from '@/application/auth/login.usecase'
 import { ResentConfirmationEmailUsecase } from '@/application/auth/resent-confirmation-email.usecase'
@@ -28,13 +29,18 @@ export const Login = () => {
   const [timer, setTimer] = useState(0)
   const [isResendDisabled, setIsResendDisabled] = useState(false)
   const [pendingUser, setPendingUser] = useState<string | null>(null)
+  const [showPassword, setShowPassword] = useState(false)
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    trigger,
+    getFieldState
   } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema)
+    resolver: zodResolver(loginSchema),
+    mode: 'onBlur',
+    reValidateMode: 'onBlur'
   })
 
   useEffect(() => {
@@ -97,13 +103,27 @@ export const Login = () => {
   return (
     <S.Container>
       <S.LeftColumn>
-        <S.Title>Bem-vindo de volta</S.Title>
-        <S.Divider />
-        <S.Subtitle>Entre na sua conta</S.Subtitle>
-        <S.Text>Digite suas credenciais para acessar sua conta.</S.Text>
+        <S.Title>
+          <span style={{ color: '#FEBB11' }}>Boas-vindas</span> de volta
+        </S.Title>
+        <img 
+          src="/images/img-tela-login.svg" 
+          alt="Food Service Gamificado" 
+          style={{ 
+            width: '100%', 
+            maxWidth: '300px', 
+            margin: '16px 0',
+            height: 'auto'
+          }} 
+        />
+        <S.Text>#1 Food Service Gamificado do Brasil</S.Text>
       </S.LeftColumn>
       <S.RightColumn>
-        <S.Card>
+        <S.ContentWrapper>
+          <S.LoginLogo>
+            <img src="/images/menuxp-logo.svg" alt="MenuXP" />
+          </S.LoginLogo>
+          <S.Card>
           <S.CardTitle>Entrar</S.CardTitle>
           <S.Form onSubmit={handleSubmit(onSubmit)}>
             <FormInput
@@ -114,36 +134,69 @@ export const Login = () => {
               placeholder="Digite seu E-mail"
               fontSize="sm"
               required
-              register={register('email')}
+              status={
+                getFieldState('email').invalid
+                  ? 'error'
+                  : getFieldState('email').isTouched
+                  ? 'success'
+                  : 'idle'
+              }
+              register={register('email', {
+                onBlur: async () => {
+                  await trigger('email')
+                }
+              })}
             />
             <FormInput
               id="password"
               label="Senha"
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               error={errors.password?.message}
               placeholder="Digite sua senha"
               fontSize="sm"
               required
+              rightAdornment={
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((s) => !s)}
+                  aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    padding: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {showPassword ? (
+                    <EyeSlashIcon size={20} />
+                  ) : (
+                    <EyeIcon size={20} />
+                  )}
+                </button>
+              }
               register={register('password')}
             />
             {pendingUser ? (
               <S.InfoText>
                 Por favor, confirme seu e-mail primeiro.{' '}
                 {isResendDisabled ? (
-                  <S.ResendLink disabled>Reenviar disponível em {timer}s</S.ResendLink>
+                  <S.ResendLink disabled aria-label={`Reenviar disponível em ${timer} segundos`}>Reenviar disponível em {timer}s</S.ResendLink>
                 ) : (
-                  <S.ResendLink onClick={handleResendLink}>clique aqui para reenviar</S.ResendLink>
+                  <S.ResendLink onClick={handleResendLink} aria-label="Clique aqui para reenviar confirmação de e-mail">clique aqui para reenviar</S.ResendLink>
                 )}
               </S.InfoText>
             ) : (
               <S.ForgotPasswordContainer>
-                <S.Link to="/forgot-password">Esqueceu a senha?</S.Link>
+                <S.Link to="/forgot-password" aria-label="Esqueceu a senha? Clique para redefinir">Esqueceu a senha?</S.Link>
               </S.ForgotPasswordContainer>
             )}
             <Button
               type="submit"
               disabled={isSubmitting}
               variant="primary"
+              size="lg"
               loading={isSubmitting}
               loadingText="Entrando..."
             >
@@ -151,9 +204,10 @@ export const Login = () => {
             </Button>
           </S.Form>
           <S.InfoText>
-            Não tem uma conta? <S.Link to="/register">Cadastre-se</S.Link>
+            Não tem uma conta? <S.Link to="/register" aria-label="Não tem uma conta? Clique para se cadastrar">Cadastre-se</S.Link>
           </S.InfoText>
-        </S.Card>
+          </S.Card>
+        </S.ContentWrapper>
       </S.RightColumn>
     </S.Container>
   )

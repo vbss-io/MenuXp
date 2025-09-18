@@ -23,6 +23,10 @@ const brutalistButtonStyles = css`
   width: 100%;
   height: auto;
   min-height: fit-content;
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  font-family: 'Tanker', ${({ theme }) => theme.typography.fonts.title};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
+  letter-spacing: 0.5px;
 
   > *:first-child {
     flex-shrink: 0;
@@ -30,31 +34,31 @@ const brutalistButtonStyles = css`
   }
 
   &.xs {
-    font-size: ${({ theme }) => theme.typography.fontSizes.xxxs};
+    font-size: calc(${({ theme }) => theme.typography.fontSizes.xxxs} + 4px);
     padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
     min-height: ${({ theme }) => theme.spacing.sm};
   }
 
   &.sm {
-    font-size: ${({ theme }) => theme.typography.fontSizes.xxs};
+    font-size: calc(${({ theme }) => theme.typography.fontSizes.xxs} + 4px);
     padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
     min-height: ${({ theme }) => theme.spacing.md};
   }
 
   &.md {
-    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    font-size: calc(${({ theme }) => theme.typography.fontSizes.sm} + 4px);
     padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
     min-height: ${({ theme }) => theme.spacing.lg};
   }
 
   &.lg {
-    font-size: ${({ theme }) => theme.typography.fontSizes.md};
-    padding: ${({ theme }) => theme.spacing.lg} ${({ theme }) => theme.spacing.xl};
-    min-height: ${({ theme }) => theme.spacing.xl};
+    font-size: calc(${({ theme }) => theme.typography.fontSizes.md} + 4px);
+    padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.xl};
+    min-height: ${({ theme }) => theme.spacing.sm};
   }
 
   &.xl {
-    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+    font-size: calc(${({ theme }) => theme.typography.fontSizes.lg} + 4px);
     padding: ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.xxl};
     min-height: ${({ theme }) => theme.spacing.xxl};
   }
@@ -78,16 +82,18 @@ const brutalistButtonStyles = css`
 
 export const ButtonContainer = styled.div`
   .button {
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
+    
     &.primary {
       ${brutalistButtonStyles}
-      font-family: ${({ theme }) => theme.typography.fonts.title};
       background: ${({ theme }) => theme.colors.mx.yellow};
       color: ${({ theme }) => theme.colors.mx.black};
-      border: 3px solid ${({ theme }) => theme.colors.mx.black};
+      border: 1px solid ${({ theme }) => theme.colors.mx.black};
       box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
-        background: ${({ theme }) => theme.colors.mx.yellow};
+        background: #0097E0;
         border-color: ${({ theme }) => theme.colors.mx.black};
         transform: translateY(-2px);
         box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.black};
@@ -96,11 +102,11 @@ export const ButtonContainer = styled.div`
 
     &.secondary {
       ${brutalistButtonStyles}
-      font-family: ${({ theme }) => theme.typography.fonts.title};
       background: ${({ theme }) => theme.colors.mx.red};
       color: ${({ theme }) => theme.colors.mx.white};
-      border: 3px solid ${({ theme }) => theme.colors.mx.black};
+      border: 1px solid ${({ theme }) => theme.colors.mx.black};
       box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
         background: ${({ theme }) => theme.colors.mx.red};
@@ -112,11 +118,11 @@ export const ButtonContainer = styled.div`
 
     &.outline {
       ${brutalistButtonStyles}
-      font-family: ${({ theme }) => theme.typography.fonts.title};
       background: transparent;
       color: ${({ theme }) => theme.colors.mx.black};
-      border: 3px solid ${({ theme }) => theme.colors.mx.black};
+      border: 1px solid ${({ theme }) => theme.colors.mx.black};
       box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
         background: ${({ theme }) => theme.colors.mx.black};
@@ -128,13 +134,13 @@ export const ButtonContainer = styled.div`
 
     &.game {
       ${brutalistButtonStyles}
-      font-family: ${({ theme }) => theme.typography.fonts.game};
       background: ${({ theme }) => theme.colors.game.gold};
       color: ${({ theme }) => theme.colors.mx.black};
-      border: 3px solid ${({ theme }) => theme.colors.mx.black};
+      border: 1px solid ${({ theme }) => theme.colors.mx.black};
       box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
       text-transform: uppercase;
       letter-spacing: 1px;
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
         background: ${({ theme }) => theme.colors.game.gold};
@@ -146,11 +152,11 @@ export const ButtonContainer = styled.div`
 
     &.danger {
       ${brutalistButtonStyles}
-      font-family: ${({ theme }) => theme.typography.fonts.title};
       background: transparent;
       color: ${({ theme }) => theme.colors.error};
-      border: 3px solid ${({ theme }) => theme.colors.error};
+      border: 1px solid ${({ theme }) => theme.colors.error};
       box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.error};
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
         background: ${({ theme }) => theme.colors.error};
@@ -162,11 +168,11 @@ export const ButtonContainer = styled.div`
 
     &.white {
       ${brutalistButtonStyles}
-      font-family: ${({ theme }) => theme.typography.fonts.title};
       background: ${({ theme }) => theme.colors.mx.white};
       color: ${({ theme }) => theme.colors.mx.black};
-      border: 3px solid ${({ theme }) => theme.colors.mx.black};
+      border: 1px solid ${({ theme }) => theme.colors.mx.black};
       box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
         background: ${({ theme }) => theme.colors.mx.gray[100]};
@@ -178,11 +184,11 @@ export const ButtonContainer = styled.div`
 
     &.ghost {
       ${brutalistButtonStyles}
-      font-family: ${({ theme }) => theme.typography.fonts.title};
       background: transparent;
       color: ${({ theme }) => theme.colors.mx.black};
-      border: 3px solid transparent;
+      border: 1px solid transparent;
       box-shadow: none;
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
         background: ${({ theme }) => theme.colors.mx.gray[100]};

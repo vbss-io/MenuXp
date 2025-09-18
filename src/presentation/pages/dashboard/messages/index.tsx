@@ -22,7 +22,6 @@ export const MessagesPage = () => {
     <S.Container>
       <Breadcrumb lastPath="Mensagens" />
       <S.Header>
-        <S.Subtitle>Gerencie as mensagens do seu restaurante</S.Subtitle>
       </S.Header>
       <S.Content>
         <S.PlaceholderCard>

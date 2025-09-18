@@ -1,7 +1,7 @@
 import { OperationStatus } from '@/domain/enums/operation/operation-status.enum'
 import type { Operation } from '@/domain/models/operation.model'
 import { Button } from '@/presentation/components/ui/button'
-import { PauseIcon, PlayIcon, StopIcon, WarningIcon } from '@phosphor-icons/react'
+import { PauseIcon, PlayIcon, StopIcon, RocketLaunchIcon } from '@phosphor-icons/react'
 import styled from 'styled-components'
 
 interface OperationControlsProps {
@@ -35,12 +35,14 @@ export const OperationControls = ({
       <Container>
         <StartSection>
           <StartInfo>
-            <WarningIconContainer>
-              <WarningIcon weight="fill" />
-            </WarningIconContainer>
+            <StartIconContainer>
+              <RocketLaunchIcon weight="fill" />
+            </StartIconContainer>
             <StartText>
-              <StartTitle>Operação Parada</StartTitle>
-              <StartDescription>Inicie a operação para começar a receber pedidos</StartDescription>
+              <StartTitle>Iniciar Operação</StartTitle>
+              <StartDescription>
+                Sua operação está parada. Clique no botão <strong>INICIAR OPERAÇÃO</strong> para começar a receber pedidos e gerenciar seu estabelecimento.
+              </StartDescription>
             </StartText>
           </StartInfo>
           <StartButton
@@ -112,10 +114,10 @@ export const OperationControls = ({
 
 const Container = styled.div`
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.lg};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
 `
 
 const StartSection = styled.div`
@@ -135,14 +137,21 @@ const StartInfo = styled.div`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `
 
-const WarningIconContainer = styled.div`
+const StartIconContainer = styled.div`
   width: 48px;
   height: 48px;
   border-radius: ${({ theme }) => theme.borderRadius.md};
-  background: #fef3c7;
-  color: #f59e0b;
+  background: #dbeafe;
+  color: #3b82f6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,7 +168,7 @@ const StartText = styled.div`
 const StartTitle = styled.h3`
   font-family: ${({ theme }) => theme.typography.fonts.title};
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   color: ${({ theme }) => theme.colors.mx.black};
   margin: 0;
   text-transform: uppercase;

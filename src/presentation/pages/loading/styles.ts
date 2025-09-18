@@ -47,9 +47,9 @@ export const LoadingWrapper = styled(motion.div)`
   gap: ${({ theme }) => theme.spacing.lg};
   padding: ${({ theme }) => theme.spacing.xl};
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   position: relative;
 
   &::before {

@@ -42,7 +42,6 @@ export const MenuItemsPage = () => {
     <S.Container>
       <Breadcrumb lastPath="Itens do Menu" />
       <S.Header>
-        <S.Subtitle>Gerencie os itens do menu do seu restaurante</S.Subtitle>
       </S.Header>
       <S.TabsContainer>
         <S.TabsHeader>

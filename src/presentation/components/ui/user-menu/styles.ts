@@ -1,10 +1,45 @@
 import styled from 'styled-components'
 
+export const UserMenuTrigger = styled.button`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+  padding: ${({ theme }) => theme.spacing.sm};
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: ${({ theme }) => theme.colors.mx.black};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.mx.gray[100]};
+    border-radius: ${({ theme }) => theme.borderRadius.sm};
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  svg {
+    color: ${({ theme }) => theme.colors.mx.black};
+    transition: transform 0.2s ease;
+  }
+
+  &:hover svg {
+    transform: translateY(1px);
+  }
+`
+
 export const UserMenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 200px;
   position: relative;
+  width: 100%;
+  padding: ${({ theme }) => theme.spacing.lg};
 `
 
 export const HeaderSection = styled.div`
@@ -12,19 +47,21 @@ export const HeaderSection = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: ${({ theme }) => theme.spacing.md};
-  padding: ${({ theme }) => theme.spacing.lg};
-  border-bottom: 2px solid ${({ theme }) => theme.colors.mx.white};
+  padding: ${({ theme }) => theme.spacing.md};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mx.gray[100]};
   position: relative;
   flex-shrink: 0;
-  min-height: 80px;
+  min-height: 60px;
+  background: transparent;
+  margin: -${({ theme }) => theme.spacing.lg} -${({ theme }) => theme.spacing.lg} ${({ theme }) => theme.spacing.md} -${({ theme }) => theme.spacing.lg};
 
   .avatar-wrapper {
     svg {
-      color: ${({ theme }) => theme.colors.mx.yellow};
+      color: ${({ theme }) => theme.colors.mx.blue};
     }
 
     span {
-      color: ${({ theme }) => theme.colors.mx.yellow};
+      color: ${({ theme }) => theme.colors.mx.black};
     }
   }
 `
@@ -42,7 +79,7 @@ export const UserInfo = styled.div`
 
 export const UserEmail = styled.div`
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.mx.white};
+  color: ${({ theme }) => theme.colors.mx.gray[600]};
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
 `
@@ -52,7 +89,7 @@ export const MenuContainer = styled.div`
   flex-direction: column;
   align-items: stretch;
   gap: ${({ theme }) => theme.spacing.xs};
-  padding: ${({ theme }) => theme.spacing.md};
+  padding: 0;
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
@@ -86,8 +123,8 @@ export const MenuItem = styled.div<{ $isActive?: boolean; $isOpen?: boolean }>`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
-  padding: 0 ${({ theme }) => theme.spacing.md};
-  color: ${({ theme }) => theme.colors.mx.white};
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+  color: ${({ theme }) => theme.colors.mx.black};
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
@@ -112,24 +149,21 @@ export const MenuItem = styled.div<{ $isActive?: boolean; $isOpen?: boolean }>`
     justify-content: center;
   `}
 
-  /* Estilo para item ativo - apenas bordas e background no ativo */
+  /* Estilo para item ativo */
   ${({ $isActive, theme }) =>
     $isActive &&
     `
-    background-color: ${theme.colors.mx.yellow};
-    border: 2px solid ${theme.colors.mx.white};
-    box-shadow: ${theme.shadows.brutalist};
-    color: ${theme.colors.mx.black};
+    background-color: ${theme.colors.mx.blue};
+    color: ${theme.colors.mx.white};
+    border-radius: ${theme.borderRadius.sm};
   `}
 
   &:hover {
     ${({ $isActive, theme }) =>
       !$isActive &&
       `
-      background-color: ${theme.colors.mx.white};
+      background-color: ${theme.colors.mx.gray[100]};
       color: ${theme.colors.mx.black};
-      transform: translateY(-1px);
-      box-shadow: ${theme.shadows.brutalist};
     `}
   }
 
@@ -137,8 +171,7 @@ export const MenuItem = styled.div<{ $isActive?: boolean; $isOpen?: boolean }>`
     ${({ $isActive, theme }) =>
       !$isActive &&
       `
-      transform: translateY(0px);
-      box-shadow: ${theme.shadows.sm};
+      background-color: ${theme.colors.mx.gray[200]};
     `}
   }
 `
@@ -157,24 +190,15 @@ export const IconWrapper = styled.div`
 `
 
 export const BottomSection = styled.div`
-  padding: ${({ theme }) => theme.spacing.lg};
-  border-top: 2px solid ${({ theme }) => theme.colors.mx.white};
+  padding: ${({ theme }) => theme.spacing.md};
+  border-top: 1px solid ${({ theme }) => theme.colors.mx.gray[100]};
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.md};
-  border-radius: 0 0 ${({ theme }) => theme.borderRadius.brutalist} 0;
   position: relative;
-  flex-shrink: 0; /* Fixa o logout */
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent 0%, ${({ theme }) => theme.colors.mx.black} 50%, transparent 100%);
-  }
+  flex-shrink: 0;
+  background: transparent;
+  margin: ${({ theme }) => theme.spacing.md} -${({ theme }) => theme.spacing.lg} -${({ theme }) => theme.spacing.lg} -${({ theme }) => theme.spacing.lg};
 
   /* Ajuste de espaçamento quando fechado - igual ao MenuContainer */
   .sidebar-closed & {
@@ -187,12 +211,12 @@ export const LogoutButton = styled.div<{ $isOpen?: boolean }>`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.md};
-  padding: 0 ${({ theme }) => theme.spacing.md};
-  color: ${({ theme }) => theme.colors.mx.black};
-  background-color: ${({ theme }) => theme.colors.mx.yellow};
+  padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
+  color: ${({ theme }) => theme.colors.mx.red};
+  background-color: transparent;
   white-space: nowrap;
   overflow: hidden;
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   justify-content: ${({ $isOpen }) => ($isOpen ? 'flex-start' : 'center')};
   font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
@@ -201,9 +225,7 @@ export const LogoutButton = styled.div<{ $isOpen?: boolean }>`
   flex-shrink: 0;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
 
   /* Ajuste quando fechado - mesmo comportamento dos outros itens */
   ${({ $isOpen }) =>
@@ -215,12 +237,12 @@ export const LogoutButton = styled.div<{ $isOpen?: boolean }>`
   `}
 
   &:hover {
-    transform: translateY(-1px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    background-color: ${({ theme }) => theme.colors.mx.red};
+    color: ${({ theme }) => theme.colors.mx.white};
   }
 
   &:active {
-    transform: translateY(0px);
-    box-shadow: ${({ theme }) => theme.shadows.sm};
+    background-color: ${({ theme }) => theme.colors.mx.red};
+    color: ${({ theme }) => theme.colors.mx.white};
   }
 `

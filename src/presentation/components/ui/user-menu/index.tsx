@@ -1,4 +1,4 @@
-import { ChartPieIcon, SignOutIcon, UserIcon } from '@phosphor-icons/react'
+import { CaretDownIcon, ChartPieIcon, SignOutIcon, UserIcon } from '@phosphor-icons/react'
 import { Button } from '@vbss-ui/button'
 import React from 'react'
 
@@ -30,18 +30,19 @@ export const UserMenu: React.FC<UserMenuProps> = ({
   }
 
   const defaultTrigger = (
-    <Button variant="ghost" size="sm" className="user-menu-trigger">
+    <S.UserMenuTrigger>
       <Avatar showName />
-    </Button>
+      <CaretDownIcon size={16} weight="bold" />
+    </S.UserMenuTrigger>
   )
 
   return (
     <Popover
       trigger={trigger || defaultTrigger}
-      side={side}
-      align={align}
-      sideOffset={sideOffset}
-      alignOffset={alignOffset}
+      side="bottom"
+      align="end"
+      sideOffset={8}
+      alignOffset={0}
       variant="primary"
     >
       <S.UserMenuContainer>

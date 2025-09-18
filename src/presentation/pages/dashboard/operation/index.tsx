@@ -60,21 +60,32 @@ export const OperationPage = () => {
     <Container>
       <Breadcrumb lastPath="Operação" />
       <Header>
-        <Subtitle>Gerencie a operação do seu restaurante</Subtitle>
       </Header>
       <Content>
-        <OperationStatusCard operation={operation} />
-        <OperationControls
-          operation={operation}
-          isStarting={isStarting}
-          isPausing={isPausing}
-          isResuming={isResuming}
-          isFinishing={isFinishing}
-          onStart={handleStartOperation}
-          onPause={pauseOperation}
-          onResume={resumeOperation}
-          onFinish={finishOperation}
-        />
+        {operation && (
+          <OperationStatusCard 
+            operation={operation}
+            isPausing={isPausing}
+            isResuming={isResuming}
+            isFinishing={isFinishing}
+            onPause={pauseOperation}
+            onResume={resumeOperation}
+            onFinish={finishOperation}
+          />
+        )}
+        {!operation && (
+          <OperationControls
+            operation={operation}
+            isStarting={isStarting}
+            isPausing={isPausing}
+            isResuming={isResuming}
+            isFinishing={isFinishing}
+            onStart={handleStartOperation}
+            onPause={pauseOperation}
+            onResume={resumeOperation}
+            onFinish={finishOperation}
+          />
+        )}
         {shouldShowMetrics && kpis && (
           <>
             <OperationKPIs kpis={kpis} isLoading={isKPIsLoading} />
@@ -98,6 +109,7 @@ const Container = styled.div`
   gap: ${({ theme }) => theme.spacing.lg};
   margin: 0 auto;
   width: 100%;
+  padding: ${({ theme }) => theme.spacing.lg} 0;
 `
 
 const LoadingWrapper = styled.div`
@@ -113,16 +125,9 @@ const Header = styled.div`
   gap: ${({ theme }) => theme.spacing.xs};
 `
 
-const Subtitle = styled.p`
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  font-size: ${({ theme }) => theme.typography.fontSizes.md};
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin: 0;
-  line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
-`
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xl};
+  gap: ${({ theme }) => theme.spacing.lg};
 `

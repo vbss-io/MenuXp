@@ -56,7 +56,7 @@ export const Header = ({ isDashboard, isHome, shouldShowHeader }: HeaderProps) =
         <S.LeftSection>
           <motion.div variants={logoVariants} initial="initial" whileHover="hover">
             <S.Logo onClick={() => window.location.assign('/')}>
-              <img src="public/images/menuxp-logo.svg" alt="MenuXP" />
+              <img src="/images/menuxp-logo.svg" alt="MenuXP" />
             </S.Logo>
           </motion.div>
           {isHome && (
