@@ -6,10 +6,10 @@ const StyledPopover = styled(VbssPopover)`
   &[data-state='open'] {
     background-color: ${({ theme }) => theme.colors.mx.white};
     color: ${({ theme }) => theme.colors.mx.black};
-    border: 2px solid ${({ theme }) => theme.colors.mx.black};
-    border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-    box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
-    padding: ${({ theme }) => theme.spacing.lg};
+    border: 1px solid ${({ theme }) => theme.colors.mx.black};
+    border-radius: ${({ theme }) => theme.borderRadius.sm};
+    box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
+    padding: 0;
     z-index: 999999;
     pointer-events: auto;
     max-height: 400px;
@@ -25,26 +25,26 @@ const StyledPopover = styled(VbssPopover)`
 
     &[data-variant='primary'] {
       background-color: ${({ theme }) => theme.colors.mx.white};
-      border: 2px solid ${({ theme }) => theme.colors.mx.black};
+      border: 1px solid ${({ theme }) => theme.colors.mx.black};
       color: ${({ theme }) => theme.colors.mx.black};
     }
 
     &[data-variant='secondary'] {
       background-color: ${({ theme }) => theme.colors.mx.red};
-      border: 2px solid ${({ theme }) => theme.colors.mx.black};
+      border: 1px solid ${({ theme }) => theme.colors.mx.black};
       color: ${({ theme }) => theme.colors.mx.white};
     }
 
     &[data-variant='outline'] {
       background-color: transparent;
-      border: 2px solid ${({ theme }) => theme.colors.mx.black};
+      border: 1px solid ${({ theme }) => theme.colors.mx.black};
       color: ${({ theme }) => theme.colors.mx.black};
     }
 
     h3 {
       font-family: ${({ theme }) => theme.typography.fonts.title};
       font-size: ${({ theme }) => theme.typography.fontSizes.md};
-      font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
       color: ${({ theme }) => theme.colors.mx.black};
       text-transform: uppercase;
       letter-spacing: 0.5px;
@@ -79,13 +79,13 @@ const StyledPopover = styled(VbssPopover)`
       position: relative;
       z-index: 10;
       pointer-events: auto;
-      box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+      box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
 
       &:hover {
         border-color: ${({ theme }) => theme.colors.mx.black};
         background: ${({ theme }) => theme.colors.mx.gray[100]};
         transform: translateY(-2px);
-        box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+        box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
       }
 
       &:focus {
@@ -95,7 +95,7 @@ const StyledPopover = styled(VbssPopover)`
 
       &:active {
         transform: translateY(0);
-        box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+        box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
       }
 
       &.selected {
@@ -134,13 +134,13 @@ const StyledPopover = styled(VbssPopover)`
       position: relative;
       z-index: 10;
       pointer-events: auto;
-      box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+      box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
 
       &:hover:not(:disabled) {
         border-color: ${({ theme }) => theme.colors.mx.black};
         background: ${({ theme }) => theme.colors.mx.gray[100]};
         transform: translateY(-1px);
-        box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+        box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
       }
 
       &:focus {
@@ -150,7 +150,7 @@ const StyledPopover = styled(VbssPopover)`
 
       &:active:not(:disabled) {
         transform: translateY(0);
-        box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+        box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
       }
 
       &:disabled {

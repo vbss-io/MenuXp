@@ -44,19 +44,33 @@ export const VerifyEmail = () => {
   return (
     <S.Container>
       <S.LeftColumn>
-        <S.Title>Verificação de Email</S.Title>
-        <S.Divider />
-        <S.Subtitle>Quase lá!</S.Subtitle>
-        <S.Text>Estamos verificando seu endereço de email.</S.Text>
+        <S.Title>
+          Verificar <span style={{ color: '#FEBB11' }}>E-mail</span>
+        </S.Title>
+        <img 
+          src="/images/img-tela-login.svg" 
+          alt="Food Service Gamificado" 
+          style={{ 
+            width: '100%', 
+            maxWidth: '300px', 
+            margin: '16px 0',
+            height: 'auto'
+          }} 
+        />
+        <S.Text>#1 Food Service Gamificado do Brasil</S.Text>
       </S.LeftColumn>
       <S.RightColumn>
-        <S.Card>
-          <S.CardTitle>
-            <S.IconWrapper>
-              <CheckCircleIcon size={48} weight="duotone" />
-            </S.IconWrapper>
-            Verificando seu email
-          </S.CardTitle>
+        <S.ContentWrapper>
+          <S.LoginLogo>
+            <img src="/images/menuxp-logo.svg" alt="MenuXP" />
+          </S.LoginLogo>
+          <S.Card>
+            <S.CardTitle>
+              <S.IconWrapper>
+                <CheckCircleIcon size={48} weight="duotone" />
+              </S.IconWrapper>
+              Verificando seu email
+            </S.CardTitle>
           <S.Description>
             <p>Por favor, aguarde enquanto verificamos seu endereço de email...</p>
             <S.LoadingWrapper>
@@ -64,7 +78,8 @@ export const VerifyEmail = () => {
             </S.LoadingWrapper>
           </S.Description>
           <S.InfoText>Você será redirecionado para a página de login automaticamente.</S.InfoText>
-        </S.Card>
+          </S.Card>
+        </S.ContentWrapper>
       </S.RightColumn>
     </S.Container>
   )

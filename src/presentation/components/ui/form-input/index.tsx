@@ -1,5 +1,6 @@
 import { Input } from '@vbss-ui/input'
 import React from 'react'
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
 
 interface FormInputProps {
   id: string
@@ -15,6 +16,8 @@ interface FormInputProps {
   fontSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
+  status?: 'success' | 'error' | 'idle'
+  rightAdornment?: React.ReactNode
 }
 
 export const FormInput: React.FC<FormInputProps> = ({
@@ -28,8 +31,31 @@ export const FormInput: React.FC<FormInputProps> = ({
   value,
   onChange,
   fontSize = 'sm',
+  status = 'idle',
+  rightAdornment,
   ...rest
 }) => {
+  const [isFocused, setIsFocused] = React.useState(false)
+
+  // support both RHF register and controlled
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const inputRegister: any = register ? register : { value, onChange, ...rest }
+
+  // Calculate border color to avoid nested ternary
+  const getBorderColor = () => {
+    if (error) return '#DC2626'
+    if (isFocused) return '#000000'
+    return undefined
+  }
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(true)
+    inputRegister?.onFocus?.(e)
+  }
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    setIsFocused(false)
+    inputRegister?.onBlur?.(e)
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
       <label
@@ -45,14 +71,68 @@ export const FormInput: React.FC<FormInputProps> = ({
       >
         {label} {required && '*'}
       </label>
-      <Input
-        id={id}
-        type={type}
-        error={error}
-        placeholder={placeholder}
-        fontSize={fontSize}
-        {...(register ? register : { value, onChange, ...rest })}
-      />
+      <div style={{ position: 'relative', height: 44 }}>
+        <Input
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          fontSize={fontSize}
+          {...inputRegister}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          style={{
+            paddingRight: rightAdornment || status !== 'idle' ? '44px' : undefined,
+            borderColor: getBorderColor(),
+            height: 44,
+            lineHeight: '44px'
+          }}
+        />
+        {rightAdornment ? (
+          <div
+            style={{
+              position: 'absolute',
+              right: 10,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              display: 'flex',
+              alignItems: 'center',
+              color: isFocused ? '#000000' : '#E5E7EB'
+            }}
+          >
+            {rightAdornment}
+          </div>
+        ) : (
+          status !== 'idle' && (
+            <div
+              aria-hidden
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: '50%',
+                transform: 'translateY(-50%)',
+                pointerEvents: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                color: status === 'success' ? '#16A34A' : '#DC2626'
+              }}
+            >
+              {status === 'success' ? (
+                <CheckCircleIcon size={20} weight="fill" />
+              ) : (
+                <XCircleIcon size={20} weight="fill" />
+              )}
+            </div>
+          )
+        )}
+      </div>
+      {/* Espaço reservado para mensagem de erro */}
+      <div style={{ minHeight: '18px', lineHeight: '18px', paddingTop: '4px' }}>
+        {error && (
+          <span style={{ fontSize: '12px', color: '#DC2626', fontFamily: 'Inter, system-ui, sans-serif' }}>
+            {error}
+          </span>
+        )}
+      </div>
     </div>
   )
 }

@@ -218,12 +218,12 @@ const S = {
   DialogTitle: styled.h2`
     font-family: ${({ theme }) => theme.typography.fonts.title};
     font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
     color: ${({ theme }) => theme.colors.mx.black};
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin: 0 0 ${({ theme }) => theme.spacing.lg} 0;
-    border-bottom: 2px solid ${({ theme }) => theme.colors.mx.black};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.mx.black};
     padding-bottom: ${({ theme }) => theme.spacing.sm};
   `,
 
@@ -242,12 +242,12 @@ const S = {
   SectionTitle: styled.h3`
     font-family: ${({ theme }) => theme.typography.fonts.title};
     font-size: ${({ theme }) => theme.typography.fontSizes.md};
-    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
     color: ${({ theme }) => theme.colors.mx.black};
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-bottom: 2px solid ${({ theme }) => theme.colors.mx.black};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.mx.black};
     padding-bottom: ${({ theme }) => theme.spacing.xs};
   `,
 
@@ -262,8 +262,8 @@ const S = {
     align-items: center;
     gap: ${({ theme }) => theme.spacing.xs};
     padding: ${({ theme }) => theme.spacing.sm};
-    border: 2px solid ${({ theme, $isSelected, $color }) => ($isSelected ? $color : theme.colors.mx.black)};
-    border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+    border: 1px solid ${({ theme, $isSelected, $color }) => ($isSelected ? $color : theme.colors.mx.black)};
+    border-radius: ${({ theme }) => theme.borderRadius.sm};
     background: ${({ $isSelected, $color }) => ($isSelected ? `${$color}20` : 'transparent')};
     color: ${({ theme, $isSelected, $color }) => ($isSelected ? $color : theme.colors.mx.black)};
     font-family: ${({ theme }) => theme.typography.fonts.body};
@@ -290,8 +290,8 @@ const S = {
     margin-top: ${({ theme }) => theme.spacing.sm};
     background: ${({ theme }) => theme.colors.mx.red};
     color: ${({ theme }) => theme.colors.mx.white};
-    border: 2px solid ${({ theme }) => theme.colors.mx.black};
-    border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+    border: 1px solid ${({ theme }) => theme.colors.mx.black};
+    border-radius: ${({ theme }) => theme.borderRadius.sm};
     padding: ${({ theme }) => theme.spacing.sm} ${({ theme }) => theme.spacing.md};
     font-family: ${({ theme }) => theme.typography.fonts.body};
     font-size: ${({ theme }) => theme.typography.fontSizes.sm};
@@ -381,7 +381,7 @@ const S = {
   ItemPrice: styled.span`
     font-family: ${({ theme }) => theme.typography.fonts.title};
     font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
     color: ${({ theme }) => theme.colors.mx.black};
   `,
 
@@ -396,7 +396,7 @@ const S = {
     justify-content: space-between;
     align-items: center;
     padding: ${({ theme }) => theme.spacing.sm};
-    border-top: ${({ theme, $isTotal }) => ($isTotal ? `2px solid ${theme.colors.mx.black}` : 'none')};
+    border-top: ${({ theme, $isTotal }) => ($isTotal ? `1px solid ${theme.colors.mx.black}` : 'none')};
     font-weight: ${({ $isTotal }) => ($isTotal ? 'bold' : 'normal')};
   `,
 

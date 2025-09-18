@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const HeroTitle = styled.h1`
-  font-family: ${({ theme }) => theme.typography.fonts.title};
   font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   color: ${({ theme }) => theme.colors.text.primary};

@@ -184,9 +184,9 @@ const S = {
 
   KanbanColumn: styled.div<{ $isDragOver: boolean }>`
     background: ${({ theme }) => theme.colors.mx.white};
-    border: 2px solid ${({ theme, $isDragOver }) => ($isDragOver ? theme.colors.mx.red : theme.colors.mx.black)};
-    border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-    box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+    border: 1px solid ${({ theme, $isDragOver }) => ($isDragOver ? theme.colors.mx.red : theme.colors.mx.black)};
+    border-radius: ${({ theme }) => theme.borderRadius.sm};
+    box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
     min-height: 500px;
     transition: all 0.2s ease;
 
@@ -200,7 +200,7 @@ const S = {
 
   ColumnHeader: styled.div<{ $color: string; $bgColor: string }>`
     background: ${({ $bgColor }) => $bgColor};
-    border-bottom: 2px solid ${({ theme }) => theme.colors.mx.black};
+    border-bottom: 1px solid ${({ theme }) => theme.colors.mx.black};
     padding: ${({ theme }) => theme.spacing.md};
     display: flex;
     justify-content: space-between;
@@ -210,7 +210,7 @@ const S = {
   ColumnTitle: styled.h3`
     font-family: ${({ theme }) => theme.typography.fonts.title};
     font-size: ${({ theme }) => theme.typography.fontSizes.md};
-    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
     color: ${({ theme }) => theme.colors.mx.black};
     margin: 0;
     text-transform: uppercase;

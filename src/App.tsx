@@ -13,8 +13,8 @@ import { GlobalStyle } from '@/presentation/styles/global'
 import { theme } from '@/presentation/styles/theme'
 
 const AppContainer = styled.div<{ $isDashboard: boolean; $shouldShowHeader: boolean }>`
-  min-height: calc(100vh - ${({ $isDashboard }) => ($isDashboard ? '0' : '5rem')});
-  margin-top: ${({ $isDashboard, $shouldShowHeader }) => ($isDashboard || $shouldShowHeader ? '0' : '5rem')};
+  min-height: 100vh;
+  margin-top: ${({ $shouldShowHeader }) => ($shouldShowHeader ? '5rem' : '0')};
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -30,7 +30,8 @@ function App() {
   const isHome = pathname === '/'
   const isRestaurantPage = !isHome && !isDashboard
   const isAuthPages = AUTH_PAGES.includes(pathname)
-  const shouldShowHeader = !isRestaurantPage && isAuthPages
+  const shouldShowHeader = !isRestaurantPage && !isAuthPages
+  const shouldReserveHeaderSpace = shouldShowHeader && isHome
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,13 +45,13 @@ function App() {
             color: theme.colors.mx.black,
             fontSize: theme.typography.fontSizes.sm,
             padding: theme.spacing.md,
-            border: `2px solid ${theme.colors.mx.black}`,
+            border: `1px solid ${theme.colors.mx.black}`,
             textAlign: 'center',
             minWidth: '240px',
             maxWidth: '400px',
             lineHeight: theme.typography.lineHeights.normal,
-            borderRadius: theme.borderRadius.brutalist,
-            boxShadow: theme.shadows.brutalist,
+            borderRadius: theme.borderRadius.sm,
+            boxShadow: '3px 3px 0px #000000',
             fontFamily: theme.typography.fonts.body,
             fontWeight: theme.typography.fontWeights.medium
           },
@@ -74,13 +75,15 @@ function App() {
         <RestaurantProvider>
           <ClientProvider>
             <SidebarProvider>
-              <Header
-                isDashboard={isDashboard}
-                isHome={isHome}
-                isRestaurantPage={isRestaurantPage}
-                isAuthPages={isAuthPages}
-              />
-              <AppContainer $isDashboard={isDashboard} $shouldShowHeader={shouldShowHeader}>
+              {shouldShowHeader && (
+                <Header
+                  isDashboard={isDashboard}
+                  isHome={isHome}
+                  isRestaurantPage={isRestaurantPage}
+                  isAuthPages={isAuthPages}
+                />
+              )}
+              <AppContainer $isDashboard={isDashboard} $shouldShowHeader={shouldReserveHeaderSpace}>
                 <Router />
               </AppContainer>
             </SidebarProvider>

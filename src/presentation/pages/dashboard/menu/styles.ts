@@ -23,13 +23,12 @@ export const Header = styled.div`
 `
 
 export const Title = styled.h1`
-  font-family: ${({ theme }) => theme.typography.fonts.title};
   font-size: ${({ theme }) => theme.typography.fontSizes.xl};
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
   color: ${({ theme }) => theme.colors.text.primary};
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  /* letter-spacing herdado do global */
 `
 
 export const Subtitle = styled.p`
@@ -53,20 +52,19 @@ export const PreviewHeader = styled.div`
   align-items: center;
   padding: ${({ theme }) => theme.spacing.lg};
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
 `
 
 export const PreviewTitle = styled.h3`
-  font-family: ${({ theme }) => theme.typography.fonts.title};
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
   color: ${({ theme }) => theme.colors.text.primary};
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  /* letter-spacing herdado do global */
 `
 
 export const PreviewActions = styled.div`
@@ -78,9 +76,9 @@ export const EditSection = styled.div`
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
   overflow: hidden;
 `
@@ -90,9 +88,9 @@ export const PreviewSection = styled.div`
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   min-height: 400px;
   overflow: hidden;
 `
@@ -102,9 +100,9 @@ export const ResizablePreviewSection = styled.div`
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   min-height: 400px;
   overflow: auto;
   max-width: 100%;

@@ -6,9 +6,9 @@ const StyledDialog = styled(VbssDialog)`
   &[data-state='open'] {
     background-color: ${({ theme }) => theme.colors.mx.white};
     color: ${({ theme }) => theme.colors.mx.black};
-    border: 2px solid ${({ theme }) => theme.colors.mx.black};
-    border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-    box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+    border: 1px solid ${({ theme }) => theme.colors.mx.black};
+    border-radius: ${({ theme }) => theme.borderRadius.sm};
+    box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
     padding: ${({ theme }) => theme.spacing.lg};
     max-height: 80vh;
     overflow-y: auto;
@@ -24,7 +24,7 @@ const StyledDialog = styled(VbssDialog)`
     h2 {
       font-family: ${({ theme }) => theme.typography.fonts.title};
       font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-      font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
       color: ${({ theme }) => theme.colors.mx.black};
       text-transform: uppercase;
       letter-spacing: 0.5px;

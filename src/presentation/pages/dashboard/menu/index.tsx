@@ -225,7 +225,6 @@ export const MenuPage = () => {
       <S.Container>
         <Breadcrumb lastPath="Layouts do Menu" />
         <S.Header>
-          <S.Subtitle>Gerencie os layouts de exibição do seu cardápio</S.Subtitle>
         </S.Header>
         <S.LayoutsGrid>
           {layouts.map((layout) => (

@@ -74,19 +74,19 @@ const ChipContainer = styled.div<{
         return theme.typography.fontSizes.sm
     }
   }};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-family: ${({ theme }) => theme.typography.fonts.title};
   text-transform: uppercase;
   letter-spacing: 0.5px;
   line-height: 1;
   white-space: nowrap;
   text-align: center;
-  box-shadow: ${({ $noBorder, theme }) => ($noBorder ? 'none' : theme.shadows.brutalist)};
-  border: ${({ $noBorder, theme }) => ($noBorder ? 'none' : `2px solid ${theme.colors.mx.black}`)};
+  box-shadow: ${({ $noBorder, theme }) => ($noBorder ? 'none' : `3px 3px 0px ${theme.colors.mx.black}`)};
+  border: ${({ $noBorder, theme }) => ($noBorder ? 'none' : `1px solid ${theme.colors.mx.black}`)};
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
 
   &:hover {
     transform: ${({ $noBorder }) => ($noBorder ? 'none' : 'translateY(-1px)')};
-    box-shadow: ${({ $noBorder, theme }) => ($noBorder ? 'none' : theme.shadows.brutalistHover)};
+    box-shadow: ${({ $noBorder, theme }) => ($noBorder ? 'none' : `0 4px 0px ${theme.colors.mx.black}`)};
   }
 `

@@ -49,10 +49,9 @@ export const TitleContainer = styled(motion.div)`
 `
 
 export const Title = styled.h1`
-  font-family: ${({ theme }) => theme.typography.fonts.title};
   color: ${({ theme }) => theme.colors.mx.black};
   text-transform: uppercase;
-  letter-spacing: 2px;
+  /* letter-spacing herdado do global */
   margin: 0;
   font-size: ${({ theme }) => theme.typography.fontSizes.xxl};
   font-weight: ${({ theme }) => theme.typography.fontWeights.extrabold};
@@ -76,9 +75,9 @@ export const Message = styled(motion.p)`
   max-width: 500px;
   padding: ${({ theme }) => theme.spacing.lg};
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   position: relative;
 
   &::before {

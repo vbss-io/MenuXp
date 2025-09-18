@@ -11,17 +11,17 @@ export const Container = styled.div`
 
 export const Card = styled.div`
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.xxl};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   width: 100%;
   max-width: 480px;
 `
 
 export const CardTitle = styled.h3`
   font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-family: ${({ theme }) => theme.typography.fonts.title};
   color: ${({ theme }) => theme.colors.mx.black};
   margin-bottom: ${({ theme }) => theme.spacing.lg};
@@ -52,8 +52,8 @@ export const FileLabel = styled.label`
   align-items: center;
   justify-content: center;
   padding: ${({ theme }) => theme.spacing.md};
-  border: 2px dashed ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border: 1px dashed ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   cursor: pointer;
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
   color: ${({ theme }) => theme.colors.mx.black};
@@ -65,7 +65,7 @@ export const FileLabel = styled.label`
     color: ${({ theme }) => theme.colors.mx.red};
     background: ${({ theme }) => theme.colors.mx.red}10;
     transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: 0 4px 0px ${({ theme }) => theme.colors.mx.black};
   }
 `
 

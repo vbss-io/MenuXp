@@ -51,7 +51,7 @@ const Container = styled.div`
 
 const Label = styled.label`
   font-size: ${({ theme }) => theme.typography.fontSizes.xs};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-family: ${({ theme }) => theme.typography.fonts.title};
   color: ${({ theme }) => theme.colors.mx.black};
   text-transform: uppercase;
@@ -65,19 +65,19 @@ const InputContainer = styled.div`
   gap: ${({ theme }) => theme.spacing.sm};
   padding: ${({ theme }) => theme.spacing.sm};
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.xs};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
 
   &:hover {
     transform: translateY(-1px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: 0 4px 0px ${({ theme }) => theme.colors.mx.black};
   }
 
   &:focus-within {
     border-color: ${({ theme }) => theme.colors.mx.blue};
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: 0 4px 0px ${({ theme }) => theme.colors.mx.black};
   }
 `
 
@@ -85,15 +85,15 @@ const ColorPreview = styled.div<{ $color: string }>`
   width: 40px;
   height: 40px;
   background: ${({ $color }) => $color};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.xs};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
   cursor: pointer;
 
   &:hover {
     transform: scale(1.05);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: 0 4px 0px ${({ theme }) => theme.colors.mx.black};
   }
 `
 

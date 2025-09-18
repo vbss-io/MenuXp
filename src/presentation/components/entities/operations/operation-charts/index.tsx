@@ -150,24 +150,23 @@ export const OperationCharts = ({ ordersByStatus, isLoading = false }: Operation
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xl};
-  margin-top: ${({ theme }) => theme.spacing.lg};
+  gap: ${({ theme }) => theme.spacing.lg};
   width: 100%;
 `
 
 const ChartSection = styled.div`
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.lg};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   width: 100%;
 `
 
 const ChartTitle = styled.h3`
   font-family: ${({ theme }) => theme.typography.fonts.title};
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   color: ${({ theme }) => theme.colors.mx.black};
   margin: 0 0 ${({ theme }) => theme.spacing.xs} 0;
   text-transform: uppercase;

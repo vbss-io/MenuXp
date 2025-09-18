@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const Label = styled.label`
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-family: ${({ theme }) => theme.typography.fonts.title};
   color: ${({ theme }) => theme.colors.mx.black};
   text-transform: uppercase;
@@ -27,8 +27,8 @@ export const ImageWrapper = styled.div`
   position: relative;
   aspect-ratio: 1;
   overflow: hidden;
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
 
   &:hover {
@@ -54,8 +54,8 @@ export const RemoveButton = styled.button`
   width: ${({ theme }) => theme.spacing.lg};
   height: ${({ theme }) => theme.spacing.lg};
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,14 +63,14 @@ export const RemoveButton = styled.button`
   opacity: 0;
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
   color: ${({ theme }) => theme.colors.mx.black};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
 
   &:hover {
     background: ${({ theme }) => theme.colors.mx.red};
     border-color: ${({ theme }) => theme.colors.mx.red};
     color: ${({ theme }) => theme.colors.mx.white};
     transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: 0 4px 0px ${({ theme }) => theme.colors.mx.black};
   }
 
   &:active {
@@ -93,7 +93,7 @@ export const UploadWrapper = styled.div`
     border-color: ${({ theme }) => theme.colors.mx.red};
     background: ${({ theme }) => theme.colors.mx.red}10;
     transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: 0 4px 0px ${({ theme }) => theme.colors.mx.black};
   }
 `
 

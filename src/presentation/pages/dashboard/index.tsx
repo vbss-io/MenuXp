@@ -17,7 +17,7 @@ const Container = styled.div<{ $isMobile: boolean }>`
 
 const Main = styled.main<{ $isSidebarOpen: boolean; $isCreatingRestaurant: boolean }>`
   flex: 1;
-  padding: ${({ theme }) => theme.spacing.xl};
+  padding: 0 ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.xl} ${({ theme }) => theme.spacing.xl};
   transition: margin-left 0.3s;
 
   @media ${({ theme }) => theme.breakpoints.md} {

@@ -15,7 +15,7 @@ export const ComboboxWrapper = styled.div`
 
 export const Label = styled.label`
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   font-family: ${({ theme }) => theme.typography.fonts.title};
   color: ${({ theme }) => theme.colors.mx.black};
   text-transform: uppercase;
@@ -89,9 +89,9 @@ export const Dropdown = styled.div`
   left: 0;
   right: 0;
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
   z-index: 1000;
   max-height: 200px;
   overflow-y: auto;

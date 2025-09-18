@@ -99,7 +99,6 @@ export const OrdersPage = () => {
       <Breadcrumb lastPath="Pedidos" />
       <S.Header>
         <S.Title>Pedidos</S.Title>
-        <S.Subtitle>Gerencie os pedidos do seu restaurante</S.Subtitle>
       </S.Header>
 
       <S.Content>

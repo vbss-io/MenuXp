@@ -6,6 +6,7 @@ import {
   HouseIcon,
   ScrollIcon,
   ShoppingCartIcon,
+  SignOutIcon,
   UserIcon,
   XIcon
 } from '@phosphor-icons/react'
@@ -63,7 +64,7 @@ const logoVariants = {
 }
 
 export const MobileHeader = ({ setShowMobile, isHome = false }: MobileHeaderProps) => {
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
 
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow
@@ -119,7 +120,7 @@ export const MobileHeader = ({ setShowMobile, isHome = false }: MobileHeaderProp
           <S.MobileHeaderSection>
             <motion.div variants={logoVariants} initial="initial" whileHover="hover">
               <S.MobileLogo onClick={() => window.location.assign('/')}>
-                <img src="public/images/menuxp-logo.svg" alt="MenuXP" />
+                <img src="/images/menuxp-logo.svg" alt="MenuXP" />
               </S.MobileLogo>
             </motion.div>
           </S.MobileHeaderSection>
@@ -172,6 +173,12 @@ export const MobileHeader = ({ setShowMobile, isHome = false }: MobileHeaderProp
                 </S.MobileIconWrapper>
                 <span>Perfil</span>
               </S.MobileMenuItem>
+              <S.MobileLogoutButton onClick={logout}>
+                <S.MobileIconWrapper>
+                  <SignOutIcon size={20} weight="fill" />
+                </S.MobileIconWrapper>
+                <span>Sair</span>
+              </S.MobileLogoutButton>
             </S.MobileMenuItems>
           )}
         </S.MobileContent>

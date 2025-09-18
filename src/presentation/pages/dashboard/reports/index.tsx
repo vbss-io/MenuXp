@@ -22,7 +22,6 @@ export const ReportsPage = () => {
     <S.Container>
       <Breadcrumb lastPath="Relatórios" />
       <S.Header>
-        <S.Subtitle>Gerencie os relatórios do seu restaurante</S.Subtitle>
       </S.Header>
       <S.Content>
         <S.PlaceholderCard>
