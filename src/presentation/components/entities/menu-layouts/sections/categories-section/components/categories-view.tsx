@@ -5,8 +5,8 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 import { GetRestaurantMenuCategoriesUsecase } from '@/application/clients-menu/get-restaurant-menu-categories.usecase'
+import { ICONS, ICONS_KEYS } from '@/domain/consts/icons.const.tsx'
 import type { MenuSection } from '@/domain/models/menu-layout.model'
-import { ICONS_KEYS, ICONS } from '@/domain/consts/icons.const.tsx'
 import { Loading } from '@/presentation/components/ui/loading'
 import { getCategoriesConfig } from '@/presentation/hooks/use-menu-layouts'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
@@ -26,7 +26,11 @@ interface CategoriesViewProps {
   isClientView?: boolean
 }
 
-export const CategoriesView: React.FC<CategoriesViewProps> = ({ section, menuLayout, isClientView }) => {
+export const CategoriesView: React.FC<CategoriesViewProps> = ({
+  section,
+  // menuLayout,
+  isClientView
+}) => {
   const [categories, setCategories] = useState<CategoryData[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const { restaurant } = useRestaurant()
@@ -39,10 +43,10 @@ export const CategoriesView: React.FC<CategoriesViewProps> = ({ section, menuLay
 
   const categoriesData = getCategoriesConfig(section)
   const isAllCategories = categoriesData?.categoryIds === null || categoriesData?.categoryIds === undefined
-  const layoutType = menuLayout || 'default'
+  // const layoutType = menuLayout || 'default'
 
-  const primaryColor = restaurant?.style?.primaryColor
-  const secondaryColor = restaurant?.style?.secondaryColor
+  // const primaryColor = restaurant?.style?.primaryColor
+  // const secondaryColor = restaurant?.style?.secondaryColor
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (!containerRef.current) return
@@ -164,20 +168,28 @@ export const CategoriesView: React.FC<CategoriesViewProps> = ({ section, menuLay
             onMouseDown={handleMouseDown}
             onMouseLeave={handleMouseLeave}
             style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-            layout={layoutType}
+            // layout={layoutType}
           >
             {categories.map((category) => (
               <S.CategoryCard
                 key={category.id}
-                layout={layoutType}
-                primaryColor={primaryColor}
-                secondaryColor={secondaryColor}
+                // layout={layoutType}
+                // primaryColor={primaryColor}
+                // secondaryColor={secondaryColor}
                 onClick={() => handleCategoryClick(category)}
               >
-                <S.CategoryIcon layout={layoutType} primaryColor={primaryColor} secondaryColor={secondaryColor}>
+                <S.CategoryIcon
+                // layout={layoutType}
+                // primaryColor={primaryColor}
+                // secondaryColor={secondaryColor}
+                >
                   {getIconComponent(category.icon)}
                 </S.CategoryIcon>
-                <S.CategoryName layout={layoutType} primaryColor={primaryColor} secondaryColor={secondaryColor}>
+                <S.CategoryName
+                // layout={layoutType}
+                // primaryColor={primaryColor}
+                // secondaryColor={secondaryColor}
+                >
                   {category.name}
                 </S.CategoryName>
                 {category.description && <S.CategoryDescription>{category.description}</S.CategoryDescription>}

@@ -1,11 +1,11 @@
-import { useState } from 'react'
 import { PlusIcon } from '@phosphor-icons/react'
+import { useState } from 'react'
 
-import type { MenuItemData } from '../types'
-import * as S from '../styles'
-import { useClient } from '@/presentation/hooks/use-client'
 import { useCart } from '@/presentation/hooks/use-cart'
+import { useClient } from '@/presentation/hooks/use-client'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
+import * as S from '../styles'
+import type { MenuItemData } from '../types'
 
 interface MenuItemCardProps {
   item: MenuItemData
@@ -19,9 +19,9 @@ interface MenuItemCardProps {
 
 export const MenuItemCard: React.FC<MenuItemCardProps> = ({
   item,
-  layout = 'default',
-  primaryColor,
-  secondaryColor,
+  // layout = 'default',
+  // primaryColor,
+  // secondaryColor,
   onClick,
   isClientView = false,
   onAuthRequired
@@ -87,44 +87,80 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
   return (
     <S.MenuItemCard
-      layout={layout}
-      primaryColor={primaryColor}
-      secondaryColor={secondaryColor}
+      // layout={layout}
+      // primaryColor={primaryColor}
+      // secondaryColor={secondaryColor}
       onClick={handleCardClick}
       style={{ cursor: isClientView ? 'pointer' : 'default' }}
     >
       {item.discount > 0 && (
-        <S.DiscountChip layout={layout} primaryColor={primaryColor} secondaryColor={secondaryColor}>
+        <S.DiscountChip
+        // layout={layout}
+        // primaryColor={primaryColor}
+        // secondaryColor={secondaryColor}
+        >
           <span>-{item.discount}%</span>
         </S.DiscountChip>
       )}
       {item.medias && item.medias.length > 0 && (
-        <S.MenuItemImage src={item.medias[0]} alt={item.name} layout={layout} />
+        <S.MenuItemImage
+        // src={item.medias[0]}
+        // alt={item.name}
+        // layout={layout}
+        />
       )}
-      <S.MenuItemContent layout={layout}>
-        <S.MenuItemName layout={layout} primaryColor={primaryColor} secondaryColor={secondaryColor}>
+      <S.MenuItemContent
+      // layout={layout}
+      >
+        <S.MenuItemName
+        // layout={layout}
+        // primaryColor={primaryColor}
+        // secondaryColor={secondaryColor}
+        >
           {item.name}
         </S.MenuItemName>
-        {item.description && <S.MenuItemDescription layout={layout}>{item.description}</S.MenuItemDescription>}
-        <S.MenuItemFooter layout={layout}>
-          <S.MenuItemPrice layout={layout} primaryColor={primaryColor} secondaryColor={secondaryColor}>
+        {item.description && (
+          <S.MenuItemDescription
+          // layout={layout}
+          >
+            {item.description}
+          </S.MenuItemDescription>
+        )}
+        <S.MenuItemFooter
+        // layout={layout}
+        >
+          <S.MenuItemPrice
+          // layout={layout}
+          // primaryColor={primaryColor}
+          // secondaryColor={secondaryColor}
+          >
             {item.discount > 0 ? (
               <>
-                <S.DiscountPrice layout={layout} primaryColor={primaryColor} secondaryColor={secondaryColor}>
+                <S.DiscountPrice
+                // layout={layout}
+                // primaryColor={primaryColor}
+                // secondaryColor={secondaryColor}
+                >
                   {formatDiscountPrice(item.price, item.discount)}
                 </S.DiscountPrice>
-                <S.OriginalPrice layout={layout}>{formatPrice(item.price)}</S.OriginalPrice>
+                <S.OriginalPrice
+                // layout={layout}
+                >
+                  {formatPrice(item.price)}
+                </S.OriginalPrice>
               </>
             ) : (
-              <S.CurrentPrice layout={layout} primaryColor={primaryColor} secondaryColor={secondaryColor}>
+              <S.CurrentPrice
+              // layout={layout} primaryColor={primaryColor} secondaryColor={secondaryColor}
+              >
                 {formatPrice(item.price)}
               </S.CurrentPrice>
             )}
           </S.MenuItemPrice>
           <S.AddToCartButton
-            layout={layout}
-            primaryColor={primaryColor}
-            secondaryColor={secondaryColor}
+            // layout={layout}
+            // primaryColor={primaryColor}
+            // secondaryColor={secondaryColor}
             onClick={handleAddToCart}
             disabled={isAddingToCart}
           >

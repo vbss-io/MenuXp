@@ -1,4 +1,4 @@
-import { ShoppingCartIcon, CaretRightIcon } from '@phosphor-icons/react'
+import { CaretRightIcon, ShoppingCartIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -10,10 +10,10 @@ import { Loading } from '@/presentation/components/ui/loading'
 import { getMenuItemsConfig } from '@/presentation/hooks/use-menu-layouts'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
+import * as S from '../styles'
 import type { MenuItemData } from '../types'
 import { MenuItemCard } from './menu-item-card'
 import { MenuItemsSlideView } from './menu-items-slide-view'
-import * as S from '../styles'
 
 interface MenuItemsViewProps {
   section: MenuSection
@@ -211,7 +211,7 @@ export const MenuItemsView: React.FC<MenuItemsViewProps> = ({ section, menuLayou
               onMouseDown={handleMouseDown}
               onMouseLeave={handleMouseLeave}
               style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
-              layout={layoutType}
+              // layout={layoutType}
             >
               {itemsToShow.map((item, index) => (
                 <motion.div
