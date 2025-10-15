@@ -1,6 +1,6 @@
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
 import { Input } from '@vbss-ui/input'
 import React from 'react'
-import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
 
 interface FormInputProps {
   id: string
@@ -125,7 +125,6 @@ export const FormInput: React.FC<FormInputProps> = ({
           )
         )}
       </div>
-      {/* Espaço reservado para mensagem de erro */}
       <div style={{ minHeight: '18px', lineHeight: '18px', paddingTop: '4px' }}>
         {error && (
           <span style={{ fontSize: '12px', color: '#DC2626', fontFamily: 'Inter, system-ui, sans-serif' }}>

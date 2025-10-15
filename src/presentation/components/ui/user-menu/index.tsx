@@ -15,13 +15,7 @@ interface UserMenuProps {
   alignOffset?: number
 }
 
-export const UserMenu: React.FC<UserMenuProps> = ({
-  trigger
-  // side = 'bottom',
-  // align = 'start',
-  // sideOffset = 10,
-  // alignOffset = 0
-}) => {
+export const UserMenu: React.FC<UserMenuProps> = ({ trigger }) => {
   const { user, logout } = useAuth()
 
   if (!user) {

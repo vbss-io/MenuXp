@@ -47,7 +47,7 @@ export const HeaderSection = styled.div<{ $isOpen: boolean }>`
       rgba(0, 0, 0, 0.1) 80%,
       transparent 100%
     );
-    box-shadow: 
+    box-shadow:
       0 1px 0 rgba(0, 0, 0, 0.05),
       inset 0 1px 0 rgba(0, 0, 0, 0.05);
   }
@@ -261,7 +261,8 @@ export const LogoutButton = styled.div<{ $isOpen?: boolean }>`
   align-items: center;
   justify-content: ${({ $isOpen }) => ($isOpen ? 'flex-start' : 'center')};
   gap: ${({ theme }) => theme.spacing.md};
-  padding: ${({ $isOpen, theme }) => ($isOpen ? `${theme.spacing.sm} ${theme.spacing.lg}` : `${theme.spacing.sm} ${theme.spacing.md}`)};
+  padding: ${({ $isOpen, theme }) =>
+    $isOpen ? `${theme.spacing.sm} ${theme.spacing.lg}` : `${theme.spacing.sm} ${theme.spacing.md}`};
   color: ${({ theme }) => theme.colors.mx.black};
   background-color: ${({ theme }) => theme.colors.mx.white};
   white-space: nowrap;
@@ -326,8 +327,6 @@ export const LogoutButton = styled.div<{ $isOpen?: boolean }>`
   }
 `
 
-// Componentes para badges de notificação
-
 export const Badge = styled.span`
   background-color: ${({ theme }) => theme.colors.mx.yellow};
   color: ${({ theme }) => theme.colors.mx.black};
@@ -345,4 +344,3 @@ export const Badge = styled.span`
   border: 1px solid ${({ theme }) => theme.colors.mx.white};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `
-

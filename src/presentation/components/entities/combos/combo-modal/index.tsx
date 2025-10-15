@@ -489,7 +489,6 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
             </Button>
           </S.ItemsContainer>
 
-          {/* Exibição dos itens selecionados */}
           {comboItems.filter((item) => item.menuItemId).length > 0 && (
             <S.SelectedItemsContainer>
               <S.SelectedItemsTitle>Itens Selecionados:</S.SelectedItemsTitle>

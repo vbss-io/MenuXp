@@ -1,7 +1,7 @@
 import { OperationStatus } from '@/domain/enums/operation/operation-status.enum'
 import type { Operation } from '@/domain/models/operation.model'
-import { Button } from '@/presentation/components/ui/button'
 import { ConfirmationDialog } from '@/presentation/components/entities/operations/confirmation-dialog'
+import { Button } from '@/presentation/components/ui/button'
 import { ClockIcon, PauseIcon, PlayIcon, StopIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -49,10 +49,10 @@ const getStatusInfo = (status: OperationStatus | null) => {
   }
 }
 
-export const OperationStatusCard = ({ 
-  operation, 
-  isPausing = false, 
-  isResuming = false, 
+export const OperationStatusCard = ({
+  operation,
+  isPausing = false,
+  isResuming = false,
   isFinishing = false,
   onPause,
   onResume,
@@ -65,7 +65,6 @@ export const OperationStatusCard = ({
   const [elapsedTime, setElapsedTime] = useState('')
   const [showFinishDialog, setShowFinishDialog] = useState(false)
 
-  // Timer em tempo real
   useEffect(() => {
     if (!startTime || !isRunning) {
       setElapsedTime('')
@@ -78,7 +77,7 @@ export const OperationStatusCard = ({
       const hours = Math.floor(diff / (1000 * 60 * 60))
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
       const seconds = Math.floor((diff % (1000 * 60)) / 1000)
-      
+
       if (hours > 0) {
         setElapsedTime(`${hours}h ${minutes}m`)
       } else if (minutes > 0) {
@@ -138,18 +137,14 @@ export const OperationStatusCard = ({
                 hour: '2-digit',
                 minute: '2-digit'
               })}
-              {isRunning && elapsedTime && (
-                <ElapsedTime> • {elapsedTime}</ElapsedTime>
-              )}
+              {isRunning && elapsedTime && <ElapsedTime> • {elapsedTime}</ElapsedTime>}
             </StartTime>
           )}
         </StatusInfo>
       </StatusColumn>
-      
-      <IdColumn>
-        {operation && <OperationId>ID: {operation.id}</OperationId>}
-      </IdColumn>
-      
+
+      <IdColumn>{operation && <OperationId>ID: {operation.id}</OperationId>}</IdColumn>
+
       <ActionsColumn>
         {(isRunning || isPaused) && (
           <ButtonsContainer>
@@ -165,7 +160,7 @@ export const OperationStatusCard = ({
                 Pausar Operação
               </ActionButton>
             )}
-            
+
             {isPaused && onResume && (
               <ActionButton
                 onClick={onResume}
@@ -178,7 +173,7 @@ export const OperationStatusCard = ({
                 Retomar Operação
               </ActionButton>
             )}
-            
+
             {onFinish && (
               <ActionButton
                 onClick={handleFinishClick}
@@ -194,7 +189,7 @@ export const OperationStatusCard = ({
           </ButtonsContainer>
         )}
       </ActionsColumn>
-      
+
       <ConfirmationDialog
         isOpen={showFinishDialog}
         onClose={() => setShowFinishDialog(false)}
@@ -214,41 +209,43 @@ const Container = styled.div<{ status: OperationStatus | null }>`
   background: ${({ theme, status }) => {
     switch (status) {
       case OperationStatus.RUNNING:
-        return '#dcfce7'; // Verde bem clarinho
+        return '#dcfce7' // Verde bem clarinho
       case OperationStatus.PAUSED:
-        return '#fef3c7'; // Laranja bem clarinho
+        return '#fef3c7' // Laranja bem clarinho
       case OperationStatus.FINISHED:
-        return '#fee2e2'; // Vermelho bem clarinho
+        return '#fee2e2' // Vermelho bem clarinho
       default:
-        return theme.colors.mx.white;
+        return theme.colors.mx.white
     }
   }};
-  border: 1px solid ${({ theme, status }) => {
-    switch (status) {
-      case OperationStatus.RUNNING:
-        return '#22c55e'; // Verde do ícone play
-      case OperationStatus.PAUSED:
-        return '#f59e0b'; // Laranja do ícone pause
-      case OperationStatus.FINISHED:
-        return '#ef4444'; // Vermelho do ícone stop
-      default:
-        return theme.colors.mx.black;
-    }
-  }};
+  border: 1px solid
+    ${({ theme, status }) => {
+      switch (status) {
+        case OperationStatus.RUNNING:
+          return '#22c55e' // Verde do ícone play
+        case OperationStatus.PAUSED:
+          return '#f59e0b' // Laranja do ícone pause
+        case OperationStatus.FINISHED:
+          return '#ef4444' // Vermelho do ícone stop
+        default:
+          return theme.colors.mx.black
+      }
+    }};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.md};
-  box-shadow: 3px 3px 0px ${({ theme, status }) => {
-    switch (status) {
-      case OperationStatus.RUNNING:
-        return '#22c55e'; // Verde do ícone play
-      case OperationStatus.PAUSED:
-        return '#f59e0b'; // Laranja do ícone pause
-      case OperationStatus.FINISHED:
-        return '#ef4444'; // Vermelho do ícone stop
-      default:
-        return theme.colors.mx.black;
-    }
-  }};
+  box-shadow: 3px 3px 0px
+    ${({ theme, status }) => {
+      switch (status) {
+        case OperationStatus.RUNNING:
+          return '#22c55e' // Verde do ícone play
+        case OperationStatus.PAUSED:
+          return '#f59e0b' // Laranja do ícone pause
+        case OperationStatus.FINISHED:
+          return '#ef4444' // Vermelho do ícone stop
+        default:
+          return theme.colors.mx.black
+      }
+    }};
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: ${({ theme }) => theme.spacing.md};
@@ -269,7 +266,7 @@ const StatusColumn = styled.div`
   gap: ${({ theme }) => theme.spacing.sm};
   min-width: 0; /* Permite que o conteúdo seja truncado se necessário */
   padding-top: ${({ theme }) => theme.spacing.xs};
-  
+
   @media (max-width: 768px) {
     justify-content: center;
     align-items: center;
@@ -349,7 +346,7 @@ const IdColumn = styled.div`
   align-items: flex-start;
   justify-content: center;
   padding-top: ${({ theme }) => theme.spacing.xs};
-  
+
   @media (max-width: 768px) {
     order: -1; /* Move para cima no mobile */
     align-items: center;
@@ -362,7 +359,7 @@ const ActionsColumn = styled.div`
   align-items: flex-start;
   justify-content: flex-end;
   padding-top: ${({ theme }) => theme.spacing.xs};
-  
+
   @media (max-width: 768px) {
     justify-content: center;
     align-items: center;
@@ -384,19 +381,19 @@ const ButtonsContainer = styled.div`
 const ActionButton = styled(Button)<{ variant?: string }>`
   min-width: 140px;
   height: 36px;
-  
+
   /* Estilo específico para botão de encerrar */
   &.button.danger {
     background: ${({ theme }) => theme.colors.mx.white} !important;
     color: ${({ theme }) => theme.colors.error} !important;
     border: 1px solid ${({ theme }) => theme.colors.error} !important;
-    
+
     &:hover {
       background: ${({ theme }) => theme.colors.error} !important;
       color: ${({ theme }) => theme.colors.mx.white} !important;
     }
   }
-  
+
   @media (max-width: 640px) {
     width: 100%;
     min-width: unset;
