@@ -1,12 +1,12 @@
-import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/presentation/components/ui/button'
 import { FormInput } from '@/presentation/components/ui/form-input'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
-import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react'
 
 import { LoginUsecase } from '@/application/auth/login.usecase'
 import { ResentConfirmationEmailUsecase } from '@/application/auth/resent-confirmation-email.usecase'
@@ -70,7 +70,7 @@ export const Login = () => {
       if (!pendingUser) throw new Error()
       setIsResendDisabled(true)
       const resentConfirmationUsecase = new ResentConfirmationEmailUsecase()
-      await resentConfirmationUsecase.execute({ username: pendingUser })
+      await resentConfirmationUsecase.execute({ email: pendingUser })
       toast.success('E-mail de confirmação reenviado com sucesso.')
       setTimer(60)
     } catch (error) {
@@ -106,15 +106,15 @@ export const Login = () => {
         <S.Title>
           <span style={{ color: '#FEBB11' }}>Boas-vindas</span> de volta
         </S.Title>
-        <img 
-          src="/images/img-tela-login.svg" 
-          alt="Food Service Gamificado" 
-          style={{ 
-            width: '100%', 
-            maxWidth: '300px', 
+        <img
+          src="/images/img-tela-login.svg"
+          alt="Food Service Gamificado"
+          style={{
+            width: '100%',
+            maxWidth: '300px',
             margin: '16px 0',
             height: 'auto'
-          }} 
+          }}
         />
         <S.Text>#1 Food Service Gamificado do Brasil</S.Text>
       </S.LeftColumn>
@@ -124,88 +124,92 @@ export const Login = () => {
             <img src="/images/menuxp-logo.svg" alt="MenuXP" />
           </S.LoginLogo>
           <S.Card>
-          <S.CardTitle>Entrar</S.CardTitle>
-          <S.Form onSubmit={handleSubmit(onSubmit)}>
-            <FormInput
-              id="email"
-              label="E-mail"
-              type="email"
-              error={errors.email?.message}
-              placeholder="Digite seu E-mail"
-              fontSize="sm"
-              required
-              status={
-                getFieldState('email').invalid
-                  ? 'error'
-                  : getFieldState('email').isTouched
-                  ? 'success'
-                  : 'idle'
-              }
-              register={register('email', {
-                onBlur: async () => {
-                  await trigger('email')
+            <S.CardTitle>Entrar</S.CardTitle>
+            <S.Form onSubmit={handleSubmit(onSubmit)}>
+              <FormInput
+                id="email"
+                label="E-mail"
+                type="email"
+                error={errors.email?.message}
+                placeholder="Digite seu E-mail"
+                fontSize="sm"
+                required
+                status={
+                  getFieldState('email').invalid ? 'error' : getFieldState('email').isTouched ? 'success' : 'idle'
                 }
-              })}
-            />
-            <FormInput
-              id="password"
-              label="Senha"
-              type={showPassword ? 'text' : 'password'}
-              error={errors.password?.message}
-              placeholder="Digite sua senha"
-              fontSize="sm"
-              required
-              rightAdornment={
-                <button
-                  type="button"
-                  onClick={() => setShowPassword((s) => !s)}
-                  aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
-                  style={{
-                    background: 'transparent',
-                    border: 'none',
-                    padding: 0,
-                    display: 'flex',
-                    alignItems: 'center',
-                    cursor: 'pointer'
-                  }}
-                >
-                  {showPassword ? (
-                    <EyeSlashIcon size={20} />
+                register={register('email', {
+                  onBlur: async () => {
+                    await trigger('email')
+                  }
+                })}
+              />
+              <FormInput
+                id="password"
+                label="Senha"
+                type={showPassword ? 'text' : 'password'}
+                error={errors.password?.message}
+                placeholder="Digite sua senha"
+                fontSize="sm"
+                required
+                rightAdornment={
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((s) => !s)}
+                    aria-label={showPassword ? 'Ocultar senha' : 'Mostrar senha'}
+                    style={{
+                      background: 'transparent',
+                      border: 'none',
+                      padding: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {showPassword ? <EyeSlashIcon size={20} /> : <EyeIcon size={20} />}
+                  </button>
+                }
+                register={register('password')}
+              />
+              {pendingUser ? (
+                <S.InfoText>
+                  Por favor, confirme seu e-mail primeiro.{' '}
+                  {isResendDisabled ? (
+                    <S.ResendLink disabled aria-label={`Reenviar disponível em ${timer} segundos`}>
+                      Reenviar disponível em {timer}s
+                    </S.ResendLink>
                   ) : (
-                    <EyeIcon size={20} />
+                    <S.ResendLink
+                      onClick={handleResendLink}
+                      aria-label="Clique aqui para reenviar confirmação de e-mail"
+                    >
+                      clique aqui para reenviar
+                    </S.ResendLink>
                   )}
-                </button>
-              }
-              register={register('password')}
-            />
-            {pendingUser ? (
-              <S.InfoText>
-                Por favor, confirme seu e-mail primeiro.{' '}
-                {isResendDisabled ? (
-                  <S.ResendLink disabled aria-label={`Reenviar disponível em ${timer} segundos`}>Reenviar disponível em {timer}s</S.ResendLink>
-                ) : (
-                  <S.ResendLink onClick={handleResendLink} aria-label="Clique aqui para reenviar confirmação de e-mail">clique aqui para reenviar</S.ResendLink>
-                )}
-              </S.InfoText>
-            ) : (
-              <S.ForgotPasswordContainer>
-                <S.Link to="/forgot-password" aria-label="Esqueceu a senha? Clique para redefinir">Esqueceu a senha?</S.Link>
-              </S.ForgotPasswordContainer>
-            )}
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              variant="primary"
-              size="lg"
-              loading={isSubmitting}
-              loadingText="Entrando..."
-            >
-              Entrar
-            </Button>
-          </S.Form>
-          <S.InfoText>
-            Não tem uma conta? <S.Link to="/register" aria-label="Não tem uma conta? Clique para se cadastrar">Cadastre-se</S.Link>
-          </S.InfoText>
+                </S.InfoText>
+              ) : (
+                <S.ForgotPasswordContainer>
+                  <S.Link to="/forgot-password" aria-label="Esqueceu a senha? Clique para redefinir">
+                    Esqueceu a senha?
+                  </S.Link>
+                </S.ForgotPasswordContainer>
+              )}
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                variant="primary"
+                size="lg"
+                loading={isSubmitting}
+                loadingText="Entrando..."
+              >
+                Entrar
+              </Button>
+            </S.Form>
+            <S.InfoText>
+              Não tem uma conta?{' '}
+              <S.Link to="/register" aria-label="Não tem uma conta? Clique para se cadastrar">
+                Cadastre-se
+              </S.Link>
+            </S.InfoText>
           </S.Card>
         </S.ContentWrapper>
       </S.RightColumn>
