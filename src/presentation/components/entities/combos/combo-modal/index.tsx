@@ -35,9 +35,13 @@ const comboSchema = z.object({
     .number({
       invalid_type_error: 'Estoque deve ser um número'
     })
-    .min(0, 'Estoque deve ser maior ou igual a 0')
-    .optional(),
-  discount: z.coerce.number().min(0).max(100).optional(),
+    .min(0, 'Estoque deve ser maior ou igual a 0'),
+  discount: z.coerce
+    .number({
+      invalid_type_error: 'Desconto deve ser um número'
+    })
+    .min(0, 'Desconto deve ser maior ou igual a 0')
+    .max(100, 'Desconto deve ser no máximo 100%'),
   categoryId: z.string().min(1, 'Categoria é obrigatória'),
   medias: z.any().optional(),
   useCategoryOptionals: z.boolean()
@@ -75,7 +79,7 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
       name: '',
       description: '',
       price: 0,
-      stock: undefined,
+      stock: 0,
       discount: 0,
       categoryId: '',
       medias: undefined,
@@ -90,8 +94,8 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
           name: combo.name,
           description: combo.description || '',
           price: combo.price,
-          stock: combo.stock,
-          discount: combo.discount || 0,
+          stock: combo.stock ?? 0,
+          discount: combo.discount ?? 0,
           categoryId: combo.categoryId,
           medias: combo.medias,
           useCategoryOptionals: combo.useCategoryOptionals || false
@@ -106,7 +110,7 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
           name: '',
           description: '',
           price: 0,
-          stock: undefined,
+          stock: 0,
           discount: 0,
           categoryId: '',
           medias: undefined,
@@ -347,11 +351,11 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
           <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
             <FormInput
               id="price"
-              label="Preço"
+              label="Preço (R$)"
               type="number"
               step="0.01"
               min="0"
-              placeholder="Preço do combo"
+              placeholder="0.00"
               error={errors.price?.message}
               required
               register={register('price')}
@@ -360,30 +364,44 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
           </S.FormGroup>
           <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
             <FormInput
-              id="stock"
-              label="Estoque"
+              id="discount"
+              label="Desconto (%)"
               type="number"
+              step="0.01"
               min="0"
-              placeholder="Estoque do combo"
-              error={errors.stock?.message}
-              register={register('stock')}
+              max="100"
+              placeholder="0"
+              error={errors.discount?.message}
+              register={register('discount')}
               fontSize="sm"
             />
           </S.FormGroup>
         </S.FormRow>
-        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
-          <FormInput
-            id="discount"
-            label="Desconto (%)"
-            type="number"
-            min="0"
-            max="100"
-            placeholder="Desconto em porcentagem"
-            error={errors.discount?.message}
-            register={register('discount')}
-            fontSize="sm"
-          />
-        </S.FormGroup>
+        <S.FormRow>
+          <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
+            <FormInput
+              id="stock"
+              label="Estoque (0 = Ilimitado)"
+              type="number"
+              min="0"
+              placeholder="0"
+              error={errors.stock?.message}
+              register={register('stock')}
+              fontSize="sm"
+            />
+            <span
+              style={{
+                fontSize: '12px',
+                fontFamily: 'Inter, system-ui, sans-serif',
+                color: '#6B7280',
+                marginTop: '4px',
+                display: 'block'
+              }}
+            >
+              Digite 0 para estoque ilimitado ou o número de unidades disponíveis
+            </span>
+          </S.FormGroup>
+        </S.FormRow>
         <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
           <MultipleImageUploader
             label="Imagens/Vídeos"

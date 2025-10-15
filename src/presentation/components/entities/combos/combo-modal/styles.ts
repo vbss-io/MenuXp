@@ -76,6 +76,14 @@ export const CheckboxLabel = styled.label`
   user-select: none;
 `
 
+export const FieldHint = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.text.secondary};
+  margin-top: ${({ theme }) => theme.spacing.xs};
+  display: block;
+`
+
 export const ItemsContainer = styled.div`
   display: flex;
   flex-direction: column;

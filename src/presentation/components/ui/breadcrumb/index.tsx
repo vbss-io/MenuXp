@@ -68,24 +68,17 @@ export const Breadcrumb = ({ lastPath }: BreadcrumbProps) => {
               <S.BreadcrumbItem>
                 <CaretRightIcon size={16} weight="bold" />
                 <S.CurrentPage>{lastPath || getPageTitle(pathnames[pathnames.length - 1])}</S.CurrentPage>
-                <InfoTooltip 
-                  content={getPageDescription(pathnames[pathnames.length - 1])}
-                  position="right"
-                />
+                <InfoTooltip content={getPageDescription(pathnames[pathnames.length - 1])} position="right" />
               </S.BreadcrumbItem>
             )
           : pathnames.length > 0 && (
               <S.BreadcrumbItem>
                 <CaretRightIcon size={16} weight="bold" />
                 <S.CurrentPage>{lastPath || getPageTitle(pathnames[pathnames.length - 1])}</S.CurrentPage>
-                <InfoTooltip 
-                  content={getPageDescription(pathnames[pathnames.length - 1])}
-                  position="right"
-                />
+                <InfoTooltip content={getPageDescription(pathnames[pathnames.length - 1])} position="right" />
               </S.BreadcrumbItem>
             )}
       </S.BreadcrumbList>
-      
       <S.UserMenuWrapper>
         <UserMenu />
       </S.UserMenuWrapper>

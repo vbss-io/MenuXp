@@ -114,12 +114,12 @@ export const ComboCard = ({ combo, onEdit, onDelete, onRefresh }: ComboCardProps
             <Chip backgroundColor="#ef4444" textColor="white" size="xs">
               Preço: R$ {combo.price.toFixed(2)}
             </Chip>
-            {combo.stock !== undefined && (
+            {combo.stock !== undefined && combo.stock > 0 && (
               <Chip backgroundColor="#ef4444" textColor="white" size="xs">
                 Estoque: {combo.stock}
               </Chip>
             )}
-            {combo.discount && combo.discount > 0 && (
+            {combo.discount !== undefined && combo.discount > 0 && (
               <Chip backgroundColor="#ef4444" textColor="white" size="xs">
                 Desconto: {combo.discount}%
               </Chip>

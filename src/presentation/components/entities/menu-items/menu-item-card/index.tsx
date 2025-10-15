@@ -115,9 +115,11 @@ export const MenuItemCard = ({ menuItem, onEdit, onDelete, onRefresh }: MenuItem
             <Chip backgroundColor="#ef4444" textColor="white" size="xs">
               Preço: R$ {menuItem.price.toFixed(2)}
             </Chip>
-            <Chip backgroundColor="#ef4444" textColor="white" size="xs">
-              Estoque: {menuItem.stock}
-            </Chip>
+            {menuItem.stock > 0 && (
+              <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+                Estoque: {menuItem.stock}
+              </Chip>
+            )}
             {menuItem.discount > 0 && (
               <Chip backgroundColor="#ef4444" textColor="white" size="xs">
                 Desconto: {menuItem.discount}%

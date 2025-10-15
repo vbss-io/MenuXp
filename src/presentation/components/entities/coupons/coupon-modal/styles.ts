@@ -11,6 +11,10 @@ export const FormRow = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: ${({ theme }) => theme.spacing.lg};
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const FormGroup = styled(motion.div)`
@@ -42,6 +46,53 @@ export const Label = styled.label`
   color: ${({ theme }) => theme.colors.mx.black};
   text-transform: uppercase;
   letter-spacing: 0.5px;
+
+  span {
+    color: ${({ theme }) => theme.colors.mx.red};
+    margin-left: 4px;
+  }
+`
+
+export const RadioGroup = styled.div`
+  display: flex;
+  gap: ${({ theme }) => theme.spacing.lg};
+`
+
+export const RadioOption = styled.div`
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.sm};
+
+  input[type='radio'] {
+    width: 20px;
+    height: 20px;
+    accent-color: ${({ theme }) => theme.colors.mx.red};
+    cursor: pointer;
+  }
+
+  label {
+    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    font-family: ${({ theme }) => theme.typography.fonts.body};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+    color: ${({ theme }) => theme.colors.mx.black};
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+`
+
+export const ErrorMessage = styled.span`
+  color: ${({ theme }) => theme.colors.mx.error};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+`
+
+export const FieldHint = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.text.muted};
+  font-style: italic;
 `
 
 export const ModalFooter = styled.div`
@@ -51,34 +102,4 @@ export const ModalFooter = styled.div`
   margin-top: ${({ theme }) => theme.spacing.lg};
   padding-top: ${({ theme }) => theme.spacing.lg};
   border-top: 2px solid ${({ theme }) => theme.colors.mx.black};
-`
-
-export const CheckboxContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin-top: ${({ theme }) => theme.spacing.xs};
-
-  input[type='checkbox'] {
-    width: 16px;
-    height: 16px;
-    accent-color: ${({ theme }) => theme.colors.mx.red};
-    cursor: pointer;
-  }
-`
-
-export const CheckboxLabel = styled.label`
-  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  color: ${({ theme }) => theme.colors.mx.black};
-  cursor: pointer;
-  user-select: none;
-`
-
-export const FieldHint = styled.span`
-  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin-top: ${({ theme }) => theme.spacing.xs};
-  display: block;
 `

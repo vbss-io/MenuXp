@@ -6,6 +6,7 @@ import { Dialog } from '@/presentation/components/ui/dialog'
 import { BannerSection } from '@/presentation/components/entities/menu-layouts/sections/banner-section'
 import { CarouselSection } from '@/presentation/components/entities/menu-layouts/sections/carousel-section'
 import { CategoriesSection } from '@/presentation/components/entities/menu-layouts/sections/categories-section'
+import { CombosSection } from '@/presentation/components/entities/menu-layouts/sections/combos-section'
 import { MenuItemsSection } from '@/presentation/components/entities/menu-layouts/sections/menu-items-section'
 
 import * as S from './styles'
@@ -62,6 +63,8 @@ export const SectionDialog: React.FC<SectionDialogProps> = ({
         return `${action} Seção de Categorias`
       case MenuSectionType.MENU_ITEMS:
         return `${action} Seção de Itens do Menu`
+      case MenuSectionType.COMBOS:
+        return `${action} Seção de Combos`
       default:
         return `${action} Seção`
     }
@@ -113,6 +116,17 @@ export const SectionDialog: React.FC<SectionDialogProps> = ({
       case MenuSectionType.MENU_ITEMS:
         return (
           <MenuItemsSection
+            section={currentSection || undefined}
+            mode={componentMode}
+            layoutId={layoutId}
+            position={position}
+            onSectionUpdated={onSectionUpdated}
+            onClose={handleCancel}
+          />
+        )
+      case MenuSectionType.COMBOS:
+        return (
+          <CombosSection
             section={currentSection || undefined}
             mode={componentMode}
             layoutId={layoutId}

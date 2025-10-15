@@ -1,0 +1,131 @@
+import { FunnelSimpleIcon, SortAscendingIcon } from '@phosphor-icons/react'
+
+import { Button } from '@/presentation/components/ui/button'
+import { FormCheckbox } from '@/presentation/components/ui/form-checkbox'
+import { Popover } from '@/presentation/components/ui/popover'
+
+import * as S from './styles'
+
+export interface CouponFilters {
+  searchMask: string
+  includeInactive: boolean
+  includeExpired: boolean
+  sortField: 'code' | 'name' | 'validUntil' | 'createdAt'
+  sortOrder: 'asc' | 'desc'
+}
+
+interface FiltersProps {
+  filters: CouponFilters
+  onFiltersChange: (filters: CouponFilters) => void
+  onReset: () => void
+}
+
+const sortFieldOptions = [
+  { value: 'code', label: 'Código' },
+  { value: 'name', label: 'Nome' },
+  { value: 'validUntil', label: 'Validade' },
+  { value: 'createdAt', label: 'Criação' }
+]
+
+export const Filters = ({ filters, onFiltersChange, onReset }: FiltersProps) => {
+  const handleFilterChange = (key: keyof CouponFilters, value: string | boolean) => {
+    onFiltersChange({
+      ...filters,
+      [key]: value
+    })
+  }
+
+  return (
+    <S.FilterContainer>
+      <S.SearchContainer>
+        <Popover
+          variant="outline"
+          side="left"
+          trigger={
+            <Button
+              variant="outline"
+              size="md"
+              as="div"
+              leftIcon={<SortAscendingIcon size={20} weight="bold" />}
+            ></Button>
+          }
+        >
+          <S.PopoverContent>
+            <S.PopoverTitle>Ordenar por:</S.PopoverTitle>
+            <S.PopoverOptions>
+              {sortFieldOptions.map((option) => (
+                <S.PopoverOption
+                  key={option.value}
+                  onClick={() => {
+                    if (filters.sortField === option.value) {
+                      const newSortOrder = filters.sortOrder === 'asc' ? 'desc' : 'asc'
+                      onFiltersChange({
+                        ...filters,
+                        sortOrder: newSortOrder
+                      })
+                    } else {
+                      onFiltersChange({
+                        ...filters,
+                        sortField: option.value as 'code' | 'name' | 'validUntil' | 'createdAt',
+                        sortOrder: 'asc'
+                      })
+                    }
+                  }}
+                  active={filters.sortField === option.value}
+                >
+                  {option.label}
+                  {filters.sortField === option.value && (
+                    <SortAscendingIcon
+                      size={16}
+                      weight="bold"
+                      style={{ transform: `rotate(${filters.sortOrder === 'asc' ? '0' : '180'}deg)` }}
+                    />
+                  )}
+                </S.PopoverOption>
+              ))}
+            </S.PopoverOptions>
+          </S.PopoverContent>
+        </Popover>
+        <Popover
+          variant="outline"
+          side="left"
+          trigger={
+            <Button
+              variant="outline"
+              size="md"
+              as="div"
+              leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}
+            ></Button>
+          }
+        >
+          <S.PopoverContent>
+            <S.PopoverTitle>Filtros adicionais:</S.PopoverTitle>
+            <S.PopoverOptions>
+              <S.PopoverOption>
+                <FormCheckbox
+                  id="includeInactive"
+                  label="Incluir cupons inativos"
+                  checked={filters.includeInactive}
+                  onCheckedChange={(checked) => handleFilterChange('includeInactive', checked)}
+                  fontSize="sm"
+                />
+              </S.PopoverOption>
+              <S.PopoverOption>
+                <FormCheckbox
+                  id="includeExpired"
+                  label="Incluir cupons expirados"
+                  checked={filters.includeExpired}
+                  onCheckedChange={(checked) => handleFilterChange('includeExpired', checked)}
+                  fontSize="sm"
+                />
+              </S.PopoverOption>
+            </S.PopoverOptions>
+            <Button variant="outline" size="sm" onClick={onReset} style={{ marginTop: '1rem', width: '100%' }}>
+              Limpar
+            </Button>
+          </S.PopoverContent>
+        </Popover>
+      </S.SearchContainer>
+    </S.FilterContainer>
+  )
+}

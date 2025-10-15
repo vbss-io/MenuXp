@@ -32,11 +32,15 @@ const menuItemSchema = z.object({
     .min(0, 'Preço deve ser maior ou igual a 0'),
   stock: z.coerce
     .number({
-      invalid_type_error: 'Estoque deve ser um número',
-      required_error: 'Estoque é obrigatório'
+      invalid_type_error: 'Estoque deve ser um número'
     })
     .min(0, 'Estoque deve ser maior ou igual a 0'),
-  discount: z.coerce.number().min(0).max(100),
+  discount: z.coerce
+    .number({
+      invalid_type_error: 'Desconto deve ser um número'
+    })
+    .min(0, 'Desconto deve ser maior ou igual a 0')
+    .max(100, 'Desconto deve ser no máximo 100%'),
   categoryId: z.string().min(1, 'Categoria é obrigatória'),
   medias: z.any().optional(),
   useCategoryOptionals: z.boolean()
@@ -71,6 +75,8 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
     defaultValues: {
       name: '',
       description: '',
+      price: 0,
+      stock: 0,
       discount: 0,
       categoryId: '',
       medias: undefined,
@@ -85,8 +91,8 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
           name: menuItem.name,
           description: menuItem.description || '',
           price: menuItem.price,
-          stock: menuItem.stock,
-          discount: menuItem.discount,
+          stock: menuItem.stock ?? 0,
+          discount: menuItem.discount ?? 0,
           categoryId: menuItem.categoryId,
           medias: menuItem.medias,
           useCategoryOptionals: menuItem.useCategoryOptionals || false
@@ -281,11 +287,11 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
           >
             <FormInput
               id="price"
-              label="Preço"
+              label="Preço (R$)"
               type="number"
               step="0.01"
               min="0"
-              placeholder="Preço do item"
+              placeholder="0.00"
               error={errors.price?.message}
               required
               register={register('price')}
@@ -298,16 +304,36 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
             animate="visible"
           >
             <FormInput
+              id="discount"
+              label="Desconto (%)"
+              type="number"
+              step="0.01"
+              min="0"
+              max="100"
+              placeholder="0"
+              error={errors.discount?.message}
+              register={register('discount')}
+              fontSize="sm"
+            />
+          </S.FormGroup>
+        </S.FormRow>
+        <S.FormRow>
+          <S.FormGroup
+            variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+            initial="hidden"
+            animate="visible"
+          >
+            <FormInput
               id="stock"
-              label="Estoque"
+              label="Estoque (0 = Ilimitado)"
               type="number"
               min="0"
-              placeholder="Estoque do item"
+              placeholder="0"
               error={errors.stock?.message}
-              required
               register={register('stock')}
               fontSize="sm"
             />
+            <S.FieldHint>Digite 0 para estoque ilimitado ou o número de unidades disponíveis</S.FieldHint>
           </S.FormGroup>
         </S.FormRow>
         <S.FormGroup

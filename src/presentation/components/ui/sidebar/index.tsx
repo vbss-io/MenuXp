@@ -8,11 +8,12 @@ import {
   HouseIcon,
   ScrollIcon,
   ShoppingCartIcon,
-  SignOutIcon
+  SignOutIcon,
+  TicketIcon
 } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
-import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useSidebar } from '@/presentation/hooks/use-sidebar'
@@ -34,55 +35,59 @@ export const Sidebar = () => {
   const location = useLocation()
   const sidebarRef = useRef<HTMLDivElement>(null)
 
-  // Lista simplificada dos itens do menu
   const menuItems: MenuItem[] = [
-    { 
-      icon: <HouseIcon size={20} weight="fill" />, 
-      label: 'Dashboard', 
+    {
+      icon: <HouseIcon size={20} weight="fill" />,
+      label: 'Dashboard',
       path: '/dashboard',
       isActive: location.pathname === '/dashboard'
     },
-    { 
-      icon: <ShoppingCartIcon size={20} weight="fill" />, 
-      label: 'Pedidos', 
+    {
+      icon: <ShoppingCartIcon size={20} weight="fill" />,
+      label: 'Pedidos',
       path: '/dashboard/orders',
-      badge: 3, // Exemplo de badge
+      // badge: 5,
       isActive: location.pathname === '/dashboard/orders'
     },
-    { 
-      icon: <BowlFoodIcon size={20} weight="fill" />, 
-      label: 'Items do Menu', 
+    {
+      icon: <BowlFoodIcon size={20} weight="fill" />,
+      label: 'Items do Menu',
       path: '/dashboard/menu-items',
       isActive: location.pathname === '/dashboard/menu-items'
     },
-    { 
-      icon: <ScrollIcon size={20} weight="fill" />, 
-      label: 'Cardápio', 
+    {
+      icon: <ScrollIcon size={20} weight="fill" />,
+      label: 'Cardápio',
       path: '/dashboard/menu',
       isActive: location.pathname === '/dashboard/menu'
     },
-    { 
-      icon: <GraphIcon size={20} weight="fill" />, 
-      label: 'Relatórios', 
+    {
+      icon: <TicketIcon size={20} weight="fill" />,
+      label: 'Cupons',
+      path: '/dashboard/coupons',
+      isActive: location.pathname === '/dashboard/coupons'
+    },
+    {
+      icon: <GraphIcon size={20} weight="fill" />,
+      label: 'Relatórios',
       path: '/dashboard/reports',
       isActive: location.pathname === '/dashboard/reports'
     },
-    { 
-      icon: <GameControllerIcon size={20} weight="fill" />, 
-      label: 'Missões', 
+    {
+      icon: <GameControllerIcon size={20} weight="fill" />,
+      label: 'Missões',
       path: '/dashboard/missions',
       isActive: location.pathname === '/dashboard/missions'
     },
-    { 
-      icon: <ChatCenteredDotsIcon size={20} weight="fill" />, 
-      label: 'Mensagens', 
+    {
+      icon: <ChatCenteredDotsIcon size={20} weight="fill" />,
+      label: 'Mensagens',
       path: '/dashboard/messages',
-      badge: 5,
       isActive: location.pathname === '/dashboard/messages'
     },
-    { 
-      icon: <GearIcon size={20} weight="fill" />, 
-      label: 'Configurações', 
+    {
+      icon: <GearIcon size={20} weight="fill" />,
+      label: 'Configurações',
       path: '/dashboard/settings',
       isActive: location.pathname === '/dashboard/settings'
     }
@@ -110,8 +115,6 @@ export const Sidebar = () => {
     }
   }
 
-
-  // Navegação por teclado
   useEffect(() => {
     const handleGlobalKeyDown = (event: KeyboardEvent) => {
       if (event.ctrlKey && event.key === 'b') {
@@ -139,17 +142,12 @@ export const Sidebar = () => {
       onKeyDown={handleKeyDown}
       tabIndex={-1}
     >
-      <S.SidebarContainer 
-        className={!isOpen ? 'sidebar-closed' : ''}
-        role="navigation"
-        aria-label="Menu principal"
-      >
-        {/* Header Section */}
+      <S.SidebarContainer className={!isOpen ? 'sidebar-closed' : ''} role="navigation" aria-label="Menu principal">
         <S.HeaderSection $isOpen={isOpen}>
           {isOpen && (
             <motion.div variants={logoVariants} initial="initial" whileHover="hover">
-              <S.Logo 
-                onClick={handleLogoClick} 
+              <S.Logo
+                onClick={handleLogoClick}
                 $isOpen={isOpen}
                 role="button"
                 tabIndex={0}
@@ -164,23 +162,17 @@ export const Sidebar = () => {
               </S.Logo>
             </motion.div>
           )}
-          
-          <S.ToggleButton 
-            onClick={toggleSidebar} 
+          <S.ToggleButton
+            onClick={toggleSidebar}
             $isOpen={isOpen}
             aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
             title={`${isOpen ? 'Fechar' : 'Abrir'} menu (Ctrl+B)`}
           >
-            <motion.div 
-              animate={{ rotate: isOpen ? 0 : 180 }} 
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-            >
+            <motion.div animate={{ rotate: isOpen ? 0 : 180 }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
               <CaretLeftIcon size={20} weight="bold" />
             </motion.div>
           </S.ToggleButton>
         </S.HeaderSection>
-
-        {/* Navigation Menu */}
         <S.MenuContainer>
           {menuItems.map((item, index) => (
             <S.MenuItem
@@ -197,24 +189,14 @@ export const Sidebar = () => {
               {isOpen && (
                 <>
                   <span>{item.label}</span>
-                  {item.badge && (
-                    <S.Badge>{item.badge}</S.Badge>
-                  )}
+                  {item.badge && <S.Badge>{item.badge}</S.Badge>}
                 </>
               )}
             </S.MenuItem>
           ))}
         </S.MenuContainer>
-
-        {/* Footer Section */}
         <S.BottomSection>
-          <S.LogoutButton 
-            onClick={logout} 
-            $isOpen={isOpen}
-            role="button"
-            tabIndex={0}
-            aria-label="Sair da conta"
-          >
+          <S.LogoutButton onClick={logout} $isOpen={isOpen} role="button" tabIndex={0} aria-label="Sair da conta">
             <S.IconWrapper>
               <SignOutIcon size={20} weight="fill" />
             </S.IconWrapper>

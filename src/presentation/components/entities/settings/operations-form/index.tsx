@@ -28,7 +28,8 @@ import * as S from './styles'
 const operationsSchema = z.object({
   operationTypes: z.array(z.nativeEnum(OperationType)).min(1, 'Selecione pelo menos um tipo de operação'),
   paymentMethods: z.array(z.nativeEnum(PaymentMethod)).min(1, 'Selecione pelo menos um método de pagamento'),
-  deliveryFee: z.number().min(0, 'Taxa de entrega deve ser maior ou igual a 0').optional()
+  deliveryFee: z.number().min(0, 'Taxa de entrega deve ser maior ou igual a 0').optional(),
+  acceptsScheduling: z.boolean().optional()
 })
 
 type OperationsFormData = z.infer<typeof operationsSchema>
@@ -91,6 +92,7 @@ export const OperationsForm = () => {
   const [selectedPaymentMethods, setSelectedPaymentMethods] = useState<PaymentMethod[]>(
     restaurant?.settings?.paymentMethods ?? []
   )
+  const [acceptsScheduling, setAcceptsScheduling] = useState<boolean>(restaurant?.settings?.acceptsScheduling ?? false)
 
   const {
     register,
@@ -103,7 +105,8 @@ export const OperationsForm = () => {
     defaultValues: {
       operationTypes: restaurant?.settings?.operationTypes ?? [],
       paymentMethods: restaurant?.settings?.paymentMethods ?? [],
-      deliveryFee: restaurant?.settings?.deliveryFee ?? 0
+      deliveryFee: restaurant?.settings?.deliveryFee ?? 0,
+      acceptsScheduling: restaurant?.settings?.acceptsScheduling ?? false
     }
   })
 
@@ -117,6 +120,10 @@ export const OperationsForm = () => {
   useEffect(() => {
     setValue('paymentMethods', selectedPaymentMethods)
   }, [selectedPaymentMethods, setValue])
+
+  useEffect(() => {
+    setValue('acceptsScheduling', acceptsScheduling)
+  }, [acceptsScheduling, setValue])
 
   const handleOperationTypeChange = (operationType: OperationType, checked: boolean) => {
     if (checked) {
@@ -144,6 +151,7 @@ export const OperationsForm = () => {
         operationTypes: data.operationTypes,
         paymentMethods: data.paymentMethods,
         deliveryFee: hasDelivery ? (data?.deliveryFee ?? 0) : 0,
+        acceptsScheduling: data.acceptsScheduling ?? false,
         businessHours: restaurant?.settings?.businessHours ?? undefined,
         templates: restaurant?.settings?.templates ?? undefined
       })
@@ -242,6 +250,19 @@ export const OperationsForm = () => {
           ))}
         </S.CheckboxGrid>
         {errors.paymentMethods && <S.ErrorMessage>{errors.paymentMethods.message}</S.ErrorMessage>}
+      </S.Section>
+      <S.Section variants={sectionVariants}>
+        <S.SectionTitle>Configurações Adicionais</S.SectionTitle>
+        <S.SectionDescription>Configure opções adicionais de operação</S.SectionDescription>
+        <S.CheckboxItem variants={formGroupVariants}>
+          <FormCheckbox
+            id="acceptsScheduling"
+            label="Aceitar Pedidos Agendados"
+            checked={acceptsScheduling}
+            onCheckedChange={(checked) => setAcceptsScheduling(checked)}
+            fontSize="sm"
+          />
+        </S.CheckboxItem>
       </S.Section>
       <S.SubmitSection>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
