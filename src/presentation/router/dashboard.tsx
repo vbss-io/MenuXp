@@ -41,6 +41,16 @@ const Menu = lazy(() =>
     default: module.MenuPage
   }))
 )
+const Profile = lazy(() =>
+  import('@/presentation/pages/dashboard/profile').then((module) => ({
+    default: module.ProfilePage
+  }))
+)
+const Coupons = lazy(() =>
+  import('@/presentation/pages/dashboard/coupons').then((module) => ({
+    default: module.Coupons
+  }))
+)
 
 export const dashboardRoutes = [
   {
@@ -64,6 +74,10 @@ export const dashboardRoutes = [
         element: <MenuItems />
       },
       {
+        path: 'coupons',
+        element: <Coupons />
+      },
+      {
         path: 'reports',
         element: <Reports />
       },
@@ -78,6 +92,10 @@ export const dashboardRoutes = [
       {
         path: 'missions',
         element: <Missions />
+      },
+      {
+        path: 'profile',
+        element: <Profile />
       }
     ]
   }
