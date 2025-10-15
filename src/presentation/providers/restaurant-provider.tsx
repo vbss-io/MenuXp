@@ -89,6 +89,7 @@ export const RestaurantProvider = ({ children }: RestaurantProviderProps) => {
       if (!validation.isReadyForOperation) {
         const missingConfigs = validation.missingConfigs.join(', ')
         toast.error(`Restaurante não está completo. Faltam: ${missingConfigs}`, {
+          id: 'restaurant-incomplete-warning',
           duration: 5000
         })
       }
@@ -130,7 +131,8 @@ export const RestaurantProvider = ({ children }: RestaurantProviderProps) => {
     if (restaurantId) {
       fetchRestaurant()
     }
-  }, [fetchRestaurant, restaurantId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [restaurantId])
 
   const contextValue = {
     restaurant,

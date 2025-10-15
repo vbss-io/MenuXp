@@ -10,6 +10,7 @@ import type {
   BannerConfig,
   CarouselConfig,
   CategoriesConfig,
+  CombosConfig,
   MenuItemsConfig,
   MenuLayout,
   MenuSection
@@ -45,18 +46,25 @@ export const getMenuItemsConfig = (section: MenuSection): MenuItemsConfig | null
   return null
 }
 
+export const getCombosConfig = (section: MenuSection): CombosConfig | null => {
+  if (section.type === MenuSectionType.COMBOS) {
+    return section.config as CombosConfig
+  }
+  return null
+}
+
 export const validateSection = (section: MenuSection, sectionDefinitions: MenuSectionDefinition[]) => {
   const definition = sectionDefinitions.find((def) => def.type === section.type)
   if (!definition) return { isValid: false, errors: ['Tipo de seção não encontrado'] }
   const errors: string[] = []
   let config = section.config || {}
   switch (section.type) {
-    case 'BANNER':
+    case MenuSectionType.BANNER:
       if (!(config as BannerConfig)?.imagePath) {
         errors.push('A imagem é obrigatória')
       }
       break
-    case 'CAROUSEL':
+    case MenuSectionType.CAROUSEL:
       config = config as CarouselConfig
       if (!config?.imagePaths || config.imagePaths.length < 2) {
         errors.push('Pelo menos 2 imagens são obrigatórias')
@@ -64,9 +72,9 @@ export const validateSection = (section: MenuSection, sectionDefinitions: MenuSe
         errors.push('Máximo de 5 imagens permitido')
       }
       break
-    case 'CATEGORIES':
+    case MenuSectionType.CATEGORIES:
       break
-    case 'MENU_ITEMS':
+    case MenuSectionType.MENU_ITEMS:
       break
   }
   return {
