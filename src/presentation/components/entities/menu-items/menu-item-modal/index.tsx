@@ -194,7 +194,6 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
         await updateMenuItemUsecase.execute({
           menuItemId: menuItem.id,
           ...data,
-          restaurantId,
           medias: selectedFiles,
           removeMedias: removedMedias.length > 0 ? removedMedias : undefined,
           optionals: optionals.length > 0 ? optionals : undefined,

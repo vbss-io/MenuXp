@@ -18,6 +18,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { DotsSixVerticalIcon } from '@phosphor-icons/react'
 import styled from 'styled-components'
 
+import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { MenuSection } from '@/domain/models/menu-layout.model'
 
 interface ReorderSectionsProps {
@@ -89,13 +90,13 @@ const SectionType = styled.span`
 
 const getSectionDisplayName = (section: MenuSection): string => {
   switch (section.type) {
-    case 'BANNER':
+    case MenuSectionType.BANNER:
       return 'Banner'
-    case 'CAROUSEL':
+    case MenuSectionType.CAROUSEL:
       return 'Carrossel'
-    case 'CATEGORIES':
+    case MenuSectionType.CATEGORIES:
       return 'Categorias'
-    case 'MENU_ITEMS':
+    case MenuSectionType.MENU_ITEMS:
       return 'Itens do Menu'
     default:
       return section.type
