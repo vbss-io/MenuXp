@@ -7,6 +7,7 @@ import type { Order, OrderStatus } from '@/domain/models/order.model'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
+import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 import { OrderDetailDialog } from './components/order-detail-dialog'
 import { OrdersKanban } from './components/orders-kanban'
 
@@ -14,6 +15,7 @@ import * as S from './styles'
 
 export const OrdersPage = () => {
   const { restaurantId } = useAuth()
+  const { restaurant } = useRestaurant()
   const [orders, setOrders] = useState<Order[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const hasLoadedRef = useRef(false)
@@ -99,7 +101,6 @@ export const OrdersPage = () => {
       <S.Header>
         <S.Title>Pedidos</S.Title>
       </S.Header>
-
       <S.Content>
         {orders.length === 0 ? (
           <S.EmptyState>
@@ -114,10 +115,10 @@ export const OrdersPage = () => {
             onOrderClick={handleOrderClick}
             onStatusUpdate={handleStatusUpdate}
             isUpdatingStatus={isUpdatingStatus}
+            acceptsScheduling={restaurant?.settings?.acceptsScheduling}
           />
         )}
       </S.Content>
-
       {selectedOrder && (
         <OrderDetailDialog
           order={selectedOrder}

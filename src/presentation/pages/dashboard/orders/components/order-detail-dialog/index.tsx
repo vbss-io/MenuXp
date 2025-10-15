@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
-import { UserIcon, MapPinIcon, ShoppingCartIcon, PhoneIcon, CalendarIcon, CheckCircleIcon } from '@phosphor-icons/react'
+import { CalendarIcon, CheckCircleIcon, MapPinIcon, PhoneIcon, ShoppingCartIcon, UserIcon } from '@phosphor-icons/react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import { Dialog } from '@/presentation/components/ui/dialog'
 import { type Order, OrderStatus } from '@/domain/models/order.model'
+import { Dialog } from '@/presentation/components/ui/dialog'
 
 interface OrderDetailDialogProps {
   order: Order
@@ -14,6 +14,7 @@ interface OrderDetailDialogProps {
 }
 
 const STATUS_OPTIONS: Array<{ value: OrderStatus; label: string; color: string }> = [
+  { value: OrderStatus.SCHEDULED, label: 'Agendado', color: '#6366F1' },
   { value: OrderStatus.RECEIVED, label: 'Recebido', color: '#F59E0B' },
   { value: OrderStatus.CONFIRMED, label: 'Confirmado', color: '#3B82F6' },
   { value: OrderStatus.IN_PRODUCTION, label: 'Em Produção', color: '#8B5CF6' },
@@ -74,9 +75,7 @@ export const OrderDetailDialog = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <S.DialogContent>
         <S.DialogTitle>Detalhes do Pedido #{order.code}</S.DialogTitle>
-
         <S.Content>
-          {/* Status Section */}
           <S.Section>
             <S.SectionTitle>Status do Pedido</S.SectionTitle>
             <S.StatusSelector>
@@ -93,7 +92,6 @@ export const OrderDetailDialog = ({
                 </S.StatusOption>
               ))}
             </S.StatusSelector>
-
             {selectedStatus !== order.status && (
               <S.UpdateButton onClick={handleStatusUpdate} disabled={isUpdatingStatus}>
                 {isUpdatingStatus ? 'Atualizando...' : 'Atualizar Status'}
@@ -108,7 +106,6 @@ export const OrderDetailDialog = ({
                 <S.InfoLabel>Nome:</S.InfoLabel>
                 <S.InfoValue>{order.customer.name}</S.InfoValue>
               </S.InfoRow>
-
               <S.InfoRow>
                 <PhoneIcon size={20} weight="fill" />
                 <S.InfoLabel>Telefone:</S.InfoLabel>

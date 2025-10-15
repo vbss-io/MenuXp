@@ -13,6 +13,7 @@ interface OrderCardProps {
 }
 
 const STATUS_CONFIG = {
+  scheduled: { color: '#6366F1', bgColor: '#E0E7FF' },
   received: { color: '#F59E0B', bgColor: '#FEF3C7' },
   confirmed: { color: '#3B82F6', bgColor: '#DBEAFE' },
   in_production: { color: '#8B5CF6', bgColor: '#EDE9FE' },
@@ -105,6 +106,7 @@ export const OrderCard = ({ order, onClick, onDragStart, onDragEnd, isDragging, 
 
 const getStatusLabel = (status: OrderStatus): string => {
   const labels = {
+    scheduled: 'Agendado',
     received: 'Recebido',
     confirmed: 'Confirmado',
     in_production: 'Em Produção',

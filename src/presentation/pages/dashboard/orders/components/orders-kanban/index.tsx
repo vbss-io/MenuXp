@@ -10,9 +10,15 @@ interface OrdersKanbanProps {
   onOrderClick: (order: Order) => void
   onStatusUpdate: (orderId: string, newStatus: OrderStatus) => Promise<void>
   isUpdatingStatus: boolean
+  acceptsScheduling?: boolean
 }
 
 const STATUS_CONFIG = {
+  scheduled: {
+    title: 'Agendados',
+    color: '#6366F1',
+    bgColor: '#E0E7FF'
+  },
   received: {
     title: 'Recebidos',
     color: '#F59E0B',
@@ -50,7 +56,13 @@ const STATUS_CONFIG = {
   }
 } as const
 
-export const OrdersKanban = ({ orders, onOrderClick, onStatusUpdate, isUpdatingStatus }: OrdersKanbanProps) => {
+export const OrdersKanban = ({
+  orders,
+  onOrderClick,
+  onStatusUpdate,
+  isUpdatingStatus,
+  acceptsScheduling = false
+}: OrdersKanbanProps) => {
   const [draggedOrder, setDraggedOrder] = useState<Order | null>(null)
   const [dragOverStatus, setDragOverStatus] = useState<OrderStatus | null>(null)
   const dragCounter = useRef(0)
@@ -65,6 +77,13 @@ export const OrdersKanban = ({ orders, onOrderClick, onStatusUpdate, isUpdatingS
     },
     {} as Record<OrderStatus, Order[]>
   )
+
+  const visibleStatuses = (Object.keys(STATUS_CONFIG) as OrderStatus[]).filter((status) => {
+    if (status === 'scheduled') {
+      return acceptsScheduling
+    }
+    return true
+  })
 
   const handleDragStart = (order: Order) => {
     setDraggedOrder(order)
@@ -112,7 +131,7 @@ export const OrdersKanban = ({ orders, onOrderClick, onStatusUpdate, isUpdatingS
   return (
     <S.KanbanContainer>
       <S.KanbanGrid>
-        {(Object.keys(STATUS_CONFIG) as OrderStatus[]).map((status) => {
+        {visibleStatuses.map((status) => {
           const config = STATUS_CONFIG[status]
           const statusOrders = ordersByStatus[status] || []
           const isDragOver = dragOverStatus === status
@@ -130,7 +149,6 @@ export const OrdersKanban = ({ orders, onOrderClick, onStatusUpdate, isUpdatingS
                 <S.ColumnTitle>{config.title}</S.ColumnTitle>
                 <S.OrderCount>{statusOrders.length}</S.OrderCount>
               </S.ColumnHeader>
-
               <S.ColumnContent>
                 <AnimatePresence>
                   {statusOrders.map((order) => (
@@ -153,7 +171,6 @@ export const OrdersKanban = ({ orders, onOrderClick, onStatusUpdate, isUpdatingS
                     </motion.div>
                   ))}
                 </AnimatePresence>
-
                 {statusOrders.length === 0 && (
                   <S.EmptyColumn>
                     <S.EmptyText>Nenhum pedido</S.EmptyText>
