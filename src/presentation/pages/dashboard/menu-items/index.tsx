@@ -16,8 +16,8 @@ export const MenuItemsPage = () => {
 
   const tabs = [
     { id: 'items' as const, label: 'Itens', icon: <BowlFoodIcon size={20} /> },
-    { id: 'categories' as const, label: 'Categorias', icon: <FolderIcon size={20} /> },
-    { id: 'combos' as const, label: 'Combos', icon: <PackageIcon size={20} /> }
+    { id: 'combos' as const, label: 'Combos', icon: <PackageIcon size={20} /> },
+    { id: 'categories' as const, label: 'Categorias', icon: <FolderIcon size={20} /> }
   ]
 
   const handlePageChange = (page: number) => {
@@ -28,11 +28,10 @@ export const MenuItemsPage = () => {
     switch (activeTab) {
       case 'items':
         return <MenuItemsTab currentPage={currentPage} onPageChange={handlePageChange} />
-      case 'categories':
-        return <CategoriesTab currentPage={currentPage} onPageChange={handlePageChange} />
-
       case 'combos':
         return <CombosTab currentPage={currentPage} onPageChange={handlePageChange} />
+      case 'categories':
+        return <CategoriesTab currentPage={currentPage} onPageChange={handlePageChange} />
       default:
         return <MenuItemsTab currentPage={currentPage} onPageChange={handlePageChange} />
     }
@@ -41,8 +40,7 @@ export const MenuItemsPage = () => {
   return (
     <S.Container>
       <Breadcrumb lastPath="Itens do Menu" />
-      <S.Header>
-      </S.Header>
+      <S.Header />
       <S.TabsContainer>
         <S.TabsHeader>
           {tabs.map((tab) => (

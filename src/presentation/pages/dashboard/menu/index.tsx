@@ -17,6 +17,7 @@ import { SectionDialog } from '@/presentation/components/entities/menu-layouts/s
 import { BannerSection } from '@/presentation/components/entities/menu-layouts/sections/banner-section'
 import { CarouselSection } from '@/presentation/components/entities/menu-layouts/sections/carousel-section'
 import { CategoriesSection } from '@/presentation/components/entities/menu-layouts/sections/categories-section'
+import { CombosSection } from '@/presentation/components/entities/menu-layouts/sections/combos-section'
 import { MenuItemsSection } from '@/presentation/components/entities/menu-layouts/sections/menu-items-section'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { Button } from '@/presentation/components/ui/button'
@@ -256,8 +257,7 @@ export const MenuPage = () => {
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
       <S.Container>
         <Breadcrumb lastPath="Layouts do Menu" />
-        <S.Header>
-        </S.Header>
+        <S.Header />
         <S.LayoutsGrid>
           {layouts.map((layout) => (
             <MenuLayoutCard
@@ -374,6 +374,18 @@ export const MenuPage = () => {
                       )}
                       {section.type === MenuSectionType.MENU_ITEMS && (
                         <MenuItemsSection
+                          section={section}
+                          mode="preview-edit"
+                          onRemove={() => handleRemoveSection(index)}
+                          onEdit={() => handleEditSection(section)}
+                          onSectionUpdated={handleSectionUpdated}
+                          sectionDefinitions={sections}
+                          layoutId={selectedLayout.id}
+                          menuLayout={selectedLayout.layout}
+                        />
+                      )}
+                      {section.type === MenuSectionType.COMBOS && (
+                        <CombosSection
                           section={section}
                           mode="preview-edit"
                           onRemove={() => handleRemoveSection(index)}

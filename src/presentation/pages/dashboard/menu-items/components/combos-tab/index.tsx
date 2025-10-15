@@ -53,7 +53,7 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
         categoryId: filters.categoryId,
         page,
         rowsPerPage: 20,
-        isActive: !filters.includeInactive
+        includeInactive: filters.includeInactive
       })
       setCombos(combosData)
       setTotalCombos(total)
