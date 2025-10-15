@@ -3,11 +3,14 @@ import type { Combo } from '@/domain/models/combo.model'
 import { Registry } from '@/infra/dependency-injection/registry'
 
 export interface GetCombosUsecaseInput {
-  restaurantId?: string
+  restaurantId: string
   categoryId?: string
+  searchMask?: string
+  includeInactive?: boolean
   page?: number
   rowsPerPage?: number
-  isActive?: boolean
+  sortField?: 'name' | 'createdAt' | 'updatedAt'
+  sortOrder?: 'asc' | 'desc'
 }
 
 interface GetCombosResponse {
@@ -25,11 +28,14 @@ export class GetCombosUsecase {
 
   async execute(params: GetCombosUsecaseInput): Promise<GetCombosResponse> {
     const queryParams = new URLSearchParams()
-    if (params.restaurantId) queryParams.append('restaurantId', params.restaurantId)
+    queryParams.append('restaurantId', params.restaurantId)
     if (params.categoryId) queryParams.append('categoryId', params.categoryId)
+    if (params.searchMask) queryParams.append('searchMask', params.searchMask)
+    if (params.includeInactive !== undefined) queryParams.append('includeInactive', params.includeInactive.toString())
     if (params.page) queryParams.append('page', params.page.toString())
     if (params.rowsPerPage) queryParams.append('rowsPerPage', params.rowsPerPage.toString())
-    if (params.isActive !== undefined) queryParams.append('isActive', params.isActive.toString())
+    if (params.sortField) queryParams.append('sortField', params.sortField)
+    if (params.sortOrder) queryParams.append('sortOrder', params.sortOrder)
     const response = await this.httpClient.get<GetCombosResponse>({
       url: `${this.url}?${queryParams.toString()}`
     })

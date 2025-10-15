@@ -5,7 +5,7 @@ import { Registry } from '@/infra/dependency-injection/registry'
 export interface CreateCategoryUsecaseInput {
   name: string
   description?: string
-  restaurantId?: string
+  restaurantId: string
   mainCategoryId?: string
   icon?: string
   optionals?: CategoryOptional[]

@@ -1,21 +1,23 @@
 import type { HttpClient } from '@/domain/http/http-client'
 import { Registry } from '@/infra/dependency-injection/registry'
 
-export interface ResumeOperationUsecaseInput {
-  operationId: string
+export interface UpdatePasswordUsecaseInput {
+  password: string
+  passwordConfirm: string
 }
 
-export class ResumeOperationUsecase {
-  protected url = `${import.meta.env.VITE_BACKEND}/operation/:operationId/resume`
+export class UpdatePasswordUsecase {
+  protected url = `${import.meta.env.VITE_BACKEND}/auth/update-password`
   private readonly httpClient: HttpClient
 
   constructor() {
     this.httpClient = Registry.getInstance().inject('authHttpClient') as HttpClient
   }
 
-  async execute(params: ResumeOperationUsecaseInput): Promise<void> {
+  async execute(params: UpdatePasswordUsecaseInput): Promise<void> {
     await this.httpClient.patch({
-      url: this.url.replace(':operationId', params.operationId)
+      url: this.url,
+      body: params
     })
   }
 }

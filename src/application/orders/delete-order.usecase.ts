@@ -6,7 +6,7 @@ export interface DeleteOrderUsecaseInput {
 }
 
 export class DeleteOrderUsecase {
-  protected url = `${import.meta.env.VITE_BACKEND}/order/:id`
+  protected url = `${import.meta.env.VITE_BACKEND}/order/:orderId`
   private readonly httpClient: HttpClient
 
   constructor() {
@@ -15,7 +15,7 @@ export class DeleteOrderUsecase {
 
   async execute(params: DeleteOrderUsecaseInput): Promise<void> {
     await this.httpClient.delete({
-      url: this.url.replace(':id', params.orderId)
+      url: this.url.replace(':orderId', params.orderId)
     })
   }
 }

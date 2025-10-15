@@ -3,7 +3,6 @@ import { Registry } from '@/infra/dependency-injection/registry'
 
 export interface ResentConfirmationEmailUsecaseInput {
   email?: string
-  username?: string
 }
 
 export class ResentConfirmationEmailUsecase {

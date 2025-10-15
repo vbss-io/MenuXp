@@ -7,7 +7,7 @@ export interface GetOrderUsecaseInput {
 }
 
 export class GetOrderUsecase {
-  protected url = `${import.meta.env.VITE_BACKEND}/order/:id`
+  protected url = `${import.meta.env.VITE_BACKEND}/order/:orderId`
   private readonly httpClient: HttpClient
 
   constructor() {
@@ -16,7 +16,7 @@ export class GetOrderUsecase {
 
   async execute(params: GetOrderUsecaseInput): Promise<Order> {
     const response = await this.httpClient.get<Order>({
-      url: this.url.replace(':id', params.orderId)
+      url: this.url.replace(':orderId', params.orderId)
     })
     return response.data
   }

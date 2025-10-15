@@ -16,10 +16,7 @@ export class GetMenuLayoutsUsecase {
 
   async execute(params: GetMenuLayoutsUsecaseInput): Promise<MenuLayout[]> {
     const response = await this.httpClient.get<MenuLayout[]>({
-      url: this.url,
-      params: {
-        restaurantId: params.restaurantId
-      }
+      url: `${import.meta.env.VITE_BACKEND}/menu-layouts/restaurant/${params.restaurantId}`
     })
     return response.data
   }

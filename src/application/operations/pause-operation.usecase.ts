@@ -6,7 +6,7 @@ export interface PauseOperationUsecaseInput {
 }
 
 export class PauseOperationUsecase {
-  protected url = `${import.meta.env.VITE_BACKEND}/operation/:id/pause`
+  protected url = `${import.meta.env.VITE_BACKEND}/operation/:operationId/pause`
   private readonly httpClient: HttpClient
 
   constructor() {
@@ -15,7 +15,7 @@ export class PauseOperationUsecase {
 
   async execute(params: PauseOperationUsecaseInput): Promise<void> {
     await this.httpClient.patch({
-      url: this.url.replace(':id', params.operationId)
+      url: this.url.replace(':operationId', params.operationId)
     })
   }
 }

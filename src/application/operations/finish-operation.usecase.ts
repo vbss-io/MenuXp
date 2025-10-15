@@ -6,7 +6,7 @@ export interface FinishOperationUsecaseInput {
 }
 
 export class FinishOperationUsecase {
-  protected url = `${import.meta.env.VITE_BACKEND}/operation/:id/finish`
+  protected url = `${import.meta.env.VITE_BACKEND}/operation/:operationId/finish`
   private readonly httpClient: HttpClient
 
   constructor() {
@@ -15,7 +15,7 @@ export class FinishOperationUsecase {
 
   async execute(params: FinishOperationUsecaseInput): Promise<void> {
     await this.httpClient.patch({
-      url: this.url.replace(':id', params.operationId)
+      url: this.url.replace(':operationId', params.operationId)
     })
   }
 }

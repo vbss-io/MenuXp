@@ -21,6 +21,7 @@ export class UpdateRestaurantSettingsUsecase {
         operationTypes: params.operationTypes,
         paymentMethods: params.paymentMethods,
         deliveryFee: params.deliveryFee,
+        acceptsScheduling: params.acceptsScheduling,
         businessHours: params.businessHours,
         templates: params.templates
       }
