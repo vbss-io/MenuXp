@@ -1,7 +1,7 @@
 export enum MenuLayoutStatus {
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE',
-  DRAFT = 'DRAFT'
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  DRAFT = 'draft'
 }
 
 export const menuLayoutStatus = Object.values(MenuLayoutStatus)

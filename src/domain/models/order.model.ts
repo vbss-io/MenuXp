@@ -21,6 +21,7 @@ export interface OrderItem {
 }
 
 export enum OrderStatus {
+  SCHEDULED = 'scheduled',
   RECEIVED = 'received',
   CONFIRMED = 'confirmed',
   IN_PRODUCTION = 'in_production',
@@ -47,7 +48,7 @@ export interface Order {
   id: string
   code: string
   restaurantId: string
-  operationId: string
+  operationId?: string
   clientId: string
   customer: OrderCustomer
   orderType: OperationType
@@ -59,6 +60,8 @@ export interface Order {
   discount?: number
   total: number
   notes?: string
+  isScheduled: boolean
+  scheduledFor?: Date
   createdAt: Date
   updatedAt: Date
 }

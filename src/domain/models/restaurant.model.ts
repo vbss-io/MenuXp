@@ -44,6 +44,7 @@ export interface RestaurantSettings {
   deliveryFee?: number
   businessHours?: BusinessHours
   templates?: Templates
+  acceptsScheduling?: boolean
 }
 
 export interface RestaurantStyle {

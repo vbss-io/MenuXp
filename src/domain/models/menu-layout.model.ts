@@ -22,7 +22,13 @@ export interface MenuItemsConfig {
   menuItemIds?: string[] | null
 }
 
-export type MenuSectionConfig = BannerConfig | CarouselConfig | CategoriesConfig | MenuItemsConfig
+export interface CombosConfig {
+  type?: 'custom' | 'best_sellers' | 'discounts'
+  title?: string
+  comboIds?: string[] | null
+}
+
+export type MenuSectionConfig = BannerConfig | CarouselConfig | CategoriesConfig | MenuItemsConfig | CombosConfig
 
 export interface MenuSection {
   id?: string
