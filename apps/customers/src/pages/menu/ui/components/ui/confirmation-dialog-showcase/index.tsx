@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
-import { Button } from '@/components/ui/button'
-import { ConfirmationDialog } from '@/components/ui/confirmation-dialog'
+import { Button } from '@menuxp/ui'
+import { ConfirmationDialog } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

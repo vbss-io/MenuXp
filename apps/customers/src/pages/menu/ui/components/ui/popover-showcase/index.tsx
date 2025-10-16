@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Button } from '@/components/ui/button'
-import { Popover } from '@/components/ui/popover'
+import { Button } from '@menuxp/ui'
+import { Popover } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

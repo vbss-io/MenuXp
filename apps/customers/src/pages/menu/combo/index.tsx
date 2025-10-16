@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { ComboItemsList } from '@/components/combo/combo-items-list'
-import { Loading } from '@/components/ui/loading'
+import { Loading } from '@menuxp/ui'
 import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'

@@ -4,11 +4,11 @@ import { ThemeProvider } from 'styled-components'
 
 import { registerDependencies } from '@/infra/dependency-injection/register'
 import { AuthProvider } from '@/presentation/providers/auth-provider'
+import { LayoutProvider } from '@/presentation/providers/layout-provider'
 import { RestaurantProvider } from '@/presentation/providers/restaurant-provider'
 import { SidebarProvider } from '@/presentation/providers/sidebar-provider'
 import { Router } from '@/presentation/router'
-import { GlobalStyle } from '@/presentation/styles/global'
-import { theme } from '@/presentation/styles/theme'
+import { GlobalStyle, admTheme as theme } from '@menuxp/styles'
 
 function App() {
   registerDependencies()
@@ -51,13 +51,15 @@ function App() {
           }
         }}
       />
-      <AuthProvider>
-        <RestaurantProvider>
-          <SidebarProvider>
-            <Router />
-          </SidebarProvider>
-        </RestaurantProvider>
-      </AuthProvider>
+      <LayoutProvider>
+        <AuthProvider>
+          <RestaurantProvider>
+            <SidebarProvider>
+              <Router />
+            </SidebarProvider>
+          </RestaurantProvider>
+        </AuthProvider>
+      </LayoutProvider>
     </ThemeProvider>
   )
 }

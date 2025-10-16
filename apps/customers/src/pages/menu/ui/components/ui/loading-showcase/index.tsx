@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Loading } from '@/components/ui/loading'
+import { Loading } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

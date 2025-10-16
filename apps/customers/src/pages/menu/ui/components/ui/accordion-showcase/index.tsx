@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Accordion } from '@/components/ui/accordion'
+import { Accordion } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

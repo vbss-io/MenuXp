@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Chip } from '@/components/ui/chip'
+import { Chip } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

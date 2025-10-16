@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { MenuItemCard } from '@/components/menu-item/menu-item-card'
 import { MenuItemDialog } from '@/components/menu-item/menu-item-dialog'
-import { Loading } from '@/components/ui/loading'
+import { Loading } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { getRestaurantMenuItems } from '@/services/menu/get-menu-items'
 import type { MenuItem } from '@/types/menu-item'

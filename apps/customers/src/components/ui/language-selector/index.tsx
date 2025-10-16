@@ -1,9 +1,8 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 
-import { Popover } from '@/components/ui/popover'
 import { useLanguage } from '@/hooks/use-language'
-import { useRestaurant } from '@/hooks/use-restaurant'
+import { Popover, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -13,7 +12,7 @@ interface LanguageSelectorProps {
 
 export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
   const { language, changeLanguage, availableLanguages } = useLanguage()
-  const { layout } = useRestaurant()
+  const { layout } = useLayout()
 
   const currentLanguage = availableLanguages.find((lang) => lang.code === language)
 

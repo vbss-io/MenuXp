@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import { FormCheckbox } from '@/components/ui/forms/form-checkbox'
-import { FormInput } from '@/components/ui/forms/form-input'
+import { FormCheckbox } from '@menuxp/ui'
+import { FormInput } from '@menuxp/ui'
 import type { Address } from '@/types/address'
 
 import * as S from './styles'

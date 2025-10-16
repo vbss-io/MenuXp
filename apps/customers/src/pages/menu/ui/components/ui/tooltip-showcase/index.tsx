@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Button } from '@/components/ui/button'
-import { Tooltip } from '@/components/ui/tooltip'
+import { Button } from '@menuxp/ui'
+import { Tooltip } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

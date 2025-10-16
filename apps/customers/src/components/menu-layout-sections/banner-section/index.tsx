@@ -2,8 +2,8 @@ import { ImageBrokenIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
-import { Chip } from '@/components/ui/chip'
-import { Loading } from '@/components/ui/loading'
+import { Chip } from '@menuxp/ui'
+import { Loading } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { MenuSectionType, type BannerConfig, type MenuSection } from '@/types/menu-layout'
 

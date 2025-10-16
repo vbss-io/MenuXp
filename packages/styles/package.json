@@ -1,0 +1,28 @@
+{
+  "name": "@menuxp/styles",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./theme": "./src/theme.ts",
+    "./global": "./src/global.ts",
+    "./src/styled": "./src/styled.d.ts"
+  },
+  "scripts": {
+    "lint": "echo 'No lint configured'"
+  },
+  "dependencies": {
+    "@menuxp/ui": "*"
+  },
+  "peerDependencies": {
+    "styled-components": "^6.1.18"
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.34",
+    "typescript": "~5.8.3"
+  }
+}
+

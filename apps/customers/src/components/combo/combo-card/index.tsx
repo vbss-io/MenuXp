@@ -1,7 +1,7 @@
 import { PlusIcon } from '@phosphor-icons/react'
 import { useNavigate } from 'react-router-dom'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { Combo } from '@/types/combo'
 

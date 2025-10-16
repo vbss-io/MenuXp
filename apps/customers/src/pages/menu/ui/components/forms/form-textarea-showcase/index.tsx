@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { FormTextarea } from '@/components/ui/forms/form-textarea'
+import { FormTextarea } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

@@ -1,10 +1,9 @@
 import { ArrowRightIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
-import Button from '@/components/ui/button'
-import { FormInput } from '@/components/ui/forms/form-input'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
+import { Button, FormInput } from '@menuxp/ui'
 
 import * as S from './styles'
 

@@ -4,12 +4,11 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
-import { Loading } from '@/components/ui/loading'
 import { useRestaurant } from '@/hooks/use-restaurant'
-import { ICONS, ICONS_KEYS } from '@/lib/utils/icons.const'
 import { getRestaurantMenuCategories } from '@/services/menu/get-categories'
 import type { Category } from '@/types/category'
 import { MenuSectionType, type CategoriesConfig, type MenuSection } from '@/types/menu-layout'
+import { ICONS, ICONS_KEYS, Loading } from '@menuxp/ui'
 import { useQuery } from '@tanstack/react-query'
 
 import * as S from './styles'

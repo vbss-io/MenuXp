@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { ComboCard } from '@/components/combo/combo-card'
 import { ComboDialog } from '@/components/combo/combo-dialog'
-import { Loading } from '@/components/ui/loading'
+import { Loading } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { Combo } from '@/types/combo'
 import { MenuSectionType, type CombosConfig, type MenuSection } from '@/types/menu-layout'

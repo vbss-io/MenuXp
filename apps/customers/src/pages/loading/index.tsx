@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { Loading } from '@/components/ui/loading'
+import { Loading } from '@menuxp/ui'
 
 import * as S from './styles'
 

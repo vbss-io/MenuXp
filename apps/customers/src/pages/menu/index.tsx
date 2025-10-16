@@ -9,7 +9,7 @@ import { MenuItemsSection } from '@/components/menu-layout-sections/menu-items-s
 import { RestaurantClientWarningBanner } from '@/components/restaurant/restaurant-client-warning-banner'
 import { RestaurantHeader } from '@/components/restaurant/restaurant-header'
 import { RestaurantOperationWarningBanner } from '@/components/restaurant/restaurant-operation-warning-banner'
-import { MenuNavbar } from '@/components/ui/menu-navbar'
+import { MenuNavbar } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { MenuSectionType, type MenuSection } from '@/types/menu-layout'
 

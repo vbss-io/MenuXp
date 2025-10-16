@@ -5,12 +5,12 @@ import { styled, ThemeProvider } from 'styled-components'
 
 import { ClientProvider } from '@/hooks/providers/client-provider'
 import { LanguageProvider } from '@/hooks/providers/language-provider'
+import { LayoutProvider } from '@/hooks/providers/layout-provider'
 import { NotificationProvider } from '@/hooks/providers/notification-provider'
 import { RestaurantProvider } from '@/hooks/providers/restaurant-provider'
 import { queryClient } from '@/lib/query-client'
 import { Router } from '@/router'
-import { GlobalStyle } from '@/styles/global'
-import { theme } from '@/styles/theme'
+import { GlobalStyle, customersTheme as theme } from '@menuxp/styles'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -61,15 +61,17 @@ function App() {
           }}
         />
         <RestaurantProvider>
-          <LanguageProvider>
-            <ClientProvider>
-              <NotificationProvider>
-                <AppContainer>
-                  <Router />
-                </AppContainer>
-              </NotificationProvider>
-            </ClientProvider>
-          </LanguageProvider>
+          <LayoutProvider>
+            <LanguageProvider>
+              <ClientProvider>
+                <NotificationProvider>
+                  <AppContainer>
+                    <Router />
+                  </AppContainer>
+                </NotificationProvider>
+              </ClientProvider>
+            </LanguageProvider>
+          </LayoutProvider>
         </RestaurantProvider>
       </ThemeProvider>
     </QueryClientProvider>

@@ -2,9 +2,7 @@ import { GearIcon } from '@phosphor-icons/react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import Button from '@/components/ui/button'
-import { FormInput } from '@/components/ui/forms/form-input'
-import Slider from '@/components/ui/slider'
+import { Button, FormInput, Slider } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

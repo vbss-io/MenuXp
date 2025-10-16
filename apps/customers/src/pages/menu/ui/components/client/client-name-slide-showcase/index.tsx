@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { ClientNameSlide } from '@/components/client/client-name-slide'
-import Button from '@/components/ui/button'
+import { Button } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

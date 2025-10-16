@@ -250,7 +250,7 @@ export const CancelButton = styled.button`
 export const AddToCartButton = styled.button`
   padding: 12px 24px;
   border: none;
-  background: ${({ theme }) => theme.colors.accent};
+  background: ${({ theme }) => theme.colors.highlight};
   color: white;
   border-radius: 8px;
   font-size: 14px;

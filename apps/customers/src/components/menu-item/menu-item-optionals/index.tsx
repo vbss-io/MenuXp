@@ -1,7 +1,7 @@
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
 import React from 'react'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { MenuItemOptional } from '@/types/menu-item'
 

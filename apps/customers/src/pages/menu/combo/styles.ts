@@ -110,7 +110,7 @@ export const NotesInput = styled.textarea`
 
   &:focus {
     outline: none;
-    border-color: ${({ theme }) => theme.colors.accent};
+    border-color: ${({ theme }) => theme.colors.highlight};
   }
 
   &::placeholder {

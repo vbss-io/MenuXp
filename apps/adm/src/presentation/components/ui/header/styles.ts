@@ -9,7 +9,7 @@ export const HeaderContainer = styled.header`
   background-color: ${({ theme }) => theme.colors.mx.red};
   border-bottom: 2px solid ${({ theme }) => theme.colors.mx.black};
   z-index: ${({ theme }) => theme.zIndex.sticky};
-  
+
   @media ${({ theme }) => theme.breakpoints.md} {
     background-color: ${({ theme }) => theme.colors.mx.white};
   }
@@ -355,12 +355,12 @@ export const UserActions = styled.div`
 export const UserInfo = styled.div`
   padding: ${({ theme }) => theme.spacing.sm};
   border-bottom: 2px solid ${({ theme }) => theme.colors.mx.red};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  font-size: ${({ theme }) => theme.typography.fontSizes.md};
 `
 
 export const UserEmail = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   opacity: 0.8;
   margin-top: ${({ theme }) => theme.spacing.xs};
 `
@@ -491,7 +491,7 @@ export const MobileNavLink = styled(motion.button)`
   gap: ${({ theme }) => theme.spacing.sm};
   padding: ${({ theme }) => theme.spacing.sm};
   color: ${({ theme }) => theme.colors.text.primary};
-  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-size: ${({ theme }) => theme.typography.fontSizes.md};
   text-decoration: none;
   transition: color 0.2s;
   width: 100%;
@@ -549,7 +549,7 @@ export const LogoutButton = styled(MenuItem)`
   color: ${({ theme }) => theme.colors.mx.red};
   background-color: ${({ theme }) => theme.colors.mx.white};
   border: 1px solid ${({ theme }) => theme.colors.mx.red};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &:hover {

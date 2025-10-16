@@ -2,7 +2,7 @@ import { Bell, BellSlash, CircleNotch, Info, ShoppingBag, Tag, ChatCircle } from
 import { motion } from 'framer-motion'
 import React from 'react'
 
-import { Popover } from '@/components/ui/popover'
+import { Popover } from '@menuxp/ui'
 import { useNotifications } from '@/hooks/use-notifications'
 import { NotificationType } from '@/types/notification'
 

@@ -2,8 +2,8 @@ import { ArrowRightIcon, EyeIcon, GlobeIcon, PhoneIcon, QrCodeIcon, ShieldCheckI
 import { motion, useReducedMotion } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 
-import { Button } from '@/components/ui/button'
-import { Chip } from '@/components/ui/chip'
+import { Button } from '@menuxp/ui'
+import { Chip } from '@menuxp/ui'
 import {
   PhoneBadge,
   PhoneContent,

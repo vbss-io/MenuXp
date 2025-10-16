@@ -4,8 +4,8 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 
-import { FormInput } from '@/components/ui/forms/form-input'
-import { FormTextarea } from '@/components/ui/forms/form-textarea'
+import { FormInput } from '@menuxp/ui'
+import { FormTextarea } from '@menuxp/ui'
 import { createLead, createLeadSchema, type CreateLeadInput } from '@/services/lead/create-lead'
 import { useMutation } from '@tanstack/react-query'
 

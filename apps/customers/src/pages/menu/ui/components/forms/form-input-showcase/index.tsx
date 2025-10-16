@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { FormInput } from '@/components/ui/forms/form-input'
+import { FormInput } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

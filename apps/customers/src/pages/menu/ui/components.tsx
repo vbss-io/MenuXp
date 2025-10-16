@@ -27,7 +27,7 @@ import { LoadingShowcase } from '@/pages/menu/ui/components/ui/loading-showcase'
 import { PopoverShowcase } from '@/pages/menu/ui/components/ui/popover-showcase'
 import { SliderShowcase } from '@/pages/menu/ui/components/ui/slider-showcase'
 import { TooltipShowcase } from '@/pages/menu/ui/components/ui/tooltip-showcase'
-import type { LayoutType } from '@/styles/layout'
+import type { LayoutType } from '@menuxp/styles'
 
 import * as S from './components.styles'
 
