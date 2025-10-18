@@ -57,8 +57,28 @@ const coreGlobalStyles = css`
 
   h1, h2, h3, h4, h5, h6 {
     font-family: ${({ theme }) => theme.typography.fonts.title};
-    font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
     letter-spacing: 0.5px;
+  }
+
+  /* Evita engrossar a Tanker dentro de headings */
+  h1 strong, h1 b,
+  h2 strong, h2 b,
+  h3 strong, h3 b,
+  h4 strong, h4 b,
+  h5 strong, h5 b,
+  h6 strong, h6 b {
+    font-weight: inherit !important;
+  }
+
+  /* Força Tanker sempre regular em qualquer contexto */
+  * {
+    &[style*="Tanker"],
+    &[class*="tanker"],
+    &[class*="title"] {
+      font-family: ${({ theme }) => theme.typography.fonts.title};
+      font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
+    }
   }
 
   input, textarea, select {

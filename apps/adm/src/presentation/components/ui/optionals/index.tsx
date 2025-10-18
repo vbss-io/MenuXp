@@ -1,4 +1,5 @@
-import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { PlusIcon, TrashIcon } from '@phosphor-icons/react'
 
 import { Button } from '@/presentation/components/ui/button'
 import { FormInput } from '@/presentation/components/ui/form-input'
@@ -18,6 +19,17 @@ interface OptionalsSectionProps {
 }
 
 export function OptionalsSection({ optionals, setOptionals, disabled = false }: OptionalsSectionProps) {
+  // Currency formatter usando Intl.NumberFormat
+  const currency = useMemo(() => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }), [])
+  
+  // State para display formatado de cada preço
+  const [priceDisplays, setPriceDisplays] = useState<string[]>([])
+  
+  // Sincronizar displays quando optionals mudar
+  useEffect(() => {
+    setPriceDisplays(optionals.map(opt => currency.format(opt.price)))
+  }, [optionals, currency])
+
   const addOptional = () => {
     setOptionals([...optionals, { name: '', price: 0 }])
   }
@@ -43,20 +55,63 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
     setOptionals(newOptionals)
   }
 
+  // Handler de mudança de preço (padrão do campo Preço principal)
+  const handlePriceChange = useCallback(
+    (index: number, e: React.ChangeEvent<HTMLInputElement>) => {
+      const raw = e.target.value || ''
+      const digitsOnly = raw.replace(/\D/g, '')
+      let cents = digitsOnly === '' ? 0 : parseInt(digitsOnly, 10)
+      // Limite 999999.99 -> 99_999_999 centavos
+      const MAX_CENTS = 99999999
+      if (cents > MAX_CENTS) cents = MAX_CENTS
+      const value = cents / 100
+      
+      updateOptional(index, 'price', value)
+      
+      // Atualizar display imediatamente
+      const newDisplays = [...priceDisplays]
+      newDisplays[index] = currency.format(value)
+      setPriceDisplays(newDisplays)
+    },
+    [updateOptional, priceDisplays, currency]
+  )
+
   return (
     <S.Container>
-      <S.SectionTitle>Opcionais/Incrementos</S.SectionTitle>
-      <S.Description>
-        Adicione opcionais que podem ser selecionados pelos clientes (ex: queijo extra, bacon, etc.)
-      </S.Description>
+      {/* Header com título, subtítulo e chips */}
+      <S.Header>
+        <S.Label>Opcionais/Incrementos</S.Label>
+        <S.Subtitle>Crie opções como bacon, queijo, molhos. O preço é adicional ao item.</S.Subtitle>
+        
+        {/* Chips informativos - sempre dentro do Header */}
+        {optionals.length === 0 && (
+          <S.ChipsContainer>
+            <S.Chip>Ex.: Queijo Extra</S.Chip>
+            <S.Chip>Ex.: Molho Barbecue</S.Chip>
+          </S.ChipsContainer>
+        )}
+      </S.Header>
+
+      {/* Lista de opcionais */}
       {optionals.map((optional, index) => (
-        <S.OptionalContainer key={index}>
+        <S.OptionalCard key={index}>
+          {/* Botão remover no canto superior direito */}
+          <S.RemoveButton
+            type="button"
+            onClick={() => removeOptional(index)}
+            disabled={disabled}
+            title="Remover opcional"
+          >
+            <TrashIcon size={16} />
+          </S.RemoveButton>
+
+          {/* Grid de campos */}
           <S.OptionalGrid>
             <S.InputGroup>
               <FormInput
                 id={`optional-name-${index}`}
-                label="Nome do Opcional *"
-                placeholder="Ex: Queijo Extra"
+                label="Nome do opcional *"
+                placeholder="Ex.: Queijo Extra"
                 value={optional.name}
                 onChange={(e) => updateOptional(index, 'name', e.target.value)}
                 disabled={disabled}
@@ -65,8 +120,20 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
             </S.InputGroup>
             <S.InputGroup>
               <FormInput
+                id={`optional-price-${index}`}
+                label="Preço adicional (R$) *"
+                type="text"
+                placeholder="R$ 0,00"
+                value={priceDisplays[index] || 'R$ 0,00'}
+                onChange={(e) => handlePriceChange(index, e)}
+                disabled={disabled}
+                fontSize="sm"
+              />
+            </S.InputGroup>
+            <S.InputGroup>
+              <FormInput
                 id={`optional-max-${index}`}
-                label="Quantidade Máxima"
+                label="Qtd. máx. por item"
                 type="number"
                 placeholder="Deixe vazio para ilimitado"
                 value={optional.maxQuantity?.toString() || ''}
@@ -76,43 +143,19 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
                 min="0"
               />
             </S.InputGroup>
-            <S.InputGroup>
-              <FormInput
-                id={`optional-price-${index}`}
-                label="Preço *"
-                type="number"
-                step="0.01"
-                placeholder="0.00"
-                value={optional.price.toString()}
-                onChange={(e) => updateOptional(index, 'price', e.target.value)}
-                disabled={disabled}
-                fontSize="sm"
-                min="0"
-              />
-            </S.InputGroup>
-            <S.RemoveButtonContainer>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={() => removeOptional(index)}
-                disabled={disabled}
-                leftIcon={<MinusIcon size={16} />}
-              >
-                Remover
-              </Button>
-            </S.RemoveButtonContainer>
           </S.OptionalGrid>
-        </S.OptionalContainer>
+        </S.OptionalCard>
       ))}
+
+      {/* Botão Adicionar - usando componente padrão da plataforma */}
       <S.AddButtonContainer>
         <Button
           type="button"
-          variant="outline"
-          size="md"
+          variant="white"
+          size="sm"
           onClick={addOptional}
           disabled={disabled}
-          leftIcon={<PlusIcon size={16} />}
+          leftIcon={<PlusIcon size={16} weight="bold" />}
         >
           Adicionar Opcional
         </Button>

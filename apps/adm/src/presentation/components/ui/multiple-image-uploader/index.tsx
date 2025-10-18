@@ -1,9 +1,9 @@
-import { CameraIcon, XIcon } from '@phosphor-icons/react'
-import { useState } from 'react'
+import { CameraIcon, TrashIcon, StarIcon } from '@phosphor-icons/react'
+import { useState, useRef } from 'react'
 
 import * as S from './styles'
 
-interface MultipleImageUploaderUploaderProps {
+interface MultipleImageUploaderProps {
   label: string
   maxImages?: number
   existingImages?: string[]
@@ -13,115 +13,119 @@ interface MultipleImageUploaderUploaderProps {
 
 export const MultipleImageUploader = ({
   label,
-  maxImages = 3,
+  maxImages = 5,
   existingImages = [],
   onChange,
   error
-}: MultipleImageUploaderUploaderProps) => {
-  const [previews, setPreviews] = useState<string[]>([])
+}: MultipleImageUploaderProps) => {
+  const [images, setImages] = useState<File[]>([])
   const [removeMedias, setRemoveMedias] = useState<string[]>([])
-  const [newFiles, setNewFiles] = useState<File[]>([])
+  const [coverIndex, setCoverIndex] = useState<number | null>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
-    if (!files) return
-    const fileArray = Array.from(files)
-    const totalImages = existingImages.length + previews.length - removeMedias.length + fileArray.length
-    if (totalImages > maxImages) {
-      alert(`Máximo de ${maxImages} imagens permitido`)
-      return
+    if (files) {
+      const newImages = Array.from(files).slice(0, maxImages - images.length)
+      setImages(prev => [...prev, ...newImages])
+      onChange([...images, ...newImages], removeMedias)
     }
-    const newPreviews: string[] = []
-    const filesToAdd: File[] = []
-    fileArray.forEach((file, index) => {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        newPreviews.push(reader.result as string)
-        setPreviews([...previews, ...newPreviews])
-      }
-      reader.readAsDataURL(file)
-      const newFile = new File([file], `media-${index}`, { type: file.type })
-      filesToAdd.push(newFile)
-    })
-
-    const updatedFiles = [...newFiles, ...filesToAdd]
-    setNewFiles(updatedFiles)
-    onChange(updatedFiles, removeMedias)
+    if (event.target) {
+      event.target.value = ''
+    }
   }
 
-  const handleRemoveImage = (index: number, isExisting: boolean) => {
-    if (isExisting) {
-      const imageToRemove = existingImages[index]
-      const updatedRemoveMedias = [...removeMedias, imageToRemove]
-      setRemoveMedias(updatedRemoveMedias)
-      onChange(newFiles, updatedRemoveMedias)
-    } else {
-      const newPreviews = [...previews]
-      const newFilesToKeep = [...newFiles]
-      newPreviews.splice(index, 1)
-      newFilesToKeep.splice(index, 1)
-      setPreviews(newPreviews)
-      setNewFiles(newFilesToKeep)
-      onChange(newFilesToKeep, removeMedias)
-    }
+  const handleRemoveImage = (index: number) => {
+    const newImages = images.filter((_, i) => i !== index)
+    setImages(newImages)
+    onChange(newImages, removeMedias)
+  }
+
+  const handleRemoveExisting = (url: string) => {
+    const updatedRemoveMedias = [...removeMedias, url]
+    setRemoveMedias(updatedRemoveMedias)
+    onChange(images, updatedRemoveMedias)
+  }
+
+  const handleSetCover = (index: number) => {
+    setCoverIndex(index)
   }
 
   const renderImages = () => {
-    const elements = []
-    existingImages.forEach((image, index) => {
-      if (!removeMedias.includes(image)) {
-        elements.push(
-          <S.ImageWrapper key={`existing-${index}`}>
-            <S.ImagePreview src={image} alt={`Imagem ${index + 1}`} />
-            <S.RemoveButton
-              className="remove-button"
-              onClick={() => handleRemoveImage(index, true)}
-              title="Remover imagem existente"
+    const allImages = [...images, ...existingImages.filter(url => !removeMedias.includes(url))]
+    
+    return allImages.map((image, index) => {
+      const isFile = image instanceof File
+      const src = isFile ? URL.createObjectURL(image) : image
+      const isCover = coverIndex === index
+      
+      return (
+        <S.ImageContainer key={index}>
+          <S.ImagePreview src={src} alt={`Preview ${index + 1}`} />
+          <S.ButtonsContainer>
+            <S.CoverBadge 
+              active={isCover} 
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                handleSetCover(index)
+              }}
+              title="Definir como capa"
             >
-              <XIcon size={12} weight="bold" />
+              <StarIcon size={12} weight={isCover ? "fill" : "regular"} />
+            </S.CoverBadge>
+            <S.RemoveButton 
+              type="button"
+              onClick={(e) => {
+                e.preventDefault()
+                e.stopPropagation()
+                isFile ? handleRemoveImage(index) : handleRemoveExisting(image as string)
+              }} 
+              title="Remover imagem"
+            >
+              <TrashIcon size={14} />
             </S.RemoveButton>
-          </S.ImageWrapper>
-        )
-      }
-    })
-    previews.forEach((preview, index) => {
-      elements.push(
-        <S.ImageWrapper key={`preview-${index}`}>
-          <S.ImagePreview src={preview} alt={`Nova imagem ${index + 1}`} />
-          <S.RemoveButton
-            className="remove-button"
-            onClick={() => handleRemoveImage(index, false)}
-            title="Remover nova imagem"
-          >
-            <XIcon size={20} weight="bold" />
-          </S.RemoveButton>
-        </S.ImageWrapper>
+          </S.ButtonsContainer>
+        </S.ImageContainer>
       )
     })
-    const totalImages = existingImages.length + previews.length - removeMedias.length
-    if (totalImages < maxImages) {
-      elements.push(
-        <S.UploadWrapper key="upload">
-          <S.UploadInput
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleImageChange}
-            id={`upload-${label.toLowerCase()}`}
-          />
-          <S.UploadLabel htmlFor={`upload-${label.toLowerCase()}`}>
-            <CameraIcon size={24} />
-          </S.UploadLabel>
-        </S.UploadWrapper>
-      )
-    }
-    return elements
   }
+
+  const totalImages = images.length + existingImages.length - removeMedias.length
 
   return (
     <S.Container>
-      <S.Label>{label}</S.Label>
-      <S.ImageGrid>{renderImages()}</S.ImageGrid>
+      <S.HeaderRow>
+        <S.Label>{label}</S.Label>
+        <S.Counter>{totalImages}/{maxImages}</S.Counter>
+      </S.HeaderRow>
+      
+      <S.RulesContainer>
+        <S.RuleItem>Formatos: JPG, PNG, WEBP, MP4</S.RuleItem>
+        <S.RuleItem>Máximo: {maxImages} arquivos</S.RuleItem>
+        <S.RuleItem>Tamanho: até 10 MB cada</S.RuleItem>
+        <S.RuleItem>Clique na estrela para definir capa</S.RuleItem>
+      </S.RulesContainer>
+
+      <S.MainGrid>
+        <S.UploadWrapper>
+          <S.UploadLabel htmlFor="image-upload">
+            <CameraIcon size={24} />
+            <S.UploadText>Adicionar Imagens/Vídeos</S.UploadText>
+          </S.UploadLabel>
+          <S.UploadInput
+            id="image-upload"
+            ref={fileInputRef}
+            type="file"
+            accept="image/*,video/*"
+            multiple
+            onChange={handleImageChange}
+          />
+        </S.UploadWrapper>
+        
+        {renderImages()}
+      </S.MainGrid>
+
       {error && <S.Error>{error}</S.Error>}
     </S.Container>
   )

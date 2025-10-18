@@ -12,12 +12,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@menuxp/styles": "*",
-    "@menuxp/ui": "*",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
+    "@hello-pangea/dnd": "^18.0.1",
     "@hookform/resolvers": "^5.0.1",
+    "@menuxp/styles": "*",
+    "@menuxp/ui": "*",
     "@phosphor-icons/react": "^2.1.10",
     "@vbss-ui/button": "^1.0.0",
     "@vbss-ui/checkbox": "^1.0.0",

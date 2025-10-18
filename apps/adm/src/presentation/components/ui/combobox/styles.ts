@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const ComboboxContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xs};
+  gap: 0px;
   width: 100%;
   position: relative;
 `
@@ -14,12 +14,11 @@ export const ComboboxWrapper = styled.div`
 `
 
 export const Label = styled.label`
-  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
-  font-family: ${({ theme }) => theme.typography.fonts.title};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
   color: ${({ theme }) => theme.colors.mx.black};
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.2px;
 `
 
 export const InputWrapper = styled.div`
@@ -46,7 +45,7 @@ export const Input = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${({ theme }) => theme.colors.mx.red};
+    border-color: ${({ theme }) => theme.colors.mx.black};
   }
 
   &:disabled {

@@ -14,6 +14,7 @@ interface FormTextareaProps {
   fontSize?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   rows?: number
   disabled?: boolean
+  maxLength?: number
 }
 
 export const FormTextarea: React.FC<FormTextareaProps> = ({
@@ -27,7 +28,8 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
   onChange,
   fontSize = 'sm',
   rows = 3,
-  disabled = false
+  disabled = false,
+  maxLength
 }) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -36,10 +38,9 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
         style={{
           fontSize: '14px',
           fontWeight: 700,
-          fontFamily: 'Inter, system-ui, sans-serif',
+          fontFamily: 'Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
           color: '#000000',
-          textTransform: 'uppercase',
-          letterSpacing: '0.5px'
+          letterSpacing: '0.2px'
         }}
       >
         {label} {required && '*'}
@@ -50,6 +51,7 @@ export const FormTextarea: React.FC<FormTextareaProps> = ({
         fontSize={fontSize}
         rows={rows}
         disabled={disabled}
+        maxLength={maxLength}
         {...(register || { id, value, onChange })}
       />
     </div>

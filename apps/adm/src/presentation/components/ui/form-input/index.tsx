@@ -63,10 +63,9 @@ export const FormInput: React.FC<FormInputProps> = ({
         style={{
           fontSize: '14px',
           fontWeight: 700,
-          fontFamily: 'Inter, system-ui, sans-serif',
+          fontFamily: 'Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
           color: '#000000',
-          textTransform: 'uppercase',
-          letterSpacing: '0.5px'
+          letterSpacing: '0.2px'
         }}
       >
         {label} {required && '*'}
@@ -78,6 +77,7 @@ export const FormInput: React.FC<FormInputProps> = ({
           placeholder={placeholder}
           fontSize={fontSize}
           {...inputRegister}
+          {...rest}
           onFocus={handleFocus}
           onBlur={handleBlur}
           style={{
@@ -125,13 +125,13 @@ export const FormInput: React.FC<FormInputProps> = ({
           )
         )}
       </div>
-      <div style={{ minHeight: '18px', lineHeight: '18px', paddingTop: '4px' }}>
-        {error && (
-          <span style={{ fontSize: '12px', color: '#DC2626', fontFamily: 'Inter, system-ui, sans-serif' }}>
+      {error && (
+        <div style={{ minHeight: '18px', lineHeight: '18px', paddingTop: '2px' }}>
+          <span style={{ fontSize: '12px', color: '#DC2626', fontFamily: 'Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif' }}>
             {error}
           </span>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }
