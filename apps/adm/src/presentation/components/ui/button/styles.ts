@@ -28,6 +28,11 @@ const brutalistButtonStyles = css`
   font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
   letter-spacing: 0.5px;
 
+  /* Garantir altura mínima para mobile (44px) */
+  @media (max-width: 768px) {
+    min-height: 44px;
+  }
+
   > *:first-child {
     flex-shrink: 0;
     align-self: center;
@@ -93,7 +98,8 @@ export const ButtonContainer = styled.div`
       font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
-        background: #0097E0;
+        background: ${({ theme }) => theme.colors.mx.blue};
+        color: ${({ theme }) => theme.colors.mx.white};
         border-color: ${({ theme }) => theme.colors.mx.black};
         transform: translateY(-2px);
         box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.black};
@@ -102,33 +108,35 @@ export const ButtonContainer = styled.div`
 
     &.secondary {
       ${brutalistButtonStyles}
-      background: ${({ theme }) => theme.colors.mx.red};
+      background: ${({ theme }) => theme.colors.mx.blue};
       color: ${({ theme }) => theme.colors.mx.white};
-      border: 1px solid ${({ theme }) => theme.colors.mx.black};
-      box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
+      border: 1px solid ${({ theme }) => theme.colors.mx.blue};
+      box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.blue};
       font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
-        background: ${({ theme }) => theme.colors.mx.red};
-        border-color: ${({ theme }) => theme.colors.mx.black};
+        background: ${({ theme }) => theme.colors.mx.white};
+        color: ${({ theme }) => theme.colors.mx.blue};
+        border-color: ${({ theme }) => theme.colors.mx.blue};
         transform: translateY(-2px);
-        box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.black};
+        box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.blue};
       }
     }
 
     &.outline {
       ${brutalistButtonStyles}
       background: transparent;
-      color: ${({ theme }) => theme.colors.mx.black};
-      border: 1px solid ${({ theme }) => theme.colors.mx.black};
-      box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
+      color: ${({ theme }) => theme.colors.mx.blue};
+      border: 1px solid ${({ theme }) => theme.colors.mx.blue};
+      box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.blue};
       font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
-        background: ${({ theme }) => theme.colors.mx.black};
+        background: ${({ theme }) => theme.colors.mx.blue};
         color: ${({ theme }) => theme.colors.mx.white};
+        border-color: ${({ theme }) => theme.colors.mx.blue};
         transform: translateY(-2px);
-        box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.black};
+        box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.blue};
       }
     }
 
@@ -191,10 +199,10 @@ export const ButtonContainer = styled.div`
       font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover {
-        background: ${({ theme }) => theme.colors.mx.gray[100]};
-        border-color: ${({ theme }) => theme.colors.mx.black};
+        background: ${({ theme }) => theme.colors.mx.white};
+        border-color: ${({ theme }) => theme.colors.mx.red};
         transform: translateY(-2px);
-        box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
+        box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.red};
       }
     }
   }

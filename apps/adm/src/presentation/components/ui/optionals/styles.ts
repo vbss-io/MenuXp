@@ -39,6 +39,10 @@ export const ChipsContainer = styled.div`
   gap: ${({ theme }) => theme.spacing.sm};
   flex-wrap: wrap;
   margin-top: 0;
+  
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `
 
 export const Chip = styled.span`

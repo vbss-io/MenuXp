@@ -120,7 +120,8 @@ export const ButtonContainer = styled.div`
       }
 
       &:hover:not(:disabled) {
-        background-color: ${({ theme }) => theme.colors.secondary};
+        background-color: ${({ theme }) => theme.colors.highlight};
+        color: ${({ theme }) => theme.colors.mx.white};
       }
 
       &:hover:not(:disabled)::before {

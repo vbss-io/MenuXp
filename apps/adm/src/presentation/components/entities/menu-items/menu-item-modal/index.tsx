@@ -298,51 +298,8 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
       onOpenChange={onClose}
     >
       <S.GlobalTextareaStyles>
-        <S.Form ref={formRef}>
-          <S.FormGroup
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-            }}
-            initial="hidden"
-            animate="visible"
-          >
-            <FormInput
-              id="name"
-              label="Nome"
-              placeholder="Ex.: X-Burguer Clássico"
-              error={errors.name?.message}
-              required
-              register={register('name', { maxLength: nameMax })}
-              fontSize="sm"
-              maxLength={nameMax}
-            />
-            <S.FieldHint aria-live="polite">
-              {Math.min(nameCount, nameMax)}/{nameMax}
-            </S.FieldHint>
-          </S.FormGroup>
-          <S.FormGroup
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-            }}
-            initial="hidden"
-            animate="visible"
-          >
-            <FormTextarea
-              id="description"
-              label="Descrição"
-              placeholder="Ex.: Pão australiano, 160g de carne, queijo, maionese da casa."
-              error={errors.description?.message}
-              register={register('description', { maxLength: descriptionMax })}
-              rows={3}
-              maxLength={descriptionMax}
-            />
-            <S.FieldHint aria-live="polite">
-              {Math.min(descriptionCount, descriptionMax)}/{descriptionMax}
-            </S.FieldHint>
-          </S.FormGroup>
-          <S.FormRow>
+        <S.ModalContent>
+          <S.Form ref={formRef}>
             <S.FormGroup
               variants={{
                 hidden: { opacity: 0, y: 10 },
@@ -352,19 +309,18 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
               animate="visible"
             >
               <FormInput
-                id="price"
-                label="Preço (R$)"
-                type="text"
-                inputMode="decimal"
-                min="0"
-                placeholder="R$ 0,00"
-                error={errors.price?.message}
+                id="name"
+                label="Nome"
+                placeholder="Ex.: X-Burguer Clássico"
+                error={errors.name?.message}
                 required
+                register={register('name', { maxLength: nameMax })}
                 fontSize="sm"
-                value={priceDisplay}
-                onChange={handlePriceChange}
+                maxLength={nameMax}
               />
-              <S.FieldHint>Preço base antes de descontos e opcionais.</S.FieldHint>
+              <S.FieldHint aria-live="polite">
+                {Math.min(nameCount, nameMax)}/{nameMax}
+              </S.FieldHint>
             </S.FormGroup>
             <S.FormGroup
               variants={{
@@ -374,104 +330,86 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
               initial="hidden"
               animate="visible"
             >
-              <S.Label>Desconto (%)</S.Label>
-              <S.SliderContainer>
-                <S.Slider
-                  type="range"
+              <FormTextarea
+                id="description"
+                label="Descrição"
+                placeholder="Ex.: Pão australiano, 160g de carne, queijo, maionese da casa."
+                error={errors.description?.message}
+                register={register('description', { maxLength: descriptionMax })}
+                rows={3}
+                maxLength={descriptionMax}
+              />
+              <S.FieldHint aria-live="polite">
+                {Math.min(descriptionCount, descriptionMax)}/{descriptionMax}
+              </S.FieldHint>
+            </S.FormGroup>
+            <S.FormRow>
+              <S.FormGroup
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                <FormInput
+                  id="price"
+                  label="Preço (R$)"
+                  type="text"
+                  inputMode="decimal"
                   min="0"
-                  max="100"
-                  step="1"
-                  value={watchedDiscount}
-                  onChange={(e) =>
-                    setValue('discount', Number(e.target.value), {
-                      shouldValidate: true
-                    })
-                  }
-                  aria-label="Desconto em porcentagem"
+                  placeholder="R$ 0,00"
+                  error={errors.price?.message}
+                  required
+                  fontSize="sm"
+                  value={priceDisplay}
+                  onChange={handlePriceChange}
                 />
-                <S.SliderValue>{watchedDiscount}%</S.SliderValue>
-              </S.SliderContainer>
-              <S.FieldHint>Preço com desconto: {currency.format(discountedPrice)}</S.FieldHint>
-            </S.FormGroup>
-          </S.FormRow>
-          <S.FormGroup
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-            }}
-            initial="hidden"
-            animate="visible"
-          >
-            <MultipleImageUploader
-              label="Imagens/Vídeos"
-              maxImages={5}
-              existingImages={getExistingImages()}
-              onChange={handleImagesChange}
-              error={errors.medias?.message?.toString()}
-            />
-          </S.FormGroup>
-          <S.FormGroup
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-            }}
-            initial="hidden"
-            animate="visible"
-          >
-            <Combobox
-              label="Categoria *"
-              placeholder="Selecione ou pesquise uma categoria"
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              onSearch={handleCategorySearch}
-              error={errors.categoryId?.message}
-              disabled={isLoading}
-            />
-          </S.FormGroup>
-          <S.FormRow>
-            <S.FormGroup
-              variants={{
-                hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-              }}
-              initial="hidden"
-              animate="visible"
-            >
-              <S.Label>Estoque</S.Label>
-              <S.ToggleContainer>
-                <S.ToggleSwitch>
-                  <S.ToggleInput
-                    type="checkbox"
-                    id="controlStock"
-                    checked={controlStock}
-                    onChange={(e) => setControlStock(e.target.checked)}
-                    disabled={isLoading}
-                  />
-                  <S.ToggleSlider />
-                </S.ToggleSwitch>
-                <S.ToggleLabel htmlFor="controlStock">Controlar estoque</S.ToggleLabel>
-              </S.ToggleContainer>
-
-              {controlStock && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <FormInput
-                    id="stock"
-                    label="Quantidade"
-                    type="number"
+                <S.FieldHint>Preço base antes de descontos e opcionais.</S.FieldHint>
+              </S.FormGroup>
+              <S.FormGroup
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                <S.Label>Desconto (%)</S.Label>
+                <S.SliderContainer>
+                  <S.Slider
+                    type="range"
                     min="0"
-                    placeholder="0 = ilimitado"
-                    error={errors.stock?.message}
-                    register={register('stock')}
-                    fontSize="sm"
+                    max="100"
+                    step="1"
+                    value={watchedDiscount}
+                    onChange={(e) =>
+                      setValue('discount', Number(e.target.value), {
+                        shouldValidate: true
+                      })
+                    }
+                    aria-label="Desconto em porcentagem"
                   />
-                  <S.FieldHint>0 = ilimitado</S.FieldHint>
-                </motion.div>
-              )}
+                  <S.SliderValue>{watchedDiscount}%</S.SliderValue>
+                </S.SliderContainer>
+                <S.FieldHint>Preço com desconto: {currency.format(discountedPrice)}</S.FieldHint>
+              </S.FormGroup>
+            </S.FormRow>
+            <S.FormGroup
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+              }}
+              initial="hidden"
+              animate="visible"
+            >
+              <MultipleImageUploader
+                label="Imagens/Vídeos"
+                maxImages={5}
+                existingImages={getExistingImages()}
+                onChange={handleImagesChange}
+                error={errors.medias?.message?.toString()}
+              />
             </S.FormGroup>
             <S.FormGroup
               variants={{
@@ -481,46 +419,120 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
               initial="hidden"
               animate="visible"
             >
-              <S.Label>Usar Opcionais da Categoria</S.Label>
-              <S.ToggleContainer>
-                <S.ToggleSwitch>
-                  <S.ToggleInput
-                    type="checkbox"
-                    id="useCategoryOptionals"
-                    checked={useCategoryOptionals}
-                    onChange={(e) => setUseCategoryOptionals(e.target.checked)}
-                    disabled={isLoading}
-                  />
-                  <S.ToggleSlider />
-                </S.ToggleSwitch>
-                <S.ToggleLabel htmlFor="useCategoryOptionals">Herdar opcionais da categoria selecionada</S.ToggleLabel>
-              </S.ToggleContainer>
+              <Combobox
+                label="Categoria *"
+                placeholder="Selecione ou pesquise uma categoria"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                onSearch={handleCategorySearch}
+                error={errors.categoryId?.message}
+                disabled={isLoading}
+              />
             </S.FormGroup>
-          </S.FormRow>
-          <S.FormGroup
-            variants={{
-              hidden: { opacity: 0, y: 10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-            }}
-            initial="hidden"
-            animate="visible"
-          >
-            <OptionalsSection optionals={optionals} setOptionals={setOptionals} disabled={isLoading} />
-          </S.FormGroup>
-          <S.ModalFooter>
-            <Button type="button" variant="ghost" onClick={onClose} disabled={isLoading}>
-              Cancelar
-            </Button>
-            <Button type="button" variant="secondary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
-              Salvar rascunho
-            </Button>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button type="button" variant="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
-                {getButtonText()}
-              </Button>
-            </motion.div>
-          </S.ModalFooter>
-        </S.Form>
+            <S.FormRow>
+              <S.FormGroup
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                <S.Label>Estoque</S.Label>
+                <S.ToggleContainer>
+                  <S.ToggleSwitch>
+                    <S.ToggleInput
+                      type="checkbox"
+                      id="controlStock"
+                      checked={controlStock}
+                      onChange={(e) => setControlStock(e.target.checked)}
+                      disabled={isLoading}
+                    />
+                    <S.ToggleSlider />
+                  </S.ToggleSwitch>
+                  <S.ToggleLabel htmlFor="controlStock">Controlar estoque</S.ToggleLabel>
+                </S.ToggleContainer>
+
+                {controlStock && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <FormInput
+                      id="stock"
+                      label="Quantidade"
+                      type="number"
+                      min="0"
+                      placeholder="0 = ilimitado"
+                      error={errors.stock?.message}
+                      register={register('stock')}
+                      fontSize="sm"
+                    />
+                    <S.FieldHint>0 = ilimitado</S.FieldHint>
+                  </motion.div>
+                )}
+              </S.FormGroup>
+              <S.FormGroup
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                <S.Label>Usar Opcionais da Categoria</S.Label>
+                <S.ToggleContainer>
+                  <S.ToggleSwitch>
+                    <S.ToggleInput
+                      type="checkbox"
+                      id="useCategoryOptionals"
+                      checked={useCategoryOptionals}
+                      onChange={(e) => setUseCategoryOptionals(e.target.checked)}
+                      disabled={isLoading}
+                    />
+                    <S.ToggleSlider />
+                  </S.ToggleSwitch>
+                  <S.ToggleLabel htmlFor="useCategoryOptionals">
+                    Herdar opcionais da categoria selecionada
+                  </S.ToggleLabel>
+                </S.ToggleContainer>
+              </S.FormGroup>
+            </S.FormRow>
+            <S.FormGroup
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+              }}
+              initial="hidden"
+              animate="visible"
+            >
+              <OptionalsSection optionals={optionals} setOptionals={setOptionals} disabled={isLoading} />
+            </S.FormGroup>
+            <S.ModalFooter>
+              <S.TertiaryActionButton>
+                <Button type="button" variant="ghost" onClick={onClose} disabled={isLoading}>
+                  Cancelar
+                </Button>
+              </S.TertiaryActionButton>
+
+              <S.SecondaryActionButton>
+                <Button type="button" variant="secondary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                  Salvar rascunho
+                </Button>
+              </S.SecondaryActionButton>
+
+              <S.PrimaryActionButton>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button type="button" variant="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                    {getButtonText()}
+                  </Button>
+                </motion.div>
+              </S.PrimaryActionButton>
+            </S.ModalFooter>
+          </S.Form>
+        </S.ModalContent>
       </S.GlobalTextareaStyles>
     </Dialog>
   )

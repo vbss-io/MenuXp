@@ -1,10 +1,15 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
+export const ModalContent = styled.div`
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  scroll-behavior: smooth;
+`
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.lg};
+  gap: ${({ theme }) => theme.spacing.md};
 `
 
 export const StickyHeader = styled.div`
@@ -50,12 +55,13 @@ export const FormGroup = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.sm};
-  padding: ${({ theme }) => theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.sm};
   background: ${({ theme }) => theme.colors.mx.white};
   border: 1px solid ${({ theme }) => theme.colors.mx.black};
   border-radius: ${({ theme }) => theme.borderRadius.brutalist};
   box-shadow: none;
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+  scroll-margin-bottom: 100px;
 
   &:hover {
     transform: translateY(-2px);
@@ -89,14 +95,40 @@ export const Label = styled.label`
 export const ModalFooter = styled.div`
   position: sticky;
   bottom: 0;
-  z-index: ${({ theme }) => theme.zIndex.sticky};
+  left: 0;
+  right: 0;
+  z-index: ${({ theme }) => theme.zIndex.modal};
   display: flex;
   justify-content: flex-end;
   gap: ${({ theme }) => theme.spacing.md};
-  margin-top: ${({ theme }) => theme.spacing.lg};
+  margin-top: ${({ theme }) => theme.spacing.md};
+  margin-left: -${({ theme }) => theme.spacing.lg};
+  margin-right: -${({ theme }) => theme.spacing.lg};
+  margin-bottom: 0;
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
+  padding-bottom: calc(${({ theme }) => theme.spacing.sm} + env(safe-area-inset-bottom));
   border-top: 2px solid ${({ theme }) => theme.colors.mx.black};
-  background: ${({ theme }) => theme.colors.mx.white};
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(6px);
+  box-shadow: none;
+  min-height: auto;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -16px;
+    height: 16px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.sm};
+    min-height: auto;
+  }
 `
 
 export const CheckboxContainer = styled.div`
@@ -126,6 +158,12 @@ export const ToggleContainer = styled.div`
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
   margin-top: ${({ theme }) => theme.spacing.xs};
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: ${({ theme }) => theme.spacing.xs};
+  }
 `
 
 export const ToggleLabel = styled.label`
@@ -135,6 +173,11 @@ export const ToggleLabel = styled.label`
   color: ${({ theme }) => theme.colors.mx.black};
   cursor: pointer;
   user-select: none;
+  
+  @media (max-width: 768px) {
+    font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+    line-height: ${({ theme }) => theme.typography.lineHeights.tight};
+  }
 `
 
 export const ToggleSwitch = styled.label`
@@ -318,4 +361,49 @@ export const GlobalTextareaStyles = styled.div`
     box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1) !important;
     outline: none !important;
   }
+
+  input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 2px solid #000 !important;
+    outline-offset: 2px !important;
+  }
+`
+
+export const PrimaryActionButton = styled.div`
+  flex: 0 0 auto;
+  min-width: 160px;
+  @media (max-width: 768px) {
+    width: 100%;
+    order: 1;
+  }
+`
+
+export const SecondaryActionButton = styled.div`
+  flex: 0 0 auto;
+  @media (max-width: 768px) {
+    width: 100%;
+    order: 2;
+  }
+`
+
+export const TertiaryActionButton = styled.div`
+  flex: 0 0 auto;
+  @media (max-width: 768px) {
+    width: 100%;
+    order: 3;
+  }
+`
+
+export const SectionTitle = styled.h3`
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+`
+
+export const SectionSubtitle = styled.p`
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.mx.gray[600]};
+  margin: 0;
+  opacity: 0.7;
 `

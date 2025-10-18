@@ -1,30 +1,35 @@
 export const buttonLayoutGlobalStyles = `
   .button.primary {
-    background-color: var(--restaurant-secondary-color) !important;
+    background-color: var(--restaurant-secondary-color);
     
     &:hover:not(:disabled) {
-      background-color: var(--restaurant-primary-color) !important;
-      border-color: var(--restaurant-primary-color) !important;
+      background-color: var(--mx-blue) !important;
+      color: var(--mx-white) !important;
+      border-color: #000000 !important;
     }
 
     &::before {
       background: linear-gradient(
         135deg,
-        var(--restaurant-primary-color)00,
-        var(--restaurant-primary-color)40
+        var(--mx-blue)00,
+        var(--mx-blue)40
       ) !important;
     }
   }
 
   .button.secondary {
-    background-color: var(--restaurant-primary-color) !important;
+    background-color: var(--mx-white) !important;
+    color: var(--mx-blue) !important;
+    border-color: var(--mx-blue) !important;
     
     &:hover:not(:disabled) {
-      background-color: var(--restaurant-secondary-color) !important;
+      background-color: var(--mx-blue) !important;
+      color: var(--mx-white) !important;
+      border-color: var(--mx-blue) !important;
     }
 
     &::before {
-      background: var(--restaurant-secondary-color) !important;
+      background: var(--mx-blue) !important;
     }
   }
 
@@ -39,10 +44,13 @@ export const buttonLayoutGlobalStyles = `
   }
 
   .button.ghost {
-    color: var(--restaurant-primary-color) !important;
+    color: var(--mx-red) !important;
     
     &:hover:not(:disabled) {
-      background-color: var(--restaurant-primary-color) !important;
+      background-color: var(--mx-white) !important;
+      color: var(--mx-red) !important;
+      border-color: var(--mx-red) !important;
+      box-shadow: 3px 3px 0 var(--mx-red) !important;
     }
   }
 
@@ -50,7 +58,7 @@ export const buttonLayoutGlobalStyles = `
     border-radius: 16px;
     box-shadow: 4px 6px 0 #000000;
     border-width: 3px;
-    font-weight: 700;
+    font-weight: 400;
 
     &:hover:not(:disabled) {
       transform: translateY(-2px) translateZ(0);
@@ -133,7 +141,7 @@ export const buttonLayoutGlobalStyles = `
     border-radius: 0;
     box-shadow: none;
     border-width: 2px;
-    font-weight: 700;
+    font-weight: 400;
 
     &:hover:not(:disabled) {
       box-shadow: inset 0 0 0 2px currentColor;

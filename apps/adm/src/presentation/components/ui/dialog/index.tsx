@@ -10,7 +10,7 @@ const StyledDialog = styled(VbssDialog)`
     border-radius: ${({ theme }) => theme.borderRadius.sm};
     box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
     padding: ${({ theme }) => theme.spacing.lg};
-    max-height: 94vh;
+    max-height: 85vh;
     overflow-y: auto;
     overflow-x: hidden;
 
@@ -33,6 +33,18 @@ const StyledDialog = styled(VbssDialog)`
 
     &::-webkit-scrollbar-thumb:hover {
       background: ${({ theme }) => theme.colors.mx.gray[500]};
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+      z-index: 2;
+      pointer-events: none;
     }
 
     h2 {
@@ -71,7 +83,6 @@ export const Dialog = ({ ...props }: DialogProps) => {
       fontSize={props.fontSize ?? 'sm'}
       style={{
         maxWidth: '80vw',
-        maxHeight: '94vh',
         ...props.style
       }}
     />
