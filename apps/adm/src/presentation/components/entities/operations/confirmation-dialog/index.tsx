@@ -1,4 +1,4 @@
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Dialog } from '@/presentation/components/ui/dialog'
 import { WarningIcon } from '@phosphor-icons/react'
 import styled from 'styled-components'

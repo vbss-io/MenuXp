@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
 import { ICONS, ICONS_KEYS } from '@/domain/consts/icons.const.tsx'
 import type { MenuSection } from '@/domain/models/menu-layout.model'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { getCategoriesConfig } from '@/presentation/hooks/use-menu-layouts'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 

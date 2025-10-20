@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { EnvelopeSimpleOpenIcon } from '@phosphor-icons/react'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'

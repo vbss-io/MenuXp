@@ -9,7 +9,7 @@ import { UpdateCombosSectionUsecase } from '@/application/menu-layouts/sections/
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { CombosConfig, MenuSection } from '@/domain/models/menu-layout.model'
 import type { MenuSectionDefinition } from '@/domain/models/menu-section-definition.model'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { Loading } from '@/presentation/components/ui/loading'

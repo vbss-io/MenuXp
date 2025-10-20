@@ -1,5 +1,5 @@
 import { ICONS, ICONS_KEYS } from '@/domain/consts/icons.const'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Popover } from '@/presentation/components/ui/popover'
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react'
 import { useMemo, useState } from 'react'

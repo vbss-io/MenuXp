@@ -9,7 +9,7 @@ import { GetCategoriesNamesUsecase } from '@/application/categories/get-categori
 import { CreateMenuItemUsecase } from '@/application/menu-items/create-menu-item.usecase'
 import { UpdateMenuItemUsecase } from '@/application/menu-items/update-menu-item.usecase'
 import type { MenuItem } from '@/domain/models/menu-item.model'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { Dialog } from '@/presentation/components/ui/dialog'
 import { FormInput } from '@/presentation/components/ui/form-input'
@@ -518,7 +518,7 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
               </S.TertiaryActionButton>
 
               <S.SecondaryActionButton>
-                <Button type="button" variant="secondary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                <Button type="button" variant="outline" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
                   Salvar rascunho
                 </Button>
               </S.SecondaryActionButton>

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 import { MenuLayoutStatus } from '@/domain/enums/menu-layouts/menu-layout-status.enum'
 import type { MenuLayout } from '@/domain/models/menu-layout.model'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 
 import * as S from './styles'
 

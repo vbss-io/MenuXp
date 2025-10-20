@@ -1,4 +1,4 @@
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Chip } from '@/presentation/components/ui/chip'
 import { EyeIcon, EyeSlashIcon, PencilIcon, TicketIcon, TrashIcon } from '@phosphor-icons/react'
 import { Dialog } from '@vbss-ui/dialog'

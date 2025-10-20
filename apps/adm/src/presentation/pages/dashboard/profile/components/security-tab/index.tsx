@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import { z } from 'zod'
 
 import { UpdatePasswordUsecase } from '@/application/users/update-password.usecase'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 
 import * as S from './styles'
 

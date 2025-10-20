@@ -10,7 +10,7 @@ import { UpdateCategoriesSectionUsecase } from '@/application/menu-layouts/secti
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { MenuSection } from '@/domain/models/menu-layout.model'
 import type { MenuSectionDefinition } from '@/domain/models/menu-section-definition.model'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { Loading } from '@/presentation/components/ui/loading'
 import { getCategoriesConfig, validateSection } from '@/presentation/hooks/use-menu-layouts'

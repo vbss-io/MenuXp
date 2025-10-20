@@ -1,4 +1,4 @@
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'

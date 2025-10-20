@@ -9,7 +9,7 @@ import { CreateCategoryUsecase } from '@/application/categories/create-category.
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { UpdateCategoryUsecase } from '@/application/categories/update-category.usecase'
 import type { Category } from '@/domain/models/category.model'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { Dialog } from '@/presentation/components/ui/dialog'
 import { FormInput } from '@/presentation/components/ui/form-input'

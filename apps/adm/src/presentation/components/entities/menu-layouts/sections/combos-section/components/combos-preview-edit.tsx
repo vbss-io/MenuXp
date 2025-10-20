@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { GetCombosUsecase } from '@/application/combos/get-combos.usecase'
 import type { MenuSection } from '@/domain/models/menu-layout.model'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { getCombosConfig } from '@/presentation/hooks/use-menu-layouts'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 

@@ -1,7 +1,7 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react'
 import React from 'react'
 
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 
 import * as S from './styles'
 

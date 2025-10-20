@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react'
 
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { FormInput } from '@/presentation/components/ui/form-input'
 
 import * as S from './styles'

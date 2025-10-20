@@ -9,7 +9,7 @@ import { CreateCouponUsecase } from '@/application/coupons/create-coupon.usecase
 import { UpdateCouponUsecase } from '@/application/coupons/update-coupon.usecase'
 import { CouponType } from '@/domain/enums/coupons/coupon-type.enum'
 import type { Coupon } from '@/domain/models/coupon.model'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Dialog } from '@/presentation/components/ui/dialog'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { FormTextarea } from '@/presentation/components/ui/form-textarea'

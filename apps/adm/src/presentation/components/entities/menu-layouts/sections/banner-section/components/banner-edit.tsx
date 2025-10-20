@@ -8,7 +8,7 @@ import { UpdateBannerSectionUsecase } from '@/application/menu-layouts/sections/
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { MenuSection, BannerConfig } from '@/domain/models/menu-layout.model'
 import type { MenuSectionDefinition } from '@/domain/models/menu-section-definition.model'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { Loading } from '@/presentation/components/ui/loading'
 import { validateSection } from '@/presentation/hooks/use-menu-layouts'

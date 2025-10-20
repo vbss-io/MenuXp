@@ -6,7 +6,7 @@ import toast from 'react-hot-toast'
 import { z } from 'zod'
 
 import { UpdateRestaurantAddressUsecase } from '@/application/restaurants/update-restaurant-address.usecase'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'

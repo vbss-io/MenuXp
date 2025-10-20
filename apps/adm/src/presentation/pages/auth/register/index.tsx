@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { FormCheckbox } from '@/presentation/components/ui/form-checkbox'
 import { useEffect, useState } from 'react'

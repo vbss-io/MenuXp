@@ -13,7 +13,7 @@ import {
   type ComboFilters as ComboFiltersType
 } from '@/presentation/components/entities/combos/combo-filters'
 import { ComboModal } from '@/presentation/components/entities/combos/combo-modal'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { Loading } from '@/presentation/components/ui/loading'
 import { Pagination } from '@/presentation/components/ui/pagination'

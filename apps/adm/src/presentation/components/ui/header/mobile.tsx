@@ -13,7 +13,7 @@ import {
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect } from 'react'
 
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'

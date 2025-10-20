@@ -1,7 +1,7 @@
 import { OperationStatus } from '@/domain/enums/operation/operation-status.enum'
 import type { Operation } from '@/domain/models/operation.model'
 import { ConfirmationDialog } from '@/presentation/components/entities/operations/confirmation-dialog'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { ClockIcon, PauseIcon, PlayIcon, StopIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'

@@ -1,4 +1,4 @@
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Chip } from '@/presentation/components/ui/chip'
 import {
   CaretDownIcon,

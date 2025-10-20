@@ -8,7 +8,7 @@ import { z } from 'zod'
 
 import { CheckSlugAvailableUsecase } from '@/application/restaurants/check-slug-available.usecase'
 import { CreateRestaurantUsecase } from '@/application/restaurants/create-restaurant.usecase'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { FormTextarea } from '@/presentation/components/ui/form-textarea'
 import { Loading } from '@/presentation/components/ui/loading'

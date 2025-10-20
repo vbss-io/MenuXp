@@ -13,7 +13,7 @@ import {
   type MenuItemFilters as MenuItemFiltersType
 } from '@/presentation/components/entities/menu-items/menu-item-filters'
 import { MenuItemModal } from '@/presentation/components/entities/menu-items/menu-item-modal'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { Loading } from '@/presentation/components/ui/loading'

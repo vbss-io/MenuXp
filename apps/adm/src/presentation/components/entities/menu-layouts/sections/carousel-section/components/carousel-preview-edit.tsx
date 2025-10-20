@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { CarouselConfig, MenuSection } from '@/domain/models/menu-layout.model'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 
 import * as S from '../styles'
 

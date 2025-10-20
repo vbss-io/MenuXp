@@ -11,7 +11,7 @@ import { CouponCard } from '@/presentation/components/entities/coupons/coupon-ca
 import { Filters, type CouponFilters } from '@/presentation/components/entities/coupons/coupon-filters'
 import { CouponModal } from '@/presentation/components/entities/coupons/coupon-modal'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { Loading } from '@/presentation/components/ui/loading'
 import { Pagination } from '@/presentation/components/ui/pagination'

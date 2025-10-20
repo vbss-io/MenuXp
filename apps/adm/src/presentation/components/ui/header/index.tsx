@@ -2,7 +2,7 @@ import { ListIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { MobileHeader } from '@/presentation/components/ui/header/mobile'
 import NavBar from '@/presentation/components/ui/home-navbar'
 import { UserMenu } from '@/presentation/components/ui/user-menu'

@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LockKeyIcon } from '@phosphor-icons/react'
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'

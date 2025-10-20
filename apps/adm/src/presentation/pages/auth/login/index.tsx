@@ -1,4 +1,4 @@
-import { Button } from '@/presentation/components/ui/button'
+import { Button } from '@menuxp/ui'
 import { FormInput } from '@/presentation/components/ui/form-input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react'
