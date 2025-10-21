@@ -1,9 +1,9 @@
+import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
+import { Loading } from '@menuxp/ui'
 import { useState } from 'react'
 
-import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Loading } from '@/presentation/components/ui/loading'
-
-import * as S from './styles'
+import { ChatIcon } from '@phosphor-icons/react'
+import * as S from '../styles'
 
 export const MessagesPage = () => {
   const [isLoading, _setIsLoading] = useState(false)
@@ -21,15 +21,16 @@ export const MessagesPage = () => {
   return (
     <S.Container>
       <Breadcrumb lastPath="Mensagens" />
-      <S.Header>
-      </S.Header>
       <S.Content>
-        <S.PlaceholderCard>
-          <S.PlaceholderTitle>Mensagens</S.PlaceholderTitle>
-          <S.PlaceholderDescription>
+        <S.EmptyState>
+          <S.EmptyStateIcon>
+            <ChatIcon size={48} />
+          </S.EmptyStateIcon>
+          <S.EmptyStateTitle>Mensagens</S.EmptyStateTitle>
+          <S.EmptyStateDescription>
             Funcionalidade em desenvolvimento. Em breve você poderá gerenciar todas as mensagens do seu restaurante.
-          </S.PlaceholderDescription>
-        </S.PlaceholderCard>
+          </S.EmptyStateDescription>
+        </S.EmptyState>
       </S.Content>
     </S.Container>
   )

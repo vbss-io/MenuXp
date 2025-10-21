@@ -1,13 +1,11 @@
+import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
+import type { MenuSection } from '@/domain/models/menu-layout.model'
+import { getCategoriesConfig } from '@/presentation/hooks/use-menu-layouts'
+import { useRestaurant } from '@/presentation/hooks/use-restaurant'
+import { Button, ICONS, ICONS_KEYS } from '@menuxp/ui'
 import { FolderIcon, PencilIcon, TrashIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
-
-import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
-import { ICONS, ICONS_KEYS } from '@/domain/consts/icons.const.tsx'
-import type { MenuSection } from '@/domain/models/menu-layout.model'
-import { Button } from '@menuxp/ui'
-import { getCategoriesConfig } from '@/presentation/hooks/use-menu-layouts'
-import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
 import * as S from '../styles'
 

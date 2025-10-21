@@ -1,8 +1,5 @@
-import { FunnelSimpleIcon, SortAscendingIcon } from '@phosphor-icons/react'
-
 import { Button, FormCheckbox, Popover } from '@menuxp/ui'
-//import { FormCheckbox } from '@/presentation/components/ui/form-checkbox'
-//import { Popover } from '@/presentation/components/ui/popover'
+import { FunnelSimpleIcon, SortAscendingIcon } from '@phosphor-icons/react'
 
 import * as S from './styles'
 

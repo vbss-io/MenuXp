@@ -1,44 +1,5 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.lg};
-  min-height: 100vh;
-  padding: ${({ theme }) => theme.spacing.lg};
-  background: ${({ theme }) => theme.colors.background};
-`
-
-export const LoadingWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-`
-
-export const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xs};
-`
-
-export const Title = styled.h1`
-  font-size: ${({ theme }) => theme.typography.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0;
-  text-transform: uppercase;
-  /* letter-spacing herdado do global */
-`
-
-export const Subtitle = styled.p`
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  font-size: ${({ theme }) => theme.typography.fontSizes.md};
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin: 0;
-  line-height: 1.5;
-`
-
 export const LayoutsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -155,32 +116,6 @@ export const SectionsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.lg};
-`
-
-export const EmptyState = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: ${({ theme }) => theme.colors.text.secondary};
-  text-align: center;
-  gap: ${({ theme }) => theme.spacing.md};
-`
-
-export const EmptyStateIcon = styled.div`
-  color: ${({ theme }) => theme.colors.mx.gray[400]};
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
-`
-
-export const EmptyStateText = styled.p`
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  font-size: ${({ theme }) => theme.typography.fontSizes.md};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 0.2px;
 `
 
 export const CreateCard = styled.div`

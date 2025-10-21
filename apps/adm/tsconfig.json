@@ -21,6 +21,6 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["src"],
+  "include": ["src", "../../packages/ui/src/components/color-input", "../../packages/ui/src/components/form-time-input"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

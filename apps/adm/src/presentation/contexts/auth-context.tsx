@@ -1,6 +1,5 @@
-import { createContext } from 'react'
-
 import type { User } from '@/domain/models/user.model'
+import { createContext } from 'react'
 
 export interface Login {
   token: string

@@ -1,12 +1,11 @@
+import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
+import { CategoriesTab } from '@/presentation/pages/dashboard/menu-items/components/categories-tab'
+import { CombosTab } from '@/presentation/pages/dashboard/menu-items/components/combos-tab'
+import { MenuItemsTab } from '@/presentation/pages/dashboard/menu-items/components/menu-items-tab'
 import { BowlFoodIcon, FolderIcon, PackageIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
-import { MenuItemsTab } from '@/presentation/pages/dashboard/menu-items/components/menu-items-tab'
-import { CategoriesTab } from '@/presentation/pages/dashboard/menu-items/components/categories-tab'
-import { CombosTab } from '@/presentation/pages/dashboard/menu-items/components/combos-tab'
-import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-
-import * as S from './styles'
+import * as Page from '../styles'
 
 type TabType = 'items' | 'categories' | 'combos'
 
@@ -38,22 +37,21 @@ export const MenuItemsPage = () => {
   }
 
   return (
-    <S.Container>
+    <Page.Container>
       <Breadcrumb lastPath="Itens do Menu" />
-      <S.Header />
-      <S.TabsContainer>
-        <S.TabsHeader>
+      <Page.TabsContainer>
+        <Page.TabsHeader>
           {tabs.map((tab) => (
-            <S.TabButton key={tab.id} $isActive={activeTab === tab.id} onClick={() => setActiveTab(tab.id)}>
+            <Page.TabButton key={tab.id} $isActive={activeTab === tab.id} onClick={() => setActiveTab(tab.id)}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 {tab.icon}
                 <span>{tab.label}</span>
               </div>
-            </S.TabButton>
+            </Page.TabButton>
           ))}
-        </S.TabsHeader>
-        <S.TabContent>{getTabContent()}</S.TabContent>
-      </S.TabsContainer>
-    </S.Container>
+        </Page.TabsHeader>
+        <Page.TabContent>{getTabContent()}</Page.TabContent>
+      </Page.TabsContainer>
+    </Page.Container>
   )
 }

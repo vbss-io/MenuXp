@@ -1,16 +1,13 @@
+import { UpdateRestaurantAddressUsecase } from '@/application/restaurants/update-restaurant-address.usecase'
+import { useAuth } from '@/presentation/hooks/use-auth'
+import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Button, FormInput, Loading } from '@menuxp/ui'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
-
-import { UpdateRestaurantAddressUsecase } from '@/application/restaurants/update-restaurant-address.usecase'
-import { Button } from '@menuxp/ui'
-import { FormInput } from '@/presentation/components/ui/form-input'
-import { Loading } from '@/presentation/components/ui/loading'
-import { useAuth } from '@/presentation/hooks/use-auth'
-import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
 import * as S from './styles'
 

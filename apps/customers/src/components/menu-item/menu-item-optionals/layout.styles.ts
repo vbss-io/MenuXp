@@ -70,7 +70,7 @@ export const menuItemOptionalsLayoutStyles = {
       border-radius: ${({ theme }) => theme.borderRadius.md};
 
       &:hover {
-        border-color: var(--primary-color);
+        border-color: var(--primary);
         background: ${({ theme }) => theme.colors.mx.gray[700]};
       }
     }
@@ -80,7 +80,7 @@ export const menuItemOptionalsLayoutStyles = {
     }
 
     .optional-price {
-      color: var(--primary-color);
+      color: var(--primary);
     }
 
     .quantity-display {
@@ -104,7 +104,7 @@ export const menuItemOptionalsLayoutStyles = {
       box-shadow: none;
 
       &:hover {
-        border-color: var(--primary-color);
+        border-color: var(--primary);
         box-shadow: ${({ theme }) => theme.shadows.sm};
       }
     }
@@ -129,7 +129,7 @@ export const menuItemOptionalsLayoutStyles = {
       box-shadow: none;
 
       &:hover {
-        border-color: var(--primary-color);
+        border-color: var(--primary);
         box-shadow: ${({ theme }) => theme.shadows.sm};
       }
     }

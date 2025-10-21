@@ -1,7 +1,7 @@
 import { OperationStatus } from '@/domain/enums/operation/operation-status.enum'
 import type { Operation } from '@/domain/models/operation.model'
 import { Button } from '@menuxp/ui'
-import { PauseIcon, PlayIcon, StopIcon, RocketLaunchIcon } from '@phosphor-icons/react'
+import { PauseIcon, PlayIcon, RocketLaunchIcon, StopIcon } from '@phosphor-icons/react'
 import styled from 'styled-components'
 
 interface OperationControlsProps {
@@ -41,7 +41,8 @@ export const OperationControls = ({
             <StartText>
               <StartTitle>Iniciar Operação</StartTitle>
               <StartDescription>
-                Sua operação está parada. Clique no botão <strong>INICIAR OPERAÇÃO</strong> para começar a receber pedidos e gerenciar seu estabelecimento.
+                Sua operação está parada. Clique no botão <strong>INICIAR OPERAÇÃO</strong> para começar a receber
+                pedidos e gerenciar seu estabelecimento.
               </StartDescription>
             </StartText>
           </StartInfo>
@@ -51,6 +52,7 @@ export const OperationControls = ({
             loadingText="Iniciando..."
             leftIcon={<PlayIcon weight="fill" />}
             size="lg"
+            variant="primary"
           >
             Iniciar Operação
           </StartButton>

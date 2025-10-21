@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { useLayout } from '@menuxp/ui'
+
 import * as S from './styles'
 
 export type DialogProps = React.ComponentProps<typeof S.StyledDialog>

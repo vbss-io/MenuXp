@@ -53,7 +53,8 @@ export const HeaderSection = styled.div`
   flex-shrink: 0;
   min-height: 60px;
   background: transparent;
-  margin: -${({ theme }) => theme.spacing.lg} -${({ theme }) => theme.spacing.lg} ${({ theme }) => theme.spacing.md} -${({ theme }) => theme.spacing.lg};
+  margin: -${({ theme }) => theme.spacing.lg} -${({ theme }) => theme.spacing.lg}
+    ${({ theme }) => theme.spacing.md} -${({ theme }) => theme.spacing.lg};
 
   .avatar-wrapper {
     svg {
@@ -198,7 +199,8 @@ export const BottomSection = styled.div`
   position: relative;
   flex-shrink: 0;
   background: transparent;
-  margin: ${({ theme }) => theme.spacing.md} -${({ theme }) => theme.spacing.lg} -${({ theme }) => theme.spacing.lg} -${({ theme }) => theme.spacing.lg};
+  margin: ${({ theme }) => theme.spacing.md} -${({ theme }) => theme.spacing.lg} -${({ theme }) =>
+      theme.spacing.lg} -${({ theme }) => theme.spacing.lg};
 
   /* Ajuste de espaçamento quando fechado - igual ao MenuContainer */
   .sidebar-closed & {

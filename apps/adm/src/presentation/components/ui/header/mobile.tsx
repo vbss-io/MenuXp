@@ -13,14 +13,13 @@ import {
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect } from 'react'
 
-import { Button } from '@menuxp/ui'
 import { useAuth } from '@/presentation/hooks/use-auth'
+import { Button } from '@menuxp/ui'
 
 import * as S from './styles'
 
 interface MobileHeaderProps {
   setShowMobile: (show: boolean) => void
-  isHome?: boolean
 }
 
 const mobileVariants = {
@@ -63,7 +62,7 @@ const logoVariants = {
   }
 }
 
-export const MobileHeader = ({ setShowMobile, isHome = false }: MobileHeaderProps) => {
+export const MobileHeader = ({ setShowMobile }: MobileHeaderProps) => {
   const { user, logout } = useAuth()
 
   useEffect(() => {
@@ -81,24 +80,6 @@ export const MobileHeader = ({ setShowMobile, isHome = false }: MobileHeaderProp
   const goTo = (path: string) => {
     window.location.assign(path)
   }
-
-  const handleHomeLinkClick = (href: string) => {
-    setShowMobile(false)
-    setTimeout(() => {
-      const element = document.querySelector(href)
-      if (element) {
-        const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80
-        window.scrollTo({ top: offsetTop, behavior: 'smooth' })
-      }
-    }, 100)
-  }
-
-  const homeNavLinks = [
-    { label: 'Funcionalidades', href: '#features' },
-    { label: 'Gamificação', href: '#gamificacao' },
-    { label: 'Gestão', href: '#kanban' },
-    { label: 'FAQ', href: '#faq' }
-  ]
 
   const menuItems = [
     { icon: <HouseIcon size={24} weight="fill" />, label: 'Operação', path: '/dashboard' },
@@ -124,25 +105,6 @@ export const MobileHeader = ({ setShowMobile, isHome = false }: MobileHeaderProp
               </S.MobileLogo>
             </motion.div>
           </S.MobileHeaderSection>
-          {isHome && (
-            <S.HomeNavSection>
-              <S.HomeNavTitle>Navegação</S.HomeNavTitle>
-              <S.HomeNavLinks>
-                {homeNavLinks.map((link) => (
-                  <S.HomeNavLink
-                    key={link.href}
-                    href={link.href}
-                    onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                      e.preventDefault()
-                      handleHomeLinkClick(link.href)
-                    }}
-                  >
-                    {link.label}
-                  </S.HomeNavLink>
-                ))}
-              </S.HomeNavLinks>
-            </S.HomeNavSection>
-          )}
           {!user ? (
             <S.MobileButtonsContainer>
               <Button onClick={() => goTo('/login')} variant="white" size="md">

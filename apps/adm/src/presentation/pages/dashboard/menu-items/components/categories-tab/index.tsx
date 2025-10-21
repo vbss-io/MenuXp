@@ -1,22 +1,18 @@
+import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
+import type { Category } from '@/domain/models/category.model'
+import { CategoryCard } from '@/presentation/components/entities/categories/category-card'
+import { Filters, type CategoryFilters } from '@/presentation/components/entities/categories/category-filters'
+import { CategoryModal } from '@/presentation/components/entities/categories/category-modal'
+import { useAuth } from '@/presentation/hooks/use-auth'
+import { useDebounce } from '@/presentation/hooks/use-debounce'
+import { Button, FormInput, Loading, Pagination } from '@menuxp/ui'
 import { FolderIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
-import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
-import type { Category } from '@/domain/models/category.model'
-
-import { CategoryCard } from '@/presentation/components/entities/categories/category-card'
-import { Filters, type CategoryFilters } from '@/presentation/components/entities/categories/category-filters'
-import { CategoryModal } from '@/presentation/components/entities/categories/category-modal'
-import { Button } from '@menuxp/ui'
-import { FormInput } from '@/presentation/components/ui/form-input'
-import { Loading } from '@/presentation/components/ui/loading'
-import { Pagination } from '@/presentation/components/ui/pagination'
-import { useAuth } from '@/presentation/hooks/use-auth'
-import { useDebounce } from '@/presentation/hooks/use-debounce'
-
-import * as S from '../../styles'
+import * as Page from '../../../styles'
+import * as S from '../styles'
 
 interface CategoriesTabProps {
   currentPage: number
@@ -108,8 +104,8 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
   }
 
   return (
-    <S.TabContainer>
-      <S.ActionsRow>
+    <Page.TabContainer>
+      <Page.ActionsRow>
         <FormInput
           id="search"
           label=""
@@ -120,7 +116,7 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
           }
           leftIcon={<MagnifyingGlassIcon size={16} />}
         />
-        <S.ActionsRowButtons>
+        <Page.ActionsRowButtons>
           <Filters
             filters={filters}
             onFiltersChange={setFilters}
@@ -136,12 +132,12 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
           <Button variant="primary" onClick={handleCreateCategory} size="md" leftIcon={<PlusIcon size={16} />}>
             Nova Categoria
           </Button>
-        </S.ActionsRowButtons>
-      </S.ActionsRow>
+        </Page.ActionsRowButtons>
+      </Page.ActionsRow>
       {isLoading ? (
-        <S.LoadingWrapper>
+        <Page.LoadingWrapper>
           <Loading />
-        </S.LoadingWrapper>
+        </Page.LoadingWrapper>
       ) : (
         <>
           <motion.div variants={containerVariants} initial="hidden" animate="visible">
@@ -161,18 +157,18 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
                 </AnimatePresence>
               </S.CategoriesGrid>
             ) : (
-              <S.EmptyState>
-                <S.EmptyStateIcon>
+              <Page.EmptyState>
+                <Page.EmptyStateIcon>
                   <FolderIcon size={48} />
-                </S.EmptyStateIcon>
-                <S.EmptyStateTitle>
+                </Page.EmptyStateIcon>
+                <Page.EmptyStateTitle>
                   {filters.searchMask ? 'Nenhuma categoria encontrada' : 'Nenhuma categoria criada'}
-                </S.EmptyStateTitle>
-                <S.EmptyStateText>
+                </Page.EmptyStateTitle>
+                <Page.EmptyStateDescription>
                   {filters.searchMask
                     ? 'Tente ajustar os termos de busca'
                     : 'Crie sua primeira categoria para organizar os produtos do seu restaurante'}
-                </S.EmptyStateText>
+                </Page.EmptyStateDescription>
                 {!filters.searchMask && (
                   <Button
                     variant="primary"
@@ -184,7 +180,7 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
                     Criar Primeira Categoria
                   </Button>
                 )}
-              </S.EmptyState>
+              </Page.EmptyState>
             )}
           </motion.div>
           <Pagination currentPage={currentPage} totalItems={totalItems} itemsPerPage={20} onPageChange={onPageChange} />
@@ -197,6 +193,6 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
         parentCategoryId={parentCategoryId}
         onSuccess={handleModalSuccess}
       />
-    </S.TabContainer>
+    </Page.TabContainer>
   )
 }

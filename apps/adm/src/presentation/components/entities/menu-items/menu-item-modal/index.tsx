@@ -1,23 +1,26 @@
+import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
+import { CreateMenuItemUsecase } from '@/application/menu-items/create-menu-item.usecase'
+import { UpdateMenuItemUsecase } from '@/application/menu-items/update-menu-item.usecase'
+import type { MenuItem } from '@/domain/models/menu-item.model'
+import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  Button,
+  Combobox,
+  Dialog,
+  FormInput,
+  FormTextarea,
+  Loading,
+  MultipleImageUploader,
+  OptionalsSection,
+  type ComboboxOption,
+  type MenuItemOptional
+} from '@menuxp/ui'
 import { motion } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
-
-import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
-import { CreateMenuItemUsecase } from '@/application/menu-items/create-menu-item.usecase'
-import { UpdateMenuItemUsecase } from '@/application/menu-items/update-menu-item.usecase'
-import type { MenuItem } from '@/domain/models/menu-item.model'
-import { Button } from '@menuxp/ui'
-import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
-import { Dialog } from '@/presentation/components/ui/dialog'
-import { FormInput } from '@/presentation/components/ui/form-input'
-import { FormTextarea } from '@/presentation/components/ui/form-textarea'
-import { Loading } from '@/presentation/components/ui/loading'
-import { MultipleImageUploader } from '@/presentation/components/ui/multiple-image-uploader'
-import { OptionalsSection, type MenuItemOptional } from '@/presentation/components/ui/optionals'
-import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 
@@ -337,7 +340,6 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
                 error={errors.description?.message}
                 register={register('description', { maxLength: descriptionMax })}
                 rows={3}
-                maxLength={descriptionMax}
               />
               <S.FieldHint aria-live="polite">
                 {Math.min(descriptionCount, descriptionMax)}/{descriptionMax}

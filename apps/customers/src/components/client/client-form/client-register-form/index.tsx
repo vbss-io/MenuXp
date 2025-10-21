@@ -39,8 +39,8 @@ export const ClientRegisterForm = ({ onModeChange, onSuccess }: ClientRegisterFo
       className="client-register-form"
       style={
         {
-          '--primary-color': primaryColor,
-          '--secondary-color': secondaryColor
+          '--primary': primaryColor,
+          '--secondary': secondaryColor
         } as React.CSSProperties
       }
     >

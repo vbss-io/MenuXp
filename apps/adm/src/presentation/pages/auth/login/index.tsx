@@ -1,17 +1,15 @@
-import { Button } from '@menuxp/ui'
-import { FormInput } from '@/presentation/components/ui/form-input'
+import { LoginUsecase } from '@/application/auth/login.usecase'
+import { ResentConfirmationEmailUsecase } from '@/application/auth/resent-confirmation-email.usecase'
+import type { Login as LoginType } from '@/presentation/contexts/auth-context'
+import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Button, FormInput } from '@menuxp/ui'
 import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
-
-import { LoginUsecase } from '@/application/auth/login.usecase'
-import { ResentConfirmationEmailUsecase } from '@/application/auth/resent-confirmation-email.usecase'
-import type { Login as LoginType } from '@/presentation/contexts/auth-context'
-import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from '../styles'
 
@@ -100,6 +98,13 @@ export const Login = () => {
     }
   }
 
+  const getInputStatus = () => {
+    const fieldState = getFieldState('email')
+    if (fieldState.invalid) return 'error'
+    if (fieldState.isTouched) return 'success'
+    return 'idle'
+  }
+
   return (
     <S.Container>
       <S.LeftColumn>
@@ -134,9 +139,7 @@ export const Login = () => {
                 placeholder="Digite seu E-mail"
                 fontSize="sm"
                 required
-                status={
-                  getFieldState('email').invalid ? 'error' : getFieldState('email').isTouched ? 'success' : 'idle'
-                }
+                status={getInputStatus()}
                 register={register('email', {
                   onBlur: async () => {
                     await trigger('email')

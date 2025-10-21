@@ -1,18 +1,14 @@
+import { CheckSlugAvailableUsecase } from '@/application/restaurants/check-slug-available.usecase'
+import { CreateRestaurantUsecase } from '@/application/restaurants/create-restaurant.usecase'
+import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Button, FormInput, FormTextarea, Loading } from '@menuxp/ui'
 import { CheckIcon, SpinnerIcon, WarningIcon } from '@phosphor-icons/react'
 import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
-
-import { CheckSlugAvailableUsecase } from '@/application/restaurants/check-slug-available.usecase'
-import { CreateRestaurantUsecase } from '@/application/restaurants/create-restaurant.usecase'
-import { Button } from '@menuxp/ui'
-import { FormInput } from '@/presentation/components/ui/form-input'
-import { FormTextarea } from '@/presentation/components/ui/form-textarea'
-import { Loading } from '@/presentation/components/ui/loading'
-import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

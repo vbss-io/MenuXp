@@ -1,9 +1,9 @@
+import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
+import { Loading } from '@menuxp/ui'
+import { MedalIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
-import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Loading } from '@/presentation/components/ui/loading'
-
-import * as S from './styles'
+import * as S from '../styles'
 
 export const MissionsPage = () => {
   const [isLoading, _setIsLoading] = useState(false)
@@ -21,16 +21,17 @@ export const MissionsPage = () => {
   return (
     <S.Container>
       <Breadcrumb lastPath="Missões" />
-      <S.Header>
-      </S.Header>
       <S.Content>
-        <S.PlaceholderCard>
-          <S.PlaceholderTitle>Missões</S.PlaceholderTitle>
-          <S.PlaceholderDescription>
+        <S.EmptyState>
+          <S.EmptyStateIcon>
+            <MedalIcon size={48} />
+          </S.EmptyStateIcon>
+          <S.EmptyStateTitle>Missões</S.EmptyStateTitle>
+          <S.EmptyStateDescription>
             Funcionalidade em desenvolvimento. Em breve você poderá gerenciar todas as missões e gamificação do seu
             restaurante.
-          </S.PlaceholderDescription>
-        </S.PlaceholderCard>
+          </S.EmptyStateDescription>
+        </S.EmptyState>
       </S.Content>
     </S.Container>
   )

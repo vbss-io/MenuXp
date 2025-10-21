@@ -1,8 +1,3 @@
-import { PlusIcon } from '@phosphor-icons/react'
-import { motion } from 'framer-motion'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import toast from 'react-hot-toast'
-
 import { ActivateMenuLayoutUsecase } from '@/application/menu-layouts/activate-menu-layout.usecase'
 import { DeleteMenuLayoutUsecase } from '@/application/menu-layouts/delete-menu-layout.usecase'
 import { RemoveSectionUsecase } from '@/application/menu-layouts/sections/remove-section.usecase'
@@ -20,11 +15,15 @@ import { CategoriesSection } from '@/presentation/components/entities/menu-layou
 import { CombosSection } from '@/presentation/components/entities/menu-layouts/sections/combos-section'
 import { MenuItemsSection } from '@/presentation/components/entities/menu-layouts/sections/menu-items-section'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Button } from '@menuxp/ui'
-import { Loading } from '@/presentation/components/ui/loading'
 import { useMenuLayouts } from '@/presentation/hooks/use-menu-layouts'
 import { useSectionReorder } from '@/presentation/hooks/use-section-reorder'
+import { Button, Loading } from '@menuxp/ui'
+import { PlusIcon } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import toast from 'react-hot-toast'
 
+import * as Page from '../styles'
 import * as S from './styles'
 
 export const MenuPage = () => {
@@ -245,19 +244,18 @@ export const MenuPage = () => {
 
   if (isLoading && layouts.length === 0) {
     return (
-      <S.Container>
-        <S.LoadingWrapper>
+      <Page.Container>
+        <Page.LoadingWrapper>
           <Loading />
-        </S.LoadingWrapper>
-      </S.Container>
+        </Page.LoadingWrapper>
+      </Page.Container>
     )
   }
 
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
-      <S.Container>
+      <Page.Container>
         <Breadcrumb lastPath="Layouts do Menu" />
-        <S.Header />
         <S.LayoutsGrid>
           {layouts.map((layout) => (
             <MenuLayoutCard
@@ -414,12 +412,12 @@ export const MenuPage = () => {
         {!selectedLayout && (
           <S.PreviewSection>
             <S.PreviewContent>
-              <S.EmptyState>
-                <S.EmptyStateIcon>
+              <Page.EmptyState>
+                <Page.EmptyStateIcon>
                   <PlusIcon size={48} />
-                </S.EmptyStateIcon>
-                <S.EmptyStateText>Selecione um layout para visualizar</S.EmptyStateText>
-              </S.EmptyState>
+                </Page.EmptyStateIcon>
+                <Page.EmptyStateDescription>Selecione um layout para visualizar</Page.EmptyStateDescription>
+              </Page.EmptyState>
             </S.PreviewContent>
           </S.PreviewSection>
         )}
@@ -435,7 +433,7 @@ export const MenuPage = () => {
             position={sectionDialog.position}
           />
         )}
-      </S.Container>
+      </Page.Container>
     </motion.div>
   )
 }

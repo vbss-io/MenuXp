@@ -5,10 +5,11 @@ import { OperationKPIs } from '@/presentation/components/entities/operations/ope
 import { OperationStatusCard } from '@/presentation/components/entities/operations/operation-status-card'
 import { StartOperationDialog } from '@/presentation/components/entities/operations/start-operation-dialog'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Loading } from '@/presentation/components/ui/loading'
 import { useOperation } from '@/presentation/hooks/use-operation'
+import { Loading } from '@menuxp/ui'
 import { useState } from 'react'
-import styled from 'styled-components'
+
+import * as S from '../styles'
 
 export const OperationPage = () => {
   const {
@@ -44,11 +45,11 @@ export const OperationPage = () => {
 
   if (isOperationLoading) {
     return (
-      <Container>
-        <LoadingWrapper>
+      <S.Container>
+        <S.LoadingWrapper>
           <Loading />
-        </LoadingWrapper>
-      </Container>
+        </S.LoadingWrapper>
+      </S.Container>
     )
   }
 
@@ -57,13 +58,11 @@ export const OperationPage = () => {
   const shouldShowMetrics = isActive || isPaused
 
   return (
-    <Container>
+    <S.Container>
       <Breadcrumb lastPath="Operação" />
-      <Header>
-      </Header>
-      <Content>
+      <S.Content>
         {operation && (
-          <OperationStatusCard 
+          <OperationStatusCard
             operation={operation}
             isPausing={isPausing}
             isResuming={isResuming}
@@ -92,42 +91,13 @@ export const OperationPage = () => {
             <OperationCharts ordersByStatus={ordersByStatus} isLoading={isKPIsLoading} />
           </>
         )}
-      </Content>
+      </S.Content>
       <StartOperationDialog
         isOpen={showStartDialog}
         onClose={handleCancelStart}
         onConfirm={handleConfirmStart}
         isLoading={isStarting}
       />
-    </Container>
+    </S.Container>
   )
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.lg};
-  margin: 0 auto;
-  width: 100%;
-  padding: ${({ theme }) => theme.spacing.lg} 0;
-`
-
-const LoadingWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-`
-
-const Header = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xs};
-`
-
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.lg};
-`

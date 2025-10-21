@@ -2,8 +2,7 @@ import { Suspense } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { RedirectToLandingPage } from '@/presentation/components/redirect-to-landing-page'
-import { HeaderWrapper } from '@/presentation/components/ui/header-wrapper'
-import { HeaderProvider } from '@/presentation/contexts/header-context'
+import { Header } from '@/presentation/components/ui/header'
 import { Error } from '@/presentation/pages/error'
 import { LoadingPage } from '@/presentation/pages/loading'
 import { NotFound } from '@/presentation/pages/not-found'
@@ -28,11 +27,10 @@ const baseRoutes = [
 const routes = [...baseRoutes, ...authRoutes, ...dashboardRoutes].map((route) => ({
   ...route,
   element: (
-    <HeaderProvider>
-      <HeaderWrapper>
-        <Suspense fallback={<LoadingPage />}>{route.element}</Suspense>
-      </HeaderWrapper>
-    </HeaderProvider>
+    <>
+      <Header />
+      <Suspense fallback={<LoadingPage />}>{route.element}</Suspense>
+    </>
   ),
   errorElement: <Error />
 }))

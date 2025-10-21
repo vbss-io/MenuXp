@@ -16,15 +16,8 @@ const coreGlobalStyles = css`
   }
 
   :root {
-    --mx-black: ${({ theme }) => theme.colors.mx.black};
-    --mx-yellow: ${({ theme }) => theme.colors.mx.yellow};
-    --mx-red: ${({ theme }) => theme.colors.mx.red};
-    --mx-blue: ${({ theme }) => theme.colors.mx.blue};
-    --mx-white: ${({ theme }) => theme.colors.mx.white};
     --restaurant-primary-color: ${({ theme }) => theme.colors.primary};
     --restaurant-secondary-color: ${({ theme }) => theme.colors.secondary};
-    --primary-color: ${({ theme }) => theme.colors.primary};
-    --secondary-color: ${({ theme }) => theme.colors.secondary};
   }
 
   *, *::before, *::after {
@@ -61,7 +54,6 @@ const coreGlobalStyles = css`
     letter-spacing: 0.5px;
   }
 
-  /* Evita engrossar a Tanker dentro de headings */
   h1 strong, h1 b,
   h2 strong, h2 b,
   h3 strong, h3 b,
@@ -71,7 +63,6 @@ const coreGlobalStyles = css`
     font-weight: inherit !important;
   }
 
-  /* Força Tanker sempre regular em qualquer contexto */
   * {
     &[style*="Tanker"],
     &[class*="tanker"],
@@ -124,7 +115,12 @@ const coreGlobalStyles = css`
   }
 `
 
-export const GlobalStyle = createGlobalStyle`
+export const AdmGlobalStyle = createGlobalStyle`
+  ${coreGlobalStyles}
+  ${baseLayoutStyles}
+`
+
+export const CustomersGlobalStyle = createGlobalStyle`
   ${coreGlobalStyles}
   ${baseLayoutStyles}
   ${allComponentLayoutStyles}

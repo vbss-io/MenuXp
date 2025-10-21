@@ -1,7 +1,6 @@
 import { OperationStatus } from '@/domain/enums/operation/operation-status.enum'
 import type { Operation } from '@/domain/models/operation.model'
-import { ConfirmationDialog } from '@/presentation/components/entities/operations/confirmation-dialog'
-import { Button } from '@menuxp/ui'
+import { Button, ConfirmationDialog } from '@menuxp/ui'
 import { ClockIcon, PauseIcon, PlayIcon, StopIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
@@ -59,6 +58,7 @@ export const OperationStatusCard = ({
   onFinish
 }: OperationStatusCardProps) => {
   const statusInfo = getStatusInfo(operation?.status || null)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const startTime = operation?.createdAt ? new Date(operation.createdAt) : null
   const isRunning = operation?.status === OperationStatus.RUNNING
   const isPaused = operation?.status === OperationStatus.PAUSED
@@ -77,7 +77,6 @@ export const OperationStatusCard = ({
       const hours = Math.floor(diff / (1000 * 60 * 60))
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
       const seconds = Math.floor((diff % (1000 * 60)) / 1000)
-
       if (hours > 0) {
         setElapsedTime(`${hours}h ${minutes}m`)
       } else if (minutes > 0) {
@@ -142,9 +141,7 @@ export const OperationStatusCard = ({
           )}
         </StatusInfo>
       </StatusColumn>
-
       <IdColumn>{operation && <OperationId>ID: {operation.id}</OperationId>}</IdColumn>
-
       <ActionsColumn>
         {(isRunning || isPaused) && (
           <ButtonsContainer>
@@ -160,7 +157,6 @@ export const OperationStatusCard = ({
                 Pausar Operação
               </ActionButton>
             )}
-
             {isPaused && onResume && (
               <ActionButton
                 onClick={onResume}
@@ -173,7 +169,6 @@ export const OperationStatusCard = ({
                 Retomar Operação
               </ActionButton>
             )}
-
             {onFinish && (
               <ActionButton
                 onClick={handleFinishClick}
@@ -189,7 +184,6 @@ export const OperationStatusCard = ({
           </ButtonsContainer>
         )}
       </ActionsColumn>
-
       <ConfirmationDialog
         isOpen={showFinishDialog}
         onClose={() => setShowFinishDialog(false)}
@@ -199,7 +193,6 @@ export const OperationStatusCard = ({
         confirmText="Sim, Finalizar"
         cancelText="Cancelar"
         variant="danger"
-        isLoading={isFinishing}
       />
     </Container>
   )
@@ -209,11 +202,11 @@ const Container = styled.div<{ status: OperationStatus | null }>`
   background: ${({ theme, status }) => {
     switch (status) {
       case OperationStatus.RUNNING:
-        return '#dcfce7' // Verde bem clarinho
+        return '#dcfce7'
       case OperationStatus.PAUSED:
-        return '#fef3c7' // Laranja bem clarinho
+        return '#fef3c7'
       case OperationStatus.FINISHED:
-        return '#fee2e2' // Vermelho bem clarinho
+        return '#fee2e2'
       default:
         return theme.colors.mx.white
     }
@@ -222,11 +215,11 @@ const Container = styled.div<{ status: OperationStatus | null }>`
     ${({ theme, status }) => {
       switch (status) {
         case OperationStatus.RUNNING:
-          return '#22c55e' // Verde do ícone play
+          return '#22c55e'
         case OperationStatus.PAUSED:
-          return '#f59e0b' // Laranja do ícone pause
+          return '#f59e0b'
         case OperationStatus.FINISHED:
-          return '#ef4444' // Vermelho do ícone stop
+          return '#ef4444'
         default:
           return theme.colors.mx.black
       }
@@ -237,11 +230,11 @@ const Container = styled.div<{ status: OperationStatus | null }>`
     ${({ theme, status }) => {
       switch (status) {
         case OperationStatus.RUNNING:
-          return '#22c55e' // Verde do ícone play
+          return '#22c55e'
         case OperationStatus.PAUSED:
-          return '#f59e0b' // Laranja do ícone pause
+          return '#f59e0b'
         case OperationStatus.FINISHED:
-          return '#ef4444' // Vermelho do ícone stop
+          return '#ef4444'
         default:
           return theme.colors.mx.black
       }
@@ -264,7 +257,7 @@ const StatusColumn = styled.div`
   display: flex;
   align-items: flex-start;
   gap: ${({ theme }) => theme.spacing.sm};
-  min-width: 0; /* Permite que o conteúdo seja truncado se necessário */
+  min-width: 0;
   padding-top: ${({ theme }) => theme.spacing.xs};
 
   @media (max-width: 768px) {
@@ -292,7 +285,7 @@ const StatusInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
-  min-width: 0; /* Permite que o conteúdo seja truncado se necessário */
+  min-width: 0;
   justify-content: flex-start;
 `
 
@@ -348,7 +341,7 @@ const IdColumn = styled.div`
   padding-top: ${({ theme }) => theme.spacing.xs};
 
   @media (max-width: 768px) {
-    order: -1; /* Move para cima no mobile */
+    order: -1;
     align-items: center;
     padding-top: 0;
   }
@@ -382,7 +375,6 @@ const ActionButton = styled(Button)<{ variant?: string }>`
   min-width: 140px;
   height: 36px;
 
-  /* Estilo específico para botão de encerrar */
   &.button.danger {
     background: ${({ theme }) => theme.colors.mx.white} !important;
     color: ${({ theme }) => theme.colors.error} !important;

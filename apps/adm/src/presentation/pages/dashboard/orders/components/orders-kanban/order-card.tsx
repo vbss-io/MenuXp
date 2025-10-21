@@ -1,7 +1,6 @@
-import { Clock, User, MapPin, ShoppingCart } from '@phosphor-icons/react'
-import styled from 'styled-components'
-
 import type { Order, OrderStatus } from '@/domain/models/order.model'
+import { Clock, MapPin, ShoppingCart, User } from '@phosphor-icons/react'
+import styled from 'styled-components'
 
 interface OrderCardProps {
   order: Order
@@ -57,13 +56,11 @@ export const OrderCard = ({ order, onClick, onDragStart, onDragEnd, isDragging, 
           {getStatusLabel(order.status)}
         </S.StatusBadge>
       </S.CardHeader>
-
       <S.CustomerInfo>
         <S.CustomerName>
           <User size={16} weight="fill" />
           {order.customer.name}
         </S.CustomerName>
-
         {order.orderType === 'delivery' && (
           <S.CustomerAddress>
             <MapPin size={16} weight="fill" />
@@ -71,29 +68,23 @@ export const OrderCard = ({ order, onClick, onDragStart, onDragEnd, isDragging, 
           </S.CustomerAddress>
         )}
       </S.CustomerInfo>
-
       <S.OrderDetails>
         <S.OrderType>{OPERATION_TYPE_LABELS[order.orderType as keyof typeof OPERATION_TYPE_LABELS]}</S.OrderType>
-
         <S.PaymentMethod>
           {PAYMENT_METHOD_LABELS[order.paymentMethod as keyof typeof PAYMENT_METHOD_LABELS]}
         </S.PaymentMethod>
       </S.OrderDetails>
-
       <S.ItemsInfo>
         <S.ItemsCount>
           <ShoppingCart size={16} weight="fill" />
           {totalItems} {totalItems === 1 ? 'item' : 'itens'}
         </S.ItemsCount>
-
         <S.OrderTotal>R$ {order.total.toFixed(2).replace('.', ',')}</S.OrderTotal>
       </S.ItemsInfo>
-
       <S.TimeInfo>
         <Clock size={14} weight="fill" />
         {timeAgo}
       </S.TimeInfo>
-
       {order.notes && (
         <S.Notes>
           <S.NotesLabel>Observações:</S.NotesLabel>
@@ -121,13 +112,10 @@ const getStatusLabel = (status: OrderStatus): string => {
 const getTimeAgo = (date: Date): string => {
   const now = new Date()
   const diffInMinutes = Math.floor((now.getTime() - new Date(date).getTime()) / (1000 * 60))
-
   if (diffInMinutes < 1) return 'Agora'
   if (diffInMinutes < 60) return `${diffInMinutes}min`
-
   const diffInHours = Math.floor(diffInMinutes / 60)
   if (diffInHours < 24) return `${diffInHours}h`
-
   const diffInDays = Math.floor(diffInHours / 24)
   return `${diffInDays}d`
 }

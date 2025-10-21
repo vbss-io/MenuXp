@@ -1,9 +1,9 @@
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
 import React from 'react'
 
-import { Button } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { MenuItemOptional } from '@/types/menu-item'
+import { Button } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -32,8 +32,8 @@ export const MenuItemOptionals: React.FC<MenuItemOptionalsProps> = ({
       className={className}
       style={
         {
-          '--primary-color': primaryColor,
-          '--secondary-color': secondaryColor
+          '--primary': primaryColor,
+          '--secondary': secondaryColor
         } as React.CSSProperties
       }
     >

@@ -1,9 +1,9 @@
+import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
+import { Loading } from '@menuxp/ui'
+import { ChartBarIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
-import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Loading } from '@/presentation/components/ui/loading'
-
-import * as S from './styles'
+import * as S from '../styles'
 
 export const ReportsPage = () => {
   const [isLoading, _setIsLoading] = useState(false)
@@ -21,16 +21,17 @@ export const ReportsPage = () => {
   return (
     <S.Container>
       <Breadcrumb lastPath="Relatórios" />
-      <S.Header>
-      </S.Header>
       <S.Content>
-        <S.PlaceholderCard>
-          <S.PlaceholderTitle>Relatórios</S.PlaceholderTitle>
-          <S.PlaceholderDescription>
+        <S.EmptyState>
+          <S.EmptyStateIcon>
+            <ChartBarIcon size={48} />
+          </S.EmptyStateIcon>
+          <S.EmptyStateTitle>Relatórios</S.EmptyStateTitle>
+          <S.EmptyStateDescription>
             Funcionalidade em desenvolvimento. Em breve você poderá visualizar relatórios detalhados sobre o desempenho
             do seu restaurante.
-          </S.PlaceholderDescription>
-        </S.PlaceholderCard>
+          </S.EmptyStateDescription>
+        </S.EmptyState>
       </S.Content>
     </S.Container>
   )

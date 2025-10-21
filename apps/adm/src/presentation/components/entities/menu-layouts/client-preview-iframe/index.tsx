@@ -1,6 +1,5 @@
-import React from 'react'
-
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
+import React from 'react'
 
 import * as S from './styles'
 

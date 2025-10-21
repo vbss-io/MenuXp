@@ -1,9 +1,8 @@
+import { useAuth } from '@/presentation/hooks/use-auth'
+import { Button } from '@menuxp/ui'
 import { HouseIcon, WarningCircleIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-
-import { Button } from '@menuxp/ui'
-import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

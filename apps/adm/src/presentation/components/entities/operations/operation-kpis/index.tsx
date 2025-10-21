@@ -1,9 +1,10 @@
 import type { OperationKPI } from '@/domain/models/operation.model'
-import { InfoTooltip } from '@/presentation/components/ui/info-tooltip'
+import { Tooltip } from '@menuxp/ui'
 import {
   CheckCircleIcon,
   ClockIcon,
   CurrencyDollarIcon,
+  InfoIcon,
   MotorcycleIcon,
   ShoppingCartIcon,
   XCircleIcon
@@ -108,7 +109,7 @@ export const OperationKPIs = ({ kpis, isLoading = false }: OperationKPIsProps) =
             <KPIInfo>
               <KPILabel>
                 {config.label}
-                <InfoTooltip content={config.description} />
+                <Tooltip trigger={<InfoIcon weight="fill" />}>{config.description}</Tooltip>
               </KPILabel>
               <KPIValue>
                 {config.format(value)}

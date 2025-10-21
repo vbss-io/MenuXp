@@ -1,9 +1,8 @@
+import { Avatar } from '@/presentation/components/ui/avatar'
+import { useAuth } from '@/presentation/hooks/use-auth'
+import { Popover } from '@menuxp/ui'
 import { CaretDownIcon, ChartPieIcon, SignOutIcon, UserIcon } from '@phosphor-icons/react'
 import React from 'react'
-
-import { Avatar } from '@/presentation/components/ui/avatar'
-import { Popover } from '@/presentation/components/ui/popover'
-import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

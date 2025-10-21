@@ -68,8 +68,8 @@ export const RestaurantProvider = ({ children, slug }: RestaurantProviderProps) 
     const body = document.body
     root.style.setProperty('--restaurant-primary-color', theme.primaryColor)
     root.style.setProperty('--restaurant-secondary-color', theme.secondaryColor)
-    root.style.setProperty('--primary-color', theme.primaryColor)
-    root.style.setProperty('--secondary-color', theme.secondaryColor)
+    root.style.setProperty('--primary', theme.primaryColor)
+    root.style.setProperty('--secondary', theme.secondaryColor)
     body.classList.remove('layout-menuxp', 'layout-default', 'layout-dark', 'layout-clean', 'layout-square')
     if (theme.layout) {
       body.classList.add(`layout-${theme.layout}`)

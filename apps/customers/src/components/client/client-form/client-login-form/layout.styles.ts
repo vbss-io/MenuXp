@@ -18,7 +18,7 @@ export const getClientLoginFormLayoutStyle = (layout: string) => {
         color: ${({ theme }) => theme.colors.text.secondary};
 
         &:hover {
-          color: var(--primary-color);
+          color: var(--primary);
         }
       }
     `,
@@ -38,7 +38,7 @@ export const getClientLoginFormLayoutStyle = (layout: string) => {
         color: ${({ theme }) => theme.colors.text.secondary};
 
         &:hover {
-          color: var(--primary-color);
+          color: var(--primary);
         }
       }
     `,
@@ -59,7 +59,7 @@ export const getClientLoginFormLayoutStyle = (layout: string) => {
         color: ${({ theme }) => theme.colors.mx.gray[400]};
 
         &:hover {
-          color: var(--primary-color);
+          color: var(--primary);
         }
       }
     `,
@@ -79,7 +79,7 @@ export const getClientLoginFormLayoutStyle = (layout: string) => {
         color: ${({ theme }) => theme.colors.text.secondary};
 
         &:hover {
-          color: var(--primary-color);
+          color: var(--primary);
         }
       }
     `,
@@ -99,7 +99,7 @@ export const getClientLoginFormLayoutStyle = (layout: string) => {
         color: ${({ theme }) => theme.colors.text.secondary};
 
         &:hover {
-          color: var(--primary-color);
+          color: var(--primary);
         }
       }
     `

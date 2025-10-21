@@ -1,5 +1,4 @@
-import { Button } from '@menuxp/ui'
-import { Dialog } from '@menuxp/ui'
+import { Button, Dialog } from '@menuxp/ui'
 
 import * as S from './styles'
 

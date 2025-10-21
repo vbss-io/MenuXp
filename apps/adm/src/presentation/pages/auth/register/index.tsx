@@ -1,15 +1,12 @@
+import { RegisterUsecase } from '@/application/auth/register.usecase'
+import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@menuxp/ui'
-import { FormInput } from '@/presentation/components/ui/form-input'
-import { FormCheckbox } from '@/presentation/components/ui/form-checkbox'
+import { Button, FormCheckbox, FormInput } from '@menuxp/ui'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
-
-import { RegisterUsecase } from '@/application/auth/register.usecase'
-import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from '../styles'
 
@@ -78,15 +75,15 @@ export const Register = () => {
         <S.Title>
           <span style={{ color: '#FEBB11' }}>Criar</span> Conta
         </S.Title>
-        <img 
-          src="/images/img-tela-login.svg" 
-          alt="Food Service Gamificado" 
-          style={{ 
-            width: '100%', 
-            maxWidth: '300px', 
+        <img
+          src="/images/img-tela-login.svg"
+          alt="Food Service Gamificado"
+          style={{
+            width: '100%',
+            maxWidth: '300px',
             margin: '16px 0',
             height: 'auto'
-          }} 
+          }}
         />
         <S.Text>#1 Food Service Gamificado do Brasil</S.Text>
       </S.LeftColumn>
@@ -97,80 +94,83 @@ export const Register = () => {
           </S.LoginLogo>
           <S.Card>
             <S.CardTitle>Cadastre-se</S.CardTitle>
-          <S.Form onSubmit={handleSubmit(onSubmit)}>
-            <FormInput
-              id="name"
-              label="Nome"
-              type="text"
-              error={errors.name?.message}
-              placeholder="Digite seu nome completo"
-              fontSize="sm"
-              required
-              register={register('name')}
-            />
-            <FormInput
-              id="email"
-              label="E-mail"
-              type="email"
-              error={errors.email?.message}
-              placeholder="Digite seu E-mail"
-              fontSize="sm"
-              required
-              register={register('email')}
-            />
-            <FormInput
-              id="password"
-              label="Senha"
-              type="password"
-              error={errors.password?.message}
-              placeholder="Digite sua senha"
-              fontSize="sm"
-              required
-              register={register('password')}
-            />
-            <FormInput
-              id="confirmPassword"
-              label="Confirmar Senha"
-              type="password"
-              error={errors.confirmPassword?.message}
-              placeholder="Confirme sua senha"
-              fontSize="sm"
-              required
-              register={register('confirmPassword')}
-            />
-            <S.TermsContainer>
-              <FormCheckbox
-                id="acceptTerms"
-                label={
-                  <>
-                    Eu aceito os&nbsp;
-                    <S.Link to="/terms" target="_blank" aria-label="Abrir termos e condições em nova aba">
-                      termos e condições
-                    </S.Link>
-                  </>
-                }
-                checked={acceptTerms}
-                onCheckedChange={(checked) => setValue('acceptTerms', checked)}
+            <S.Form onSubmit={handleSubmit(onSubmit)}>
+              <FormInput
+                id="name"
+                label="Nome"
+                type="text"
+                error={errors.name?.message}
+                placeholder="Digite seu nome completo"
                 fontSize="sm"
-                variant="primary"
+                required
+                register={register('name')}
               />
-              {errors.acceptTerms && <S.ErrorMessage>{errors.acceptTerms.message}</S.ErrorMessage>}
-            </S.TermsContainer>
-            {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              variant="primary"
-              size="lg"
-              loading={isSubmitting}
-              loadingText="Criando conta..."
-            >
-              Criar Conta
-            </Button>
-          </S.Form>
-          <S.InfoText>
-            Já tem uma conta? <S.Link to="/login" aria-label="Já tem uma conta? Clique para entrar">Entrar</S.Link>
-          </S.InfoText>
+              <FormInput
+                id="email"
+                label="E-mail"
+                type="email"
+                error={errors.email?.message}
+                placeholder="Digite seu E-mail"
+                fontSize="sm"
+                required
+                register={register('email')}
+              />
+              <FormInput
+                id="password"
+                label="Senha"
+                type="password"
+                error={errors.password?.message}
+                placeholder="Digite sua senha"
+                fontSize="sm"
+                required
+                register={register('password')}
+              />
+              <FormInput
+                id="confirmPassword"
+                label="Confirmar Senha"
+                type="password"
+                error={errors.confirmPassword?.message}
+                placeholder="Confirme sua senha"
+                fontSize="sm"
+                required
+                register={register('confirmPassword')}
+              />
+              <S.TermsContainer>
+                <FormCheckbox
+                  id="acceptTerms"
+                  label={
+                    <>
+                      Eu aceito os&nbsp;
+                      <S.Link to="/terms" target="_blank" aria-label="Abrir termos e condições em nova aba">
+                        termos e condições
+                      </S.Link>
+                    </>
+                  }
+                  checked={acceptTerms}
+                  onCheckedChange={(checked) => setValue('acceptTerms', checked)}
+                  fontSize="sm"
+                  variant="primary"
+                />
+                {errors.acceptTerms && <S.ErrorMessage>{errors.acceptTerms.message}</S.ErrorMessage>}
+              </S.TermsContainer>
+              {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                variant="primary"
+                size="lg"
+                loading={isSubmitting}
+                loadingText="Criando conta..."
+              >
+                Criar Conta
+              </Button>
+            </S.Form>
+            <S.InfoText>
+              Já tem uma conta?{' '}
+              <S.Link to="/login" aria-label="Já tem uma conta? Clique para entrar">
+                Entrar
+              </S.Link>
+            </S.InfoText>
           </S.Card>
         </S.ContentWrapper>
       </S.RightColumn>

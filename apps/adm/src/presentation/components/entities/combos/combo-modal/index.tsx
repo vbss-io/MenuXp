@@ -1,24 +1,27 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
-import { z } from 'zod'
-
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { CreateComboUsecase } from '@/application/combos/create-combo.usecase'
 import { UpdateComboUsecase } from '@/application/combos/update-combo.usecase'
 import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
 import type { Combo, ComboItem, ComboOptional } from '@/domain/models/combo.model'
-import { Button } from '@menuxp/ui'
-import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
-import { Dialog } from '@/presentation/components/ui/dialog'
-import { FormInput } from '@/presentation/components/ui/form-input'
-import { FormTextarea } from '@/presentation/components/ui/form-textarea'
-import { Loading } from '@/presentation/components/ui/loading'
-import { MultipleImageUploader } from '@/presentation/components/ui/multiple-image-uploader'
-import { OptionalsSection, type MenuItemOptional } from '@/presentation/components/ui/optionals'
 import { useAuth } from '@/presentation/hooks/use-auth'
+import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  Button,
+  Combobox,
+  Dialog,
+  FormInput,
+  FormTextarea,
+  Loading,
+  MultipleImageUploader,
+  OptionalsSection,
+  type ComboboxOption,
+  type MenuItemOptional
+} from '@menuxp/ui'
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import { z } from 'zod'
 
 import * as S from './styles'
 
@@ -432,7 +435,7 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
                 <S.ItemCombobox
                   placeholder="Selecionar item"
                   value={item.menuItemId}
-                  onChange={(menuItemId) => {
+                  onChange={(menuItemId: string) => {
                     const newItems = [...comboItems]
                     newItems[index].menuItemId = menuItemId
 

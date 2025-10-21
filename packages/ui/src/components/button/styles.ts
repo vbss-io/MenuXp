@@ -29,7 +29,6 @@ const brutalistButtonStyles = css`
   letter-spacing: 0.5px;
   cursor: pointer;
 
-  /* Garantir altura mínima para mobile (44px) */
   @media (max-width: 768px) {
     min-height: 44px;
   }
@@ -92,14 +91,12 @@ export const ButtonContainer = styled.div`
 
     &.primary {
       ${brutalistButtonStyles}
-      background: ${({ theme }) => theme.colors.mx.yellow};
       color: ${({ theme }) => theme.colors.mx.black};
       border: 1px solid ${({ theme }) => theme.colors.mx.black};
       box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
       font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover:not(:disabled) {
-        background: ${({ theme }) => theme.colors.mx.blue};
         border: 1px solid ${({ theme }) => theme.colors.mx.black};
         transform: translateY(-2px);
         box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.black};
@@ -108,14 +105,12 @@ export const ButtonContainer = styled.div`
 
     &.secondary {
       ${brutalistButtonStyles}
-      background: ${({ theme }) => theme.colors.mx.red};
       color: ${({ theme }) => theme.colors.mx.white};
       border: 1px solid ${({ theme }) => theme.colors.mx.black};
       box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
       font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover:not(:disabled) {
-        background: ${({ theme }) => theme.colors.mx.red};
         border-color: ${({ theme }) => theme.colors.mx.black};
         transform: translateY(-2px);
         box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.black};
@@ -131,7 +126,6 @@ export const ButtonContainer = styled.div`
       font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
 
       &:hover:not(:disabled) {
-        background: ${({ theme }) => theme.colors.mx.black};
         color: ${({ theme }) => theme.colors.mx.white};
         transform: translateY(-2px);
         box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.black};

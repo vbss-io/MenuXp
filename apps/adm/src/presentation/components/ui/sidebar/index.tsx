@@ -1,3 +1,5 @@
+import { useAuth } from '@/presentation/hooks/use-auth'
+import { useSidebar } from '@/presentation/hooks/use-sidebar'
 import {
   BowlFoodIcon,
   CaretLeftIcon,
@@ -14,9 +16,6 @@ import {
 import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-
-import { useAuth } from '@/presentation/hooks/use-auth'
-import { useSidebar } from '@/presentation/hooks/use-sidebar'
 
 import * as S from './styles'
 
@@ -40,13 +39,13 @@ export const Sidebar = () => {
       icon: <HouseIcon size={20} weight="fill" />,
       label: 'Dashboard',
       path: '/dashboard',
+      // badge: 5,
       isActive: location.pathname === '/dashboard'
     },
     {
       icon: <ShoppingCartIcon size={20} weight="fill" />,
       label: 'Pedidos',
       path: '/dashboard/orders',
-      // badge: 5,
       isActive: location.pathname === '/dashboard/orders'
     },
     {

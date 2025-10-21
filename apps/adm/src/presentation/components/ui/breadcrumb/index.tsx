@@ -1,9 +1,10 @@
-import { CaretRightIcon, HouseIcon } from '@phosphor-icons/react'
+import { CaretRightIcon, HouseIcon, InfoIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
-import { InfoTooltip } from '../info-tooltip'
-import { UserMenu } from '../user-menu'
+import { UserMenu } from '@/presentation/components/ui/user-menu'
+import { Tooltip } from '@menuxp/ui'
+
 import * as S from './styles'
 
 interface BreadcrumbProps {
@@ -68,14 +69,18 @@ export const Breadcrumb = ({ lastPath }: BreadcrumbProps) => {
               <S.BreadcrumbItem>
                 <CaretRightIcon size={16} weight="bold" />
                 <S.CurrentPage>{lastPath || getPageTitle(pathnames[pathnames.length - 1])}</S.CurrentPage>
-                <InfoTooltip content={getPageDescription(pathnames[pathnames.length - 1])} position="right" />
+                <Tooltip trigger={<InfoIcon size={20} weight="fill" />}>
+                  {getPageDescription(pathnames[pathnames.length - 1])}
+                </Tooltip>
               </S.BreadcrumbItem>
             )
           : pathnames.length > 0 && (
               <S.BreadcrumbItem>
                 <CaretRightIcon size={16} weight="bold" />
                 <S.CurrentPage>{lastPath || getPageTitle(pathnames[pathnames.length - 1])}</S.CurrentPage>
-                <InfoTooltip content={getPageDescription(pathnames[pathnames.length - 1])} position="right" />
+                <Tooltip trigger={<InfoIcon size={20} weight="fill" />}>
+                  {getPageDescription(pathnames[pathnames.length - 1])}
+                </Tooltip>
               </S.BreadcrumbItem>
             )}
       </S.BreadcrumbList>

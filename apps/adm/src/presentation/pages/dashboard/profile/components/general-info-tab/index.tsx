@@ -1,13 +1,12 @@
+import { UpdateUserProfileUsecase } from '@/application/users/update-user-profile.usecase'
+import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Button } from '@menuxp/ui'
 import { CameraIcon } from '@phosphor-icons/react'
 import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
-
-import { UpdateUserProfileUsecase } from '@/application/users/update-user-profile.usecase'
-import { Button } from '@menuxp/ui'
-import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

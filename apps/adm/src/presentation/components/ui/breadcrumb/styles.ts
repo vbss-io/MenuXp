@@ -54,7 +54,7 @@ export const CurrentPage = styled.span`
   color: ${({ theme }) => theme.colors.mx.white};
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
   padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.sm};
-  background-color: #0097E0;
+  background-color: #0097e0;
   border-radius: ${({ theme }) => theme.borderRadius.xs};
   display: flex;
   align-items: center;
@@ -73,7 +73,7 @@ export const UserMenuWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   flex-shrink: 0;
-  
+
   @media (max-width: 767px) {
     display: none;
   }

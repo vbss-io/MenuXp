@@ -1,10 +1,9 @@
+import { VerifyEmailUsecase } from '@/application/auth/verify-email.usecase'
+import { Loading } from '@menuxp/ui'
 import { CheckCircleIcon } from '@phosphor-icons/react'
 import { useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-
-import { VerifyEmailUsecase } from '@/application/auth/verify-email.usecase'
-import { Loading } from '@/presentation/components/ui/loading'
 
 import * as S from '../styles'
 
@@ -47,15 +46,15 @@ export const VerifyEmail = () => {
         <S.Title>
           Verificar <span style={{ color: '#FEBB11' }}>E-mail</span>
         </S.Title>
-        <img 
-          src="/images/img-tela-login.svg" 
-          alt="Food Service Gamificado" 
-          style={{ 
-            width: '100%', 
-            maxWidth: '300px', 
+        <img
+          src="/images/img-tela-login.svg"
+          alt="Food Service Gamificado"
+          style={{
+            width: '100%',
+            maxWidth: '300px',
             margin: '16px 0',
             height: 'auto'
-          }} 
+          }}
         />
         <S.Text>#1 Food Service Gamificado do Brasil</S.Text>
       </S.LeftColumn>
@@ -71,13 +70,13 @@ export const VerifyEmail = () => {
               </S.IconWrapper>
               Verificando seu email
             </S.CardTitle>
-          <S.Description>
-            <p>Por favor, aguarde enquanto verificamos seu endereço de email...</p>
-            <S.LoadingWrapper>
-              <Loading />
-            </S.LoadingWrapper>
-          </S.Description>
-          <S.InfoText>Você será redirecionado para a página de login automaticamente.</S.InfoText>
+            <S.Description>
+              <p>Por favor, aguarde enquanto verificamos seu endereço de email...</p>
+              <S.LoadingWrapper>
+                <Loading />
+              </S.LoadingWrapper>
+            </S.Description>
+            <S.InfoText>Você será redirecionado para a página de login automaticamente.</S.InfoText>
           </S.Card>
         </S.ContentWrapper>
       </S.RightColumn>

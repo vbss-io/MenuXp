@@ -10,7 +10,7 @@ import { NotificationProvider } from '@/hooks/providers/notification-provider'
 import { RestaurantProvider } from '@/hooks/providers/restaurant-provider'
 import { queryClient } from '@/lib/query-client'
 import { Router } from '@/router'
-import { GlobalStyle, customersTheme as theme } from '@menuxp/styles'
+import { CustomersGlobalStyle, customersTheme as theme } from '@menuxp/styles'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -24,7 +24,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
+        <CustomersGlobalStyle />
         <Toaster
           position="bottom-right"
           toastOptions={{

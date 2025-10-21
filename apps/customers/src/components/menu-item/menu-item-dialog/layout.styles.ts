@@ -4,28 +4,28 @@ export const getMenuItemDialogLayoutStyle = (layout: string) => {
   const menuItemDialogLayoutStyles = {
     menuxp: css`
       &.dialog-header {
-        border-bottom: 2px solid var(--primary-color);
+        border-bottom: 2px solid var(--primary);
         padding-bottom: 20px;
       }
 
       &.product-image {
-        border: 3px solid var(--primary-color);
+        border: 3px solid var(--primary);
         border-radius: 16px;
       }
 
       &.product-title {
-        color: var(--primary-color);
+        color: var(--primary);
         font-weight: 700;
       }
 
       &.price {
-        color: var(--primary-color);
+        color: var(--primary);
         font-weight: 700;
         font-size: 20px;
       }
 
       &.discount-badge {
-        background: var(--secondary-color);
+        background: var(--secondary);
         color: white;
         border-radius: 8px;
         padding: 4px 8px;
@@ -50,7 +50,7 @@ export const getMenuItemDialogLayoutStyle = (layout: string) => {
       }
 
       &.price {
-        color: var(--primary-color);
+        color: var(--primary);
         font-weight: 600;
         font-size: 18px;
       }
@@ -60,7 +60,7 @@ export const getMenuItemDialogLayoutStyle = (layout: string) => {
       }
 
       &.discount-badge {
-        background: var(--secondary-color);
+        background: var(--secondary);
         color: white;
         border-radius: 6px;
         padding: 2px 6px;
@@ -76,7 +76,7 @@ export const getMenuItemDialogLayoutStyle = (layout: string) => {
       }
 
       &.product-image {
-        border: 2px solid var(--primary-color);
+        border: 2px solid var(--primary);
         border-radius: 12px;
       }
 
@@ -90,7 +90,7 @@ export const getMenuItemDialogLayoutStyle = (layout: string) => {
       }
 
       &.price {
-        color: var(--primary-color);
+        color: var(--primary);
         font-weight: 700;
         font-size: 20px;
       }
@@ -100,7 +100,7 @@ export const getMenuItemDialogLayoutStyle = (layout: string) => {
       }
 
       &.discount-badge {
-        background: var(--secondary-color);
+        background: var(--secondary);
         color: white;
         border-radius: 8px;
         padding: 4px 8px;
@@ -110,24 +110,24 @@ export const getMenuItemDialogLayoutStyle = (layout: string) => {
 
     clean: css`
       &.dialog-header {
-        border-bottom: 2px solid var(--primary-color);
+        border-bottom: 2px solid var(--primary);
         padding-bottom: 20px;
       }
 
       &.product-image {
-        border: 2px solid var(--primary-color);
+        border: 2px solid var(--primary);
         border-radius: 8px;
       }
 
       &.product-title {
         color: #1f2937;
         font-weight: 600;
-        border-bottom: 1px solid var(--primary-color);
+        border-bottom: 1px solid var(--primary);
         padding-bottom: 4px;
       }
 
       &.price {
-        color: var(--primary-color);
+        color: var(--primary);
         font-weight: 700;
         font-size: 18px;
       }
@@ -137,7 +137,7 @@ export const getMenuItemDialogLayoutStyle = (layout: string) => {
       }
 
       &.discount-badge {
-        background: var(--secondary-color);
+        background: var(--secondary);
         color: white;
         border-radius: 4px;
         padding: 2px 6px;
@@ -148,24 +148,24 @@ export const getMenuItemDialogLayoutStyle = (layout: string) => {
 
     square: css`
       &.dialog-header {
-        border-bottom: 3px solid var(--primary-color);
+        border-bottom: 3px solid var(--primary);
         padding-bottom: 20px;
       }
 
       &.product-image {
-        border: 3px solid var(--primary-color);
+        border: 3px solid var(--primary);
         border-radius: 0;
       }
 
       &.product-title {
-        color: var(--primary-color);
+        color: var(--primary);
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.5px;
       }
 
       &.price {
-        color: var(--primary-color);
+        color: var(--primary);
         font-weight: 800;
         font-size: 20px;
       }
@@ -175,7 +175,7 @@ export const getMenuItemDialogLayoutStyle = (layout: string) => {
       }
 
       &.discount-badge {
-        background: var(--secondary-color);
+        background: var(--secondary);
         color: white;
         border-radius: 0;
         padding: 4px 8px;

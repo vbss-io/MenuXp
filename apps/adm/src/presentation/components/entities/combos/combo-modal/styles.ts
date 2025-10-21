@@ -1,6 +1,6 @@
+import { Combobox } from '@menuxp/ui'
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
-import { Combobox } from '@/presentation/components/ui/combobox'
 
 export const Form = styled.form`
   display: flex;

@@ -1,9 +1,8 @@
-import { LockKeyIcon, UserIcon } from '@phosphor-icons/react'
-import { useState } from 'react'
-
+import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { GeneralInfoTab } from '@/presentation/pages/dashboard/profile/components/general-info-tab'
 import { SecurityTab } from '@/presentation/pages/dashboard/profile/components/security-tab'
-import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
+import { LockKeyIcon, UserIcon } from '@phosphor-icons/react'
+import { useState } from 'react'
 
 import * as S from './styles'
 

@@ -1,9 +1,8 @@
-import { ImageIcon, PencilIcon, TrashIcon } from '@phosphor-icons/react'
-import { AnimatePresence, motion } from 'framer-motion'
-
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { BannerConfig, MenuSection } from '@/domain/models/menu-layout.model'
 import { Button } from '@menuxp/ui'
+import { ImageIcon, PencilIcon, TrashIcon } from '@phosphor-icons/react'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import * as S from '../styles'
 

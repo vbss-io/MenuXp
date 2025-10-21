@@ -1,12 +1,10 @@
+import { MobileHeader } from '@/presentation/components/ui/header/mobile'
+import { UserMenu } from '@/presentation/components/ui/user-menu'
+import { useAuth } from '@/presentation/hooks/use-auth'
+import { Button } from '@menuxp/ui'
 import { ListIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-
-import { Button } from '@menuxp/ui'
-import { MobileHeader } from '@/presentation/components/ui/header/mobile'
-import NavBar from '@/presentation/components/ui/home-navbar'
-import { UserMenu } from '@/presentation/components/ui/user-menu'
-import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 
@@ -22,13 +20,7 @@ const logoVariants = {
   }
 }
 
-interface HeaderProps {
-  isDashboard?: boolean
-  isHome?: boolean
-  shouldShowHeader?: boolean
-}
-
-export const Header = ({ isDashboard, isHome, shouldShowHeader }: HeaderProps) => {
+export const Header = () => {
   const { user } = useAuth()
   const [showMobile, setShowMobile] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -42,11 +34,7 @@ export const Header = ({ isDashboard, isHome, shouldShowHeader }: HeaderProps) =
     return () => window.removeEventListener('resize', checkIsMobile)
   }, [])
 
-  if (isDashboard && !isMobile) {
-    return null
-  }
-
-  if (!shouldShowHeader) {
+  if (!isMobile) {
     return null
   }
 
@@ -59,11 +47,6 @@ export const Header = ({ isDashboard, isHome, shouldShowHeader }: HeaderProps) =
               <img src="/images/menuxp-logo.svg" alt="MenuXP" />
             </S.Logo>
           </motion.div>
-          {isHome && (
-            <S.NavBarWrapper>
-              <NavBar />
-            </S.NavBarWrapper>
-          )}
         </S.LeftSection>
         <S.RightSection>
           <S.MobileMenuButton onClick={() => setShowMobile(!showMobile)} aria-label="Toggle menu">
@@ -85,7 +68,7 @@ export const Header = ({ isDashboard, isHome, shouldShowHeader }: HeaderProps) =
           )}
         </S.RightSection>
       </S.HeaderContent>
-      {showMobile && <MobileHeader setShowMobile={setShowMobile} isHome={isHome} />}
+      {showMobile && <MobileHeader setShowMobile={setShowMobile} />}
     </S.HeaderContainer>
   )
 }

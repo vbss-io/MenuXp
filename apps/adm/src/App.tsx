@@ -8,14 +8,14 @@ import { LayoutProvider } from '@/presentation/providers/layout-provider'
 import { RestaurantProvider } from '@/presentation/providers/restaurant-provider'
 import { SidebarProvider } from '@/presentation/providers/sidebar-provider'
 import { Router } from '@/presentation/router'
-import { GlobalStyle, admTheme as theme } from '@menuxp/styles'
+import { AdmGlobalStyle, admTheme as theme } from '@menuxp/styles'
 
 function App() {
   registerDependencies()
 
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyle />
+      <AdmGlobalStyle />
       <Toaster
         position="bottom-right"
         toastOptions={{

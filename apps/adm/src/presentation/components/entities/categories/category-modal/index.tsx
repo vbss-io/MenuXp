@@ -1,23 +1,26 @@
+import { CreateCategoryUsecase } from '@/application/categories/create-category.usecase'
+import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
+import { UpdateCategoryUsecase } from '@/application/categories/update-category.usecase'
+import type { Category } from '@/domain/models/category.model'
+import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import {
+  Button,
+  Combobox,
+  Dialog,
+  FormInput,
+  FormTextarea,
+  IconSelector,
+  Loading,
+  OptionalsSection,
+  type ComboboxOption,
+  type MenuItemOptional
+} from '@menuxp/ui'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
-
-import { CreateCategoryUsecase } from '@/application/categories/create-category.usecase'
-import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
-import { UpdateCategoryUsecase } from '@/application/categories/update-category.usecase'
-import type { Category } from '@/domain/models/category.model'
-import { Button } from '@menuxp/ui'
-import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
-import { Dialog } from '@/presentation/components/ui/dialog'
-import { FormInput } from '@/presentation/components/ui/form-input'
-import { FormTextarea } from '@/presentation/components/ui/form-textarea'
-import { IconSelector } from '@/presentation/components/ui/icon-selector'
-import { Loading } from '@/presentation/components/ui/loading'
-import { OptionalsSection, type MenuItemOptional } from '@/presentation/components/ui/optionals'
-import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

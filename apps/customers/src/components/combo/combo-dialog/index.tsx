@@ -2,13 +2,11 @@ import { MinusIcon, PlusIcon, ShoppingCartIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 import { ComboItemsList } from '@/components/combo/combo-items-list'
-import { Button } from '@menuxp/ui'
-import { Dialog } from '@menuxp/ui'
-import { FormTextarea } from '@menuxp/ui'
 import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { Combo } from '@/types/combo'
+import { Button, Dialog, FormTextarea } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -84,8 +82,8 @@ export const ComboDialog = ({ isOpen, onClose, item }: ComboDialogProps) => {
         className="combo-dialog"
         style={
           {
-            '--primary-color': primaryColor,
-            '--secondary-color': secondaryColor
+            '--primary': primaryColor,
+            '--secondary': secondaryColor
           } as React.CSSProperties
         }
       >

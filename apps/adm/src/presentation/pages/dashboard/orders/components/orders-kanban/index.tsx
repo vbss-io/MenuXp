@@ -1,8 +1,8 @@
-import { useState, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import type { Order, OrderStatus } from '@/domain/models/order.model'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useRef, useState } from 'react'
 import styled from 'styled-components'
 
-import type { Order, OrderStatus } from '@/domain/models/order.model'
 import { OrderCard } from './order-card'
 
 interface OrdersKanbanProps {
@@ -135,7 +135,6 @@ export const OrdersKanban = ({
           const config = STATUS_CONFIG[status]
           const statusOrders = ordersByStatus[status] || []
           const isDragOver = dragOverStatus === status
-
           return (
             <S.KanbanColumn
               key={status}

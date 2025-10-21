@@ -1,9 +1,8 @@
+import { type Order, OrderStatus } from '@/domain/models/order.model'
+import { Dialog } from '@menuxp/ui'
 import { CalendarIcon, CheckCircleIcon, MapPinIcon, PhoneIcon, ShoppingCartIcon, UserIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-
-import { type Order, OrderStatus } from '@/domain/models/order.model'
-import { Dialog } from '@/presentation/components/ui/dialog'
 
 interface OrderDetailDialogProps {
   order: Order

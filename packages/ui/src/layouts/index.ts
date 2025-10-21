@@ -1,20 +1,20 @@
 // UI Components
-export * from '../components/accordion/accordion'
-export * from '../components/button/button'
-export * from '../components/chip/chip'
-export * from '../components/dialog/dialog'
-export * from '../components/loading/loading'
-export * from '../components/menu-navbar/menu-navbar'
-export * from '../components/popover/popover'
-export * from '../components/slider/slider'
-export * from '../components/tooltip/tooltip'
+export * from '../components/accordion/layout.styles'
+export * from '../components/button/layout.styles'
+export * from '../components/chip/layout.styles'
+export * from '../components/dialog/layout.styles'
+export * from '../components/loading/layout.styles'
+export * from '../components/menu-navbar/layout.styles'
+export * from '../components/popover/layout.styles'
+export * from '../components/slider/layout.styles'
+export * from '../components/tooltip/layout.styles'
 export * from './ui/language-selector'
 
 // Forms
-export * from '../components/forms/combobox/combobox'
-export * from '../components/forms/form-checkbox/form-checkbox'
-export * from '../components/forms/form-input/form-input'
-export * from '../components/forms/form-textarea/form-textarea'
+export * from '../components/forms/combobox/layout.styles'
+export * from '../components/forms/form-checkbox/layout.styles'
+export * from '../components/forms/form-input/layout.styles'
+export * from '../components/forms/form-textarea/layout.styles'
 
 // Restaurant Components
 export * from './restaurant/restaurant-client-warning-banner'

@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
-
 import type { User } from '@/domain/models/user.model'
 import type { LocalStorage } from '@/domain/storage/local-storage'
 import { Registry } from '@/infra/dependency-injection/registry'
 import { type Login, type UpdateProfile, AuthContext } from '@/presentation/contexts/auth-context'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
 interface AuthProviderProps {
   children: React.ReactNode

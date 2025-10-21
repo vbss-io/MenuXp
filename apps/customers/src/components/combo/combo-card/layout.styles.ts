@@ -15,19 +15,19 @@ export const getComboCardLayoutStyle = (layout: string) => {
         }
 
         &:hover {
-          border-color: var(--secondary-color);
+          border-color: var(--secondary);
           transform: translateY(-2px);
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
       }
 
       .combo-badge {
-        background: var(--secondary-color);
+        background: var(--secondary);
         border-radius: 12px;
       }
 
       .discount-chip {
-        background: var(--primary-color);
+        background: var(--primary);
         border-radius: 12px;
       }
 
@@ -53,11 +53,11 @@ export const getComboCardLayoutStyle = (layout: string) => {
 
       .combo-price {
         .discount-price {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .current-price {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .original-price {
@@ -66,7 +66,7 @@ export const getComboCardLayoutStyle = (layout: string) => {
       }
 
       .add-to-cart-button {
-        background: var(--primary-color);
+        background: var(--primary);
         border-radius: 8px;
       }
     `,
@@ -84,19 +84,19 @@ export const getComboCardLayoutStyle = (layout: string) => {
         }
 
         &:hover {
-          border-color: var(--secondary-color);
+          border-color: var(--secondary);
           transform: translateY(-2px);
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
       }
 
       .combo-badge {
-        background: var(--secondary-color);
+        background: var(--secondary);
         border-radius: 12px;
       }
 
       .discount-chip {
-        background: var(--primary-color);
+        background: var(--primary);
         border-radius: 12px;
       }
 
@@ -122,11 +122,11 @@ export const getComboCardLayoutStyle = (layout: string) => {
 
       .combo-price {
         .discount-price {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .current-price {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .original-price {
@@ -135,7 +135,7 @@ export const getComboCardLayoutStyle = (layout: string) => {
       }
 
       .add-to-cart-button {
-        background: var(--primary-color);
+        background: var(--primary);
         border-radius: 8px;
       }
     `,
@@ -155,19 +155,19 @@ export const getComboCardLayoutStyle = (layout: string) => {
         }
 
         &:hover {
-          border-color: var(--secondary-color);
+          border-color: var(--secondary);
           transform: translateY(-2px);
           box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
       }
 
       .combo-badge {
-        background: var(--secondary-color);
+        background: var(--secondary);
         border-radius: 12px;
       }
 
       .discount-chip {
-        background: var(--primary-color);
+        background: var(--primary);
         border-radius: 12px;
       }
 
@@ -194,11 +194,11 @@ export const getComboCardLayoutStyle = (layout: string) => {
 
       .combo-price {
         .discount-price {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .current-price {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .original-price {
@@ -207,7 +207,7 @@ export const getComboCardLayoutStyle = (layout: string) => {
       }
 
       .add-to-cart-button {
-        background: var(--primary-color);
+        background: var(--primary);
         border-radius: 8px;
       }
     `,
@@ -215,7 +215,7 @@ export const getComboCardLayoutStyle = (layout: string) => {
     clean: css`
       &.combo-card {
         background: ${({ theme }) => theme.colors.mx.white};
-        border: 1px solid var(--secondary-color);
+        border: 1px solid var(--secondary);
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         min-width: 260px;
@@ -227,19 +227,19 @@ export const getComboCardLayoutStyle = (layout: string) => {
         }
 
         &:hover {
-          border-color: var(--primary-color);
+          border-color: var(--primary);
           transform: translateY(-1px);
           box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
         }
       }
 
       .combo-badge {
-        background: var(--secondary-color);
+        background: var(--secondary);
         border-radius: 8px;
       }
 
       .discount-chip {
-        background: var(--primary-color);
+        background: var(--primary);
         border-radius: 8px;
       }
 
@@ -265,11 +265,11 @@ export const getComboCardLayoutStyle = (layout: string) => {
 
       .combo-price {
         .discount-price {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .current-price {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .original-price {
@@ -278,7 +278,7 @@ export const getComboCardLayoutStyle = (layout: string) => {
       }
 
       .add-to-cart-button {
-        background: var(--primary-color);
+        background: var(--primary);
         border-radius: 6px;
       }
     `,
@@ -296,19 +296,19 @@ export const getComboCardLayoutStyle = (layout: string) => {
         }
 
         &:hover {
-          border-color: var(--secondary-color);
+          border-color: var(--secondary);
           transform: translateY(-2px);
           box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
       }
 
       .combo-badge {
-        background: var(--secondary-color);
+        background: var(--secondary);
         border-radius: 0;
       }
 
       .discount-chip {
-        background: var(--primary-color);
+        background: var(--primary);
         border-radius: 0;
       }
 
@@ -334,11 +334,11 @@ export const getComboCardLayoutStyle = (layout: string) => {
 
       .combo-price {
         .discount-price {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .current-price {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .original-price {
@@ -347,7 +347,7 @@ export const getComboCardLayoutStyle = (layout: string) => {
       }
 
       .add-to-cart-button {
-        background: var(--primary-color);
+        background: var(--primary);
         border-radius: 0;
       }
     `

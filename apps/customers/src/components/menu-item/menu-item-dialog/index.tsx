@@ -2,13 +2,11 @@ import { MinusIcon, PlusIcon, ShoppingCartIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
 import { MenuItemOptionals } from '@/components/menu-item/menu-item-optionals'
-import { Button } from '@menuxp/ui'
-import { Dialog } from '@menuxp/ui'
-import { FormTextarea } from '@menuxp/ui'
 import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { MenuItem } from '@/types/menu-item'
+import { Button, Dialog, FormTextarea } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -116,8 +114,8 @@ export const MenuItemDialog = ({ isOpen, onClose, item }: MenuItemDialogProps) =
         className="menu-item-dialog"
         style={
           {
-            '--primary-color': primaryColor,
-            '--secondary-color': secondaryColor
+            '--primary': primaryColor,
+            '--secondary': secondaryColor
           } as React.CSSProperties
         }
       >

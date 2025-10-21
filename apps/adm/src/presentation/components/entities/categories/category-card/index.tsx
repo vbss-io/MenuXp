@@ -1,5 +1,8 @@
-import { Button } from '@menuxp/ui'
-import { Chip } from '@/presentation/components/ui/chip'
+import { DeleteCategoryUsecase } from '@/application/categories/delete-category.usecase'
+import { ToggleCategoryStatusUsecase } from '@/application/categories/toggle-category-status.usecase'
+import type { Category } from '@/domain/models/category.model'
+import { useAuth } from '@/presentation/hooks/use-auth'
+import { Button, Chip, ICONS, ICONS_KEYS, Loading } from '@menuxp/ui'
 import {
   CaretDownIcon,
   CaretUpIcon,
@@ -12,13 +15,6 @@ import {
 } from '@phosphor-icons/react'
 import { Dialog } from '@vbss-ui/dialog'
 import { useState } from 'react'
-
-import { DeleteCategoryUsecase } from '@/application/categories/delete-category.usecase'
-import { ToggleCategoryStatusUsecase } from '@/application/categories/toggle-category-status.usecase'
-import { ICONS, ICONS_KEYS } from '@/domain/consts/icons.const'
-import type { Category } from '@/domain/models/category.model'
-import { Loading } from '@/presentation/components/ui/loading'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import toast from 'react-hot-toast'
 
 import * as S from './styles'

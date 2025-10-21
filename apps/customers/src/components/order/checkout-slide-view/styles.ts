@@ -216,7 +216,7 @@ export const SaveAddressOption = styled.div`
 
     input[type='checkbox'] {
       margin-right: 0.5rem;
-      accent-color: var(--primary-color, #3b82f6);
+      accent-color: var(--primary, #3b82f6);
     }
   }
 `

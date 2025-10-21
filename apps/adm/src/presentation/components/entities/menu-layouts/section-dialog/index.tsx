@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
-
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { MenuSection } from '@/domain/models/menu-layout.model'
-import { Dialog } from '@/presentation/components/ui/dialog'
 import { BannerSection } from '@/presentation/components/entities/menu-layouts/sections/banner-section'
 import { CarouselSection } from '@/presentation/components/entities/menu-layouts/sections/carousel-section'
 import { CategoriesSection } from '@/presentation/components/entities/menu-layouts/sections/categories-section'
 import { CombosSection } from '@/presentation/components/entities/menu-layouts/sections/combos-section'
 import { MenuItemsSection } from '@/presentation/components/entities/menu-layouts/sections/menu-items-section'
+import { Dialog } from '@menuxp/ui'
+import React, { useEffect, useState } from 'react'
 
 import * as S from './styles'
 

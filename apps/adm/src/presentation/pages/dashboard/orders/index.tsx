@@ -1,17 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { toast } from 'react-hot-toast'
-
 import { GetOrdersUsecase } from '@/application/orders/get-orders.usecase'
 import { UpdateOrderUsecase } from '@/application/orders/update-order.usecase'
 import type { Order, OrderStatus } from '@/domain/models/order.model'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Loading } from '@/presentation/components/ui/loading'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
+import { Loading } from '@menuxp/ui'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { OrderDetailDialog } from './components/order-detail-dialog'
 import { OrdersKanban } from './components/orders-kanban'
 
-import * as S from './styles'
+import * as S from '../styles'
 
 export const OrdersPage = () => {
   const { restaurantId } = useAuth()

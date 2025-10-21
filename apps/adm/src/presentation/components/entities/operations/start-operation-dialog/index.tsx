@@ -1,6 +1,5 @@
-import { Button } from '@menuxp/ui'
-import { Dialog } from '@/presentation/components/ui/dialog'
-import { Play, Warning, CheckCircle, Clock, Users, ChartLine } from '@phosphor-icons/react'
+import { Button, Dialog } from '@menuxp/ui'
+import { ChartLine, CheckCircle, Clock, Play, Users, Warning } from '@phosphor-icons/react'
 import styled from 'styled-components'
 
 interface StartOperationDialogProps {
@@ -28,14 +27,13 @@ const StyledDialog = styled(Dialog)`
     &::-webkit-scrollbar-thumb {
       background: ${({ theme }) => theme.colors.mx.gray[400]};
       border-radius: ${({ theme }) => theme.borderRadius.xs};
-      
+
       &:hover {
         background: ${({ theme }) => theme.colors.secondary};
       }
     }
   }
-  
-  /* Ajuste para mobile - garantir que o modal não seja sobreposto pelo header */
+
   @media (max-width: 768px) {
     &[data-state='open'] {
       margin-top: 0;
@@ -62,11 +60,11 @@ export const StartOperationDialog = ({ isOpen, onClose, onConfirm, isLoading = f
       style={{ width: '95%', maxWidth: '800px', maxHeight: '90vh' }}
       footer={
         <DialogFooter>
-          <CancelButton 
-            type="button" 
-            variant="ghost" 
+          <CancelButton
+            type="button"
+            variant="ghost"
             size="lg"
-            onClick={onClose} 
+            onClick={onClose}
             disabled={isLoading}
             aria-label="Cancelar início da operação"
             style={{ display: 'inline-flex' }}
@@ -98,12 +96,11 @@ export const StartOperationDialog = ({ isOpen, onClose, onConfirm, isLoading = f
           <WarningText>
             <WarningTitle>Importante!</WarningTitle>
             <WarningDescription>
-              Antes de iniciar, verifique se seu estabelecimento está preparado: cardápio atualizado, 
-              estoque organizado e equipe pronta para atender.
+              Antes de iniciar, verifique se seu estabelecimento está preparado: cardápio atualizado, estoque organizado
+              e equipe pronta para atender.
             </WarningDescription>
           </WarningText>
         </WarningSection>
-        
         <InfoSection>
           <InfoTitle>🎯 O que acontece quando você inicia:</InfoTitle>
           <InfoList role="list">
@@ -133,7 +130,6 @@ export const StartOperationDialog = ({ isOpen, onClose, onConfirm, isLoading = f
             </InfoItem>
           </InfoList>
         </InfoSection>
-
         <ReadySection>
           <ReadyTitle>✅ Pronto para começar?</ReadyTitle>
           <ReadyDescription>
@@ -153,25 +149,24 @@ const DialogFooter = styled.div`
   margin-top: ${({ theme }) => theme.spacing.md} !important;
   align-items: center;
   width: 100%;
-  
+
   button {
     min-width: 160px;
     height: 48px;
     flex-shrink: 0;
   }
-  
+
   @media (max-width: 640px) {
     flex-direction: column-reverse !important;
     gap: ${({ theme }) => theme.spacing.sm};
     width: 100%;
-    
-    /* Força container flexível igual */
+
     > * {
       width: 100% !important;
       flex: 1 1 auto !important;
-      
-      /* Força botão interno */
-      button, .button {
+
+      button,
+      .button {
         width: 100% !important;
         min-width: 0 !important;
         max-width: none !important;
@@ -190,7 +185,7 @@ const CancelButton = styled(Button)`
     color: ${({ theme }) => theme.colors.mx.black};
     border: 1px solid ${({ theme }) => theme.colors.mx.black};
     box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
-    
+
     &:hover {
       background: transparent;
       color: ${({ theme }) => theme.colors.error};
@@ -217,7 +212,7 @@ const WarningSection = styled.div`
   background: ${({ theme }) => theme.colors.warning}15;
   border: 2px solid ${({ theme }) => theme.colors.warning};
   border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  
+
   @media ${({ theme }) => theme.breakpoints.sm} {
     flex-direction: row;
     align-items: flex-start;
@@ -239,7 +234,7 @@ const WarningIcon = styled.div`
   font-size: ${({ theme }) => theme.typography.fontSizes.lg};
   flex-shrink: 0;
   box-shadow: ${({ theme }) => theme.shadows.sm};
-  
+
   @media ${({ theme }) => theme.breakpoints.xs} {
     width: 32px;
     height: 32px;
@@ -252,7 +247,7 @@ const WarningText = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.xs};
   width: 100%;
-  
+
   @media ${({ theme }) => theme.breakpoints.sm} {
     flex: 1;
     width: auto;
@@ -267,7 +262,7 @@ const WarningTitle = styled.h4`
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  
+
   @media ${({ theme }) => theme.breakpoints.xs} {
     font-size: ${({ theme }) => theme.typography.fontSizes.md};
   }
@@ -296,7 +291,7 @@ const InfoTitle = styled.h4`
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  
+
   @media ${({ theme }) => theme.breakpoints.xs} {
     font-size: ${({ theme }) => theme.typography.fontSizes.md};
   }
@@ -320,14 +315,14 @@ const InfoItem = styled.li`
   border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   transition: all ${({ theme }) => theme.animations.durations.fast} ${({ theme }) => theme.animations.easings.ease};
-  
+
   &:hover {
     background: ${({ theme }) => theme.colors.mx.gray[100]};
     border-color: ${({ theme }) => theme.colors.primary};
     transform: translateY(-1px);
     box-shadow: ${({ theme }) => theme.shadows.sm};
   }
-  
+
   @media ${({ theme }) => theme.breakpoints.xs} {
     padding: ${({ theme }) => theme.spacing.xs};
     gap: ${({ theme }) => theme.spacing.xs};
@@ -346,7 +341,7 @@ const InfoIcon = styled.div`
   font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   flex-shrink: 0;
   margin-top: 2px;
-  
+
   @media ${({ theme }) => theme.breakpoints.xs} {
     width: 20px;
     height: 20px;
@@ -372,7 +367,7 @@ const ReadySection = styled.div`
   border: 2px solid ${({ theme }) => theme.colors.success};
   border-radius: ${({ theme }) => theme.borderRadius.brutalist};
   text-align: center;
-  
+
   @media ${({ theme }) => theme.breakpoints.xs} {
     padding: ${({ theme }) => theme.spacing.md};
   }
@@ -386,7 +381,7 @@ const ReadyTitle = styled.h4`
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  
+
   @media ${({ theme }) => theme.breakpoints.xs} {
     font-size: ${({ theme }) => theme.typography.fontSizes.md};
   }

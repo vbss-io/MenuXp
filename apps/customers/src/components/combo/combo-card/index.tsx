@@ -1,9 +1,9 @@
 import { PlusIcon } from '@phosphor-icons/react'
 import { useNavigate } from 'react-router-dom'
 
-import { Button } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { Combo } from '@/types/combo'
+import { Button } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -58,8 +58,8 @@ export const ComboCard: React.FC<ComboCardProps> = ({ item, onClick, onAddToCart
       style={
         {
           cursor: 'pointer',
-          '--primary-color': primaryColor,
-          '--secondary-color': secondaryColor
+          '--primary': primaryColor,
+          '--secondary': secondaryColor
         } as React.CSSProperties
       }
     >

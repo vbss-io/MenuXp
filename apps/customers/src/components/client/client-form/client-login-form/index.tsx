@@ -36,8 +36,8 @@ export const ClientLoginForm = ({ onModeChange, onSuccess }: ClientLoginFormProp
       className="client-login-form"
       style={
         {
-          '--primary-color': primaryColor,
-          '--secondary-color': secondaryColor
+          '--primary': primaryColor,
+          '--secondary': secondaryColor
         } as React.CSSProperties
       }
     >

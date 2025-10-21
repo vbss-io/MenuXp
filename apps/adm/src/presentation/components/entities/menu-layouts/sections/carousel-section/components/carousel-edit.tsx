@@ -1,16 +1,14 @@
-import { PlusIcon, UploadIcon, WarningIcon, XIcon } from '@phosphor-icons/react'
-import { motion } from 'framer-motion'
-import { useMemo, useRef, useState, useEffect } from 'react'
-import toast from 'react-hot-toast'
-
 import { AddSectionUsecase } from '@/application/menu-layouts/sections/add-section.usecase'
 import { UpdateCarouselSectionUsecase } from '@/application/menu-layouts/sections/update-carousel-section.usecase'
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { CarouselConfig, MenuSection } from '@/domain/models/menu-layout.model'
 import type { MenuSectionDefinition } from '@/domain/models/menu-section-definition.model'
-import { Button } from '@menuxp/ui'
-import { Loading } from '@/presentation/components/ui/loading'
 import { validateSection } from '@/presentation/hooks/use-menu-layouts'
+import { Button, Loading } from '@menuxp/ui'
+import { PlusIcon, UploadIcon, WarningIcon, XIcon } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import toast from 'react-hot-toast'
 
 import * as S from '../styles'
 

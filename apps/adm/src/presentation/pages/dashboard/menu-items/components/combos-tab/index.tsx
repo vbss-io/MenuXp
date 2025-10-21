@@ -1,11 +1,10 @@
+import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
+import { GetCombosUsecase } from '@/application/combos/get-combos.usecase'
+import type { Combo } from '@/domain/models/combo.model'
 import { PackageIcon, PlusIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
-
-import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
-import { GetCombosUsecase } from '@/application/combos/get-combos.usecase'
-import type { Combo } from '@/domain/models/combo.model'
 
 import { ComboCard } from '@/presentation/components/entities/combos/combo-card'
 import {
@@ -13,14 +12,11 @@ import {
   type ComboFilters as ComboFiltersType
 } from '@/presentation/components/entities/combos/combo-filters'
 import { ComboModal } from '@/presentation/components/entities/combos/combo-modal'
-import { Button } from '@menuxp/ui'
-import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
-import { Loading } from '@/presentation/components/ui/loading'
-import { Pagination } from '@/presentation/components/ui/pagination'
 import { useAuth } from '@/presentation/hooks/use-auth'
+import { Button, Combobox, Loading, Pagination, type ComboboxOption } from '@menuxp/ui'
 
-import * as S from '../../styles'
-
+import * as Page from '../../../styles'
+import * as S from '../styles'
 interface CombosTabProps {
   currentPage: number
   onPageChange: (page: number) => void
@@ -117,15 +113,15 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
   }
 
   return (
-    <S.TabContainer>
-      <S.ActionsRow>
+    <Page.TabContainer>
+      <Page.ActionsRow>
         <Combobox
           placeholder="Filtrar por categoria"
           value={selectedCategory}
           onChange={handleCategoryChange}
           onSearch={handleCategorySearch}
         />
-        <S.ActionsRowButtons>
+        <Page.ActionsRowButtons>
           <ComboFilters
             filters={filters}
             onFiltersChange={setFilters}
@@ -142,12 +138,12 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
           <Button variant="primary" onClick={() => setIsComboModalOpen(true)} leftIcon={<PlusIcon size={16} />}>
             Novo Combo
           </Button>
-        </S.ActionsRowButtons>
-      </S.ActionsRow>
+        </Page.ActionsRowButtons>
+      </Page.ActionsRow>
       {isLoading ? (
-        <S.LoadingWrapper>
+        <Page.LoadingWrapper>
           <Loading />
-        </S.LoadingWrapper>
+        </Page.LoadingWrapper>
       ) : (
         <>
           <motion.div variants={containerVariants} initial="hidden" animate="visible">
@@ -171,12 +167,14 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
                 </AnimatePresence>
               </S.CombosGrid>
             ) : (
-              <S.EmptyState>
-                <S.EmptyStateIcon>
+              <Page.EmptyState>
+                <Page.EmptyStateIcon>
                   <PackageIcon size={48} />
-                </S.EmptyStateIcon>
-                <S.EmptyStateTitle>Nenhum combo criado</S.EmptyStateTitle>
-                <S.EmptyStateText>Crie seu primeiro combo para o menu do seu restaurante</S.EmptyStateText>
+                </Page.EmptyStateIcon>
+                <Page.EmptyStateTitle>Nenhum combo criado</Page.EmptyStateTitle>
+                <Page.EmptyStateDescription>
+                  Crie seu primeiro combo para o menu do seu restaurante
+                </Page.EmptyStateDescription>
                 <Button
                   variant="primary"
                   onClick={() => setIsComboModalOpen(true)}
@@ -185,7 +183,7 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
                 >
                   Criar Primeiro Combo
                 </Button>
-              </S.EmptyState>
+              </Page.EmptyState>
             )}
           </motion.div>
           <Pagination
@@ -202,6 +200,6 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
         combo={editingCombo}
         onSuccess={handleComboModalSuccess}
       />
-    </S.TabContainer>
+    </Page.TabContainer>
   )
 }

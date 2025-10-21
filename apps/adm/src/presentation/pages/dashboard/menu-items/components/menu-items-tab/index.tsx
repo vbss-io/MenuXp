@@ -1,28 +1,22 @@
-import { BowlFoodIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
-
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
 import type { MenuItem } from '@/domain/models/menu-item.model'
-
 import { MenuItemCard } from '@/presentation/components/entities/menu-items/menu-item-card'
 import {
   MenuItemFilters,
   type MenuItemFilters as MenuItemFiltersType
 } from '@/presentation/components/entities/menu-items/menu-item-filters'
 import { MenuItemModal } from '@/presentation/components/entities/menu-items/menu-item-modal'
-import { Button } from '@menuxp/ui'
-import { Combobox, type ComboboxOption } from '@/presentation/components/ui/combobox'
-import { FormInput } from '@/presentation/components/ui/form-input'
-import { Loading } from '@/presentation/components/ui/loading'
-import { Pagination } from '@/presentation/components/ui/pagination'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
+import { Button, Combobox, FormInput, Loading, Pagination, type ComboboxOption } from '@menuxp/ui'
+import { BowlFoodIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 
-import * as S from '../../styles'
-
+import * as Page from '../../../styles'
+import * as S from '../styles'
 interface MenuItemsTabProps {
   currentPage: number
   onPageChange: (page: number) => void
@@ -144,8 +138,8 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
   }
 
   return (
-    <S.TabContainer>
-      <S.ActionsRow>
+    <Page.TabContainer>
+      <Page.ActionsRow>
         <FormInput
           id="search"
           label=""
@@ -162,7 +156,7 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
           onChange={handleCategoryChange}
           onSearch={handleCategorySearch}
         />
-        <S.ActionsRowButtons>
+        <Page.ActionsRowButtons>
           <MenuItemFilters
             filters={filters}
             onFiltersChange={setFilters}
@@ -179,12 +173,12 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
           <Button variant="primary" onClick={handleCreateMenuItem} leftIcon={<PlusIcon size={16} />}>
             Novo Item
           </Button>
-        </S.ActionsRowButtons>
-      </S.ActionsRow>
+        </Page.ActionsRowButtons>
+      </Page.ActionsRow>
       {isLoading ? (
-        <S.LoadingWrapper>
+        <Page.LoadingWrapper>
           <Loading />
-        </S.LoadingWrapper>
+        </Page.LoadingWrapper>
       ) : (
         <>
           <motion.div variants={containerVariants} initial="hidden" animate="visible">
@@ -203,18 +197,18 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
                 </AnimatePresence>
               </S.MenuItemsGrid>
             ) : (
-              <S.EmptyState>
-                <S.EmptyStateIcon>
+              <Page.EmptyState>
+                <Page.EmptyStateIcon>
                   <BowlFoodIcon size={48} />
-                </S.EmptyStateIcon>
-                <S.EmptyStateTitle>
+                </Page.EmptyStateIcon>
+                <Page.EmptyStateTitle>
                   {filters.searchMask ? 'Nenhum item encontrado' : 'Nenhum item criado'}
-                </S.EmptyStateTitle>
-                <S.EmptyStateText>
+                </Page.EmptyStateTitle>
+                <Page.EmptyStateDescription>
                   {filters.searchMask
                     ? 'Tente ajustar os termos de busca'
                     : 'Crie seu primeiro item para o menu do seu restaurante'}
-                </S.EmptyStateText>
+                </Page.EmptyStateDescription>
                 {!filters.searchMask && (
                   <Button
                     variant="primary"
@@ -225,7 +219,7 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
                     Criar Primeiro Item
                   </Button>
                 )}
-              </S.EmptyState>
+              </Page.EmptyState>
             )}
           </motion.div>
           <Pagination currentPage={currentPage} totalItems={totalItems} itemsPerPage={20} onPageChange={onPageChange} />
@@ -237,6 +231,6 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
         menuItem={editingMenuItem}
         onSuccess={handleModalSuccess}
       />
-    </S.TabContainer>
+    </Page.TabContainer>
   )
 }
