@@ -17,7 +17,7 @@ import {
   type MenuItemOptional
 } from '@menuxp/ui'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
@@ -49,11 +49,18 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
   const [selectedIcon, setSelectedIcon] = useState<string>('')
   const [optionals, setOptionals] = useState<MenuItemOptional[]>([])
   const isEditing = !!category
+  
+  const nameMax = 60
+  const descriptionMax = 180
+  const [nameCount, setNameCount] = useState(0)
+  const [descriptionCount, setDescriptionCount] = useState(0)
+  
   const {
     register,
     handleSubmit,
     reset,
     setValue,
+    watch,
     formState: { errors }
   } = useForm<CategoryFormData>({
     resolver: zodResolver(categorySchema),
@@ -89,6 +96,15 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
       }
     }
   }, [isOpen, category, parentCategoryId, reset])
+
+  // Atualiza contadores de caracteres em tempo real
+  useEffect(() => {
+    const subscription = watch((values) => {
+      setNameCount(values.name ? values.name.length : 0)
+      setDescriptionCount(values.description ? values.description.length : 0)
+    })
+    return () => subscription.unsubscribe()
+  }, [watch])
 
   const handleMainCategoryChange = (value: string) => {
     setSelectedMainCategory(value)
@@ -187,19 +203,10 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
 
   const getButtonText = () => {
     if (isLoading) return <Loading />
-    return isEditing ? 'Atualizar' : 'Criar'
+    return isEditing ? 'Atualizar e publicar' : 'Salvar e publicar'
   }
 
   const isDisabled = Array.isArray(category?.subCategories) && category.subCategories.length > 0
-
-  const formGroupVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.4 }
-    }
-  }
 
   return (
     <Dialog
@@ -208,63 +215,128 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
       open={isOpen}
       onOpenChange={onClose}
     >
-      <S.Form>
-        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
-          <FormInput
-            id="name"
-            label="Nome"
-            placeholder="Digite o nome da categoria"
-            error={errors.name?.message}
-            required
-            register={register('name')}
-            fontSize="sm"
-          />
-        </S.FormGroup>
-        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
-          <S.Label>Ícone</S.Label>
-          <IconSelector
-            selectedIcon={selectedIcon}
-            onIconSelect={handleIconSelect}
-            placeholder="Selecionar ícone (opcional)"
-          />
-        </S.FormGroup>
-        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
-          <FormTextarea
-            id="description"
-            label="Descrição"
-            placeholder="Digite uma descrição para a categoria"
-            error={errors.description?.message}
-            register={register('description')}
-            rows={3}
-          />
-        </S.FormGroup>
-        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
-          <S.Label>Categoria Pai</S.Label>
-          <Combobox
-            placeholder="Selecione uma categoria pai (opcional)"
-            value={selectedMainCategory}
-            onChange={handleMainCategoryChange}
-            onSearch={handleMainCategorySearch}
-            disabled={isDisabled}
-          />
-          {isDisabled && (
-            <S.WarningText>Categorias com subcategorias não podem receber uma categoria pai.</S.WarningText>
-          )}
-        </S.FormGroup>
-        <S.FormGroup variants={formGroupVariants} initial="hidden" animate="visible">
-          <OptionalsSection optionals={optionals} setOptionals={setOptionals} disabled={isLoading} />
-        </S.FormGroup>
-        <S.ModalFooter>
-          <Button type="button" variant="ghost" onClick={onClose} disabled={isLoading}>
-            Cancelar
-          </Button>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button type="button" variant="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
-              {getButtonText()}
-            </Button>
-          </motion.div>
-        </S.ModalFooter>
-      </S.Form>
+      <S.CancelButtonStyles>
+        <S.GlobalTextareaStyles>
+          <S.ModalContent>
+            <S.Form>
+              <S.FormGroup
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                <FormInput
+                  id="name"
+                  label="Nome"
+                  placeholder="Ex.: Bebidas, Lanches, Sobremesas"
+                  error={errors.name?.message}
+                  required
+                  register={register('name', { maxLength: nameMax })}
+                  fontSize="sm"
+                  maxLength={nameMax}
+                />
+                <S.FieldHint aria-live="polite">
+                  {Math.min(nameCount, nameMax)}/{nameMax}
+                </S.FieldHint>
+              </S.FormGroup>
+              <S.FormGroup
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                <S.Label>Ícone</S.Label>
+                <IconSelector
+                  selectedIcon={selectedIcon}
+                  onIconSelect={handleIconSelect}
+                  placeholder="Selecionar ícone (opcional)"
+                />
+              </S.FormGroup>
+              <S.FormGroup
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                <FormTextarea
+                  id="description"
+                  label="Descrição"
+                  placeholder="Ex.: Refrigerantes, sucos naturais e bebidas geladas"
+                  error={errors.description?.message}
+                  register={register('description', { maxLength: descriptionMax })}
+                  rows={3}
+                />
+                <S.FieldHint aria-live="polite">
+                  {Math.min(descriptionCount, descriptionMax)}/{descriptionMax}
+                </S.FieldHint>
+              </S.FormGroup>
+              <S.FormGroup
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                <S.Label>Categoria Pai</S.Label>
+                <Combobox
+                  placeholder="Selecione uma categoria pai (opcional)"
+                  value={selectedMainCategory}
+                  onChange={handleMainCategoryChange}
+                  onSearch={handleMainCategorySearch}
+                  disabled={isDisabled}
+                />
+                {isDisabled && (
+                  <S.WarningText>Categorias com subcategorias não podem receber uma categoria pai.</S.WarningText>
+                )}
+              </S.FormGroup>
+              <S.FormGroup
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
+                <OptionalsSection optionals={optionals} setOptionals={setOptionals} disabled={isLoading} />
+              </S.FormGroup>
+              <S.ModalFooter>
+                <S.TertiaryActionButton>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="cancel-button"
+                    onClick={onClose}
+                    disabled={isLoading}
+                  >
+                    Cancelar
+                  </Button>
+                </S.TertiaryActionButton>
+
+                <S.SecondaryActionButton>
+                  <Button type="button" variant="white" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                    Salvar rascunho
+                  </Button>
+                </S.SecondaryActionButton>
+
+                <S.PrimaryActionButton>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button type="button" variant="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                      {getButtonText()}
+                    </Button>
+                  </motion.div>
+                </S.PrimaryActionButton>
+              </S.ModalFooter>
+            </S.Form>
+          </S.ModalContent>
+        </S.GlobalTextareaStyles>
+      </S.CancelButtonStyles>
     </Dialog>
   )
 }

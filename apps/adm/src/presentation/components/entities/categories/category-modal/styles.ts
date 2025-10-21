@@ -1,80 +1,169 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
+export const ModalContent = styled.div`
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  scroll-behavior: smooth;
+`
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.md};
+`
+
+export const FormRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
   gap: ${({ theme }) => theme.spacing.lg};
+
+  @media ${({ theme }) => theme.breakpoints.md} {
+    grid-template-columns: 1fr 1fr;
+  }
 `
 
 export const FormGroup = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.sm};
-  padding: ${({ theme }) => theme.spacing.md};
+  padding: ${({ theme }) => theme.spacing.sm};
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
   border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
+  box-shadow: none;
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+  scroll-margin-bottom: 100px;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: none;
   }
 
   &:focus-within {
     border-color: ${({ theme }) => theme.colors.mx.blue};
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
+    box-shadow: none;
+  }
+
+  /* Unifica rótulos dos campos gerados por componentes de formulário (diretos ou internos) */
+  label, h3 {
+    font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    font-family: ${({ theme }) => theme.typography.fonts.body};
+    color: ${({ theme }) => theme.colors.mx.black};
+    letter-spacing: 0.2px;
+    text-transform: none;
   }
 `
 
 export const Label = styled.label`
-  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
   font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-  font-family: ${({ theme }) => theme.typography.fonts.title};
-  color: ${({ theme }) => theme.colors.mx.black};
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-`
-
-export const Select = styled.select`
-  width: 100%;
-  padding: ${({ theme }) => theme.spacing.md};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
   font-family: ${({ theme }) => theme.typography.fonts.body};
-  background: ${({ theme }) => theme.colors.mx.white};
   color: ${({ theme }) => theme.colors.mx.black};
-  box-shadow: ${({ theme }) => theme.shadows.brutalist};
-  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
-
-  &:focus {
-    outline: none;
-    border-color: ${({ theme }) => theme.colors.mx.red};
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
-    transform: translateY(-1px);
-  }
-
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
-  }
-
-  option[disabled] {
-    color: ${({ theme }) => theme.colors.text.muted};
-    font-style: italic;
-  }
+  letter-spacing: 0.2px;
 `
 
 export const ModalFooter = styled.div`
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: ${({ theme }) => theme.zIndex.modal};
   display: flex;
   justify-content: flex-end;
   gap: ${({ theme }) => theme.spacing.md};
-  margin-top: ${({ theme }) => theme.spacing.lg};
-  padding-top: ${({ theme }) => theme.spacing.lg};
+  margin-top: ${({ theme }) => theme.spacing.md};
+  margin-left: -${({ theme }) => theme.spacing.lg};
+  margin-right: -${({ theme }) => theme.spacing.lg};
+  margin-bottom: 0;
+  padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
+  padding-bottom: calc(${({ theme }) => theme.spacing.sm} + env(safe-area-inset-bottom));
   border-top: 2px solid ${({ theme }) => theme.colors.mx.black};
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(6px);
+  box-shadow: none;
+  min-height: auto;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -16px;
+    height: 16px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    pointer-events: none;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.sm};
+    min-height: auto;
+  }
+`
+
+export const FieldHint = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.text.secondary};
+  margin-top: 0px;
+  display: block;
+`
+
+export const PrimaryActionButton = styled.div`
+  flex: 0 0 auto;
+  min-width: 160px;
+  @media (max-width: 768px) {
+    width: 100%;
+    order: 1;
+  }
+`
+
+export const SecondaryActionButton = styled.div`
+  flex: 0 0 auto;
+  @media (max-width: 768px) {
+    width: 100%;
+    order: 2;
+  }
+`
+
+export const TertiaryActionButton = styled.div`
+  flex: 0 0 auto;
+  @media (max-width: 768px) {
+    width: 100%;
+    order: 3;
+  }
+`
+
+// Estilos customizados para o botão de cancelar
+export const CancelButtonStyles = styled.div`
+  .cancel-button {
+    &.button.ghost {
+      color: ${({ theme }) => theme.colors.mx.black} !important;
+      
+      &:hover:not(:disabled) {
+        background-color: transparent !important;
+        color: ${({ theme }) => theme.colors.mx.red} !important;
+        border: 1px solid ${({ theme }) => theme.colors.mx.red} !important;
+        box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.red} !important;
+        transform: translateY(-2px);
+      }
+    }
+  }
+`
+
+// Estilo global para textarea no modal - foco preto ao invés de vermelho
+export const GlobalTextareaStyles = styled.div`
+  textarea:focus {
+    border-color: ${({ theme }) => theme.colors.mx.black} !important;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1) !important;
+    outline: none !important;
+  }
+
+  input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 2px solid #000 !important;
+    outline-offset: 2px !important;
+  }
 `
 
 export const WarningText = styled.span`
