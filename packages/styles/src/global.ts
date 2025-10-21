@@ -69,7 +69,27 @@ const coreGlobalStyles = css`
     &[class*="title"] {
       font-family: ${({ theme }) => theme.typography.fonts.title};
       font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
+      letter-spacing: 0.5px;
     }
+  }
+
+  /* Seletores específicos para títulos de modais e dialogs */
+  [data-radix-dialog-title],
+  [data-radix-dialog-content] h1,
+  [data-radix-dialog-content] h2,
+  [data-radix-dialog-content] h3,
+  [data-radix-dialog-content] h4,
+  [data-radix-dialog-content] h5,
+  [data-radix-dialog-content] h6,
+  .dialog h1,
+  .dialog h2,
+  .dialog h3,
+  .dialog h4,
+  .dialog h5,
+  .dialog h6 {
+    font-family: ${({ theme }) => theme.typography.fonts.title} !important;
+    font-weight: ${({ theme }) => theme.typography.fontWeights.regular} !important;
+    letter-spacing: 0.5px !important;
   }
 
   input, textarea, select {

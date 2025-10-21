@@ -407,3 +407,20 @@ export const SectionSubtitle = styled.p`
   margin: 0;
   opacity: 0.7;
 `
+
+// Estilos customizados para o botão de cancelar
+export const CancelButtonStyles = styled.div`
+  .cancel-button {
+    &.button.ghost {
+      color: ${({ theme }) => theme.colors.mx.black} !important;
+      
+      &:hover:not(:disabled) {
+        background-color: transparent !important;
+        color: ${({ theme }) => theme.colors.mx.red} !important;
+        border: 1px solid ${({ theme }) => theme.colors.mx.red} !important;
+        box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.red} !important;
+        transform: translateY(-2px);
+      }
+    }
+  }
+`

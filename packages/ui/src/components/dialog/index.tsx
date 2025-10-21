@@ -17,7 +17,10 @@ export const Dialog = ({ className, ...props }: DialogProps) => {
       rounded={props.rounded ?? 'none'}
       fontSize={props.fontSize ?? 'sm'}
       className={classes}
-    />
+    >
+      <S.SeparatorLine />
+      {props.children}
+    </S.StyledDialog>
   )
 }
 

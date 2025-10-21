@@ -13,8 +13,8 @@ import {
 export const createTheme = (overrides?: Partial<DefaultTheme>): DefaultTheme => {
   const baseTheme: DefaultTheme = {
     colors: {
-      primary: menuXpColors.blue,
-      secondary: menuXpColors.yellow,
+      primary: menuXpColors.yellow,
+      secondary: menuXpColors.blue,
       highlight: menuXpColors.red,
       neutral: menuXpColors.black,
       background: menuXpColors.gray[50],

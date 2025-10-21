@@ -129,7 +129,8 @@ export const ButtonContainer = styled.div`
         color: ${({ theme }) => theme.colors.mx.white};
         transform: translateY(-2px);
         box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.black};
-      }
+        border: 1px solid ${({ theme }) => theme.colors.mx.white};
+        }
     }
 
     &.game {

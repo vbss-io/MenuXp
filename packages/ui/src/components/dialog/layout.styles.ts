@@ -1,4 +1,11 @@
 export const dialogLayoutGlobalStyles = `
+  .dialog.layout-menuxp[data-state='open'] {
+    border: 1px solid #000000 !important;
+    border-radius: 16px !important;
+    box-shadow: 6px 8px 0 #000000 !important;
+    font-weight: 500 !important;
+  }
+
   .dialog.layout-default[data-state='open'] {
     border: 2px solid hsl(220, 13%, 91%);
     border-radius: 8px;

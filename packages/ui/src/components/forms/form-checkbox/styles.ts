@@ -40,10 +40,6 @@ export const CheckboxContainer = styled.div`
         color: ${({ theme }) => theme.colors.mx.black};
         transition: color ${({ theme }) => theme.animations.durations.normal}
           ${({ theme }) => theme.animations.easings.ease};
-
-        &:hover {
-          color: ${({ theme }) => theme.colors.primary};
-        }
       }
     }
   }

@@ -9,14 +9,10 @@ export const StyledTextareaContainer = styled.div`
     .textareaContainer {
       .textareaLabel {
         font-size: ${({ theme }) => theme.typography.fontSizes.xs};
-        font-family: ${({ theme }) => theme.typography.fonts.title};
+        font-family: ${({ theme }) => theme.typography.fonts.body};
         color: ${({ theme }) => theme.colors.mx.black};
         margin-bottom: ${({ theme }) => theme.spacing.xs};
         transition: color ${({ theme }) => `${theme.animations.durations.normal} ${theme.animations.easings.ease}`};
-
-        &:hover {
-          color: ${({ theme }) => theme.colors.primary};
-        }
       }
 
       .textarea {

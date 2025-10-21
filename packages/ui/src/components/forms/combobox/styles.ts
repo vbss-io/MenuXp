@@ -15,12 +15,10 @@ export const ComboboxWrapper = styled.div`
 
 export const Label = styled.label`
   &.combobox-label {
-    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    font-size: ${({ theme }) => theme.typography.fontSizes.xs};
     font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-    font-family: ${({ theme }) => theme.typography.fonts.title};
+    font-family: ${({ theme }) => theme.typography.fonts.body};
     color: ${({ theme }) => theme.colors.mx.black};
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
   }
 `
 

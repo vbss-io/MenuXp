@@ -1,10 +1,9 @@
 export const buttonLayoutGlobalStyles = `
   .button.primary {
-    background-color: var(--restaurant-secondary-color) !important;
+    background-color: var(--restaurant-primary-color) !important;
     
     &:hover:not(:disabled) {
-      background-color: var(--restaurant-primary-color) !important;
-      border-color: var(--restaurant-primary-color) !important;
+      background-color: var(--restaurant-secondary-color) !important;
     }
 
     &::before {
@@ -31,19 +30,22 @@ export const buttonLayoutGlobalStyles = `
   .button.outline {
     color: var(--restaurant-primary-color) !important;
     border-color: var(--restaurant-primary-color) !important;
-    
+    box-shadow: 3px 3px 0px var(--restaurant-primary-color) !important;
+   
     &:hover:not(:disabled) {
       background-color: var(--restaurant-primary-color) !important;
-      border-color: var(--restaurant-primary-color) !important;
-    }
+      color: white !important;
+      }
   }
 
   .button.ghost {
     color: var(--restaurant-primary-color) !important;
     
     &:hover:not(:disabled) {
-      background-color: var(--restaurant-primary-color) !important;
-    }
+      background-color: transparent !important;
+      border: 1px solid var(--restaurant-primary-color) !important;
+      box-shadow: 3px 3px 0px var(--restaurant-primary-color) !important;
+      }
   }
 
   .button.layout-default {
