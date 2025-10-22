@@ -10,13 +10,13 @@ import * as Page from '../styles'
 type TabType = 'items' | 'categories' | 'combos'
 
 export const MenuItemsPage = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('items')
+  const [activeTab, setActiveTab] = useState<TabType>('categories')
   const [currentPage, setCurrentPage] = useState(1)
 
   const tabs = [
+    { id: 'categories' as const, label: 'Categorias', icon: <FolderIcon size={20} /> },
     { id: 'items' as const, label: 'Itens', icon: <BowlFoodIcon size={20} /> },
-    { id: 'combos' as const, label: 'Combos', icon: <PackageIcon size={20} /> },
-    { id: 'categories' as const, label: 'Categorias', icon: <FolderIcon size={20} /> }
+    { id: 'combos' as const, label: 'Combos', icon: <PackageIcon size={20} /> }
   ]
 
   const handlePageChange = (page: number) => {
