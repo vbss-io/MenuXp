@@ -17,6 +17,7 @@ import {
   type ComboboxOption,
   type MenuItemOptional
 } from '@menuxp/ui'
+import { PlusIcon, TrashIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -583,11 +584,35 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
                 initial="hidden"
                 animate="visible"
               >
-                <S.Label>Itens do Combo</S.Label>
-                <S.ItemsContainer>
-                  {comboItems.map((item, index) => (
-                    <S.ItemRow key={index}>
-                      <S.ItemCombobox>
+                <S.ComboItemsHeader>
+                  <S.Label>Itens do Combo</S.Label>
+                  <S.ComboItemsSubtitle>
+                    Selecione os itens que fazem parte deste combo e suas quantidades.
+                  </S.ComboItemsSubtitle>
+                  {comboItems.length === 0 && (
+                    <S.ChipsContainer>
+                      <S.Chip>Ex.: X-Burguer</S.Chip>
+                      <S.Chip>Ex.: Batata Frita</S.Chip>
+                      <S.Chip>Ex.: Refrigerante</S.Chip>
+                    </S.ChipsContainer>
+                  )}
+                </S.ComboItemsHeader>
+                {comboItems.map((item, index) => (
+                  <S.ComboItemCard key={index}>
+                    <S.ComboItemRemoveButton
+                      type="button"
+                      onClick={() => {
+                        const newItems = comboItems.filter((_, i) => i !== index)
+                        setComboItems(newItems)
+                      }}
+                      disabled={isLoading}
+                      title="Remover item"
+                    >
+                      <TrashIcon size={16} />
+                    </S.ComboItemRemoveButton>
+                    <S.ComboItemGrid>
+                      <S.ComboItemInputGroup>
+                        <S.Label>Item do menu *</S.Label>
                         <Combobox
                           placeholder="Selecionar item"
                           value={item.menuItemId}
@@ -613,58 +638,38 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
                           }}
                           onSearch={handleMenuItemSearch}
                         />
-                      </S.ItemCombobox>
-                      <S.ItemInput
-                        type="number"
-                        placeholder="Qtd"
-                        value={item.quantity}
-                        onChange={(e) => {
-                          const newItems = [...comboItems]
-                          newItems[index].quantity = parseInt(e.target.value) || 1
-                          setComboItems(newItems)
-                        }}
-                      />
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          const newItems = comboItems.filter((_, i) => i !== index)
-                          setComboItems(newItems)
-                        }}
-                      >
-                        Remover
-                      </Button>
-                    </S.ItemRow>
-                  ))}
+                      </S.ComboItemInputGroup>
+                      <S.ComboItemInputGroup>
+                        <S.Label>Quantidade *</S.Label>
+                        <S.ComboItemQuantityInput
+                          type="number"
+                          placeholder="1"
+                          value={item.quantity}
+                          onChange={(e) => {
+                            const newItems = [...comboItems]
+                            newItems[index].quantity = parseInt(e.target.value) || 1
+                            setComboItems(newItems)
+                          }}
+                          min="1"
+                        />
+                      </S.ComboItemInputGroup>
+                    </S.ComboItemGrid>
+                  </S.ComboItemCard>
+                ))}
+                <S.AddComboItemButtonContainer>
                   <Button
                     type="button"
-                    variant="outline"
+                    variant="white"
                     size="sm"
                     onClick={() => {
                       setComboItems([...comboItems, { menuItemId: '', name: '', price: 0, quantity: 1 }])
                     }}
+                    disabled={isLoading}
+                    leftIcon={<PlusIcon size={16} weight="bold" />}
                   >
                     Adicionar Item
                   </Button>
-                </S.ItemsContainer>
-
-                {comboItems.filter((item) => item.menuItemId).length > 0 && (
-                  <S.SelectedItemsContainer>
-                    <S.SelectedItemsTitle>Itens Selecionados:</S.SelectedItemsTitle>
-                    {comboItems
-                      .filter((item) => item.menuItemId)
-                      .map((item, index) => (
-                        <S.SelectedItemCard key={index}>
-                          <S.SelectedItemInfo>
-                            <S.SelectedItemName>{item.name}</S.SelectedItemName>
-                            <S.SelectedItemPrice>R$ {item.price.toFixed(2)}</S.SelectedItemPrice>
-                            <S.SelectedItemQuantity>Qtd: {item.quantity}</S.SelectedItemQuantity>
-                          </S.SelectedItemInfo>
-                        </S.SelectedItemCard>
-                      ))}
-                  </S.SelectedItemsContainer>
-                )}
+                </S.AddComboItemButtonContainer>
               </S.FormGroup>
               <S.FormGroup
                 variants={{
@@ -685,6 +690,7 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
                   <Button
                     type="button"
                     variant="ghost"
+                    size="sm"
                     className="cancel-button"
                     onClick={onClose}
                     disabled={isLoading}
@@ -694,14 +700,14 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
                 </S.TertiaryActionButton>
 
                 <S.SecondaryActionButton>
-                  <Button type="button" variant="white" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                  <Button type="button" variant="white" size="sm" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
                     Salvar rascunho
                   </Button>
                 </S.SecondaryActionButton>
 
                 <S.PrimaryActionButton>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button type="button" variant="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                    <Button type="button" variant="primary" size="sm" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
                       {getButtonText()}
                     </Button>
                   </motion.div>

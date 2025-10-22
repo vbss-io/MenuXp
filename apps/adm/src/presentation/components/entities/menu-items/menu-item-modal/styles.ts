@@ -370,7 +370,7 @@ export const GlobalTextareaStyles = styled.div`
 
 export const PrimaryActionButton = styled.div`
   flex: 0 0 auto;
-  min-width: 160px;
+  min-width: 200px;
   @media (max-width: 768px) {
     width: 100%;
     order: 1;
@@ -379,6 +379,7 @@ export const PrimaryActionButton = styled.div`
 
 export const SecondaryActionButton = styled.div`
   flex: 0 0 auto;
+  min-width: 200px;
   @media (max-width: 768px) {
     width: 100%;
     order: 2;
@@ -387,6 +388,7 @@ export const SecondaryActionButton = styled.div`
 
 export const TertiaryActionButton = styled.div`
   flex: 0 0 auto;
+  min-width: 200px;
   @media (max-width: 768px) {
     width: 100%;
     order: 3;

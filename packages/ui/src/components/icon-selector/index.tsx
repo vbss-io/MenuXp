@@ -7,13 +7,15 @@ interface IconSelectorProps {
   onIconSelect: (icon: string) => void
   placeholder?: string
   disabled?: boolean
+  variant?: 'white' | 'outline' | 'primary' | 'secondary' | 'danger' | 'ghost'
 }
 
 export const IconSelector = ({
   selectedIcon,
   onIconSelect,
   placeholder = 'Selecionar ícone',
-  disabled = false
+  disabled = false,
+  variant = 'white'
 }: IconSelectorProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
@@ -53,7 +55,7 @@ export const IconSelector = ({
         open={isOpen}
         onOpenChange={setIsOpen}
         trigger={
-          <Button variant="outline" size="md" disabled={disabled} type="button" onClick={() => setIsOpen(!isOpen)}>
+          <Button variant={variant} size="sm" disabled={disabled} type="button" onClick={() => setIsOpen(!isOpen)}>
             {SelectedIconComponent ? <SelectedIconComponent size={20} /> : <span>{placeholder}</span>}
           </Button>
         }

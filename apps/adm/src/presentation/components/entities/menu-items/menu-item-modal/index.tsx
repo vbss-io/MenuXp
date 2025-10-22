@@ -518,6 +518,7 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
                   <Button
                     type="button"
                     variant="ghost"
+                    size="sm"
                     className="cancel-button"
                     onClick={onClose}
                     disabled={isLoading}
@@ -527,14 +528,14 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
                 </S.TertiaryActionButton>
 
                 <S.SecondaryActionButton>
-                  <Button type="button" variant="white" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                  <Button type="button" variant="white" size="sm" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
                     Salvar rascunho
                   </Button>
                 </S.SecondaryActionButton>
 
                 <S.PrimaryActionButton>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button type="button" variant="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                    <Button type="button" variant="primary" size="sm" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
                       {getButtonText()}
                     </Button>
                   </motion.div>

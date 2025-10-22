@@ -14,10 +14,13 @@ import {
   Loading,
   OptionalsSection,
   type ComboboxOption,
-  type MenuItemOptional
+  type MenuItemOptional,
+  ICONS,
+  ICONS_KEYS
 } from '@menuxp/ui'
+import { TrashIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
@@ -49,12 +52,11 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
   const [selectedIcon, setSelectedIcon] = useState<string>('')
   const [optionals, setOptionals] = useState<MenuItemOptional[]>([])
   const isEditing = !!category
-  
+
   const nameMax = 60
   const descriptionMax = 180
   const [nameCount, setNameCount] = useState(0)
   const [descriptionCount, setDescriptionCount] = useState(0)
-  
   const {
     register,
     handleSubmit,
@@ -249,21 +251,6 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
                 initial="hidden"
                 animate="visible"
               >
-                <S.Label>Ícone</S.Label>
-                <IconSelector
-                  selectedIcon={selectedIcon}
-                  onIconSelect={handleIconSelect}
-                  placeholder="Selecionar ícone (opcional)"
-                />
-              </S.FormGroup>
-              <S.FormGroup
-                variants={{
-                  hidden: { opacity: 0, y: 10 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
-                }}
-                initial="hidden"
-                animate="visible"
-              >
                 <FormTextarea
                   id="description"
                   label="Descrição"
@@ -304,6 +291,61 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
                 initial="hidden"
                 animate="visible"
               >
+                <S.IconSelectorHeader>
+                  <S.Label>Ícone</S.Label>
+                  <S.IconSelectorSubtitle>
+                    Escolha um ícone para representar visualmente esta categoria no menu.
+                  </S.IconSelectorSubtitle>
+                  {!selectedIcon && (
+                    <S.ChipsContainer>
+                      <S.Chip>🍔 Hambúrgueres</S.Chip>
+                      <S.Chip>🍕 Pizzas</S.Chip>
+                      <S.Chip>🥤 Bebidas</S.Chip>
+                    </S.ChipsContainer>
+                  )}
+                </S.IconSelectorHeader>
+                {selectedIcon && (
+                  <S.IconPreviewCard>
+                    <S.IconPreviewWrapper>
+                      {(() => {
+                        const iconName = ICONS_KEYS[selectedIcon]
+                        const IconComponent = iconName ? ICONS[iconName as keyof typeof ICONS] : null
+                        return IconComponent ? <IconComponent size={32} /> : null
+                      })()}
+                    </S.IconPreviewWrapper>
+                    <S.IconPreviewInfo>
+                      <S.IconPreviewName>Ícone selecionado</S.IconPreviewName>
+                      <S.IconPreviewKey>{selectedIcon}</S.IconPreviewKey>
+                    </S.IconPreviewInfo>
+                    <S.IconRemoveButton
+                      type="button"
+                      onClick={() => handleIconSelect('')}
+                      disabled={isLoading}
+                      title="Remover ícone"
+                    >
+                      <TrashIcon size={16} />
+                    </S.IconRemoveButton>
+                  </S.IconPreviewCard>
+                )}
+                {!selectedIcon && (
+                  <S.IconSelectorButtonContainer>
+                    <IconSelector
+                      selectedIcon={selectedIcon}
+                      onIconSelect={handleIconSelect}
+                      placeholder="Selecionar Ícone"
+                      variant="white"
+                    />
+                  </S.IconSelectorButtonContainer>
+                )}
+              </S.FormGroup>
+              <S.FormGroup
+                variants={{
+                  hidden: { opacity: 0, y: 10 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+                }}
+                initial="hidden"
+                animate="visible"
+              >
                 <OptionalsSection optionals={optionals} setOptionals={setOptionals} disabled={isLoading} />
               </S.FormGroup>
               <S.ModalFooter>
@@ -311,6 +353,7 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
                   <Button
                     type="button"
                     variant="ghost"
+                    size="sm"
                     className="cancel-button"
                     onClick={onClose}
                     disabled={isLoading}
@@ -320,14 +363,20 @@ export const CategoryModal = ({ isOpen, onClose, category, parentCategoryId, onS
                 </S.TertiaryActionButton>
 
                 <S.SecondaryActionButton>
-                  <Button type="button" variant="white" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                  <Button type="button" variant="white" size="sm" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
                     Salvar rascunho
                   </Button>
                 </S.SecondaryActionButton>
 
                 <S.PrimaryActionButton>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button type="button" variant="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="sm"
+                      disabled={isLoading}
+                      onClick={handleSubmit(onSubmit)}
+                    >
                       {getButtonText()}
                     </Button>
                   </motion.div>

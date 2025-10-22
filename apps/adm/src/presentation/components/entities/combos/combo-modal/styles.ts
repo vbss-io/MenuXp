@@ -112,7 +112,7 @@ export const FieldHint = styled.span`
 
 export const PrimaryActionButton = styled.div`
   flex: 0 0 auto;
-  min-width: 160px;
+  min-width: 200px;
   @media (max-width: 768px) {
     width: 100%;
     order: 1;
@@ -121,6 +121,7 @@ export const PrimaryActionButton = styled.div`
 
 export const SecondaryActionButton = styled.div`
   flex: 0 0 auto;
+  min-width: 200px;
   @media (max-width: 768px) {
     width: 100%;
     order: 2;
@@ -129,6 +130,7 @@ export const SecondaryActionButton = styled.div`
 
 export const TertiaryActionButton = styled.div`
   flex: 0 0 auto;
+  min-width: 200px;
   @media (max-width: 768px) {
     width: 100%;
     order: 3;
@@ -302,25 +304,112 @@ export const SliderValue = styled.span`
   text-align: center;
 `
 
-export const ItemsContainer = styled.div`
+export const ComboItemsHeader = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.sm};
-  margin-top: ${({ theme }) => theme.spacing.sm};
+  gap: ${({ theme }) => theme.spacing.xxs};
 `
 
-export const ItemRow = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr auto;
+export const ComboItemsSubtitle = styled.p`
+  font-size: ${({ theme }) => theme.typography.fontSizes.xxs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.gray[500]};
+  margin: 0 !important;
+  line-height: ${({ theme }) => theme.typography.lineHeights.tight};
+  opacity: 0.85;
+`
+
+export const ChipsContainer = styled.div`
+  display: flex;
   gap: ${({ theme }) => theme.spacing.sm};
+  flex-wrap: wrap;
+  margin-top: 0;
+`
+
+export const Chip = styled.span`
+  font-size: ${({ theme }) => theme.typography.fontSizes.xxs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.gray[600]};
+  border: 1px dashed ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  padding: ${({ theme }) => theme.spacing.xxs} ${({ theme }) => theme.spacing.sm};
+  display: inline-flex;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.sm};
-  background: ${({ theme }) => theme.colors.mx.gray[50]};
-  border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  background: ${({ theme }) => theme.colors.mx.white};
 `
 
-export const ItemInput = styled.input`
+export const ComboItemCard = styled.div`
+  position: relative;
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
+  padding: ${({ theme }) => theme.spacing.md};
+  background: ${({ theme }) => theme.colors.mx.white};
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.mx.black};
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+`
+
+export const ComboItemRemoveButton = styled.button`
+  position: absolute;
+  top: ${({ theme }) => theme.spacing.sm};
+  right: ${({ theme }) => theme.spacing.sm};
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
+  border-radius: ${({ theme }) => theme.borderRadius.xs};
+  color: ${({ theme }) => theme.colors.mx.gray[500]};
+  cursor: pointer;
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+
+  &:hover:not(:disabled) {
+    background: ${({ theme }) => theme.colors.mx.red}10;
+    border-color: ${({ theme }) => theme.colors.mx.red};
+    color: ${({ theme }) => theme.colors.mx.red};
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    outline: 2px solid ${({ theme }) => theme.colors.mx.red};
+    outline-offset: 1px;
+  }
+`
+
+export const ComboItemGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: ${({ theme }) => theme.spacing.sm};
+
+  @media ${({ theme }) => theme.breakpoints.md} {
+    grid-template-columns: 2.5fr 1fr;
+    align-items: start;
+    gap: ${({ theme }) => theme.spacing.md};
+  }
+`
+
+export const ComboItemInputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xs};
+`
+
+export const ComboItemQuantityInput = styled.input`
   padding: ${({ theme }) => theme.spacing.sm};
   border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
@@ -332,8 +421,8 @@ export const ItemInput = styled.input`
 
   &:focus {
     outline: none;
-    border-color: ${({ theme }) => theme.colors.mx.red};
-    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.mx.red}20;
+    border-color: ${({ theme }) => theme.colors.mx.black};
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
   }
 
   &::placeholder {
@@ -341,66 +430,19 @@ export const ItemInput = styled.input`
   }
 `
 
-export const ItemCombobox = styled.div`
-  flex: 1;
-`
-
-export const SelectedItemsContainer = styled.div`
-  margin-top: ${({ theme }) => theme.spacing.md};
-  padding: ${({ theme }) => theme.spacing.md};
-  background: ${({ theme }) => theme.colors.mx.gray[50]};
-  border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-`
-
-export const SelectedItemsTitle = styled.h4`
-  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-  font-family: ${({ theme }) => theme.typography.fonts.title};
-  color: ${({ theme }) => theme.colors.mx.black};
-  margin: 0 0 ${({ theme }) => theme.spacing.sm} 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-`
-
-export const SelectedItemCard = styled.div`
+export const AddComboItemButtonContainer = styled.div`
   display: flex;
-  align-items: center;
-  padding: ${({ theme }) => theme.spacing.sm};
-  background: ${({ theme }) => theme.colors.mx.white};
-  border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  margin-bottom: ${({ theme }) => theme.spacing.xs};
+  justify-content: center;
+  width: 100%;
+  margin-top: ${({ theme }) => theme.spacing.xs};
 
-  &:last-child {
-    margin-bottom: 0;
+  .button {
+    width: fit-content !important;
+    min-width: 200px;
+    
+    &.white:hover {
+      background: ${({ theme }) => theme.colors.mx.yellow} !important;
+      border-color: ${({ theme }) => theme.colors.mx.black} !important;
+    }
   }
-`
-
-export const SelectedItemInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xs};
-  flex: 1;
-`
-
-export const SelectedItemName = styled.span`
-  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  color: ${({ theme }) => theme.colors.mx.black};
-`
-
-export const SelectedItemPrice = styled.span`
-  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  color: ${({ theme }) => theme.colors.mx.gray[600]};
-`
-
-export const SelectedItemQuantity = styled.span`
-  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  color: ${({ theme }) => theme.colors.mx.red};
 `
