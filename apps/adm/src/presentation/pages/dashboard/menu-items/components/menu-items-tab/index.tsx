@@ -9,7 +9,7 @@ import {
 import { MenuItemModal } from '@/presentation/components/entities/menu-items/menu-item-modal'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
-import { Button, Combobox, FormInput, Loading, Pagination, type ComboboxOption } from '@menuxp/ui'
+import { Button, Combobox, FormInput, Loading, Pagination, Popover, type ComboboxOption } from '@menuxp/ui'
 import { BowlFoodIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
@@ -102,6 +102,8 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
     loadMenuItems()
   }
 
+  const hasMenuItems = menuItems.length > 0
+
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value)
     setFilters((prev) => ({ ...prev, categoryId: value || undefined }))
@@ -140,21 +142,26 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
   return (
     <Page.TabContainer>
       <Page.ActionsRow>
-        <FormInput
-          id="search"
-          label=""
-          placeholder="Buscar itens..."
-          value={filters.searchMask}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setFilters((prev) => ({ ...prev, searchMask: e.target.value }))
-          }
-          leftIcon={<MagnifyingGlassIcon size={16} />}
-        />
+        <Page.SearchWrapper>
+          <Page.SearchLabel htmlFor="search">Buscar itens</Page.SearchLabel>
+          <FormInput
+            id="search"
+            label=""
+            placeholder="Digite para buscar..."
+            value={filters.searchMask}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setFilters((prev) => ({ ...prev, searchMask: e.target.value }))
+            }
+            leftIcon={<MagnifyingGlassIcon size={16} />}
+            aria-label="Buscar itens do menu"
+          />
+        </Page.SearchWrapper>
         <Combobox
           placeholder="Filtrar por categoria"
           value={selectedCategory}
           onChange={handleCategoryChange}
           onSearch={handleCategorySearch}
+          aria-label="Filtrar itens por categoria"
         />
         <Page.ActionsRowButtons>
           <MenuItemFilters
@@ -169,10 +176,27 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
                 sortOrder: 'asc'
               })
             }
+            isEmpty={!hasMenuItems}
           />
-          <Button variant="primary" onClick={handleCreateMenuItem} leftIcon={<PlusIcon size={16} />}>
-            Novo Item
-          </Button>
+          {hasMenuItems ? (
+            <Button 
+              variant="primary" 
+              onClick={handleCreateMenuItem} 
+              leftIcon={<PlusIcon size={16} />}
+              aria-label="Criar novo item do menu"
+            >
+              Novo Item
+            </Button>
+          ) : (
+            <Button 
+              variant="outline" 
+              onClick={handleCreateMenuItem} 
+              leftIcon={<PlusIcon size={16} />}
+              aria-label="Criar novo item do menu"
+            >
+              Novo Item
+            </Button>
+          )}
         </Page.ActionsRowButtons>
       </Page.ActionsRow>
       {isLoading ? (
@@ -198,26 +222,52 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
               </S.MenuItemsGrid>
             ) : (
               <Page.EmptyState>
-                <Page.EmptyStateIcon>
-                  <BowlFoodIcon size={48} />
-                </Page.EmptyStateIcon>
-                <Page.EmptyStateTitle>
-                  {filters.searchMask ? 'Nenhum item encontrado' : 'Nenhum item criado'}
-                </Page.EmptyStateTitle>
-                <Page.EmptyStateDescription>
-                  {filters.searchMask
-                    ? 'Tente ajustar os termos de busca'
-                    : 'Crie seu primeiro item para o menu do seu restaurante'}
-                </Page.EmptyStateDescription>
-                {!filters.searchMask && (
-                  <Button
-                    variant="primary"
-                    onClick={handleCreateMenuItem}
-                    leftIcon={<PlusIcon size={16} />}
-                    style={{ marginTop: '16px' }}
-                  >
-                    Criar Primeiro Item
-                  </Button>
+                {filters.searchMask ? (
+                  // Estado: Busca sem resultados
+                  <>
+                    <Page.EmptyStateIcon>
+                      <MagnifyingGlassIcon size={72} />
+                    </Page.EmptyStateIcon>
+                    <Page.EmptyStateTitle>Nenhum item encontrado</Page.EmptyStateTitle>
+                    <Page.EmptyStateDescription>
+                      Nenhum item corresponde à busca "{filters.searchMask}"
+                    </Page.EmptyStateDescription>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => setFilters(prev => ({...prev, searchMask: ''}))}
+                      style={{ marginTop: '16px' }}
+                    >
+                      Limpar busca
+                    </Button>
+                  </>
+                ) : (
+                  // Estado: Vazio real
+                  <>
+                    <Page.EmptyStateIcon>
+                      <BowlFoodIcon size={72} />
+                    </Page.EmptyStateIcon>
+                    <Page.EmptyStateTitle>
+                      Nenhum item ainda
+                    </Page.EmptyStateTitle>
+                    <Page.EmptyStateDescription>
+                      Itens são os produtos do seu cardápio vinculados a categorias.
+                    </Page.EmptyStateDescription>
+                    <Page.EmptyStateChecklist>
+                      <Page.ChecklistItem>✅ Ex.: Hambúrguer Especial, Suco de Laranja</Page.ChecklistItem>
+                      <Page.ChecklistItem>✅ Adicione fotos e descrições</Page.ChecklistItem>
+                    </Page.EmptyStateChecklist>
+                    <Page.EmptyStateButton>
+                      <Button
+                        variant="primary"
+                        onClick={handleCreateMenuItem}
+                        leftIcon={<PlusIcon size={16} />}
+                        aria-label="Criar novo item do menu"
+                      >
+                        Novo Item
+                      </Button>
+                    </Page.EmptyStateButton>
+                  </>
                 )}
               </Page.EmptyState>
             )}

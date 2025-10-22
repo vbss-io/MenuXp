@@ -93,6 +93,8 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
     loadCategories()
   }
 
+  const hasCategories = categories.length > 0
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -106,16 +108,20 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
   return (
     <Page.TabContainer>
       <Page.ActionsRow>
-        <FormInput
-          id="search"
-          label=""
-          placeholder="Buscar categorias..."
-          value={filters.searchMask}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setFilters((prev) => ({ ...prev, searchMask: e.target.value }))
-          }
-          leftIcon={<MagnifyingGlassIcon size={16} />}
-        />
+        <Page.SearchWrapper>
+          <Page.SearchLabel htmlFor="search">Buscar categorias</Page.SearchLabel>
+          <FormInput
+            id="search"
+            label=""
+            placeholder="Digite para buscar..."
+            value={filters.searchMask}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setFilters((prev) => ({ ...prev, searchMask: e.target.value }))
+            }
+            leftIcon={<MagnifyingGlassIcon size={16} />}
+            aria-label="Buscar categorias"
+          />
+        </Page.SearchWrapper>
         <Page.ActionsRowButtons>
           <Filters
             filters={filters}
@@ -128,10 +134,29 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
                 sortOrder: 'asc'
               })
             }
+            isEmpty={!hasCategories}
           />
-          <Button variant="primary" onClick={handleCreateCategory} size="md" leftIcon={<PlusIcon size={16} />}>
-            Nova Categoria
-          </Button>
+          {hasCategories ? (
+            <Button 
+              variant="primary" 
+              onClick={handleCreateCategory} 
+              size="md" 
+              leftIcon={<PlusIcon size={16} />}
+              aria-label="Criar nova categoria"
+            >
+              Nova Categoria
+            </Button>
+          ) : (
+            <Button 
+              variant="outline" 
+              onClick={handleCreateCategory} 
+              size="md" 
+              leftIcon={<PlusIcon size={16} />}
+              aria-label="Criar nova categoria"
+            >
+              Nova Categoria
+            </Button>
+          )}
         </Page.ActionsRowButtons>
       </Page.ActionsRow>
       {isLoading ? (
@@ -158,27 +183,53 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
               </S.CategoriesGrid>
             ) : (
               <Page.EmptyState>
-                <Page.EmptyStateIcon>
-                  <FolderIcon size={48} />
-                </Page.EmptyStateIcon>
-                <Page.EmptyStateTitle>
-                  {filters.searchMask ? 'Nenhuma categoria encontrada' : 'Nenhuma categoria criada'}
-                </Page.EmptyStateTitle>
-                <Page.EmptyStateDescription>
-                  {filters.searchMask
-                    ? 'Tente ajustar os termos de busca'
-                    : 'Crie sua primeira categoria para organizar os produtos do seu restaurante'}
-                </Page.EmptyStateDescription>
-                {!filters.searchMask && (
-                  <Button
-                    variant="primary"
-                    onClick={handleCreateCategory}
-                    size="md"
-                    style={{ marginTop: '16px' }}
-                    leftIcon={<PlusIcon size={16} />}
-                  >
-                    Criar Primeira Categoria
-                  </Button>
+                {filters.searchMask ? (
+                  // Estado: Busca sem resultados
+                  <>
+                    <Page.EmptyStateIcon>
+                      <MagnifyingGlassIcon size={72} />
+                    </Page.EmptyStateIcon>
+                    <Page.EmptyStateTitle>Nenhuma categoria encontrada</Page.EmptyStateTitle>
+                    <Page.EmptyStateDescription>
+                      Nenhuma categoria corresponde à busca "{filters.searchMask}"
+                    </Page.EmptyStateDescription>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => setFilters(prev => ({...prev, searchMask: ''}))}
+                      style={{ marginTop: '16px' }}
+                    >
+                      Limpar busca
+                    </Button>
+                  </>
+                ) : (
+                  // Estado: Vazio real
+                  <>
+                    <Page.EmptyStateIcon>
+                      <FolderIcon size={72} />
+                    </Page.EmptyStateIcon>
+                    <Page.EmptyStateTitle>
+                      Nenhuma categoria ainda
+                    </Page.EmptyStateTitle>
+                    <Page.EmptyStateDescription>
+                      Categorias organizam seu cardápio. Crie ao menos uma para cadastrar itens e combos.
+                    </Page.EmptyStateDescription>
+                    <Page.EmptyStateChecklist>
+                      <Page.ChecklistItem>✅ Ex.: Lanches, Bebidas, Sobremesas</Page.ChecklistItem>
+                      <Page.ChecklistItem>✅ Você pode reordenar depois</Page.ChecklistItem>
+                    </Page.EmptyStateChecklist>
+                    <Page.EmptyStateButton>
+                      <Button
+                        variant="primary"
+                        onClick={handleCreateCategory}
+                        size="md"
+                        leftIcon={<PlusIcon size={16} />}
+                        aria-label="Criar nova categoria"
+                      >
+                        Nova Categoria
+                      </Button>
+                    </Page.EmptyStateButton>
+                  </>
                 )}
               </Page.EmptyState>
             )}

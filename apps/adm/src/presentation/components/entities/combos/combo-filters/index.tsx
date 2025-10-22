@@ -15,6 +15,7 @@ interface FiltersProps {
   filters: ComboFilters
   onFiltersChange: (filters: ComboFilters) => void
   onReset: () => void
+  isEmpty?: boolean
 }
 
 const sortFieldOptions = [
@@ -24,7 +25,7 @@ const sortFieldOptions = [
   { value: 'updatedAt', label: 'Atualização' }
 ]
 
-export const ComboFilters = ({ filters, onFiltersChange, onReset }: FiltersProps) => {
+export const ComboFilters = ({ filters, onFiltersChange, onReset, isEmpty = false }: FiltersProps) => {
   const handleFilterChange = (key: keyof ComboFilters, value: string | boolean | undefined) => {
     onFiltersChange({
       ...filters,
@@ -44,6 +45,9 @@ export const ComboFilters = ({ filters, onFiltersChange, onReset }: FiltersProps
               size="md"
               as="div"
               leftIcon={<SortAscendingIcon size={20} weight="bold" />}
+              title="Ordenar combos"
+              aria-label="Ordenar combos"
+              disabled={isEmpty}
             ></Button>
           }
         >
@@ -92,6 +96,9 @@ export const ComboFilters = ({ filters, onFiltersChange, onReset }: FiltersProps
               size="md"
               as="div"
               leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}
+              title="Filtros adicionais"
+              aria-label="Filtros adicionais"
+              disabled={isEmpty}
             ></Button>
           }
         >

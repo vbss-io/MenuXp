@@ -15,6 +15,7 @@ interface FiltersProps {
   filters: MenuItemFilters
   onFiltersChange: (filters: MenuItemFilters) => void
   onReset: () => void
+  isEmpty?: boolean
 }
 
 const sortFieldOptions = [
@@ -24,7 +25,7 @@ const sortFieldOptions = [
   { value: 'updatedAt', label: 'Atualização' }
 ]
 
-export const MenuItemFilters = ({ filters, onFiltersChange, onReset }: FiltersProps) => {
+export const MenuItemFilters = ({ filters, onFiltersChange, onReset, isEmpty = false }: FiltersProps) => {
   const handleFilterChange = (key: keyof MenuItemFilters, value: string | boolean | undefined) => {
     onFiltersChange({
       ...filters,
@@ -39,7 +40,15 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset }: FiltersPr
           variant="outline"
           side="left"
           trigger={
-            <Button variant="outline" size="md" as="div" leftIcon={<SortAscendingIcon size={20} weight="bold" />} />
+            <Button 
+              variant="outline" 
+              size="md" 
+              as="div" 
+              leftIcon={<SortAscendingIcon size={20} weight="bold" />}
+              title="Ordenar itens"
+              aria-label="Ordenar itens"
+              disabled={isEmpty}
+            />
           }
         >
           <S.PopoverContent>
@@ -82,7 +91,15 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset }: FiltersPr
           variant="outline"
           side="left"
           trigger={
-            <Button variant="outline" size="md" as="div" leftIcon={<FunnelSimpleIcon size={20} weight="bold" />} />
+            <Button 
+              variant="outline" 
+              size="md" 
+              as="div" 
+              leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}
+              title="Filtros adicionais"
+              aria-label="Filtros adicionais"
+              disabled={isEmpty}
+            />
           }
         >
           <S.PopoverContent>

@@ -14,6 +14,7 @@ interface FiltersProps {
   filters: CategoryFilters
   onFiltersChange: (filters: CategoryFilters) => void
   onReset: () => void
+  isEmpty?: boolean
 }
 
 const sortFieldOptions = [
@@ -22,7 +23,7 @@ const sortFieldOptions = [
   { value: 'updatedAt', label: 'Atualização' }
 ]
 
-export const Filters = ({ filters, onFiltersChange, onReset }: FiltersProps) => {
+export const Filters = ({ filters, onFiltersChange, onReset, isEmpty = false }: FiltersProps) => {
   const handleFilterChange = (key: keyof CategoryFilters, value: string | boolean) => {
     onFiltersChange({
       ...filters,
@@ -42,6 +43,9 @@ export const Filters = ({ filters, onFiltersChange, onReset }: FiltersProps) => 
               size="md"
               as="div"
               leftIcon={<SortAscendingIcon size={20} weight="bold" />}
+              title="Ordenar categorias"
+              aria-label="Ordenar categorias"
+              disabled={isEmpty}
             ></Button>
           }
         >
@@ -90,6 +94,9 @@ export const Filters = ({ filters, onFiltersChange, onReset }: FiltersProps) => 
               size="md"
               as="div"
               leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}
+              title="Filtros adicionais"
+              aria-label="Filtros adicionais"
+              disabled={isEmpty}
             ></Button>
           }
         >

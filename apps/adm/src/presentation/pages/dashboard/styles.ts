@@ -58,6 +58,11 @@ export const TabButton = styled.button<{ $isActive: boolean }>`
     box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.mx.red};
   }
 
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.colors.mx.black};
+    outline-offset: 2px;
+  }
+
   &:last-child {
     border-right: none;
   }
@@ -109,7 +114,7 @@ export const TabPlaceholderText = styled.p`
 export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.lg};
+  gap: ${({ theme }) => theme.spacing.md};
 `
 
 export const ActionsRow = styled.div`
@@ -135,6 +140,11 @@ export const ActionsRow = styled.div`
 
   @media ${({ theme }) => theme.breakpoints.xl} {
     gap: ${({ theme }) => theme.spacing.xl};
+  }
+
+  input:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.colors.mx.black};
+    outline-offset: 2px;
   }
 `
 
@@ -164,6 +174,11 @@ export const ActionsRowButtons = styled.div`
     @media ${({ theme }) => theme.breakpoints.lg} {
       width: auto;
     }
+  }
+
+  button:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.colors.mx.black};
+    outline-offset: 2px;
   }
 `
 
@@ -203,36 +218,14 @@ export const Content = styled.div`
 `
 
 export const EmptyState = styled.div`
-  background: ${({ theme }) => theme.colors.mx.white};
-  border: 1px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  padding: ${({ theme }) => theme.spacing.xl};
-  box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
+  padding: ${({ theme }) => theme.spacing.lg};
   text-align: center;
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      135deg,
-      ${({ theme }) => theme.colors.mx.yellow} 0%,
-      ${({ theme }) => theme.colors.mx.red} 100%
-    );
-    opacity: 0.02;
-    pointer-events: none;
-    border-radius: ${({ theme }) => theme.borderRadius.brutalist};
-  }
 `
 
 export const EmptyStateIcon = styled.div`
   justify-self: center;
-  color: ${({ theme }) => theme.colors.mx.gray[400]};
-  margin-bottom: ${({ theme }) => theme.spacing.sm};
+  color: ${({ theme }) => theme.colors.mx.gray[500]};
+  margin-bottom: ${({ theme }) => theme.spacing.md};
 `
 
 export const EmptyStateTitle = styled.h3`
@@ -251,4 +244,144 @@ export const EmptyStateDescription = styled.p`
   color: ${({ theme }) => theme.colors.text.secondary};
   margin: 0;
   line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
+`
+
+export const TabSubtitle = styled.div`
+  padding: ${({ theme }) => theme.spacing.xs} ${({ theme }) => theme.spacing.lg};
+  background: ${({ theme }) => theme.colors.mx.yellow}10;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.gray[600]};
+  text-align: center;
+  opacity: 0.9;
+`
+
+export const EmptyStateChecklist = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: ${({ theme }) => theme.spacing.sm} 0;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xxs};
+`
+
+export const ChecklistItem = styled.li`
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.gray[600]};
+`
+
+export const EmptyStateHelp = styled.button`
+  margin-top: ${({ theme }) => theme.spacing.md};
+  background: transparent;
+  border: none;
+  color: ${({ theme }) => theme.colors.mx.blue};
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: ${({ theme }) => theme.spacing.xs};
+  
+  &:hover {
+    text-decoration: underline;
+  }
+  
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.colors.mx.black};
+    outline-offset: 2px;
+  }
+`
+
+export const HelpIconButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-left: ${({ theme }) => theme.spacing.sm};
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
+  border-radius: ${({ theme }) => theme.borderRadius.full};
+  color: ${({ theme }) => theme.colors.mx.gray[600]};
+  cursor: pointer;
+  transition: all ${({ theme }) => theme.animations.durations.normal};
+  
+  &:hover {
+    background: ${({ theme }) => theme.colors.mx.gray[100]};
+    border-color: ${({ theme }) => theme.colors.mx.black};
+    color: ${({ theme }) => theme.colors.mx.black};
+  }
+  
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.colors.mx.black};
+    outline-offset: 2px;
+  }
+`
+
+export const HelpPopoverContent = styled.div`
+  padding: ${({ theme }) => theme.spacing.md};
+  max-width: 300px;
+`
+
+export const HelpTitle = styled.h4`
+  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.black};
+  margin: 0 0 ${({ theme }) => theme.spacing.sm} 0;
+`
+
+export const HelpList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xs};
+  
+  li {
+    font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+    font-family: ${({ theme }) => theme.typography.fonts.body};
+    color: ${({ theme }) => theme.colors.mx.gray[700]};
+    line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
+    padding-left: ${({ theme }) => theme.spacing.md};
+    position: relative;
+    
+    &::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: ${({ theme }) => theme.colors.mx.gray[500]};
+    }
+  }
+`
+
+export const SearchWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.spacing.xxs};
+  flex: 1;
+`
+
+export const SearchLabel = styled.label`
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.gray[700]};
+  opacity: 0.85;
+`
+
+export const EmptyStateButton = styled.div`
+  margin-top: ${({ theme }) => theme.spacing.md};
+  max-width: 280px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  
+  button {
+    width: 100%;
+  }
 `

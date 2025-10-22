@@ -1,7 +1,7 @@
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { GetCombosUsecase } from '@/application/combos/get-combos.usecase'
 import type { Combo } from '@/domain/models/combo.model'
-import { PackageIcon, PlusIcon } from '@phosphor-icons/react'
+import { PackageIcon, PlusIcon, MagnifyingGlassIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -13,7 +13,8 @@ import {
 } from '@/presentation/components/entities/combos/combo-filters'
 import { ComboModal } from '@/presentation/components/entities/combos/combo-modal'
 import { useAuth } from '@/presentation/hooks/use-auth'
-import { Button, Combobox, Loading, Pagination, type ComboboxOption } from '@menuxp/ui'
+import { useDebounce } from '@/presentation/hooks/use-debounce'
+import { Button, Combobox, FormInput, Loading, Pagination, Popover, type ComboboxOption } from '@menuxp/ui'
 
 import * as Page from '../../../styles'
 import * as S from '../styles'
@@ -39,6 +40,8 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
     sortOrder: 'asc'
   })
 
+  const debouncedSearchMask = useDebounce(filters.searchMask, 500)
+
   const loadCombos = async (page = currentPage) => {
     if (!restaurantId) return
     setIsLoading(true)
@@ -46,6 +49,7 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
       const getCombosUsecase = new GetCombosUsecase()
       const { combos: combosData, total } = await getCombosUsecase.execute({
         restaurantId,
+        searchMask: debouncedSearchMask,
         categoryId: filters.categoryId,
         page,
         rowsPerPage: 20,
@@ -67,7 +71,7 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
       onPageChange(1)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [restaurantId, filters.includeInactive, filters.categoryId, filters.sortField, filters.sortOrder])
+  }, [restaurantId, debouncedSearchMask, filters.includeInactive, filters.categoryId, filters.sortField, filters.sortOrder])
 
   useEffect(() => {
     setSelectedCategory(filters.categoryId || '')
@@ -76,6 +80,8 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
   const handleComboModalSuccess = () => {
     loadCombos()
   }
+
+  const hasCombos = combos.length > 0
 
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value)
@@ -115,11 +121,26 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
   return (
     <Page.TabContainer>
       <Page.ActionsRow>
+        <Page.SearchWrapper>
+          <Page.SearchLabel htmlFor="search">Buscar combos</Page.SearchLabel>
+          <FormInput
+            id="search"
+            label=""
+            placeholder="Digite para buscar..."
+            value={filters.searchMask}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setFilters((prev) => ({ ...prev, searchMask: e.target.value }))
+            }
+            leftIcon={<MagnifyingGlassIcon size={16} />}
+            aria-label="Buscar combos"
+          />
+        </Page.SearchWrapper>
         <Combobox
           placeholder="Filtrar por categoria"
           value={selectedCategory}
           onChange={handleCategoryChange}
           onSearch={handleCategorySearch}
+          aria-label="Filtrar combos por categoria"
         />
         <Page.ActionsRowButtons>
           <ComboFilters
@@ -134,10 +155,27 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
                 sortOrder: 'asc'
               })
             }
+            isEmpty={!hasCombos}
           />
-          <Button variant="primary" onClick={() => setIsComboModalOpen(true)} leftIcon={<PlusIcon size={16} />}>
-            Novo Combo
-          </Button>
+          {hasCombos ? (
+            <Button 
+              variant="primary" 
+              onClick={() => setIsComboModalOpen(true)} 
+              leftIcon={<PlusIcon size={16} />}
+              aria-label="Criar novo combo"
+            >
+              Novo Combo
+            </Button>
+          ) : (
+            <Button 
+              variant="outline" 
+              onClick={() => setIsComboModalOpen(true)} 
+              leftIcon={<PlusIcon size={16} />}
+              aria-label="Criar novo combo"
+            >
+              Novo Combo
+            </Button>
+          )}
         </Page.ActionsRowButtons>
       </Page.ActionsRow>
       {isLoading ? (
@@ -168,21 +206,53 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
               </S.CombosGrid>
             ) : (
               <Page.EmptyState>
-                <Page.EmptyStateIcon>
-                  <PackageIcon size={48} />
-                </Page.EmptyStateIcon>
-                <Page.EmptyStateTitle>Nenhum combo criado</Page.EmptyStateTitle>
-                <Page.EmptyStateDescription>
-                  Crie seu primeiro combo para o menu do seu restaurante
-                </Page.EmptyStateDescription>
-                <Button
-                  variant="primary"
-                  onClick={() => setIsComboModalOpen(true)}
-                  leftIcon={<PlusIcon size={16} />}
-                  style={{ marginTop: '16px' }}
-                >
-                  Criar Primeiro Combo
-                </Button>
+                {filters.searchMask ? (
+                  // Estado: Busca sem resultados
+                  <>
+                    <Page.EmptyStateIcon>
+                      <MagnifyingGlassIcon size={72} />
+                    </Page.EmptyStateIcon>
+                    <Page.EmptyStateTitle>Nenhum combo encontrado</Page.EmptyStateTitle>
+                    <Page.EmptyStateDescription>
+                      Nenhum combo corresponde à busca "{filters.searchMask}"
+                    </Page.EmptyStateDescription>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => setFilters(prev => ({...prev, searchMask: ''}))}
+                      style={{ marginTop: '16px' }}
+                    >
+                      Limpar busca
+                    </Button>
+                  </>
+                ) : (
+                  // Estado: Vazio real
+                  <>
+                    <Page.EmptyStateIcon>
+                      <PackageIcon size={72} />
+                    </Page.EmptyStateIcon>
+                    <Page.EmptyStateTitle>
+                      Nenhum combo ainda
+                    </Page.EmptyStateTitle>
+                    <Page.EmptyStateDescription>
+                      Combos permitem agrupar itens com preço especial.
+                    </Page.EmptyStateDescription>
+                    <Page.EmptyStateChecklist>
+                      <Page.ChecklistItem>✅ Ex.: Combo Executivo, Combo Família</Page.ChecklistItem>
+                      <Page.ChecklistItem>✅ Defina descontos atrativos</Page.ChecklistItem>
+                    </Page.EmptyStateChecklist>
+                    <Page.EmptyStateButton>
+                      <Button
+                        variant="primary"
+                        onClick={() => setIsComboModalOpen(true)}
+                        leftIcon={<PlusIcon size={16} />}
+                        aria-label="Criar novo combo"
+                      >
+                        Novo Combo
+                      </Button>
+                    </Page.EmptyStateButton>
+                  </>
+                )}
               </Page.EmptyState>
             )}
           </motion.div>
