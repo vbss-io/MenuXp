@@ -3,10 +3,9 @@ import styled from 'styled-components'
 
 export const Card = styled(motion.div)`
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
   border-radius: ${({ theme }) => theme.borderRadius.brutalist};
   padding: ${({ theme }) => theme.spacing.lg};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
   display: flex;
   flex-direction: column;
@@ -17,12 +16,10 @@ export const Card = styled(motion.div)`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
   }
 
   &:active {
     transform: translateY(0px);
-    box-shadow: ${({ theme }) => theme.shadows.sm};
   }
 
   &::before {
@@ -71,6 +68,11 @@ export const CardTitle = styled.h3`
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
 
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.typography.fontSizes.md};
@@ -92,6 +94,11 @@ export const CardDescription = styled.p`
   margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
   flex-shrink: 0;
   line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
 `
 
 export const ImagesContainer = styled.div`
@@ -139,6 +146,54 @@ export const ActionsContainer = styled.div`
       background-color: ${({ theme }) => theme.colors.mx.red};
       color: ${({ theme }) => theme.colors.mx.white};
       transform: translateY(-1px);
+    }
+
+    /* Sobrescrever hover para botão white */
+    &.white:hover:not(:disabled) {
+      background: ${({ theme }) => theme.colors.mx.gray[100]};
+      border-color: ${({ theme }) => theme.colors.mx.black};
+      transform: translateY(-2px);
+      box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.black};
+      color: ${({ theme }) => theme.colors.mx.black};
+    }
+
+    /* Sobrescrever hover para botão ghost - vermelho */
+    &.ghost:hover:not(:disabled) {
+      background-color: transparent !important;
+      color: ${({ theme }) => theme.colors.mx.red} !important;
+      border: 1px solid ${({ theme }) => theme.colors.mx.red} !important;
+      box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.red} !important;
+      transform: translateY(-2px);
+    }
+
+    /* Sobrescrever hover para botão primary - azul */
+    &.primary:hover:not(:disabled) {
+      background: ${({ theme }) => theme.colors.mx.blue} !important;
+      color: ${({ theme }) => theme.colors.mx.white} !important;
+      border: 1px solid ${({ theme }) => theme.colors.mx.blue} !important;
+      box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.blue} !important;
+      transform: translateY(-2px);
+    }
+
+    /* Estilo customizado para botão EDITAR */
+    &.edit-button {
+      border-color: ${({ theme }) => theme.colors.mx.blue};
+      background: ${({ theme }) => theme.colors.mx.white};
+      color: ${({ theme }) => theme.colors.mx.blue};
+      box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.blue};
+
+      &:hover:not(:disabled) {
+        background: ${({ theme }) => theme.colors.mx.blue};
+        color: ${({ theme }) => theme.colors.mx.white};
+        border-color: ${({ theme }) => theme.colors.mx.white};
+        box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.blue};
+        transform: translateY(-2px);
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0px);
+        box-shadow: 0 2px 0 ${({ theme }) => theme.colors.mx.blue};
+      }
     }
   }
 
@@ -194,9 +249,20 @@ export const OptionalItem = styled.div`
   span:first-child {
     color: ${({ theme }) => theme.colors.mx.black};
     font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60%;
   }
 
   span:last-child {
-    color: ${({ theme }) => theme.colors.mx.gray[600]};
+    color: ${({ theme }) => theme.colors.mx.gray[700]};
+    white-space: nowrap;
+  }
+`
+
+export const StatusBadge = styled.div`
+  .chip {
+    border-radius: 9999px !important;
   }
 `

@@ -128,30 +128,45 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
       <S.CardHeader>
         <S.CardTitleContainer>
           <S.CardIcon>{getCategoryIcon()}</S.CardIcon>
-          <S.CardTitle>{category.name}</S.CardTitle>
+          <S.CardTitle title={category.name}>{category.name}</S.CardTitle>
         </S.CardTitleContainer>
-        <Chip backgroundColor={category.isActive ? '#22c55e' : '#ef4444'} textColor="white" size="sm">
-          {category.isActive ? 'Ativa' : 'Inativa'}
-        </Chip>
+        <S.StatusBadge>
+          <Chip backgroundColor={category.isActive ? '#22c55e' : '#ef4444'} textColor="white" size="sm">
+            {category.isActive ? 'Ativa' : 'Inativa'}
+          </Chip>
+        </S.StatusBadge>
       </S.CardHeader>
       <S.CardContent>
-        {category.description && <S.CardDescription>{category.description}</S.CardDescription>}
+        {category.description && (
+          <S.CardDescription title={category.description}>{category.description}</S.CardDescription>
+        )}
         <S.SubCategoriesContainer>
           <S.SubCategoriesHeader>
-            <strong>Sub Categorias:</strong>
+            <strong>Subcategorias:</strong>
             <Button
-              variant="outline"
-              size="sm"
+              variant="white"
+              size="xs"
               onClick={() => onCreateSubCategory(category.id)}
-              leftIcon={<PlusIcon size={14} />}
+              leftIcon={<PlusIcon size={12} />}
             >
-              Adicionar
+              Subcategoria
             </Button>
           </S.SubCategoriesHeader>
           {hasSubCategories ? (
             <S.SubCategoriesList>
               {(category.subCategories ?? []).map((sub) => (
-                <S.SubCategoryChip key={sub.id} onClick={() => onEdit(sub)}>
+                <S.SubCategoryChip
+                  key={sub.id}
+                  onClick={() => onEdit(sub)}
+                  title={sub.name}
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      onEdit(sub)
+                    }
+                  }}
+                >
                   <span>{sub.name}</span>
                   <S.DeleteIcon
                     onClick={(e) => {
@@ -160,7 +175,7 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
                       setIsSubDeleteDialogOpen(true)
                     }}
                   >
-                    <TrashIcon size={12} />
+                    <TrashIcon size={16} />
                   </S.DeleteIcon>
                 </S.SubCategoryChip>
               ))}
@@ -173,12 +188,12 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
         {hasOptionals && (
           <S.OptionalsSection>
             <Button
-              variant="outline"
+              variant="white"
               size="sm"
               onClick={() => setShowOptionals(!showOptionals)}
               leftIcon={showOptionals ? <CaretUpIcon size={14} /> : <CaretDownIcon size={14} />}
             >
-              Ver Adicionais ({category.optionals?.length || 0})
+              Adicionais ({category.optionals?.length || 0})
             </Button>
 
             {showOptionals && (
@@ -249,16 +264,17 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
             }
           />
           <Button
-            variant="outline"
+            variant="ghost"
             size="sm"
-            onClick={() => onEdit(category)}
-            disabled={isLoading}
-            leftIcon={<PencilIcon size={16} />}
+            onClick={() => setIsDeleteDialogOpen(true)}
+            disabled={isLoading || hasSubCategories}
+            title={hasSubCategories ? 'Exclua as subcategorias primeiro' : ''}
+            leftIcon={<TrashIcon size={16} />}
           >
-            Editar
+            Excluir
           </Button>
           <Button
-            variant="outline"
+            variant={category.isActive ? 'white' : 'primary'}
             size="sm"
             onClick={handleToggleStatus}
             disabled={isLoading}
@@ -269,12 +285,12 @@ export const CategoryCard = ({ category, onEdit, onDelete, onRefresh, onCreateSu
           <Button
             variant="outline"
             size="sm"
-            onClick={() => setIsDeleteDialogOpen(true)}
-            disabled={isLoading || hasSubCategories}
-            title={hasSubCategories ? 'Exclua as subcategorias primeiro' : ''}
-            leftIcon={<TrashIcon size={16} />}
+            onClick={() => onEdit(category)}
+            disabled={isLoading}
+            leftIcon={<PencilIcon size={16} />}
+            className="edit-button"
           >
-            Excluir
+            Editar
           </Button>
         </S.ActionsContainer>
       </S.CardFooter>

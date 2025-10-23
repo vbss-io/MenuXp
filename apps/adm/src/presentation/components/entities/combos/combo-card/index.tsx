@@ -92,13 +92,17 @@ export const ComboCard = ({ combo, onEdit, onDelete, onRefresh }: ComboCardProps
     <>
       <S.Card variants={cardVariants} initial="hidden" animate="visible" exit="exit" whileHover={{ y: -2 }}>
         <S.CardHeader>
-          <S.CardTitle>{combo.name}</S.CardTitle>
-          <Chip backgroundColor={combo.isActive ? '#22c55e' : '#ef4444'} textColor="white" size="sm">
-            {combo.isActive ? 'Ativo' : 'Inativo'}
-          </Chip>
+          <S.CardTitle title={combo.name}>{combo.name}</S.CardTitle>
+          <S.StatusBadge>
+            <Chip backgroundColor={combo.isActive ? '#22c55e' : '#ef4444'} textColor="white" size="sm">
+              {combo.isActive ? 'Ativo' : 'Inativo'}
+            </Chip>
+          </S.StatusBadge>
         </S.CardHeader>
         <S.CardContent>
-          {combo.description && <S.CardDescription>{combo.description}</S.CardDescription>}
+          {combo.description && (
+            <S.CardDescription title={combo.description}>{combo.description}</S.CardDescription>
+          )}
           {hasImages && (
             <S.ImagesContainer>
               <S.ImagesLabel>Imagens:</S.ImagesLabel>
@@ -126,12 +130,12 @@ export const ComboCard = ({ combo, onEdit, onDelete, onRefresh }: ComboCardProps
           {hasItems && (
             <S.ItemsSection>
               <Button
-                variant="outline"
+                variant="white"
                 size="sm"
                 onClick={() => setShowItems(!showItems)}
                 leftIcon={showItems ? <CaretUpIcon size={14} /> : <CaretDownIcon size={14} />}
               >
-                Ver Itens ({combo.items.length})
+                Itens ({combo.items.length})
               </Button>
               {showItems && (
                 <S.ItemsList>
@@ -150,12 +154,12 @@ export const ComboCard = ({ combo, onEdit, onDelete, onRefresh }: ComboCardProps
           {hasOptionals && (
             <S.OptionalsSection>
               <Button
-                variant="outline"
+                variant="white"
                 size="sm"
                 onClick={() => setShowOptionals(!showOptionals)}
                 leftIcon={showOptionals ? <CaretUpIcon size={14} /> : <CaretDownIcon size={14} />}
               >
-                Ver Adicionais ({combo.optionals.length})
+                Adicionais ({combo.optionals.length})
               </Button>
               {showOptionals && (
                 <S.OptionalsList>
@@ -194,16 +198,16 @@ export const ComboCard = ({ combo, onEdit, onDelete, onRefresh }: ComboCardProps
               }
             />
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              onClick={() => onEdit(combo)}
+              onClick={() => setIsDeleteDialogOpen(true)}
               disabled={isLoading}
-              leftIcon={<PencilIcon size={16} />}
+              leftIcon={<TrashIcon size={16} />}
             >
-              Editar
+              Excluir
             </Button>
             <Button
-              variant="outline"
+              variant={combo.isActive ? 'white' : 'primary'}
               size="sm"
               onClick={handleToggleStatus}
               disabled={isLoading}
@@ -214,11 +218,12 @@ export const ComboCard = ({ combo, onEdit, onDelete, onRefresh }: ComboCardProps
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setIsDeleteDialogOpen(true)}
+              onClick={() => onEdit(combo)}
               disabled={isLoading}
-              leftIcon={<TrashIcon size={16} />}
+              leftIcon={<PencilIcon size={16} />}
+              className="edit-button"
             >
-              Excluir
+              Editar
             </Button>
           </S.ActionsContainer>
         </S.CardFooter>

@@ -55,10 +55,10 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
         ...newOptionals[index],
         [field]: stringValue
       }
-    } else {
+    } else if (field === 'price') {
       newOptionals[index] = {
         ...newOptionals[index],
-        [field]: field === 'price' ? Number(value) : value
+        [field]: Number(value)
       }
     }
     setOptionals(newOptionals)

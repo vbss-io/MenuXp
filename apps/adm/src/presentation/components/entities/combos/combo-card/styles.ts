@@ -194,10 +194,15 @@ export const ItemRow = styled.div`
   span:first-child {
     color: ${({ theme }) => theme.colors.mx.black};
     font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60%;
   }
 
   span:last-child {
-    color: ${({ theme }) => theme.colors.mx.gray[600]};
+    color: ${({ theme }) => theme.colors.mx.gray[700]};
+    white-space: nowrap;
   }
 `
 
@@ -241,9 +246,20 @@ export const OptionalItem = styled.div`
   span:first-child {
     color: ${({ theme }) => theme.colors.mx.black};
     font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60%;
   }
 
   span:last-child {
-    color: ${({ theme }) => theme.colors.mx.gray[600]};
+    color: ${({ theme }) => theme.colors.mx.gray[700]};
+    white-space: nowrap;
+  }
+`
+
+export const StatusBadge = styled.div`
+  .chip {
+    border-radius: 9999px !important;
   }
 `

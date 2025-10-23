@@ -90,13 +90,17 @@ export const MenuItemCard = ({ menuItem, onEdit, onDelete, onRefresh }: MenuItem
     <>
       <S.Card variants={cardVariants} initial="hidden" animate="visible" exit="exit" whileHover={{ y: -2 }}>
         <S.CardHeader>
-          <S.CardTitle>{menuItem.name}</S.CardTitle>
-          <Chip backgroundColor={menuItem.isActive ? '#22c55e' : '#ef4444'} textColor="white" size="sm">
-            {menuItem.isActive ? 'Ativo' : 'Inativo'}
-          </Chip>
+          <S.CardTitle title={menuItem.name}>{menuItem.name}</S.CardTitle>
+          <S.StatusBadge>
+            <Chip backgroundColor={menuItem.isActive ? '#22c55e' : '#ef4444'} textColor="white" size="sm">
+              {menuItem.isActive ? 'Ativo' : 'Inativo'}
+            </Chip>
+          </S.StatusBadge>
         </S.CardHeader>
         <S.CardContent>
-          {menuItem.description && <S.CardDescription>{menuItem.description}</S.CardDescription>}
+          {menuItem.description && (
+            <S.CardDescription title={menuItem.description}>{menuItem.description}</S.CardDescription>
+          )}
           {hasImages && (
             <S.ImagesContainer>
               <S.ImagesLabel>Imagens:</S.ImagesLabel>
@@ -124,12 +128,12 @@ export const MenuItemCard = ({ menuItem, onEdit, onDelete, onRefresh }: MenuItem
           {hasOptionals && (
             <S.OptionalsSection>
               <Button
-                variant="outline"
+                variant="white"
                 size="sm"
                 onClick={() => setShowOptionals(!showOptionals)}
                 leftIcon={showOptionals ? <CaretUpIcon size={14} /> : <CaretDownIcon size={14} />}
               >
-                Ver Adicionais ({menuItem.optionals.length})
+                Adicionais ({menuItem.optionals.length})
               </Button>
               {showOptionals && (
                 <S.OptionalsList>
@@ -168,16 +172,16 @@ export const MenuItemCard = ({ menuItem, onEdit, onDelete, onRefresh }: MenuItem
               }
             />
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
-              onClick={() => onEdit(menuItem)}
+              onClick={() => setIsDeleteDialogOpen(true)}
               disabled={isLoading}
-              leftIcon={<PencilIcon size={16} />}
+              leftIcon={<TrashIcon size={16} />}
             >
-              Editar
+              Excluir
             </Button>
             <Button
-              variant="outline"
+              variant={menuItem.isActive ? 'white' : 'primary'}
               size="sm"
               onClick={handleToggleStatus}
               disabled={isLoading}
@@ -188,11 +192,12 @@ export const MenuItemCard = ({ menuItem, onEdit, onDelete, onRefresh }: MenuItem
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setIsDeleteDialogOpen(true)}
+              onClick={() => onEdit(menuItem)}
               disabled={isLoading}
-              leftIcon={<TrashIcon size={16} />}
+              leftIcon={<PencilIcon size={16} />}
+              className="edit-button"
             >
-              Excluir
+              Editar
             </Button>
           </S.ActionsContainer>
         </S.CardFooter>
