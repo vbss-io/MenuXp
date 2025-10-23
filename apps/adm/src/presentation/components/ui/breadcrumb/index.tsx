@@ -29,8 +29,8 @@ export const Breadcrumb = ({ lastPath }: BreadcrumbProps) => {
     const titles: Record<string, string> = {
       dashboard: 'Dashboard',
       orders: 'Pedidos',
-      menu: 'Cardápio',
-      'menu-items': 'Items do Menu',
+      menu: 'Aparência',
+      'menu-items': 'Cardápio',
       reports: 'Relatórios',
       missions: 'Missões',
       messages: 'Mensagens',
@@ -42,15 +42,15 @@ export const Breadcrumb = ({ lastPath }: BreadcrumbProps) => {
 
   const getPageDescription = (path: string) => {
     const descriptions: Record<string, string> = {
-      dashboard: 'Gerencie a operação do seu restaurante',
+      dashboard: 'Gerencie a operação do seu estabelecimento',
       orders: 'Visualize e gerencie todos os pedidos recebidos',
-      menu: 'Configure e personalize o cardápio do seu restaurante',
-      'menu-items': 'Adicione e edite os itens disponíveis no seu cardápio',
+      menu: 'Configure e personalize a aparência do seu estabelecimento',
+      'menu-items': 'Gerencie categorias, itens e combos do seu cardápio',
       reports: 'Acompanhe relatórios e métricas de performance',
       missions: 'Complete missões e ganhe recompensas',
       messages: 'Gerencie mensagens e comunicação com clientes',
       settings: 'Configure as preferências e configurações do sistema',
-      'create-restaurant': 'Configure os dados básicos do seu restaurante'
+      'create-restaurant': 'Configure os dados básicos do seu estabelecimento'
     }
     return descriptions[path] || 'Informações sobre esta página'
   }

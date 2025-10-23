@@ -28,7 +28,7 @@ export const MessagesPage = () => {
           </S.EmptyStateIcon>
           <S.EmptyStateTitle>Mensagens</S.EmptyStateTitle>
           <S.EmptyStateDescription>
-            Funcionalidade em desenvolvimento. Em breve você poderá gerenciar todas as mensagens do seu restaurante.
+            Funcionalidade em desenvolvimento. Em breve você poderá gerenciar todas as mensagens do seu estabelecimento.
           </S.EmptyStateDescription>
         </S.EmptyState>
       </S.Content>

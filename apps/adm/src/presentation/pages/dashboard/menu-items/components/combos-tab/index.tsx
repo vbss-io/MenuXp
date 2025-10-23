@@ -14,7 +14,7 @@ import {
 import { ComboModal } from '@/presentation/components/entities/combos/combo-modal'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
-import { Button, Combobox, FormInput, Loading, Pagination, Popover, type ComboboxOption } from '@menuxp/ui'
+import { Button, Combobox, FormInput, Loading, Pagination, type ComboboxOption } from '@menuxp/ui'
 
 import * as Page from '../../../styles'
 import * as S from '../styles'
@@ -160,6 +160,7 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
           {hasCombos ? (
             <Button 
               variant="primary" 
+              size="sm"
               onClick={() => setIsComboModalOpen(true)} 
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar novo combo"
@@ -168,7 +169,8 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
             </Button>
           ) : (
             <Button 
-              variant="outline" 
+              variant="white" 
+              size="sm"
               onClick={() => setIsComboModalOpen(true)} 
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar novo combo"
@@ -217,7 +219,7 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
                       Nenhum combo corresponde à busca "{filters.searchMask}"
                     </Page.EmptyStateDescription>
                     <Button 
-                      variant="outline" 
+                      variant="white" 
                       size="sm" 
                       onClick={() => setFilters(prev => ({...prev, searchMask: ''}))}
                       style={{ marginTop: '16px' }}
@@ -244,6 +246,7 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
                     <Page.EmptyStateButton>
                       <Button
                         variant="primary"
+                        size="sm"
                         onClick={() => setIsComboModalOpen(true)}
                         leftIcon={<PlusIcon size={16} />}
                         aria-label="Criar novo combo"

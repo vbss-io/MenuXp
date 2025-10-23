@@ -29,7 +29,7 @@ export const MissionsPage = () => {
           <S.EmptyStateTitle>Missões</S.EmptyStateTitle>
           <S.EmptyStateDescription>
             Funcionalidade em desenvolvimento. Em breve você poderá gerenciar todas as missões e gamificação do seu
-            restaurante.
+            estabelecimento.
           </S.EmptyStateDescription>
         </S.EmptyState>
       </S.Content>

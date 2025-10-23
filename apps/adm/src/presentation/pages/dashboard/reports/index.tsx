@@ -29,7 +29,7 @@ export const ReportsPage = () => {
           <S.EmptyStateTitle>Relatórios</S.EmptyStateTitle>
           <S.EmptyStateDescription>
             Funcionalidade em desenvolvimento. Em breve você poderá visualizar relatórios detalhados sobre o desempenho
-            do seu restaurante.
+            do seu estabelecimento.
           </S.EmptyStateDescription>
         </S.EmptyState>
       </S.Content>

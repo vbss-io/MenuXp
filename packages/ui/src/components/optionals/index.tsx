@@ -17,6 +17,9 @@ interface OptionalsSectionProps {
   disabled?: boolean
 }
 
+const OPTIONAL_NAME_MAX_LENGTH = 50
+const OPTIONAL_MAX_QUANTITY_LIMIT = 999
+
 export function OptionalsSection({ optionals, setOptionals, disabled = false }: OptionalsSectionProps) {
   const currency = useMemo(() => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }), [])
   const [priceDisplays, setPriceDisplays] = useState<string[]>([])
@@ -36,9 +39,21 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
   const updateOptional = (index: number, field: keyof MenuItemOptional, value: string | number) => {
     const newOptionals = [...optionals]
     if (field === 'maxQuantity') {
+      // Validar limite máximo
+      let numValue = value === '' ? undefined : Number(value)
+      if (numValue !== undefined && numValue > OPTIONAL_MAX_QUANTITY_LIMIT) {
+        numValue = OPTIONAL_MAX_QUANTITY_LIMIT
+      }
       newOptionals[index] = {
         ...newOptionals[index],
-        [field]: value === '' ? undefined : Number(value)
+        [field]: numValue
+      }
+    } else if (field === 'name') {
+      // Validar comprimento máximo do nome
+      const stringValue = String(value).slice(0, OPTIONAL_NAME_MAX_LENGTH)
+      newOptionals[index] = {
+        ...newOptionals[index],
+        [field]: stringValue
       }
     } else {
       newOptionals[index] = {
@@ -97,6 +112,7 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
                 onChange={(e) => updateOptional(index, 'name', e.target.value)}
                 disabled={disabled}
                 fontSize="sm"
+                maxLength={OPTIONAL_NAME_MAX_LENGTH}
               />
             </S.InputGroup>
             <S.InputGroup>
@@ -122,6 +138,7 @@ export function OptionalsSection({ optionals, setOptionals, disabled = false }: 
                 disabled={disabled}
                 fontSize="sm"
                 min="0"
+                max={OPTIONAL_MAX_QUANTITY_LIMIT}
               />
             </S.InputGroup>
           </S.OptionalGrid>

@@ -38,13 +38,13 @@ export const MenuItemsPage = () => {
 
   return (
     <Page.Container>
-      <Breadcrumb lastPath="Itens do Menu" />
+      <Breadcrumb lastPath="Cardápio" />
       <Page.TabsContainer>
         <Page.TabsHeader>
           {tabs.map((tab) => (
             <Page.TabButton key={tab.id} $isActive={activeTab === tab.id} onClick={() => setActiveTab(tab.id)}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                {tab.icon}
+                <span className="tab-icon">{tab.icon}</span>
                 <span>{tab.label}</span>
               </div>
             </Page.TabButton>

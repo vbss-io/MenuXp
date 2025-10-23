@@ -255,7 +255,7 @@ export const MenuPage = () => {
   return (
     <motion.div variants={containerVariants} initial="hidden" animate="visible">
       <Page.Container>
-        <Breadcrumb lastPath="Layouts do Menu" />
+        <Breadcrumb />
         <S.LayoutsGrid>
           {layouts.map((layout) => (
             <MenuLayoutCard

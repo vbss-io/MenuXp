@@ -66,6 +66,16 @@ export const TabButton = styled.button<{ $isActive: boolean }>`
   &:last-child {
     border-right: none;
   }
+
+  /* Ocultar ícones em mobile para melhor responsividade */
+  .tab-icon {
+    display: inline-flex;
+    align-items: center;
+    
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
 `
 
 export const TabContent = styled.div`
@@ -179,6 +189,22 @@ export const ActionsRowButtons = styled.div`
   button:focus-visible {
     outline: 3px solid ${({ theme }) => theme.colors.mx.black};
     outline-offset: 2px;
+  }
+
+  /* Padronização dos botões para seguir o mesmo padrão do modal */
+  .button {
+    min-width: 200px;
+    
+    @media (max-width: 768px) {
+      min-width: auto;
+      width: 100%;
+    }
+  }
+
+  /* Exceção para botões de ícone - mantém largura natural */
+  .button.icon-only {
+    min-width: auto;
+    width: auto;
   }
 `
 

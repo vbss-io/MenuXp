@@ -9,7 +9,7 @@ import {
 import { MenuItemModal } from '@/presentation/components/entities/menu-items/menu-item-modal'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
-import { Button, Combobox, FormInput, Loading, Pagination, Popover, type ComboboxOption } from '@menuxp/ui'
+import { Button, Combobox, FormInput, Loading, Pagination, type ComboboxOption } from '@menuxp/ui'
 import { BowlFoodIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
@@ -181,6 +181,7 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
           {hasMenuItems ? (
             <Button 
               variant="primary" 
+              size="sm"
               onClick={handleCreateMenuItem} 
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar novo item do menu"
@@ -189,7 +190,8 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
             </Button>
           ) : (
             <Button 
-              variant="outline" 
+              variant="white" 
+              size="sm"
               onClick={handleCreateMenuItem} 
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar novo item do menu"
@@ -233,7 +235,7 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
                       Nenhum item corresponde à busca "{filters.searchMask}"
                     </Page.EmptyStateDescription>
                     <Button 
-                      variant="outline" 
+                      variant="white" 
                       size="sm" 
                       onClick={() => setFilters(prev => ({...prev, searchMask: ''}))}
                       style={{ marginTop: '16px' }}
@@ -260,6 +262,7 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
                     <Page.EmptyStateButton>
                       <Button
                         variant="primary"
+                        size="sm"
                         onClick={handleCreateMenuItem}
                         leftIcon={<PlusIcon size={16} />}
                         aria-label="Criar novo item do menu"

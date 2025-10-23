@@ -41,13 +41,14 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset, isEmpty = f
           side="left"
           trigger={
             <Button 
-              variant="outline" 
-              size="md" 
+              variant="white" 
+              size="sm" 
               as="div" 
               leftIcon={<SortAscendingIcon size={20} weight="bold" />}
               title="Ordenar itens"
               aria-label="Ordenar itens"
               disabled={isEmpty}
+              className="icon-only"
             />
           }
         >
@@ -92,13 +93,14 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset, isEmpty = f
           side="left"
           trigger={
             <Button 
-              variant="outline" 
-              size="md" 
+              variant="white" 
+              size="sm" 
               as="div" 
               leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}
               title="Filtros adicionais"
               aria-label="Filtros adicionais"
               disabled={isEmpty}
+              className="icon-only"
             />
           }
         >

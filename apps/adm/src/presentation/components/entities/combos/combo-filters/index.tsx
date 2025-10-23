@@ -41,13 +41,14 @@ export const ComboFilters = ({ filters, onFiltersChange, onReset, isEmpty = fals
           side="left"
           trigger={
             <Button
-              variant="outline"
-              size="md"
+              variant="white"
+              size="sm"
               as="div"
               leftIcon={<SortAscendingIcon size={20} weight="bold" />}
               title="Ordenar combos"
               aria-label="Ordenar combos"
               disabled={isEmpty}
+              className="icon-only"
             ></Button>
           }
         >
@@ -92,13 +93,14 @@ export const ComboFilters = ({ filters, onFiltersChange, onReset, isEmpty = fals
           side="left"
           trigger={
             <Button
-              variant="outline"
-              size="md"
+              variant="white"
+              size="sm"
               as="div"
               leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}
               title="Filtros adicionais"
               aria-label="Filtros adicionais"
               disabled={isEmpty}
+              className="icon-only"
             ></Button>
           }
         >

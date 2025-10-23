@@ -87,13 +87,13 @@ export const RestaurantProvider = ({ children }: RestaurantProviderProps) => {
       localStorage.set('restaurantConfigValidation', validation)
       if (!validation.isReadyForOperation) {
         const missingConfigs = validation.missingConfigs.join(', ')
-        toast.error(`Restaurante não está completo. Faltam: ${missingConfigs}`, {
+        toast.error(`Estabelecimento não está completo. Faltam: ${missingConfigs}`, {
           id: 'restaurant-incomplete-warning',
           duration: 5000
         })
       }
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Erro ao carregar restaurante'
+      const errorMessage = err instanceof Error ? err.message : 'Erro ao carregar estabelecimento'
       setError(errorMessage)
       toast.error(errorMessage)
       localStorage.remove('restaurant')

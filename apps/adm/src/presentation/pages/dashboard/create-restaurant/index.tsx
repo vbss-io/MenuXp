@@ -74,11 +74,11 @@ export const CreateRestaurant = () => {
         files: selectedFile ? [selectedFile] : undefined
       })
       updateRestaurantId(result.id)
-      toast.success('Restaurante criado com sucesso!')
+      toast.success('Estabelecimento criado com sucesso!')
       navigate('/dashboard')
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Ocorreu um erro')
-      toast.error('Ocorreu um erro ao criar o restaurante. Por favor, tente novamente.')
+      toast.error('Ocorreu um erro ao criar o estabelecimento. Por favor, tente novamente.')
     }
   }
 
@@ -164,12 +164,12 @@ export const CreateRestaurant = () => {
   return (
     <S.Container>
       <S.Card>
-        <S.CardTitle>Criar Restaurante</S.CardTitle>
+        <S.CardTitle>Criar Estabelecimento</S.CardTitle>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <FormInput
             id="name"
-            label="Nome do Restaurante"
-            placeholder="Digite o nome do seu restaurante"
+            label="Nome do Estabelecimento"
+            placeholder="Digite o nome do seu estabelecimento"
             error={errors.name?.message}
             required
             register={register('name')}
@@ -177,7 +177,7 @@ export const CreateRestaurant = () => {
           <FormTextarea
             id="description"
             label="Descrição"
-            placeholder="Descreva seu restaurante"
+            placeholder="Descreva seu estabelecimento"
             error={errors.description?.message}
             required
             register={register('description')}
@@ -196,12 +196,12 @@ export const CreateRestaurant = () => {
             {slugStatusElement && <S.StatusContainer>{slugStatusElement}</S.StatusContainer>}
           </S.InputWrapper>
           <S.FileLabel htmlFor="logo">
-            {selectedFile ? selectedFile.name : 'Clique para selecionar o logo do restaurante'}
+            {selectedFile ? selectedFile.name : 'Clique para selecionar o logo do estabelecimento'}
             <S.FileInput id="logo" type="file" accept="image/*" onChange={handleFileChange} />
           </S.FileLabel>
           {error && <S.ErrorMessage>{error}</S.ErrorMessage>}
           <Button type="submit" disabled={isSubmitting} variant="primary">
-            {isSubmitting ? <Loading /> : 'Criar Restaurante'}
+            {isSubmitting ? <Loading /> : 'Criar Estabelecimento'}
           </Button>
         </S.Form>
       </S.Card>

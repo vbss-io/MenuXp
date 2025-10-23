@@ -29,11 +29,11 @@ export const SettingsPage = () => {
     const content = {
       branding: {
         title: 'Configurações de Branding',
-        description: 'Personalize a aparência e identidade visual do seu restaurante'
+        description: 'Personalize a aparência e identidade visual do seu estabelecimento'
       },
       address: {
         title: 'Endereço',
-        description: 'Configure o endereço do seu restaurante'
+        description: 'Configure o endereço do seu estabelecimento'
       },
       operations: {
         title: 'Configurações de Operações',
@@ -49,7 +49,7 @@ export const SettingsPage = () => {
       },
       users: {
         title: 'Usuários',
-        description: 'Gerencie os usuários do seu restaurante'
+        description: 'Gerencie os usuários do seu estabelecimento'
       }
     }
     return content[tabId]

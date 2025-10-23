@@ -50,13 +50,13 @@ export const Sidebar = () => {
     },
     {
       icon: <BowlFoodIcon size={20} weight="fill" />,
-      label: 'Items do Menu',
+      label: 'Cardápio',
       path: '/dashboard/menu-items',
       isActive: location.pathname === '/dashboard/menu-items'
     },
     {
       icon: <ScrollIcon size={20} weight="fill" />,
-      label: 'Cardápio',
+      label: 'Aparência',
       path: '/dashboard/menu',
       isActive: location.pathname === '/dashboard/menu'
     },
@@ -155,7 +155,7 @@ export const Sidebar = () => {
               >
                 <img
                   src="/images/menuxp-logo.svg"
-                  alt="MenuXP - Seu restaurante merece um app próprio"
+                  alt="MenuXP - Seu estabelecimento merece um app próprio"
                   style={{ width: '120px', height: 'auto' }}
                 />
               </S.Logo>

@@ -140,7 +140,7 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
             <Button 
               variant="primary" 
               onClick={handleCreateCategory} 
-              size="md" 
+              size="sm" 
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar nova categoria"
             >
@@ -148,9 +148,9 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
             </Button>
           ) : (
             <Button 
-              variant="outline" 
+              variant="white" 
               onClick={handleCreateCategory} 
-              size="md" 
+              size="sm" 
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar nova categoria"
             >
@@ -194,7 +194,7 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
                       Nenhuma categoria corresponde à busca "{filters.searchMask}"
                     </Page.EmptyStateDescription>
                     <Button 
-                      variant="outline" 
+                      variant="white" 
                       size="sm" 
                       onClick={() => setFilters(prev => ({...prev, searchMask: ''}))}
                       style={{ marginTop: '16px' }}
@@ -222,7 +222,7 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
                       <Button
                         variant="primary"
                         onClick={handleCreateCategory}
-                        size="md"
+                        size="sm"
                         leftIcon={<PlusIcon size={16} />}
                         aria-label="Criar nova categoria"
                       >
