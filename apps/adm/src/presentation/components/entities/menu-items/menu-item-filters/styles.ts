@@ -43,13 +43,50 @@ export const PopoverOption = styled.div<{ active?: boolean }>`
   align-items: center;
   justify-content: space-between;
   padding: ${({ theme }) => theme.spacing.sm};
-  border-radius: ${({ theme }) => theme.borderRadius.xs};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   cursor: pointer;
-  transition: background-color 0.2s ease;
-  background: ${({ active, theme }) => (active ? `${theme.colors.mx.red}10` : 'transparent')};
-  color: ${({ active, theme }) => (active ? theme.colors.mx.red : theme.colors.mx.black)};
+  transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
+  background: ${({ active }) => (active ? '#3b82f6' : 'transparent')};
+  color: ${({ active, theme }) => (active ? theme.colors.mx.white : theme.colors.mx.black)};
 
   &:hover {
-    background: ${({ theme }) => `${theme.colors.mx.red}05`};
+    background: ${({ active, theme }) => (active ? '#3b82f6' : theme.colors.mx.gray[100])};
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`
+
+export const CheckboxWrapper = styled.div`
+  .form-checkbox {
+    .checkboxContainer {
+      .checkboxRoot {
+        background-color: ${({ theme }) => theme.colors.mx.white} !important;
+        border: 1px solid ${({ theme }) => theme.colors.mx.black} !important;
+        border-radius: 4px !important;
+        
+        &[data-state="checked"] {
+          background-color: ${({ theme }) => theme.colors.mx.white} !important;
+          
+          .checkboxIconContainer {
+            color: ${({ theme }) => theme.colors.mx.black} !important;
+            filter: none !important;
+          }
+        }
+        
+        &:hover {
+          border-color: ${({ theme }) => theme.colors.mx.black} !important;
+          background-color: ${({ theme }) => theme.colors.mx.gray[50]} !important;
+        }
+      }
+      
+      .checkboxLabel {
+        font-family: ${({ theme }) => theme.typography.fonts.body} !important;
+        font-size: ${({ theme }) => theme.typography.fontSizes.sm} !important;
+        color: ${({ theme }) => theme.colors.mx.black} !important;
+      }
+    }
   }
 `

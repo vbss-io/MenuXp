@@ -29,7 +29,7 @@ export const FormGroup = styled(motion.div)`
   padding: ${({ theme }) => theme.spacing.sm};
   background: ${({ theme }) => theme.colors.mx.white};
   border: 1px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   box-shadow: none;
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
   scroll-margin-bottom: 100px;

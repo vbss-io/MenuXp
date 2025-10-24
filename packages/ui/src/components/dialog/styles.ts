@@ -13,7 +13,7 @@ export const StyledDialog = styled(VbssDialog)`
     
     /* Estilos brutalistas base */
     border: 1px solid ${({ theme }) => theme.colors.mx.black};
-    border-radius: ${({ theme }) => theme.borderRadius.lg};
+    border-radius: ${({ theme }) => theme.borderRadius.sm};
     box-shadow: 4px 4px 0px ${({ theme }) => theme.colors.mx.black};
     font-weight: ${({ theme }) => theme.typography.fontWeights.regular};
 

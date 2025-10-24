@@ -108,13 +108,16 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset, isEmpty = f
             <S.PopoverTitle>Filtros adicionais:</S.PopoverTitle>
             <S.PopoverOptions>
               <S.PopoverOption>
-                <FormCheckbox
-                  id="includeInactive"
-                  label="Incluir itens inativos"
-                  checked={filters.includeInactive}
-                  onCheckedChange={(checked) => handleFilterChange('includeInactive', checked)}
-                  fontSize="sm"
-                />
+                <S.CheckboxWrapper>
+                  <FormCheckbox
+                    id="includeInactive"
+                    label="Incluir itens inativos"
+                    checked={filters.includeInactive}
+                    onCheckedChange={(checked) => handleFilterChange('includeInactive', checked)}
+                    fontSize="sm"
+                    rounded="none"
+                  />
+                </S.CheckboxWrapper>
               </S.PopoverOption>
             </S.PopoverOptions>
             <Button variant="outline" size="sm" onClick={onReset} style={{ marginTop: '1rem', width: '100%' }}>

@@ -18,7 +18,7 @@ const chipsStyles = css`
 export const Card = styled(motion.div)`
   background: ${({ theme }) => theme.colors.mx.white};
   border: 1px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.lg};
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
   display: flex;

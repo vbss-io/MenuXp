@@ -108,16 +108,19 @@ export const ComboFilters = ({ filters, onFiltersChange, onReset, isEmpty = fals
             <S.PopoverTitle>Filtros adicionais:</S.PopoverTitle>
             <S.PopoverOptions>
               <S.PopoverOption>
-                <FormCheckbox
-                  id="includeInactive"
-                  label="Incluir combos inativos"
-                  checked={filters.includeInactive}
-                  onCheckedChange={(checked) => handleFilterChange('includeInactive', checked)}
-                  fontSize="sm"
-                />
+                <S.CheckboxWrapper>
+                  <FormCheckbox
+                    id="includeInactive"
+                    label="Incluir combos inativos"
+                    checked={filters.includeInactive}
+                    onCheckedChange={(checked) => handleFilterChange('includeInactive', checked)}
+                    fontSize="sm"
+                    rounded="none"
+                  />
+                </S.CheckboxWrapper>
               </S.PopoverOption>
             </S.PopoverOptions>
-            <Button variant="outline" size="sm" onClick={onReset} style={{ marginTop: '1rem', width: '100%' }}>
+            <Button variant="white" size="sm" onClick={onReset} style={{ marginTop: '1rem', width: '100%' }}>
               Limpar
             </Button>
           </S.PopoverContent>

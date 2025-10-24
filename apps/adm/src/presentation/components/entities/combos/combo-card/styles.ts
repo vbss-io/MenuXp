@@ -3,10 +3,9 @@ import styled from 'styled-components'
 
 export const Card = styled(motion.div)`
   background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border: 1px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.lg};
-  box-shadow: ${({ theme }) => theme.shadows.brutalistCard};
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
   display: flex;
   flex-direction: column;
@@ -17,12 +16,10 @@ export const Card = styled(motion.div)`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: ${({ theme }) => theme.shadows.brutalistHover};
   }
 
   &:active {
     transform: translateY(0px);
-    box-shadow: ${({ theme }) => theme.shadows.sm};
   }
 
   &::before {
@@ -71,6 +68,11 @@ export const CardTitle = styled.h3`
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
 
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.typography.fontSizes.md};
@@ -92,22 +94,36 @@ export const CardDescription = styled.p`
   margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
   flex-shrink: 0;
   line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
 `
 
 export const ImagesContainer = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.md};
+  margin-bottom: 4px;
   flex-shrink: 0;
+
+  /* Sobrescrever estilos do ImageCarousel */
+  .image-carousel {
+    margin-bottom: 0 !important;
+  }
+
+  .image-carousel > div {
+    gap: ${({ theme }) => theme.spacing.xs} !important;
+  }
 `
 
 export const ImagesLabel = styled.strong`
-  font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.xs};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.mx.gray[500]};
-  margin-bottom: ${({ theme }) => theme.spacing.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.black};
+  letter-spacing: 0.2px;
+  text-transform: none;
+  margin-bottom: 2px;
   display: block;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 `
 
 export const CardInfo = styled.div`
@@ -115,7 +131,34 @@ export const CardInfo = styled.div`
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.xs};
   margin-bottom: ${({ theme }) => theme.spacing.md};
+  margin-top: 2px;
   flex-shrink: 0;
+
+  /* Estilos específicos para chips dentro do CardInfo */
+  > * {
+    font-family: ${({ theme }) => theme.typography.fonts.title} !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    min-width: 0 !important;
+    max-width: 300px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    display: block !important;
+    
+    /* Forçar alinhamento do conteúdo interno */
+    > * {
+      text-align: left !important;
+      justify-content: flex-start !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 100% !important;
+    }
+  }
 `
 
 export const CardFooter = styled.div`
@@ -139,6 +182,54 @@ export const ActionsContainer = styled.div`
       background-color: ${({ theme }) => theme.colors.mx.red};
       color: ${({ theme }) => theme.colors.mx.white};
       transform: translateY(-1px);
+    }
+
+    /* Sobrescrever hover para botão white */
+    &.white:hover:not(:disabled) {
+      background: ${({ theme }) => theme.colors.mx.gray[100]};
+      border-color: ${({ theme }) => theme.colors.mx.black};
+      transform: translateY(-2px);
+      box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.black};
+      color: ${({ theme }) => theme.colors.mx.black};
+    }
+
+    /* Sobrescrever hover para botão ghost - vermelho */
+    &.ghost:hover:not(:disabled) {
+      background-color: transparent !important;
+      color: ${({ theme }) => theme.colors.mx.red} !important;
+      border: 1px solid ${({ theme }) => theme.colors.mx.red} !important;
+      box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.red} !important;
+      transform: translateY(-2px);
+    }
+
+    /* Sobrescrever hover para botão primary - azul */
+    &.primary:hover:not(:disabled) {
+      background: ${({ theme }) => theme.colors.mx.blue} !important;
+      color: ${({ theme }) => theme.colors.mx.white} !important;
+      border: 1px solid ${({ theme }) => theme.colors.mx.blue} !important;
+      box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.blue} !important;
+      transform: translateY(-2px);
+    }
+
+    /* Estilo customizado para botão EDITAR */
+    &.edit-button {
+      border-color: ${({ theme }) => theme.colors.mx.blue};
+      background: ${({ theme }) => theme.colors.mx.white};
+      color: ${({ theme }) => theme.colors.mx.blue};
+      box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.blue};
+
+      &:hover:not(:disabled) {
+        background: ${({ theme }) => theme.colors.mx.blue};
+        color: ${({ theme }) => theme.colors.mx.white};
+        border-color: ${({ theme }) => theme.colors.mx.white};
+        box-shadow: 0 4px 0 ${({ theme }) => theme.colors.mx.blue};
+        transform: translateY(-2px);
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0px);
+        box-shadow: 0 2px 0 ${({ theme }) => theme.colors.mx.blue};
+      }
     }
   }
 

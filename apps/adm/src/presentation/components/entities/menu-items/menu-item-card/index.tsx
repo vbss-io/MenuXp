@@ -108,19 +108,19 @@ export const MenuItemCard = ({ menuItem, onEdit, onDelete, onRefresh }: MenuItem
             </S.ImagesContainer>
           )}
           <S.CardInfo>
-            <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+            <Chip backgroundColor="#3b82f6" textColor="white" size="xs">
               {menuItem.categoryName}
             </Chip>
-            <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+            <Chip backgroundColor="#3b82f6" textColor="white" size="xs">
               Preço: R$ {menuItem.price.toFixed(2)}
             </Chip>
             {menuItem.stock > 0 && (
-              <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+              <Chip backgroundColor="#3b82f6" textColor="white" size="xs">
                 Estoque: {menuItem.stock}
               </Chip>
             )}
             {menuItem.discount > 0 && (
-              <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+              <Chip backgroundColor="#3b82f6" textColor="white" size="xs">
                 Desconto: {menuItem.discount}%
               </Chip>
             )}

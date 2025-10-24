@@ -110,20 +110,20 @@ export const ComboCard = ({ combo, onEdit, onDelete, onRefresh }: ComboCardProps
             </S.ImagesContainer>
           )}
           <S.CardInfo>
-            <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+            <Chip backgroundColor="#3b82f6" textColor="white" size="xs">
               Preço: R$ {combo.price.toFixed(2)}
             </Chip>
             {combo.stock !== undefined && combo.stock > 0 && (
-              <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+              <Chip backgroundColor="#3b82f6" textColor="white" size="xs">
                 Estoque: {combo.stock}
               </Chip>
             )}
             {combo.discount !== undefined && combo.discount > 0 && (
-              <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+              <Chip backgroundColor="#3b82f6" textColor="white" size="xs">
                 Desconto: {combo.discount}%
               </Chip>
             )}
-            <Chip backgroundColor="#ef4444" textColor="white" size="xs">
+            <Chip backgroundColor="#3b82f6" textColor="white" size="xs">
               Itens: {combo.items.length}
             </Chip>
           </S.CardInfo>

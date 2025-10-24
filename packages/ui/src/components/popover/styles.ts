@@ -12,6 +12,7 @@ export const StyledPopover = styled(VbssPopover)`
     max-height: 400px;
     overflow-y: auto;
     overflow-x: hidden;
+    outline: none !important;
 
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -33,9 +34,12 @@ export const StyledPopover = styled(VbssPopover)`
     }
 
     &.outline {
-      border: 2px solid ${({ theme }) => theme.colors.primary};
+      border: 1px solid ${({ theme }) => theme.colors.mx.black};
+      border-radius: ${({ theme }) => theme.borderRadius.sm};
       background-color: ${({ theme }) => theme.colors.mx.white};
       color: ${({ theme }) => theme.colors.mx.black};
+      box-shadow: ${({ theme }) => theme.shadows.md};
+      outline: none;
     }
 
     &.ghost {
@@ -53,9 +57,10 @@ export const StyledPopover = styled(VbssPopover)`
     h3 {
       font-family: ${({ theme }) => theme.typography.fonts.title};
       font-size: ${({ theme }) => theme.typography.fontSizes.md};
-      color: ${({ theme }) => theme.colors.primary};
+      color: ${({ theme }) => theme.colors.mx.black};
       margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
       text-transform: none;
+      letter-spacing: 0.5px;
     }
 
     &.primary h3,

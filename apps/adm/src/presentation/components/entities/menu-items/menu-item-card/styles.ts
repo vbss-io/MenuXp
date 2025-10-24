@@ -4,7 +4,7 @@ import styled from 'styled-components'
 export const Card = styled(motion.div)`
   background: ${({ theme }) => theme.colors.mx.white};
   border: 1px solid ${({ theme }) => theme.colors.mx.black};
-  border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+  border-radius: ${({ theme }) => theme.borderRadius.sm};
   padding: ${({ theme }) => theme.spacing.lg};
   transition: all ${({ theme }) => theme.animations.durations.normal} ${({ theme }) => theme.animations.easings.ease};
   display: flex;
@@ -102,19 +102,28 @@ export const CardDescription = styled.p`
 `
 
 export const ImagesContainer = styled.div`
-  margin-bottom: ${({ theme }) => theme.spacing.md};
+  margin-bottom: 4px;
   flex-shrink: 0;
+
+  /* Sobrescrever estilos do ImageCarousel */
+  .image-carousel {
+    margin-bottom: 0 !important;
+  }
+
+  .image-carousel > div {
+    gap: ${({ theme }) => theme.spacing.xs} !important;
+  }
 `
 
 export const ImagesLabel = styled.strong`
-  font-family: ${({ theme }) => theme.typography.fonts.body};
   font-size: ${({ theme }) => theme.typography.fontSizes.xs};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.mx.gray[500]};
-  margin-bottom: ${({ theme }) => theme.spacing.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  font-family: ${({ theme }) => theme.typography.fonts.body};
+  color: ${({ theme }) => theme.colors.mx.black};
+  letter-spacing: 0.2px;
+  text-transform: none;
+  margin-bottom: 2px;
   display: block;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 `
 
 export const CardInfo = styled.div`
@@ -122,7 +131,34 @@ export const CardInfo = styled.div`
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.spacing.xs};
   margin-bottom: ${({ theme }) => theme.spacing.md};
+  margin-top: 2px;
   flex-shrink: 0;
+
+  /* Estilos específicos para chips dentro do CardInfo */
+  > * {
+    font-family: ${({ theme }) => theme.typography.fonts.title} !important;
+    letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    min-width: 0 !important;
+    max-width: 300px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    display: block !important;
+    
+    /* Forçar alinhamento do conteúdo interno */
+    > * {
+      text-align: left !important;
+      justify-content: flex-start !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 100% !important;
+    }
+  }
 `
 
 export const CardFooter = styled.div`

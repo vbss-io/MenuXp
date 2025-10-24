@@ -106,13 +106,16 @@ export const Filters = ({ filters, onFiltersChange, onReset, isEmpty = false }: 
             <S.PopoverTitle>Filtros adicionais:</S.PopoverTitle>
             <S.PopoverOptions>
               <S.PopoverOption>
-                <FormCheckbox
-                  id="includeInactive"
-                  label="Incluir categorias inativas"
-                  checked={filters.includeInactive}
-                  onCheckedChange={(checked) => handleFilterChange('includeInactive', checked)}
-                  fontSize="sm"
-                />
+                <S.CheckboxWrapper>
+                  <FormCheckbox
+                    id="includeInactive"
+                    label="Incluir categorias inativas"
+                    checked={filters.includeInactive}
+                    onCheckedChange={(checked) => handleFilterChange('includeInactive', checked)}
+                    fontSize="sm"
+                    rounded="none"
+                  />
+                </S.CheckboxWrapper>
               </S.PopoverOption>
             </S.PopoverOptions>
             <Button variant="outline" size="sm" onClick={onReset} style={{ marginTop: '1rem', width: '100%' }}>
