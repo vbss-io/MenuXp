@@ -1,0 +1,88 @@
+[
+  {
+    "pt": "Entrega",
+    "en": "Delivery",
+    "es": "Entrega"
+  },
+  {
+    "pt": "Retirada",
+    "en": "Pickup",
+    "es": "Retirada"
+  },
+  {
+    "pt": "Consumo no local",
+    "en": "Dine-in",
+    "es": "Consumo en el local"
+  },
+  {
+    "pt": "Dinheiro",
+    "en": "Cash",
+    "es": "Efectivo"
+  },
+  {
+    "pt": "Cartão de Crédito",
+    "en": "Credit Card",
+    "es": "Tarjeta de Crédito"
+  },
+  {
+    "pt": "Cartão de Débito",
+    "en": "Debit Card",
+    "es": "Tarjeta de Débito"
+  },
+  {
+    "pt": "PIX",
+    "en": "PIX",
+    "es": "PIX"
+  },
+  {
+    "pt": "Resumo do Pedido",
+    "en": "Order Summary",
+    "es": "Resumen del Pedido"
+  },
+  {
+    "pt": "Agendamento",
+    "en": "Schedule",
+    "es": "Programación"
+  },
+  {
+    "pt": "Itens",
+    "en": "Items",
+    "es": "Artículos"
+  },
+  {
+    "pt": "Tipo de Pedido",
+    "en": "Order Type",
+    "es": "Tipo de Pedido"
+  },
+  {
+    "pt": "Forma de Pagamento",
+    "en": "Payment Method",
+    "es": "Forma de Pago"
+  },
+  {
+    "pt": "Endereço",
+    "en": "Address",
+    "es": "Dirección"
+  },
+  {
+    "pt": "Subtotal",
+    "en": "Subtotal",
+    "es": "Subtotal"
+  },
+  {
+    "pt": "Taxa de entrega",
+    "en": "Delivery fee",
+    "es": "Tarifa de entrega"
+  },
+  {
+    "pt": "Grátis",
+    "en": "Free",
+    "es": "Gratis"
+  },
+  {
+    "pt": "Total",
+    "en": "Total",
+    "es": "Total"
+  }
+]
+

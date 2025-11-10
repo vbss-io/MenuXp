@@ -1,0 +1,83 @@
+[
+  {
+    "pt": "Carregando...",
+    "en": "Loading...",
+    "es": "Cargando..."
+  },
+  {
+    "pt": "Item adicionado ao carrinho!",
+    "en": "Item added to cart!",
+    "es": "¡Artículo agregado al carrito!"
+  },
+  {
+    "pt": "Erro ao adicionar item ao carrinho",
+    "en": "Error adding item to cart",
+    "es": "Error al agregar artículo al carrito"
+  },
+  {
+    "pt": "Item removido do carrinho!",
+    "en": "Item removed from cart!",
+    "es": "¡Artículo eliminado del carrito!"
+  },
+  {
+    "pt": "Erro ao remover item do carrinho",
+    "en": "Error removing item from cart",
+    "es": "Error al eliminar artículo del carrito"
+  },
+  {
+    "pt": "Quantidade atualizada!",
+    "en": "Quantity updated!",
+    "es": "¡Cantidad actualizada!"
+  },
+  {
+    "pt": "Erro ao atualizar quantidade",
+    "en": "Error updating quantity",
+    "es": "Error al actualizar cantidad"
+  },
+  {
+    "pt": "Carrinho limpo!",
+    "en": "Cart cleared!",
+    "es": "¡Carrito vaciado!"
+  },
+  {
+    "pt": "Erro ao limpar carrinho",
+    "en": "Error clearing cart",
+    "es": "Error al vaciar el carrito"
+  },
+  {
+    "pt": "Login realizado com sucesso!",
+    "en": "Login successful!",
+    "es": "¡Inicio de sesión exitoso!"
+  },
+  {
+    "pt": "Cliente não encontrado. Faça o cadastro primeiro.",
+    "en": "Customer not found. Please register first.",
+    "es": "Cliente no encontrado. Regístrese primero."
+  },
+  {
+    "pt": "Erro ao fazer login. Tente novamente.",
+    "en": "Error logging in. Try again.",
+    "es": "Error al iniciar sesión. Intente nuevamente."
+  },
+  {
+    "pt": "Cadastro realizado com sucesso!",
+    "en": "Registration successful!",
+    "es": "¡Registro exitoso!"
+  },
+  {
+    "pt": "Erro ao fazer cadastro. Tente novamente.",
+    "en": "Error registering. Try again.",
+    "es": "Error al registrarse. Intente nuevamente."
+  },
+  {
+    "pt": "Dados atualizados com sucesso!",
+    "en": "Data updated successfully!",
+    "es": "¡Datos actualizados exitosamente!"
+  },
+  {
+    "pt": "Erro ao atualizar dados. Tente novamente.",
+    "en": "Error updating data. Try again.",
+    "es": "Error al actualizar datos. Intente nuevamente."
+  }
+]
+

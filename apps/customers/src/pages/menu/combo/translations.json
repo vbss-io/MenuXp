@@ -1,0 +1,63 @@
+[
+  {
+    "pt": "Combo adicionado ao carrinho com sucesso!",
+    "en": "Combo added to cart successfully!",
+    "es": "¡Combo agregado al carrito exitosamente!"
+  },
+  {
+    "pt": "Erro ao adicionar combo ao carrinho. Tente novamente.",
+    "en": "Error adding combo to cart. Try again.",
+    "es": "Error al agregar combo al carrito. Intente nuevamente."
+  },
+  {
+    "pt": "Carregando combo...",
+    "en": "Loading combo...",
+    "es": "Cargando combo..."
+  },
+  {
+    "pt": "Voltar ao menu",
+    "en": "Back to menu",
+    "es": "Volver al menú"
+  },
+  {
+    "pt": "Combo não encontrado",
+    "en": "Combo not found",
+    "es": "Combo no encontrado"
+  },
+  {
+    "pt": "COMBO",
+    "en": "COMBO",
+    "es": "COMBO"
+  },
+  {
+    "pt": "Observações",
+    "en": "Notes",
+    "es": "Observaciones"
+  },
+  {
+    "pt": "Ex: sem cebola, bem assado...",
+    "en": "E.g.: without onion, well done...",
+    "es": "Ej: sin cebolla, bien asado..."
+  },
+  {
+    "pt": "Quantidade",
+    "en": "Quantity",
+    "es": "Cantidad"
+  },
+  {
+    "pt": "Total",
+    "en": "Total",
+    "es": "Total"
+  },
+  {
+    "pt": "Adicionando...",
+    "en": "Adding...",
+    "es": "Agregando..."
+  },
+  {
+    "pt": "Adicionar ao Carrinho",
+    "en": "Add to Cart",
+    "es": "Agregar al Carrito"
+  }
+]
+

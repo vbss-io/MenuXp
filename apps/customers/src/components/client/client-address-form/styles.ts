@@ -1,19 +1,25 @@
 import styled from 'styled-components'
 
 export const FormContainer = styled.div`
-  width: 100%;
+  &.client-address-form {
+    width: 100%;
+  }
 `
 
 export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+  &.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.md};
+  }
 `
 
 export const SaveAddressOption = styled.div`
-  padding: 1rem;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  margin-top: 0.5rem;
+  &.save-address-option {
+    padding: ${({ theme }) => theme.spacing.md};
+    background: ${({ theme }) => theme.colors.mx.gray[50]};
+    border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+    border-radius: ${({ theme }) => theme.borderRadius.md};
+    margin-top: ${({ theme }) => theme.spacing.sm};
+  }
 `

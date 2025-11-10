@@ -1,0 +1,153 @@
+[
+  {
+    "pt": "Item editado com sucesso!",
+    "en": "Item edited successfully!",
+    "es": "¡Artículo editado exitosamente!"
+  },
+  {
+    "pt": "Erro ao editar item. Tente novamente.",
+    "en": "Error editing item. Try again.",
+    "es": "Error al editar artículo. Intente nuevamente."
+  },
+  {
+    "pt": "Pedido finalizado com sucesso!",
+    "en": "Order completed successfully!",
+    "es": "¡Pedido finalizado exitosamente!"
+  },
+  {
+    "pt": "Recebido",
+    "en": "Received",
+    "es": "Recibido"
+  },
+  {
+    "pt": "Confirmado",
+    "en": "Confirmed",
+    "es": "Confirmado"
+  },
+  {
+    "pt": "Em Produção",
+    "en": "In Production",
+    "es": "En Producción"
+  },
+  {
+    "pt": "Pronto",
+    "en": "Ready",
+    "es": "Listo"
+  },
+  {
+    "pt": "Saiu para Entrega",
+    "en": "Out for Delivery",
+    "es": "Salió para Entrega"
+  },
+  {
+    "pt": "Entregue",
+    "en": "Delivered",
+    "es": "Entregado"
+  },
+  {
+    "pt": "Cancelado",
+    "en": "Cancelled",
+    "es": "Cancelado"
+  },
+  {
+    "pt": "Preparando",
+    "en": "Preparing",
+    "es": "Preparando"
+  },
+  {
+    "pt": "Saiu p/ Entrega",
+    "en": "Out for Delivery",
+    "es": "Salió para Entrega"
+  },
+  {
+    "pt": "Carregando carrinho...",
+    "en": "Loading cart...",
+    "es": "Cargando carrito..."
+  },
+  {
+    "pt": "COMBO",
+    "en": "COMBO",
+    "es": "COMBO"
+  },
+  {
+    "pt": "Opcionais:",
+    "en": "Optionals:",
+    "es": "Opcionales:"
+  },
+  {
+    "pt": "Observação:",
+    "en": "Note:",
+    "es": "Observación:"
+  },
+  {
+    "pt": "Subtotal",
+    "en": "Subtotal",
+    "es": "Subtotal"
+  },
+  {
+    "pt": "Total",
+    "en": "Total",
+    "es": "Total"
+  },
+  {
+    "pt": "Finalizar Pedido",
+    "en": "Complete Order",
+    "es": "Finalizar Pedido"
+  },
+  {
+    "pt": "Limpar Carrinho",
+    "en": "Clear Cart",
+    "es": "Vaciar Carrito"
+  },
+  {
+    "pt": "Seu carrinho está vazio",
+    "en": "Your cart is empty",
+    "es": "Su carrito está vacío"
+  },
+  {
+    "pt": "Adicione alguns itens do menu para começar!",
+    "en": "Add some menu items to get started!",
+    "es": "¡Agregue algunos artículos del menú para comenzar!"
+  },
+  {
+    "pt": "Seu Pedido",
+    "en": "Your Order",
+    "es": "Su Pedido"
+  },
+  {
+    "pt": "Acompanhe seu Pedido",
+    "en": "Track your Order",
+    "es": "Seguir su Pedido"
+  },
+  {
+    "pt": "Pedido",
+    "en": "Order",
+    "es": "Pedido"
+  },
+  {
+    "pt": "Outros pedidos em andamento",
+    "en": "Other orders in progress",
+    "es": "Otros pedidos en curso"
+  },
+  {
+    "pt": "Voltar ao menu",
+    "en": "Back to menu",
+    "es": "Volver al menú"
+  },
+  {
+    "pt": "Carrinho de Compras",
+    "en": "Shopping Cart",
+    "es": "Carrito de Compras"
+  },
+  {
+    "pt": "Tem certeza que deseja remover todos os itens do carrinho? Esta ação não pode ser desfeita.",
+    "en": "Are you sure you want to remove all items from the cart? This action cannot be undone.",
+    "es": "¿Está seguro de que desea eliminar todos los artículos del carrito? Esta acción no se puede deshacer."
+  },
+  {
+    "pt": "Cancelar",
+    "en": "Cancel",
+    "es": "Cancelar"
+  }
+]
+

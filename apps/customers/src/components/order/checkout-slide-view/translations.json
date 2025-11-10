@@ -1,0 +1,138 @@
+[
+  {
+    "pt": "Restaurante fechado. Apenas pedidos agendados.",
+    "en": "Restaurant closed. Only scheduled orders.",
+    "es": "Restaurante cerrado. Solo pedidos programados."
+  },
+  {
+    "pt": "Restaurante aberto. Pedidos imediatos ou agendados aceitos.",
+    "en": "Restaurant open. Immediate or scheduled orders accepted.",
+    "es": "Restaurante abierto. Pedidos inmediatos o programados aceptados."
+  },
+  {
+    "pt": "Restaurante aberto. Pedidos imediatos aceitos.",
+    "en": "Restaurant open. Immediate orders accepted.",
+    "es": "Restaurante abierto. Pedidos inmediatos aceptados."
+  },
+  {
+    "pt": "Restaurante fechado. Não aceita pedidos agendados.",
+    "en": "Restaurant closed. Does not accept scheduled orders.",
+    "es": "Restaurante cerrado. No acepta pedidos programados."
+  },
+  {
+    "pt": "Pedido criado com sucesso! Código",
+    "en": "Order created successfully! Code",
+    "es": "¡Pedido creado exitosamente! Código"
+  },
+  {
+    "pt": "Erro ao criar pedido. Tente novamente.",
+    "en": "Error creating order. Try again.",
+    "es": "Error al crear el pedido. Intente nuevamente."
+  },
+  {
+    "pt": "Por favor, insira um telefone válido",
+    "en": "Please enter a valid phone number",
+    "es": "Por favor, ingrese un teléfono válido"
+  },
+  {
+    "pt": "Por favor, aguarde a verificação do telefone ou clique fora do campo",
+    "en": "Please wait for phone verification or click outside the field",
+    "es": "Por favor, espere la verificación del teléfono o haga clic fuera del campo"
+  },
+  {
+    "pt": "Por favor, informe seu nome completo",
+    "en": "Please enter your full name",
+    "es": "Por favor, ingrese su nombre completo"
+  },
+  {
+    "pt": "Erro ao processar seus dados. Tente novamente.",
+    "en": "Error processing your data. Try again.",
+    "es": "Error al procesar sus datos. Intente nuevamente."
+  },
+  {
+    "pt": "Por favor, preencha todos os campos obrigatórios do endereço",
+    "en": "Please fill in all required address fields",
+    "es": "Por favor, complete todos los campos obligatorios de la dirección"
+  },
+  {
+    "pt": "Endereço salvo com sucesso!",
+    "en": "Address saved successfully!",
+    "es": "¡Dirección guardada exitosamente!"
+  },
+  {
+    "pt": "Erro ao salvar endereço",
+    "en": "Error saving address",
+    "es": "Error al guardar la dirección"
+  },
+  {
+    "pt": "Dados incompletos para finalizar pedido",
+    "en": "Incomplete data to complete order",
+    "es": "Datos incompletos para finalizar el pedido"
+  },
+  {
+    "pt": "Restaurante não aceita pedidos agendados",
+    "en": "Restaurant does not accept scheduled orders",
+    "es": "El restaurante no acepta pedidos programados"
+  },
+  {
+    "pt": "Por favor, selecione a data e hora para o agendamento",
+    "en": "Please select the date and time for scheduling",
+    "es": "Por favor, seleccione la fecha y hora para la programación"
+  },
+  {
+    "pt": "Restaurante fechado. Não é possível fazer pedidos imediatos.",
+    "en": "Restaurant closed. Cannot place immediate orders.",
+    "es": "Restaurante cerrado. No es posible hacer pedidos inmediatos."
+  },
+  {
+    "pt": "Não foi possível encontrar o id da operação",
+    "en": "Could not find operation id",
+    "es": "No se pudo encontrar el id de la operación"
+  },
+  {
+    "pt": "Itens",
+    "en": "Items",
+    "es": "Artículos"
+  },
+  {
+    "pt": "Informações",
+    "en": "Information",
+    "es": "Información"
+  },
+  {
+    "pt": "Endereço",
+    "en": "Address",
+    "es": "Dirección"
+  },
+  {
+    "pt": "Confirmação",
+    "en": "Confirmation",
+    "es": "Confirmación"
+  },
+  {
+    "pt": "Finalizar Pedido",
+    "en": "Complete Order",
+    "es": "Finalizar Pedido"
+  },
+  {
+    "pt": "Anterior",
+    "en": "Previous",
+    "es": "Anterior"
+  },
+  {
+    "pt": "Processando...",
+    "en": "Processing...",
+    "es": "Procesando..."
+  },
+  {
+    "pt": "Próximo",
+    "en": "Next",
+    "es": "Siguiente"
+  },
+  {
+    "pt": "Confirmar Pedido",
+    "en": "Confirm Order",
+    "es": "Confirmar Pedido"
+  }
+]
+

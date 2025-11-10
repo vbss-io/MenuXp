@@ -1,0 +1,28 @@
+[
+  {
+    "pt": "Você ainda não tem pedidos finalizados",
+    "en": "You don't have any completed orders yet",
+    "es": "Aún no tiene pedidos finalizados"
+  },
+  {
+    "pt": "Cancelado",
+    "en": "Cancelled",
+    "es": "Cancelado"
+  },
+  {
+    "pt": "Entregue",
+    "en": "Delivered",
+    "es": "Entregado"
+  },
+  {
+    "pt": "Histórico de Pedidos",
+    "en": "Order History",
+    "es": "Historial de Pedidos"
+  },
+  {
+    "pt": "Voltar ao menu",
+    "en": "Back to menu",
+    "es": "Volver al menú"
+  }
+]
+

@@ -1,18 +1,4 @@
 export const restaurantHeaderLayoutGlobalStyles = `
-  .header-container.layout-menuxp {
-    background: #ffffff !important;
-    border-bottom: 3px solid #000000 !important;
-    box-shadow: 6px 8px 0 #000000 !important;
-
-    .logo-container img {
-      filter: none;
-    }
-
-    .actions-container {
-      gap: 16px;
-    }
-  }
-
   .header-container.layout-default {
     background: #ffffff !important;
     border-bottom: 1px solid hsl(220, 13%, 91%) !important;

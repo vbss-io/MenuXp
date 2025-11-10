@@ -1,21 +1,23 @@
 import { ArrowLeftIcon, CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useTranslator } from 'vbss-translator'
 
 import { ClientLoginForm } from '@/components/client/client-form/client-login-form'
 import { ClientRegisterForm } from '@/components/client/client-form/client-register-form'
 import { ClientProfile } from '@/components/client/client-profile'
-import { Loading } from '@menuxp/ui'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { getOrdersByClient } from '@/services/order/get-orders-by-client'
 import { OrderStatus } from '@/types/order'
+import { Loading } from '@menuxp/ui'
 import { useQuery } from '@tanstack/react-query'
 
 import { ChildBackButton as BackButton, ChildContainer as Container } from '../styles'
 import * as S from './styles'
 
 export const RestaurantProfilePage = () => {
+  const { t } = useTranslator()
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
   const { restaurant } = useRestaurant({ slug: slug || '' })
@@ -67,7 +69,7 @@ export const RestaurantProfilePage = () => {
     if (historicalOrders.length === 0) {
       return (
         <S.EmptyMessage>
-          <p>Você ainda não tem pedidos finalizados</p>
+          <p>{t('Você ainda não tem pedidos finalizados')}</p>
         </S.EmptyMessage>
       )
     }
@@ -76,14 +78,14 @@ export const RestaurantProfilePage = () => {
       <S.OrdersList>
         {historicalOrders.map((order) => {
           const isDelivered = order.status === OrderStatus.DELIVERED
-          let statusColor = '#ef4444' // Cancelado
+          let statusColor = '#ef4444'
           let statusIcon = <XCircleIcon size={14} weight="fill" />
-          let statusLabel = 'Cancelado'
+          let statusLabel = t('Cancelado')
 
           if (isDelivered) {
-            statusColor = '#22c55e' // Entregue
+            statusColor = '#22c55e'
             statusIcon = <CheckCircleIcon size={14} weight="fill" />
-            statusLabel = 'Entregue'
+            statusLabel = t('Entregue')
           }
 
           return (
@@ -136,9 +138,8 @@ export const RestaurantProfilePage = () => {
     return (
       <>
         <ClientProfile onLogout={handleLogout} />
-
         <S.OrderHistorySection>
-          <S.HistoryTitle>Histórico de Pedidos</S.HistoryTitle>
+          <S.HistoryTitle>{t('Histórico de Pedidos')}</S.HistoryTitle>
           {renderOrderHistory()}
         </S.OrderHistorySection>
       </>
@@ -149,7 +150,7 @@ export const RestaurantProfilePage = () => {
     <Container>
       <BackButton onClick={handleBackClick}>
         <ArrowLeftIcon size={20} />
-        Voltar ao menu
+        {t('Voltar ao menu')}
       </BackButton>
       <S.ProfileContainer>{renderContent()}</S.ProfileContainer>
     </Container>

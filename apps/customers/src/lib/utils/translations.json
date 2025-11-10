@@ -1,0 +1,28 @@
+[
+  {
+    "pt": "Endereço",
+    "en": "Address",
+    "es": "Dirección"
+  },
+  {
+    "pt": "Informações de Contato",
+    "en": "Contact Information",
+    "es": "Información de Contacto"
+  },
+  {
+    "pt": "Configurações de Operação",
+    "en": "Operation Settings",
+    "es": "Configuraciones de Operación"
+  },
+  {
+    "pt": "Horários de Funcionamento",
+    "en": "Business Hours",
+    "es": "Horarios de Funcionamiento"
+  },
+  {
+    "pt": "Templates de Mensagens",
+    "en": "Message Templates",
+    "es": "Plantillas de Mensajes"
+  }
+]
+

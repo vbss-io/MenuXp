@@ -1,0 +1,33 @@
+[
+  {
+    "pt": "Revisar Itens",
+    "en": "Review Items",
+    "es": "Revisar Artículos"
+  },
+  {
+    "pt": "Carrinho não encontrado",
+    "en": "Cart not found",
+    "es": "Carrito no encontrado"
+  },
+  {
+    "pt": "Carrinho vazio",
+    "en": "Empty cart",
+    "es": "Carrito vacío"
+  },
+  {
+    "pt": "Subtotal",
+    "en": "Subtotal",
+    "es": "Subtotal"
+  },
+  {
+    "pt": "Taxa de entrega",
+    "en": "Delivery fee",
+    "es": "Tarifa de entrega"
+  },
+  {
+    "pt": "Total",
+    "en": "Total",
+    "es": "Total"
+  }
+]
+

@@ -35,26 +35,6 @@ export const languageSelectorLayoutGlobalStyles = `
     color: var(--restaurant-primary-color) !important;
   }
 
-  .language-trigger.layout-menuxp {
-    border: 3px solid #000000;
-    border-radius: 16px;
-    box-shadow: 4px 6px 0 #000000;
-    font-weight: 700;
-
-    &:hover {
-      box-shadow: 2px 3px 0 #000000;
-      transform: translateY(-2px) translateZ(0);
-    }
-
-    .language-circle {
-      border: 2px solid #000000;
-    }
-
-    .language-code {
-      font-weight: 700;
-    }
-  }
-
   .language-trigger.layout-default {
     background: #ffffff;
     border: 2px solid hsl(220, 13%, 91%);

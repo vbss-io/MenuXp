@@ -7,6 +7,9 @@ export default defineConfig({
   server: {
     port: 5180
   },
+  build: {
+    outDir: 'build'
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

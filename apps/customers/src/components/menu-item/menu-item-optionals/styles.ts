@@ -1,104 +1,88 @@
 import styled from 'styled-components'
 
-import { getMenuItemOptionalsLayoutStyle } from './layout.styles'
-
-export const OptionalsContainer = styled.div<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.md};
-  width: 100%;
-
-  ${({ $layout }) => getMenuItemOptionalsLayoutStyle($layout)}
+export const OptionalsContainer = styled.div`
+  &.menu-item-optionals {
+    display: flex;
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.md};
+    width: 100%;
+  }
 `
 
-export const OptionalsTitle = styled.h3<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  font-family: ${({ theme }) => theme.typography.fonts.title};
-  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0;
+export const OptionalsTitle = styled.h3`
+  &.optionals-title {
+    font-family: ${({ theme }) => theme.typography.fonts.title};
+    font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    color: ${({ theme }) => theme.colors.text.primary};
+    margin: 0;
+  }
 `
 
-export const OptionalsList = styled.div<{
-  $layout: string
-}>`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.sm};
+export const OptionalsList = styled.div`
+  &.optionals-list {
+    display: flex;
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `
 
-export const OptionalItem = styled.div<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: ${({ theme }) => theme.spacing.md};
-  background: ${({ theme }) => theme.colors.mx.white};
-  border: 2px solid ${({ theme }) => theme.colors.mx.gray[200]};
-  border-radius: ${({ theme }) => theme.borderRadius.sm};
-  transition: all 0.2s ease;
-
-  &:hover {
-    border-color: ${({ $primaryColor }) => $primaryColor};
-    box-shadow: ${({ theme }) => theme.shadows.sm};
+export const OptionalItem = styled.div`
+  &.optional-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: ${({ theme }) => theme.spacing.md};
+    background: ${({ theme }) => theme.colors.mx.white};
+    border: 3px solid ${({ theme }) => theme.colors.mx.black};
+    border-radius: ${({ theme }) => theme.borderRadius.brutalist};
+    box-shadow: ${({ theme }) => theme.shadows.brutalist};
+    transition: all 0.2s ease;
   }
 `
 
 export const OptionalInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.spacing.xs};
-  flex: 1;
+  &.optional-info {
+    display: flex;
+    flex-direction: column;
+    gap: ${({ theme }) => theme.spacing.xs};
+    flex: 1;
+  }
 `
 
-export const OptionalName = styled.span<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  font-size: ${({ theme }) => theme.typography.fontSizes.md};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.medium};
-  color: ${({ theme }) => theme.colors.text.primary};
+export const OptionalName = styled.span`
+  &.optional-name {
+    font-family: ${({ theme }) => theme.typography.fonts.body};
+    font-size: ${({ theme }) => theme.typography.fontSizes.md};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    color: ${({ theme }) => theme.colors.text.primary};
+  }
 `
 
-export const OptionalPrice = styled.span<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  font-size: ${({ theme }) => theme.typography.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-  color: ${({ $primaryColor }) => $primaryColor};
+export const OptionalPrice = styled.span`
+  &.optional-price {
+    font-family: ${({ theme }) => theme.typography.fonts.body};
+    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    color: var(--restaurant-primary-color);
+  }
 `
 
 export const OptionalControls = styled.div`
-  display: flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.spacing.sm};
+  &.optional-controls {
+    display: flex;
+    align-items: center;
+    gap: ${({ theme }) => theme.spacing.sm};
+  }
 `
 
-export const QuantityDisplay = styled.span<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  font-family: ${({ theme }) => theme.typography.fonts.body};
-  font-size: ${({ theme }) => theme.typography.fontSizes.md};
-  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.text.primary};
-  min-width: 32px;
-  text-align: center;
+export const QuantityDisplay = styled.span`
+  &.quantity-display {
+    font-family: ${({ theme }) => theme.typography.fonts.body};
+    font-size: ${({ theme }) => theme.typography.fontSizes.md};
+    font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+    color: ${({ theme }) => theme.colors.text.primary};
+    min-width: 32px;
+    text-align: center;
+  }
 `

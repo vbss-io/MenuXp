@@ -1,0 +1,28 @@
+[
+  {
+    "pt": "Nome",
+    "en": "Name",
+    "es": "Nombre"
+  },
+  {
+    "pt": "Nome completo",
+    "en": "Full name",
+    "es": "Nombre completo"
+  },
+  {
+    "pt": "Digite seu nome completo",
+    "en": "Enter your full name",
+    "es": "Ingrese su nombre completo"
+  },
+  {
+    "pt": "Salvando...",
+    "en": "Saving...",
+    "es": "Guardando..."
+  },
+  {
+    "pt": "Salvar nome",
+    "en": "Save name",
+    "es": "Guardar nombre"
+  }
+]
+

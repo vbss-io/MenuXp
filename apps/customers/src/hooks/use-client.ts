@@ -1,6 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { useContext } from 'react'
 import toast from 'react-hot-toast'
+import { useTranslator } from 'vbss-translator'
 
 import { ClientContext } from '@/hooks/contexts/client-context'
 import { getSessionId } from '@/lib/utils/session'
@@ -25,6 +26,7 @@ interface UseClientReturn {
 }
 
 export const useClient = (): UseClientReturn => {
+  const { t } = useTranslator()
   const context = useContext(ClientContext)
   if (!context) {
     throw new Error('useClient must be used within a ClientProvider')
@@ -35,33 +37,33 @@ export const useClient = (): UseClientReturn => {
       findClientByPhone({ restaurantId, phone }),
     onSuccess: (existingClient) => {
       if (existingClient) {
-        toast.success('Login realizado com sucesso!')
+        toast.success(t('Login realizado com sucesso!'))
       } else {
-        toast.error('Cliente não encontrado. Faça o cadastro primeiro.')
+        toast.error(t('Cliente não encontrado. Faça o cadastro primeiro.'))
       }
     },
     onError: () => {
-      toast.error('Erro ao fazer login. Tente novamente.')
+      toast.error(t('Erro ao fazer login. Tente novamente.'))
     }
   })
 
   const registerClientMutation = useMutation({
     mutationFn: (clientData: CreateClientParams) => createClient(clientData),
     onSuccess: () => {
-      toast.success('Cadastro realizado com sucesso!')
+      toast.success(t('Cadastro realizado com sucesso!'))
     },
     onError: () => {
-      toast.error('Erro ao fazer cadastro. Tente novamente.')
+      toast.error(t('Erro ao fazer cadastro. Tente novamente.'))
     }
   })
 
   const updateClientMutation = useMutation({
     mutationFn: ({ id, ...updates }: { id: string } & UpdateClientParams) => updateClient({ id, ...updates }),
     onSuccess: () => {
-      toast.success('Dados atualizados com sucesso!')
+      toast.success(t('Dados atualizados com sucesso!'))
     },
     onError: () => {
-      toast.error('Erro ao atualizar dados. Tente novamente.')
+      toast.error(t('Erro ao atualizar dados. Tente novamente.'))
     }
   })
 

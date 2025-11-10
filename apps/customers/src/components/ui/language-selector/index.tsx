@@ -1,23 +1,33 @@
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { useMemo } from 'react'
+import { useTranslator } from 'vbss-translator'
 
-import { useLanguage } from '@/hooks/use-language'
 import { Popover, useLayout } from '@menuxp/ui'
-
 import * as S from './styles'
+
+export type Language = 'pt' | 'en' | 'es'
 
 interface LanguageSelectorProps {
   className?: string
 }
 
 export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
-  const { language, changeLanguage, availableLanguages } = useLanguage()
+  const { language, setLanguage } = useTranslator()
   const { layout } = useLayout()
+
+  const availableLanguages: { code: Language; name: string; flag: string }[] = useMemo(
+    () => [
+      { code: 'pt', name: 'Português', flag: '🇧🇷' },
+      { code: 'en', name: 'English', flag: '🇺🇸' },
+      { code: 'es', name: 'Español', flag: '🇪🇸' }
+    ],
+    []
+  )
 
   const currentLanguage = availableLanguages.find((lang) => lang.code === language)
 
-  const handleLanguageChange = (languageCode: string) => {
-    changeLanguage(languageCode as 'pt' | 'en' | 'es')
+  const handleLanguageChange = (languageCode: Language) => {
+    setLanguage(languageCode)
   }
 
   const popoverContent = (

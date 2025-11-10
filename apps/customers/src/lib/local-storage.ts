@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js'
 
-import type { Language } from '@/hooks/contexts/language-context'
+import type { Language } from '@/components/ui/language-selector'
 import type { Cart } from '@/types/cart'
 import type { Client } from '@/types/client'
 import type { Restaurant, RestaurantConfigValidation } from '@/types/restaurant'

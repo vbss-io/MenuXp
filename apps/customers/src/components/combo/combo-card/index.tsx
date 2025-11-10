@@ -1,9 +1,9 @@
 import { PlusIcon } from '@phosphor-icons/react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslator } from 'vbss-translator'
 
-import { useRestaurant } from '@/hooks/use-restaurant'
 import type { Combo } from '@/types/combo'
-import { Button } from '@menuxp/ui'
+import { Button, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -15,7 +15,8 @@ interface ComboCardProps {
 }
 
 export const ComboCard: React.FC<ComboCardProps> = ({ item, onClick, onAddToCart, disabled = false }) => {
-  const { primaryColor, secondaryColor, layout } = useRestaurant()
+  const { t } = useTranslator()
+  const { layout } = useLayout()
   const navigate = useNavigate()
 
   const formatPrice = (price: number) => {
@@ -50,34 +51,13 @@ export const ComboCard: React.FC<ComboCardProps> = ({ item, onClick, onAddToCart
 
   return (
     <S.ComboCard
-      $layout={layout}
-      $primaryColor={primaryColor}
-      $secondaryColor={secondaryColor}
       onClick={handleCardClick}
-      className="combo-card"
-      style={
-        {
-          cursor: 'pointer',
-          '--primary': primaryColor,
-          '--secondary': secondaryColor
-        } as React.CSSProperties
-      }
+      className={`combo-card layout-${layout}`}
+      style={{ cursor: disabled ? 'not-allowed' : 'pointer' }}
     >
-      <S.ComboBadge
-        $layout={layout}
-        $primaryColor={primaryColor}
-        $secondaryColor={secondaryColor}
-        className="combo-badge"
-      >
-        COMBO
-      </S.ComboBadge>
+      <S.ComboBadge className="combo-badge">{t('COMBO')}</S.ComboBadge>
       {item.discount > 0 && (
-        <S.DiscountChip
-          $layout={layout}
-          $primaryColor={primaryColor}
-          $secondaryColor={secondaryColor}
-          className="discount-chip"
-        >
+        <S.DiscountChip className="discount-chip">
           <span>-{item.discount}%</span>
         </S.DiscountChip>
       )}
@@ -85,59 +65,28 @@ export const ComboCard: React.FC<ComboCardProps> = ({ item, onClick, onAddToCart
         <S.ComboImage
           src={item.medias[0]}
           alt={item.name}
-          $layout={layout}
           className="combo-image"
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
         />
       )}
-      <S.ComboContent $layout={layout} className="combo-content">
-        <S.ComboName
-          $layout={layout}
-          $primaryColor={primaryColor}
-          $secondaryColor={secondaryColor}
-          className="combo-name"
-        >
-          {item.name}
-        </S.ComboName>
-        {item.description && (
-          <S.ComboDescription $layout={layout} className="combo-description">
-            {item.description}
-          </S.ComboDescription>
-        )}
-        <S.ComboItemsCount $layout={layout} className="combo-items-count">
-          {item.items.length} {item.items.length === 1 ? 'item' : 'itens'}
+      <S.ComboContent className="combo-content">
+        <S.ComboName className="combo-name">{item.name}</S.ComboName>
+        {item.description && <S.ComboDescription className="combo-description">{item.description}</S.ComboDescription>}
+        <S.ComboItemsCount className="combo-items-count">
+          {item.items.length} {item.items.length === 1 ? t('item') : t('itens')}
         </S.ComboItemsCount>
-        <S.ComboFooter $layout={layout} className="combo-footer">
-          <S.ComboPrice
-            $layout={layout}
-            $primaryColor={primaryColor}
-            $secondaryColor={secondaryColor}
-            className="combo-price"
-          >
+        <S.ComboFooter className="combo-footer">
+          <S.ComboPrice className="combo-price">
             {item.discount > 0 ? (
               <>
-                <S.DiscountPrice
-                  $layout={layout}
-                  $primaryColor={primaryColor}
-                  $secondaryColor={secondaryColor}
-                  className="discount-price"
-                >
+                <S.DiscountPrice className="discount-price">
                   {formatDiscountPrice(item.price, item.discount)}
                 </S.DiscountPrice>
-                <S.OriginalPrice $layout={layout} className="original-price">
-                  {formatPrice(item.price)}
-                </S.OriginalPrice>
+                <S.OriginalPrice className="original-price">{formatPrice(item.price)}</S.OriginalPrice>
               </>
             ) : (
-              <S.CurrentPrice
-                $layout={layout}
-                $primaryColor={primaryColor}
-                $secondaryColor={secondaryColor}
-                className="current-price"
-              >
-                {formatPrice(item.price)}
-              </S.CurrentPrice>
+              <S.CurrentPrice className="current-price">{formatPrice(item.price)}</S.CurrentPrice>
             )}
           </S.ComboPrice>
           <Button variant="primary" size="sm" onClick={handleAddToCart} className="add-to-cart-button">

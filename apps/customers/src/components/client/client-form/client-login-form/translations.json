@@ -1,0 +1,33 @@
+[
+  {
+    "pt": "Entrar com Telefone",
+    "en": "Login with Phone",
+    "es": "Iniciar sesión con Teléfono"
+  },
+  {
+    "pt": "Telefone",
+    "en": "Phone",
+    "es": "Teléfono"
+  },
+  {
+    "pt": "Digite seu telefone",
+    "en": "Enter your phone",
+    "es": "Ingrese su teléfono"
+  },
+  {
+    "pt": "Entrando...",
+    "en": "Logging in...",
+    "es": "Iniciando sesión..."
+  },
+  {
+    "pt": "Entrar",
+    "en": "Login",
+    "es": "Iniciar sesión"
+  },
+  {
+    "pt": "Não tem conta? Faça seu cadastro",
+    "en": "Don't have an account? Register",
+    "es": "¿No tiene cuenta? Regístrese"
+  }
+]
+

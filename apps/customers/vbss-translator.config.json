@@ -1,0 +1,6 @@
+{
+  "pattern": "src/**/translations.json",
+  "outputPath": "src/translations/index.ts",
+  "outputFormat": "ts",
+  "referenceLanguage": "pt"
+}

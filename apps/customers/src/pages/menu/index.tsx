@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef } from 'react'
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useTranslator } from 'vbss-translator'
 
 import { BannerSection } from '@/components/menu-layout-sections/banner-section'
 import { CarouselSection } from '@/components/menu-layout-sections/carousel-section'
@@ -9,13 +10,14 @@ import { MenuItemsSection } from '@/components/menu-layout-sections/menu-items-s
 import { RestaurantClientWarningBanner } from '@/components/restaurant/restaurant-client-warning-banner'
 import { RestaurantHeader } from '@/components/restaurant/restaurant-header'
 import { RestaurantOperationWarningBanner } from '@/components/restaurant/restaurant-operation-warning-banner'
-import { MenuNavbar } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { MenuSectionType, type MenuSection } from '@/types/menu-layout'
+import { MenuNavbar } from '@menuxp/ui'
 
 import * as S from './styles'
 
 export const MenuPage = () => {
+  const { t } = useTranslator()
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
   const location = useLocation()
@@ -71,7 +73,7 @@ export const MenuPage = () => {
     return (
       <>
         <RestaurantHeader />
-        <S.Container>Carregando...</S.Container>
+        <S.Container>{t('Carregando...')}</S.Container>
       </>
     )
   }
@@ -81,7 +83,7 @@ export const MenuPage = () => {
       <>
         <RestaurantHeader />
         <S.Container>
-          <S.RestaurantNotFound>Restaurante não encontrado</S.RestaurantNotFound>
+          <S.RestaurantNotFound>{t('Restaurante não encontrado')}</S.RestaurantNotFound>
         </S.Container>
       </>
     )
@@ -120,7 +122,7 @@ export const MenuPage = () => {
             {menuLayout.sections.map((section, index) => renderSection(section, index))}
           </S.ChildContainer>
         )}
-        {!isChildRoute && !menuLayout && <S.MenuNotFound>Menu não disponível</S.MenuNotFound>}
+        {!isChildRoute && !menuLayout && <S.MenuNotFound>{t('Menu não disponível')}</S.MenuNotFound>}
       </S.Content>
       <MenuNavbar />
     </S.Container>

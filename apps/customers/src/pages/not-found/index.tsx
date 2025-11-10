@@ -1,12 +1,14 @@
 import { HouseIcon, RocketIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { useTranslator } from 'vbss-translator'
 
 import { Button } from '@menuxp/ui'
 
 import * as S from './styles'
 
 export const NotFound = () => {
+  const { t } = useTranslator()
   const navigate = useNavigate()
 
   const containerVariants = {
@@ -35,10 +37,12 @@ export const NotFound = () => {
       <S.NotFoundContent variants={containerVariants} initial="hidden" animate="visible">
         <S.TitleContainer variants={itemVariants}>
           <RocketIcon size={48} weight="duotone" />
-          <S.Title>GAME OVER</S.Title>
+          <S.Title>{t('GAME OVER')}</S.Title>
         </S.TitleContainer>
         <S.Message variants={itemVariants}>
-          Ops! Parece que você encontrou um glitch na matrix. Esta página não existe ou foi movida para outro lugar.
+          {t(
+            'Ops! Parece que você encontrou um glitch na matrix. Esta página não existe ou foi movida para outro lugar.'
+          )}
         </S.Message>
         <S.ButtonContainer variants={itemVariants}>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -48,7 +52,7 @@ export const NotFound = () => {
               size="lg"
               leftIcon={<HouseIcon size={20} weight="fill" />}
             >
-              Voltar a Home
+              {t('Voltar a Home')}
             </Button>
           </motion.div>
         </S.ButtonContainer>

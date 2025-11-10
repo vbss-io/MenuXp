@@ -1,0 +1,43 @@
+[
+  {
+    "pt": "Criar Conta",
+    "en": "Create Account",
+    "es": "Crear Cuenta"
+  },
+  {
+    "pt": "Telefone",
+    "en": "Phone",
+    "es": "Teléfono"
+  },
+  {
+    "pt": "Digite seu telefone",
+    "en": "Enter your phone",
+    "es": "Ingrese su teléfono"
+  },
+  {
+    "pt": "Nome (opcional)",
+    "en": "Name (optional)",
+    "es": "Nombre (opcional)"
+  },
+  {
+    "pt": "Seu nome (opcional)",
+    "en": "Your name (optional)",
+    "es": "Su nombre (opcional)"
+  },
+  {
+    "pt": "Criando conta...",
+    "en": "Creating account...",
+    "es": "Creando cuenta..."
+  },
+  {
+    "pt": "Criar conta",
+    "en": "Create account",
+    "es": "Crear cuenta"
+  },
+  {
+    "pt": "Já tem conta? Faça login",
+    "en": "Already have an account? Login",
+    "es": "¿Ya tiene cuenta? Inicie sesión"
+  }
+]
+

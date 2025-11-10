@@ -1,0 +1,23 @@
+[
+  {
+    "pt": "Erro ao carregar produtos da categoria",
+    "en": "Error loading category products",
+    "es": "Error al cargar productos de la categoría"
+  },
+  {
+    "pt": "Carregando produtos...",
+    "en": "Loading products...",
+    "es": "Cargando productos..."
+  },
+  {
+    "pt": "Voltar ao menu",
+    "en": "Back to menu",
+    "es": "Volver al menú"
+  },
+  {
+    "pt": "Não há produtos disponíveis nesta categoria.",
+    "en": "There are no products available in this category.",
+    "es": "No hay productos disponibles en esta categoría."
+  }
+]
+

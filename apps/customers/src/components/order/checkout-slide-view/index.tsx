@@ -4,23 +4,23 @@ import {
   CheckCircleIcon,
   CreditCardIcon,
   MapPinIcon,
-  ShoppingCartIcon,
-  XIcon
+  ShoppingCartIcon
 } from '@phosphor-icons/react'
-import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { useTranslator } from 'vbss-translator'
 
-import { AddressStep } from '@/components/order/checkout-slide-view/steps/address-step'
-import { OrderConfigStep } from '@/components/order/checkout-slide-view/steps/payment-step'
-import { ReviewItemsStep } from '@/components/order/checkout-slide-view/steps/review-items-step'
-import { SummaryStep } from '@/components/order/checkout-slide-view/steps/summary-step'
+import { AddressStep } from '@/components/order/checkout-slide-view/address-step'
+import { PaymentStep } from '@/components/order/checkout-slide-view/payment-step'
+import { ReviewItemsStep } from '@/components/order/checkout-slide-view/review-items-step'
+import { SummaryStep } from '@/components/order/checkout-slide-view/summary-step'
 import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { type CreateOrderParams, createOrder as createOrderService } from '@/services/order/create-order'
 import type { Address } from '@/types/address'
 import { OperationType, PaymentMethod } from '@/types/order'
+import { Button, Slider } from '@menuxp/ui'
 import { useMutation } from '@tanstack/react-query'
 
 import * as S from './styles'
@@ -31,14 +31,8 @@ interface CheckoutSlideViewProps {
   onSuccess: () => void
 }
 
-const STEPS = [
-  { id: 1, label: 'Itens', icon: ShoppingCartIcon },
-  { id: 2, label: 'Informações', icon: CreditCardIcon },
-  { id: 3, label: 'Endereço', icon: MapPinIcon },
-  { id: 4, label: 'Confirmação', icon: CheckCircleIcon }
-]
-
 export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideViewProps) => {
+  const { t } = useTranslator()
   const { client, loginClient, registerClient } = useClient()
   const { restaurant, operationId } = useRestaurant()
   const { cart, refetch: refetchCart } = useCart({
@@ -56,25 +50,26 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
   const canAcceptOrders = canAcceptImmediateOrders || canAcceptScheduledOrders
   const mustSchedule = !isOperationActive && acceptsScheduling
 
-  let validationMessage = ''
-  if (mustSchedule) {
-    validationMessage = 'Restaurante fechado. Apenas pedidos agendados.'
-  } else if (isOperationActive && acceptsScheduling) {
-    validationMessage = 'Restaurante aberto. Pedidos imediatos ou agendados aceitos.'
-  } else if (isOperationActive) {
-    validationMessage = 'Restaurante aberto. Pedidos imediatos aceitos.'
-  } else {
-    validationMessage = 'Restaurante fechado. Não aceita pedidos agendados.'
+  const getValidationMessage = () => {
+    if (mustSchedule) {
+      return t('Restaurante fechado. Apenas pedidos agendados.')
+    } else if (isOperationActive && acceptsScheduling) {
+      return t('Restaurante aberto. Pedidos imediatos ou agendados aceitos.')
+    } else if (isOperationActive) {
+      return t('Restaurante aberto. Pedidos imediatos aceitos.')
+    } else {
+      return t('Restaurante fechado. Não aceita pedidos agendados.')
+    }
   }
 
   const createOrderMutation = useMutation({
     mutationFn: (params: CreateOrderParams) => createOrderService(params),
     onSuccess: (data) => {
-      toast.success(`Pedido criado com sucesso! Código: ${data.code}`)
+      toast.success(`${t('Pedido criado com sucesso! Código')}: ${data.code}`)
       onSuccess()
     },
     onError: () => {
-      toast.error('Erro ao criar pedido. Tente novamente.')
+      toast.error(t('Erro ao criar pedido. Tente novamente.'))
     }
   })
 
@@ -129,21 +124,19 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
-  const primaryColor = restaurant?.style?.primaryColor || '#3B82F6'
-
   const handleNext = async () => {
     if (currentStep === 2 && !client) {
       const cleanPhone = guestPhone.replace(/\D/g, '')
       if (!cleanPhone || cleanPhone.length < 10 || cleanPhone.length > 11) {
-        toast.error('Por favor, insira um telefone válido')
+        toast.error(t('Por favor, insira um telefone válido'))
         return
       }
       if (!phoneVerified) {
-        toast.error('Por favor, aguarde a verificação do telefone ou clique fora do campo')
+        toast.error(t('Por favor, aguarde a verificação do telefone ou clique fora do campo'))
         return
       }
       if (!guestName || guestName.trim().length < 3) {
-        toast.error('Por favor, informe seu nome completo')
+        toast.error(t('Por favor, informe seu nome completo'))
         return
       }
       setIsAuthenticatingGuest(true)
@@ -160,7 +153,7 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
         await refetchCart()
       } catch (error) {
         console.error('Erro ao autenticar visitante:', error)
-        toast.error('Erro ao processar seus dados. Tente novamente.')
+        toast.error(t('Erro ao processar seus dados. Tente novamente.'))
         setIsAuthenticatingGuest(false)
         return
       }
@@ -170,7 +163,7 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
       setCurrentStep(4)
     } else if (currentStep === 3 && orderType === 'delivery') {
       if (!hasValidAddress()) {
-        toast.error('Por favor, preencha todos os campos obrigatórios do endereço')
+        toast.error(t('Por favor, preencha todos os campos obrigatórios do endereço'))
         return
       }
       setCurrentStep(4)
@@ -208,10 +201,10 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
           zipCode: address.zipCode
         }
       })
-      toast.success('Endereço salvo com sucesso!')
+      toast.success(t('Endereço salvo com sucesso!'))
     } catch (error) {
       console.error('Erro ao salvar endereço:', error)
-      toast.error('Erro ao salvar endereço')
+      toast.error(t('Erro ao salvar endereço'))
     }
   }
 
@@ -250,29 +243,29 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
 
   const handleConfirmOrder = async () => {
     if (!canAcceptOrders) {
-      toast.error(validationMessage)
+      toast.error(getValidationMessage())
       return
     }
     if (!client || !restaurant || !cart) {
-      toast.error('Dados incompletos para finalizar pedido')
+      toast.error(t('Dados incompletos para finalizar pedido'))
       return
     }
     if (isScheduled) {
       if (!canAcceptScheduledOrders) {
-        toast.error('Restaurante não aceita pedidos agendados')
+        toast.error(t('Restaurante não aceita pedidos agendados'))
         return
       }
       if (!scheduledDate || !scheduledTime) {
-        toast.error('Por favor, selecione a data e hora para o agendamento')
+        toast.error(t('Por favor, selecione a data e hora para o agendamento'))
         return
       }
     } else {
       if (!canAcceptImmediateOrders) {
-        toast.error('Restaurante fechado. Não é possível fazer pedidos imediatos.')
+        toast.error(t('Restaurante fechado. Não é possível fazer pedidos imediatos.'))
         return
       }
       if (!operationId) {
-        toast.error('Não foi possível encontrar o id da operação')
+        toast.error(t('Não foi possível encontrar o id da operação'))
         return
       }
     }
@@ -322,7 +315,7 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
         return <ReviewItemsStep cart={cart} />
       case 2:
         return (
-          <OrderConfigStep
+          <PaymentStep
             client={client}
             orderType={orderType}
             paymentMethod={paymentMethod}
@@ -388,91 +381,81 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
     }
   }
 
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose()
-    }
-  }
+  const STEPS = [
+    { id: 1, label: t('Itens'), icon: ShoppingCartIcon },
+    { id: 2, label: t('Informações'), icon: CreditCardIcon },
+    { id: 3, label: t('Endereço'), icon: MapPinIcon },
+    { id: 4, label: t('Confirmação'), icon: CheckCircleIcon }
+  ]
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <S.SlideOverlay onClick={handleBackdropClick}>
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+    <Slider
+      isOpen={isOpen}
+      onClose={onClose}
+      title={t('Finalizar Pedido')}
+      icon={<ShoppingCartIcon size={24} style={{ color: 'var(--restaurant-primary-color)' }} />}
+      maxWidth="500px"
+      noPadding={false}
+    >
+      <S.StepsContainer className="steps-container">
+        {STEPS.map((step) => {
+          if (step.id === 3 && orderType !== 'delivery') return null
+          const Icon = step.icon
+          const isActive = currentStep === step.id
+          const isCompleted = currentStep > step.id
+          return (
+            <S.Step
+              key={step.id}
+              $active={isActive}
+              $completed={isCompleted}
+              className={`step ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
+            >
+              <S.StepIcon
+                $active={isActive}
+                $completed={isCompleted}
+                className={`step-icon ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
+              >
+                {isCompleted ? <CheckCircleIcon size={16} /> : <Icon size={16} />}
+              </S.StepIcon>
+              <S.StepLabel
+                $active={isActive}
+                $completed={isCompleted}
+                className={`step-label ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
+              >
+                {step.label}
+              </S.StepLabel>
+            </S.Step>
+          )
+        })}
+      </S.StepsContainer>
+      <S.StepContent>{renderStepContent()}</S.StepContent>
+      <S.ButtonGroup>
+        {currentStep > 1 && (
+          <Button
+            onClick={handlePrevious}
+            disabled={isCreating}
+            className="navigation-button secondary"
+            leftIcon={<ArrowLeftIcon size={20} />}
           >
-            <S.SlideContainer>
-              <S.SlideHeader>
-                <S.HeaderTitle>
-                  <ShoppingCartIcon size={24} style={{ color: primaryColor }} />
-                  Finalizar Pedido
-                </S.HeaderTitle>
-                <S.CloseButton onClick={onClose}>
-                  <XIcon size={24} />
-                </S.CloseButton>
-              </S.SlideHeader>
-              <S.SlideContent>
-                <S.StepsContainer>
-                  {STEPS.map((step) => {
-                    if (step.id === 3 && orderType !== 'delivery') return null
-                    const Icon = step.icon
-                    const isActive = currentStep === step.id
-                    const isCompleted = currentStep > step.id
-                    return (
-                      <S.Step key={step.id} active={isActive} completed={isCompleted}>
-                        <S.StepIcon active={isActive} completed={isCompleted}>
-                          {isCompleted ? <CheckCircleIcon size={16} /> : <Icon size={16} />}
-                        </S.StepIcon>
-                        <S.StepLabel active={isActive} completed={isCompleted}>
-                          {step.label}
-                        </S.StepLabel>
-                      </S.Step>
-                    )
-                  })}
-                </S.StepsContainer>
-                <S.StepContent>{renderStepContent()}</S.StepContent>
-                <S.ButtonGroup>
-                  {currentStep > 1 && (
-                    <S.Button
-                      variant="secondary"
-                      primaryColor={primaryColor}
-                      onClick={handlePrevious}
-                      disabled={isCreating}
-                    >
-                      <ArrowLeftIcon size={20} />
-                      Anterior
-                    </S.Button>
-                  )}
-                  {currentStep < 4 ? (
-                    <S.Button
-                      variant="primary"
-                      primaryColor={primaryColor}
-                      onClick={handleNext}
-                      disabled={isCreating || isAuthenticatingGuest}
-                    >
-                      {isAuthenticatingGuest ? 'Processando...' : 'Próximo'}
-                      <ArrowRightIcon size={20} />
-                    </S.Button>
-                  ) : (
-                    <S.Button
-                      variant="primary"
-                      primaryColor={primaryColor}
-                      onClick={handleConfirmOrder}
-                      disabled={isCreating}
-                    >
-                      {isCreating ? 'Processando...' : 'Confirmar Pedido'}
-                      <CheckCircleIcon size={20} />
-                    </S.Button>
-                  )}
-                </S.ButtonGroup>
-              </S.SlideContent>
-            </S.SlideContainer>
-          </motion.div>
-        </S.SlideOverlay>
-      )}
-    </AnimatePresence>
+            {t('Anterior')}
+          </Button>
+        )}
+        {currentStep < 4 ? (
+          <Button
+            onClick={handleNext}
+            disabled={isCreating || isAuthenticatingGuest}
+            className="navigation-button primary"
+            rightIcon={<ArrowRightIcon size={20} />}
+          >
+            {isAuthenticatingGuest ? t('Processando...') : t('Próximo')}
+          </Button>
+        ) : (
+          <Button onClick={handleConfirmOrder} disabled={isCreating} className="navigation-button primary">
+            {isCreating ? t('Processando...') : t('Confirmar Pedido')}
+            <CheckCircleIcon size={20} />
+          </Button>
+        )}
+      </S.ButtonGroup>
+    </Slider>
   )
 }

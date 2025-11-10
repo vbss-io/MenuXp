@@ -1,115 +1,152 @@
 import styled from 'styled-components'
 
 export const DialogContent = styled.div`
-  background: white;
-  border-radius: 12px;
-  width: 100%;
-  max-height: 90vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  &.edit-cart-item-dialog {
+    background: ${({ theme }) => theme.colors.mx.white};
+    border: 3px solid ${({ theme }) => theme.colors.mx.black};
+    border-radius: 0;
+    box-shadow: 4px 4px 0 ${({ theme }) => theme.colors.mx.black};
+    width: 100%;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 export const DialogHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  border-bottom: 1px solid #e5e7eb;
+  &.dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 3px solid ${({ theme }) => theme.colors.mx.black};
+  }
 `
 
 export const DialogTitle = styled.h2`
-  font-size: 18px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  &.dialog-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.text.primary};
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 `
 
 export const ComboBadge = styled.span`
-  background: #feba0c;
-  color: ${({ theme }) => theme.colors.text.primary};
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 10px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  &.combo-badge {
+    background: #feba0c;
+    color: ${({ theme }) => theme.colors.text.primary};
+    padding: 4px 12px;
+    border-radius: 0;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
 `
 
 export const DialogBody = styled.div`
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
+  &.dialog-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+  }
 `
 
 export const TabsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  &.tabs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 `
 
 export const TabsList = styled.div`
-  display: flex;
-  gap: 8px;
-  border-bottom: 1px solid #e5e7eb;
-  padding-bottom: 0;
+  &.tabs-list {
+    display: flex;
+    gap: 8px;
+    border-bottom: 3px solid ${({ theme }) => theme.colors.mx.black};
+    padding-bottom: 0;
+  }
 `
 
 export const TabButton = styled.button<{ $isActive: boolean }>`
-  padding: 12px 16px;
-  border: none;
-  background: ${({ $isActive }) => ($isActive ? '#3B82F6' : 'transparent')};
-  color: ${({ $isActive }) => ($isActive ? 'white' : '#6B7280')};
-  border-radius: 8px 8px 0 0;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s;
+  &.tab-button {
+    padding: 12px 16px;
+    border: 3px solid ${({ theme }) => theme.colors.mx.black};
+    background: ${({ $isActive, theme }) => ($isActive ? theme.colors.mx.black : theme.colors.mx.white)};
+    color: ${({ $isActive, theme }) => ($isActive ? theme.colors.mx.white : theme.colors.mx.black)};
+    border-radius: 0;
+    border-bottom: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.2s;
 
-  &:hover {
-    background: ${({ $isActive }) => ($isActive ? '#2563EB' : '#F3F4F6')};
+    &:hover {
+      background: ${({ $isActive, theme }) => ($isActive ? theme.colors.mx.black : theme.colors.mx.gray[100])};
+    }
+
+    &.active {
+      background: ${({ theme }) => theme.colors.mx.black};
+      color: ${({ theme }) => theme.colors.mx.white};
+    }
   }
 `
 
 export const TabContent = styled.div<{ $isActive: boolean }>`
-  display: ${({ $isActive }) => ($isActive ? 'block' : 'none')};
+  &.tab-content {
+    display: ${({ $isActive }) => ($isActive ? 'block' : 'none')};
+  }
 `
 
 export const ItemSection = styled.div`
-  margin-bottom: 24px;
+  &.item-section {
+    margin-bottom: 24px;
+  }
 `
 
 export const ItemInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px;
-  background: #f9fafb;
-  border-radius: 8px;
-  margin-bottom: 16px;
+  &.item-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: ${({ theme }) => theme.colors.mx.gray[100]};
+    border: 3px solid ${({ theme }) => theme.colors.mx.black};
+    border-radius: 0;
+    margin-bottom: 16px;
+  }
 `
 
 export const ItemName = styled.h4`
-  font-size: 16px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0;
+  &.item-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.text.primary};
+    margin: 0;
+  }
 `
 
 export const ItemPrice = styled.span`
-  font-size: 18px;
-  font-weight: 700;
-  color: #10b981;
+  &.item-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.mx.black};
+  }
 `
 
 export const SectionTitle = styled.h3`
-  font-size: 18px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0 0 16px 0;
+  &.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.text.primary};
+    margin: 0 0 16px 0;
+  }
 `
 
 export const FieldGroup = styled.div`
@@ -141,26 +178,32 @@ export const AddButton = styled.button`
 `
 
 export const OptionalCard = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.background};
-  margin-bottom: 16px;
+  &.optional-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 3px solid ${({ theme }) => theme.colors.mx.black};
+    border-radius: 0;
+    background-color: ${({ theme }) => theme.colors.background};
+    margin-bottom: 16px;
+  }
 `
 
 export const OptionalHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  &.optional-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
 `
 
 export const OptionalTitle = styled.span`
-  font-size: 14px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.text.primary};
+  &.optional-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.text.primary};
+  }
 `
 
 export const RemoveButton = styled.button`
@@ -206,55 +249,66 @@ export const EmptyOptionals = styled.div`
 `
 
 export const DialogFooter = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
-  padding: 20px;
-  border-top: 1px solid #e5e7eb;
-  background: #f9fafb;
+  &.dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px;
+    border-top: 3px solid ${({ theme }) => theme.colors.mx.black};
+    background: ${({ theme }) => theme.colors.mx.gray[100]};
+  }
 `
 
 export const OptionalPrice = styled.span`
-  font-size: 12px;
-  color: ${({ theme }) => theme.colors.text.secondary};
+  &.optional-price {
+    font-size: 12px;
+    color: ${({ theme }) => theme.colors.text.secondary};
+  }
 `
 
 export const OptionalControls = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  &.optional-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 `
 
 export const QuantityButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border: 1px solid ${({ theme }) => theme.colors.mx.gray[300]};
-  border-radius: 6px;
-  background-color: ${({ theme }) => theme.colors.background};
-  color: ${({ theme }) => theme.colors.text.primary};
-  cursor: pointer;
-  transition: all 0.2s;
+  &.quantity-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 3px solid ${({ theme }) => theme.colors.mx.black};
+    border-radius: 0;
+    background-color: ${({ theme }) => theme.colors.background};
+    color: ${({ theme }) => theme.colors.text.primary};
+    cursor: pointer;
+    transition: all 0.2s;
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.mx.gray[100]};
-  }
+    &:hover {
+      background-color: ${({ theme }) => theme.colors.mx.black};
+      color: ${({ theme }) => theme.colors.mx.white};
+    }
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 `
 
 export const QuantityDisplay = styled.span`
-  font-size: 16px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.text.primary};
-  min-width: 20px;
-  text-align: center;
+  &.quantity-display {
+    font-size: 16px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.text.primary};
+    min-width: 20px;
+    text-align: center;
+  }
 `
 
 export const MaxQuantityInfo = styled.div`

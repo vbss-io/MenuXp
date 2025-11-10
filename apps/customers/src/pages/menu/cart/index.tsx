@@ -1,30 +1,27 @@
 import {
   ArrowLeftIcon,
-  CheckCircleIcon,
-  ClockIcon,
-  CookingPotIcon,
   MinusIcon,
   PackageIcon,
   PencilIcon,
   PlusIcon,
   ShoppingCartIcon,
-  TrashIcon,
-  TruckIcon
+  TrashIcon
 } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useTranslator } from 'vbss-translator'
 
+import { ActiveOrders } from '@/components/cart/active-orders'
 import { EditCartItemDialog } from '@/components/cart/edit-cart-item-dialog'
 import { CheckoutSlideView } from '@/components/order/checkout-slide-view'
-import { ConfirmationDialog } from '@menuxp/ui'
-import { Loading } from '@menuxp/ui'
 import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { getOrdersByClient } from '@/services/order/get-orders-by-client'
 import type { CartItem } from '@/types/cart'
 import { OrderStatus } from '@/types/order'
+import { ConfirmationDialog, Loading } from '@menuxp/ui'
 import { useQuery } from '@tanstack/react-query'
 
 import { ChildBackButton as BackButton, ChildContainer as Container } from '../styles'
@@ -50,6 +47,7 @@ const isSameCartItem = (
 }
 
 export const RestaurantCartPage = () => {
+  const { t } = useTranslator()
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
   const { restaurant } = useRestaurant({ slug: slug || '' })
@@ -87,6 +85,7 @@ export const RestaurantCartPage = () => {
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
 
   const latestOrder = currentOrders[0]
+  const otherOrders = currentOrders.slice(1)
 
   const handleBackClick = () => {
     navigate(`/${slug}`)
@@ -150,10 +149,10 @@ export const RestaurantCartPage = () => {
           note: editedItem.note || ''
         })
       }
-      toast.success('Item editado com sucesso!')
+      toast.success(t('Item editado com sucesso!'))
     } catch (error) {
       console.error('Erro ao editar item:', error)
-      toast.error('Erro ao editar item. Tente novamente.')
+      toast.error(t('Erro ao editar item. Tente novamente.'))
     }
   }
 
@@ -174,77 +173,8 @@ export const RestaurantCartPage = () => {
   }
 
   const handleCheckoutSuccess = () => {
-    toast.success('Pedido finalizado com sucesso!')
+    toast.success(t('Pedido finalizado com sucesso!'))
     refetchOrders()
-  }
-
-  const getOrderStatusLabel = (status: OrderStatus) => {
-    const labels: Record<OrderStatus, string> = {
-      [OrderStatus.RECEIVED]: 'Recebido',
-      [OrderStatus.CONFIRMED]: 'Confirmado',
-      [OrderStatus.IN_PRODUCTION]: 'Em Produção',
-      [OrderStatus.READY]: 'Pronto',
-      [OrderStatus.SENT_FOR_DELIVERY]: 'Saiu para Entrega',
-      [OrderStatus.DELIVERED]: 'Entregue',
-      [OrderStatus.CANCELLED]: 'Cancelado'
-    }
-    return labels[status] || status
-  }
-
-  const getOrderStatusColor = (status: OrderStatus) => {
-    const colors: Record<OrderStatus, string> = {
-      [OrderStatus.RECEIVED]: '#3b82f6',
-      [OrderStatus.CONFIRMED]: '#8b5cf6',
-      [OrderStatus.IN_PRODUCTION]: '#f59e0b',
-      [OrderStatus.READY]: '#10b981',
-      [OrderStatus.SENT_FOR_DELIVERY]: '#06b6d4',
-      [OrderStatus.DELIVERED]: '#22c55e',
-      [OrderStatus.CANCELLED]: '#ef4444'
-    }
-    return colors[status] || '#6b7280'
-  }
-
-  const getOrderTimeline = (status: OrderStatus) => {
-    const timelineSteps = [
-      {
-        status: OrderStatus.RECEIVED,
-        label: 'Recebido',
-        icon: <ClockIcon size={20} weight="fill" />
-      },
-      {
-        status: OrderStatus.CONFIRMED,
-        label: 'Confirmado',
-        icon: <CheckCircleIcon size={20} weight="fill" />
-      },
-      {
-        status: OrderStatus.IN_PRODUCTION,
-        label: 'Preparando',
-        icon: <CookingPotIcon size={20} weight="fill" />
-      },
-      {
-        status: OrderStatus.READY,
-        label: 'Pronto',
-        icon: <PackageIcon size={20} weight="fill" />
-      },
-      {
-        status: OrderStatus.SENT_FOR_DELIVERY,
-        label: 'Saiu p/ Entrega',
-        icon: <TruckIcon size={20} weight="fill" />
-      },
-      {
-        status: OrderStatus.DELIVERED,
-        label: 'Entregue',
-        icon: <CheckCircleIcon size={20} weight="fill" />
-      }
-    ]
-
-    const currentIndex = timelineSteps.findIndex((step) => step.status === status)
-
-    return timelineSteps.map((step, index) => ({
-      ...step,
-      isCompleted: index <= currentIndex,
-      isActive: index === currentIndex
-    }))
   }
 
   const renderCartContent = () => {
@@ -259,7 +189,7 @@ export const RestaurantCartPage = () => {
           }}
         >
           <Loading />
-          <span>Carregando carrinho...</span>
+          <span>{t('Carregando carrinho...')}</span>
         </div>
       )
     }
@@ -282,12 +212,12 @@ export const RestaurantCartPage = () => {
                       ) : null}
                       {item.name}
                     </S.CartItemName>
-                    {item.itemType === 'combo' ? <S.ComboBadge>COMBO</S.ComboBadge> : null}
+                    {item.itemType === 'combo' ? <S.ComboBadge>{t('COMBO')}</S.ComboBadge> : null}
                   </S.CartItemHeader>
                   <S.CartItemPrice>{formatPrice(item.price)}</S.CartItemPrice>
                   {item.optionals && item.optionals.length > 0 ? (
                     <S.CartItemOptionals>
-                      <S.OptionalsLabel>Opcionais:</S.OptionalsLabel>
+                      <S.OptionalsLabel>{t('Opcionais:')}</S.OptionalsLabel>
                       {item.optionals.map((optional, optIndex) => {
                         let quantityText = ''
                         if (optional.quantity > 1) {
@@ -310,7 +240,7 @@ export const RestaurantCartPage = () => {
                   ) : null}
                   {item.note ? (
                     <S.CartItemNote>
-                      <S.NoteLabel>Observação:</S.NoteLabel>
+                      <S.NoteLabel>{t('Observação:')}</S.NoteLabel>
                       <S.NoteText>"{item.note}"</S.NoteText>
                     </S.CartItemNote>
                   ) : null}
@@ -344,20 +274,20 @@ export const RestaurantCartPage = () => {
           </S.CartItemsContainer>
           <S.CartSummary>
             <S.SummaryRow>
-              <span>Subtotal</span>
+              <span>{t('Subtotal')}</span>
               <span>{formatPrice(calculateSubtotal())}</span>
             </S.SummaryRow>
             <S.SummaryRow>
-              <span>Total</span>
+              <span>{t('Total')}</span>
               <span>{formatPrice(calculateSubtotal())}</span>
             </S.SummaryRow>
             <S.ActionButton variant="primary" onClick={() => setIsCheckoutOpen(true)}>
               <ShoppingCartIcon size={16} />
-              Finalizar Pedido
+              {t('Finalizar Pedido')}
             </S.ActionButton>
             <S.ActionButton variant="danger" onClick={handleClearCart}>
               <TrashIcon size={16} />
-              Limpar Carrinho
+              {t('Limpar Carrinho')}
             </S.ActionButton>
           </S.CartSummary>
         </>
@@ -366,96 +296,9 @@ export const RestaurantCartPage = () => {
 
     return (
       <S.EmptyCartMessage>
-        <h3>Seu carrinho está vazio</h3>
-        <p>Adicione alguns itens do menu para começar!</p>
+        <h3>{t('Seu carrinho está vazio')}</h3>
+        <p>{t('Adicione alguns itens do menu para começar!')}</p>
       </S.EmptyCartMessage>
-    )
-  }
-
-  const renderLatestOrder = () => {
-    if (isLoadingOrders) {
-      return (
-        <S.OrderSection>
-          <S.SectionTitle>Seu Pedido</S.SectionTitle>
-          <div style={{ display: 'flex', justifyContent: 'center', padding: '20px' }}>
-            <Loading />
-          </div>
-        </S.OrderSection>
-      )
-    }
-
-    if (!latestOrder) {
-      return null
-    }
-
-    const timeline = getOrderTimeline(latestOrder.status)
-    const otherOrders = currentOrders.slice(1)
-
-    return (
-      <S.OrderSection>
-        <S.SectionTitle>Acompanhe seu Pedido</S.SectionTitle>
-        <S.CurrentOrderCard>
-          <S.OrderHeader>
-            <S.OrderCode>Pedido #{latestOrder.code}</S.OrderCode>
-            <S.OrderStatus color={getOrderStatusColor(latestOrder.status)}>
-              {getOrderStatusLabel(latestOrder.status)}
-            </S.OrderStatus>
-          </S.OrderHeader>
-          <S.OrderTimeline>
-            {timeline.map((step, index) => (
-              <S.TimelineStep key={step.status}>
-                <S.TimelineIcon isCompleted={step.isCompleted} isActive={step.isActive}>
-                  {step.icon}
-                </S.TimelineIcon>
-                <S.TimelineContent>
-                  <S.TimelineLabel isCompleted={step.isCompleted} isActive={step.isActive}>
-                    {step.label}
-                  </S.TimelineLabel>
-                </S.TimelineContent>
-                {index < timeline.length - 1 ? <S.TimelineLine isCompleted={step.isCompleted} /> : null}
-              </S.TimelineStep>
-            ))}
-          </S.OrderTimeline>
-          <S.OrderInfo>
-            <S.OrderDate>
-              {new Date(latestOrder.createdAt).toLocaleString('pt-BR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
-            </S.OrderDate>
-            <S.OrderTotal>{formatPrice(latestOrder.total)}</S.OrderTotal>
-          </S.OrderInfo>
-        </S.CurrentOrderCard>
-        {otherOrders.length > 0 ? (
-          <S.OtherOrdersSection>
-            <S.OtherOrdersTitle>Outros pedidos em andamento ({otherOrders.length})</S.OtherOrdersTitle>
-            <S.OtherOrdersList>
-              {otherOrders.map((order) => (
-                <S.CompactOrderCard key={order.id}>
-                  <S.CompactOrderHeader>
-                    <S.CompactOrderCode>#{order.code}</S.CompactOrderCode>
-                    <S.CompactOrderStatus color={getOrderStatusColor(order.status)}>
-                      {getOrderStatusLabel(order.status)}
-                    </S.CompactOrderStatus>
-                  </S.CompactOrderHeader>
-                  <S.CompactOrderInfo>
-                    <S.CompactOrderDate>
-                      {new Date(order.createdAt).toLocaleTimeString('pt-BR', {
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
-                    </S.CompactOrderDate>
-                    <S.CompactOrderTotal>{formatPrice(order.total)}</S.CompactOrderTotal>
-                  </S.CompactOrderInfo>
-                </S.CompactOrderCard>
-              ))}
-            </S.OtherOrdersList>
-          </S.OtherOrdersSection>
-        ) : null}
-      </S.OrderSection>
     )
   }
 
@@ -463,13 +306,13 @@ export const RestaurantCartPage = () => {
     <Container>
       <BackButton onClick={handleBackClick}>
         <ArrowLeftIcon size={20} />
-        Voltar ao menu
+        {t('Voltar ao menu')}
       </BackButton>
-      {latestOrder ? renderLatestOrder() : null}
+      <ActiveOrders isLoading={isLoadingOrders} latestOrder={latestOrder} otherOrders={otherOrders} />
       <S.CartContainer>
         <S.CartTitle>
           <ShoppingCartIcon size={24} />
-          Carrinho de Compras
+          {t('Carrinho de Compras')}
         </S.CartTitle>
         {renderCartContent()}
       </S.CartContainer>
@@ -494,10 +337,10 @@ export const RestaurantCartPage = () => {
         isOpen={isClearCartDialogOpen}
         onClose={() => setIsClearCartDialogOpen(false)}
         onConfirm={confirmClearCart}
-        title="Limpar Carrinho"
-        description="Tem certeza que deseja remover todos os itens do carrinho? Esta ação não pode ser desfeita."
-        confirmText="Limpar Carrinho"
-        cancelText="Cancelar"
+        title={t('Limpar Carrinho')}
+        description={t('Tem certeza que deseja remover todos os itens do carrinho? Esta ação não pode ser desfeita.')}
+        confirmText={t('Limpar Carrinho')}
+        cancelText={t('Cancelar')}
         variant="danger"
       />
     </Container>

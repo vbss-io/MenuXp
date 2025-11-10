@@ -1,12 +1,13 @@
 import { MinusIcon, PlusIcon, ShoppingCartIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 import { ComboItemsList } from '@/components/combo/combo-items-list'
 import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { Combo } from '@/types/combo'
-import { Button, Dialog, FormTextarea } from '@menuxp/ui'
+import { Button, Dialog, FormTextarea, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -17,8 +18,10 @@ interface ComboDialogProps {
 }
 
 export const ComboDialog = ({ isOpen, onClose, item }: ComboDialogProps) => {
+  const { t } = useTranslator()
   const { client } = useClient()
-  const { restaurant, primaryColor, secondaryColor, layout } = useRestaurant()
+  const { restaurant } = useRestaurant()
+  const { layout } = useLayout()
   const { addItem } = useCart({
     clientId: client?.id,
     restaurantId: restaurant?.id?.toString() ?? '',
@@ -75,84 +78,21 @@ export const ComboDialog = ({ isOpen, onClose, item }: ComboDialogProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <S.DialogContent
-        $layout={layout}
-        $primaryColor={primaryColor}
-        $secondaryColor={secondaryColor}
-        className="combo-dialog"
-        style={
-          {
-            '--primary': primaryColor,
-            '--secondary': secondaryColor
-          } as React.CSSProperties
-        }
-      >
-        <S.DialogHeader
-          $layout={layout}
-          $primaryColor={primaryColor}
-          $secondaryColor={secondaryColor}
-          className="dialog-header"
-        >
-          <S.ProductImage src={item.medias[0]} alt={item.name} $layout={layout} className="product-image" />
-          <S.ProductInfo
-            $layout={layout}
-            $primaryColor={primaryColor}
-            $secondaryColor={secondaryColor}
-            className="product-info"
-          >
-            <S.ComboBadge
-              $layout={layout}
-              $primaryColor={primaryColor}
-              $secondaryColor={secondaryColor}
-              className="combo-badge"
-            >
-              COMBO
-            </S.ComboBadge>
-            <S.ProductTitle
-              $layout={layout}
-              $primaryColor={primaryColor}
-              $secondaryColor={secondaryColor}
-              className="product-title"
-            >
-              {item.name}
-            </S.ProductTitle>
+      <S.DialogContent className={`combo-dialog layout-${layout}`}>
+        <S.DialogHeader className="dialog-header">
+          <S.ProductImage src={item.medias[0]} alt={item.name} className="product-image" />
+          <S.ProductInfo className="product-info">
+            <S.ComboBadge className="combo-badge">{t('COMBO')}</S.ComboBadge>
+            <S.ProductTitle className="product-title">{item.name}</S.ProductTitle>
             {item.description && (
-              <S.ProductDescription
-                $layout={layout}
-                $primaryColor={primaryColor}
-                $secondaryColor={secondaryColor}
-                className="product-description"
-              >
-                {item.description}
-              </S.ProductDescription>
+              <S.ProductDescription className="product-description">{item.description}</S.ProductDescription>
             )}
-            <S.PriceContainer
-              $layout={layout}
-              $primaryColor={primaryColor}
-              $secondaryColor={secondaryColor}
-              className="price-container"
-            >
-              <S.Price $layout={layout} $primaryColor={primaryColor} $secondaryColor={secondaryColor} className="price">
-                R$ {finalPrice.toFixed(2)}
-              </S.Price>
+            <S.PriceContainer className="price-container">
+              <S.Price className="price">R$ {finalPrice.toFixed(2)}</S.Price>
               {hasDiscount && (
                 <>
-                  <S.OriginalPrice
-                    $layout={layout}
-                    $primaryColor={primaryColor}
-                    $secondaryColor={secondaryColor}
-                    className="original-price"
-                  >
-                    R$ {item.price.toFixed(2)}
-                  </S.OriginalPrice>
-                  <S.DiscountBadge
-                    $layout={layout}
-                    $primaryColor={primaryColor}
-                    $secondaryColor={secondaryColor}
-                    className="discount-badge"
-                  >
-                    -{item.discount}%
-                  </S.DiscountBadge>
+                  <S.OriginalPrice className="original-price">R$ {item.price.toFixed(2)}</S.OriginalPrice>
+                  <S.DiscountBadge className="discount-badge">-{item.discount}%</S.DiscountBadge>
                 </>
               )}
             </S.PriceContainer>
@@ -163,33 +103,33 @@ export const ComboDialog = ({ isOpen, onClose, item }: ComboDialogProps) => {
           <S.NotesSection>
             <FormTextarea
               id="notes"
-              label="Observações"
+              label={t('Observações')}
               value={note}
               onChange={(e) => setNote(e.target.value)}
-              placeholder="Ex: sem cebola, bem assado..."
+              placeholder={t('Ex: sem cebola, bem assado...')}
               rows={3}
             />
           </S.NotesSection>
           <S.QuantitySection>
-            <S.QuantityLabel>Quantidade</S.QuantityLabel>
+            <S.QuantityLabel className="quantity-label">{t('Quantidade')}</S.QuantityLabel>
             <S.OptionalControls>
               <Button variant="outline" size="sm" onClick={() => handleQuantityChange(false)} disabled={quantity <= 1}>
                 <MinusIcon size={16} />
               </Button>
-              <S.QuantityDisplay>{quantity}</S.QuantityDisplay>
+              <S.QuantityDisplay className="quantity-display">{quantity}</S.QuantityDisplay>
               <Button variant="outline" size="sm" onClick={() => handleQuantityChange(true)}>
                 <PlusIcon size={16} />
               </Button>
             </S.OptionalControls>
           </S.QuantitySection>
-          <S.TotalPrice $layout={layout} $primaryColor={primaryColor} $secondaryColor={secondaryColor}>
-            <span>Total</span>
+          <S.TotalPrice className="total-price">
+            <span>{t('Total')}</span>
             <span>R$ {calculateTotalPrice().toFixed(2)}</span>
           </S.TotalPrice>
         </S.DialogBody>
         <S.DialogFooter>
           <Button variant="outline" onClick={handleClose}>
-            Cancelar
+            {t('Cancelar')}
           </Button>
           <Button
             variant="primary"
@@ -197,7 +137,7 @@ export const ComboDialog = ({ isOpen, onClose, item }: ComboDialogProps) => {
             disabled={isAddingToCart}
             leftIcon={<ShoppingCartIcon size={20} />}
           >
-            {isAddingToCart ? 'Adicionando...' : 'Adicionar ao Carrinho'}
+            {isAddingToCart ? t('Adicionando...') : t('Adicionar ao Carrinho')}
           </Button>
         </S.DialogFooter>
       </S.DialogContent>

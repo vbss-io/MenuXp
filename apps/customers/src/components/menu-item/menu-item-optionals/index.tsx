@@ -1,9 +1,9 @@
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
 import React from 'react'
+import { useTranslator } from 'vbss-translator'
 
-import { useRestaurant } from '@/hooks/use-restaurant'
 import type { MenuItemOptional } from '@/types/menu-item'
-import { Button } from '@menuxp/ui'
+import { Button, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -20,57 +20,20 @@ export const MenuItemOptionals: React.FC<MenuItemOptionalsProps> = ({
   onOptionalChange,
   className
 }) => {
-  const { primaryColor, secondaryColor, layout } = useRestaurant()
+  const { t } = useTranslator()
+  const { layout } = useLayout()
 
   if (!optionals || optionals.length === 0) return null
 
   return (
-    <S.OptionalsContainer
-      $layout={layout}
-      $primaryColor={primaryColor}
-      $secondaryColor={secondaryColor}
-      className={className}
-      style={
-        {
-          '--primary': primaryColor,
-          '--secondary': secondaryColor
-        } as React.CSSProperties
-      }
-    >
-      <S.OptionalsTitle
-        $layout={layout}
-        $primaryColor={primaryColor}
-        $secondaryColor={secondaryColor}
-        className="optionals-title"
-      >
-        Opcionais
-      </S.OptionalsTitle>
-      <S.OptionalsList $layout={layout} className="optionals-list">
+    <S.OptionalsContainer className={`menu-item-optionals layout-${layout} ${className || ''}`}>
+      <S.OptionalsTitle className="optionals-title">{t('Opcionais')}</S.OptionalsTitle>
+      <S.OptionalsList className="optionals-list">
         {optionals.map((optional) => (
-          <S.OptionalItem
-            key={optional.name}
-            $layout={layout}
-            $primaryColor={primaryColor}
-            $secondaryColor={secondaryColor}
-            className="optional-item"
-          >
+          <S.OptionalItem key={optional.name} className="optional-item">
             <S.OptionalInfo className="optional-info">
-              <S.OptionalName
-                $layout={layout}
-                $primaryColor={primaryColor}
-                $secondaryColor={secondaryColor}
-                className="optional-name"
-              >
-                {optional.name}
-              </S.OptionalName>
-              <S.OptionalPrice
-                $layout={layout}
-                $primaryColor={primaryColor}
-                $secondaryColor={secondaryColor}
-                className="optional-price"
-              >
-                + R$ {optional.price.toFixed(2)}
-              </S.OptionalPrice>
+              <S.OptionalName className="optional-name">{optional.name}</S.OptionalName>
+              <S.OptionalPrice className="optional-price">+ R$ {optional.price.toFixed(2)}</S.OptionalPrice>
             </S.OptionalInfo>
             <S.OptionalControls className="optional-controls">
               <Button
@@ -81,12 +44,7 @@ export const MenuItemOptionals: React.FC<MenuItemOptionalsProps> = ({
               >
                 <MinusIcon size={16} />
               </Button>
-              <S.QuantityDisplay
-                $layout={layout}
-                $primaryColor={primaryColor}
-                $secondaryColor={secondaryColor}
-                className="quantity-display"
-              >
+              <S.QuantityDisplay className="quantity-display">
                 {selectedOptionals[optional.name] || 0}
               </S.QuantityDisplay>
               <Button

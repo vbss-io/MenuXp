@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import { useTranslator } from 'vbss-translator'
 
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { getRestaurantMenuCategories } from '@/services/menu/get-categories'
@@ -26,6 +27,7 @@ interface CategoriesSectionProps {
 }
 
 export const CategoriesSection: React.FC<CategoriesSectionProps> = ({ section, mockCategories }) => {
+  const { t } = useTranslator()
   const { restaurant } = useRestaurant()
   const { layout } = useRestaurant()
   const navigate = useNavigate()
@@ -108,9 +110,9 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({ section, m
 
   useEffect(() => {
     if (error) {
-      toast.error('Erro ao carregar categorias')
+      toast.error(t('Erro ao carregar categorias'))
     }
-  }, [error])
+  }, [error, t])
 
   const getIconComponent = (iconKey?: string) => {
     if (!iconKey || !(iconKey in ICONS_KEYS)) return <FolderIcon size={24} />
@@ -139,7 +141,9 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({ section, m
     return (
       <S.ViewContainer className={`view-container categories-section layout-${layout}`}>
         <S.EmptyStateContainer>
-          <S.EmptyStateDescription>Não há categorias disponíveis para exibir nesta seção.</S.EmptyStateDescription>
+          <S.EmptyStateDescription>
+            {t('Não há categorias disponíveis para exibir nesta seção.')}
+          </S.EmptyStateDescription>
         </S.EmptyStateContainer>
       </S.ViewContainer>
     )

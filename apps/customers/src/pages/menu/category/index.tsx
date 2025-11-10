@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useTranslator } from 'vbss-translator'
 
 import { ComboCard } from '@/components/combo/combo-card'
 import { ComboDialog } from '@/components/combo/combo-dialog'
@@ -25,6 +26,7 @@ interface CategoryData {
 }
 
 export const RestaurantCategoryPage = () => {
+  const { t } = useTranslator()
   const { slug, categoryId } = useParams<{ slug: string; categoryId: string }>()
   const navigate = useNavigate()
   const location = useLocation()
@@ -65,10 +67,10 @@ export const RestaurantCategoryPage = () => {
 
   useEffect(() => {
     if (error) {
-      toast.error('Erro ao carregar produtos da categoria')
+      toast.error(t('Erro ao carregar produtos da categoria'))
       navigate('/404')
     }
-  }, [error, navigate])
+  }, [error, navigate, t])
 
   const handleBackClick = () => {
     navigate(`/${slug}`)
@@ -100,7 +102,7 @@ export const RestaurantCategoryPage = () => {
         <Container>
           <S.LoadingContainer>
             <Loading />
-            <span>Carregando produtos...</span>
+            <span>{t('Carregando produtos...')}</span>
           </S.LoadingContainer>
         </Container>
       </>
@@ -111,7 +113,7 @@ export const RestaurantCategoryPage = () => {
     <Container>
       <BackButton onClick={handleBackClick}>
         <ArrowLeftIcon size={20} />
-        Voltar ao menu
+        {t('Voltar ao menu')}
       </BackButton>
       {categoryData && (
         <S.CategoryHeader $secondaryColor={restaurant?.style?.secondaryColor || '#FEBA0C'}>
@@ -126,7 +128,7 @@ export const RestaurantCategoryPage = () => {
       )}
       {allItems.length === 0 ? (
         <S.EmptyStateContainer>
-          <S.EmptyStateDescription>Não há produtos disponíveis nesta categoria.</S.EmptyStateDescription>
+          <S.EmptyStateDescription>{t('Não há produtos disponíveis nesta categoria.')}</S.EmptyStateDescription>
         </S.EmptyStateContainer>
       ) : (
         <S.MenuItemsGrid>

@@ -1,110 +1,89 @@
 import styled from 'styled-components'
 
-import { getMenuItemDialogLayoutStyle } from './layout.styles'
-
-export const DialogContent = styled.div<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  padding: 24px;
-  width: 100%;
-
-  ${({ $layout }) => getMenuItemDialogLayoutStyle($layout)}
+export const DialogContent = styled.div`
+  &.menu-item-dialog {
+    padding: 24px;
+    width: 100%;
+  }
 `
 
-export const DialogHeader = styled.div<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  display: flex;
-  gap: 16px;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+export const DialogHeader = styled.div`
+  &.dialog-header {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--restaurant-primary-color);
+  }
 `
 
-export const ProductImage = styled.img<{
-  $layout: string
-}>`
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 2px solid ${({ theme }) => theme.colors.mx.gray[200]};
+export const ProductImage = styled.img`
+  &.product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 3px solid var(--restaurant-primary-color);
+  }
 `
 
-export const ProductInfo = styled.div<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  flex: 1;
+export const ProductInfo = styled.div`
+  &.product-info {
+    flex: 1;
+  }
 `
 
-export const ProductTitle = styled.h2<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  font-size: 18px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0 0 8px 0;
+export const ProductTitle = styled.h2`
+  &.product-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--restaurant-primary-color);
+    margin: 0 0 8px 0;
+  }
 `
 
-export const ProductDescription = styled.p<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  font-size: 14px;
-  color: ${({ theme }) => theme.colors.text.secondary};
-  margin: 0 0 12px 0;
-  line-height: 1.4;
+export const ProductDescription = styled.p`
+  &.product-description {
+    font-size: 14px;
+    color: ${({ theme }) => theme.colors.text.secondary};
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+  }
 `
 
-export const PriceContainer = styled.div<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  display: flex;
-  align-items: center;
-  gap: 8px;
+export const PriceContainer = styled.div`
+  &.price-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 `
 
-export const Price = styled.span<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  font-size: 16px;
-  font-weight: 600;
-  color: ${({ $primaryColor }) => $primaryColor || '#FF8C00'};
+export const Price = styled.span`
+  &.price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--restaurant-primary-color);
+  }
 `
 
-export const OriginalPrice = styled.span<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  font-size: 14px;
-  text-decoration: line-through;
+export const OriginalPrice = styled.span`
+  &.original-price {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: ${({ theme }) => theme.colors.text.secondary};
+  }
 `
 
-export const DiscountBadge = styled.span<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 600;
-  background: ${({ $primaryColor }) => $primaryColor || '#FF8C00'};
-  color: white;
+export const DiscountBadge = styled.span`
+  &.discount-badge {
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--restaurant-secondary-color);
+    color: white;
+  }
 `
 
 export const DialogBody = styled.div`
@@ -179,14 +158,17 @@ export const QuantityButton = styled.button`
 `
 
 export const QuantityDisplay = styled.span`
-  font-size: 14px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text.primary};
-  min-width: 24px;
-  text-align: center;
+  &.quantity-display {
+    font-size: 14px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.text.primary};
+    min-width: 24px;
+    text-align: center;
+  }
 `
 
 export const NotesSection = styled.div`
+  margin-top: 24px;
   margin-bottom: 20px;
 `
 
@@ -198,27 +180,27 @@ export const QuantitySection = styled.div`
 `
 
 export const QuantityLabel = styled.span`
-  font-size: 16px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text.primary};
+  &.quantity-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.text.primary};
+  }
 `
 
-export const TotalPrice = styled.div<{
-  $layout: string
-  $primaryColor: string
-  $secondaryColor: string
-}>`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 0;
-  border-top: 2px solid ${({ theme }) => theme.colors.mx.gray[200]};
-  font-weight: 600;
-  color: ${({ theme }) => theme.colors.text.primary};
+export const TotalPrice = styled.div`
+  &.total-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-top: 2px solid ${({ theme }) => theme.colors.mx.gray[200]};
+    font-weight: 600;
+    color: ${({ theme }) => theme.colors.text.primary};
 
-  span:last-child {
-    font-size: 18px;
-    color: ${({ $primaryColor }) => $primaryColor || '#FF8C00'};
+    span:last-child {
+      font-size: 18px;
+      color: var(--restaurant-primary-color);
+    }
   }
 `
 

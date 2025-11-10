@@ -1,10 +1,11 @@
 import { MapPinIcon, SignOutIcon, UserIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 import { ClientAddressSlide } from '@/components/client/client-address-slide'
 import { ClientNameSlide } from '@/components/client/client-name-slide'
 import { useClient } from '@/hooks/use-client'
-import { useRestaurant } from '@/hooks/use-restaurant'
+import { useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -13,12 +14,11 @@ interface ClientProfileProps {
 }
 
 export const ClientProfile = ({ onLogout }: ClientProfileProps) => {
+  const { t } = useTranslator()
   const { client } = useClient()
-  const { restaurant } = useRestaurant()
+  const { layout } = useLayout()
   const [isAddressSlideOpen, setIsAddressSlideOpen] = useState(false)
   const [isNameSlideOpen, setIsNameSlideOpen] = useState(false)
-
-  const primaryColor = restaurant?.style?.primaryColor ?? '#3B82F6'
 
   if (!client) return null
 
@@ -41,45 +41,44 @@ export const ClientProfile = ({ onLogout }: ClientProfileProps) => {
   }
 
   return (
-    <S.ProfileContainer>
-      <S.ClientSummaryCard>
-        <S.ClientInfo>
-          <S.ClientAvatar primaryColor={primaryColor}>{getInitials(client.name)}</S.ClientAvatar>
-          <S.ClientDetails>
-            <S.ClientName>{client.name ?? 'Cliente'}</S.ClientName>
-            <S.ClientPhone>{client.phone}</S.ClientPhone>
+    <S.ProfileContainer className={`client-profile layout-${layout}`}>
+      <S.ClientSummaryCard className="client-summary-card">
+        <S.ClientInfo className="client-info">
+          <S.ClientAvatar className="client-avatar">{getInitials(client.name)}</S.ClientAvatar>
+          <S.ClientDetails className="client-details">
+            <S.ClientName className="client-name">{client.name ?? t('Cliente')}</S.ClientName>
+            <S.ClientPhone className="client-phone">{client.phone}</S.ClientPhone>
           </S.ClientDetails>
         </S.ClientInfo>
-        <S.LogoutButton onClick={onLogout} primaryColor={primaryColor}>
+        <S.LogoutButton onClick={onLogout} className="logout-button">
           <SignOutIcon size={20} />
         </S.LogoutButton>
       </S.ClientSummaryCard>
-      <S.CardsRow>
-        <S.ActionCard onClick={handleAddressClick}>
-          <S.CardHeader>
-            <S.CardIcon primaryColor={primaryColor}>
+      <S.CardsRow className="cards-row">
+        <S.ActionCard onClick={handleAddressClick} className="action-card">
+          <S.CardHeader className="card-header">
+            <S.CardIcon className="card-icon">
               <MapPinIcon size={20} />
             </S.CardIcon>
-            <S.CardTitle>Endereço</S.CardTitle>
+            <S.CardTitle className="card-title">{t('Endereço')}</S.CardTitle>
           </S.CardHeader>
-          <S.CardDescription>{client.address ? 'Endereço cadastrado' : 'Adicionar endereço'}</S.CardDescription>
+          <S.CardDescription className="card-description">
+            {client.address ? t('Endereço cadastrado') : t('Adicionar endereço')}
+          </S.CardDescription>
         </S.ActionCard>
-        <S.ActionCard onClick={handleNameClick}>
-          <S.CardHeader>
-            <S.CardIcon primaryColor={primaryColor}>
+        <S.ActionCard onClick={handleNameClick} className="action-card">
+          <S.CardHeader className="card-header">
+            <S.CardIcon className="card-icon">
               <UserIcon size={20} />
             </S.CardIcon>
-            <S.CardTitle>Nome</S.CardTitle>
+            <S.CardTitle className="card-title">{t('Nome')}</S.CardTitle>
           </S.CardHeader>
-          <S.CardDescription>{client.name ? 'Editar nome' : 'Adicionar nome'}</S.CardDescription>
+          <S.CardDescription className="card-description">
+            {client.name ? t('Editar nome') : t('Adicionar nome')}
+          </S.CardDescription>
         </S.ActionCard>
       </S.CardsRow>
-      <S.OrdersSection>
-        <S.OrdersTitle>Pedidos</S.OrdersTitle>
-        <S.EmptyOrdersCard>
-          <S.EmptyOrdersText>Nenhum pedido encontrado</S.EmptyOrdersText>
-        </S.EmptyOrdersCard>
-      </S.OrdersSection>
+
       <ClientAddressSlide isOpen={isAddressSlideOpen} onClose={() => setIsAddressSlideOpen(false)} />
       <ClientNameSlide isOpen={isNameSlideOpen} onClose={() => setIsNameSlideOpen(false)} />
     </S.ProfileContainer>

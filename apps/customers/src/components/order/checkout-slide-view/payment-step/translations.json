@@ -1,0 +1,158 @@
+[
+  {
+    "pt": "Entrega",
+    "en": "Delivery",
+    "es": "Entrega"
+  },
+  {
+    "pt": "Retirada",
+    "en": "Pickup",
+    "es": "Retirada"
+  },
+  {
+    "pt": "Consumo no local",
+    "en": "Dine-in",
+    "es": "Consumo en el local"
+  },
+  {
+    "pt": "Dinheiro",
+    "en": "Cash",
+    "es": "Efectivo"
+  },
+  {
+    "pt": "Cartão de Crédito",
+    "en": "Credit Card",
+    "es": "Tarjeta de Crédito"
+  },
+  {
+    "pt": "Cartão de Débito",
+    "en": "Debit Card",
+    "es": "Tarjeta de Débito"
+  },
+  {
+    "pt": "PIX",
+    "en": "PIX",
+    "es": "PIX"
+  },
+  {
+    "pt": "Bem-vindo de volta",
+    "en": "Welcome back",
+    "es": "Bienvenido de nuevo"
+  },
+  {
+    "pt": "cliente",
+    "en": "customer",
+    "es": "cliente"
+  },
+  {
+    "pt": "Informações do Pedido",
+    "en": "Order Information",
+    "es": "Información del Pedido"
+  },
+  {
+    "pt": "Para continuar, precisamos de algumas informações básicas",
+    "en": "To continue, we need some basic information",
+    "es": "Para continuar, necesitamos información básica"
+  },
+  {
+    "pt": "Telefone *",
+    "en": "Phone *",
+    "es": "Teléfono *"
+  },
+  {
+    "pt": "Verificando telefone...",
+    "en": "Checking phone...",
+    "es": "Verificando teléfono..."
+  },
+  {
+    "pt": "Digite seu telefone para continuar",
+    "en": "Enter your phone to continue",
+    "es": "Ingrese su teléfono para continuar"
+  },
+  {
+    "pt": "Cliente identificado!",
+    "en": "Customer identified!",
+    "es": "¡Cliente identificado!"
+  },
+  {
+    "pt": "Nome *",
+    "en": "Name *",
+    "es": "Nombre *"
+  },
+  {
+    "pt": "Seu nome completo",
+    "en": "Your full name",
+    "es": "Su nombre completo"
+  },
+  {
+    "pt": "Como você gostaria de ser chamado?",
+    "en": "How would you like to be called?",
+    "es": "¿Cómo le gustaría ser llamado?"
+  },
+  {
+    "pt": "Quando deseja receber?",
+    "en": "When do you want to receive?",
+    "es": "¿Cuándo desea recibir?"
+  },
+  {
+    "pt": "Agora (Pedido Imediato)",
+    "en": "Now (Immediate Order)",
+    "es": "Ahora (Pedido Inmediato)"
+  },
+  {
+    "pt": "Agendar para depois",
+    "en": "Schedule for later",
+    "es": "Programar para después"
+  },
+  {
+    "pt": "Restaurante fechado. Este será um",
+    "en": "Restaurant closed. This will be a",
+    "es": "Restaurante cerrado. Este será un"
+  },
+  {
+    "pt": "pedido agendado",
+    "en": "scheduled order",
+    "es": "pedido programado"
+  },
+  {
+    "pt": "Você optou por fazer um",
+    "en": "You chose to place a",
+    "es": "Optó por hacer un"
+  },
+  {
+    "pt": "Tipo de Pedido",
+    "en": "Order Type",
+    "es": "Tipo de Pedido"
+  },
+  {
+    "pt": "Taxa",
+    "en": "Fee",
+    "es": "Tarifa"
+  },
+  {
+    "pt": "Entrega grátis",
+    "en": "Free delivery",
+    "es": "Entrega gratis"
+  },
+  {
+    "pt": "Taxa de entrega",
+    "en": "Delivery fee",
+    "es": "Tarifa de entrega"
+  },
+  {
+    "pt": "Forma de Pagamento",
+    "en": "Payment Method",
+    "es": "Forma de Pago"
+  },
+  {
+    "pt": "Data do Agendamento",
+    "en": "Scheduled Date",
+    "es": "Fecha Programada"
+  },
+  {
+    "pt": "Horário do Agendamento",
+    "en": "Scheduled Time",
+    "es": "Hora Programada"
+  }
+]
+

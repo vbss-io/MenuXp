@@ -1,0 +1,62 @@
+[
+  {
+    "pt": "Restaurante Fechado",
+    "en": "Restaurant Closed",
+    "es": "Restaurante Cerrado"
+  },
+  {
+    "pt": "Segunda-feira",
+    "en": "Monday",
+    "es": "Lunes"
+  },
+  {
+    "pt": "Terça-feira",
+    "en": "Tuesday",
+    "es": "Martes"
+  },
+  {
+    "pt": "Quarta-feira",
+    "en": "Wednesday",
+    "es": "Miércoles"
+  },
+  {
+    "pt": "Quinta-feira",
+    "en": "Thursday",
+    "es": "Jueves"
+  },
+  {
+    "pt": "Sexta-feira",
+    "en": "Friday",
+    "es": "Viernes"
+  },
+  {
+    "pt": "Sábado",
+    "en": "Saturday",
+    "es": "Sábado"
+  },
+  {
+    "pt": "Domingo",
+    "en": "Sunday",
+    "es": "Domingo"
+  },
+  {
+    "pt": "Este restaurante não está aceitando pedidos no momento.",
+    "en": "This restaurant is not accepting orders at the moment.",
+    "es": "Este restaurante no está aceptando pedidos en este momento."
+  },
+  {
+    "pt": "Este restaurante está fechado no momento, mas você pode fazer um pedido agendado.",
+    "en": "This restaurant is closed at the moment, but you can place a scheduled order.",
+    "es": "Este restaurante está cerrado en este momento, pero puede hacer un pedido programado."
+  },
+  {
+    "pt": "Horário de funcionamento hoje",
+    "en": "Opening hours today",
+    "es": "Horario de atención hoy"
+  },
+  {
+    "pt": "Fechado hoje",
+    "en": "Closed today",
+    "es": "Cerrado hoy"
+  }
+]

@@ -1,4 +1,5 @@
 import { WarningIcon } from '@phosphor-icons/react'
+import { useTranslator } from 'vbss-translator'
 
 import { useRestaurant } from '@/hooks/use-restaurant'
 import * as S from './styles'
@@ -8,6 +9,7 @@ interface RestaurantClientWarningBannerProps {
 }
 
 export const RestaurantClientWarningBanner = ({ forceShow = false }: RestaurantClientWarningBannerProps) => {
+  const { t } = useTranslator()
   const { configValidation, layout } = useRestaurant()
 
   if (!forceShow && (!configValidation || configValidation.isReadyForOperation)) {
@@ -20,10 +22,11 @@ export const RestaurantClientWarningBanner = ({ forceShow = false }: RestaurantC
         <WarningIcon size={20} color="#ffffff" weight="fill" />
       </S.IconContainer>
       <S.Content>
-        <S.Title className="title">Restaurante Temporariamente Indisponível</S.Title>
+        <S.Title className="title">{t('Restaurante Temporariamente Indisponível')}</S.Title>
         <S.Description className="description">
-          Este restaurante ainda está em processo de configuração. Por favor, tente novamente mais tarde ou entre em
-          contato diretamente com o estabelecimento.
+          {t(
+            'Este restaurante ainda está em processo de configuração. Por favor, tente novamente mais tarde ou entre em contato diretamente com o estabelecimento.'
+          )}
         </S.Description>
       </S.Content>
     </S.Banner>

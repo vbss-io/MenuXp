@@ -1,48 +1,4 @@
 export const categoriesSectionLayoutGlobalStyles = `
-  .view-container.categories-section.layout-menuxp {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-  }
-
-  .category-card.layout-menuxp {
-    background: transparent !important;
-    border-radius: 16px !important;
-    border: none !important;
-    box-shadow: none !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    text-align: center !important;
-    padding-top: 8px !important;
-  }
-
-  .category-card.layout-menuxp:hover {
-    transform: translateY(-2px) translateZ(0) !important;
-    box-shadow: none !important;
-  }
-
-  .category-icon.layout-menuxp,
-  .category-card.layout-menuxp .category-icon {
-    width: 60px !important;
-    height: 60px !important;
-    background: #ffffff !important;
-    border: 2px solid #000000 !important;
-    border-radius: 50% !important;
-    box-shadow: 4px 4px 0 #000000 !important;
-    margin-bottom: 8px !important;
-    min-width: 60px !important;
-  }
-
-  .category-card.layout-menuxp .category-icon svg { width: 30px; height: 30px; color: #000000; }
-
-  .category-card.layout-menuxp:hover .category-icon { border-color: var(--restaurant-primary-color) !important; }
-  .category-card.layout-menuxp:hover .category-icon svg { color: var(--restaurant-primary-color) !important; }
-
-  .category-card.layout-menuxp .category-name {
-    font-weight: 700 !important;
-    color: #000000 !important;
-  }
-
   .view-container.categories-section.layout-default {
     background: transparent !important;
     border: none !important;

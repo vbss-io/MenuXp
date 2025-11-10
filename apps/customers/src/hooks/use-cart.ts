@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast'
+import { useTranslator } from 'vbss-translator'
 
 import { addItemToCart } from '@/services/cart/add-cart-item'
 import { clearCart as clearCartService } from '@/services/cart/clear-cart'
@@ -49,6 +50,7 @@ interface UseCartReturn {
 }
 
 export const useCart = ({ clientId, restaurantId, enabled = true }: UseCartOptions): UseCartReturn => {
+  const { t } = useTranslator()
   const queryClient = useQueryClient()
 
   const {
@@ -104,7 +106,7 @@ export const useCart = ({ clientId, restaurantId, enabled = true }: UseCartOptio
             quantity: newItem.quantity,
             optionals: newItem.optionals || [],
             note: newItem.note || '',
-            name: 'Carregando...',
+            name: t('Carregando...'),
             price: 0
           }
           return { ...old, items: [...(old.items || []), newCartItem] }
@@ -115,13 +117,13 @@ export const useCart = ({ clientId, restaurantId, enabled = true }: UseCartOptio
     },
     onSuccess: () => {
       queryClient.refetchQueries({ queryKey: ['cart', clientId, restaurantId] })
-      toast.success('Item adicionado ao carrinho!')
+      toast.success(t('Item adicionado ao carrinho!'))
     },
     onError: (_, __, context) => {
       if (context?.previousCart) {
         queryClient.setQueryData(['cart', clientId, restaurantId], context.previousCart)
       }
-      toast.error('Erro ao adicionar item ao carrinho')
+      toast.error(t('Erro ao adicionar item ao carrinho'))
     }
   })
 
@@ -149,13 +151,13 @@ export const useCart = ({ clientId, restaurantId, enabled = true }: UseCartOptio
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart', clientId, restaurantId] })
-      toast.success('Item removido do carrinho!')
+      toast.success(t('Item removido do carrinho!'))
     },
     onError: (_, __, context) => {
       if (context?.previousCart) {
         queryClient.setQueryData(['cart', clientId, restaurantId], context.previousCart)
       }
-      toast.error('Erro ao remover item do carrinho')
+      toast.error(t('Erro ao remover item do carrinho'))
     }
   })
 
@@ -198,13 +200,13 @@ export const useCart = ({ clientId, restaurantId, enabled = true }: UseCartOptio
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart', clientId, restaurantId] })
-      toast.success('Quantidade atualizada!')
+      toast.success(t('Quantidade atualizada!'))
     },
     onError: (_, __, context) => {
       if (context?.previousCart) {
         queryClient.setQueryData(['cart', clientId, restaurantId], context.previousCart)
       }
-      toast.error('Erro ao atualizar quantidade')
+      toast.error(t('Erro ao atualizar quantidade'))
     }
   })
 
@@ -222,13 +224,13 @@ export const useCart = ({ clientId, restaurantId, enabled = true }: UseCartOptio
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart', clientId, restaurantId] })
-      toast.success('Carrinho limpo!')
+      toast.success(t('Carrinho limpo!'))
     },
     onError: (_, __, context) => {
       if (context?.previousCart) {
         queryClient.setQueryData(['cart', clientId, restaurantId], context.previousCart)
       }
-      toast.error('Erro ao limpar carrinho')
+      toast.error(t('Erro ao limpar carrinho'))
     }
   })
 

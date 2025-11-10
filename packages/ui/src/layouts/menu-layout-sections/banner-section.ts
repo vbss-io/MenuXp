@@ -1,34 +1,4 @@
 export const bannerSectionLayoutGlobalStyles = `
-  .banner-view-container.layout-menuxp {
-    border-radius: 16px !important;
-    box-shadow: none !important;
-    border: none !important;
-
-    .banner-image {
-      border-radius: 16px !important;
-    }
-
-    .banner-placeholder {
-      background: #ffffff !important;
-      color: hsl(220, 9%, 46%) !important;
-      border-radius: 16px !important;
-    }
-
-    .banner-title {
-      font-weight: 700 !important;
-      font-family: 'Archivo Black', sans-serif !important;
-      color: rgba(255, 255, 255, 0.95) !important;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7) !important;
-    }
-
-    .banner-subtitle {
-      font-weight: 700 !important;
-      font-family: 'Inter', sans-serif !important;
-      color: rgba(255, 255, 255, 0.9) !important;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
-    }
-  }
-
   .banner-view-container.layout-default {
     border-radius: 8px !important;
     box-shadow: none !important;

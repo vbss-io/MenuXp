@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 const getStepBackgroundColor = (active: boolean, completed: boolean) => {
@@ -13,119 +12,69 @@ const getStepTextColor = (active: boolean, completed: boolean) => {
   return '#6B7280'
 }
 
-export const SlideOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 10000;
-  display: flex;
-  justify-content: flex-end;
-`
-
-export const SlideContainer = styled(motion.div)`
-  background: white;
-  width: 100%;
-  max-width: 500px;
-  height: 100vh;
-  overflow-y: auto;
-  position: relative;
-`
-
-export const SlideHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
-  position: sticky;
-  top: 0;
-  background: white;
-  z-index: 10;
-`
-
-export const HeaderTitle = styled.h2`
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #111827;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-`
-
-export const CloseButton = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 6px;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background: #f3f4f6;
-  }
-`
-
-export const SlideContent = styled.div`
-  padding: 1.5rem;
-`
-
 export const StepsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  padding: 0 1rem;
-`
-
-export const Step = styled.div<{ active: boolean; completed: boolean }>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  flex: 1;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 1rem;
-    left: 50%;
-    width: 100%;
-    height: 2px;
-    background: ${({ active, completed }) => {
-      if (completed) return '#10B981'
-      if (active) return '#3B82F6'
-      return '#D1D5DB'
-    }};
-    z-index: -1;
-  }
-
-  &:last-child::after {
-    display: none;
+  &.steps-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
   }
 `
 
-export const StepIcon = styled.div<{ active: boolean; completed: boolean }>`
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${({ active, completed }) => getStepBackgroundColor(active, completed)};
-  color: white;
-  font-size: 0.875rem;
-  font-weight: 600;
+export const Step = styled.div<{ $active: boolean; $completed: boolean }>`
+  &.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 1rem;
+      left: 50%;
+      width: 100%;
+      height: 2px;
+      background: ${({ $active, $completed }) => {
+        if ($completed) return '#10B981'
+        if ($active) return '#3B82F6'
+        return '#D1D5DB'
+      }};
+      z-index: 0;
+    }
+
+    &:last-child::after {
+      display: none;
+    }
+  }
 `
 
-export const StepLabel = styled.span<{ active: boolean; completed: boolean }>`
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: ${({ active, completed }) => getStepTextColor(active, completed)};
-  text-align: center;
+export const StepIcon = styled.div<{ $active: boolean; $completed: boolean }>`
+  &.step-icon {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${({ $active, $completed }) => getStepBackgroundColor($active, $completed)};
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+`
+
+export const StepLabel = styled.span<{ $active: boolean; $completed: boolean }>`
+  &.step-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: ${({ $active, $completed }) => getStepTextColor($active, $completed)};
+    text-align: center;
+  }
 `
 
 export const StepContent = styled.div`
@@ -328,29 +277,6 @@ export const Select = styled.select`
   }
 `
 
-export const Input = styled.input`
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  background: white;
-  transition: all 0.2s ease;
-
-  &:focus {
-    outline: none;
-    border-color: #111827;
-    box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.1),
-      0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    transform: translate(-2px, -2px);
-  }
-
-  &::placeholder {
-    color: #6b7280;
-  }
-`
-
 export const SummarySection = styled.div`
   display: flex;
   flex-direction: column;
@@ -381,36 +307,6 @@ export const ButtonGroup = styled.div`
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
-`
-
-export const Button = styled.button<{ variant: 'primary' | 'secondary'; primaryColor: string }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  flex: 1;
-  padding: 0.75rem 1rem;
-  background: ${({ variant, primaryColor }) => (variant === 'primary' ? primaryColor : 'transparent')};
-  color: ${({ variant, primaryColor }) => (variant === 'primary' ? 'white' : primaryColor)};
-  border: 2px solid ${({ primaryColor }) => primaryColor};
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover:not(:disabled) {
-    transform: translate(-2px, -2px);
-    box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-  }
 `
 
 export const GuestInfoAlert = styled.div`

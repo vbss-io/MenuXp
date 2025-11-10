@@ -8,58 +8,60 @@ export const ProfileContainer = styled.div`
   padding: 20px;
   min-height: 400px;
   width: 100%;
-  gap: 32px;
+  gap: 24px;
 `
 
 export const OrderHistorySection = styled.div`
   width: 100%;
-  max-width: 600px;
-  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `
 
 export const HistoryTitle = styled.h2`
-  font-size: 20px;
-  font-weight: 600;
+  font-size: ${({ theme }) => theme.typography.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
   color: ${({ theme }) => theme.colors.text.primary};
-  margin: 0 0 20px 0;
-  text-align: center;
+  margin: 0;
+  text-align: left;
 `
 
 export const EmptyMessage = styled.div`
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 3px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: 0;
+  padding: 32px 24px;
+  box-shadow: 4px 4px 0 ${({ theme }) => theme.colors.mx.black};
   text-align: center;
-  padding: 40px 20px;
-  color: ${({ theme }) => theme.colors.text.secondary};
 
   p {
     margin: 0;
-    font-size: 14px;
+    font-size: ${({ theme }) => theme.typography.fontSizes.sm};
+    color: ${({ theme }) => theme.colors.text.secondary};
   }
 `
 
 export const OrdersList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 `
 
 export const OrderCard = styled.div`
-  padding: 16px;
-  border: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
-  border-radius: 8px;
-  background: ${({ theme }) => theme.colors.background};
-  transition: all 0.2s;
-
-  &:hover {
-    border-color: ${({ theme }) => theme.colors.mx.gray[300]};
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  }
+  background: ${({ theme }) => theme.colors.mx.white};
+  border: 3px solid ${({ theme }) => theme.colors.mx.black};
+  border-radius: 0;
+  box-shadow: 4px 4px 0 ${({ theme }) => theme.colors.mx.black};
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 `
 
 export const OrderHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
 `
 
 export const OrderCode = styled.span`
@@ -69,17 +71,18 @@ export const OrderCode = styled.span`
 `
 
 export const OrderStatusBadge = styled.span<{ color: string }>`
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 12px;
-  font-weight: 600;
-  color: white;
+  gap: 6px;
+  font-size: ${({ theme }) => theme.typography.fontSizes.xs};
+  font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.mx.white};
   background: ${({ color }) => color};
-  padding: 4px 10px;
-  border-radius: 12px;
+  padding: 6px 12px;
+  border-radius: 0;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.6px;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
 
   svg {
     flex-shrink: 0;
@@ -90,7 +93,6 @@ export const OrderDetails = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
 `
 
 export const OrderDate = styled.span`
@@ -107,9 +109,9 @@ export const OrderTotal = styled.span`
 export const OrderItems = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding-top: 12px;
-  border-top: 1px solid ${({ theme }) => theme.colors.mx.gray[200]};
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 3px solid ${({ theme }) => theme.colors.mx.black};
 `
 
 export const OrderItem = styled.div`

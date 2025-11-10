@@ -1,14 +1,12 @@
-import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
-import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
-
 import { ComboItemsList } from '@/components/combo/combo-items-list'
-import { Button } from '@menuxp/ui'
-import { Dialog } from '@menuxp/ui'
-import { FormTextarea } from '@menuxp/ui'
 import { getRestaurantMenuCombo } from '@/services/menu/get-combo'
 import { getRestaurantMenuItem } from '@/services/menu/get-menu-item'
 import type { CartItem } from '@/types/cart'
+import { Button, Dialog, FormTextarea, useLayout } from '@menuxp/ui'
+import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
+import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 import * as S from './styles'
 
@@ -21,6 +19,8 @@ interface EditCartItemDialogProps {
 }
 
 export const EditCartItemDialog = ({ isOpen, onClose, onSave, item, restaurantId }: EditCartItemDialogProps) => {
+  const { t } = useTranslator()
+  const { layout } = useLayout()
   const [activeTab, setActiveTab] = useState(0)
   const [editedItems, setEditedItems] = useState<CartItem[]>([])
   const [originalItems, setOriginalItems] = useState<CartItem[]>([])
@@ -135,13 +135,15 @@ export const EditCartItemDialog = ({ isOpen, onClose, onSave, item, restaurantId
   if (isLoading) {
     return (
       <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-        <S.DialogContent>
-          <S.DialogHeader>
-            <S.DialogTitle>Carregando...</S.DialogTitle>
+        <S.DialogContent className={`edit-cart-item-dialog layout-${layout}`}>
+          <S.DialogHeader className="dialog-header">
+            <S.DialogTitle className="dialog-title">{t('Carregando...')}</S.DialogTitle>
           </S.DialogHeader>
-          <S.DialogBody>
+          <S.DialogBody className="dialog-body">
             <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
-              <span>Carregando dados do {isCombo ? 'combo' : 'item'}...</span>
+              <span>
+                {t('Carregando dados do')} {isCombo ? t('combo') : t('item')}...
+              </span>
             </div>
           </S.DialogBody>
         </S.DialogContent>
@@ -151,70 +153,81 @@ export const EditCartItemDialog = ({ isOpen, onClose, onSave, item, restaurantId
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <S.DialogContent>
-        <S.DialogHeader>
-          <S.DialogTitle>
-            Editar {isCombo ? 'Combo' : 'Item'}: {item.name}
-            {isCombo && <S.ComboBadge>COMBO</S.ComboBadge>}
+      <S.DialogContent className={`edit-cart-item-dialog layout-${layout}`}>
+        <S.DialogHeader className="dialog-header">
+          <S.DialogTitle className="dialog-title">
+            {t('Editar')} {isCombo ? t('Combo') : t('Item')}: {item.name}
+            {isCombo && <S.ComboBadge className="combo-badge">{t('COMBO')}</S.ComboBadge>}
           </S.DialogTitle>
         </S.DialogHeader>
-        <S.DialogBody>
-          <S.TabsContainer>
-            <S.TabsList>
+        <S.DialogBody className="dialog-body">
+          <S.TabsContainer className="tabs-container">
+            <S.TabsList className="tabs-list">
               {editedItems.map((_, index) => (
-                <S.TabButton key={index} $isActive={activeTab === index} onClick={() => setActiveTab(index)}>
-                  {isCombo ? 'Combo' : 'Item'} {index + 1}
+                <S.TabButton
+                  key={index}
+                  $isActive={activeTab === index}
+                  onClick={() => setActiveTab(index)}
+                  className={`tab-button ${activeTab === index ? 'active' : ''}`}
+                >
+                  {isCombo ? t('Combo') : t('Item')} {index + 1}
                 </S.TabButton>
               ))}
             </S.TabsList>
             {editedItems.map((editedItem, itemIndex) => (
-              <S.TabContent key={itemIndex} $isActive={activeTab === itemIndex}>
-                <S.ItemSection>
-                  <S.SectionTitle>Informações do {isCombo ? 'Combo' : 'Item'}</S.SectionTitle>
-                  <S.ItemInfo>
-                    <S.ItemName>{editedItem.name}</S.ItemName>
-                    <S.ItemPrice>R$ {editedItem.price.toFixed(2).replace('.', ',')}</S.ItemPrice>
+              <S.TabContent key={itemIndex} $isActive={activeTab === itemIndex} className="tab-content">
+                <S.ItemSection className="item-section">
+                  <S.SectionTitle className="section-title">
+                    {t('Informações do')} {isCombo ? t('Combo') : t('Item')}
+                  </S.SectionTitle>
+                  <S.ItemInfo className="item-info">
+                    <S.ItemName className="item-name">{editedItem.name}</S.ItemName>
+                    <S.ItemPrice className="item-price">R$ {editedItem.price.toFixed(2).replace('.', ',')}</S.ItemPrice>
                   </S.ItemInfo>
                   <S.FieldGroup>
                     <FormTextarea
                       id={`note-${itemIndex}`}
-                      label="Observação"
+                      label={t('Observação')}
                       value={editedItem.note || ''}
                       onChange={(e) => handleItemChange(itemIndex, 'note', e.target.value)}
-                      placeholder="Ex: remover cebola, sem sal..."
+                      placeholder={t('Ex: remover cebola, sem sal...')}
                       rows={3}
                     />
                   </S.FieldGroup>
                 </S.ItemSection>
                 {isCombo && combo?.items && combo.items.length > 0 && (
-                  <S.ItemSection>
-                    <S.SectionTitle>Itens incluídos no combo</S.SectionTitle>
+                  <S.ItemSection className="item-section">
+                    <S.SectionTitle className="section-title">{t('Itens incluídos no combo')}</S.SectionTitle>
                     <ComboItemsList items={combo.items} />
                   </S.ItemSection>
                 )}
                 {!isCombo && menuItem?.optionals && menuItem.optionals.length > 0 && (
-                  <S.ItemSection>
-                    <S.SectionTitle>Opcionais</S.SectionTitle>
+                  <S.ItemSection className="item-section">
+                    <S.SectionTitle className="section-title">{t('Opcionais')}</S.SectionTitle>
                     {menuItem.optionals.map((menuOptional) => {
                       const currentQuantity = getOptionalQuantity(itemIndex, menuOptional.name)
                       const maxQuantity = menuOptional.maxQuantity || 10
                       return (
-                        <S.OptionalCard key={menuOptional.name}>
-                          <S.OptionalHeader>
-                            <S.OptionalTitle>{menuOptional.name}</S.OptionalTitle>
-                            <S.OptionalPrice>R$ {menuOptional.price.toFixed(2).replace('.', ',')}</S.OptionalPrice>
+                        <S.OptionalCard key={menuOptional.name} className="optional-card">
+                          <S.OptionalHeader className="optional-header">
+                            <S.OptionalTitle className="optional-title">{menuOptional.name}</S.OptionalTitle>
+                            <S.OptionalPrice className="optional-price">
+                              R$ {menuOptional.price.toFixed(2).replace('.', ',')}
+                            </S.OptionalPrice>
                           </S.OptionalHeader>
-                          <S.OptionalControls>
+                          <S.OptionalControls className="optional-controls">
                             <S.QuantityButton
                               onClick={() => handleOptionalQuantityChange(itemIndex, menuOptional.name, false)}
                               disabled={currentQuantity <= 0}
+                              className="quantity-button"
                             >
                               <MinusIcon size={16} />
                             </S.QuantityButton>
-                            <S.QuantityDisplay>{currentQuantity}</S.QuantityDisplay>
+                            <S.QuantityDisplay className="quantity-display">{currentQuantity}</S.QuantityDisplay>
                             <S.QuantityButton
                               onClick={() => handleOptionalQuantityChange(itemIndex, menuOptional.name, true)}
                               disabled={currentQuantity >= maxQuantity}
+                              className="quantity-button"
                             >
                               <PlusIcon size={16} />
                             </S.QuantityButton>
@@ -228,9 +241,9 @@ export const EditCartItemDialog = ({ isOpen, onClose, onSave, item, restaurantId
             ))}
           </S.TabsContainer>
         </S.DialogBody>
-        <S.DialogFooter>
+        <S.DialogFooter className="dialog-footer">
           <Button variant="secondary" onClick={onClose}>
-            Cancelar
+            {t('Cancelar')}
           </Button>
           <Button
             variant="primary"
@@ -241,7 +254,7 @@ export const EditCartItemDialog = ({ isOpen, onClose, onSave, item, restaurantId
               cursor: hasChanges() ? 'pointer' : 'not-allowed'
             }}
           >
-            {hasChanges() ? 'Salvar Alterações' : 'Nenhuma Alteração'}
+            {hasChanges() ? t('Salvar Alterações') : t('Nenhuma Alteração')}
           </Button>
         </S.DialogFooter>
       </S.DialogContent>

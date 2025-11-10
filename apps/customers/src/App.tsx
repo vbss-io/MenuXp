@@ -1,16 +1,16 @@
-import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { Toaster } from 'react-hot-toast'
-import { styled, ThemeProvider } from 'styled-components'
-
 import { ClientProvider } from '@/hooks/providers/client-provider'
-import { LanguageProvider } from '@/hooks/providers/language-provider'
 import { LayoutProvider } from '@/hooks/providers/layout-provider'
 import { NotificationProvider } from '@/hooks/providers/notification-provider'
 import { RestaurantProvider } from '@/hooks/providers/restaurant-provider'
 import { queryClient } from '@/lib/query-client'
 import { Router } from '@/router'
+import translations from '@/translations/index'
 import { CustomersGlobalStyle, customersTheme as theme } from '@menuxp/styles'
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from 'react-hot-toast'
+import { styled, ThemeProvider } from 'styled-components'
+import { TranslatorProvider } from 'vbss-translator'
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -24,45 +24,45 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <CustomersGlobalStyle />
-        <Toaster
-          position="bottom-right"
-          toastOptions={{
-            duration: 6000,
-            style: {
-              background: theme.colors.mx.white,
-              color: theme.colors.mx.black,
-              fontSize: theme.typography.fontSizes.sm,
-              padding: theme.spacing.md,
-              border: `2px solid ${theme.colors.mx.black}`,
-              textAlign: 'center',
-              minWidth: '240px',
-              maxWidth: '400px',
-              lineHeight: theme.typography.lineHeights.normal,
-              borderRadius: theme.borderRadius.brutalist,
-              boxShadow: theme.shadows.brutalist,
-              fontFamily: theme.typography.fonts.body,
-              fontWeight: theme.typography.fontWeights.medium
-            },
-            success: {
+        <TranslatorProvider translations={translations} defaultLanguage="pt">
+          <CustomersGlobalStyle />
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              duration: 6000,
               style: {
-                borderColor: theme.colors.mx.success,
-                background: theme.colors.mx.white
+                background: theme.colors.mx.white,
+                color: theme.colors.mx.black,
+                fontSize: theme.typography.fontSizes.sm,
+                padding: theme.spacing.md,
+                border: `2px solid ${theme.colors.mx.black}`,
+                textAlign: 'center',
+                minWidth: '240px',
+                maxWidth: '400px',
+                lineHeight: theme.typography.lineHeights.normal,
+                borderRadius: theme.borderRadius.brutalist,
+                boxShadow: theme.shadows.brutalist,
+                fontFamily: theme.typography.fonts.body,
+                fontWeight: theme.typography.fontWeights.medium
               },
-              icon: <CheckCircleIcon color={theme.colors.mx.success} size={24} weight="duotone" />
-            },
-            error: {
-              style: {
-                borderColor: theme.colors.mx.error,
-                background: theme.colors.mx.white
+              success: {
+                style: {
+                  borderColor: theme.colors.mx.success,
+                  background: theme.colors.mx.white
+                },
+                icon: <CheckCircleIcon color={theme.colors.mx.success} size={24} weight="duotone" />
               },
-              icon: <XCircleIcon color={theme.colors.mx.error} size={24} weight="duotone" />
-            }
-          }}
-        />
-        <RestaurantProvider>
-          <LayoutProvider>
-            <LanguageProvider>
+              error: {
+                style: {
+                  borderColor: theme.colors.mx.error,
+                  background: theme.colors.mx.white
+                },
+                icon: <XCircleIcon color={theme.colors.mx.error} size={24} weight="duotone" />
+              }
+            }}
+          />
+          <RestaurantProvider>
+            <LayoutProvider>
               <ClientProvider>
                 <NotificationProvider>
                   <AppContainer>
@@ -70,9 +70,9 @@ function App() {
                   </AppContainer>
                 </NotificationProvider>
               </ClientProvider>
-            </LanguageProvider>
-          </LayoutProvider>
-        </RestaurantProvider>
+            </LayoutProvider>
+          </RestaurantProvider>
+        </TranslatorProvider>
       </ThemeProvider>
     </QueryClientProvider>
   )

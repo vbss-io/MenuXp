@@ -1,11 +1,11 @@
 import { ImageBrokenIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
-import { Chip } from '@menuxp/ui'
-import { Loading } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { MenuSectionType, type BannerConfig, type MenuSection } from '@/types/menu-layout'
+import { Chip, Loading } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -14,6 +14,7 @@ interface BannerSectionProps {
 }
 
 export const BannerSection: React.FC<BannerSectionProps> = ({ section }) => {
+  const { t } = useTranslator()
   const { layout } = useRestaurant()
   const [imageError, setImageError] = useState(false)
   const [imageLoading, setImageLoading] = useState(true)
@@ -104,13 +105,13 @@ export const BannerSection: React.FC<BannerSectionProps> = ({ section }) => {
               {imageLoading ? (
                 <S.BannerPlaceholder className="banner-placeholder">
                   <Loading />
-                  <span>Carregando imagem...</span>
+                  <span>{t('Carregando imagem...')}</span>
                 </S.BannerPlaceholder>
               ) : (
                 <S.BannerImage
                   key={bannerData.imagePath}
                   src={bannerData.imagePath}
-                  alt="Banner"
+                  alt={t('Banner')}
                   className="banner-image"
                 />
               )}
@@ -125,7 +126,7 @@ export const BannerSection: React.FC<BannerSectionProps> = ({ section }) => {
           ) : (
             <S.BannerPlaceholder className="banner-placeholder">
               <ImageBrokenIcon size={64} weight="fill" />
-              <span>Imagem não disponível</span>
+              <span>{t('Imagem não disponível')}</span>
             </S.BannerPlaceholder>
           )}
           <S.BannerOverlay>

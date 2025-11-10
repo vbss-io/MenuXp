@@ -3,18 +3,20 @@ import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useTranslator } from 'vbss-translator'
 
 import { ComboItemsList } from '@/components/combo/combo-items-list'
-import { Loading } from '@menuxp/ui'
 import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { getRestaurantMenuCombo } from '@/services/menu/get-combo'
+import { Loading } from '@menuxp/ui'
 
 import { ChildBackButton as BackButton, ChildContainer as Container } from '../styles'
 import * as S from './styles'
 
 export const RestaurantComboPage = () => {
+  const { t } = useTranslator()
   const { slug, comboId } = useParams<{ slug: string; comboId: string }>()
   const navigate = useNavigate()
   const { restaurant } = useRestaurant({ slug: slug || '' })
@@ -74,10 +76,10 @@ export const RestaurantComboPage = () => {
         note: note.trim()
       })
       resetForm()
-      toast.success('Combo adicionado ao carrinho com sucesso!')
+      toast.success(t('Combo adicionado ao carrinho com sucesso!'))
     } catch (error) {
       console.error('Erro ao adicionar combo ao carrinho:', error)
-      toast.error('Erro ao adicionar combo ao carrinho. Tente novamente.')
+      toast.error(t('Erro ao adicionar combo ao carrinho. Tente novamente.'))
     } finally {
       setIsAddingToCart(false)
     }
@@ -89,7 +91,7 @@ export const RestaurantComboPage = () => {
         <Container>
           <S.ProductContainer>
             <Loading />
-            <span>Carregando combo...</span>
+            <span>{t('Carregando combo...')}</span>
           </S.ProductContainer>
         </Container>
       </>
@@ -102,9 +104,9 @@ export const RestaurantComboPage = () => {
         <Container>
           <BackButton onClick={handleBackClick}>
             <ArrowLeftIcon size={20} />
-            Voltar ao menu
+            {t('Voltar ao menu')}
           </BackButton>
-          <S.ErrorMessage>{error?.message || 'Combo não encontrado'}</S.ErrorMessage>
+          <S.ErrorMessage>{error?.message || t('Combo não encontrado')}</S.ErrorMessage>
         </Container>
       </>
     )
@@ -117,10 +119,10 @@ export const RestaurantComboPage = () => {
     <Container>
       <BackButton onClick={handleBackClick}>
         <ArrowLeftIcon size={20} />
-        Voltar ao menu
+        {t('Voltar ao menu')}
       </BackButton>
       <S.ProductContainer>
-        <S.ComboBadge $secondaryColor={restaurant?.style?.secondaryColor || '#FEBA0C'}>COMBO</S.ComboBadge>
+        <S.ComboBadge $secondaryColor={restaurant?.style?.secondaryColor || '#FEBA0C'}>{t('COMBO')}</S.ComboBadge>
         {combo.medias.length > 0 && <S.ProductImage src={combo.medias[0]} alt={combo.name} />}
         <S.ProductInfo>
           <S.ProductTitle>{combo.name}</S.ProductTitle>
@@ -141,17 +143,17 @@ export const RestaurantComboPage = () => {
           <ComboItemsList items={combo.items} />
         </S.ComboItemsSection>
         <S.NotesSection>
-          <S.NotesLabel>Observações</S.NotesLabel>
+          <S.NotesLabel>{t('Observações')}</S.NotesLabel>
           <S.NotesInput
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            placeholder="Ex: sem cebola, bem assado..."
+            placeholder={t('Ex: sem cebola, bem assado...')}
             maxLength={200}
           />
         </S.NotesSection>
         <S.AddToCartSection>
           <S.QuantitySection>
-            <S.QuantityLabel>Quantidade</S.QuantityLabel>
+            <S.QuantityLabel>{t('Quantidade')}</S.QuantityLabel>
             <S.OptionalControls>
               <S.QuantityButton onClick={() => handleQuantityChange(false)} disabled={quantity <= 1}>
                 <MinusIcon size={16} />
@@ -163,7 +165,7 @@ export const RestaurantComboPage = () => {
             </S.OptionalControls>
           </S.QuantitySection>
           <S.TotalPrice>
-            <span>Total</span>
+            <span>{t('Total')}</span>
             <span>R$ {calculateTotalPrice().toFixed(2)}</span>
           </S.TotalPrice>
           <S.AddToCartButton
@@ -172,7 +174,7 @@ export const RestaurantComboPage = () => {
             disabled={isAddingToCart}
           >
             <ShoppingCartIcon size={20} />
-            {isAddingToCart ? 'Adicionando...' : 'Adicionar ao Carrinho'}
+            {isAddingToCart ? t('Adicionando...') : t('Adicionar ao Carrinho')}
           </S.AddToCartButton>
         </S.AddToCartSection>
       </S.ProductContainer>

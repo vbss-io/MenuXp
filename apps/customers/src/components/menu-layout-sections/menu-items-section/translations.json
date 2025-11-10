@@ -1,0 +1,23 @@
+[
+  {
+    "pt": "Mais Vendidos",
+    "en": "Best Sellers",
+    "es": "Más Vendidos"
+  },
+  {
+    "pt": "Com Descontos",
+    "en": "On Sale",
+    "es": "Con Descuentos"
+  },
+  {
+    "pt": "Carregando itens do menu...",
+    "en": "Loading menu items...",
+    "es": "Cargando artículos del menú..."
+  },
+  {
+    "pt": "Não há itens disponíveis para exibir nesta seção.",
+    "en": "There are no items available to display in this section.",
+    "es": "No hay artículos disponibles para mostrar en esta sección."
+  }
+]
+

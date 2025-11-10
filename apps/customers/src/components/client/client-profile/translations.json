@@ -1,0 +1,48 @@
+[
+  {
+    "pt": "Cliente",
+    "en": "Client",
+    "es": "Cliente"
+  },
+  {
+    "pt": "Endereço",
+    "en": "Address",
+    "es": "Dirección"
+  },
+  {
+    "pt": "Endereço cadastrado",
+    "en": "Address registered",
+    "es": "Dirección registrada"
+  },
+  {
+    "pt": "Adicionar endereço",
+    "en": "Add address",
+    "es": "Agregar dirección"
+  },
+  {
+    "pt": "Nome",
+    "en": "Name",
+    "es": "Nombre"
+  },
+  {
+    "pt": "Editar nome",
+    "en": "Edit name",
+    "es": "Editar nombre"
+  },
+  {
+    "pt": "Adicionar nome",
+    "en": "Add name",
+    "es": "Agregar nombre"
+  },
+  {
+    "pt": "Pedidos",
+    "en": "Orders",
+    "es": "Pedidos"
+  },
+  {
+    "pt": "Nenhum pedido encontrado",
+    "en": "No orders found",
+    "es": "No se encontraron pedidos"
+  }
+]
+

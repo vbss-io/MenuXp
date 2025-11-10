@@ -1,4 +1,5 @@
 import { ClockIcon } from '@phosphor-icons/react'
+import { useTranslator } from 'vbss-translator'
 
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { BusinessWeekDay } from '@/types/restaurant'
@@ -12,15 +13,15 @@ interface RestaurantOperationWarningBannerProps {
   forceShow?: boolean
 }
 
-const dayLabels = {
-  [BusinessWeekDay.MONDAY]: 'Segunda-feira',
-  [BusinessWeekDay.TUESDAY]: 'Terça-feira',
-  [BusinessWeekDay.WEDNESDAY]: 'Quarta-feira',
-  [BusinessWeekDay.THURSDAY]: 'Quinta-feira',
-  [BusinessWeekDay.FRIDAY]: 'Sexta-feira',
-  [BusinessWeekDay.SATURDAY]: 'Sábado',
-  [BusinessWeekDay.SUNDAY]: 'Domingo'
-}
+const getDayLabels = (t: (key: string) => string) => ({
+  [BusinessWeekDay.MONDAY]: t('Segunda-feira'),
+  [BusinessWeekDay.TUESDAY]: t('Terça-feira'),
+  [BusinessWeekDay.WEDNESDAY]: t('Quarta-feira'),
+  [BusinessWeekDay.THURSDAY]: t('Quinta-feira'),
+  [BusinessWeekDay.FRIDAY]: t('Sexta-feira'),
+  [BusinessWeekDay.SATURDAY]: t('Sábado'),
+  [BusinessWeekDay.SUNDAY]: t('Domingo')
+})
 
 export const RestaurantOperationWarningBanner = ({
   operationId,
@@ -28,6 +29,7 @@ export const RestaurantOperationWarningBanner = ({
   acceptsScheduling = false,
   forceShow = false
 }: RestaurantOperationWarningBannerProps) => {
+  const { t } = useTranslator()
   const { configValidation, layout } = useRestaurant()
 
   if (!forceShow && (!configValidation?.isReadyForOperation || operationId)) {
@@ -50,20 +52,21 @@ export const RestaurantOperationWarningBanner = ({
 
   const currentDay = getCurrentDay()
   const todayHours = businessHours?.[currentDay]
+  const dayLabels = getDayLabels(t)
   const dayLabel = dayLabels[currentDay]
 
-  let description = 'Este restaurante não está aceitando pedidos no momento.'
+  let description = t('Este restaurante não está aceitando pedidos no momento.')
   let timeInfo = ''
 
   if (acceptsScheduling) {
-    description = 'Este restaurante está fechado no momento, mas você pode fazer um pedido agendado.'
+    description = t('Este restaurante está fechado no momento, mas você pode fazer um pedido agendado.')
   }
 
   if (todayHours) {
     const [startTime, endTime] = todayHours.split('-')
-    timeInfo = `Horário de funcionamento hoje (${dayLabel}): ${startTime} - ${endTime}`
+    timeInfo = `${t('Horário de funcionamento hoje')} (${dayLabel}): ${startTime} - ${endTime}`
   } else {
-    timeInfo = `Fechado hoje (${dayLabel})`
+    timeInfo = `${t('Fechado hoje')} (${dayLabel})`
   }
 
   return (
@@ -72,7 +75,7 @@ export const RestaurantOperationWarningBanner = ({
         <ClockIcon size={20} color="#000000" weight="fill" />
       </S.IconContainer>
       <S.Content>
-        <S.Title className="title">Restaurante Fechado</S.Title>
+        <S.Title className="title">{t('Restaurante Fechado')}</S.Title>
         <S.Description className="description">{description}</S.Description>
         {timeInfo && <S.TimeInfo className="time-info">{timeInfo}</S.TimeInfo>}
       </S.Content>

@@ -1,14 +1,15 @@
 import { ShoppingCartIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 import { MenuItemCard } from '@/components/menu-item/menu-item-card'
 import { MenuItemDialog } from '@/components/menu-item/menu-item-dialog'
-import { Loading } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { getRestaurantMenuItems } from '@/services/menu/get-menu-items'
 import type { MenuItem } from '@/types/menu-item'
 import { MenuSectionType, type MenuItemsConfig, type MenuSection } from '@/types/menu-layout'
+import { Loading } from '@menuxp/ui'
 import { useQuery } from '@tanstack/react-query'
 
 import * as S from './styles'
@@ -19,6 +20,7 @@ interface MenuItemsSectionProps {
 }
 
 export const MenuItemsSection: React.FC<MenuItemsSectionProps> = ({ section, mockItems }) => {
+  const { t } = useTranslator()
   const { layout } = useRestaurant()
   const { restaurant } = useRestaurant()
 
@@ -64,9 +66,9 @@ export const MenuItemsSection: React.FC<MenuItemsSectionProps> = ({ section, moc
   function getDefaultTitle(type: string): string {
     switch (type) {
       case 'best_sellers':
-        return 'Mais Vendidos'
+        return t('Mais Vendidos')
       case 'discounts':
-        return 'Com Descontos'
+        return t('Com Descontos')
       case 'custom':
       default:
         return ''
@@ -158,7 +160,7 @@ export const MenuItemsSection: React.FC<MenuItemsSectionProps> = ({ section, moc
       <S.ViewContainer className={`view-container menu-items-section layout-${layout}`}>
         <S.LoadingContainer className="loading-container">
           <Loading />
-          <span>Carregando itens do menu...</span>
+          <span>{t('Carregando itens do menu...')}</span>
         </S.LoadingContainer>
       </S.ViewContainer>
     )
@@ -169,7 +171,7 @@ export const MenuItemsSection: React.FC<MenuItemsSectionProps> = ({ section, moc
       <S.ViewContainer className={`view-container menu-items-section layout-${layout}`}>
         <S.EmptyStateContainer className="empty-state-container">
           <S.EmptyStateDescription className="empty-state-description">
-            Não há itens disponíveis para exibir nesta seção.
+            {t('Não há itens disponíveis para exibir nesta seção.')}
           </S.EmptyStateDescription>
         </S.EmptyStateContainer>
       </S.ViewContainer>

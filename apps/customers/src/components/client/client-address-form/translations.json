@@ -1,0 +1,88 @@
+[
+  {
+    "pt": "Este campo é obrigatório",
+    "en": "This field is required",
+    "es": "Este campo es obligatorio"
+  },
+  {
+    "pt": "CEP inválido. Use o formato: 00000-000",
+    "en": "Invalid ZIP code. Use the format: 00000-000",
+    "es": "Código postal inválido. Use el formato: 00000-000"
+  },
+  {
+    "pt": "Use a sigla do estado (ex: SP, RJ)",
+    "en": "Use the state abbreviation (e.g.: SP, RJ)",
+    "es": "Use la sigla del estado (ej: SP, RJ)"
+  },
+  {
+    "pt": "Rua *",
+    "en": "Street *",
+    "es": "Calle *"
+  },
+  {
+    "pt": "Digite a rua",
+    "en": "Enter the street",
+    "es": "Ingrese la calle"
+  },
+  {
+    "pt": "Número *",
+    "en": "Number *",
+    "es": "Número *"
+  },
+  {
+    "pt": "Nº",
+    "en": "No.",
+    "es": "Nº"
+  },
+  {
+    "pt": "CEP *",
+    "en": "ZIP Code *",
+    "es": "Código Postal *"
+  },
+  {
+    "pt": "Complemento",
+    "en": "Complement",
+    "es": "Complemento"
+  },
+  {
+    "pt": "Apto, bloco, etc.",
+    "en": "Apt, block, etc.",
+    "es": "Apto, bloque, etc."
+  },
+  {
+    "pt": "Bairro *",
+    "en": "Neighborhood *",
+    "es": "Barrio *"
+  },
+  {
+    "pt": "Digite o bairro",
+    "en": "Enter the neighborhood",
+    "es": "Ingrese el barrio"
+  },
+  {
+    "pt": "Cidade *",
+    "en": "City *",
+    "es": "Ciudad *"
+  },
+  {
+    "pt": "Digite a cidade",
+    "en": "Enter the city",
+    "es": "Ingrese la ciudad"
+  },
+  {
+    "pt": "Estado *",
+    "en": "State *",
+    "es": "Estado *"
+  },
+  {
+    "pt": "UF",
+    "en": "State",
+    "es": "Estado"
+  },
+  {
+    "pt": "Salvar este endereço para pedidos futuros",
+    "en": "Save this address for future orders",
+    "es": "Guardar esta dirección para pedidos futuros"
+  }
+]
+

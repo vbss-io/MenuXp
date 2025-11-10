@@ -1,0 +1,83 @@
+[
+  {
+    "pt": "Carregando...",
+    "en": "Loading...",
+    "es": "Cargando..."
+  },
+  {
+    "pt": "Carregando dados do",
+    "en": "Loading data from",
+    "es": "Cargando datos del"
+  },
+  {
+    "pt": "combo",
+    "en": "combo",
+    "es": "combo"
+  },
+  {
+    "pt": "item",
+    "en": "item",
+    "es": "artículo"
+  },
+  {
+    "pt": "Editar",
+    "en": "Edit",
+    "es": "Editar"
+  },
+  {
+    "pt": "Combo",
+    "en": "Combo",
+    "es": "Combo"
+  },
+  {
+    "pt": "Item",
+    "en": "Item",
+    "es": "Artículo"
+  },
+  {
+    "pt": "COMBO",
+    "en": "COMBO",
+    "es": "COMBO"
+  },
+  {
+    "pt": "Informações do",
+    "en": "Information about the",
+    "es": "Información del"
+  },
+  {
+    "pt": "Observação",
+    "en": "Note",
+    "es": "Observación"
+  },
+  {
+    "pt": "Ex: remover cebola, sem sal...",
+    "en": "E.g.: remove onion, without salt...",
+    "es": "Ej: quitar cebolla, sin sal..."
+  },
+  {
+    "pt": "Itens incluídos no combo",
+    "en": "Items included in combo",
+    "es": "Artículos incluidos en el combo"
+  },
+  {
+    "pt": "Opcionais",
+    "en": "Optionals",
+    "es": "Opcionales"
+  },
+  {
+    "pt": "Cancelar",
+    "en": "Cancel",
+    "es": "Cancelar"
+  },
+  {
+    "pt": "Salvar Alterações",
+    "en": "Save Changes",
+    "es": "Guardar Cambios"
+  },
+  {
+    "pt": "Nenhuma Alteração",
+    "en": "No Changes",
+    "es": "Sin Cambios"
+  }
+]
+

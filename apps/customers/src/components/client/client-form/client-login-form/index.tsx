@@ -1,9 +1,10 @@
 import { ArrowRightIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
-import { Button, FormInput } from '@menuxp/ui'
+import { Button, FormInput, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -14,9 +15,10 @@ interface ClientLoginFormProps {
 }
 
 export const ClientLoginForm = ({ onModeChange, onSuccess }: ClientLoginFormProps) => {
+  const { t } = useTranslator()
   const { loginClient, loginClientMutation } = useClient()
   const { restaurant } = useRestaurant()
-  const { primaryColor, secondaryColor, layout } = useRestaurant()
+  const { layout } = useLayout()
   const [phone, setPhone] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -29,25 +31,14 @@ export const ClientLoginForm = ({ onModeChange, onSuccess }: ClientLoginFormProp
   }
 
   return (
-    <S.FormContainer
-      $layout={layout}
-      $primaryColor={primaryColor}
-      $secondaryColor={secondaryColor}
-      className="client-login-form"
-      style={
-        {
-          '--primary': primaryColor,
-          '--secondary': secondaryColor
-        } as React.CSSProperties
-      }
-    >
-      <S.Title className="form-title">Entrar com Telefone</S.Title>
+    <S.FormContainer className={`client-login-form layout-${layout}`}>
+      <S.Title className="form-title">{t('Entrar com Telefone')}</S.Title>
       <S.Form onSubmit={handleSubmit}>
         <FormInput
           id="phone"
-          label="Telefone"
+          label={t('Telefone')}
           type="tel"
-          placeholder="Digite seu telefone"
+          placeholder={t('Digite seu telefone')}
           value={phone}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
           required
@@ -58,11 +49,11 @@ export const ClientLoginForm = ({ onModeChange, onSuccess }: ClientLoginFormProp
           disabled={loginClientMutation.isPending || !phone.trim()}
           rightIcon={<ArrowRightIcon size={20} />}
         >
-          {loginClientMutation.isPending ? 'Entrando...' : 'Entrar'}
+          {loginClientMutation.isPending ? t('Entrando...') : t('Entrar')}
         </Button>
       </S.Form>
       <S.SwitchModeButton onClick={() => onModeChange('register')} className="switch-mode-button">
-        Não tem conta? Faça seu cadastro
+        {t('Não tem conta? Faça seu cadastro')}
       </S.SwitchModeButton>
     </S.FormContainer>
   )

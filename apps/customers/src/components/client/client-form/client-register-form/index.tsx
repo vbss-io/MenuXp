@@ -1,9 +1,10 @@
 import { ArrowRightIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
-import { Button, FormInput } from '@menuxp/ui'
+import { Button, FormInput, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -14,9 +15,10 @@ interface ClientRegisterFormProps {
 }
 
 export const ClientRegisterForm = ({ onModeChange, onSuccess }: ClientRegisterFormProps) => {
+  const { t } = useTranslator()
   const { registerClient, registerClientMutation } = useClient()
   const { restaurant } = useRestaurant()
-  const { primaryColor, secondaryColor, layout } = useRestaurant()
+  const { layout } = useLayout()
   const [phone, setPhone] = useState('')
   const [name, setName] = useState('')
 
@@ -32,34 +34,23 @@ export const ClientRegisterForm = ({ onModeChange, onSuccess }: ClientRegisterFo
   }
 
   return (
-    <S.FormContainer
-      $layout={layout}
-      $primaryColor={primaryColor}
-      $secondaryColor={secondaryColor}
-      className="client-register-form"
-      style={
-        {
-          '--primary': primaryColor,
-          '--secondary': secondaryColor
-        } as React.CSSProperties
-      }
-    >
-      <S.Title className="form-title">Criar Conta</S.Title>
+    <S.FormContainer className={`client-register-form layout-${layout}`}>
+      <S.Title className="form-title">{t('Criar Conta')}</S.Title>
       <S.Form onSubmit={handleSubmit}>
         <FormInput
           id="phone"
-          label="Telefone"
+          label={t('Telefone')}
           type="tel"
-          placeholder="Digite seu telefone"
+          placeholder={t('Digite seu telefone')}
           value={phone}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
           required
         />
         <FormInput
           id="name"
-          label="Nome (opcional)"
+          label={t('Nome (opcional)')}
           type="text"
-          placeholder="Seu nome (opcional)"
+          placeholder={t('Seu nome (opcional)')}
           value={name}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
         />
@@ -69,11 +60,11 @@ export const ClientRegisterForm = ({ onModeChange, onSuccess }: ClientRegisterFo
           disabled={registerClientMutation.isPending || !phone.trim()}
           rightIcon={<ArrowRightIcon size={20} />}
         >
-          {registerClientMutation.isPending ? 'Criando conta...' : 'Criar conta'}
+          {registerClientMutation.isPending ? t('Criando conta...') : t('Criar conta')}
         </Button>
       </S.Form>
       <S.SwitchModeButton onClick={() => onModeChange('login')} className="switch-mode-button">
-        Já tem conta? Faça login
+        {t('Já tem conta? Faça login')}
       </S.SwitchModeButton>
     </S.FormContainer>
   )

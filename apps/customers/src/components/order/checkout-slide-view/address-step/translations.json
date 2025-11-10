@@ -1,0 +1,33 @@
+[
+  {
+    "pt": "Endereço de Entrega",
+    "en": "Delivery Address",
+    "es": "Dirección de Entrega"
+  },
+  {
+    "pt": "Endereço cadastrado",
+    "en": "Registered address",
+    "es": "Dirección registrada"
+  },
+  {
+    "pt": "Usar outro endereço",
+    "en": "Use another address",
+    "es": "Usar otra dirección"
+  },
+  {
+    "pt": "Clique para inserir um endereço diferente",
+    "en": "Click to enter a different address",
+    "es": "Haga clic para ingresar una dirección diferente"
+  },
+  {
+    "pt": "Usar endereço cadastrado",
+    "en": "Use registered address",
+    "es": "Usar dirección registrada"
+  },
+  {
+    "pt": "Novo endereço",
+    "en": "New address",
+    "es": "Nueva dirección"
+  }
+]
+

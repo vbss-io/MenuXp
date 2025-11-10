@@ -1,12 +1,14 @@
 import { HouseIcon, WarningCircleIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { useTranslator } from 'vbss-translator'
 
 import { Button } from '@menuxp/ui'
 
 import * as S from './styles'
 
 export const Error = () => {
+  const { t } = useTranslator()
   const navigate = useNavigate()
 
   const containerVariants = {
@@ -35,10 +37,10 @@ export const Error = () => {
       <S.ErrorContent variants={containerVariants} initial="hidden" animate="visible">
         <S.TitleContainer variants={itemVariants}>
           <WarningCircleIcon size={48} weight="duotone" />
-          <S.Title>ERROR</S.Title>
+          <S.Title>{t('ERROR')}</S.Title>
         </S.TitleContainer>
         <S.Message variants={itemVariants}>
-          Ops! Parece que algo deu errado. Esta página encontrou um erro inesperado.
+          {t('Ops! Parece que algo deu errado. Esta página encontrou um erro inesperado.')}
         </S.Message>
         <S.ButtonContainer variants={itemVariants}>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -48,7 +50,7 @@ export const Error = () => {
               size="lg"
               leftIcon={<HouseIcon size={20} weight="fill" />}
             >
-              Voltar a Home
+              {t('Voltar a Home')}
             </Button>
           </motion.div>
         </S.ButtonContainer>

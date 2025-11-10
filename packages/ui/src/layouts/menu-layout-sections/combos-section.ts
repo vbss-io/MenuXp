@@ -11,32 +11,6 @@ export const combosSectionLayoutGlobalStyles = `
     }
   }
 
-  .view-container.combos-section.layout-menuxp {
-    .section-title {
-      color: hsl(0, 0%, 0%) !important;
-    }
-
-    .combos-grid {
-      gap: 16px !important;
-
-      @media (max-width: 768px) {
-        gap: 12px !important;
-      }
-    }
-
-    .loading-container {
-      color: hsl(0, 0%, 50%) !important;
-    }
-
-    .empty-state-container {
-      color: hsl(0, 0%, 50%) !important;
-    }
-
-    .empty-state-description {
-      color: hsl(0, 0%, 50%) !important;
-    }
-  }
-
   .view-container.combos-section.layout-default {
     .section-title {
       color: hsl(0, 0%, 0%) !important;

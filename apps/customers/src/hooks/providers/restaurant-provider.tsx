@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 import { RestaurantContext } from '@/hooks/contexts/restaurant-context'
 import { storageUtils } from '@/lib/local-storage'
@@ -14,6 +15,7 @@ interface RestaurantProviderProps {
 }
 
 export const RestaurantProvider = ({ children, slug }: RestaurantProviderProps) => {
+  const { t } = useTranslator()
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null)
   const [operationId, setOperationId] = useState<string | null>(null)
   const [configValidation, setConfigValidation] = useState<RestaurantConfigValidation | null>(null)
@@ -36,7 +38,6 @@ export const RestaurantProvider = ({ children, slug }: RestaurantProviderProps) 
     const savedRestaurant = storageUtils.restaurant.get() as Restaurant | null
     const savedOperationId = storageUtils.operation.get() as string | null
     const savedConfigValidation = storageUtils.configValidation.get() as RestaurantConfigValidation | null
-
     if (savedRestaurant) {
       setRestaurant(savedRestaurant)
     }
@@ -76,16 +77,17 @@ export const RestaurantProvider = ({ children, slug }: RestaurantProviderProps) 
     }
   }, [theme])
 
-  const setClientRestaurant = useCallback((clientRestaurant: Restaurant) => {
-    setRestaurant(clientRestaurant)
-    storageUtils.restaurant.set(clientRestaurant)
-
-    const validation = validateRestaurantConfig(clientRestaurant, true)
-    setConfigValidation(validation)
-    storageUtils.configValidation.set(validation)
-
-    setError(null)
-  }, [])
+  const setClientRestaurant = useCallback(
+    (clientRestaurant: Restaurant) => {
+      setRestaurant(clientRestaurant)
+      storageUtils.restaurant.set(clientRestaurant)
+      const validation = validateRestaurantConfig(clientRestaurant, true, t)
+      setConfigValidation(validation)
+      storageUtils.configValidation.set(validation)
+      setError(null)
+    },
+    [t]
+  )
 
   const handleSetOperationId = useCallback((newOperationId: string) => {
     setOperationId(newOperationId)

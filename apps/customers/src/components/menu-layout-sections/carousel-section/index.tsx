@@ -1,6 +1,7 @@
 import { CaretLeftIcon, CaretRightIcon, ImageBrokenIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { MenuSectionType, type CarouselConfig, type MenuSection } from '@/types/menu-layout'
@@ -12,6 +13,7 @@ interface CarouselSectionProps {
 }
 
 export const CarouselSection: React.FC<CarouselSectionProps> = ({ section }) => {
+  const { t } = useTranslator()
   const { layout } = useRestaurant()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
@@ -95,7 +97,7 @@ export const CarouselSection: React.FC<CarouselSectionProps> = ({ section }) => 
                       {!imageErrors[index] ? (
                         <S.CarouselImage
                           src={imagePath}
-                          alt={`Carousel ${index + 1}`}
+                          alt={`${t('Carrossel')} ${index + 1}`}
                           onError={() => handleImageError(index)}
                           onLoad={() => handleImageLoad(index)}
                           className="carousel-image"
@@ -103,7 +105,7 @@ export const CarouselSection: React.FC<CarouselSectionProps> = ({ section }) => 
                       ) : (
                         <S.CarouselPlaceholder className="carousel-placeholder">
                           <ImageBrokenIcon size={64} weight="fill" />
-                          <span>Imagem não disponível</span>
+                          <span>{t('Imagem não disponível')}</span>
                         </S.CarouselPlaceholder>
                       )}
                     </S.CarouselSlide>

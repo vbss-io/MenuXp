@@ -1,13 +1,10 @@
-import { ArrowRightIcon, MapPinIcon, XIcon } from '@phosphor-icons/react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
-
 import { ClientAddressForm } from '@/components/client/client-address-form'
 import { useClient } from '@/hooks/use-client'
-import { useRestaurant } from '@/hooks/use-restaurant'
 import type { Address } from '@/types/address'
-
-import * as S from './styles'
+import { Button, Slider } from '@menuxp/ui'
+import { ArrowRightIcon, MapPinIcon } from '@phosphor-icons/react'
+import { useCallback, useMemo, useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 interface ClientAddressSlideProps {
   isOpen: boolean
@@ -15,24 +12,28 @@ interface ClientAddressSlideProps {
 }
 
 export const ClientAddressSlide = ({ isOpen, onClose }: ClientAddressSlideProps) => {
+  const { t } = useTranslator()
   const { client, updateClientData, updateClientMutation } = useClient()
-  const { restaurant } = useRestaurant()
 
-  const [formData, setFormData] = useState<Address>({
-    street: client?.address?.street ?? '',
-    number: client?.address?.number ?? '',
-    complement: client?.address?.complement ?? '',
-    neighborhood: client?.address?.neighborhood ?? '',
-    city: client?.address?.city ?? '',
-    state: client?.address?.state ?? '',
-    zipCode: client?.address?.zipCode ?? ''
-  })
+  const initialAddress = useMemo(
+    () => ({
+      street: client?.address?.street ?? '',
+      number: client?.address?.number ?? '',
+      complement: client?.address?.complement ?? '',
+      neighborhood: client?.address?.neighborhood ?? '',
+      city: client?.address?.city ?? '',
+      state: client?.address?.state ?? '',
+      zipCode: client?.address?.zipCode ?? ''
+    }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [client?.id]
+  )
 
-  const primaryColor = restaurant?.style?.primaryColor ?? '#3B82F6'
+  const [formData, setFormData] = useState<Address>(initialAddress)
 
-  const handleAddressChange = (address: Address) => {
+  const handleAddressChange = useCallback((address: Address) => {
     setFormData(address)
-  }
+  }, [])
 
   const handleSubmit = async () => {
     if (client?.id) {
@@ -43,49 +44,24 @@ export const ClientAddressSlide = ({ isOpen, onClose }: ClientAddressSlideProps)
     }
   }
 
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose()
-    }
-  }
-
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <S.SlideOverlay onClick={handleBackdropClick}>
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          >
-            <S.SlideContainer>
-              <S.SlideHeader>
-                <S.HeaderTitle>
-                  <MapPinIcon size={24} style={{ color: primaryColor }} />
-                  Endereço
-                </S.HeaderTitle>
-                <S.CloseButton onClick={onClose}>
-                  <XIcon size={24} />
-                </S.CloseButton>
-              </S.SlideHeader>
-              <S.SlideContent>
-                <ClientAddressForm initialData={formData} onChange={handleAddressChange} onSubmit={handleSubmit} />
-                <S.Button
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={updateClientMutation.isPending}
-                  primaryColor={primaryColor}
-                  style={{ marginTop: '1rem' }}
-                >
-                  {updateClientMutation.isPending ? 'Salvando...' : 'Salvar endereço'}
-                  <ArrowRightIcon size={20} />
-                </S.Button>
-              </S.SlideContent>
-            </S.SlideContainer>
-          </motion.div>
-        </S.SlideOverlay>
-      )}
-    </AnimatePresence>
+    <Slider
+      isOpen={isOpen}
+      onClose={onClose}
+      title={t('Endereço')}
+      icon={<MapPinIcon size={24} style={{ color: 'var(--restaurant-primary-color)' }} />}
+    >
+      <ClientAddressForm initialData={initialAddress} onChange={handleAddressChange} onSubmit={handleSubmit} />
+      <Button
+        className="submit-button"
+        type="button"
+        onClick={handleSubmit}
+        disabled={updateClientMutation.isPending}
+        style={{ marginTop: '1rem' }}
+        rightIcon={<ArrowRightIcon size={20} />}
+      >
+        {updateClientMutation.isPending ? t('Salvando...') : t('Salvar endereço')}
+      </Button>
+    </Slider>
   )
 }

@@ -1,0 +1,63 @@
+[
+  {
+    "pt": "Item adicionado ao carrinho com sucesso!",
+    "en": "Item added to cart successfully!",
+    "es": "¡Artículo agregado al carrito exitosamente!"
+  },
+  {
+    "pt": "Erro ao adicionar item ao carrinho. Tente novamente.",
+    "en": "Error adding item to cart. Try again.",
+    "es": "Error al agregar artículo al carrito. Intente nuevamente."
+  },
+  {
+    "pt": "Carregando produto...",
+    "en": "Loading product...",
+    "es": "Cargando producto..."
+  },
+  {
+    "pt": "Voltar ao menu",
+    "en": "Back to menu",
+    "es": "Volver al menú"
+  },
+  {
+    "pt": "Produto não encontrado",
+    "en": "Product not found",
+    "es": "Producto no encontrado"
+  },
+  {
+    "pt": "Opcionais",
+    "en": "Optionals",
+    "es": "Opcionales"
+  },
+  {
+    "pt": "Observações",
+    "en": "Notes",
+    "es": "Observaciones"
+  },
+  {
+    "pt": "Ex: sem cebola, bem assado...",
+    "en": "E.g.: without onion, well done...",
+    "es": "Ej: sin cebolla, bien asado..."
+  },
+  {
+    "pt": "Quantidade",
+    "en": "Quantity",
+    "es": "Cantidad"
+  },
+  {
+    "pt": "Total",
+    "en": "Total",
+    "es": "Total"
+  },
+  {
+    "pt": "Adicionando...",
+    "en": "Adding...",
+    "es": "Agregando..."
+  },
+  {
+    "pt": "Adicionar ao Carrinho",
+    "en": "Add to Cart",
+    "es": "Agregar al Carrito"
+  }
+]
+

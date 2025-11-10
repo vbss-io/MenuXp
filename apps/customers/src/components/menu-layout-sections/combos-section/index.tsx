@@ -2,13 +2,14 @@ import { PackageIcon } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 import { ComboCard } from '@/components/combo/combo-card'
 import { ComboDialog } from '@/components/combo/combo-dialog'
-import { Loading } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { Combo } from '@/types/combo'
 import { MenuSectionType, type CombosConfig, type MenuSection } from '@/types/menu-layout'
+import { Loading } from '@menuxp/ui'
 
 import { getRestaurantMenuCombos } from '@/services/menu/get-combos'
 import * as S from './styles'
@@ -19,6 +20,7 @@ interface CombosSectionProps {
 }
 
 export const CombosSection: React.FC<CombosSectionProps> = ({ section, mockCombos }) => {
+  const { t } = useTranslator()
   const { layout } = useRestaurant()
   const { restaurant } = useRestaurant()
 
@@ -61,12 +63,12 @@ export const CombosSection: React.FC<CombosSectionProps> = ({ section, mockCombo
   function getDefaultTitle(type: string): string {
     switch (type) {
       case 'best_sellers':
-        return 'Combos Mais Vendidos'
+        return t('Combos Mais Vendidos')
       case 'discounts':
-        return 'Combos em Promoção'
+        return t('Combos em Promoção')
       case 'custom':
       default:
-        return 'Combos'
+        return t('Combos')
     }
   }
 
@@ -155,7 +157,7 @@ export const CombosSection: React.FC<CombosSectionProps> = ({ section, mockCombo
       <S.ViewContainer className={`view-container combos-section layout-${layout}`}>
         <S.LoadingContainer className="loading-container">
           <Loading />
-          <span>Carregando combos...</span>
+          <span>{t('Carregando combos...')}</span>
         </S.LoadingContainer>
       </S.ViewContainer>
     )
@@ -166,7 +168,7 @@ export const CombosSection: React.FC<CombosSectionProps> = ({ section, mockCombo
       <S.ViewContainer className={`view-container combos-section layout-${layout}`}>
         <S.EmptyStateContainer className="empty-state-container">
           <S.EmptyStateDescription className="empty-state-description">
-            Não há combos disponíveis para exibir nesta seção.
+            {t('Não há combos disponíveis para exibir nesta seção.')}
           </S.EmptyStateDescription>
         </S.EmptyStateContainer>
       </S.ViewContainer>

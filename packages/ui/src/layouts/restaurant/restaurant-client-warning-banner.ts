@@ -1,20 +1,4 @@
 export const restaurantClientWarningBannerLayoutGlobalStyles = `
-  .banner.layout-menuxp {
-    border: 3px solid #ef4444 !important;
-    border-radius: 16px !important;
-    box-shadow: 6px 8px 0 #000000 !important;
-
-    .icon-container {
-      border: 3px solid #000000 !important;
-      border-radius: 16px !important;
-      box-shadow: 4px 6px 0 #000000 !important;
-    }
-
-    .title {
-      font-weight: 700 !important;
-    }
-  }
-
   .banner.layout-default {
     border: 2px solid #ef4444 !important;
     border-radius: 8px !important;
