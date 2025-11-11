@@ -6,6 +6,7 @@ export interface Client {
   restaurantId: string
   name?: string
   address?: Address
+  preferredLanguage?: string
   createdAt: Date
   updatedAt: Date
 }

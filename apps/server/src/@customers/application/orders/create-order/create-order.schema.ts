@@ -11,7 +11,8 @@ export const CreateOrderSchema = z
     orderType: z.nativeEnum(OperationType),
     paymentMethod: z.nativeEnum(PaymentMethod),
     deliveryFee: z.number().min(0).default(0),
-    scheduledFor: z.coerce.date().optional()
+    scheduledFor: z.coerce.date().optional(),
+    verificationToken: z.string().min(1)
   })
   .refine(
     (data) => {

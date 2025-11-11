@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import React, { useMemo } from 'react'
 import { useTranslator } from 'vbss-translator'
 
+import { useClient } from '@/hooks/use-client'
 import { Popover, useLayout } from '@menuxp/ui'
 import * as S from './styles'
 
@@ -14,6 +15,7 @@ interface LanguageSelectorProps {
 export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className }) => {
   const { language, setLanguage } = useTranslator()
   const { layout } = useLayout()
+  const { client, updateClient } = useClient()
 
   const availableLanguages: { code: Language; name: string; flag: string }[] = useMemo(
     () => [
@@ -28,6 +30,9 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className })
 
   const handleLanguageChange = (languageCode: Language) => {
     setLanguage(languageCode)
+    if (client) {
+      updateClient({ preferredLanguage: languageCode })
+    }
   }
 
   const popoverContent = (

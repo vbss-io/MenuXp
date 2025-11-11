@@ -210,7 +210,12 @@ export const MenuItemsSection: React.FC<MenuItemsSectionProps> = ({ section, moc
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  <MenuItemCard item={item} onAddToCart={handleAddToCart} disabled={isDragActive} />
+                  <MenuItemCard
+                    item={item}
+                    onAddToCart={handleAddToCart}
+                    disabled={isDragActive}
+                    translate={index === 0}
+                  />
                 </motion.div>
               ))}
             </S.MenuItemsGrid>

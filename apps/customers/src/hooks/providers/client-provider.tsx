@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslator } from 'vbss-translator'
 
 import { ClientContext } from '@/hooks/contexts/client-context'
 import { storageUtils } from '@/lib/local-storage'
@@ -9,6 +10,7 @@ interface ClientProviderProps {
 }
 
 export const ClientProvider = ({ children }: ClientProviderProps) => {
+  const { language, setLanguage } = useTranslator()
   const [client, setClientState] = useState<Client | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -16,8 +18,11 @@ export const ClientProvider = ({ children }: ClientProviderProps) => {
     const savedClient = storageUtils.client.get() as Client | null
     if (savedClient) {
       setClientState(savedClient)
+      if (savedClient.preferredLanguage && savedClient.preferredLanguage !== language) {
+        setLanguage(savedClient.preferredLanguage as 'pt' | 'en' | 'es')
+      }
     }
-  }, [])
+  }, [language, setLanguage])
 
   const setClient = useCallback((newClient: Client) => {
     setClientState(newClient)
@@ -37,8 +42,11 @@ export const ClientProvider = ({ children }: ClientProviderProps) => {
       const updatedClient = { ...client, ...updates }
       setClientState(updatedClient)
       storageUtils.client.set(updatedClient)
+      if (updates.preferredLanguage && updates.preferredLanguage !== language) {
+        setLanguage(updates.preferredLanguage as 'pt' | 'en' | 'es')
+      }
     },
-    [client]
+    [client, language, setLanguage]
   )
 
   const contextValue = useMemo(

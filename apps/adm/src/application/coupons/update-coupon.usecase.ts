@@ -41,18 +41,18 @@ export class UpdateCouponUsecase {
     if (params.minOrderValue !== undefined) body.minOrderValue = params.minOrderValue
     if (params.maxDiscountValue !== undefined) body.maxDiscountValue = params.maxDiscountValue
 
-    const response = await this.httpClient.put<{ coupon: Coupon }>({
+    const response = await this.httpClient.put<Coupon>({
       url,
       body
     })
 
     return {
       coupon: {
-        ...response.data.coupon,
-        validFrom: new Date(response.data.coupon.validFrom),
-        validUntil: new Date(response.data.coupon.validUntil),
-        createdAt: new Date(response.data.coupon.createdAt),
-        updatedAt: new Date(response.data.coupon.updatedAt)
+        ...response.data,
+        validFrom: new Date(response.data.validFrom),
+        validUntil: new Date(response.data.validUntil),
+        createdAt: new Date(response.data.createdAt),
+        updatedAt: new Date(response.data.updatedAt)
       }
     }
   }

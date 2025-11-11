@@ -8,6 +8,7 @@ export interface CustomerUserDocument extends Document {
   restaurantId: string
   name?: string
   address?: Address
+  preferredLanguage: string
   createdAt: Date
   updatedAt: Date
 }
@@ -70,6 +71,12 @@ const customerUserSchema = new Schema<CustomerUserDocument>(
         required: false,
         trim: true
       }
+    },
+    preferredLanguage: {
+      type: String,
+      required: false,
+      default: 'pt_BR',
+      trim: true
     },
     createdAt: {
       type: Date,

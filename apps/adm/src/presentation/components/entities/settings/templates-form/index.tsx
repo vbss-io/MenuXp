@@ -13,6 +13,13 @@ import { z } from 'zod'
 import * as S from './styles'
 
 const templatesSchema = z.object({
+  order_scheduled: z
+    .string()
+    .optional()
+    .refine((value) => {
+      if (!value) return true
+      return value.includes('#{order_id}') && value.includes('#{scheduled_for}')
+    }, 'Deve conter as tags #{order_id} e #{scheduled_for}'),
   order_received: z
     .string()
     .min(1, 'Mensagem é obrigatória')
@@ -21,7 +28,6 @@ const templatesSchema = z.object({
     .string()
     .min(1, 'Mensagem é obrigatória')
     .refine((value) => value.includes('#{order_id}'), 'Deve conter a tag #{order_id}'),
-
   order_in_production: z
     .string()
     .min(1, 'Mensagem é obrigatória')
@@ -48,6 +54,7 @@ const templatesSchema = z.object({
 type TemplatesFormData = z.infer<typeof templatesSchema>
 
 const templateLabels = {
+  order_scheduled: 'Pedido Agendado',
   order_received: 'Pedido Recebido',
   order_confirmed: 'Pedido Confirmado',
   order_in_production: 'Pedido em Produção',
@@ -58,6 +65,7 @@ const templateLabels = {
 }
 
 const templateDescriptions = {
+  order_scheduled: 'Enviada quando o pedido é agendado pelo cliente',
   order_received: 'Enviada quando o pedido é recebido pelo sistema',
   order_confirmed: 'Enviada quando o pedido é confirmado pelo restaurante',
   order_in_production: 'Enviada quando o pedido entra em produção',
@@ -68,6 +76,7 @@ const templateDescriptions = {
 }
 
 const templateExamples = {
+  order_scheduled: 'Pedido #{order_id} agendado para #{scheduled_for}! Aguarde a confirmação do restaurante.',
   order_received: 'Pedido #{order_id} recebido! Estamos processando sua solicitação.',
   order_confirmed: 'Pedido #{order_id} confirmado! Iniciaremos a preparação em breve.',
   order_in_production: 'Pedido #{order_id} em produção! Seu pedido está sendo preparado.',
@@ -103,6 +112,7 @@ export const TemplatesForm = () => {
   function getDefaultValues(): TemplatesFormData {
     const templates = restaurant?.settings?.templates
     return {
+      order_scheduled: templates?.order_scheduled ?? templateExamples.order_scheduled,
       order_received: templates?.order_received ?? '',
       order_confirmed: templates?.order_confirmed ?? '',
       order_canceled: templates?.order_canceled ?? '',
@@ -162,16 +172,22 @@ export const TemplatesForm = () => {
     }
   }
 
+  const hasScheduledTemplate = restaurant?.settings?.acceptsScheduling
+
   return (
     <S.FormContainer onSubmit={handleSubmit(onSubmit)} variants={containerVariants} initial="hidden" animate="visible">
       <S.Section variants={sectionVariants}>
         <S.SectionTitle>Templates de Mensagens</S.SectionTitle>
         <S.SectionDescription>
-          Configure as mensagens enviadas automaticamente para seus clientes. Use as tags {'#{order_id}'} e{' '}
-          {'#{cancel_reason}'} que serão substituídas pelos valores reais.
+          Configure as mensagens enviadas automaticamente para seus clientes. Use as tags {'#{order_id}'},{' '}
+          {'#{scheduled_for}'} e {'#{cancel_reason}'} que serão substituídas pelos valores reais.
         </S.SectionDescription>
         <S.TemplatesGrid>
-          {(Object.keys(templateLabels) as Array<keyof Templates>).map((templateKey) => (
+          {(
+            Object.keys(templateLabels).filter((key) =>
+              !hasScheduledTemplate ? key !== 'order_scheduled' : true
+            ) as Array<keyof Templates>
+          ).map((templateKey) => (
             <S.TemplateCard key={templateKey} variants={formGroupVariants}>
               <S.TemplateHeader>
                 <S.TemplateTitle>{templateLabels[templateKey]}</S.TemplateTitle>
@@ -192,6 +208,7 @@ export const TemplatesForm = () => {
                 <S.TagsList>
                   <S.Tag>{'#{order_id}'}</S.Tag>
                   {templateKey === 'order_canceled' && <S.Tag>{'#{cancel_reason}'}</S.Tag>}
+                  {templateKey === 'order_scheduled' && <S.Tag>{'#{scheduled_for}'}</S.Tag>}
                 </S.TagsList>
               </S.TagsInfo>
             </S.TemplateCard>

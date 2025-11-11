@@ -11,6 +11,7 @@ import { WinstonLoggerAdapter } from '@api/infra/adapters/logger/logger.adapter'
 import { NodemailerAdapter } from '@api/infra/adapters/mailer/mailer.adapter'
 import { InMemoryQueueAdapter } from '@api/infra/adapters/queue/queue.adapter'
 import { AzureStorageAdapter } from '@api/infra/adapters/storage/storage.adapter'
+import { WhatsAppMessagingAdapter } from '@api/infra/adapters/whatsapp/whatsapp-messaging.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
 import { CancellationTokenSource } from '@api/infra/events/cancellation-token'
 import { Mediator } from '@api/infra/events/mediator'
@@ -43,7 +44,10 @@ function main(): void {
   registry.provide('FileConverterService', new FileConverterService())
   const httpServer = new ExpressAdapter()
   registry.provide('HttpServer', httpServer)
-  registry.provide('HttpClient', new AxiosAdapter())
+  const httpClient = new AxiosAdapter()
+  registry.provide('HttpClient', httpClient)
+  const logger = registry.inject('Logger') as WinstonLoggerAdapter
+  registry.provide('WhatsAppMessagingClient', new WhatsAppMessagingAdapter(httpClient, logger))
   const mongooseConnection = new MongooseAdapter()
   registry.provide('MongooseConnection', mongooseConnection)
   void mongooseConnection.connect()

@@ -1,10 +1,12 @@
-import { NotFoundError } from '@api/domain/errors'
+import { NotFoundError, UnauthorizedError } from '@api/domain/errors'
 import { Address } from '@api/domain/types/address.type'
+import { Cache } from '@api/infra/adapters/cache/cache.adapter'
 import { Queue } from '@api/infra/adapters/queue/queue.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
 import { CartRepository } from '@customers/infra/repositories/cart.repository'
 import { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'
 import { CreateOrderType } from '@customers/application/orders/create-order/create-order.schema'
+import { VerificationCodeService } from '@customers/application/whatsapp-verification/verification-code.service'
 import { OperationStatus } from '@restaurants/domain/operations/enums/operation-status.enum'
 import { ORDER_CREATED } from '@restaurants/domain/orders/consts/order-events.const'
 import { OrderCreated } from '@restaurants/domain/orders/events/order-created.event'
@@ -43,9 +45,25 @@ export class CreateOrderUsecase {
   @inject('OrderRepository')
   private readonly OrderRepository!: OrderRepository
 
+  @inject('VerificationCodeService')
+  private readonly verificationCodeService!: VerificationCodeService
+
+  @inject('Cache')
+  private readonly cache!: Cache
+
   async execute(input: CreateOrderUsecaseInput): Promise<Order> {
     const client = await this.CustomerUserRepository.findById(input.clientId)
     if (!client) throw new NotFoundError('Client', input.clientId)
+    const tokenData = this.verificationCodeService.validateToken(input.verificationToken)
+    if (!tokenData) {
+      throw new UnauthorizedError('Invalid or expired verification token')
+    }
+    if (tokenData.restaurantId !== client.restaurantId) {
+      throw new UnauthorizedError('Verification token does not match restaurant')
+    }
+    if (tokenData.phone !== client.phone) {
+      throw new UnauthorizedError('Verification token does not match client phone')
+    }
     const cart = await this.CartRepository.findOne({
       clientId: input.clientId,
       restaurantId: client.restaurantId
@@ -137,6 +155,7 @@ export class CreateOrderUsecase {
     const order = Order.create(orderData)
     const createdOrder = await this.OrderRepository.create(order)
     await this.CartRepository.delete({ id: cart.id })
+    this.cache.delete(`checkout-verification:${input.verificationToken}`)
     const orderCreatedEvent = new OrderCreated({
       orderId: createdOrder.id as string,
       orderCode: createdOrder.code,

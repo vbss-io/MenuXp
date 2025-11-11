@@ -21,6 +21,7 @@ export class CustomerUserRepositoryMongoose
       restaurantId: entity.restaurantId,
       name: entity.name,
       address: entity.address,
+      preferredLanguage: entity.preferredLanguage,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt
     })

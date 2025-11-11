@@ -14,10 +14,9 @@ export class CreateCouponController extends BaseController {
 
   constructor() {
     super()
-
     this.HttpServer.register(
       HttpMethod.POST,
-      'coupon',
+      '/coupon',
       async (params: CreateCouponType) => {
         const { id } = this.RequestFacade.getUser()
         const validatedParams = this.CreateCouponValidate.validate(params)

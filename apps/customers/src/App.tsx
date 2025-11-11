@@ -24,7 +24,20 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={theme}>
-        <TranslatorProvider translations={translations} defaultLanguage="pt">
+        <TranslatorProvider
+          translations={translations}
+          defaultLanguage="pt"
+          externalTranslation={{
+            debug: true,
+            provider: {
+              id: 'google',
+              apiKey: import.meta.env.VITE_GOOGLE_TRANSLATE_KEY
+            },
+            cache: { enabled: true, ttlMs: 15 * 60 * 1000 },
+            timeoutMs: 10_000,
+            shouldTranslate: ({ targetLanguage, sourceLanguage }) => targetLanguage !== (sourceLanguage ?? 'auto')
+          }}
+        >
           <CustomersGlobalStyle />
           <Toaster
             position="top-center"

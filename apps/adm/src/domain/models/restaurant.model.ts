@@ -29,6 +29,7 @@ export type BusinessHours = {
 }
 
 export interface Templates {
+  order_scheduled?: string
   order_received: string
   order_confirmed: string
   order_in_production: string

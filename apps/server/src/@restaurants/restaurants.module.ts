@@ -25,6 +25,7 @@ import { PlanRepositoryMongoose } from '@restaurants/infra/repositories/plan.rep
 import { RestaurantRepositoryMongoose } from '@restaurants/infra/repositories/restaurant.repository'
 import { SubscriptionRepositoryMongoose } from '@restaurants/infra/repositories/subscription.repository'
 import { UserRepositoryMongoose } from '@restaurants/infra/repositories/user.repository'
+import { WhatsAppNotificationLogRepositoryMongoose } from '@restaurants/infra/repositories/whatsapp-notification-log.repository'
 
 export class RestaurantsModule {
   constructor() {
@@ -42,6 +43,7 @@ export class RestaurantsModule {
     registry.provide('MenuLayoutRepository', new MenuLayoutRepositoryMongoose())
     registry.provide('CouponRepository', new CouponRepositoryMongoose())
     registry.provide('ComboRepository', new ComboRepositoryMongoose())
+    registry.provide('WhatsAppNotificationLogRepository', new WhatsAppNotificationLogRepositoryMongoose())
 
     new AdminModule()
     new AuthModule()

@@ -1,0 +1,82 @@
+[
+  {
+    "pt": "Verificação WhatsApp",
+    "en": "WhatsApp Verification",
+    "es": "Verificación WhatsApp"
+  },
+  {
+    "pt": "Para sua segurança, enviamos um código de verificação para o WhatsApp cadastrado.",
+    "en": "For your security, we sent a verification code to your registered WhatsApp.",
+    "es": "Por tu seguridad, enviamos un código de verificación a tu WhatsApp registrado."
+  },
+  {
+    "pt": "Digite o código de 6 dígitos",
+    "en": "Enter the 6-digit code",
+    "es": "Ingresa el código de 6 dígitos"
+  },
+  {
+    "pt": "O código expira em",
+    "en": "Code expires in",
+    "es": "El código expira en"
+  },
+  {
+    "pt": "Não recebeu o código?",
+    "en": "Didn't receive the code?",
+    "es": "¿No recibiste el código?"
+  },
+  {
+    "pt": "Reenviar código",
+    "en": "Resend code",
+    "es": "Reenviar código"
+  },
+  {
+    "pt": "Aguarde",
+    "en": "Wait",
+    "es": "Espera"
+  },
+  {
+    "pt": "Código inválido. Tente novamente.",
+    "en": "Invalid code. Please try again.",
+    "es": "Código inválido. Inténtalo de nuevo."
+  },
+  {
+    "pt": "Código verificado com sucesso!",
+    "en": "Code verified successfully!",
+    "es": "¡Código verificado con éxito!"
+  },
+  {
+    "pt": "Erro ao enviar código. Tente novamente.",
+    "en": "Error sending code. Please try again.",
+    "es": "Error al enviar el código. Inténtalo de nuevo."
+  },
+  {
+    "pt": "Erro ao validar código. Tente novamente.",
+    "en": "Error validating code. Please try again.",
+    "es": "Error al validar el código. Inténtalo de nuevo."
+  },
+  {
+    "pt": "Por favor, digite o código de 6 dígitos",
+    "en": "Please enter the 6-digit code",
+    "es": "Por favor, ingresa el código de 6 dígitos"
+  },
+  {
+    "pt": "Código enviado com sucesso!",
+    "en": "Code sent successfully!",
+    "es": "¡Código enviado con éxito!"
+  },
+  {
+    "pt": "Cliente não encontrado",
+    "en": "Client not found",
+    "es": "Cliente no encontrado"
+  },
+  {
+    "pt": "Código expirado. Solicite um novo código.",
+    "en": "Code expired. Request a new code.",
+    "es": "Código expirado. Solicita un nuevo código."
+  },
+  {
+    "pt": "Enviando",
+    "en": "Sending",
+    "es": "Enviando"
+  }
+]

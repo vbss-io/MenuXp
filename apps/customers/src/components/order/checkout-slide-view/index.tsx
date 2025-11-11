@@ -4,9 +4,10 @@ import {
   CheckCircleIcon,
   CreditCardIcon,
   MapPinIcon,
+  ShieldCheckIcon,
   ShoppingCartIcon
 } from '@phosphor-icons/react'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslator } from 'vbss-translator'
 
@@ -14,6 +15,7 @@ import { AddressStep } from '@/components/order/checkout-slide-view/address-step
 import { PaymentStep } from '@/components/order/checkout-slide-view/payment-step'
 import { ReviewItemsStep } from '@/components/order/checkout-slide-view/review-items-step'
 import { SummaryStep } from '@/components/order/checkout-slide-view/summary-step'
+import { VerificationStep } from '@/components/order/checkout-slide-view/verification-step'
 import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
@@ -24,6 +26,16 @@ import { Button, Slider } from '@menuxp/ui'
 import { useMutation } from '@tanstack/react-query'
 
 import * as S from './styles'
+
+type StepType = 'items' | 'info' | 'verification' | 'address' | 'confirmation'
+
+type StepDefinition = {
+  label: string
+  icon: typeof ShoppingCartIcon
+  type: StepType
+}
+
+type StepConfig = StepDefinition & { id: number }
 
 interface CheckoutSlideViewProps {
   isOpen: boolean
@@ -44,7 +56,8 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
 
   const isOperationActive = !!operationId
   const acceptsScheduling = restaurant?.settings?.acceptsScheduling || false
-
+  // const requiresWhatsAppVerification = restaurant?.settings?.requiresWhatsAppVerification || false
+  const requiresWhatsAppVerification = true
   const canAcceptImmediateOrders = isOperationActive
   const canAcceptScheduledOrders = acceptsScheduling
   const canAcceptOrders = canAcceptImmediateOrders || canAcceptScheduledOrders
@@ -62,10 +75,20 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
     }
   }
 
+  const clearVerificationToken = useCallback(() => {
+    if (typeof window === 'undefined' || !client?.id) return
+    try {
+      sessionStorage.removeItem(`whatsapp-verification-token-${client.id}`)
+    } catch (error) {
+      console.error('Erro ao limpar token de verificação do WhatsApp:', error)
+    }
+  }, [client?.id])
+
   const createOrderMutation = useMutation({
     mutationFn: (params: CreateOrderParams) => createOrderService(params),
     onSuccess: (data) => {
       toast.success(`${t('Pedido criado com sucesso! Código')}: ${data.code}`)
+      clearVerificationToken()
       onSuccess()
     },
     onError: () => {
@@ -98,6 +121,7 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
   const [isAuthenticatingGuest, setIsAuthenticatingGuest] = useState(false)
   const [phoneVerified, setPhoneVerified] = useState(false)
   const [isNewClient, setIsNewClient] = useState(false)
+  const [verificationToken, setVerificationToken] = useState<string>('')
 
   const [customAddress, setCustomAddress] = useState<Address>({
     street: '',
@@ -110,6 +134,24 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
   })
   const [orderType, setOrderType] = useState<OperationType>(OperationType.DELIVERY)
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(PaymentMethod.DINHEIRO)
+
+  const steps = useMemo<StepConfig[]>(() => {
+    const baseSteps: StepDefinition[] = [
+      { type: 'items', label: t('Itens'), icon: ShoppingCartIcon },
+      { type: 'info', label: t('Informações'), icon: CreditCardIcon }
+    ]
+    if (requiresWhatsAppVerification) {
+      baseSteps.push({ type: 'verification', label: t('Verificação'), icon: ShieldCheckIcon })
+    }
+    if (orderType === OperationType.DELIVERY) {
+      baseSteps.push({ type: 'address', label: t('Endereço'), icon: MapPinIcon })
+    }
+    baseSteps.push({ type: 'confirmation', label: t('Confirmação'), icon: CheckCircleIcon })
+    return baseSteps.map((step, index) => ({
+      ...step,
+      id: index + 1
+    }))
+  }, [requiresWhatsAppVerification, orderType, t])
 
   useEffect(() => {
     if (mustSchedule) {
@@ -124,8 +166,18 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
+  useEffect(() => {
+    if (currentStep > steps.length) {
+      setCurrentStep(steps.length)
+    }
+  }, [currentStep, steps])
+
   const handleNext = async () => {
-    if (currentStep === 2 && !client) {
+    const currentStepConfig = steps[currentStep - 1]
+
+    if (!currentStepConfig) return
+
+    if (currentStepConfig.type === 'info' && !client) {
       const cleanPhone = guestPhone.replace(/\D/g, '')
       if (!cleanPhone || cleanPhone.length < 10 || cleanPhone.length > 11) {
         toast.error(t('Por favor, insira um telefone válido'))
@@ -159,25 +211,31 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
       }
       setIsAuthenticatingGuest(false)
     }
-    if (currentStep === 2 && orderType !== 'delivery') {
-      setCurrentStep(4)
-    } else if (currentStep === 3 && orderType === 'delivery') {
+
+    if (currentStepConfig.type === 'address') {
       if (!hasValidAddress()) {
         toast.error(t('Por favor, preencha todos os campos obrigatórios do endereço'))
         return
       }
-      setCurrentStep(4)
-    } else if (currentStep < 4) {
-      setCurrentStep(currentStep + 1)
+    }
+
+    if (currentStep < steps.length) {
+      setCurrentStep((previousStep) => previousStep + 1)
     }
   }
 
   const handlePrevious = () => {
-    if (currentStep === 4 && orderType !== 'delivery') {
-      setCurrentStep(2)
-    } else if (currentStep > 1) {
-      setCurrentStep(currentStep - 1)
+    if (currentStep > 1) {
+      setCurrentStep((previousStep) => previousStep - 1)
     }
+  }
+
+  const handleVerificationComplete = (token: string) => {
+    setVerificationToken(token)
+  }
+
+  const handleVerificationError = () => {
+    toast.error(t('Erro na verificação. Tente novamente.'))
   }
 
   const handleAddressChange = useCallback((address: Address) => {
@@ -227,7 +285,7 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
   }
 
   const hasValidAddress = () => {
-    if (orderType !== 'delivery') return true
+    if (orderType !== OperationType.DELIVERY) return true
     const address = getSelectedAddress()
     return address.street && address.number && address.neighborhood && address.city && address.state && address.zipCode
   }
@@ -270,7 +328,7 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
       }
     }
     try {
-      if (orderType === 'delivery' && !hasValidClientAddress) {
+      if (orderType === OperationType.DELIVERY && !hasValidClientAddress) {
         const address = getSelectedAddress()
         await updateClientData(client.id, {
           id: client.id,
@@ -286,8 +344,8 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
           }
         })
       }
-      const deliveryFee = orderType === 'delivery' ? restaurant.settings?.deliveryFee || 0 : 0
-      const orderData = {
+      const deliveryFee = orderType === OperationType.DELIVERY ? restaurant.settings?.deliveryFee || 0 : 0
+      const orderData: CreateOrderParams = {
         clientId: client.id,
         orderType,
         paymentMethod,
@@ -298,7 +356,8 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
             }
           : {
               operationId: operationId!
-            })
+            }),
+        ...(requiresWhatsAppVerification && verificationToken ? { verificationToken } : {})
       }
       await createOrder(orderData)
       await refetchCart()
@@ -309,11 +368,13 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
     }
   }
 
+  const currentStepConfig = steps[currentStep - 1]
+
   const renderStepContent = () => {
-    switch (currentStep) {
-      case 1:
+    switch (currentStepConfig?.type) {
+      case 'items':
         return <ReviewItemsStep cart={cart} />
-      case 2:
+      case 'info':
         return (
           <PaymentStep
             client={client}
@@ -338,32 +399,25 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
             onIsNewClient={setIsNewClient}
           />
         )
-      case 3:
-        if (orderType === 'delivery') {
-          return (
-            <AddressStep
-              client={client}
-              useClientAddress={useClientAddress}
-              customAddress={customAddress}
-              onUseClientAddressChange={setUseClientAddress}
-              onCustomAddressChange={handleAddressChange}
-              onSaveAddressForFuture={handleSaveAddressForFuture}
-            />
-          )
-        }
+      case 'verification':
         return (
-          <SummaryStep
-            cart={cart}
-            orderType={orderType}
-            paymentMethod={paymentMethod}
-            isScheduled={isScheduled}
-            scheduledDate={scheduledDate}
-            scheduledTime={scheduledTime}
-            getSelectedAddress={getSelectedAddress}
-            calculateTotal={calculateTotal}
+          <VerificationStep
+            onVerificationComplete={handleVerificationComplete}
+            onVerificationError={handleVerificationError}
           />
         )
-      case 4:
+      case 'address':
+        return (
+          <AddressStep
+            client={client}
+            useClientAddress={useClientAddress}
+            customAddress={customAddress}
+            onUseClientAddressChange={setUseClientAddress}
+            onCustomAddressChange={handleAddressChange}
+            onSaveAddressForFuture={handleSaveAddressForFuture}
+          />
+        )
+      case 'confirmation':
         return (
           <SummaryStep
             cart={cart}
@@ -381,13 +435,6 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
     }
   }
 
-  const STEPS = [
-    { id: 1, label: t('Itens'), icon: ShoppingCartIcon },
-    { id: 2, label: t('Informações'), icon: CreditCardIcon },
-    { id: 3, label: t('Endereço'), icon: MapPinIcon },
-    { id: 4, label: t('Confirmação'), icon: CheckCircleIcon }
-  ]
-
   return (
     <Slider
       isOpen={isOpen}
@@ -398,8 +445,7 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
       noPadding={false}
     >
       <S.StepsContainer className="steps-container">
-        {STEPS.map((step) => {
-          if (step.id === 3 && orderType !== 'delivery') return null
+        {steps.map((step) => {
           const Icon = step.icon
           const isActive = currentStep === step.id
           const isCompleted = currentStep > step.id
@@ -440,10 +486,12 @@ export const CheckoutSlideView = ({ isOpen, onClose, onSuccess }: CheckoutSlideV
             {t('Anterior')}
           </Button>
         )}
-        {currentStep < 4 ? (
+        {currentStep < steps.length ? (
           <Button
             onClick={handleNext}
-            disabled={isCreating || isAuthenticatingGuest}
+            disabled={
+              isCreating || isAuthenticatingGuest || (currentStepConfig?.type === 'verification' && !verificationToken)
+            }
             className="navigation-button primary"
             rightIcon={<ArrowRightIcon size={20} />}
           >

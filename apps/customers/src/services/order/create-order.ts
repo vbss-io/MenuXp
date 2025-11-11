@@ -8,6 +8,7 @@ export interface CreateOrderParams {
   paymentMethod: PaymentMethod
   deliveryFee: number
   scheduledFor?: string
+  verificationToken?: string
 }
 
 export interface CreateOrderResponse {

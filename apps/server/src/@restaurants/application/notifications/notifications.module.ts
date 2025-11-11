@@ -4,6 +4,8 @@ import { inject, Registry } from '@api/infra/dependency-injection/registry'
 import { NotificationListenersController } from '@restaurants/application/notifications/@listeners/notification-listeners.controller'
 import { OrderCreatedListener } from '@restaurants/application/notifications/@listeners/order-created.listener'
 import { OrderStatusChangedListener } from '@restaurants/application/notifications/@listeners/order-status-changed.listener'
+import { WhatsAppOrderCreatedListener } from '@restaurants/application/notifications/@listeners/whatsapp-order-created.listener'
+import { WhatsAppOrderStatusChangedListener } from '@restaurants/application/notifications/@listeners/whatsapp-order-status-changed.listener'
 import { CreateNotificationUsecase } from '@restaurants/application/notifications/create-notification/create-notification.usecase'
 import { GetRestaurantNotificationsController } from '@restaurants/application/notifications/get-restaurant-notifications/get-restaurant-notifications.controller'
 import { GetRestaurantNotificationsSchema } from '@restaurants/application/notifications/get-restaurant-notifications/get-restaurant-notifications.schema'
@@ -11,6 +13,7 @@ import { GetRestaurantNotificationsUsecase } from '@restaurants/application/noti
 import { MarkNotificationAsReadController } from '@restaurants/application/notifications/mark-notification-as-read/mark-as-read.controller'
 import { MarkNotificationAsReadSchema } from '@restaurants/application/notifications/mark-notification-as-read/mark-as-read.schema'
 import { MarkNotificationAsReadUsecase } from '@restaurants/application/notifications/mark-notification-as-read/mark-as-read.usecase'
+import { SendWhatsAppNotificationUsecase } from '@restaurants/application/whatsapp-notifications/send-whatsapp-notification/send-whatsapp-notification.usecase'
 import { ORDER_CREATED, ORDER_STATUS_CHANGED } from '@restaurants/domain/orders/consts/order-events.const'
 
 export class RestaurantNotificationsModule {
@@ -24,9 +27,12 @@ export class RestaurantNotificationsModule {
     void this.Queue.register(ORDER_STATUS_CHANGED.eventName, ORDER_STATUS_CHANGED.consume)
 
     registry.provide('CreateNotificationUsecase', new CreateNotificationUsecase())
+    registry.provide('SendWhatsAppNotificationUsecase', new SendWhatsAppNotificationUsecase())
 
     registry.provide('OrderCreatedListener', new OrderCreatedListener())
     registry.provide('OrderStatusChangedListener', new OrderStatusChangedListener())
+    registry.provide('WhatsAppOrderCreatedListener', new WhatsAppOrderCreatedListener())
+    registry.provide('WhatsAppOrderStatusChangedListener', new WhatsAppOrderStatusChangedListener())
     new NotificationListenersController()
 
     registry.provide('GetRestaurantNotificationsValidate', new ZodAdapter(GetRestaurantNotificationsSchema))

@@ -1,9 +1,10 @@
 import { PlusIcon } from '@phosphor-icons/react'
 import { useNavigate } from 'react-router-dom'
 
-import { Button } from '@menuxp/ui'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { MenuItem } from '@/types/menu-item'
+import { Button } from '@menuxp/ui'
+import { useTranslator } from 'vbss-translator'
 
 import * as S from './styles'
 
@@ -12,9 +13,17 @@ interface MenuItemCardProps {
   onClick?: (item: MenuItem) => void
   onAddToCart?: (item: MenuItem) => void
   disabled?: boolean
+  translate?: boolean
 }
 
-export const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, onClick, onAddToCart, disabled = false }) => {
+export const MenuItemCard: React.FC<MenuItemCardProps> = ({
+  item,
+  onClick,
+  onAddToCart,
+  disabled = false,
+  translate = false
+}) => {
+  const { t } = useTranslator()
   const { layout } = useRestaurant()
   const navigate = useNavigate()
   const formatPrice = (price: number) => {
@@ -70,7 +79,9 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, onClick, onAdd
       <S.MenuItemContent className="menu-item-content">
         <S.MenuItemName className="menu-item-name">{item.name}</S.MenuItemName>
         {item.description && (
-          <S.MenuItemDescription className="menu-item-description">{item.description}</S.MenuItemDescription>
+          <S.MenuItemDescription className="menu-item-description">
+            {translate ? t(item.description, { preferExternal: true, sourceLanguage: 'pt' }) : item.description}
+          </S.MenuItemDescription>
         )}
         <S.MenuItemFooter className="menu-item-footer">
           <S.MenuItemPrice className="menu-item-price">

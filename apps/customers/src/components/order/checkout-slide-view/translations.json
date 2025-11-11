@@ -133,6 +133,16 @@
     "pt": "Confirmar Pedido",
     "en": "Confirm Order",
     "es": "Confirmar Pedido"
+  },
+  {
+    "pt": "Erro na verificação. Tente novamente.",
+    "en": "Verification error. Please try again.",
+    "es": "Error en la verificación. Intente nuevamente."
+  },
+  {
+    "pt": "Verificação",
+    "en": "Verification",
+    "es": "Verificación"
   }
 ]
 

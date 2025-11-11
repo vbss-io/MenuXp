@@ -3,10 +3,10 @@ import { type Document, Schema, model } from 'mongoose'
 import { OperationTypeValues } from '@restaurants/domain/restaurants/enums/operation-type.enum'
 import { PaymentMethodValues } from '@restaurants/domain/restaurants/enums/payment-methods.enum'
 import type {
-    RestaurantAddress,
-    RestaurantContactInfo,
-    RestaurantSettings,
-    RestaurantStyle
+  RestaurantAddress,
+  RestaurantContactInfo,
+  RestaurantSettings,
+  RestaurantStyle
 } from '@restaurants/domain/restaurants/restaurant.entity'
 
 export interface RestaurantDocument extends Document {

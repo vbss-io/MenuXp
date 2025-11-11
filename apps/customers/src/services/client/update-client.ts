@@ -7,6 +7,7 @@ export interface UpdateClientParams {
   phone: string
   name?: string
   address?: Address
+  preferredLanguage?: string
 }
 
 export const updateClient = async ({ id, ...updates }: UpdateClientParams): Promise<Client> => {

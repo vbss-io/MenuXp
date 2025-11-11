@@ -21,21 +21,22 @@ import translations19 from '../components/order/checkout-slide-view/payment-step
 import translations20 from '../components/order/checkout-slide-view/review-items-step/translations.json' assert { type: 'json' };
 import translations21 from '../components/order/checkout-slide-view/summary-step/translations.json' assert { type: 'json' };
 import translations22 from '../components/order/checkout-slide-view/translations.json' assert { type: 'json' };
-import translations23 from '../components/restaurant/restaurant-client-warning-banner/translations.json' assert { type: 'json' };
-import translations24 from '../components/restaurant/restaurant-header/translations.json' assert { type: 'json' };
-import translations25 from '../components/restaurant/restaurant-operation-warning-banner/translations.json' assert { type: 'json' };
-import translations26 from '../hooks/translations.json' assert { type: 'json' };
-import translations27 from '../lib/utils/translations.json' assert { type: 'json' };
-import translations28 from '../pages/error/translations.json' assert { type: 'json' };
-import translations29 from '../pages/menu/cart/translations.json' assert { type: 'json' };
-import translations30 from '../pages/menu/category/translations.json' assert { type: 'json' };
-import translations31 from '../pages/menu/combo/translations.json' assert { type: 'json' };
-import translations32 from '../pages/menu/coupons/translations.json' assert { type: 'json' };
-import translations33 from '../pages/menu/games/translations.json' assert { type: 'json' };
-import translations34 from '../pages/menu/product/translations.json' assert { type: 'json' };
-import translations35 from '../pages/menu/profile/translations.json' assert { type: 'json' };
-import translations36 from '../pages/menu/translations.json' assert { type: 'json' };
-import translations37 from '../pages/not-found/translations.json' assert { type: 'json' };
+import translations23 from '../components/order/checkout-slide-view/verification-step/translations.json' assert { type: 'json' };
+import translations24 from '../components/restaurant/restaurant-client-warning-banner/translations.json' assert { type: 'json' };
+import translations25 from '../components/restaurant/restaurant-header/translations.json' assert { type: 'json' };
+import translations26 from '../components/restaurant/restaurant-operation-warning-banner/translations.json' assert { type: 'json' };
+import translations27 from '../hooks/translations.json' assert { type: 'json' };
+import translations28 from '../lib/utils/translations.json' assert { type: 'json' };
+import translations29 from '../pages/error/translations.json' assert { type: 'json' };
+import translations30 from '../pages/menu/cart/translations.json' assert { type: 'json' };
+import translations31 from '../pages/menu/category/translations.json' assert { type: 'json' };
+import translations32 from '../pages/menu/combo/translations.json' assert { type: 'json' };
+import translations33 from '../pages/menu/coupons/translations.json' assert { type: 'json' };
+import translations34 from '../pages/menu/games/translations.json' assert { type: 'json' };
+import translations35 from '../pages/menu/product/translations.json' assert { type: 'json' };
+import translations36 from '../pages/menu/profile/translations.json' assert { type: 'json' };
+import translations37 from '../pages/menu/translations.json' assert { type: 'json' };
+import translations38 from '../pages/not-found/translations.json' assert { type: 'json' };
 
 export interface Translation {
   pt: string;
@@ -82,7 +83,8 @@ const allTranslations: Translation[] = [
   ...translations34,
   ...translations35,
   ...translations36,
-  ...translations37
+  ...translations37,
+  ...translations38
 ];
 const uniqueTranslations = allTranslations.filter(
   (translation, index, self) => index === self.findIndex((t) => t.pt === translation.pt)

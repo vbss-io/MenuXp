@@ -43,6 +43,7 @@ export class UpdateCouponUsecase {
       maxDiscountValue: updateData.maxDiscountValue,
       status: updateData.status as CouponStatus | undefined
     })
-    return await this.CouponRepository.update({ id: coupon.id }, coupon)
+    await this.CouponRepository.update({ id: coupon.id }, coupon)
+    return coupon
   }
 }

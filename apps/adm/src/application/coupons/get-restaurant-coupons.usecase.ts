@@ -25,11 +25,11 @@ export class GetRestaurantCouponsUsecase {
       queryParams.append('includeInactive', params.includeInactive.toString())
     }
     const url = `${import.meta.env.VITE_BACKEND}/coupons?${queryParams.toString()}`
-    const response = await this.httpClient.get<{ coupons: Coupon[] }>({
+    const response = await this.httpClient.get<Coupon[]>({
       url
     })
     return {
-      coupons: response.data.coupons.map((coupon) => ({
+      coupons: response.data.map((coupon) => ({
         ...coupon,
         validFrom: new Date(coupon.validFrom),
         validUntil: new Date(coupon.validUntil),

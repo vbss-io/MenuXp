@@ -1,4 +1,5 @@
 export enum Templates {
+  SCHEDULED = 'order_scheduled',
   RECEIVED = 'order_received',
   CONFIRMED = 'order_confirmed',
   IN_PRODUCTION = 'order_in_production',

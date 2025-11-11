@@ -3,6 +3,10 @@ import prettier from "eslint-plugin-prettier"
 import { defineConfig } from "eslint/config"
 import globals from "globals"
 import tseslint from "typescript-eslint"
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default defineConfig([
   {
@@ -22,7 +26,7 @@ export default defineConfig([
       parser: tseslint.parser,
       parserOptions: {
         project: "./tsconfig.json",
-        tsconfigRootDir: ".",
+        tsconfigRootDir: __dirname,
         sourceType: "module"
       }
     },

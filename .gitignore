@@ -78,5 +78,10 @@ Thumbs.db
 tmp/
 temp/
 
-# Docs
-docs/
+# AI
+.claude/
+.cursor/
+tasks/
+templates/
+prompts/
+CLAUDE.md

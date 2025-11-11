@@ -23,7 +23,7 @@ export class UpdateCouponController extends BaseController {
         const validatedParams = this.UpdateCouponValidate.validate(params)
         return await this.UpdateCouponUsecase.execute({ userId: id, ...validatedParams })
       },
-      HttpCode.NO_CONTENT
+      HttpCode.OK
     )
   }
 }

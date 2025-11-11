@@ -4,6 +4,7 @@ export class CustomerUser {
   name?: string
   phone: string
   address?: Address
+  preferredLanguage: string
 
   private constructor(
     readonly id: string | undefined,
@@ -11,16 +12,18 @@ export class CustomerUser {
     readonly restaurantId: string,
     name?: string,
     address?: Address,
+    preferredLanguage?: string,
     readonly createdAt?: Date,
     readonly updatedAt?: Date
   ) {
     this.phone = phone
     this.name = name
     this.address = address
+    this.preferredLanguage = preferredLanguage ?? 'pt_BR'
   }
 
   static create(input: CreateCustomerUser): CustomerUser {
-    return new CustomerUser(undefined, input.phone, input.restaurantId, input.name, input.address)
+    return new CustomerUser(undefined, input.phone, input.restaurantId, input.name, input.address, input.preferredLanguage)
   }
 
   static restore(input: RestoreCustomerUser): CustomerUser {
@@ -30,6 +33,7 @@ export class CustomerUser {
       input.restaurantId,
       input.name,
       input.address,
+      input.preferredLanguage,
       input.createdAt,
       input.updatedAt
     )
@@ -39,6 +43,7 @@ export class CustomerUser {
     this.name = input.name ?? this.name
     this.phone = input.phone ?? this.phone
     this.address = input.address ?? this.address
+    this.preferredLanguage = input.preferredLanguage ?? this.preferredLanguage
   }
 
   setAddress(address: Address): void {
@@ -59,10 +64,12 @@ export interface CreateCustomerUser {
   restaurantId: string
   name?: string
   address?: Address
+  preferredLanguage?: string
 }
 
 type RestoreCustomerUser = CreateCustomerUser & {
   id: string
+  preferredLanguage?: string
   createdAt: Date
   updatedAt: Date
 }
