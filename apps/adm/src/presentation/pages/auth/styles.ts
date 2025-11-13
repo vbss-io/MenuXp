@@ -8,7 +8,7 @@ export const Container = styled.div`
   overflow: hidden;
   min-height: 100vh;
   width: 100vw;
-  
+
   @media ${({ theme }) => theme.breakpoints.sm} {
     height: 100vh;
   }
@@ -90,7 +90,7 @@ export const LoginLogo = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing.md};
 
   img {
-    width: 132px; /* ~33% de 400px (largura máxima do Card) - aumentado 10% */
+    width: 132px;
     max-width: 33%;
     height: auto;
     display: block;

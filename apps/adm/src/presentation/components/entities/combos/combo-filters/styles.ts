@@ -66,22 +66,22 @@ export const CheckboxWrapper = styled.div`
         background-color: ${({ theme }) => theme.colors.mx.white} !important;
         border: 1px solid ${({ theme }) => theme.colors.mx.black} !important;
         border-radius: 4px !important;
-        
-        &[data-state="checked"] {
+
+        &[data-state='checked'] {
           background-color: ${({ theme }) => theme.colors.mx.white} !important;
-          
+
           .checkboxIconContainer {
             color: ${({ theme }) => theme.colors.mx.black} !important;
             filter: none !important;
           }
         }
-        
+
         &:hover {
           border-color: ${({ theme }) => theme.colors.mx.black} !important;
           background-color: ${({ theme }) => theme.colors.mx.gray[50]} !important;
         }
       }
-      
+
       .checkboxLabel {
         font-family: ${({ theme }) => theme.typography.fonts.body} !important;
         font-size: ${({ theme }) => theme.typography.fontSizes.sm} !important;

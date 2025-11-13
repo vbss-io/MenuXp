@@ -137,20 +137,20 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
             isEmpty={!hasCategories}
           />
           {hasCategories ? (
-            <Button 
-              variant="primary" 
-              onClick={handleCreateCategory} 
-              size="sm" 
+            <Button
+              variant="primary"
+              onClick={handleCreateCategory}
+              size="sm"
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar nova categoria"
             >
               Nova Categoria
             </Button>
           ) : (
-            <Button 
-              variant="white" 
-              onClick={handleCreateCategory} 
-              size="sm" 
+            <Button
+              variant="white"
+              onClick={handleCreateCategory}
+              size="sm"
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar nova categoria"
             >
@@ -184,7 +184,6 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
             ) : (
               <Page.EmptyState>
                 {filters.searchMask ? (
-                  // Estado: Busca sem resultados
                   <>
                     <Page.EmptyStateIcon>
                       <MagnifyingGlassIcon size={72} />
@@ -193,24 +192,21 @@ export const CategoriesTab = ({ currentPage, onPageChange }: CategoriesTabProps)
                     <Page.EmptyStateDescription>
                       Nenhuma categoria corresponde à busca "{filters.searchMask}"
                     </Page.EmptyStateDescription>
-                    <Button 
-                      variant="white" 
-                      size="sm" 
-                      onClick={() => setFilters(prev => ({...prev, searchMask: ''}))}
+                    <Button
+                      variant="white"
+                      size="sm"
+                      onClick={() => setFilters((prev) => ({ ...prev, searchMask: '' }))}
                       style={{ marginTop: '16px' }}
                     >
                       Limpar busca
                     </Button>
                   </>
                 ) : (
-                  // Estado: Vazio real
                   <>
                     <Page.EmptyStateIcon>
                       <FolderIcon size={72} />
                     </Page.EmptyStateIcon>
-                    <Page.EmptyStateTitle>
-                      Nenhuma categoria ainda
-                    </Page.EmptyStateTitle>
+                    <Page.EmptyStateTitle>Nenhuma categoria ainda</Page.EmptyStateTitle>
                     <Page.EmptyStateDescription>
                       Categorias organizam seu cardápio. Crie ao menos uma para cadastrar itens e combos.
                     </Page.EmptyStateDescription>

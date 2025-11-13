@@ -73,8 +73,8 @@ export const FormGroup = styled(motion.div)`
     box-shadow: none;
   }
 
-  /* Unifica rótulos dos campos gerados por componentes de formulário (diretos ou internos) */
-  label, h3 {
+  label,
+  h3 {
     font-size: ${({ theme }) => theme.typography.fontSizes.xs};
     font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
     font-family: ${({ theme }) => theme.typography.fonts.body};
@@ -158,7 +158,7 @@ export const ToggleContainer = styled.div`
   align-items: center;
   gap: ${({ theme }) => theme.spacing.sm};
   margin-top: ${({ theme }) => theme.spacing.xs};
-  
+
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: flex-start;
@@ -173,7 +173,7 @@ export const ToggleLabel = styled.label`
   color: ${({ theme }) => theme.colors.mx.black};
   cursor: pointer;
   user-select: none;
-  
+
   @media (max-width: 768px) {
     font-size: ${({ theme }) => theme.typography.fontSizes.xs};
     line-height: ${({ theme }) => theme.typography.lineHeights.tight};
@@ -354,7 +354,6 @@ export const FooterActions = styled.div`
   align-items: center;
 `
 
-// Estilo global para textarea no modal - foco preto ao invés de vermelho
 export const GlobalTextareaStyles = styled.div`
   textarea:focus {
     border-color: ${({ theme }) => theme.colors.mx.black} !important;
@@ -362,7 +361,9 @@ export const GlobalTextareaStyles = styled.div`
     outline: none !important;
   }
 
-  input:focus-visible, textarea:focus-visible, select:focus-visible {
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
     outline: 2px solid #000 !important;
     outline-offset: 2px !important;
   }
@@ -410,12 +411,11 @@ export const SectionSubtitle = styled.p`
   opacity: 0.7;
 `
 
-// Estilos customizados para o botão de cancelar
 export const CancelButtonStyles = styled.div`
   .cancel-button {
     &.button.ghost {
       color: ${({ theme }) => theme.colors.mx.black} !important;
-      
+
       &:hover:not(:disabled) {
         background-color: transparent !important;
         color: ${({ theme }) => theme.colors.mx.red} !important;

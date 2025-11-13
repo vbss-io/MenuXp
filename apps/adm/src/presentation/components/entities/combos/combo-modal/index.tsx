@@ -72,14 +72,14 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
   const [menuItemsCache, setMenuItemsCache] = useState<{ id: string; name: string; price: number }[]>([])
   const [controlStock, setControlStock] = useState(false)
   const isEditing = !!combo
-  
+
   const nameMax = 60
   const descriptionMax = 180
   const [nameCount, setNameCount] = useState(0)
   const [descriptionCount, setDescriptionCount] = useState(0)
   const currency = useMemo(() => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }), [])
   const [priceDisplay, setPriceDisplay] = useState('')
-  
+
   const {
     register,
     handleSubmit,
@@ -698,16 +698,20 @@ export const ComboModal = ({ isOpen, onClose, combo, onSuccess }: ComboModalProp
                     Cancelar
                   </Button>
                 </S.TertiaryActionButton>
-
                 <S.SecondaryActionButton>
                   <Button type="button" variant="white" size="sm" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
                     Salvar rascunho
                   </Button>
                 </S.SecondaryActionButton>
-
                 <S.PrimaryActionButton>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button type="button" variant="primary" size="sm" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="sm"
+                      disabled={isLoading}
+                      onClick={handleSubmit(onSubmit)}
+                    >
                       {getButtonText()}
                     </Button>
                   </motion.div>

@@ -100,9 +100,7 @@ export const ComboCard = ({ combo, onEdit, onDelete, onRefresh }: ComboCardProps
           </S.StatusBadge>
         </S.CardHeader>
         <S.CardContent>
-          {combo.description && (
-            <S.CardDescription title={combo.description}>{combo.description}</S.CardDescription>
-          )}
+          {combo.description && <S.CardDescription title={combo.description}>{combo.description}</S.CardDescription>}
           {hasImages && (
             <S.ImagesContainer>
               <S.ImagesLabel>Imagens:</S.ImagesLabel>

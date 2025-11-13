@@ -98,8 +98,7 @@ export const CardTitle = styled.h3`
   flex: 1;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  
-  /* Line clamp para 2 linhas */
+
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -126,8 +125,7 @@ export const CardDescription = styled.p`
   margin: 0 0 ${({ theme }) => theme.spacing.md} 0;
   flex-shrink: 0;
   line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
-  
-  /* Line clamp para 3 linhas */
+
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -158,7 +156,6 @@ export const ActionsContainer = styled.div`
       transform: translateY(-1px);
     }
 
-    /* Sobrescrever hover para botão white - manter padrão da variante */
     &.white:hover:not(:disabled) {
       background: ${({ theme }) => theme.colors.mx.gray[100]};
       border-color: ${({ theme }) => theme.colors.mx.black};
@@ -167,7 +164,6 @@ export const ActionsContainer = styled.div`
       color: ${({ theme }) => theme.colors.mx.black};
     }
 
-    /* Sobrescrever hover para botão ghost - igual ao botão CANCELAR do modal */
     &.ghost:hover:not(:disabled) {
       background-color: transparent !important;
       color: ${({ theme }) => theme.colors.mx.red} !important;
@@ -176,7 +172,6 @@ export const ActionsContainer = styled.div`
       transform: translateY(-2px);
     }
 
-    /* Sobrescrever hover para botão primary - hover azul como Nova Categoria */
     &.primary:hover:not(:disabled) {
       background: ${({ theme }) => theme.colors.mx.blue} !important;
       color: ${({ theme }) => theme.colors.mx.white} !important;
@@ -186,7 +181,6 @@ export const ActionsContainer = styled.div`
     }
   }
 
-  /* Estilo customizado para botão EDITAR */
   .button.edit-button {
     border-color: ${({ theme }) => theme.colors.mx.blue};
     background: ${({ theme }) => theme.colors.mx.white};
@@ -223,8 +217,8 @@ export const SubCategoriesContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: ${({ theme }) => theme.spacing.md}; /* Aumentado de sm para md */
-  margin-bottom: ${({ theme }) => theme.spacing.lg}; /* Aumentado de md para lg */
+  gap: ${({ theme }) => theme.spacing.md};
+  margin-bottom: ${({ theme }) => theme.spacing.lg};
 
   strong {
     font-size: ${({ theme }) => theme.typography.fontSizes.xs};
@@ -276,8 +270,7 @@ export const SubCategoryChip = styled.div`
   &:hover {
     transform: translateY(-1px);
   }
-  
-  /* NOVO - Focus visible para acessibilidade */
+
   &:focus-visible {
     outline: 3px solid ${({ theme }) => theme.colors.mx.black};
     outline-offset: 2px;
@@ -285,8 +278,8 @@ export const SubCategoryChip = styled.div`
 
   span {
     flex: 1;
-    overflow: hidden;           /* NOVO */
-    text-overflow: ellipsis;    /* NOVO */
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
   }
 `
@@ -346,15 +339,15 @@ export const OptionalItem = styled.div`
   span:first-child {
     color: ${({ theme }) => theme.colors.mx.black};
     font-weight: ${({ theme }) => theme.typography.fontWeights.semibold};
-    overflow: hidden;           /* NOVO */
-    text-overflow: ellipsis;    /* NOVO */
-    white-space: nowrap;        /* NOVO */
-    max-width: 60%;             /* NOVO */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 60%;
   }
 
   span:last-child {
-    color: ${({ theme }) => theme.colors.mx.gray[700]}; /* Escurecido de 600 para 700 */
-    white-space: nowrap; /* NOVO */
+    color: ${({ theme }) => theme.colors.mx.gray[700]};
+    white-space: nowrap;
   }
 `
 

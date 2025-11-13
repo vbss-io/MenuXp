@@ -38,7 +38,8 @@ const operationSchema = new Schema<OperationDocument>(
     toJSON: {
       // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       transform: (_, ret) => {
-        ret.id = ret._id as string
+        ret.id = ret._id
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (ret as any)._id
         return ret
       }

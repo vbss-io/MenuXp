@@ -133,6 +133,7 @@ declare module 'styled-components' {
     colors: {
       primary: string
       secondary: string
+      accent: string
       highlight: string
       neutral: string
       background: string
@@ -185,6 +186,30 @@ declare module 'styled-components' {
     }
     animations: Animations
     zIndex: ZIndex
+    fonts: {
+      default: string
+    }
+    fontSizes: {
+      xxxs: string
+      xxs: string
+      xs: string
+      sm: string
+      md: string
+      lg: string
+      xl: string
+      xxl: string
+      xxxl: string
+      xxxxl: string
+      xxxxxl: string
+    }
+    fontWeights: {
+      light: number
+      normal: number
+      medium: number
+      semibold: number
+      bold: number
+      extrabold: number
+    }
   }
 }
 

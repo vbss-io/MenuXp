@@ -67,11 +67,10 @@ export const TabButton = styled.button<{ $isActive: boolean }>`
     border-right: none;
   }
 
-  /* Ocultar ícones em mobile para melhor responsividade */
   .tab-icon {
     display: inline-flex;
     align-items: center;
-    
+
     @media (max-width: 768px) {
       display: none;
     }
@@ -191,17 +190,15 @@ export const ActionsRowButtons = styled.div`
     outline-offset: 2px;
   }
 
-  /* Padronização dos botões para seguir o mesmo padrão do modal */
   .button {
     min-width: 200px;
-    
+
     @media (max-width: 768px) {
       min-width: auto;
       width: 100%;
     }
   }
 
-  /* Exceção para botões de ícone - mantém largura natural */
   .button.icon-only {
     min-width: auto;
     width: auto;
@@ -310,11 +307,11 @@ export const EmptyStateHelp = styled.button`
   display: flex;
   align-items: center;
   gap: ${({ theme }) => theme.spacing.xs};
-  
+
   &:hover {
     text-decoration: underline;
   }
-  
+
   &:focus-visible {
     outline: 3px solid ${({ theme }) => theme.colors.mx.black};
     outline-offset: 2px;
@@ -334,13 +331,13 @@ export const HelpIconButton = styled.button`
   color: ${({ theme }) => theme.colors.mx.gray[600]};
   cursor: pointer;
   transition: all ${({ theme }) => theme.animations.durations.normal};
-  
+
   &:hover {
     background: ${({ theme }) => theme.colors.mx.gray[100]};
     border-color: ${({ theme }) => theme.colors.mx.black};
     color: ${({ theme }) => theme.colors.mx.black};
   }
-  
+
   &:focus-visible {
     outline: 3px solid ${({ theme }) => theme.colors.mx.black};
     outline-offset: 2px;
@@ -367,7 +364,7 @@ export const HelpList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.xs};
-  
+
   li {
     font-size: ${({ theme }) => theme.typography.fontSizes.xs};
     font-family: ${({ theme }) => theme.typography.fonts.body};
@@ -375,7 +372,7 @@ export const HelpList = styled.ul`
     line-height: ${({ theme }) => theme.typography.lineHeights.relaxed};
     padding-left: ${({ theme }) => theme.spacing.md};
     position: relative;
-    
+
     &::before {
       content: '→';
       position: absolute;
@@ -406,7 +403,7 @@ export const EmptyStateButton = styled.div`
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  
+
   button {
     width: 100%;
   }

@@ -179,20 +179,20 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
             isEmpty={!hasMenuItems}
           />
           {hasMenuItems ? (
-            <Button 
-              variant="primary" 
+            <Button
+              variant="primary"
               size="sm"
-              onClick={handleCreateMenuItem} 
+              onClick={handleCreateMenuItem}
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar novo item do menu"
             >
               Novo Item
             </Button>
           ) : (
-            <Button 
-              variant="white" 
+            <Button
+              variant="white"
               size="sm"
-              onClick={handleCreateMenuItem} 
+              onClick={handleCreateMenuItem}
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar novo item do menu"
             >
@@ -225,7 +225,6 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
             ) : (
               <Page.EmptyState>
                 {filters.searchMask ? (
-                  // Estado: Busca sem resultados
                   <>
                     <Page.EmptyStateIcon>
                       <MagnifyingGlassIcon size={72} />
@@ -234,24 +233,21 @@ export const MenuItemsTab = ({ currentPage, onPageChange }: MenuItemsTabProps) =
                     <Page.EmptyStateDescription>
                       Nenhum item corresponde à busca "{filters.searchMask}"
                     </Page.EmptyStateDescription>
-                    <Button 
-                      variant="white" 
-                      size="sm" 
-                      onClick={() => setFilters(prev => ({...prev, searchMask: ''}))}
+                    <Button
+                      variant="white"
+                      size="sm"
+                      onClick={() => setFilters((prev) => ({ ...prev, searchMask: '' }))}
                       style={{ marginTop: '16px' }}
                     >
                       Limpar busca
                     </Button>
                   </>
                 ) : (
-                  // Estado: Vazio real
                   <>
                     <Page.EmptyStateIcon>
                       <BowlFoodIcon size={72} />
                     </Page.EmptyStateIcon>
-                    <Page.EmptyStateTitle>
-                      Nenhum item ainda
-                    </Page.EmptyStateTitle>
+                    <Page.EmptyStateTitle>Nenhum item ainda</Page.EmptyStateTitle>
                     <Page.EmptyStateDescription>
                       Itens são os produtos do seu cardápio vinculados a categorias.
                     </Page.EmptyStateDescription>

@@ -30,7 +30,7 @@ export class UpdateCouponUsecase {
   async execute(params: UpdateCouponUsecaseInput): Promise<UpdateCouponUsecaseOutput> {
     const url = `${import.meta.env.VITE_BACKEND}/coupon/${params.couponId}`
 
-    const body: Record<string, any> = {}
+    const body: Record<string, string | number | undefined> = {}
     if (params.name !== undefined) body.name = params.name
     if (params.type !== undefined) body.type = params.type
     if (params.value !== undefined) body.value = params.value

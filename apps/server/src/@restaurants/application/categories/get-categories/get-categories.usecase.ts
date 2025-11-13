@@ -1,10 +1,7 @@
 import { ForbiddenError } from '@api/domain/errors/forbidden.error'
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { inject } from '@api/infra/dependency-injection/registry'
-import {
-  CategoryWithSub,
-  GetCategoriesQuery
-} from '@restaurants/application/categories/@queries/get-categories.query'
+import { CategoryWithSub, GetCategoriesQuery } from '@restaurants/application/categories/@queries/get-categories.query'
 import { GetCategoriesType } from '@restaurants/application/categories/get-categories/get-categories.schema'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'

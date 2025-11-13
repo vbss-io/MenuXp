@@ -105,7 +105,6 @@ export const ImagesContainer = styled.div`
   margin-bottom: 4px;
   flex-shrink: 0;
 
-  /* Sobrescrever estilos do ImageCarousel */
   .image-carousel {
     margin-bottom: 0 !important;
   }
@@ -134,7 +133,6 @@ export const CardInfo = styled.div`
   margin-top: 2px;
   flex-shrink: 0;
 
-  /* Estilos específicos para chips dentro do CardInfo */
   > * {
     font-family: ${({ theme }) => theme.typography.fonts.title} !important;
     letter-spacing: 0.5px !important;
@@ -148,8 +146,7 @@ export const CardInfo = styled.div`
     justify-content: flex-start !important;
     align-items: center !important;
     display: block !important;
-    
-    /* Forçar alinhamento do conteúdo interno */
+
     > * {
       text-align: left !important;
       justify-content: flex-start !important;
@@ -184,7 +181,6 @@ export const ActionsContainer = styled.div`
       transform: translateY(-1px);
     }
 
-    /* Sobrescrever hover para botão white */
     &.white:hover:not(:disabled) {
       background: ${({ theme }) => theme.colors.mx.gray[100]};
       border-color: ${({ theme }) => theme.colors.mx.black};
@@ -193,7 +189,6 @@ export const ActionsContainer = styled.div`
       color: ${({ theme }) => theme.colors.mx.black};
     }
 
-    /* Sobrescrever hover para botão ghost - vermelho */
     &.ghost:hover:not(:disabled) {
       background-color: transparent !important;
       color: ${({ theme }) => theme.colors.mx.red} !important;
@@ -202,7 +197,6 @@ export const ActionsContainer = styled.div`
       transform: translateY(-2px);
     }
 
-    /* Sobrescrever hover para botão primary - azul */
     &.primary:hover:not(:disabled) {
       background: ${({ theme }) => theme.colors.mx.blue} !important;
       color: ${({ theme }) => theme.colors.mx.white} !important;
@@ -211,7 +205,6 @@ export const ActionsContainer = styled.div`
       transform: translateY(-2px);
     }
 
-    /* Estilo customizado para botão EDITAR */
     &.edit-button {
       border-color: ${({ theme }) => theme.colors.mx.blue};
       background: ${({ theme }) => theme.colors.mx.white};

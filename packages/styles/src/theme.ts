@@ -15,6 +15,7 @@ export const createTheme = (overrides?: Partial<DefaultTheme>): DefaultTheme => 
     colors: {
       primary: menuXpColors.yellow,
       secondary: menuXpColors.blue,
+      accent: menuXpColors.blue,
       highlight: menuXpColors.red,
       neutral: menuXpColors.black,
       background: menuXpColors.gray[50],
@@ -49,6 +50,19 @@ export const createTheme = (overrides?: Partial<DefaultTheme>): DefaultTheme => 
     breakpoints,
     animations,
     zIndex,
+
+    fonts: {
+      default: typography.fonts.body
+    },
+    fontSizes: typography.fontSizes,
+    fontWeights: {
+      light: typography.fontWeights.light,
+      normal: typography.fontWeights.regular,
+      medium: typography.fontWeights.medium,
+      semibold: typography.fontWeights.semibold,
+      bold: typography.fontWeights.bold,
+      extrabold: typography.fontWeights.extrabold
+    }
   }
 
   return overrides ? { ...baseTheme, ...overrides } : baseTheme

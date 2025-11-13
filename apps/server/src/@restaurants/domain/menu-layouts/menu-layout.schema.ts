@@ -1,12 +1,12 @@
 import { type Document, Schema, model } from 'mongoose'
 
 import {
-    type MenuSectionType,
-    MenuSectionTypeValues
+  type MenuSectionType,
+  MenuSectionTypeValues
 } from '@restaurants/domain/menu-layouts/enums/menu-layout-section-type.enum'
 import {
-    MenuLayoutStatus,
-    MenuLayoutStatusValues
+  MenuLayoutStatus,
+  MenuLayoutStatusValues
 } from '@restaurants/domain/menu-layouts/enums/menu-layout-status.enum'
 
 export interface MenuSectionDocument {
@@ -100,7 +100,8 @@ const menuLayoutSchema = new Schema<MenuLayoutDocument>(
     toJSON: {
       // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       transform: (_, ret) => {
-        ret.id = ret._id as string
+        ret.id = ret._id
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (ret as any)._id
         return ret
       }

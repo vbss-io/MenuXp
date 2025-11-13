@@ -40,10 +40,10 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset, isEmpty = f
           variant="outline"
           side="left"
           trigger={
-            <Button 
-              variant="white" 
-              size="sm" 
-              as="div" 
+            <Button
+              variant="white"
+              size="sm"
+              as="div"
               leftIcon={<SortAscendingIcon size={20} weight="bold" />}
               title="Ordenar itens"
               aria-label="Ordenar itens"
@@ -92,10 +92,10 @@ export const MenuItemFilters = ({ filters, onFiltersChange, onReset, isEmpty = f
           variant="outline"
           side="left"
           trigger={
-            <Button 
-              variant="white" 
-              size="sm" 
-              as="div" 
+            <Button
+              variant="white"
+              size="sm"
+              as="div"
               leftIcon={<FunnelSimpleIcon size={20} weight="bold" />}
               title="Filtros adicionais"
               aria-label="Filtros adicionais"

@@ -1,7 +1,7 @@
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { GetCombosUsecase } from '@/application/combos/get-combos.usecase'
 import type { Combo } from '@/domain/models/combo.model'
-import { PackageIcon, PlusIcon, MagnifyingGlassIcon } from '@phosphor-icons/react'
+import { MagnifyingGlassIcon, PackageIcon, PlusIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -71,7 +71,14 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
       onPageChange(1)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [restaurantId, debouncedSearchMask, filters.includeInactive, filters.categoryId, filters.sortField, filters.sortOrder])
+  }, [
+    restaurantId,
+    debouncedSearchMask,
+    filters.includeInactive,
+    filters.categoryId,
+    filters.sortField,
+    filters.sortOrder
+  ])
 
   useEffect(() => {
     setSelectedCategory(filters.categoryId || '')
@@ -158,20 +165,20 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
             isEmpty={!hasCombos}
           />
           {hasCombos ? (
-            <Button 
-              variant="primary" 
+            <Button
+              variant="primary"
               size="sm"
-              onClick={() => setIsComboModalOpen(true)} 
+              onClick={() => setIsComboModalOpen(true)}
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar novo combo"
             >
               Novo Combo
             </Button>
           ) : (
-            <Button 
-              variant="white" 
+            <Button
+              variant="white"
               size="sm"
-              onClick={() => setIsComboModalOpen(true)} 
+              onClick={() => setIsComboModalOpen(true)}
               leftIcon={<PlusIcon size={16} />}
               aria-label="Criar novo combo"
             >
@@ -209,7 +216,6 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
             ) : (
               <Page.EmptyState>
                 {filters.searchMask ? (
-                  // Estado: Busca sem resultados
                   <>
                     <Page.EmptyStateIcon>
                       <MagnifyingGlassIcon size={72} />
@@ -218,24 +224,21 @@ export const CombosTab = ({ currentPage, onPageChange }: CombosTabProps) => {
                     <Page.EmptyStateDescription>
                       Nenhum combo corresponde à busca "{filters.searchMask}"
                     </Page.EmptyStateDescription>
-                    <Button 
-                      variant="white" 
-                      size="sm" 
-                      onClick={() => setFilters(prev => ({...prev, searchMask: ''}))}
+                    <Button
+                      variant="white"
+                      size="sm"
+                      onClick={() => setFilters((prev) => ({ ...prev, searchMask: '' }))}
                       style={{ marginTop: '16px' }}
                     >
                       Limpar busca
                     </Button>
                   </>
                 ) : (
-                  // Estado: Vazio real
                   <>
                     <Page.EmptyStateIcon>
                       <PackageIcon size={72} />
                     </Page.EmptyStateIcon>
-                    <Page.EmptyStateTitle>
-                      Nenhum combo ainda
-                    </Page.EmptyStateTitle>
+                    <Page.EmptyStateTitle>Nenhum combo ainda</Page.EmptyStateTitle>
                     <Page.EmptyStateDescription>
                       Combos permitem agrupar itens com preço especial.
                     </Page.EmptyStateDescription>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type Document, model, Schema } from 'mongoose'
 
 import { type UserRole, UserRoleValues } from '@restaurants/domain/users/enums/user-role.enum'
@@ -87,7 +88,7 @@ const userSchema = new Schema<UserDocument>(
     toJSON: {
       // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       transform: (_, ret) => {
-        ret.id = ret._id as string
+        ret.id = ret._id
         delete (ret as any)._id
         delete (ret as any).passwordHash
         delete (ret as any).confirmationCode

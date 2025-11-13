@@ -44,8 +44,8 @@ export const FormGroup = styled(motion.div)`
     box-shadow: none;
   }
 
-  /* Unifica rótulos dos campos gerados por componentes de formulário (diretos ou internos) */
-  label, h3 {
+  label,
+  h3 {
     font-size: ${({ theme }) => theme.typography.fontSizes.xs};
     font-weight: ${({ theme }) => theme.typography.fontWeights.bold};
     font-family: ${({ theme }) => theme.typography.fonts.body};
@@ -137,12 +137,11 @@ export const TertiaryActionButton = styled.div`
   }
 `
 
-// Estilos customizados para o botão de cancelar
 export const CancelButtonStyles = styled.div`
   .cancel-button {
     &.button.ghost {
       color: ${({ theme }) => theme.colors.mx.black} !important;
-      
+
       &:hover:not(:disabled) {
         background-color: transparent !important;
         color: ${({ theme }) => theme.colors.mx.red} !important;
@@ -154,7 +153,6 @@ export const CancelButtonStyles = styled.div`
   }
 `
 
-// Estilo global para textarea no modal - foco preto ao invés de vermelho
 export const GlobalTextareaStyles = styled.div`
   textarea:focus {
     border-color: ${({ theme }) => theme.colors.mx.black} !important;
@@ -162,7 +160,9 @@ export const GlobalTextareaStyles = styled.div`
     outline: none !important;
   }
 
-  input:focus-visible, textarea:focus-visible, select:focus-visible {
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
     outline: 2px solid #000 !important;
     outline-offset: 2px !important;
   }
@@ -300,7 +300,7 @@ export const IconSelectorButtonContainer = styled.div`
   .button {
     width: fit-content !important;
     min-width: 200px;
-    
+
     &.white:hover {
       background: ${({ theme }) => theme.colors.mx.yellow} !important;
       border-color: ${({ theme }) => theme.colors.mx.black} !important;

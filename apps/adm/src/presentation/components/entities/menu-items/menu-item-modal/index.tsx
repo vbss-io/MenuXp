@@ -535,7 +535,13 @@ export const MenuItemModal = ({ isOpen, onClose, menuItem, onSuccess }: MenuItem
 
                 <S.PrimaryActionButton>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button type="button" variant="primary" size="sm" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                    <Button
+                      type="button"
+                      variant="primary"
+                      size="sm"
+                      disabled={isLoading}
+                      onClick={handleSubmit(onSubmit)}
+                    >
                       {getButtonText()}
                     </Button>
                   </motion.div>

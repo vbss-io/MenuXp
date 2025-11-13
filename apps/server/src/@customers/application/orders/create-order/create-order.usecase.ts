@@ -3,10 +3,10 @@ import { Address } from '@api/domain/types/address.type'
 import { Cache } from '@api/infra/adapters/cache/cache.adapter'
 import { Queue } from '@api/infra/adapters/queue/queue.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
-import { CartRepository } from '@customers/infra/repositories/cart.repository'
-import { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'
 import { CreateOrderType } from '@customers/application/orders/create-order/create-order.schema'
 import { VerificationCodeService } from '@customers/application/whatsapp-verification/verification-code.service'
+import { CartRepository } from '@customers/infra/repositories/cart.repository'
+import { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'
 import { OperationStatus } from '@restaurants/domain/operations/enums/operation-status.enum'
 import { ORDER_CREATED } from '@restaurants/domain/orders/consts/order-events.const'
 import { OrderCreated } from '@restaurants/domain/orders/events/order-created.event'
@@ -109,6 +109,7 @@ export class CreateOrderUsecase {
           price: menuItem.price,
           quantity: cartItem.quantity,
           itemType: 'menu-item' as const,
+          categoryId: menuItem.categoryId,
           optionals: cartItem.optionals ?? [],
           note: cartItem.note ?? ''
         })
@@ -124,6 +125,7 @@ export class CreateOrderUsecase {
           price: combo.price,
           quantity: cartItem.quantity,
           itemType: 'combo' as const,
+          categoryId: combo.categoryId,
           optionals: cartItem.optionals ?? [],
           note: cartItem.note ?? ''
         })
@@ -164,7 +166,8 @@ export class CreateOrderUsecase {
       customerName: createdOrder.customer.name,
       total: createdOrder.total,
       isScheduled: createdOrder.isScheduled,
-      scheduledFor: createdOrder.scheduledFor
+      scheduledFor: createdOrder.scheduledFor,
+      status: createdOrder.status
     })
     await this.queue.publish(ORDER_CREATED.eventName, orderCreatedEvent.data)
     return createdOrder
