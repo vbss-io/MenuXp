@@ -5,8 +5,8 @@ import type { PlanFeatures } from '@restaurants/domain/plans/plan.entity'
 import { planFeaturesSchema } from '@restaurants/domain/plans/plan.schema'
 import { BillingCycle, BillingCycleValues } from '@restaurants/domain/subscriptions/enums/billing-cycle.enum'
 import {
-    SubscriptionStatus,
-    SubscriptionStatusValues
+  SubscriptionStatus,
+  SubscriptionStatusValues
 } from '@restaurants/domain/subscriptions/enums/subscription-status.enum'
 
 export interface SubscriptionDocument extends Document {
@@ -26,6 +26,10 @@ export interface SubscriptionDocument extends Document {
     features: PlanFeatures
   }
   externalSubscriptionId?: string
+  latestInvoiceId?: string
+  lastPaymentStatus?: string
+  invoicePdf?: string
+  invoicePdfHosted?: string
   cancelledAt?: Date
   cancelledReason?: string
   createdAt: Date
@@ -94,6 +98,22 @@ const subscriptionSchema = new Schema<SubscriptionDocument>(
       type: String,
       trim: true
     },
+    latestInvoiceId: {
+      type: String,
+      trim: true
+    },
+    lastPaymentStatus: {
+      type: String,
+      trim: true
+    },
+    invoicePdf: {
+      type: String,
+      trim: true
+    },
+    invoicePdfHosted: {
+      type: String,
+      trim: true
+    },
     cancelledAt: {
       type: Date
     },
@@ -116,7 +136,8 @@ const subscriptionSchema = new Schema<SubscriptionDocument>(
     toJSON: {
       // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       transform: (_, ret) => {
-        ret.id = ret._id as string
+        ret.id = ret._id
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (ret as any)._id
         return ret
       }

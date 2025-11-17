@@ -21,10 +21,12 @@ export class Subscription extends Observable {
     features: PlanFeatures
   }
   externalSubscriptionId?: string
-  cancelledAt?: Date
-  cancelledReason?: string
+  latestInvoiceId?: string
+  lastPaymentStatus?: string
   invoicePdf?: string
   invoicePdfHosted?: string
+  cancelledAt?: Date
+  cancelledReason?: string
 
   private constructor(
     readonly id: string | undefined,
@@ -43,10 +45,12 @@ export class Subscription extends Observable {
       features: PlanFeatures
     },
     externalSubscriptionId: string | undefined,
-    cancelledAt: Date | undefined,
-    cancelledReason: string | undefined,
+    latestInvoiceId: string | undefined,
+    lastPaymentStatus: string | undefined,
     invoicePdf: string | undefined,
     invoicePdfHosted: string | undefined,
+    cancelledAt: Date | undefined,
+    cancelledReason: string | undefined,
     readonly createdAt?: Date,
     readonly updatedAt?: Date
   ) {
@@ -60,10 +64,12 @@ export class Subscription extends Observable {
     this.billingCycle = billingCycle
     this.planMetadata = planMetadata
     this.externalSubscriptionId = externalSubscriptionId
-    this.cancelledAt = cancelledAt
-    this.cancelledReason = cancelledReason
+    this.latestInvoiceId = latestInvoiceId
+    this.lastPaymentStatus = lastPaymentStatus
     this.invoicePdf = invoicePdf
     this.invoicePdfHosted = invoicePdfHosted
+    this.cancelledAt = cancelledAt
+    this.cancelledReason = cancelledReason
   }
 
   static create(input: CreateSubscription): Subscription {
@@ -79,6 +85,8 @@ export class Subscription extends Observable {
       input.billingCycle,
       input.planMetadata,
       input.externalSubscriptionId,
+      undefined,
+      undefined,
       undefined,
       undefined,
       undefined,
@@ -98,10 +106,12 @@ export class Subscription extends Observable {
       input.billingCycle,
       input.planMetadata,
       input.externalSubscriptionId,
-      input.cancelledAt,
-      input.cancelledReason,
+      input.latestInvoiceId,
+      input.lastPaymentStatus,
       input.invoicePdf,
       input.invoicePdfHosted,
+      input.cancelledAt,
+      input.cancelledReason,
       input.createdAt,
       input.updatedAt
     )
@@ -165,6 +175,32 @@ export class Subscription extends Observable {
     this.invoicePdf = invoicePdf
     this.invoicePdfHosted = invoicePdfHosted
   }
+
+  setLatestInvoice(invoiceId: string): void {
+    this.latestInvoiceId = invoiceId
+  }
+
+  setPaymentStatus(status: string): void {
+    this.lastPaymentStatus = status
+  }
+
+  updateFromStripeSubscription(stripeData: {
+    status?: string
+    currentPeriodEnd?: Date
+    latestInvoiceId?: string
+  }): void {
+    if (stripeData.status === 'active') {
+      this.activate()
+    } else if (stripeData.status === 'canceled') {
+      this.cancel()
+    }
+    if (stripeData.currentPeriodEnd) {
+      this.nextBillingDate = stripeData.currentPeriodEnd
+    }
+    if (stripeData.latestInvoiceId) {
+      this.latestInvoiceId = stripeData.latestInvoiceId
+    }
+  }
 }
 
 export interface CreateSubscription {
@@ -187,10 +223,12 @@ type RestoreSubscription = CreateSubscription & {
   id: string
   endDate?: Date
   nextBillingDate: Date
-  cancelledAt?: Date
-  cancelledReason?: string
+  latestInvoiceId?: string
+  lastPaymentStatus?: string
   invoicePdf?: string
   invoicePdfHosted?: string
+  cancelledAt?: Date
+  cancelledReason?: string
   createdAt: Date
   updatedAt: Date
 }
