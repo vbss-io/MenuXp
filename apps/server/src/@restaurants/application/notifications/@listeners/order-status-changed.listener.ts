@@ -4,6 +4,8 @@ import { NotificationType } from '@restaurants/domain/notifications/enums/notifi
 import { RecipientType } from '@restaurants/domain/notifications/enums/recipient-type.enum'
 import { OrderStatus } from '@restaurants/domain/orders/enums/order-status.enum'
 import type { OrderStatusChangedData } from '@restaurants/domain/orders/events/order-status-changed.event'
+import { OrderStatusHistory } from '@restaurants/domain/orders/order-status-history.entity'
+import { OrderStatusHistoryRepository } from '@restaurants/infra/repositories/order-status-history.repository'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'
 
 type OrderStatusChangedListenerInput = OrderStatusChangedData
@@ -15,8 +17,21 @@ export class OrderStatusChangedListener {
   @inject('RestaurantRepository')
   private readonly RestaurantRepository!: RestaurantRepository
 
+  @inject('OrderStatusHistoryRepository')
+  private readonly OrderStatusHistoryRepository!: OrderStatusHistoryRepository
+
   async execute(data: OrderStatusChangedListenerInput): Promise<void> {
+    await this.persistStatusHistory(data)
     await this.createCustomerNotification(data)
+  }
+
+  private async persistStatusHistory(data: OrderStatusChangedListenerInput): Promise<void> {
+    const statusHistory = OrderStatusHistory.create({
+      orderId: data.orderId,
+      restaurantId: data.restaurantId,
+      status: data.newStatus
+    })
+    await this.OrderStatusHistoryRepository.create(statusHistory)
   }
 
   private async createCustomerNotification(data: OrderStatusChangedListenerInput): Promise<void> {

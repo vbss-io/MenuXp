@@ -3,6 +3,8 @@ import { CreateNotificationUsecase } from '@restaurants/application/notification
 import { NotificationType } from '@restaurants/domain/notifications/enums/notification-type.enum'
 import { RecipientType } from '@restaurants/domain/notifications/enums/recipient-type.enum'
 import type { OrderCreatedData } from '@restaurants/domain/orders/events/order-created.event'
+import { OrderStatusHistory } from '@restaurants/domain/orders/order-status-history.entity'
+import { OrderStatusHistoryRepository } from '@restaurants/infra/repositories/order-status-history.repository'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'
 
 type OrderCreatedListenerInput = OrderCreatedData
@@ -14,7 +16,11 @@ export class OrderCreatedListener {
   @inject('RestaurantRepository')
   private readonly RestaurantRepository!: RestaurantRepository
 
+  @inject('OrderStatusHistoryRepository')
+  private readonly OrderStatusHistoryRepository!: OrderStatusHistoryRepository
+
   async execute(data: OrderCreatedListenerInput): Promise<void> {
+    await this.persistInitialStatusHistory(data)
     const title = data.isScheduled ? 'Novo Pedido Agendado!' : 'Novo Pedido Recebido!'
     const scheduleInfo = data.scheduledFor ? ` para ${new Date(data.scheduledFor).toLocaleString('pt-BR')}` : ''
     await this.createCustomerNotification(data)
@@ -36,6 +42,15 @@ export class OrderCreatedListener {
     })
   }
 
+  private async persistInitialStatusHistory(data: OrderCreatedListenerInput): Promise<void> {
+    const statusHistory = OrderStatusHistory.create({
+      orderId: data.orderId,
+      restaurantId: data.restaurantId,
+      status: data.status
+    })
+    await this.OrderStatusHistoryRepository.create(statusHistory)
+  }
+
   private async createCustomerNotification(data: OrderCreatedListenerInput): Promise<void> {
     const restaurant = await this.RestaurantRepository.findById(data.restaurantId)
     if (!restaurant) return
@@ -54,7 +69,7 @@ export class OrderCreatedListener {
       message,
       metadata: {
         orderId: data.orderId,
-        orderCode: data.orderCode,
+        orderCode: data.orderCode
       }
     })
   }

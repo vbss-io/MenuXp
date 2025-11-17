@@ -38,7 +38,9 @@ export class WhatsAppOrderCreatedListener {
         })
         return
       }
-      const templateKey = eventData.isScheduled ? WhatsAppTemplateKey.ORDER_SCHEDULED : WhatsAppTemplateKey.ORDER_RECEIVED
+      const templateKey = eventData.isScheduled
+        ? WhatsAppTemplateKey.ORDER_SCHEDULED
+        : WhatsAppTemplateKey.ORDER_RECEIVED
       await this.sendWhatsAppNotificationUsecase.execute(
         {
           orderId: eventData.orderId,
