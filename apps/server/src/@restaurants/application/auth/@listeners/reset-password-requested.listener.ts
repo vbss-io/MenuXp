@@ -28,7 +28,7 @@ export class ResetPasswordRequestedListener {
     if (!user) throw new NotFoundError('User', email)
     const token = this.TokenAuthentication.encode(user.getAuth())
     this.Cache.set(`auth:${user.id}`, { token }, ONE_DAY)
-    const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`
+    const resetUrl = `${process.env.ADM_URL}/reset-password?token=${token}`
     const content = {
       subject: 'Redefinir sua Senha',
       text: 'Recebemos uma solicitação para redefinir sua senha. Clique no link neste email para criar uma nova senha.'

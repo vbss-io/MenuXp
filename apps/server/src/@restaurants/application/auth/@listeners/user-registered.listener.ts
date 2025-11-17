@@ -28,7 +28,7 @@ export class UserRegisteredListener {
     if (!user) throw new NotFoundError('User', email)
     const token = this.TokenAuthentication.encode(user.getAuth())
     this.Cache.set(`auth:${user.id}`, { token }, ONE_DAY)
-    const confirmationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${token}`
+    const confirmationUrl = `${process.env.ADM_URL}/verify-email?token=${token}`
     const content = {
       subject: 'Confirme seu Email',
       text: 'Por favor, confirme seu endereço de email clicando no link neste email.'
