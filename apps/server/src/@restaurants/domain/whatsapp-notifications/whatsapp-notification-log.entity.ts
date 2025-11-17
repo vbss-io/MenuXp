@@ -1,4 +1,4 @@
-import { NotificationEventType, NotificationStatus } from './whatsapp-notification-log.schema'
+import { type NotificationEventType, NotificationStatus } from './whatsapp-notification-log.schema'
 
 export class WhatsAppNotificationLog {
   event: NotificationEventType
@@ -112,7 +112,7 @@ export interface CreateWhatsAppNotificationLog {
   errorMessage?: string
 }
 
-type RestoreWhatsAppNotificationLog = {
+interface RestoreWhatsAppNotificationLog {
   id: string
   orderId?: string
   event: NotificationEventType

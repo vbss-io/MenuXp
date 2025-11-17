@@ -102,8 +102,10 @@ const whatsappNotificationLogSchema = new Schema<WhatsAppNotificationLogDocument
     versionKey: false,
     collection: 'whatsapp_notification_logs',
     toJSON: {
+      // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       transform: (_, ret) => {
-        ret.id = ret._id as string
+        ret.id = ret._id
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (ret as any)._id
         return ret
       }
