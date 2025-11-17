@@ -1,2 +1,1 @@
-import '@menuxp/styles/src/styled';
-
+import '@menuxp/styles/src/styled'
