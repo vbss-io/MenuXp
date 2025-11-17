@@ -1,5 +1,4 @@
 import { getPlans } from '@/services/plan/get-plans'
-import { trackPlanCTAClick } from '@/utils/analytics'
 import { PlanGrid } from '@menuxp/ui'
 import { motion } from 'framer-motion'
 import React from 'react'
@@ -29,9 +28,8 @@ const Plans: React.FC = () => {
     fetchPlans()
   }, [])
 
-  const handlePlanCTAClick = (planCode: string) => {
-    trackPlanCTAClick(planCode, 'home')
-    window.location.href = '/menu'
+  const handlePlanCTAClick = () => {
+    window.location.href = `${import.meta.env.VITE_ADM_FRONTEND}/register`
   }
 
   if (loading) {
