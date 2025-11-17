@@ -25,7 +25,6 @@ export const PreviewTitle = styled.h3`
   color: ${({ theme }) => theme.colors.text.primary};
   margin: 0;
   text-transform: uppercase;
-  /* letter-spacing herdado do global */
 `
 
 export const PreviewActions = styled.div`

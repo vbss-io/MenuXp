@@ -4,7 +4,7 @@ import { SecurityTab } from '@/presentation/pages/dashboard/profile/components/s
 import { LockKeyIcon, UserIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
-import * as S from './styles'
+import * as S from '../styles'
 
 type TabType = 'general' | 'security'
 

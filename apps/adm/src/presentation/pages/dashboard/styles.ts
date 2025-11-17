@@ -6,13 +6,13 @@ export const Container = styled.div`
   gap: ${({ theme }) => theme.spacing.lg};
   margin: 0 auto;
   width: 100%;
+  min-height: 100vh;
   padding: ${({ theme }) => theme.spacing.lg} 0;
 `
 
 export const TabsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.colors.mx.white};
   border: 1px solid ${({ theme }) => theme.colors.mx.black};
   border-radius: ${({ theme }) => theme.borderRadius.sm};
   box-shadow: 3px 3px 0px ${({ theme }) => theme.colors.mx.black};
@@ -22,12 +22,11 @@ export const TabsContainer = styled.div`
 export const TabsHeader = styled.div`
   display: flex;
   border-bottom: 1px solid ${({ theme }) => theme.colors.mx.black};
-  background: ${({ theme }) => theme.colors.mx.white};
   overflow-x: auto;
 `
 
 export const TabButton = styled.button<{ $isActive: boolean }>`
-  background: ${({ theme, $isActive }) => ($isActive ? theme.colors.mx.red : theme.colors.mx.white)};
+  background: ${({ theme, $isActive }) => $isActive && theme.colors.mx.red};
   border: none;
   border-right: 1px solid ${({ theme }) => theme.colors.mx.black};
   padding: ${({ theme }) => theme.spacing.md} ${({ theme }) => theme.spacing.lg};
