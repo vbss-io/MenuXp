@@ -1,4 +1,4 @@
-import { getPlans } from '@/services/plan'
+import { getPlans } from '@/services/plan/get-plans'
 import { trackPlanCTAClick } from '@/utils/analytics'
 import { PlanGrid } from '@menuxp/ui'
 import { motion } from 'framer-motion'
