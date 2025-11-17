@@ -1,10 +1,17 @@
-import type { DomainEvent } from '@api/infra/events/domain-event';
+import type { DomainEvent } from '@api/infra/events/domain-event'
 
 export class Observable {
-  observers: Array<{ eventName: string; callback: (event: DomainEvent<unknown>) => Promise<void> }>
+  private _observers: Array<{ eventName: string; callback: (event: DomainEvent<unknown>) => Promise<void> }>
 
   constructor() {
-    this.observers = []
+    this._observers = []
+  }
+
+  private get observers(): Array<{ eventName: string; callback: (event: DomainEvent<unknown>) => Promise<void> }> {
+    if (!this._observers) {
+      this._observers = []
+    }
+    return this._observers
   }
 
   register(eventName: string, callback: <Event>(event: DomainEvent<Event>) => Promise<void>): void {
