@@ -52,7 +52,7 @@ export class UpdateOrderUsecase {
     await this.OrderRepository.update({ id: orderId }, order)
     if (oldStatus !== status) {
       const orderStatusChangedEvent = new OrderStatusChanged({
-        orderId: order.id as string,
+        orderId,
         orderCode: order.code,
         restaurantId: order.restaurantId,
         customerId: order.clientId,

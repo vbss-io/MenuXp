@@ -10,6 +10,7 @@ import { RestaurantNotificationsModule as NotificationsModule } from '@restauran
 import { OperationsModule } from '@restaurants/application/operations/operations.module'
 import { OrdersModule } from '@restaurants/application/orders/orders.module'
 import { PlansModule } from '@restaurants/application/plans/plans.module'
+import { ReportsModule } from '@restaurants/application/reports/reports.module'
 import { RestaurantsModule as RestaurantsModuleApp } from '@restaurants/application/restaurants/restaurants.module'
 import { SubscriptionsModule } from '@restaurants/application/subscriptions/subscriptions.module'
 import { UsersModule } from '@restaurants/application/users/users.module'
@@ -20,9 +21,11 @@ import { MenuItemRepositoryMongoose } from '@restaurants/infra/repositories/menu
 import { MenuLayoutRepositoryMongoose } from '@restaurants/infra/repositories/menu-layout.repository'
 import { NotificationRepositoryMongoose } from '@restaurants/infra/repositories/notifications.repository'
 import { OperationRepositoryMongoose } from '@restaurants/infra/repositories/operation.repository'
+import { OrderStatusHistoryRepositoryMongoose } from '@restaurants/infra/repositories/order-status-history.repository'
 import { OrderRepositoryMongoose } from '@restaurants/infra/repositories/orders.repository'
 import { PlanRepositoryMongoose } from '@restaurants/infra/repositories/plan.repository'
 import { RestaurantRepositoryMongoose } from '@restaurants/infra/repositories/restaurant.repository'
+import { StripeWebhookLogRepositoryMongoose } from '@restaurants/infra/repositories/stripe-webhook-log.repository'
 import { SubscriptionRepositoryMongoose } from '@restaurants/infra/repositories/subscription.repository'
 import { UserRepositoryMongoose } from '@restaurants/infra/repositories/user.repository'
 import { WhatsAppNotificationLogRepositoryMongoose } from '@restaurants/infra/repositories/whatsapp-notification-log.repository'
@@ -37,6 +40,7 @@ export class RestaurantsModule {
     registry.provide('PlanRepository', new PlanRepositoryMongoose())
     registry.provide('SubscriptionRepository', new SubscriptionRepositoryMongoose())
     registry.provide('OrderRepository', new OrderRepositoryMongoose())
+    registry.provide('OrderStatusHistoryRepository', new OrderStatusHistoryRepositoryMongoose())
     registry.provide('NotificationRepository', new NotificationRepositoryMongoose())
     registry.provide('CategoryRepository', new CategoryRepositoryMongoose())
     registry.provide('OperationRepository', new OperationRepositoryMongoose())
@@ -44,6 +48,7 @@ export class RestaurantsModule {
     registry.provide('CouponRepository', new CouponRepositoryMongoose())
     registry.provide('ComboRepository', new ComboRepositoryMongoose())
     registry.provide('WhatsAppNotificationLogRepository', new WhatsAppNotificationLogRepositoryMongoose())
+    registry.provide('StripeWebhookLogRepository', new StripeWebhookLogRepositoryMongoose())
 
     new AdminModule()
     new AuthModule()
@@ -56,6 +61,7 @@ export class RestaurantsModule {
     new OperationsModule()
     new OrdersModule()
     new PlansModule()
+    new ReportsModule()
     new RestaurantsModuleApp()
     new SubscriptionsModule()
     new UsersModule()
