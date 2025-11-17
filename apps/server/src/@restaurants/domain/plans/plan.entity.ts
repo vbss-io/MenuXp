@@ -15,6 +15,11 @@ export interface PlanFeatures {
   maxStorage: number | null
 }
 
+export interface PlanIntervals {
+  month: number
+  year: number
+}
+
 export class Plan {
   name: string
   code: PlanCode
@@ -26,6 +31,10 @@ export class Plan {
   description?: string
   monthlyPriceId?: string
   yearlyPriceId?: string
+  externalProductId?: string
+  intervals?: PlanIntervals
+  taxBehavior?: string
+  trialDays?: number
 
   private constructor(
     readonly id: string | undefined,
@@ -39,6 +48,10 @@ export class Plan {
     description?: string,
     monthlyPriceId?: string,
     yearlyPriceId?: string,
+    externalProductId?: string,
+    intervals?: PlanIntervals,
+    taxBehavior?: string,
+    trialDays?: number,
     readonly createdAt?: Date,
     readonly updatedAt?: Date
   ) {
@@ -52,6 +65,10 @@ export class Plan {
     this.description = description
     this.monthlyPriceId = monthlyPriceId
     this.yearlyPriceId = yearlyPriceId
+    this.externalProductId = externalProductId
+    this.intervals = intervals
+    this.taxBehavior = taxBehavior
+    this.trialDays = trialDays
   }
 
   static create(input: CreatePlan): Plan {
@@ -81,6 +98,10 @@ export class Plan {
       input.description,
       input.monthlyPriceId,
       input.yearlyPriceId,
+      input.externalProductId,
+      input.intervals,
+      input.taxBehavior,
+      input.trialDays,
       input.createdAt,
       input.updatedAt
     )
@@ -96,6 +117,10 @@ export class Plan {
     this.description = input.description ?? this.description
     this.monthlyPriceId = input.monthlyPriceId ?? this.monthlyPriceId
     this.yearlyPriceId = input.yearlyPriceId ?? this.yearlyPriceId
+    this.externalProductId = input.externalProductId ?? this.externalProductId
+    this.intervals = input.intervals ?? this.intervals
+    this.taxBehavior = input.taxBehavior ?? this.taxBehavior
+    this.trialDays = input.trialDays ?? this.trialDays
   }
 
   activate(): void {
@@ -134,6 +159,10 @@ type RestorePlan = CreatePlan & {
   isActive: boolean
   monthlyPriceId?: string
   yearlyPriceId?: string
+  externalProductId?: string
+  intervals?: PlanIntervals
+  taxBehavior?: string
+  trialDays?: number
   createdAt: Date
   updatedAt: Date
 }

@@ -34,7 +34,7 @@ export const AVAILABLE_PLANS: AvailablePlan[] = [
       menuLayouts: 1,
       maxStorage: 500
     },
-    description: 'Plano Gratuito'
+    description: 'MenuXP Free'
   },
   {
     name: 'Basic',
@@ -57,11 +57,11 @@ export const AVAILABLE_PLANS: AvailablePlan[] = [
       menuLayouts: 3,
       maxStorage: 1000
     },
-    description: 'Plano Básico'
+    description: 'MenuXP Basic'
   },
   {
-    name: 'Essential',
-    code: PlanCode.ESSENTIAL,
+    name: 'Premium',
+    code: PlanCode.PREMIUM,
     price: 99.9,
     yearlyDiscount: 0.15,
     currency: 'BRL',
@@ -80,11 +80,11 @@ export const AVAILABLE_PLANS: AvailablePlan[] = [
       menuLayouts: 5,
       maxStorage: 5000
     },
-    description: 'Plano Essencial'
+    description: 'MenuXP Premium'
   },
   {
-    name: 'Pro',
-    code: PlanCode.PRO,
+    name: 'Enterprise',
+    code: PlanCode.ENTERPRISE,
     price: 199.9,
     yearlyDiscount: 0.15,
     currency: 'BRL',
@@ -103,6 +103,6 @@ export const AVAILABLE_PLANS: AvailablePlan[] = [
       menuLayouts: 10,
       maxStorage: null
     },
-    description: 'Plano Pro'
+    description: 'MenuXP Enterprise'
   }
 ]

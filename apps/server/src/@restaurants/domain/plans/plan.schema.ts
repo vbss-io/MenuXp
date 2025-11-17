@@ -1,7 +1,7 @@
 import { type Document, model, Schema } from 'mongoose'
 
 import { PlanCode, PlanCodeValues } from '@restaurants/domain/plans/enums/plan-code.enum'
-import type { PlanFeatures } from '@restaurants/domain/plans/plan.entity'
+import type { PlanFeatures, PlanIntervals } from '@restaurants/domain/plans/plan.entity'
 
 export interface PlanDocument extends Document {
   _id: string
@@ -15,6 +15,10 @@ export interface PlanDocument extends Document {
   description?: string
   monthlyPriceId?: string
   yearlyPriceId?: string
+  externalProductId?: string
+  intervals?: PlanIntervals
+  taxBehavior?: string
+  trialDays?: number
   createdAt: Date
   updatedAt: Date
 }
@@ -76,6 +80,20 @@ export const planFeaturesSchema = new Schema<PlanFeatures>({
   }
 })
 
+const planIntervalsSchema = new Schema<PlanIntervals>(
+  {
+    month: {
+      type: Number,
+      required: true
+    },
+    year: {
+      type: Number,
+      required: true
+    }
+  },
+  { _id: false }
+)
+
 const planSchema = new Schema<PlanDocument>(
   {
     name: {
@@ -126,6 +144,22 @@ const planSchema = new Schema<PlanDocument>(
       type: String,
       trim: true
     },
+    externalProductId: {
+      type: String,
+      trim: true,
+      sparse: true
+    },
+    intervals: {
+      type: planIntervalsSchema
+    },
+    taxBehavior: {
+      type: String,
+      trim: true
+    },
+    trialDays: {
+      type: Number,
+      min: 0
+    },
     createdAt: {
       type: Date,
       default: Date.now
@@ -141,7 +175,8 @@ const planSchema = new Schema<PlanDocument>(
     toJSON: {
       // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       transform: (_, ret) => {
-        ret.id = ret._id as string
+        ret.id = ret._id
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (ret as any)._id
         return ret
       }
@@ -156,3 +191,5 @@ planSchema.index({ price: 1 }, { name: 'idx_plan_price' })
 planSchema.index({ createdAt: -1 }, { name: 'idx_plan_created_at_desc' })
 planSchema.index({ updatedAt: -1 }, { name: 'idx_plan_updated_at_desc' })
 planSchema.index({ isActive: 1, price: 1 }, { name: 'idx_plan_active_price' })
+planSchema.index({ externalProductId: 1 }, { name: 'idx_plan_external_product_id', sparse: true })
+planSchema.index({ code: 1 }, { name: 'idx_plan_code', unique: true })

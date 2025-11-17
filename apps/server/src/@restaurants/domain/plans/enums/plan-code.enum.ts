@@ -1,8 +1,8 @@
 export enum PlanCode {
-  FREE = 'free',
-  BASIC = 'basic',
-  ESSENTIAL = 'essential',
-  PRO = 'pro'
+  FREE = 'FREE',
+  BASIC = 'BASIC',
+  PREMIUM = 'PREMIUM',
+  ENTERPRISE = 'ENTERPRISE'
 }
 
 export const PlanCodeValues = Object.values(PlanCode)
