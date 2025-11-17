@@ -71,7 +71,7 @@ export default defineConfig([
       "prefer-arrow-callback": "error",
       "prefer-template": "error",
       "eqeqeq": ["error", "always"],
-      "no-multiple-empty-lines": ["error", { "max": 1 }],
+      "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
       "prettier/prettier": ["error", {
         "semi": false,
         "trailingComma": "none",

@@ -75,7 +75,7 @@ export default defineConfig([
       'prefer-template': 'error',
       'eqeqeq': ['error', 'always'],
       'no-nested-ternary': 'error',
-      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0 }],
+      'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 0, maxBOF: 0 }],
       'no-trailing-spaces': 'error',
       'object-curly-spacing': ['error', 'always'],
       'array-bracket-spacing': ['error', 'never'],
