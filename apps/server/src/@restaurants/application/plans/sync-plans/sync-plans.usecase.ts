@@ -17,7 +17,7 @@ export class SyncPlansUsecase {
   @inject('PlanRepository')
   private readonly planRepository!: PlanRepository
 
-  @inject('StripePaymentGateway')
+  @inject('SubscriptionPaymentGateway')
   private readonly stripeGateway!: SubscriptionPaymentGateway
 
   @inject('Logger')

@@ -16,6 +16,7 @@ import { Registry } from '@api/infra/dependency-injection/registry'
 import { CancellationTokenSource } from '@api/infra/events/cancellation-token'
 import { Mediator } from '@api/infra/events/mediator'
 import { RequestFacade } from '@api/infra/facades/request.facade'
+import { StripePaymentGateway } from '@api/infra/gateways/stripe.gateway'
 import { ExpressAuthHandler } from '@api/infra/handlers/express-auth.handler'
 import { ExpressErrorHandler } from '@api/infra/handlers/express-error.handler'
 import { ExpressHttpLoggerHandler } from '@api/infra/handlers/express-http-logger.handler'
@@ -46,11 +47,12 @@ function main(): void {
   registry.provide('HttpServer', httpServer)
   const httpClient = new AxiosAdapter()
   registry.provide('HttpClient', httpClient)
-  const logger = registry.inject('Logger') as WinstonLoggerAdapter
-  registry.provide('WhatsAppMessagingClient', new WhatsAppMessagingAdapter(httpClient, logger))
+  registry.provide('WhatsAppMessagingClient', new WhatsAppMessagingAdapter())
   const mongooseConnection = new MongooseAdapter()
   registry.provide('MongooseConnection', mongooseConnection)
   void mongooseConnection.connect()
+  const stripeGateway = new StripePaymentGateway()
+  registry.provide('SubscriptionPaymentGateway', stripeGateway)
 
   new ApiModule()
   new CustomersModule()

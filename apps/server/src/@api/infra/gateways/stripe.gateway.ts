@@ -16,8 +16,8 @@ import type { SubscriptionPaymentGateway } from './subscription-payment.gateway'
 export class StripePaymentGateway implements SubscriptionPaymentGateway {
   private readonly stripe: Stripe
 
-  constructor(secretKey: string, apiVersion: Stripe.LatestApiVersion = '2025-10-29.clover') {
-    this.stripe = new Stripe(secretKey, {
+  constructor(apiVersion: Stripe.LatestApiVersion = '2025-10-29.clover') {
+    this.stripe = new Stripe(String(process.env.STRIPE_SECRET_KEY), {
       apiVersion,
       maxNetworkRetries: 3,
       timeout: 30000
