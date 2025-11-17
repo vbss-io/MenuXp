@@ -9,6 +9,7 @@ import { Header } from '@/pages/home/components/header'
 import { Hero } from '@/pages/home/components/hero'
 import HowItWorks from '@/pages/home/components/how-it-works'
 import MiniGames from '@/pages/home/components/mini-games'
+import Plans from '@/pages/home/components/plans'
 import TrustBar from '@/pages/home/components/trust-bar'
 import ValueProps from '@/pages/home/components/value-props'
 
@@ -23,6 +24,7 @@ export const Home = () => {
         <FeatureShowcase />
         <HowItWorks />
         <MiniGames />
+        <Plans />
         <Analytics />
         <CTASection />
         <FAQ />

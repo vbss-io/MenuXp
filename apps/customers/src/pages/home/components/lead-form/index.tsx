@@ -1,13 +1,11 @@
+import { createLead, createLeadSchema, type CreateLeadInput } from '@/services/lead/create-lead'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { FormInput, FormTextarea } from '@menuxp/ui'
 import { ArrowRightIcon } from '@phosphor-icons/react'
+import { useMutation } from '@tanstack/react-query'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
-
-import { FormInput } from '@menuxp/ui'
-import { FormTextarea } from '@menuxp/ui'
-import { createLead, createLeadSchema, type CreateLeadInput } from '@/services/lead/create-lead'
-import { useMutation } from '@tanstack/react-query'
 
 import * as S from './styles'
 
