@@ -1,5 +1,6 @@
 import type { HttpClient } from '@api/infra/adapters/http/http-client.adapter'
 import type { Logger } from '@api/infra/adapters/logger/logger.adapter'
+import { inject } from '@api/infra/dependency-injection/registry'
 
 export interface WhatsAppComponent {
   type: 'header' | 'body' | 'footer' | 'button'
@@ -70,19 +71,22 @@ const UNRECOVERABLE_ERROR_CODES = [470, 131047, 131031, 131026]
 const RATE_LIMIT_JITTER_MS = 200
 
 export class WhatsAppMessagingAdapter implements WhatsAppMessagingClient {
+  @inject('HttpClient')
+  private readonly HttpClient!: HttpClient
+
+  @inject('Logger')
+  private readonly Logger!: Logger
+
   private readonly baseUrl: string
   private readonly phoneNumberId: string
   private readonly accessToken: string
 
-  constructor(
-    private readonly httpClient: HttpClient,
-    private readonly logger: Logger
-  ) {
+  constructor() {
     this.baseUrl = process.env.WHATSAPP_API_BASE_URL ?? 'https://graph.facebook.com/v18.0'
     this.phoneNumberId = process.env.WHATSAPP_BUSINESS_NUMBER_ID ?? ''
     this.accessToken = process.env.WHATSAPP_ACCESS_TOKEN ?? ''
     if (!this.phoneNumberId || !this.accessToken) {
-      this.logger.warn('WhatsApp credentials not configured', {
+      this.Logger.warn('WhatsApp credentials not configured', {
         hasPhoneNumberId: !!this.phoneNumberId,
         hasAccessToken: !!this.accessToken
       })
@@ -111,7 +115,7 @@ export class WhatsAppMessagingAdapter implements WhatsAppMessagingClient {
       'Content-Type': 'application/json'
     }
     const maskedPhone = this.maskPhone(phone)
-    this.logger.info('Sending WhatsApp template message', {
+    this.Logger.info('Sending WhatsApp template message', {
       correlationId,
       phone: maskedPhone,
       template,
@@ -119,14 +123,14 @@ export class WhatsAppMessagingAdapter implements WhatsAppMessagingClient {
       hasComponents: !!components
     })
     try {
-      const response = await this.httpClient.post<WhatsAppApiResponse>({
+      const response = await this.HttpClient.post<WhatsAppApiResponse>({
         url,
         body,
         headers
       })
       if (response.error) {
         const isUnrecoverable = UNRECOVERABLE_ERROR_CODES.includes(response.error.code)
-        this.logger.error('WhatsApp API returned error', {
+        this.Logger.error('WhatsApp API returned error', {
           correlationId,
           phone: maskedPhone,
           template,
@@ -144,7 +148,7 @@ export class WhatsAppMessagingAdapter implements WhatsAppMessagingClient {
       }
       if (response.messages && response.messages.length > 0) {
         const messageId = response.messages[0].id
-        this.logger.info('WhatsApp template message sent successfully', {
+        this.Logger.info('WhatsApp template message sent successfully', {
           correlationId,
           phone: maskedPhone,
           template,
@@ -155,7 +159,7 @@ export class WhatsAppMessagingAdapter implements WhatsAppMessagingClient {
           messageId
         }
       }
-      this.logger.error('WhatsApp API returned unexpected response format', {
+      this.Logger.error('WhatsApp API returned unexpected response format', {
         correlationId,
         phone: maskedPhone,
         template
@@ -168,7 +172,7 @@ export class WhatsAppMessagingAdapter implements WhatsAppMessagingClient {
         }
       }
     } catch (error) {
-      this.logger.error('WhatsApp API request failed', {
+      this.Logger.error('WhatsApp API request failed', {
         correlationId,
         phone: maskedPhone,
         template,

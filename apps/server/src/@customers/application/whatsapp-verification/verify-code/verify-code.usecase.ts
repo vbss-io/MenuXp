@@ -1,12 +1,17 @@
+import { inject } from '@api/infra/dependency-injection/registry';
 import type { VerificationCodeService } from '@customers/application/whatsapp-verification/verification-code.service';
-
-import type { VerifyCodeType } from './verify-code.schema';
+import type { VerifyCodeType } from '@customers/application/whatsapp-verification/verify-code/verify-code.schema';
 
 export class VerifyCodeUsecase {
-  constructor(private readonly verificationCodeService: VerificationCodeService) {}
+  @inject('VerificationCodeService')
+  private readonly VerificationCodeService!: VerificationCodeService
 
-  async execute({ verificationId, code, customerId }: VerifyCodeType): Promise<{ verificationToken: string; expiresInSeconds: number }> {
-    return await this.verificationCodeService.verifyCode({
+  async execute({
+    verificationId,
+    code,
+    customerId
+  }: VerifyCodeType): Promise<{ verificationToken: string; expiresInSeconds: number }> {
+    return await this.VerificationCodeService.verifyCode({
       verificationId,
       code,
       customerId

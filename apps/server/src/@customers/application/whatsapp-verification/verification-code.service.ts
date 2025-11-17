@@ -5,13 +5,14 @@ import { BadRequestError, UnauthorizedError } from '@api/domain/errors'
 import type { Cache } from '@api/infra/adapters/cache/cache.adapter'
 import type { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import type { WhatsAppMessagingClient } from '@api/infra/adapters/whatsapp/whatsapp-messaging.adapter'
+import { inject } from '@api/infra/dependency-injection/registry'
 import { WhatsAppVerification } from '@customers/domain/whatsapp-verifications/whatsapp-verification.entity'
 import type { WhatsAppVerificationRepository } from '@customers/infra/repositories/whatsapp-verification.repository'
 
 const CODE_HASH_SALT_ROUNDS = 10
 const VERIFICATION_TOKEN_TTL_MS = 600000
 const RESEND_COOLDOWN_MS = 60000
-const VERIFICATION_TEMPLATE_NAME = 'order_verification_code'
+// const VERIFICATION_TEMPLATE_NAME = 'order_verification_code'
 
 export interface VerificationRequestParams {
   phone: string
@@ -54,14 +55,26 @@ export interface VerificationCodeService {
 }
 
 export class VerificationCodeServiceImpl implements VerificationCodeService {
-  constructor(
-    private readonly verificationRepository: WhatsAppVerificationRepository,
-    private readonly whatsappClient: WhatsAppMessagingClient,
-    private readonly cache: Cache,
-    private readonly logger: Logger
-  ) {}
+  @inject('WhatsAppVerificationRepository')
+  private readonly WhatsAppVerificationRepository!: WhatsAppVerificationRepository
 
-  async requestCode({ phone, restaurantId, customerId, language = 'pt_BR', requestIp, userAgent }: VerificationRequestParams): Promise<VerificationRequestResult> {
+  @inject('WhatsAppMessagingClient')
+  private readonly WhatsAppMessagingClient!: WhatsAppMessagingClient
+
+  @inject('Cache')
+  private readonly Cache!: Cache
+
+  @inject('Logger')
+  private readonly Logger!: Logger
+
+  async requestCode({
+    phone,
+    restaurantId,
+    customerId,
+    language = 'pt_BR',
+    requestIp,
+    userAgent
+  }: VerificationRequestParams): Promise<VerificationRequestResult> {
     const correlationId = this.generateCorrelationId()
     await this.invalidatePendingVerifications(phone, restaurantId)
     // const code = this.generateCode() // To-Do: Remove this after testing
@@ -76,7 +89,7 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
       requestIp,
       userAgent
     })
-    const saved = await this.verificationRepository.create(verification)
+    const saved = await this.WhatsAppVerificationRepository.create(verification)
     // To-Do: Uncomment this after testing
     // const sendResult = await this.whatsappClient.sendTemplateMessage({
     //   phone,
@@ -103,7 +116,7 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
     //   })
     //   throw new BadRequestError('Failed to send verification code')
     // }
-    this.logger.info('Verification code requested successfully', {
+    this.Logger.info('Verification code requested successfully', {
       correlationId,
       verificationId: saved.id,
       phone: this.maskPhone(phone),
@@ -111,18 +124,16 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
       language
     })
     return {
-      verificationId: saved.id!,
+      verificationId: saved.id as string,
       expiresInSeconds: Math.floor(VERIFICATION_TOKEN_TTL_MS / 1000)
     }
   }
 
-  async resendCode(
-    params: VerificationRequestParams,
-    verificationId: string
-  ): Promise<VerificationRequestResult> {
-    const { phone, restaurantId, language = 'pt_BR' } = params
+  async resendCode(params: VerificationRequestParams, verificationId: string): Promise<VerificationRequestResult> {
+    // const { phone, restaurantId, language = 'pt_BR' } = params
+    const { phone, restaurantId } = params
     const correlationId = this.generateCorrelationId()
-    const verification = await this.verificationRepository.findById(verificationId)
+    const verification = await this.WhatsAppVerificationRepository.findById(verificationId)
     if (!verification) {
       throw new BadRequestError('Verification not found')
     }
@@ -141,7 +152,7 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
     const code = '123457'
     const codeHash = await this.hashCode(code)
     verification.markAsResent(codeHash)
-    await this.verificationRepository.update({ id: verification.id }, verification)
+    await this.WhatsAppVerificationRepository.update({ id: verification.id }, verification)
     // To-Do: Uncomment this after testing
     // const sendResult = await this.whatsappClient.sendTemplateMessage({
     //   phone,
@@ -169,7 +180,7 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
     //   })
     //   throw new BadRequestError('Failed to resend verification code')
     // }
-    this.logger.info('Verification code resent successfully', {
+    this.Logger.info('Verification code resent successfully', {
       correlationId,
       verificationId: verification.id,
       phone: this.maskPhone(phone),
@@ -177,19 +188,19 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
       resendCount: verification.metadata.resendCount
     })
     return {
-      verificationId: verification.id!,
+      verificationId: verification.id as string,
       expiresInSeconds: Math.floor(VERIFICATION_TOKEN_TTL_MS / 1000)
     }
   }
 
   async verifyCode({ verificationId, code, customerId }: VerificationVerifyParams): Promise<VerificationVerifyResult> {
     const correlationId = this.generateCorrelationId()
-    const verification = await this.verificationRepository.findById(verificationId)
+    const verification = await this.WhatsAppVerificationRepository.findById(verificationId)
     if (!verification) {
       throw new BadRequestError('Verification not found')
     }
     if (verification.isExpired()) {
-      this.logger.warn('Verification code expired', {
+      this.Logger.warn('Verification code expired', {
         correlationId,
         verificationId,
         phone: this.maskPhone(verification.phone)
@@ -200,7 +211,7 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
       throw new BadRequestError('Verification already completed')
     }
     if (!verification.canAttempt()) {
-      this.logger.warn('Verification attempts exceeded', {
+      this.Logger.warn('Verification attempts exceeded', {
         correlationId,
         verificationId,
         phone: this.maskPhone(verification.phone),
@@ -212,8 +223,8 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
     const isValid = await this.compareCode(code, verification.codeHash)
     if (!isValid) {
       verification.incrementAttempts()
-      await this.verificationRepository.update({ id: verification.id }, verification)
-      this.logger.warn('Invalid verification code attempt', {
+      await this.WhatsAppVerificationRepository.update({ id: verification.id }, verification)
+      this.Logger.warn('Invalid verification code attempt', {
         correlationId,
         verificationId,
         phone: this.maskPhone(verification.phone),
@@ -223,7 +234,7 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
       throw new UnauthorizedError('Invalid verification code')
     }
     verification.verify()
-    await this.verificationRepository.update({ id: verification.id }, verification)
+    await this.WhatsAppVerificationRepository.update({ id: verification.id }, verification)
     const token = this.generateToken()
     const tokenData: VerificationTokenData = {
       customerId,
@@ -231,8 +242,8 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
       phone: verification.phone,
       issuedAt: Date.now()
     }
-    this.cache.set(`checkout-verification:${token}`, tokenData, VERIFICATION_TOKEN_TTL_MS)
-    this.logger.info('Verification code verified successfully', {
+    this.Cache.set(`checkout-verification:${token}`, tokenData, VERIFICATION_TOKEN_TTL_MS)
+    this.Logger.info('Verification code verified successfully', {
       correlationId,
       verificationId,
       phone: this.maskPhone(verification.phone),
@@ -245,40 +256,40 @@ export class VerificationCodeServiceImpl implements VerificationCodeService {
   }
 
   validateToken(token: string): VerificationTokenData | null {
-    const tokenData = this.cache.get<VerificationTokenData>(`checkout-verification:${token}`)
+    const tokenData = this.Cache.get<VerificationTokenData>(`checkout-verification:${token}`)
     if (!tokenData) {
       return null
     }
     const age = Date.now() - tokenData.issuedAt
     if (age > VERIFICATION_TOKEN_TTL_MS) {
-      this.cache.delete(`checkout-verification:${token}`)
+      this.Cache.delete(`checkout-verification:${token}`)
       return null
     }
     return tokenData
   }
 
   async invalidate(verificationId: string): Promise<void> {
-    const verification = await this.verificationRepository.findById(verificationId)
+    const verification = await this.WhatsAppVerificationRepository.findById(verificationId)
     if (!verification) {
       return
     }
     verification.expire()
-    await this.verificationRepository.update({ id: verification.id }, verification)
-    this.logger.info('Verification invalidated', {
+    await this.WhatsAppVerificationRepository.update({ id: verification.id }, verification)
+    this.Logger.info('Verification invalidated', {
       verificationId,
       phone: this.maskPhone(verification.phone)
     })
   }
 
   private async invalidatePendingVerifications(phone: string, restaurantId: string): Promise<void> {
-    const pending = await this.verificationRepository.find({
+    const pending = await this.WhatsAppVerificationRepository.find({
       phone,
       restaurantId
     })
     for (const verification of pending) {
       if (verification.isPending()) {
         verification.expire()
-        await this.verificationRepository.update({ id: verification.id }, verification)
+        await this.WhatsAppVerificationRepository.update({ id: verification.id }, verification)
       }
     }
   }
