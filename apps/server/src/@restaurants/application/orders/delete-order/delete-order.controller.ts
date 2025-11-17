@@ -2,6 +2,7 @@ import { BaseController } from '@api/application/@base.controller'
 import { HttpCode, HttpMethod } from '@api/domain/enums/http.enum'
 import { InputValidate } from '@api/infra/adapters/validate/validate.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { DeleteOrderType } from '@restaurants/application/orders/delete-order/delete-order.schema'
 import { DeleteOrderUsecase } from '@restaurants/application/orders/delete-order/delete-order.usecase'
 

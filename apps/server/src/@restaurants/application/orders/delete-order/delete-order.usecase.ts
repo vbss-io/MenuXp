@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { DeleteOrderType } from '@restaurants/application/orders/delete-order/delete-order.schema'
 import { OrderRepository } from '@restaurants/infra/repositories/orders.repository'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'

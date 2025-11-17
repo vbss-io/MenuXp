@@ -1,8 +1,8 @@
+import { Button } from '@menuxp/ui'
 import { useState } from 'react'
 
 import { EditCartItemDialog } from '@/components/cart/edit-cart-item-dialog'
 import type { CartItem } from '@/types/cart'
-import { Button } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

@@ -1,3 +1,4 @@
+import { Button, Slider } from '@menuxp/ui'
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -7,6 +8,7 @@ import {
   ShieldCheckIcon,
   ShoppingCartIcon
 } from '@phosphor-icons/react'
+import { useMutation } from '@tanstack/react-query'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useTranslator } from 'vbss-translator'
@@ -22,8 +24,6 @@ import { useRestaurant } from '@/hooks/use-restaurant'
 import { type CreateOrderParams, createOrder as createOrderService } from '@/services/order/create-order'
 import type { Address } from '@/types/address'
 import { OperationType, PaymentMethod } from '@/types/order'
-import { Button, Slider } from '@menuxp/ui'
-import { useMutation } from '@tanstack/react-query'
 
 import * as S from './styles'
 

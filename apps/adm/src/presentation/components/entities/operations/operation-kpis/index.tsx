@@ -1,4 +1,3 @@
-import type { OperationKPI } from '@/domain/models/operation.model'
 import { Tooltip } from '@menuxp/ui'
 import {
   CheckCircleIcon,
@@ -10,6 +9,8 @@ import {
   XCircleIcon
 } from '@phosphor-icons/react'
 import styled from 'styled-components'
+
+import type { OperationKPI } from '@/domain/models/operation.model'
 
 interface OperationKPIsProps {
   kpis: OperationKPI

@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { WhatsAppVerification } from '@customers/domain/whatsapp-verifications/whatsapp-verification.entity'
 import {
   type WhatsAppVerificationDocument,

@@ -1,9 +1,9 @@
+import { Button, useLayout } from '@menuxp/ui'
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
 import React from 'react'
 import { useTranslator } from 'vbss-translator'
 
 import type { MenuItemOptional } from '@/types/menu-item'
-import { Button, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -32,7 +32,9 @@ export const MenuItemOptionals: React.FC<MenuItemOptionalsProps> = ({
         {optionals.map((optional) => (
           <S.OptionalItem key={optional.name} className="optional-item">
             <S.OptionalInfo className="optional-info">
-              <S.OptionalName className="optional-name">{optional.name}</S.OptionalName>
+              <S.OptionalName className="optional-name">
+                {t(optional.name, { preferExternal: true, sourceLanguage: 'pt' })}
+              </S.OptionalName>
               <S.OptionalPrice className="optional-price">+ R$ {optional.price.toFixed(2)}</S.OptionalPrice>
             </S.OptionalInfo>
             <S.OptionalControls className="optional-controls">

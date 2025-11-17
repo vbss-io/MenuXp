@@ -1,4 +1,6 @@
+import { Loading } from '@menuxp/ui'
 import { ShoppingCartIcon } from '@phosphor-icons/react'
+import { useQuery } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslator } from 'vbss-translator'
@@ -9,8 +11,6 @@ import { useRestaurant } from '@/hooks/use-restaurant'
 import { getRestaurantMenuItems } from '@/services/menu/get-menu-items'
 import type { MenuItem } from '@/types/menu-item'
 import { MenuSectionType, type MenuItemsConfig, type MenuSection } from '@/types/menu-layout'
-import { Loading } from '@menuxp/ui'
-import { useQuery } from '@tanstack/react-query'
 
 import * as S from './styles'
 
@@ -192,7 +192,7 @@ export const MenuItemsSection: React.FC<MenuItemsSectionProps> = ({ section, moc
               <S.SectionTitle className="section-title">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <ShoppingCartIcon size={20} />
-                  <span>{sectionTitle}</span>
+                  <span>{t(sectionTitle, { preferExternal: true, sourceLanguage: 'pt' })}</span>
                 </div>
               </S.SectionTitle>
             )}
@@ -210,12 +210,7 @@ export const MenuItemsSection: React.FC<MenuItemsSectionProps> = ({ section, moc
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
-                  <MenuItemCard
-                    item={item}
-                    onAddToCart={handleAddToCart}
-                    disabled={isDragActive}
-                    translate={index === 0}
-                  />
+                  <MenuItemCard item={item} onAddToCart={handleAddToCart} disabled={isDragActive} />
                 </motion.div>
               ))}
             </S.MenuItemsGrid>

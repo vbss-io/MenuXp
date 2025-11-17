@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { WhatsAppNotificationLog } from '@restaurants/domain/whatsapp-notifications/whatsapp-notification-log.entity'
 import {
   type WhatsAppNotificationLogDocument,

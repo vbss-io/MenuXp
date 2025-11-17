@@ -1,4 +1,5 @@
 import type { DomainEvent } from '@api/infra/events/domain-event'
+
 import { SUBSCRIPTION_PAYMENT_CONFIRMED } from '@restaurants/domain/subscriptions/consts/subscription-events.const'
 
 export interface PaymentConfirmedData {

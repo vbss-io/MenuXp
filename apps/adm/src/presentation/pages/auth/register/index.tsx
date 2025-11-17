@@ -1,5 +1,3 @@
-import { RegisterUsecase } from '@/application/auth/register.usecase'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, FormCheckbox, FormInput } from '@menuxp/ui'
 import { useEffect, useState } from 'react'
@@ -7,6 +5,9 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
+
+import { RegisterUsecase } from '@/application/auth/register.usecase'
+import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from '../styles'
 

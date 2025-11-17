@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetCombosType } from '@restaurants/application/combos/get-combos/get-combos.schema'
 import { Combo } from '@restaurants/domain/combos/combo.entity'
 import { ComboRepository } from '@restaurants/infra/repositories/combo.repository'

@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import type { OrderStatus } from '@restaurants/domain/orders/enums/order-status.enum'
 import { OrderStatusHistory } from '@restaurants/domain/orders/order-status-history.entity'
 import {

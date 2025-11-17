@@ -1,5 +1,6 @@
 import { NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { ResendCodeType } from '@customers/application/whatsapp-verification/resend-code/resend-code.schema'
 import type { VerificationCodeService } from '@customers/application/whatsapp-verification/verification-code.service'
 import { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'

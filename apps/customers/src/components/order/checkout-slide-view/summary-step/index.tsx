@@ -1,9 +1,9 @@
+import { useLayout } from '@menuxp/ui'
 import { useTranslator } from 'vbss-translator'
 
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { Cart } from '@/types/cart'
 import { OperationType, PaymentMethod } from '@/types/order'
-import { useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 

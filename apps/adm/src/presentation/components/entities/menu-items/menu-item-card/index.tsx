@@ -1,11 +1,12 @@
-import { DeleteMenuItemUsecase } from '@/application/menu-items/delete-menu-item.usecase'
-import { ToggleMenuItemStatusUsecase } from '@/application/menu-items/toggle-menu-item-status.usecase'
-import type { MenuItem } from '@/domain/models/menu-item.model'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { Button, Chip, Dialog, ImageCarousel, Loading } from '@menuxp/ui'
 import { CaretDownIcon, CaretUpIcon, EyeIcon, EyeSlashIcon, PencilIcon, TrashIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+
+import { DeleteMenuItemUsecase } from '@/application/menu-items/delete-menu-item.usecase'
+import { ToggleMenuItemStatusUsecase } from '@/application/menu-items/toggle-menu-item-status.usecase'
+import type { MenuItem } from '@/domain/models/menu-item.model'
+import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

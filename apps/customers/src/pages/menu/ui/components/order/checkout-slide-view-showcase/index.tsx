@@ -1,6 +1,8 @@
-import { CheckoutSlideView } from '@/components/order/checkout-slide-view'
 import { Button } from '@menuxp/ui'
 import { useState } from 'react'
+
+import { CheckoutSlideView } from '@/components/order/checkout-slide-view'
+
 import * as S from '../../styles'
 
 export const CheckoutSlideViewShowcase: React.FC = () => {

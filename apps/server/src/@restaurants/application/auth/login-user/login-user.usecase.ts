@@ -5,6 +5,7 @@ import { TokenAuthentication } from '@api/infra/adapters/auth/token-auth.adapter
 import { Cache } from '@api/infra/adapters/cache/cache.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
 import { UserAuth } from '@api/infra/facades/user-auth.dto'
+
 import { LoginUserType } from '@restaurants/application/auth/login-user/login-user.schema'
 import { PlanFeatures } from '@restaurants/domain/plans/plan.entity'
 import { UserStatus } from '@restaurants/domain/users/enums/user-status.enum'

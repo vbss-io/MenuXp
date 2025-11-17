@@ -2,6 +2,7 @@ import { ForbiddenError } from '@api/domain/errors/forbidden.error'
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { Queue } from '@api/infra/adapters/queue/queue.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { OperationStatus } from '@restaurants/domain/operations/enums/operation-status.enum'
 import { ORDER_STATUS_CHANGED } from '@restaurants/domain/orders/consts/order-events.const'
 import { OrderStatus } from '@restaurants/domain/orders/enums/order-status.enum'

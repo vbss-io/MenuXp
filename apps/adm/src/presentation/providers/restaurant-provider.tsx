@@ -1,3 +1,6 @@
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import {
   GetRestaurantByIdUsecase,
   type RestaurantConfigValidation
@@ -7,8 +10,6 @@ import type { LocalStorage } from '@/domain/storage/local-storage'
 import { Registry } from '@/infra/dependency-injection/registry'
 import { RestaurantContext } from '@/presentation/contexts/restaurant-context'
 import { useAuth } from '@/presentation/hooks/use-auth'
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import toast from 'react-hot-toast'
 
 interface RestaurantProviderProps {
   children: React.ReactNode

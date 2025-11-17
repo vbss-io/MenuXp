@@ -1,12 +1,13 @@
-import { ComboItemsList } from '@/components/combo/combo-items-list'
-import { getRestaurantMenuCombo } from '@/services/menu/get-combo'
-import { getRestaurantMenuItem } from '@/services/menu/get-menu-item'
-import type { CartItem } from '@/types/cart'
 import { Button, Dialog, FormTextarea, useLayout } from '@menuxp/ui'
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { useTranslator } from 'vbss-translator'
+
+import { ComboItemsList } from '@/components/combo/combo-items-list'
+import { getRestaurantMenuCombo } from '@/services/menu/get-combo'
+import { getRestaurantMenuItem } from '@/services/menu/get-menu-item'
+import type { CartItem } from '@/types/cart'
 
 import * as S from './styles'
 
@@ -156,7 +157,8 @@ export const EditCartItemDialog = ({ isOpen, onClose, onSave, item, restaurantId
       <S.DialogContent className={`edit-cart-item-dialog layout-${layout}`}>
         <S.DialogHeader className="dialog-header">
           <S.DialogTitle className="dialog-title">
-            {t('Editar')} {isCombo ? t('Combo') : t('Item')}: {item.name}
+            {t('Editar')} {isCombo ? t('Combo') : t('Item')}:{' '}
+            {t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}
             {isCombo && <S.ComboBadge className="combo-badge">{t('COMBO')}</S.ComboBadge>}
           </S.DialogTitle>
         </S.DialogHeader>
@@ -181,7 +183,9 @@ export const EditCartItemDialog = ({ isOpen, onClose, onSave, item, restaurantId
                     {t('Informações do')} {isCombo ? t('Combo') : t('Item')}
                   </S.SectionTitle>
                   <S.ItemInfo className="item-info">
-                    <S.ItemName className="item-name">{editedItem.name}</S.ItemName>
+                    <S.ItemName className="item-name">
+                      {t(editedItem.name, { preferExternal: true, sourceLanguage: 'pt' })}
+                    </S.ItemName>
                     <S.ItemPrice className="item-price">R$ {editedItem.price.toFixed(2).replace('.', ',')}</S.ItemPrice>
                   </S.ItemInfo>
                   <S.FieldGroup>
@@ -210,7 +214,9 @@ export const EditCartItemDialog = ({ isOpen, onClose, onSave, item, restaurantId
                       return (
                         <S.OptionalCard key={menuOptional.name} className="optional-card">
                           <S.OptionalHeader className="optional-header">
-                            <S.OptionalTitle className="optional-title">{menuOptional.name}</S.OptionalTitle>
+                            <S.OptionalTitle className="optional-title">
+                              {t(menuOptional.name, { preferExternal: true, sourceLanguage: 'pt' })}
+                            </S.OptionalTitle>
                             <S.OptionalPrice className="optional-price">
                               R$ {menuOptional.price.toFixed(2).replace('.', ',')}
                             </S.OptionalPrice>

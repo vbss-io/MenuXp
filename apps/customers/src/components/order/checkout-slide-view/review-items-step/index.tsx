@@ -1,7 +1,7 @@
+import { useLayout } from '@menuxp/ui'
 import { useTranslator } from 'vbss-translator'
 
 import type { Cart, CartItem } from '@/types/cart'
-import { useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -65,7 +65,9 @@ export const ReviewItemsStep = ({ cart }: ReviewItemsStepProps) => {
           <S.ItemCard key={index} className="item-card">
             <S.ItemContent className="item-content">
               <S.ItemInfo className="item-info">
-                <S.ItemName className="item-name">{item.name}</S.ItemName>
+                <S.ItemName className="item-name">
+                  {t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}
+                </S.ItemName>
                 <S.ItemDetails className="item-details">
                   {item.quantity}x {formatPrice(item.price)}
                 </S.ItemDetails>
@@ -76,7 +78,7 @@ export const ReviewItemsStep = ({ cart }: ReviewItemsStepProps) => {
                   {item.optionals.map((optional, optIndex) => (
                     <S.OptionalItem key={optIndex} className="optional-item">
                       <span>
-                        + {optional.name} ({optional.quantity}x)
+                        + {t(optional.name, { preferExternal: true, sourceLanguage: 'pt' })} ({optional.quantity}x)
                       </span>
                       <span>{formatPrice(optional.price * optional.quantity)}</span>
                     </S.OptionalItem>

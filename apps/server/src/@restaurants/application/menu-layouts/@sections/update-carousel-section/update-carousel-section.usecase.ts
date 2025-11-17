@@ -4,8 +4,10 @@ import { BadRequestError } from '@api/domain/errors/bad-request.error'
 import { FileStorage } from '@api/infra/adapters/storage/storage.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
 import { CustomFile, FileConverter } from '@api/infra/services/file-converter.service'
+
 import { MenuSectionType } from '@restaurants/domain/menu-layouts/enums/menu-layout-section-type.enum'
 import { CarouselConfig } from '@restaurants/domain/menu-layouts/types/section-configs.type'
+
 import { BaseSectionUsecase, BaseSectionUsecaseInput, BaseSectionUsecaseOutput } from '../base-section.usecase'
 
 export interface UpdateCarouselSectionUsecaseInput extends BaseSectionUsecaseInput {

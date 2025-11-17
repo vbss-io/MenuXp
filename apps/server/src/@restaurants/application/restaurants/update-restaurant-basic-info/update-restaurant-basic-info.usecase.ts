@@ -2,6 +2,7 @@ import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { FileStorage } from '@api/infra/adapters/storage/storage.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
 import { CustomFile, FileConverter } from '@api/infra/services/file-converter.service'
+
 import { UpdateRestaurantBasicInfoType } from '@restaurants/application/restaurants/update-restaurant-basic-info/update-restaurant-basic-info.schema'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'

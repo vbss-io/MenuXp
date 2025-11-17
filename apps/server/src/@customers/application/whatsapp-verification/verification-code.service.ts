@@ -1,11 +1,13 @@
-import { compare, hash } from 'bcryptjs'
 import { randomBytes } from 'crypto'
+
+import { compare, hash } from 'bcryptjs'
 
 import { BadRequestError, UnauthorizedError } from '@api/domain/errors'
 import type { Cache } from '@api/infra/adapters/cache/cache.adapter'
 import type { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import type { WhatsAppMessagingClient } from '@api/infra/adapters/whatsapp/whatsapp-messaging.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { WhatsAppVerification } from '@customers/domain/whatsapp-verifications/whatsapp-verification.entity'
 import type { WhatsAppVerificationRepository } from '@customers/infra/repositories/whatsapp-verification.repository'
 

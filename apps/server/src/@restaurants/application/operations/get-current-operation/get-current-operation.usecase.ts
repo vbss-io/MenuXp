@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetCurrentOperationQuery } from '@restaurants/application/operations/@queries/get-current-operation.query'
 import { GetCurrentOperationType } from '@restaurants/application/operations/get-current-operation/get-current-operation.schema'
 import { Operation } from '@restaurants/domain/operations/operation.entity'

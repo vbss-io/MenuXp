@@ -1,3 +1,9 @@
+import { Button, Combobox, FormInput, Loading, Pagination, type ComboboxOption } from '@menuxp/ui'
+import { BowlFoodIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
 import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
 import type { MenuItem } from '@/domain/models/menu-item.model'
@@ -9,11 +15,6 @@ import {
 import { MenuItemModal } from '@/presentation/components/entities/menu-items/menu-item-modal'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
-import { Button, Combobox, FormInput, Loading, Pagination, type ComboboxOption } from '@menuxp/ui'
-import { BowlFoodIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 
 import * as Page from '../../../styles'
 import * as S from '../styles'

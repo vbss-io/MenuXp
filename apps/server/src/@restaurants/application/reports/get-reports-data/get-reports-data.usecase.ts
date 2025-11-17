@@ -1,6 +1,7 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type {
   GetReportsDataQuery,
   ReportsDatasetOutput

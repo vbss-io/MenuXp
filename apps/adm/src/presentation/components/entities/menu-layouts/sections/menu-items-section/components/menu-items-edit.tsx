@@ -1,3 +1,9 @@
+import { Button, Combobox, type ComboboxOption, FormInput, Loading } from '@menuxp/ui'
+import { WarningIcon, XIcon } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
+import { useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
 import { AddSectionUsecase } from '@/application/menu-layouts/sections/add-section.usecase'
 import { UpdateMenuItemsSectionUsecase } from '@/application/menu-layouts/sections/update-menu-items-section.usecase'
@@ -6,11 +12,6 @@ import type { MenuItemsConfig, MenuSection } from '@/domain/models/menu-layout.m
 import type { MenuSectionDefinition } from '@/domain/models/menu-section-definition.model'
 import { validateSection } from '@/presentation/hooks/use-menu-layouts'
 import { useRestaurant } from '@/presentation/hooks/use-restaurant'
-import { Button, Combobox, type ComboboxOption, FormInput, Loading } from '@menuxp/ui'
-import { WarningIcon, XIcon } from '@phosphor-icons/react'
-import { motion } from 'framer-motion'
-import { useCallback, useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 
 import * as S from '../styles'
 

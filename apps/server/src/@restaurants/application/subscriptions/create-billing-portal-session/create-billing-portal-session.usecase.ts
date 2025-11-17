@@ -2,6 +2,7 @@ import { NotFoundError } from '@api/domain/errors'
 import { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
 import { SubscriptionPaymentGateway } from '@api/infra/gateways/subscription-payment.gateway'
+
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'
 
 interface CreateBillingPortalSessionUsecaseInput {

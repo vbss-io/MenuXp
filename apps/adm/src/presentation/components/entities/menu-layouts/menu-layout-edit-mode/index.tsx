@@ -1,11 +1,12 @@
-import { UpdateMenuLayoutUsecase } from '@/application/menu-layouts/update-menu-layout.usecase'
-import { LAYOUTS } from '@/domain/consts/layouts.const'
-import type { MenuLayout } from '@/domain/models/menu-layout.model'
 import { Button, FormInput, FormTextarea, Loading } from '@menuxp/ui'
 import { CheckIcon, WarningIcon, XIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+
+import { UpdateMenuLayoutUsecase } from '@/application/menu-layouts/update-menu-layout.usecase'
+import { LAYOUTS } from '@/domain/consts/layouts.const'
+import type { MenuLayout } from '@/domain/models/menu-layout.model'
 
 import * as S from './styles'
 

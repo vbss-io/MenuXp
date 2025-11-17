@@ -1,11 +1,12 @@
-import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
-import { GetCombosUsecase } from '@/application/combos/get-combos.usecase'
-import type { Combo } from '@/domain/models/combo.model'
+import { Button, Combobox, FormInput, Loading, Pagination, type ComboboxOption } from '@menuxp/ui'
 import { MagnifyingGlassIcon, PackageIcon, PlusIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
+import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
+import { GetCombosUsecase } from '@/application/combos/get-combos.usecase'
+import type { Combo } from '@/domain/models/combo.model'
 import { ComboCard } from '@/presentation/components/entities/combos/combo-card'
 import {
   ComboFilters,
@@ -14,7 +15,6 @@ import {
 import { ComboModal } from '@/presentation/components/entities/combos/combo-modal'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
-import { Button, Combobox, FormInput, Loading, Pagination, type ComboboxOption } from '@menuxp/ui'
 
 import * as Page from '../../../styles'
 import * as S from '../styles'

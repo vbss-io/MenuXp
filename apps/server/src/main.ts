@@ -21,7 +21,9 @@ import { ExpressAuthHandler } from '@api/infra/handlers/express-auth.handler'
 import { ExpressErrorHandler } from '@api/infra/handlers/express-error.handler'
 import { ExpressHttpLoggerHandler } from '@api/infra/handlers/express-http-logger.handler'
 import { FileConverterService } from '@api/infra/services/file-converter.service'
+
 import { CustomersModule } from '@customers/customers.module'
+
 import { RestaurantsModule } from '@restaurants/restaurants.module'
 
 const PORT = Number(process.env.PORT ?? 3000)

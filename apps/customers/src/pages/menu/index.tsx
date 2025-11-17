@@ -1,3 +1,4 @@
+import { MenuNavbar } from '@menuxp/ui'
 import { useEffect, useMemo, useRef } from 'react'
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useTranslator } from 'vbss-translator'
@@ -12,7 +13,6 @@ import { RestaurantHeader } from '@/components/restaurant/restaurant-header'
 import { RestaurantOperationWarningBanner } from '@/components/restaurant/restaurant-operation-warning-banner'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { MenuSectionType, type MenuSection } from '@/types/menu-layout'
-import { MenuNavbar } from '@menuxp/ui'
 
 import * as S from './styles'
 

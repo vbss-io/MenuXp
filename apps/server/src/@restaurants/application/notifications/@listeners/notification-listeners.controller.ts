@@ -1,5 +1,6 @@
 import { BaseController } from '@api/application/@base.controller'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { OrderCreatedListener } from '@restaurants/application/notifications/@listeners/order-created.listener'
 import { OrderStatusChangedListener } from '@restaurants/application/notifications/@listeners/order-status-changed.listener'
 import { WhatsAppOrderCreatedListener } from '@restaurants/application/notifications/@listeners/whatsapp-order-created.listener'

@@ -1,3 +1,4 @@
+import { Button, Dialog, FormTextarea, useLayout } from '@menuxp/ui'
 import { MinusIcon, PlusIcon, ShoppingCartIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useTranslator } from 'vbss-translator'
@@ -7,7 +8,6 @@ import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { Combo } from '@/types/combo'
-import { Button, Dialog, FormTextarea, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -80,12 +80,20 @@ export const ComboDialog = ({ isOpen, onClose, item }: ComboDialogProps) => {
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <S.DialogContent className={`combo-dialog layout-${layout}`}>
         <S.DialogHeader className="dialog-header">
-          <S.ProductImage src={item.medias[0]} alt={item.name} className="product-image" />
+          <S.ProductImage
+            src={item.medias[0]}
+            alt={t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}
+            className="product-image"
+          />
           <S.ProductInfo className="product-info">
             <S.ComboBadge className="combo-badge">{t('COMBO')}</S.ComboBadge>
-            <S.ProductTitle className="product-title">{item.name}</S.ProductTitle>
+            <S.ProductTitle className="product-title">
+              {t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}
+            </S.ProductTitle>
             {item.description && (
-              <S.ProductDescription className="product-description">{item.description}</S.ProductDescription>
+              <S.ProductDescription className="product-description">
+                {t(item.description, { preferExternal: true, sourceLanguage: 'pt' })}
+              </S.ProductDescription>
             )}
             <S.PriceContainer className="price-container">
               <S.Price className="price">R$ {finalPrice.toFixed(2)}</S.Price>

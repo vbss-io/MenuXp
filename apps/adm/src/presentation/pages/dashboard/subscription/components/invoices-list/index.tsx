@@ -1,6 +1,7 @@
-import type { Invoice } from '@/domain/models/subscription.model'
 import { Button } from '@menuxp/ui'
 import { DownloadIcon, FileTextIcon } from '@phosphor-icons/react'
+
+import type { Invoice } from '@/domain/models/subscription.model'
 
 import * as S from './styles'
 

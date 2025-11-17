@@ -1,6 +1,7 @@
 import { NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
 import { Mediator } from '@api/infra/events/mediator'
+
 import { UpdateUserStatusType } from '@restaurants/application/admin/update-user-status/update-user-status.schema'
 import { USER_STATUS_NON_ACTIVE_UPDATED } from '@restaurants/domain/auth/consts/auth-events.const'
 import { UserStatusNonActiveUpdated } from '@restaurants/domain/auth/events/user-status-non-active-updated.event'

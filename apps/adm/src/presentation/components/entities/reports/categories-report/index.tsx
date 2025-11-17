@@ -1,8 +1,9 @@
-import type { CategoriesData } from '@/domain/models/reports.model'
 import { FolderOpen, TrendDown, TrendUp } from '@phosphor-icons/react'
 import type { ApexOptions } from 'apexcharts'
 import { useMemo } from 'react'
 import ReactApexChart from 'react-apexcharts'
+
+import type { CategoriesData } from '@/domain/models/reports.model'
 
 import * as S from '../orders-report/styles'
 

@@ -1,6 +1,7 @@
 import { NotFoundError } from '@api/domain/errors'
 import { PasswordAuthentication } from '@api/infra/adapters/auth/password-auth.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { UpdatePasswordType } from '@restaurants/application/auth/update-password/update-password.schema'
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'
 

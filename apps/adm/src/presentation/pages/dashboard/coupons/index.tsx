@@ -1,3 +1,9 @@
+import { Button, FormInput, Loading, Pagination } from '@menuxp/ui'
+import { MagnifyingGlassIcon, PlusIcon, TicketIcon } from '@phosphor-icons/react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { GetRestaurantCouponsUsecase } from '@/application/coupons/get-restaurant-coupons.usecase'
 import { CouponStatus } from '@/domain/enums/coupons/coupon-status.enum'
 import type { Coupon } from '@/domain/models/coupon.model'
@@ -7,11 +13,6 @@ import { CouponModal } from '@/presentation/components/entities/coupons/coupon-m
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
-import { Button, FormInput, Loading, Pagination } from '@menuxp/ui'
-import { MagnifyingGlassIcon, PlusIcon, TicketIcon } from '@phosphor-icons/react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 
 import * as Page from '../styles'
 import * as S from './styles'

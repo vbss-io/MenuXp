@@ -1,6 +1,7 @@
 import { FileUrl } from '@api/domain/vos/file-url.vo'
 import { Observable } from '@api/infra/events/observer'
 import type { UserAuth } from '@api/infra/facades/user-auth.dto'
+
 import { ResetPasswordRequested } from '@restaurants/domain/auth/events/reset-password-requested.event'
 import { UserRegistered } from '@restaurants/domain/auth/events/user-registered.event'
 import { type UserRole } from '@restaurants/domain/users/enums/user-role.enum'

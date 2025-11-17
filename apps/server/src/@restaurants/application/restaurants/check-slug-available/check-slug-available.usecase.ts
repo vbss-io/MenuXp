@@ -1,4 +1,5 @@
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { CheckSlugType } from '@restaurants/application/restaurants/check-slug-available/check-slug-available.schema'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'
 

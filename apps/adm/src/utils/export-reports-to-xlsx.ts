@@ -1,5 +1,6 @@
-import type { ReportsDataset, ReportsFilters } from '@/domain/models/reports.model'
 import * as XLSX from 'xlsx'
+
+import type { ReportsDataset, ReportsFilters } from '@/domain/models/reports.model'
 
 interface ExportReportsInput {
   data: ReportsDataset

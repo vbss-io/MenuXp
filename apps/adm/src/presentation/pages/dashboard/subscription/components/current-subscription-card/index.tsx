@@ -1,10 +1,11 @@
-import { CancelSubscriptionUsecase } from '@/application/subscriptions/cancel-subscription.usecase'
-import { CreateBillingPortalSessionUsecase } from '@/application/subscriptions/create-billing-portal-session.usecase'
-import type { SubscriptionViewModel } from '@/domain/models/subscription.model'
 import { Button } from '@menuxp/ui'
 import { CheckCircleIcon, CreditCardIcon, WarningCircleIcon, XCircleIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+
+import { CancelSubscriptionUsecase } from '@/application/subscriptions/cancel-subscription.usecase'
+import { CreateBillingPortalSessionUsecase } from '@/application/subscriptions/create-billing-portal-session.usecase'
+import type { SubscriptionViewModel } from '@/domain/models/subscription.model'
 
 import * as S from './styles'
 

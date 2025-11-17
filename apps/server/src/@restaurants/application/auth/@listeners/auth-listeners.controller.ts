@@ -1,5 +1,6 @@
 import { BaseController } from '@api/application/@base.controller'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { ResetPasswordRequestedListener } from '@restaurants/application/auth/@listeners/reset-password-requested.listener'
 import { UserRegisteredListener } from '@restaurants/application/auth/@listeners/user-registered.listener'
 import { RESET_PASSWORD_REQUESTED, USER_REGISTERED } from '@restaurants/domain/auth/consts/auth-events.const'

@@ -1,4 +1,5 @@
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import {
   GetCategoriesQueryBuilderMongoose,
   type GetCategoriesQueryInput

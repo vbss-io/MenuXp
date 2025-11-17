@@ -1,5 +1,3 @@
-import { useAuth } from '@/presentation/hooks/use-auth'
-import { useSidebar } from '@/presentation/hooks/use-sidebar'
 import {
   BowlFoodIcon,
   CaretLeftIcon,
@@ -17,6 +15,9 @@ import {
 import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+
+import { useAuth } from '@/presentation/hooks/use-auth'
+import { useSidebar } from '@/presentation/hooks/use-sidebar'
 
 import * as S from './styles'
 

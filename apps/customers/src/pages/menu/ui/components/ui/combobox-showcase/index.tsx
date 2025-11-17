@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-
 import { Combobox, type ComboboxOption } from '@menuxp/ui'
+import React, { useState } from 'react'
 
 import * as S from '../../styles'
 

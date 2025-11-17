@@ -1,4 +1,6 @@
+import { Loading } from '@menuxp/ui'
 import { ArrowLeftIcon, CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
+import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslator } from 'vbss-translator'
@@ -10,8 +12,6 @@ import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { getOrdersByClient } from '@/services/order/get-orders-by-client'
 import { OrderStatus } from '@/types/order'
-import { Loading } from '@menuxp/ui'
-import { useQuery } from '@tanstack/react-query'
 
 import { ChildBackButton as BackButton, ChildContainer as Container } from '../styles'
 import * as S from './styles'
@@ -115,7 +115,7 @@ export const RestaurantProfilePage = () => {
                 {order.items.map((item, idx) => (
                   <S.OrderItem key={idx}>
                     <span>
-                      {item.quantity}x {item.name}
+                      {item.quantity}x {t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}
                     </span>
                   </S.OrderItem>
                 ))}

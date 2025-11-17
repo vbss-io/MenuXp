@@ -1,8 +1,9 @@
-import { MenuLayoutStatus } from '@/domain/enums/menu-layouts/menu-layout-status.enum'
-import type { MenuLayout } from '@/domain/models/menu-layout.model'
 import { Button } from '@menuxp/ui'
 import { CheckIcon, TrashIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
+
+import { MenuLayoutStatus } from '@/domain/enums/menu-layouts/menu-layout-status.enum'
+import type { MenuLayout } from '@/domain/models/menu-layout.model'
 
 import * as S from './styles'
 

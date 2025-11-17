@@ -1,7 +1,8 @@
-import type { CustomersData } from '@/domain/models/reports.model'
 import { Users } from '@phosphor-icons/react'
 import type { ApexOptions } from 'apexcharts'
 import ReactApexChart from 'react-apexcharts'
+
+import type { CustomersData } from '@/domain/models/reports.model'
 
 import * as S from '../items-report/styles'
 import * as RS from '../orders-report/styles'

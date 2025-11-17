@@ -1,6 +1,7 @@
 import { NotFoundError } from '@api/domain/errors'
 import { FileUrl } from '@api/domain/vos/file-url.vo'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetMenuLayoutType } from '@restaurants/application/menu-layouts/get-menu-layout/get-menu-layout.schema'
 import { MenuSectionType } from '@restaurants/domain/menu-layouts/enums/menu-layout-section-type.enum'
 import type { MenuLayout } from '@restaurants/domain/menu-layouts/menu-layout.entity'

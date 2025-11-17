@@ -1,8 +1,10 @@
 import { BadRequestError } from '@api/domain/errors/bad-request.error'
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { inject } from '@api/infra/dependency-injection/registry'
-import { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'
+
 import { GetOrdersByClientType } from '@customers/application/orders/get-orders-by-client/get-orders-by-client.schema'
+import { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'
+
 import { Order } from '@restaurants/domain/orders/orders.entity'
 import { OrderRepository } from '@restaurants/infra/repositories/orders.repository'
 

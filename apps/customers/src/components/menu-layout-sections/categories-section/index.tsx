@@ -1,4 +1,6 @@
+import { ICONS, ICONS_KEYS, Loading } from '@menuxp/ui'
 import { FolderIcon } from '@phosphor-icons/react'
+import { useQuery } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -9,8 +11,6 @@ import { useRestaurant } from '@/hooks/use-restaurant'
 import { getRestaurantMenuCategories } from '@/services/menu/get-categories'
 import type { Category } from '@/types/category'
 import { MenuSectionType, type CategoriesConfig, type MenuSection } from '@/types/menu-layout'
-import { ICONS, ICONS_KEYS, Loading } from '@menuxp/ui'
-import { useQuery } from '@tanstack/react-query'
 
 import * as S from './styles'
 
@@ -172,9 +172,13 @@ export const CategoriesSection: React.FC<CategoriesSectionProps> = ({ section, m
                 className={`category-card layout-${layout}`}
               >
                 <S.CategoryIcon className="category-icon">{getIconComponent(category.icon)}</S.CategoryIcon>
-                <S.CategoryName className="category-name">{category.name}</S.CategoryName>
+                <S.CategoryName className="category-name">
+                  {t(category.name, { preferExternal: true, sourceLanguage: 'pt' })}
+                </S.CategoryName>
                 {category.description && (
-                  <S.CategoryDescription className="category-description">{category.description}</S.CategoryDescription>
+                  <S.CategoryDescription className="category-description">
+                    {t(category.description, { preferExternal: true, sourceLanguage: 'pt' })}
+                  </S.CategoryDescription>
                 )}
               </S.CategoryCard>
             ))}

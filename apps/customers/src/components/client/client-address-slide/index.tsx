@@ -1,10 +1,11 @@
-import { ClientAddressForm } from '@/components/client/client-address-form'
-import { useClient } from '@/hooks/use-client'
-import type { Address } from '@/types/address'
 import { Button, Slider } from '@menuxp/ui'
 import { ArrowRightIcon, MapPinIcon } from '@phosphor-icons/react'
 import { useCallback, useMemo, useState } from 'react'
 import { useTranslator } from 'vbss-translator'
+
+import { ClientAddressForm } from '@/components/client/client-address-form'
+import { useClient } from '@/hooks/use-client'
+import type { Address } from '@/types/address'
 
 interface ClientAddressSlideProps {
   isOpen: boolean

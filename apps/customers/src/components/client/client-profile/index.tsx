@@ -1,3 +1,4 @@
+import { useLayout } from '@menuxp/ui'
 import { MapPinIcon, SignOutIcon, UserIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useTranslator } from 'vbss-translator'
@@ -5,7 +6,6 @@ import { useTranslator } from 'vbss-translator'
 import { ClientAddressSlide } from '@/components/client/client-address-slide'
 import { ClientNameSlide } from '@/components/client/client-name-slide'
 import { useClient } from '@/hooks/use-client'
-import { useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -78,7 +78,6 @@ export const ClientProfile = ({ onLogout }: ClientProfileProps) => {
           </S.CardDescription>
         </S.ActionCard>
       </S.CardsRow>
-
       <ClientAddressSlide isOpen={isAddressSlideOpen} onClose={() => setIsAddressSlideOpen(false)} />
       <ClientNameSlide isOpen={isNameSlideOpen} onClose={() => setIsNameSlideOpen(false)} />
     </S.ProfileContainer>

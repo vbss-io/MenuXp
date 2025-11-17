@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetMenuItemsQuery } from '@restaurants/application/menu-items/@queries/get-menu-items.query'
 import { GetMenuItemsType } from '@restaurants/application/menu-items/get-menu-items/get-menu-items.schema'
 import { MenuItem } from '@restaurants/domain/menu-items/menu-item.entity'

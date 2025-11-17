@@ -1,4 +1,5 @@
 import { Observable } from '@api/infra/events/observer'
+
 import type { PlanCode } from '@restaurants/domain/plans/enums/plan-code.enum'
 import type { PlanFeatures } from '@restaurants/domain/plans/plan.entity'
 import type { BillingCycle } from '@restaurants/domain/subscriptions/enums/billing-cycle.enum'

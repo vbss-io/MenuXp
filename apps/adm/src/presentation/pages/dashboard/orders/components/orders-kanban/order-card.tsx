@@ -1,6 +1,7 @@
-import type { Order, OrderStatus } from '@/domain/models/order.model'
 import { Clock, MapPin, ShoppingCart, User } from '@phosphor-icons/react'
 import styled from 'styled-components'
+
+import type { Order, OrderStatus } from '@/domain/models/order.model'
 
 interface OrderCardProps {
   order: Order

@@ -1,9 +1,9 @@
+import { useLayout } from '@menuxp/ui'
 import { useTranslator } from 'vbss-translator'
 
 import { ClientAddressForm } from '@/components/client/client-address-form'
 import type { Address } from '@/types/address'
 import type { Client } from '@/types/client'
-import { useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 

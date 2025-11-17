@@ -1,10 +1,11 @@
 import js from "@eslint/js"
+import importPlugin from "eslint-plugin-import"
 import prettier from "eslint-plugin-prettier"
 import { defineConfig } from "eslint/config"
 import globals from "globals"
+import { dirname } from 'path'
 import tseslint from "typescript-eslint"
 import { fileURLToPath } from 'url'
-import { dirname } from 'path'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,7 +21,10 @@ export default defineConfig([
   },
   { files: ["**/*.{js,mjs,cjs,ts}"], plugins: { js }, extends: ["js/recommended"] },
   { files: ["**/*.{js,mjs,cjs,ts}"], languageOptions: { globals: globals.browser } },
-  tseslint.configs.recommended,
+  ...tseslint.configs.recommended.map((config) => ({
+    ...config,
+    files: ["**/*.ts"],
+  })),
   {
     files: ["**/*.ts"],
     languageOptions: {
@@ -33,7 +37,17 @@ export default defineConfig([
     },
     plugins: {
       "@typescript-eslint": tseslint.plugin,
-      "prettier": prettier
+      "prettier": prettier,
+      "import": importPlugin
+    },
+    settings: {
+      "import/resolver": {
+        typescript: {
+          project: "./tsconfig.json",
+          tsconfigRootDir: __dirname,
+          alwaysTryTypes: true,
+        },
+      },
     },
     rules: {
       "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
@@ -68,6 +82,37 @@ export default defineConfig([
         "bracketSpacing": true,
         "arrowParens": "always",
         "endOfLine": "auto"
+      }],
+      "import/order": ["error", {
+        groups: [
+          "builtin",
+          "external",
+          "internal",
+          ["parent", "sibling", "index"]
+        ],
+        "newlines-between": "always",
+        pathGroups: [
+          {
+            pattern: "@api/**",
+            group: "internal",
+            position: "after"
+          },
+          {
+            pattern: "@customers/**",
+            group: "internal",
+            position: "after"
+          },
+          {
+            pattern: "@restaurants/**",
+            group: "internal",
+            position: "after"
+          }
+        ],
+        pathGroupsExcludedImportTypes: ["builtin"],
+        alphabetize: {
+          order: "asc",
+          caseInsensitive: true
+        }
       }]
     }
   }

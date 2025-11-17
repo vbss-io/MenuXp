@@ -4,6 +4,7 @@ import { TokenAuthentication } from '@api/infra/adapters/auth/token-auth.adapter
 import { Cache } from '@api/infra/adapters/cache/cache.adapter'
 import { Mailer } from '@api/infra/adapters/mailer/mailer.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { UserRegisteredData } from '@restaurants/domain/auth/events/user-registered.event'
 import { EmailConfirmationTemplate } from '@restaurants/domain/auth/mailer/email-confirmation.template'
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'

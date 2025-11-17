@@ -1,8 +1,7 @@
+import { Button } from '@menuxp/ui'
 import { XIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect } from 'react'
-
-import { Button } from '@menuxp/ui'
 
 import * as S from './styles'
 

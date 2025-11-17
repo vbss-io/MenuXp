@@ -1,5 +1,6 @@
 import { NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { UpdateCouponType } from '@restaurants/application/coupons/update-coupon/update-coupon.schema'
 import { Coupon } from '@restaurants/domain/coupons/coupon.entity'
 import { CouponStatus } from '@restaurants/domain/coupons/enums/coupon-status.enum'

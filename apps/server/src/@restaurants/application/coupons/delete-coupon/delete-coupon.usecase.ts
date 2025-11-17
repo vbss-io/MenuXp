@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { DeleteCouponType } from '@restaurants/application/coupons/delete-coupon/delete-coupon.schema'
 import { CouponRepository } from '@restaurants/infra/repositories/coupon.repository'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'

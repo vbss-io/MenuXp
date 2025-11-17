@@ -1,7 +1,9 @@
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { GetCustomerNotificationsType } from '@customers/application/notifications/get-customer-notifications/get-customer-notifications.schema'
 import { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'
+
 import { RecipientType } from '@restaurants/domain/notifications/enums/recipient-type.enum'
 import type { Notification } from '@restaurants/domain/notifications/notifications.entity'
 import { NotificationRepository } from '@restaurants/infra/repositories/notifications.repository'

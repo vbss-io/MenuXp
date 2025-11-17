@@ -1,4 +1,5 @@
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { AdminModule } from '@restaurants/application/admin/admin.module'
 import { AuthModule } from '@restaurants/application/auth/auth.module'
 import { CategoriesModule } from '@restaurants/application/categories/categories.module'

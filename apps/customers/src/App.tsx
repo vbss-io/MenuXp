@@ -1,3 +1,10 @@
+import { CustomersGlobalStyle, customersTheme as theme } from '@menuxp/styles'
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { Toaster } from 'react-hot-toast'
+import { styled, ThemeProvider } from 'styled-components'
+import { TranslatorProvider } from 'vbss-translator'
+
 import { ClientProvider } from '@/hooks/providers/client-provider'
 import { LayoutProvider } from '@/hooks/providers/layout-provider'
 import { NotificationProvider } from '@/hooks/providers/notification-provider'
@@ -5,12 +12,6 @@ import { RestaurantProvider } from '@/hooks/providers/restaurant-provider'
 import { queryClient } from '@/lib/query-client'
 import { Router } from '@/router'
 import translations from '@/translations/index'
-import { CustomersGlobalStyle, customersTheme as theme } from '@menuxp/styles'
-import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { Toaster } from 'react-hot-toast'
-import { styled, ThemeProvider } from 'styled-components'
-import { TranslatorProvider } from 'vbss-translator'
 
 const AppContainer = styled.div`
   min-height: 100vh;

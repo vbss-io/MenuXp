@@ -1,6 +1,7 @@
 import { ConflictError, UnauthorizedError } from '@api/domain/errors'
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { CreateCouponType } from '@restaurants/application/coupons/create-coupon/create-coupon.schema'
 import { Coupon } from '@restaurants/domain/coupons/coupon.entity'
 import { CouponType } from '@restaurants/domain/coupons/enums/coupon-type.enum'

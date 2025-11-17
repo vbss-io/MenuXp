@@ -1,8 +1,3 @@
-import { CheckSlugAvailableUsecase } from '@/application/restaurants/check-slug-available.usecase'
-import { UpdateRestaurantBasicInfoUsecase } from '@/application/restaurants/update-restaurant-basic-info.usecase'
-import { UpdateRestaurantContactInfoUsecase } from '@/application/restaurants/update-restaurant-contact-info.usecase'
-import { useAuth } from '@/presentation/hooks/use-auth'
-import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, ColorInput, FormInput, FormTextarea, Loading } from '@menuxp/ui'
 import { CameraIcon, CheckIcon, SpinnerIcon, WarningIcon, XIcon } from '@phosphor-icons/react'
@@ -11,6 +6,12 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
+
+import { CheckSlugAvailableUsecase } from '@/application/restaurants/check-slug-available.usecase'
+import { UpdateRestaurantBasicInfoUsecase } from '@/application/restaurants/update-restaurant-basic-info.usecase'
+import { UpdateRestaurantContactInfoUsecase } from '@/application/restaurants/update-restaurant-contact-info.usecase'
+import { useAuth } from '@/presentation/hooks/use-auth'
+import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
 import * as S from './styles'
 

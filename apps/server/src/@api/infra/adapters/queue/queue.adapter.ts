@@ -1,6 +1,7 @@
 import { ONE_SECOND } from '@api/domain/consts/timeouts.const'
 import { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { QueueMessageStatus } from '@restaurants/domain/queues/enums/queue-message-status.enum'
 import { QueueMessage } from '@restaurants/domain/queues/queue-message.entity'
 

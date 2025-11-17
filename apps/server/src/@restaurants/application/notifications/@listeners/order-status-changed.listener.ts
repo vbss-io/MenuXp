@@ -1,4 +1,5 @@
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { CreateNotificationUsecase } from '@restaurants/application/notifications/create-notification/create-notification.usecase'
 import { NotificationType } from '@restaurants/domain/notifications/enums/notification-type.enum'
 import { RecipientType } from '@restaurants/domain/notifications/enums/recipient-type.enum'

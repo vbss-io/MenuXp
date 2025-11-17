@@ -1,5 +1,6 @@
 import { NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetRestaurantBySlugType } from '@restaurants/application/restaurants/get-restaurant-by-slug/get-restaurant-by-slug.schema'
 import { Restaurant } from '@restaurants/domain/restaurants/restaurant.entity'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'

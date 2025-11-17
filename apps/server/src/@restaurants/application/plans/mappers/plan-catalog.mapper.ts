@@ -1,4 +1,5 @@
 import type { StripeProductWithPrices } from '@api/infra/gateways/subscription-payment-gateway.types'
+
 import { AVAILABLE_PLANS } from '@restaurants/domain/plans/consts/plans.const'
 import { PlanCode } from '@restaurants/domain/plans/enums/plan-code.enum'
 import type { Plan, PlanIntervals } from '@restaurants/domain/plans/plan.entity'

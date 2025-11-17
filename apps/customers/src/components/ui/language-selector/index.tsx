@@ -1,9 +1,10 @@
+import { Popover, useLayout } from '@menuxp/ui'
 import { motion } from 'framer-motion'
 import React, { useMemo } from 'react'
 import { useTranslator } from 'vbss-translator'
 
 import { useClient } from '@/hooks/use-client'
-import { Popover, useLayout } from '@menuxp/ui'
+
 import * as S from './styles'
 
 export type Language = 'pt' | 'en' | 'es'

@@ -2,6 +2,7 @@ import { BadRequestError, NotFoundError } from '@api/domain/errors'
 import { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
 import { SubscriptionPaymentGateway } from '@api/infra/gateways/subscription-payment.gateway'
+
 import { PlanCode } from '@restaurants/domain/plans/enums/plan-code.enum'
 import { BillingCycle } from '@restaurants/domain/subscriptions/enums/billing-cycle.enum'
 import { SubscriptionStatus } from '@restaurants/domain/subscriptions/enums/subscription-status.enum'

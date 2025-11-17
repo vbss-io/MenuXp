@@ -1,3 +1,4 @@
+import { Button } from '@menuxp/ui'
 import {
   BowlFoodIcon,
   ChatCenteredDotsIcon,
@@ -15,7 +16,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect } from 'react'
 
 import { useAuth } from '@/presentation/hooks/use-auth'
-import { Button } from '@menuxp/ui'
 
 import * as S from './styles'
 

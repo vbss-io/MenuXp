@@ -1,17 +1,18 @@
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { CreateOrderController } from '@customers/application/orders/create-order/create-order.controller'
 import { CreateOrderSchema } from '@customers/application/orders/create-order/create-order.schema'
 import { CreateOrderUsecase } from '@customers/application/orders/create-order/create-order.usecase'
 import { GetOrderBySlugAndCodeController } from '@customers/application/orders/get-order-by-slug-and-code/get-order-by-slug-and-code.controller'
 import { GetOrderBySlugAndCodeSchema } from '@customers/application/orders/get-order-by-slug-and-code/get-order-by-slug-and-code.schema'
 import { GetOrderBySlugAndCodeUsecase } from '@customers/application/orders/get-order-by-slug-and-code/get-order-by-slug-and-code.usecase'
-import { GetOrdersByClientPhoneController } from '@customers/application/orders/get-orders-by-client-phone/get-orders-by-client-phone.controller'
-import { GetOrdersByClientPhoneSchema } from '@customers/application/orders/get-orders-by-client-phone/get-orders-by-client-phone.schema'
-import { GetOrdersByClientPhoneUsecase } from '@customers/application/orders/get-orders-by-client-phone/get-orders-by-client-phone.usecase'
 import { GetOrdersByClientController } from '@customers/application/orders/get-orders-by-client/get-orders-by-client.controller'
 import { GetOrdersByClientSchema } from '@customers/application/orders/get-orders-by-client/get-orders-by-client.schema'
 import { GetOrdersByClientUsecase } from '@customers/application/orders/get-orders-by-client/get-orders-by-client.usecase'
+import { GetOrdersByClientPhoneController } from '@customers/application/orders/get-orders-by-client-phone/get-orders-by-client-phone.controller'
+import { GetOrdersByClientPhoneSchema } from '@customers/application/orders/get-orders-by-client-phone/get-orders-by-client-phone.schema'
+import { GetOrdersByClientPhoneUsecase } from '@customers/application/orders/get-orders-by-client-phone/get-orders-by-client-phone.usecase'
 
 export class OrdersModule {
   constructor() {

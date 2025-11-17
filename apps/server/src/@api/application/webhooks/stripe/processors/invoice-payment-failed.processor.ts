@@ -2,6 +2,7 @@ import Stripe from 'stripe'
 
 import { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { SubscriptionRepository } from '@restaurants/infra/repositories/subscription.repository'
 
 export class InvoicePaymentFailedProcessor {

@@ -1,5 +1,6 @@
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { FindCustomerUserByPhoneType } from '@customers/application/users/find-customer-user-by-phone/find-customer-user-by-phone.schema'
 import { CustomerUser } from '@customers/domain/users/customer-user.entity'
 import type { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'

@@ -1,7 +1,8 @@
-import type { OrdersData } from '@/domain/models/reports.model'
 import { ChartBar, ChartBarHorizontal, ChartLine } from '@phosphor-icons/react'
 import type { ApexOptions } from 'apexcharts'
 import ReactApexChart from 'react-apexcharts'
+
+import type { OrdersData } from '@/domain/models/reports.model'
 
 import * as S from './styles'
 

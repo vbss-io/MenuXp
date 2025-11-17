@@ -1,4 +1,5 @@
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { Plan } from '@restaurants/domain/plans/plan.entity'
 import { PlanRepository } from '@restaurants/infra/repositories/plan.repository'
 

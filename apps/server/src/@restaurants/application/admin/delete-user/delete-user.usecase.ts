@@ -1,5 +1,6 @@
 import { NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { DeleteUserType } from '@restaurants/application/admin/delete-user/delete-user.schema'
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'
 

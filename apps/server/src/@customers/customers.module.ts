@@ -1,4 +1,5 @@
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { CartModule } from '@customers/application/cart/cart.module'
 import { CouponsModule } from '@customers/application/coupons/coupons.module'
 import { LeadsModule } from '@customers/application/leads/leads.module'

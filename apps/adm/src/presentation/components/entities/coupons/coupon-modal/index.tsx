@@ -1,8 +1,3 @@
-import { CreateCouponUsecase } from '@/application/coupons/create-coupon.usecase'
-import { UpdateCouponUsecase } from '@/application/coupons/update-coupon.usecase'
-import { CouponType } from '@/domain/enums/coupons/coupon-type.enum'
-import type { Coupon } from '@/domain/models/coupon.model'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Dialog, FormInput, FormTextarea, Loading } from '@menuxp/ui'
 import { motion } from 'framer-motion'
@@ -10,6 +5,12 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
+
+import { CreateCouponUsecase } from '@/application/coupons/create-coupon.usecase'
+import { UpdateCouponUsecase } from '@/application/coupons/update-coupon.usecase'
+import { CouponType } from '@/domain/enums/coupons/coupon-type.enum'
+import type { Coupon } from '@/domain/models/coupon.model'
+import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

@@ -1,5 +1,6 @@
 import { BadRequestError, ConflictError, ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { UpdateCategoryType } from '@restaurants/application/categories/update-category/update-category.schema'
 import { CategoryRepository } from '@restaurants/infra/repositories/category.repository'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'

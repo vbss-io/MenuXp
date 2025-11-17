@@ -1,3 +1,9 @@
+import { Button, FormInput, Loading, Pagination } from '@menuxp/ui'
+import { FolderIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { GetCategoriesUsecase } from '@/application/categories/get-categories.usecase'
 import type { Category } from '@/domain/models/category.model'
 import { CategoryCard } from '@/presentation/components/entities/categories/category-card'
@@ -5,11 +11,6 @@ import { Filters, type CategoryFilters } from '@/presentation/components/entitie
 import { CategoryModal } from '@/presentation/components/entities/categories/category-modal'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useDebounce } from '@/presentation/hooks/use-debounce'
-import { Button, FormInput, Loading, Pagination } from '@menuxp/ui'
-import { FolderIcon, MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react'
-import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 
 import * as Page from '../../../styles'
 import * as S from '../styles'

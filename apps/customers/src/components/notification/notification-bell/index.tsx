@@ -1,3 +1,4 @@
+import { Popover, useLayout } from '@menuxp/ui'
 import { Bell, BellSlash, ChatCircle, CircleNotch, Info, ShoppingBag, Tag } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import React from 'react'
@@ -5,7 +6,6 @@ import { useTranslator } from 'vbss-translator'
 
 import { useNotifications } from '@/hooks/use-notifications'
 import { NotificationType } from '@/types/notification'
-import { Popover, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -99,9 +99,11 @@ export const NotificationBell: React.FC = () => {
                 </S.NotificationIcon>
 
                 <S.NotificationContent className="notification-content">
-                  <S.NotificationTitle className="notification-title-text">{notification.title}</S.NotificationTitle>
+                  <S.NotificationTitle className="notification-title-text">
+                    {t(notification.title, { preferExternal: true, sourceLanguage: 'pt' })}
+                  </S.NotificationTitle>
                   <S.NotificationMessage className="notification-message-text">
-                    {notification.message}
+                    {t(notification.message, { preferExternal: true, sourceLanguage: 'pt' })}
                   </S.NotificationMessage>
                   <S.NotificationTime className="notification-time-text">
                     {formatTime(notification.createdAt, t)}

@@ -2,6 +2,7 @@ import { BaseController } from '@api/application/@base.controller'
 import { HttpCode, HttpMethod } from '@api/domain/enums/http.enum'
 import { InputValidate } from '@api/infra/adapters/validate/validate.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { ToggleComboStatusType } from '@restaurants/application/combos/toggle-combo-status/toggle-combo-status.schema'
 import { ToggleComboStatusUsecase } from '@restaurants/application/combos/toggle-combo-status/toggle-combo-status.usecase'
 

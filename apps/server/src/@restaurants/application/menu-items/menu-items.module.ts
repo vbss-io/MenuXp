@@ -1,5 +1,6 @@
 import { FormDataZodAdapter, ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { GetMenuItemsQueryMongoose } from '@restaurants/application/menu-items/@queries/get-menu-items.query'
 import { CreateMenuItemController } from '@restaurants/application/menu-items/create-menu-item/create-menu-item.controller'
 import {
@@ -11,12 +12,12 @@ import { CreateMenuItemUsecase } from '@restaurants/application/menu-items/creat
 import { DeleteMenuItemController } from '@restaurants/application/menu-items/delete-menu-item/delete-menu-item.controller'
 import { DeleteMenuItemSchema } from '@restaurants/application/menu-items/delete-menu-item/delete-menu-item.schema'
 import { DeleteMenuItemUsecase } from '@restaurants/application/menu-items/delete-menu-item/delete-menu-item.usecase'
-import { GetMenuItemOptionalsController } from '@restaurants/application/menu-items/get-menu-item-optionals/get-menu-item-optionals.controller'
-import { GetMenuItemOptionalsSchema } from '@restaurants/application/menu-items/get-menu-item-optionals/get-menu-item-optionals.schema'
-import { GetMenuItemOptionalsUsecase } from '@restaurants/application/menu-items/get-menu-item-optionals/get-menu-item-optionals.usecase'
 import { GetMenuItemController } from '@restaurants/application/menu-items/get-menu-item/get-menu-item.controller'
 import { GetMenuItemSchema } from '@restaurants/application/menu-items/get-menu-item/get-menu-item.schema'
 import { GetMenuItemUsecase } from '@restaurants/application/menu-items/get-menu-item/get-menu-item.usecase'
+import { GetMenuItemOptionalsController } from '@restaurants/application/menu-items/get-menu-item-optionals/get-menu-item-optionals.controller'
+import { GetMenuItemOptionalsSchema } from '@restaurants/application/menu-items/get-menu-item-optionals/get-menu-item-optionals.schema'
+import { GetMenuItemOptionalsUsecase } from '@restaurants/application/menu-items/get-menu-item-optionals/get-menu-item-optionals.usecase'
 import { GetMenuItemsController } from '@restaurants/application/menu-items/get-menu-items/get-menu-items.controller'
 import { GetMenuItemsSchema } from '@restaurants/application/menu-items/get-menu-items/get-menu-items.schema'
 import { GetMenuItemsUsecase } from '@restaurants/application/menu-items/get-menu-items/get-menu-items.usecase'

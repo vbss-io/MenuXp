@@ -1,5 +1,6 @@
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { RequestCodeController } from '@customers/application/whatsapp-verification/request-code/request-code.controller'
 import { RequestCodeSchema } from '@customers/application/whatsapp-verification/request-code/request-code.schema'
 import { RequestCodeUsecase } from '@customers/application/whatsapp-verification/request-code/request-code.usecase'

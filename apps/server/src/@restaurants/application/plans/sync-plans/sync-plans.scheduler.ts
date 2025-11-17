@@ -1,6 +1,7 @@
 import { Cache } from '@api/infra/adapters/cache/cache.adapter'
 import { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { SyncPlansUsecase } from '@restaurants/application/plans/sync-plans/sync-plans.usecase'
 
 const NIGHTLY_SYNC_HOUR = 0

@@ -1,5 +1,6 @@
 import { BadRequestError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { MigrateCartType } from '@customers/application/cart/migrate-cart/migrate-cart.schema'
 import { Cart } from '@customers/domain/cart/cart.entity'
 import type { CartRepository } from '@customers/infra/repositories/cart.repository'

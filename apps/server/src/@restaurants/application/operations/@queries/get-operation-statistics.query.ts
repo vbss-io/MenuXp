@@ -1,4 +1,5 @@
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { OperationStatistics } from '@restaurants/application/operations/get-operation-statistics/get-operation-statistics.usecase'
 import { OrderStatus } from '@restaurants/domain/orders/enums/order-status.enum'
 import { Order } from '@restaurants/domain/orders/orders.entity'

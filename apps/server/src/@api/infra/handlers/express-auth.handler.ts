@@ -9,6 +9,7 @@ import { inject } from '@api/infra/dependency-injection/registry'
 import { RequestFacade } from '@api/infra/facades/request.facade'
 import { UserAuth } from '@api/infra/facades/user-auth.dto'
 import { SubscriptionPaymentGateway } from '@api/infra/gateways/subscription-payment.gateway'
+
 import { UserRole } from '@restaurants/domain/users/enums/user-role.enum'
 
 export interface AuthHandler {

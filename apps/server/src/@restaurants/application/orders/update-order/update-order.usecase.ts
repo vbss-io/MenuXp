@@ -1,6 +1,7 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { Queue } from '@api/infra/adapters/queue/queue.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { UpdateOrderType } from '@restaurants/application/orders/update-order/update-order.schema'
 import { OperationStatus } from '@restaurants/domain/operations/enums/operation-status.enum'
 import { Operation } from '@restaurants/domain/operations/operation.entity'

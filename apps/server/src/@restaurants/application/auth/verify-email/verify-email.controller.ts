@@ -1,6 +1,7 @@
 import { BaseController } from '@api/application/@base.controller'
 import { HttpCode, HttpMethod } from '@api/domain/enums/http.enum'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { VerifyEmailUsecase } from '@restaurants/application/auth/verify-email/verify-email.usecase'
 
 export class VerifyEmailController extends BaseController {

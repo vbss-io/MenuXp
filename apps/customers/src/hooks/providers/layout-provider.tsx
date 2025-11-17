@@ -1,6 +1,7 @@
-import { useRestaurant } from '@/hooks/use-restaurant'
 import type { LayoutType } from '@menuxp/styles'
 import { LayoutContext } from '@menuxp/ui'
+
+import { useRestaurant } from '@/hooks/use-restaurant'
 
 interface LayoutProviderProps {
   children: React.ReactNode

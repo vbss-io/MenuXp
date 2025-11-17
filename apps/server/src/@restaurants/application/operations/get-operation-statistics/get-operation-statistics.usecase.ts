@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetOperationStatisticsQuery } from '@restaurants/application/operations/@queries/get-operation-statistics.query'
 import { GetOperationStatisticsType } from '@restaurants/application/operations/get-operation-statistics/get-operation-statistics.schema'
 import { OrderStatus } from '@restaurants/domain/orders/enums/order-status.enum'

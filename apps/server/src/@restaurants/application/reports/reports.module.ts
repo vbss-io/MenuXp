@@ -1,5 +1,6 @@
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { GetReportsDataQueryMongoose } from '@restaurants/application/reports/@queries/get-reports-data.query'
 import { GetReportsDataController } from '@restaurants/application/reports/get-reports-data/get-reports-data.controller'
 import { GetReportsDataSchema } from '@restaurants/application/reports/get-reports-data/get-reports-data.schema'

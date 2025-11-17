@@ -1,5 +1,6 @@
 import { FormDataZodAdapter, ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { CheckSlugAvailableController } from '@restaurants/application/restaurants/check-slug-available/check-slug-available.controller'
 import { CheckSlugSchema } from '@restaurants/application/restaurants/check-slug-available/check-slug-available.schema'
 import { CheckSlugAvailableUsecase } from '@restaurants/application/restaurants/check-slug-available/check-slug-available.usecase'

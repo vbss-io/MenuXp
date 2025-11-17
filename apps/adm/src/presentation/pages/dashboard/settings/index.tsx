@@ -1,12 +1,13 @@
+import { Loading } from '@menuxp/ui'
+import { ClockIcon, FileTextIcon, GearIcon, MapPinLineIcon, PaletteIcon, UsersIcon } from '@phosphor-icons/react'
+import { useState } from 'react'
+
 import { AddressForm } from '@/presentation/components/entities/settings/address-form'
 import { BrandingForm } from '@/presentation/components/entities/settings/branding-form'
 import { HoursForm } from '@/presentation/components/entities/settings/hours-form'
 import { OperationsForm } from '@/presentation/components/entities/settings/operations-form'
 import { TemplatesForm } from '@/presentation/components/entities/settings/templates-form'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
-import { Loading } from '@menuxp/ui'
-import { ClockIcon, FileTextIcon, GearIcon, MapPinLineIcon, PaletteIcon, UsersIcon } from '@phosphor-icons/react'
-import { useState } from 'react'
 
 import * as S from '../styles'
 

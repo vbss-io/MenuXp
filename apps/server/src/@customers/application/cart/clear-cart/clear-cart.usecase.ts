@@ -1,5 +1,6 @@
 import { BadRequestError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { ClearCartType } from '@customers/application/cart/clear-cart/clear-cart.schema'
 import type { CartRepository } from '@customers/infra/repositories/cart.repository'
 import type { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'

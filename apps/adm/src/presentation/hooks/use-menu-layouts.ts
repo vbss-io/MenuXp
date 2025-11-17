@@ -1,3 +1,5 @@
+import { useCallback, useState } from 'react'
+
 import { CreateMenuLayoutUsecase } from '@/application/menu-layouts/create-menu-layout.usecase'
 import { GetMenuLayoutUsecase } from '@/application/menu-layouts/get-menu-layout.usecase'
 import { GetMenuLayoutsUsecase } from '@/application/menu-layouts/get-menu-layouts.usecase'
@@ -14,7 +16,7 @@ import type {
   MenuSection
 } from '@/domain/models/menu-layout.model'
 import type { MenuSectionDefinition } from '@/domain/models/menu-section-definition.model'
-import { useCallback, useState } from 'react'
+
 import { useAuth } from './use-auth'
 
 export const getBannerConfig = (section: MenuSection): BannerConfig | null => {

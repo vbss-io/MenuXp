@@ -1,11 +1,11 @@
 import { z } from 'zod'
 
+import { ObjectIdSchema } from '@api/application/@schemas/object-id.schema'
+
 import { BusinessWeekDay } from '@restaurants/domain/restaurants/enums/business-week-day.enum'
 import { OperationType } from '@restaurants/domain/restaurants/enums/operation-type.enum'
 import { PaymentMethod } from '@restaurants/domain/restaurants/enums/payment-methods.enum'
 import { Templates } from '@restaurants/domain/restaurants/enums/templates.enum'
-
-import { ObjectIdSchema } from '@api/application/@schemas/object-id.schema'
 
 export const UpdateRestaurantSettingsSchema = z.object({
   restaurantId: ObjectIdSchema,

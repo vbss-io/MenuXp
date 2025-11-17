@@ -1,7 +1,8 @@
-import { getPlans } from '@/services/plan/get-plans'
 import { PlanGrid } from '@menuxp/ui'
 import { motion } from 'framer-motion'
 import React from 'react'
+
+import { getPlans } from '@/services/plan/get-plans'
 
 import * as S from './styles'
 

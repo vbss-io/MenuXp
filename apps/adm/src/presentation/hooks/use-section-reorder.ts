@@ -1,7 +1,8 @@
-import { ReorderSectionsUsecase } from '@/application/menu-layouts/sections/reorder-sections.usecase'
-import type { MenuSection } from '@/domain/models/menu-layout.model'
 import { useCallback, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+
+import { ReorderSectionsUsecase } from '@/application/menu-layouts/sections/reorder-sections.usecase'
+import type { MenuSection } from '@/domain/models/menu-layout.model'
 
 interface UseSectionReorderProps {
   sections: MenuSection[]

@@ -1,7 +1,8 @@
-import type { Order, OrderStatus } from '@/domain/models/order.model'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useRef, useState } from 'react'
 import styled from 'styled-components'
+
+import type { Order, OrderStatus } from '@/domain/models/order.model'
 
 import { OrderCard } from './order-card'
 

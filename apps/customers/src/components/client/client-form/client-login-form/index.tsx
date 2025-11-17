@@ -1,10 +1,10 @@
+import { Button, FormInput, useLayout } from '@menuxp/ui'
 import { ArrowRightIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useTranslator } from 'vbss-translator'
 
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
-import { Button, FormInput, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 

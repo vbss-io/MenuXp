@@ -1,6 +1,7 @@
-import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 import { WarningIcon } from '@phosphor-icons/react'
 import styled from 'styled-components'
+
+import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
 const Banner = styled.div`
   background: ${({ theme }) => theme.colors.mx.white};

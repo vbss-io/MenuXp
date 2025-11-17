@@ -1,9 +1,10 @@
+import { BowlFoodIcon, FolderIcon, PackageIcon } from '@phosphor-icons/react'
+import { useState } from 'react'
+
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { CategoriesTab } from '@/presentation/pages/dashboard/menu-items/components/categories-tab'
 import { CombosTab } from '@/presentation/pages/dashboard/menu-items/components/combos-tab'
 import { MenuItemsTab } from '@/presentation/pages/dashboard/menu-items/components/menu-items-tab'
-import { BowlFoodIcon, FolderIcon, PackageIcon } from '@phosphor-icons/react'
-import { useState } from 'react'
 
 import * as Page from '../styles'
 

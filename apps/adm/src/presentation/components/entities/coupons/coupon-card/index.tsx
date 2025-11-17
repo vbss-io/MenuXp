@@ -1,13 +1,14 @@
+import { Button, Chip, Dialog, Loading } from '@menuxp/ui'
+import { EyeIcon, EyeSlashIcon, PencilIcon, TicketIcon, TrashIcon } from '@phosphor-icons/react'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { DeleteCouponUsecase } from '@/application/coupons/delete-coupon.usecase'
 import { ToggleCouponStatusUsecase } from '@/application/coupons/toggle-coupon-status.usecase'
 import { CouponStatus } from '@/domain/enums/coupons/coupon-status.enum'
 import { CouponType } from '@/domain/enums/coupons/coupon-type.enum'
 import type { Coupon } from '@/domain/models/coupon.model'
 import { useAuth } from '@/presentation/hooks/use-auth'
-import { Button, Chip, Dialog, Loading } from '@menuxp/ui'
-import { EyeIcon, EyeSlashIcon, PencilIcon, TicketIcon, TrashIcon } from '@phosphor-icons/react'
-import { useState } from 'react'
-import toast from 'react-hot-toast'
 
 import * as S from './styles'
 

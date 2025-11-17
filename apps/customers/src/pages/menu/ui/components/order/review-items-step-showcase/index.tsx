@@ -1,5 +1,6 @@
 import { ReviewItemsStep } from '@/components/order/checkout-slide-view/review-items-step'
 import type { Cart } from '@/types/cart'
+
 import * as S from '../../styles'
 
 export const ReviewItemsStepShowcase: React.FC = () => {

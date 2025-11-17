@@ -1,7 +1,3 @@
-import { DeleteCategoryUsecase } from '@/application/categories/delete-category.usecase'
-import { ToggleCategoryStatusUsecase } from '@/application/categories/toggle-category-status.usecase'
-import type { Category } from '@/domain/models/category.model'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { Button, Chip, ICONS, ICONS_KEYS, Loading } from '@menuxp/ui'
 import {
   CaretDownIcon,
@@ -16,6 +12,11 @@ import {
 import { Dialog } from '@vbss-ui/dialog'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+
+import { DeleteCategoryUsecase } from '@/application/categories/delete-category.usecase'
+import { ToggleCategoryStatusUsecase } from '@/application/categories/toggle-category-status.usecase'
+import type { Category } from '@/domain/models/category.model'
+import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

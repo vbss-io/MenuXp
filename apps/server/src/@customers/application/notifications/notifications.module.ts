@@ -1,5 +1,6 @@
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { GetCustomerNotificationsController } from '@customers/application/notifications/get-customer-notifications/get-customer-notifications.controller'
 import { GetCustomerNotificationsSchema } from '@customers/application/notifications/get-customer-notifications/get-customer-notifications.schema'
 import { GetCustomerNotificationsUsecase } from '@customers/application/notifications/get-customer-notifications/get-customer-notifications.usecase'

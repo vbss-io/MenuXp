@@ -1,3 +1,6 @@
+import { useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { GetReportsOptionsUsecase } from '@/application/reports/get-reports-options.usecase'
 import { GetReportsUsecase } from '@/application/reports/get-reports.usecase'
 import type {
@@ -7,8 +10,7 @@ import type {
   ReportsFilters,
   ReportsSection
 } from '@/domain/models/reports.model'
-import { useCallback, useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+
 import { useAuth } from './use-auth'
 import { useDebounce } from './use-debounce'
 

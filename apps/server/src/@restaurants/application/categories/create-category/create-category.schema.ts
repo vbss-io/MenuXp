@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { ObjectIdSchema } from '@api/application/@schemas/object-id.schema'
+
 import { CategoryOptionalSchema } from '@restaurants/application/categories/@schemas/category-optional.schema'
 
 export const CreateCategorySchema = z.object({

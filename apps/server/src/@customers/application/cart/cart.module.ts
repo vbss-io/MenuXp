@@ -1,5 +1,6 @@
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { AddItemToCartController } from '@customers/application/cart/add-item/add-item.controller'
 import { AddItemToCartSchema } from '@customers/application/cart/add-item/add-item.schema'
 import { AddItemToCartUsecase } from '@customers/application/cart/add-item/add-item.usecase'

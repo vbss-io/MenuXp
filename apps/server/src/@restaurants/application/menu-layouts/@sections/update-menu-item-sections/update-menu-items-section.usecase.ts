@@ -2,9 +2,11 @@ import { randomUUID } from 'crypto'
 
 import { BadRequestError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { MenuSectionType } from '@restaurants/domain/menu-layouts/enums/menu-layout-section-type.enum'
 import { MenuItemsConfig } from '@restaurants/domain/menu-layouts/types/section-configs.type'
 import { MenuItemRepository } from '@restaurants/infra/repositories/menu-item.repository'
+
 import { BaseSectionUsecase, BaseSectionUsecaseInput, BaseSectionUsecaseOutput } from '../base-section.usecase'
 
 export interface UpdateMenuItemsSectionUsecaseInput extends BaseSectionUsecaseInput {

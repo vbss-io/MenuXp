@@ -1,7 +1,9 @@
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetOrdersByClientPhoneType } from '@customers/application/orders/get-orders-by-client-phone/get-orders-by-client-phone.schema'
 import { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'
+
 import { Order } from '@restaurants/domain/orders/orders.entity'
 import { OrderRepository } from '@restaurants/infra/repositories/orders.repository'
 

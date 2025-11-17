@@ -1,5 +1,6 @@
-import type { ItemsData } from '@/domain/models/reports.model'
 import { Package } from '@phosphor-icons/react'
+
+import type { ItemsData } from '@/domain/models/reports.model'
 
 import * as S from './styles'
 

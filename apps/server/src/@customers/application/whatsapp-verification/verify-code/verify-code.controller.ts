@@ -2,6 +2,7 @@ import { BaseController } from '@api/application/@base.controller'
 import { HttpCode, HttpMethod } from '@api/domain/enums/http.enum'
 import { InputValidate } from '@api/infra/adapters/validate/validate.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { VerifyCodeType } from '@customers/application/whatsapp-verification/verify-code/verify-code.schema'
 import { VerifyCodeUsecase } from '@customers/application/whatsapp-verification/verify-code/verify-code.usecase'
 

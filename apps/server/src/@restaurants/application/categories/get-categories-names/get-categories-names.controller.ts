@@ -2,8 +2,9 @@ import { BaseController } from '@api/application/@base.controller'
 import { HttpCode, HttpMethod } from '@api/domain/enums/http.enum'
 import { InputValidate } from '@api/infra/adapters/validate/validate.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
-import { GetCategoriesNamesUsecase } from '@restaurants/application/categories/get-categories-names/get-categories-names.usecase'
+
 import { GetCategoriesType } from '@restaurants/application/categories/get-categories/get-categories.schema'
+import { GetCategoriesNamesUsecase } from '@restaurants/application/categories/get-categories-names/get-categories-names.usecase'
 
 export class GetCategoriesNamesController extends BaseController {
   @inject('GetCategoriesValidate')

@@ -1,7 +1,9 @@
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { FileUrl } from '@api/domain/vos/file-url.vo'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetRestaurantInfoType } from '@customers/application/restaurant/get-restaurant-info/get-restaurant-info.schema'
+
 import { GetCurrentOperationQuery } from '@restaurants/application/operations/@queries/get-current-operation.query'
 import { MenuSectionType } from '@restaurants/domain/menu-layouts/enums/menu-layout-section-type.enum'
 import { MenuLayoutStatus } from '@restaurants/domain/menu-layouts/enums/menu-layout-status.enum'

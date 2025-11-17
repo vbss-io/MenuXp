@@ -1,9 +1,9 @@
+import { Button, useLayout } from '@menuxp/ui'
 import { PlusIcon } from '@phosphor-icons/react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslator } from 'vbss-translator'
 
 import type { Combo } from '@/types/combo'
-import { Button, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -64,15 +64,19 @@ export const ComboCard: React.FC<ComboCardProps> = ({ item, onClick, onAddToCart
       {item.medias && item.medias.length > 0 && (
         <S.ComboImage
           src={item.medias[0]}
-          alt={item.name}
+          alt={t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}
           className="combo-image"
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
         />
       )}
       <S.ComboContent className="combo-content">
-        <S.ComboName className="combo-name">{item.name}</S.ComboName>
-        {item.description && <S.ComboDescription className="combo-description">{item.description}</S.ComboDescription>}
+        <S.ComboName className="combo-name">{t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}</S.ComboName>
+        {item.description && (
+          <S.ComboDescription className="combo-description">
+            {t(item.description, { preferExternal: true, sourceLanguage: 'pt' })}
+          </S.ComboDescription>
+        )}
         <S.ComboItemsCount className="combo-items-count">
           {item.items.length} {item.items.length === 1 ? t('item') : t('itens')}
         </S.ComboItemsCount>

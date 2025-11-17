@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { ObjectIdSchema } from '@api/application/@schemas/object-id.schema'
+
 import { OrderStatus } from '@restaurants/domain/orders/enums/order-status.enum'
 
 export const UpdateOrderSchema = z

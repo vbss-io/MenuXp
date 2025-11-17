@@ -1,3 +1,4 @@
+import { AdmGlobalStyle, admTheme as theme } from '@menuxp/styles'
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react'
 import { Toaster } from 'react-hot-toast'
 import { ThemeProvider } from 'styled-components'
@@ -8,7 +9,6 @@ import { LayoutProvider } from '@/presentation/providers/layout-provider'
 import { RestaurantProvider } from '@/presentation/providers/restaurant-provider'
 import { SidebarProvider } from '@/presentation/providers/sidebar-provider'
 import { Router } from '@/presentation/router'
-import { AdmGlobalStyle, admTheme as theme } from '@menuxp/styles'
 
 function App() {
   registerDependencies()

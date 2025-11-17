@@ -1,4 +1,3 @@
-import { UpdatePasswordUsecase } from '@/application/users/update-password.usecase'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@menuxp/ui'
 import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react'
@@ -6,6 +5,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
+
+import { UpdatePasswordUsecase } from '@/application/users/update-password.usecase'
 
 import * as S from './styles'
 

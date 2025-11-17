@@ -1,6 +1,7 @@
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { UnauthorizedError } from '@api/domain/errors/unauthorized.error'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { ToggleCouponStatusType } from '@restaurants/application/coupons/toggle-coupon-status/toggle-coupon-status.schema'
 import { Coupon } from '@restaurants/domain/coupons/coupon.entity'
 import { CouponRepository } from '@restaurants/infra/repositories/coupon.repository'

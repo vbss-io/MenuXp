@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-
 import { FormCheckbox } from '@menuxp/ui'
+import React, { useState } from 'react'
 
 import * as S from '../../styles'
 

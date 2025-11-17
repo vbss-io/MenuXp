@@ -1,4 +1,5 @@
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { OperationStatus } from '@restaurants/domain/operations/enums/operation-status.enum'
 import { Operation } from '@restaurants/domain/operations/operation.entity'
 import { OperationRepository } from '@restaurants/infra/repositories/operation.repository'

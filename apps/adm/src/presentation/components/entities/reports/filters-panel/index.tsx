@@ -1,5 +1,6 @@
-import type { ChartGranularity, ReportsFilterOptions, ReportsFilters } from '@/domain/models/reports.model'
 import { ArrowCounterClockwise } from '@phosphor-icons/react'
+
+import type { ChartGranularity, ReportsFilterOptions, ReportsFilters } from '@/domain/models/reports.model'
 
 import * as S from './styles'
 

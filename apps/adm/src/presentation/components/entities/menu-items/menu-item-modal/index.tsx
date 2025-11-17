@@ -1,8 +1,3 @@
-import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
-import { CreateMenuItemUsecase } from '@/application/menu-items/create-menu-item.usecase'
-import { UpdateMenuItemUsecase } from '@/application/menu-items/update-menu-item.usecase'
-import type { MenuItem } from '@/domain/models/menu-item.model'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Button,
@@ -21,6 +16,12 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
+
+import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
+import { CreateMenuItemUsecase } from '@/application/menu-items/create-menu-item.usecase'
+import { UpdateMenuItemUsecase } from '@/application/menu-items/update-menu-item.usecase'
+import type { MenuItem } from '@/domain/models/menu-item.model'
+import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

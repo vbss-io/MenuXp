@@ -1,5 +1,6 @@
 import { NotFoundError, UnauthorizedError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { MarkNotificationAsReadType } from '@restaurants/application/notifications/mark-notification-as-read/mark-as-read.schema'
 import { RecipientType } from '@restaurants/domain/notifications/enums/recipient-type.enum'
 import { NotificationRepository } from '@restaurants/infra/repositories/notifications.repository'

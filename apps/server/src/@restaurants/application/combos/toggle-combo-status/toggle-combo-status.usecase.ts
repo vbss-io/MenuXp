@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { ToggleComboStatusType } from '@restaurants/application/combos/toggle-combo-status/toggle-combo-status.schema'
 import { ComboRepository } from '@restaurants/infra/repositories/combo.repository'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'

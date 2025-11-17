@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { MenuLayoutEntity } from '@restaurants/domain/menu-layouts/menu-layout.entity'
 import { type MenuLayoutDocument, MenuLayoutModel } from '@restaurants/domain/menu-layouts/menu-layout.schema'
 

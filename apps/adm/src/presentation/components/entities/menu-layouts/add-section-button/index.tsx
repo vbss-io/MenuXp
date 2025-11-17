@@ -1,9 +1,10 @@
-import type { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
-import type { MenuSectionDefinition } from '@/domain/models/menu-section-definition.model'
 import { Popover } from '@menuxp/ui'
 import { PlusIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import React from 'react'
+
+import type { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
+import type { MenuSectionDefinition } from '@/domain/models/menu-section-definition.model'
 
 import * as S from './styles'
 

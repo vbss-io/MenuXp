@@ -1,5 +1,6 @@
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetCategoryType } from '@restaurants/application/categories/get-category/get-category.schema'
 import { Category } from '@restaurants/domain/categories/category.entity'
 import { CategoryRepository } from '@restaurants/infra/repositories/category.repository'

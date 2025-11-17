@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { ActivateMenuLayoutType } from '@restaurants/application/menu-layouts/activate-menu-layout/activate-menu-layout.schema'
 import { MenuLayoutStatus } from '@restaurants/domain/menu-layouts/enums/menu-layout-status.enum'
 import { MenuLayoutEntity } from '@restaurants/domain/menu-layouts/menu-layout.entity'

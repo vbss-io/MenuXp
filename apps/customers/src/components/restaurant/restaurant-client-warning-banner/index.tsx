@@ -2,6 +2,7 @@ import { WarningIcon } from '@phosphor-icons/react'
 import { useTranslator } from 'vbss-translator'
 
 import { useRestaurant } from '@/hooks/use-restaurant'
+
 import * as S from './styles'
 
 interface RestaurantClientWarningBannerProps {

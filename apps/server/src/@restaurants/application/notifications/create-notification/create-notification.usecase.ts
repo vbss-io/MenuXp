@@ -1,6 +1,8 @@
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { Notification } from '@restaurants/domain/notifications/notifications.entity'
 import { NotificationRepository } from '@restaurants/infra/repositories/notifications.repository'
+
 import { CreateNotificationType } from './create-notification.schema'
 
 export type CreateNotificationUsecaseInput = CreateNotificationType

@@ -1,12 +1,13 @@
+import { Button } from '@menuxp/ui'
+import { CheckIcon, RocketLaunchIcon } from '@phosphor-icons/react'
+import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { GetAvailablePlansUsecase } from '@/application/plans/get-available-plans.usecase'
 import { CreateCheckoutSessionUsecase } from '@/application/subscriptions/create-checkout-session.usecase'
 import { UpdateSubscriptionPlanUsecase } from '@/application/subscriptions/update-subscription-plan.usecase'
 import type { Plan } from '@/domain/models/plan.model'
 import type { BillingInterval } from '@/domain/models/subscription.model'
-import { Button } from '@menuxp/ui'
-import { CheckIcon, RocketLaunchIcon } from '@phosphor-icons/react'
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
 
 import * as S from './styles'
 

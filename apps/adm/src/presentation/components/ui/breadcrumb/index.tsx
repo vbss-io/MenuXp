@@ -1,9 +1,9 @@
+import { Tooltip } from '@menuxp/ui'
 import { CaretRightIcon, HouseIcon, InfoIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import { UserMenu } from '@/presentation/components/ui/user-menu'
-import { Tooltip } from '@menuxp/ui'
 
 import * as S from './styles'
 

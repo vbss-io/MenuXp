@@ -1,3 +1,4 @@
+import { FormInput, useLayout } from '@menuxp/ui'
 import { CheckCircleIcon, CheckIcon, UserIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
@@ -7,7 +8,6 @@ import { useRestaurant } from '@/hooks/use-restaurant'
 import { findClientByPhone } from '@/services/client/find-client-by-phone'
 import type { Client } from '@/types/client'
 import { OperationType, PaymentMethod } from '@/types/order'
-import { FormInput, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 

@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { Lead } from '@customers/domain/leads/lead.entity'
 import { type LeadDocument, LeadModel } from '@customers/domain/leads/lead.schema'
 

@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { StripeWebhookLog } from '@restaurants/domain/webhooks/stripe-webhook-log.entity'
 import {
   type StripeWebhookLogDocument,

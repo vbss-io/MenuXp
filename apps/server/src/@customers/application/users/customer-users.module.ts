@@ -1,5 +1,6 @@
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { CreateCustomerUserController } from '@customers/application/users/create-customer-user/create-customer-user.controller'
 import { CreateCustomerUserSchema } from '@customers/application/users/create-customer-user/create-customer-user.schema'
 import { CreateCustomerUserUsecase } from '@customers/application/users/create-customer-user/create-customer-user.usecase'

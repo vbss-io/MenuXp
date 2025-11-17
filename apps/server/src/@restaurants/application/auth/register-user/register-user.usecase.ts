@@ -3,6 +3,7 @@ import { PasswordAuthentication } from '@api/infra/adapters/auth/password-auth.a
 import { Queue } from '@api/infra/adapters/queue/queue.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
 import { DomainEvent } from '@api/infra/events/domain-event'
+
 import { RegisterUserType } from '@restaurants/application/auth/register-user/register-user.schema'
 import { USER_REGISTERED } from '@restaurants/domain/auth/consts/auth-events.const'
 import { PlanCode } from '@restaurants/domain/plans/enums/plan-code.enum'

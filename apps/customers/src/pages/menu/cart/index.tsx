@@ -1,3 +1,4 @@
+import { ConfirmationDialog, Loading } from '@menuxp/ui'
 import {
   ArrowLeftIcon,
   MinusIcon,
@@ -7,6 +8,7 @@ import {
   ShoppingCartIcon,
   TrashIcon
 } from '@phosphor-icons/react'
+import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -21,8 +23,6 @@ import { useRestaurant } from '@/hooks/use-restaurant'
 import { getOrdersByClient } from '@/services/order/get-orders-by-client'
 import type { CartItem } from '@/types/cart'
 import { OrderStatus } from '@/types/order'
-import { ConfirmationDialog, Loading } from '@menuxp/ui'
-import { useQuery } from '@tanstack/react-query'
 
 import { ChildBackButton as BackButton, ChildContainer as Container } from '../styles'
 import * as S from './styles'
@@ -99,14 +99,12 @@ export const RestaurantCartPage = () => {
   ) => {
     const currentItem = cart?.items.find((item) => isSameCartItem(item, { itemId, optionals, note }))
     if (!currentItem) return
-
     let newQuantity = currentItem.quantity
     if (increment) {
       newQuantity = currentItem.quantity + 1
     } else {
       newQuantity = currentItem.quantity - 1
     }
-
     if (newQuantity <= 0) {
       await removeItem(itemId, currentItem.optionals, currentItem.note)
     } else {
@@ -173,7 +171,6 @@ export const RestaurantCartPage = () => {
   }
 
   const handleCheckoutSuccess = () => {
-    toast.success(t('Pedido finalizado com sucesso!'))
     refetchOrders()
   }
 
@@ -210,7 +207,7 @@ export const RestaurantCartPage = () => {
                           <PackageIcon size={16} weight="fill" />
                         </S.ComboIcon>
                       ) : null}
-                      {item.name}
+                      {t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}
                     </S.CartItemName>
                     {item.itemType === 'combo' ? <S.ComboBadge>{t('COMBO')}</S.ComboBadge> : null}
                   </S.CartItemHeader>
@@ -231,7 +228,7 @@ export const RestaurantCartPage = () => {
 
                         return (
                           <S.OptionalTag key={optIndex}>
-                            {optional.name} {quantityText}
+                            {t(optional.name, { preferExternal: true, sourceLanguage: 'pt' })} {quantityText}
                             {priceText}
                           </S.OptionalTag>
                         )

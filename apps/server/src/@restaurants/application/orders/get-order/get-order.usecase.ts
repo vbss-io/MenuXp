@@ -1,5 +1,6 @@
 import { NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetOrderType } from '@restaurants/application/orders/get-order/get-order.schema'
 import { Order } from '@restaurants/domain/orders/orders.entity'
 import { OrderRepository } from '@restaurants/infra/repositories/orders.repository'

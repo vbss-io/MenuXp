@@ -1,8 +1,3 @@
-import { UpdateRestaurantSettingsUsecase } from '@/application/restaurants/update-restaurant-settings.usecase'
-import { OperationType, operationTypes } from '@/domain/enums/restaurants/operation-type.enum'
-import { PaymentMethod, paymentMethods } from '@/domain/enums/restaurants/payment-methods.enum'
-import { useAuth } from '@/presentation/hooks/use-auth'
-import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, FormCheckbox, FormInput, Loading } from '@menuxp/ui'
 import {
@@ -18,6 +13,12 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
+
+import { UpdateRestaurantSettingsUsecase } from '@/application/restaurants/update-restaurant-settings.usecase'
+import { OperationType, operationTypes } from '@/domain/enums/restaurants/operation-type.enum'
+import { PaymentMethod, paymentMethods } from '@/domain/enums/restaurants/payment-methods.enum'
+import { useAuth } from '@/presentation/hooks/use-auth'
+import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
 import * as S from './styles'
 

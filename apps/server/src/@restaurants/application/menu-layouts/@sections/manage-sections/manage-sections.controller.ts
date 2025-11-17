@@ -2,6 +2,7 @@ import { BaseController } from '@api/application/@base.controller'
 import { HttpCode, HttpMethod } from '@api/domain/enums/http.enum'
 import { InputValidate } from '@api/infra/adapters/validate/validate.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { AddSectionType } from '@restaurants/application/menu-layouts/@sections/@schemas/add-section.schema'
 import { RemoveSectionType } from '@restaurants/application/menu-layouts/@sections/@schemas/remove-section.schema'
 import { ReorderSectionsType } from '@restaurants/application/menu-layouts/@sections/@schemas/reorder-sections.schema'

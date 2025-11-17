@@ -6,6 +6,7 @@ import type {
   WhatsAppMessagingClient
 } from '@api/infra/adapters/whatsapp/whatsapp-messaging.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { WhatsAppTemplateKey } from '@restaurants/application/notifications/@types/whatsapp-templates.type'
 import { OrderStatus } from '@restaurants/domain/orders/enums/order-status.enum'
 import { DEFAULT_TEMPLATES } from '@restaurants/domain/restaurants/consts/default-templates.const'

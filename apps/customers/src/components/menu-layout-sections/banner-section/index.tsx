@@ -1,3 +1,4 @@
+import { Chip, Loading } from '@menuxp/ui'
 import { ImageBrokenIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
@@ -5,7 +6,6 @@ import { useTranslator } from 'vbss-translator'
 
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { MenuSectionType, type BannerConfig, type MenuSection } from '@/types/menu-layout'
-import { Chip, Loading } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -133,7 +133,7 @@ export const BannerSection: React.FC<BannerSectionProps> = ({ section }) => {
             {bannerData?.tag && (
               <S.TagContainer style={{ transform: `scale(${calculateTagScale()})`, transformOrigin: 'top left' }}>
                 <Chip variant="primary" size="sm">
-                  {bannerData.tag}
+                  {t(bannerData.tag, { preferExternal: true, sourceLanguage: 'pt' })}
                 </Chip>
               </S.TagContainer>
             )}
@@ -147,7 +147,7 @@ export const BannerSection: React.FC<BannerSectionProps> = ({ section }) => {
                       transformOrigin: 'bottom left'
                     }}
                   >
-                    {bannerData.title}
+                    {t(bannerData.title, { preferExternal: true, sourceLanguage: 'pt' })}
                   </S.BannerTitle>
                 )}
                 {bannerData?.subtitle && (
@@ -158,7 +158,7 @@ export const BannerSection: React.FC<BannerSectionProps> = ({ section }) => {
                       transformOrigin: 'bottom left'
                     }}
                   >
-                    {bannerData.subtitle}
+                    {t(bannerData.subtitle, { preferExternal: true, sourceLanguage: 'pt' })}
                   </S.BannerSubtitle>
                 )}
               </S.TextContainer>

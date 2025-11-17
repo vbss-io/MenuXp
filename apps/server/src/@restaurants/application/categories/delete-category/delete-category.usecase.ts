@@ -2,6 +2,7 @@ import { ConflictError } from '@api/domain/errors/conflict.error'
 import { ForbiddenError } from '@api/domain/errors/forbidden.error'
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { DeleteCategoryType } from '@restaurants/application/categories/delete-category/delete-category.schema'
 import { CategoryRepository } from '@restaurants/infra/repositories/category.repository'
 import { MenuItemRepository } from '@restaurants/infra/repositories/menu-item.repository'

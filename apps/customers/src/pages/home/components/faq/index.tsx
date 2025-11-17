@@ -1,7 +1,6 @@
+import { Accordion } from '@menuxp/ui'
 import { motion } from 'framer-motion'
 import React from 'react'
-
-import { Accordion } from '@menuxp/ui'
 
 import * as S from './styles'
 

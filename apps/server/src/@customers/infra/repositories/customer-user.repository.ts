@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { CustomerUser } from '@customers/domain/users/customer-user.entity'
 import { type CustomerUserDocument, CustomerUserModel } from '@customers/domain/users/customer-user.schema'
 

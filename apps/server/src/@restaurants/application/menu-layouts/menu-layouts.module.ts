@@ -1,5 +1,6 @@
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { MenuLayoutSectionsModule } from '@restaurants/application/menu-layouts/@sections/menu-layout-sections.module'
 import { ActivateMenuLayoutController } from '@restaurants/application/menu-layouts/activate-menu-layout/activate-menu-layout.controller'
 import { ActivateMenuLayoutSchema } from '@restaurants/application/menu-layouts/activate-menu-layout/activate-menu-layout.schema'

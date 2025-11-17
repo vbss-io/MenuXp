@@ -1,8 +1,3 @@
-import { CreateCategoryUsecase } from '@/application/categories/create-category.usecase'
-import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
-import { UpdateCategoryUsecase } from '@/application/categories/update-category.usecase'
-import type { Category } from '@/domain/models/category.model'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Button,
@@ -24,6 +19,12 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
+
+import { CreateCategoryUsecase } from '@/application/categories/create-category.usecase'
+import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
+import { UpdateCategoryUsecase } from '@/application/categories/update-category.usecase'
+import type { Category } from '@/domain/models/category.model'
+import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

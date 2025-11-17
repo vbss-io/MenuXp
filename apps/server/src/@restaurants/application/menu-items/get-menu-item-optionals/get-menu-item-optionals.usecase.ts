@@ -1,9 +1,11 @@
 import { NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { CategoryOptional } from '@restaurants/domain/categories/category.entity'
 import { MenuItemOptional } from '@restaurants/domain/menu-items/menu-item.entity'
 import { CategoryRepository } from '@restaurants/infra/repositories/category.repository'
 import { MenuItemRepository } from '@restaurants/infra/repositories/menu-item.repository'
+
 import { GetMenuItemOptionalsType } from './get-menu-item-optionals.schema'
 
 export interface GetMenuItemOptionalsUsecaseOutput {

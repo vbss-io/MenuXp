@@ -1,5 +1,6 @@
 import { NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'
 
 interface VerifyEmailUsecaseInput {

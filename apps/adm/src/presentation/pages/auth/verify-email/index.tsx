@@ -1,9 +1,10 @@
-import { VerifyEmailUsecase } from '@/application/auth/verify-email.usecase'
 import { Loading } from '@menuxp/ui'
 import { CheckCircleIcon } from '@phosphor-icons/react'
 import { useEffect, useRef } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+
+import { VerifyEmailUsecase } from '@/application/auth/verify-email.usecase'
 
 import * as S from '../styles'
 

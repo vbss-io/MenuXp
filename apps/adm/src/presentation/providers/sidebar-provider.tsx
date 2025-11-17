@@ -1,5 +1,6 @@
-import { SidebarContext } from '@/presentation/contexts/sidebar-context'
 import { useState } from 'react'
+
+import { SidebarContext } from '@/presentation/contexts/sidebar-context'
 
 export const SidebarProvider = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(true)

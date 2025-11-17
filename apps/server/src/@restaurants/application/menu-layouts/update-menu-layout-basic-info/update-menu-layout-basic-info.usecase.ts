@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { UpdateMenuLayoutBasicInfoType } from '@restaurants/application/menu-layouts/update-menu-layout-basic-info/update-menu-layout-basic-info.schema'
 import { MenuLayoutEntity } from '@restaurants/domain/menu-layouts/menu-layout.entity'
 import { MenuLayoutRepository } from '@restaurants/infra/repositories/menu-layout.repository'

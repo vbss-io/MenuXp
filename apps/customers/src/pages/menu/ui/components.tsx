@@ -1,6 +1,7 @@
-import { useRestaurant } from '@/hooks/use-restaurant'
+import type { LayoutType } from '@menuxp/styles'
 import React, { useState } from 'react'
 
+import { useRestaurant } from '@/hooks/use-restaurant'
 import { EditCartItemDialogShowcase } from '@/pages/menu/ui/components/cart/edit-cart-item-dialog-showcase'
 import { ClientAddressFormShowcase } from '@/pages/menu/ui/components/client/client-address-form-showcase'
 import { ClientAddressSlideShowcase } from '@/pages/menu/ui/components/client/client-address-slide-showcase'
@@ -42,7 +43,6 @@ import { LoadingShowcase } from '@/pages/menu/ui/components/ui/loading-showcase'
 import { PopoverShowcase } from '@/pages/menu/ui/components/ui/popover-showcase'
 import { SliderShowcase } from '@/pages/menu/ui/components/ui/slider-showcase'
 import { TooltipShowcase } from '@/pages/menu/ui/components/ui/tooltip-showcase'
-import type { LayoutType } from '@menuxp/styles'
 
 import * as S from './components.styles'
 

@@ -2,6 +2,7 @@ import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { Cache } from '@api/infra/adapters/cache/cache.adapter'
 import { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { GetReportsOptionsType } from '@restaurants/application/reports/get-reports-options/get-reports-options.schema'
 import { CategoryRepository } from '@restaurants/infra/repositories/category.repository'
 import { ComboRepository } from '@restaurants/infra/repositories/combo.repository'

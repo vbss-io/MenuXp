@@ -1,12 +1,13 @@
+import { useEffect, useState } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+
 import { UserRole } from '@/domain/enums/users/user-role.enum'
 import { RestaurantPendingBanner } from '@/presentation/components/entities/restaurants/restaurant-pending-banner'
 import { Sidebar } from '@/presentation/components/ui/sidebar'
 import { useAuth } from '@/presentation/hooks/use-auth'
 import { useSidebar } from '@/presentation/hooks/use-sidebar'
 import { OperationPage } from '@/presentation/pages/dashboard/operation'
-import { useEffect, useState } from 'react'
-import { Outlet, useLocation, useNavigate } from 'react-router-dom'
-import styled from 'styled-components'
 
 const Container = styled.div<{ $isMobile: boolean }>`
   min-height: 100vh;

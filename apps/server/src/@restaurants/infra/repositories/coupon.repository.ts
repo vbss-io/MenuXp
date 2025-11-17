@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { Coupon } from '@restaurants/domain/coupons/coupon.entity'
 import { type CouponDocument, CouponModel } from '@restaurants/domain/coupons/coupon.schema'
 

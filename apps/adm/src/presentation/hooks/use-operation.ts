@@ -1,3 +1,6 @@
+import { useCallback, useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { FinishOperationUsecase } from '@/application/operations/finish-operation.usecase'
 import { GetCurrentOperationUsecase } from '@/application/operations/get-current-operation.usecase'
 import {
@@ -8,8 +11,7 @@ import { PauseOperationUsecase } from '@/application/operations/pause-operation.
 import { ResumeOperationUsecase } from '@/application/operations/resume-operation.usecase'
 import { StartOperationUsecase } from '@/application/operations/start-operation.usecase'
 import type { Operation } from '@/domain/models/operation.model'
-import { useCallback, useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+
 import { useAuth } from './use-auth'
 
 const getCurrentOperationUsecase = new GetCurrentOperationUsecase()

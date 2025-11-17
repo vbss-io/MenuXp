@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { Subscription } from '@restaurants/domain/subscriptions/subscription.entity'
 import { type SubscriptionDocument, SubscriptionModel } from '@restaurants/domain/subscriptions/subscription.schema'
 

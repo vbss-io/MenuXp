@@ -1,11 +1,12 @@
-import { GetCombosUsecase } from '@/application/combos/get-combos.usecase'
-import type { MenuSection } from '@/domain/models/menu-layout.model'
-import { getCombosConfig } from '@/presentation/hooks/use-menu-layouts'
-import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 import { Button } from '@menuxp/ui'
 import { PackageIcon, PencilIcon, TrashIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
+
+import { GetCombosUsecase } from '@/application/combos/get-combos.usecase'
+import type { MenuSection } from '@/domain/models/menu-layout.model'
+import { getCombosConfig } from '@/presentation/hooks/use-menu-layouts'
+import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
 import * as S from '../styles'
 import type { ComboData } from '../types'

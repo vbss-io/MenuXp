@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { ToggleMenuItemStatusType } from '@restaurants/application/menu-items/toggle-menu-item-status/toggle-menu-item-status.schema'
 import { MenuItemRepository } from '@restaurants/infra/repositories/menu-item.repository'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'

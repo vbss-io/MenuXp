@@ -1,8 +1,9 @@
-import { useClient } from '@/hooks/use-client'
 import { Button, FormInput, Slider, useLayout } from '@menuxp/ui'
 import { ArrowRightIcon, UserIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useTranslator } from 'vbss-translator'
+
+import { useClient } from '@/hooks/use-client'
 
 import * as S from './styles'
 

@@ -1,8 +1,9 @@
-import { type Order, OrderStatus } from '@/types/order'
 import { Loading, useLayout } from '@menuxp/ui'
 import { CheckCircleIcon, ClockIcon, CookingPotIcon, PackageIcon, TruckIcon } from '@phosphor-icons/react'
 import { useMemo } from 'react'
 import { useTranslator } from 'vbss-translator'
+
+import { type Order, OrderStatus } from '@/types/order'
 
 import * as S from './styles'
 

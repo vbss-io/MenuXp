@@ -1,5 +1,6 @@
-import type { CouponsData } from '@/domain/models/reports.model'
 import { Ticket } from '@phosphor-icons/react'
+
+import type { CouponsData } from '@/domain/models/reports.model'
 
 import * as S from '../items-report/styles'
 

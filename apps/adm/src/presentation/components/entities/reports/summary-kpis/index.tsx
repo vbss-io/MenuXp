@@ -1,5 +1,6 @@
-import type { SummaryData } from '@/domain/models/reports.model'
 import { ChartBar, CurrencyDollar, Receipt, Ticket } from '@phosphor-icons/react'
+
+import type { SummaryData } from '@/domain/models/reports.model'
 
 import * as S from './styles'
 

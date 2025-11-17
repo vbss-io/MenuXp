@@ -1,4 +1,5 @@
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { GetPlansController } from '@restaurants/application/plans/get-plans/get-plans.controller'
 import { GetPlansUsecase } from '@restaurants/application/plans/get-plans/get-plans.usecase'
 import { PlanSyncHealthController } from '@restaurants/application/plans/health/plan-sync-health.controller'

@@ -1,6 +1,7 @@
+import { z } from 'zod'
+
 import { NotificationType } from '@restaurants/domain/notifications/enums/notification-type.enum'
 import { RecipientType } from '@restaurants/domain/notifications/enums/recipient-type.enum'
-import { z } from 'zod'
 
 export const CreateNotificationSchema = z.object({
   type: z.nativeEnum(NotificationType, {

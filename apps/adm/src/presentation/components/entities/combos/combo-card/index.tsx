@@ -1,11 +1,12 @@
-import { DeleteComboUsecase } from '@/application/combos/delete-combo.usecase'
-import { ToggleComboStatusUsecase } from '@/application/combos/toggle-combo-status.usecase'
-import type { Combo } from '@/domain/models/combo.model'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { Button, Chip, Dialog, ImageCarousel, Loading } from '@menuxp/ui'
 import { CaretDownIcon, CaretUpIcon, EyeIcon, EyeSlashIcon, PencilIcon, TrashIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
+
+import { DeleteComboUsecase } from '@/application/combos/delete-combo.usecase'
+import { ToggleComboStatusUsecase } from '@/application/combos/toggle-combo-status.usecase'
+import type { Combo } from '@/domain/models/combo.model'
+import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

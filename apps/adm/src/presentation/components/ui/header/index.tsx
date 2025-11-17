@@ -1,10 +1,11 @@
-import { MobileHeader } from '@/presentation/components/ui/header/mobile'
-import { UserMenu } from '@/presentation/components/ui/user-menu'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { Button } from '@menuxp/ui'
 import { ListIcon } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+
+import { MobileHeader } from '@/presentation/components/ui/header/mobile'
+import { UserMenu } from '@/presentation/components/ui/user-menu'
+import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

@@ -1,7 +1,7 @@
+import { Button } from '@menuxp/ui'
 import { useState } from 'react'
 
 import { MenuItemDialog } from '@/components/menu-item/menu-item-dialog'
-import { Button } from '@menuxp/ui'
 import type { MenuItem } from '@/types/menu-item'
 
 import * as S from '../../styles'

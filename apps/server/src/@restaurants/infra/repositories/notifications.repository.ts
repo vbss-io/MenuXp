@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import type { NotificationType } from '@restaurants/domain/notifications/enums/notification-type.enum'
 import type { RecipientType } from '@restaurants/domain/notifications/enums/recipient-type.enum'
 import { Notification } from '@restaurants/domain/notifications/notifications.entity'

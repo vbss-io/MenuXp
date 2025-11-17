@@ -1,8 +1,9 @@
-import { OperationStatus } from '@/domain/enums/operation/operation-status.enum'
-import type { Operation } from '@/domain/models/operation.model'
 import { Button } from '@menuxp/ui'
 import { PauseIcon, PlayIcon, RocketLaunchIcon, StopIcon } from '@phosphor-icons/react'
 import styled from 'styled-components'
+
+import { OperationStatus } from '@/domain/enums/operation/operation-status.enum'
+import type { Operation } from '@/domain/models/operation.model'
 
 interface OperationControlsProps {
   operation: Operation | null

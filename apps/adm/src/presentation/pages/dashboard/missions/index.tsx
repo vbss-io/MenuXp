@@ -1,7 +1,8 @@
-import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { Loading } from '@menuxp/ui'
 import { MedalIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
+
+import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 
 import * as S from '../styles'
 

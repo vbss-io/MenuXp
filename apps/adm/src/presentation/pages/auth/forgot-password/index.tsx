@@ -1,4 +1,3 @@
-import { ForgotPasswordUsecase } from '@/application/auth/forgot-password.usecase'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, FormInput } from '@menuxp/ui'
 import { EnvelopeSimpleOpenIcon } from '@phosphor-icons/react'
@@ -6,6 +5,8 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
+
+import { ForgotPasswordUsecase } from '@/application/auth/forgot-password.usecase'
 
 import * as S from '../styles'
 

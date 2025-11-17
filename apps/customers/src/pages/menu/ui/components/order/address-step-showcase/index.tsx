@@ -1,7 +1,8 @@
+import { useState } from 'react'
+
 import { AddressStep } from '@/components/order/checkout-slide-view/address-step'
 import type { Address } from '@/types/address'
 import type { Client } from '@/types/client'
-import { useState } from 'react'
 
 import * as S from '../../styles'
 

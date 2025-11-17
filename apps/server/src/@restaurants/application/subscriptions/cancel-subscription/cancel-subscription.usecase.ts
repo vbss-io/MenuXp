@@ -2,6 +2,7 @@ import { BadRequestError, NotFoundError } from '@api/domain/errors'
 import { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
 import { SubscriptionPaymentGateway } from '@api/infra/gateways/subscription-payment.gateway'
+
 import { SubscriptionStatus } from '@restaurants/domain/subscriptions/enums/subscription-status.enum'
 import { SubscriptionRepository } from '@restaurants/infra/repositories/subscription.repository'
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'

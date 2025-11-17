@@ -3,6 +3,7 @@ import Stripe from 'stripe'
 import { NotFoundError } from '@api/domain/errors'
 import { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { PlanRepository } from '@restaurants/infra/repositories/plan.repository'
 import { SubscriptionRepository } from '@restaurants/infra/repositories/subscription.repository'
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'

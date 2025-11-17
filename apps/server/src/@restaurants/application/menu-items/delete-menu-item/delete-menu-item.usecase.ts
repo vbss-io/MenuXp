@@ -1,6 +1,7 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { FileStorage } from '@api/infra/adapters/storage/storage.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { DeleteMenuItemType } from '@restaurants/application/menu-items/delete-menu-item/delete-menu-item.schema'
 import { MenuItemRepository } from '@restaurants/infra/repositories/menu-item.repository'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'

@@ -1,3 +1,4 @@
+import { Loading } from '@menuxp/ui'
 import { PackageIcon } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -7,11 +8,10 @@ import { useTranslator } from 'vbss-translator'
 import { ComboCard } from '@/components/combo/combo-card'
 import { ComboDialog } from '@/components/combo/combo-dialog'
 import { useRestaurant } from '@/hooks/use-restaurant'
+import { getRestaurantMenuCombos } from '@/services/menu/get-combos'
 import type { Combo } from '@/types/combo'
 import { MenuSectionType, type CombosConfig, type MenuSection } from '@/types/menu-layout'
-import { Loading } from '@menuxp/ui'
 
-import { getRestaurantMenuCombos } from '@/services/menu/get-combos'
 import * as S from './styles'
 
 interface CombosSectionProps {
@@ -189,7 +189,7 @@ export const CombosSection: React.FC<CombosSectionProps> = ({ section, mockCombo
               <S.SectionTitle className="section-title">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <PackageIcon size={20} />
-                  <span>{sectionTitle}</span>
+                  <span>{t(sectionTitle, { preferExternal: true, sourceLanguage: 'pt' })}</span>
                 </div>
               </S.SectionTitle>
             )}

@@ -1,5 +1,6 @@
 import { ConflictError, ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { FinishOperationType } from '@restaurants/application/operations/finish-operation/finish-operation.schema'
 import { OperationStatus } from '@restaurants/domain/operations/enums/operation-status.enum'
 import { OperationRepository } from '@restaurants/infra/repositories/operation.repository'

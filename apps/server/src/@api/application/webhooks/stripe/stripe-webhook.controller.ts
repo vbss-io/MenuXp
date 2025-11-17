@@ -1,4 +1,5 @@
 import crypto from 'crypto'
+
 import Stripe from 'stripe'
 
 import { BaseController } from '@api/application/@base.controller'
@@ -11,6 +12,7 @@ import { SubscriptionUpdatedProcessor } from '@api/application/webhooks/stripe/p
 import { HttpCode, HttpMethod } from '@api/domain/enums/http.enum'
 import { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { StripeWebhookLog } from '@restaurants/domain/webhooks/stripe-webhook-log.entity'
 import { StripeWebhookLogRepository } from '@restaurants/infra/repositories/stripe-webhook-log.repository'
 

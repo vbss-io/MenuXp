@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { MenuLayoutEntity, type MenuSection } from '@restaurants/domain/menu-layouts/menu-layout.entity'
 import { Restaurant } from '@restaurants/domain/restaurants/restaurant.entity'
 import { User } from '@restaurants/domain/users/user.entity'

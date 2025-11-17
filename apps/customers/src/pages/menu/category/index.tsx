@@ -1,3 +1,4 @@
+import { ICONS, ICONS_KEYS, Loading } from '@menuxp/ui'
 import { ArrowLeftIcon, FolderIcon } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
@@ -13,7 +14,6 @@ import { useRestaurant } from '@/hooks/use-restaurant'
 import { getRestaurantMenuItemsByCategory } from '@/services/menu/get-menu-items-by-category'
 import type { Combo } from '@/types/combo'
 import type { MenuItem } from '@/types/menu-item'
-import { ICONS, ICONS_KEYS, Loading } from '@menuxp/ui'
 
 import { ChildBackButton as BackButton, ChildContainer as Container } from '../styles'
 import * as S from './styles'
@@ -121,8 +121,12 @@ export const RestaurantCategoryPage = () => {
             {getIconComponent(categoryData.icon)}
           </S.CategoryIcon>
           <S.CategoryInfo>
-            <S.CategoryName>{categoryData.name}</S.CategoryName>
-            {categoryData.description && <S.CategoryDescription>{categoryData.description}</S.CategoryDescription>}
+            <S.CategoryName>{t(categoryData.name, { preferExternal: true, sourceLanguage: 'pt' })}</S.CategoryName>
+            {categoryData.description && (
+              <S.CategoryDescription>
+                {t(categoryData.description, { preferExternal: true, sourceLanguage: 'pt' })}
+              </S.CategoryDescription>
+            )}
           </S.CategoryInfo>
         </S.CategoryHeader>
       )}

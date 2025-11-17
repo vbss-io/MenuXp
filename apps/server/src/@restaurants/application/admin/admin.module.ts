@@ -2,6 +2,7 @@ import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { inject, Registry } from '@api/infra/dependency-injection/registry'
 import { DomainEvent } from '@api/infra/events/domain-event'
 import { Mediator } from '@api/infra/events/mediator'
+
 import { DeleteUserController } from '@restaurants/application/admin/delete-user/delete-user.controller'
 import { DeleteUserSchema } from '@restaurants/application/admin/delete-user/delete-user.schema'
 import { DeleteUserUsecase } from '@restaurants/application/admin/delete-user/delete-user.usecase'
@@ -13,6 +14,7 @@ import { RevokeSectionUsecase } from '@restaurants/application/admin/revoke-sect
 import { UpdateUserStatusUsecase } from '@restaurants/application/admin/update-user-status/update-user-status.usecase'
 import { USER_STATUS_NON_ACTIVE_UPDATED } from '@restaurants/domain/auth/consts/auth-events.const'
 import { UserStatusNonActiveUpdatedData } from '@restaurants/domain/auth/events/user-status-non-active-updated.event'
+
 import { UpdateUserStatusController } from './update-user-status/update-user-status.controller'
 import { UpdateUserStatusSchema } from './update-user-status/update-user-status.schema'
 

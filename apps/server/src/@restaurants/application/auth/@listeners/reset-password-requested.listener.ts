@@ -4,6 +4,7 @@ import { TokenAuthentication } from '@api/infra/adapters/auth/token-auth.adapter
 import { Cache } from '@api/infra/adapters/cache/cache.adapter'
 import { Mailer } from '@api/infra/adapters/mailer/mailer.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { ResetPasswordRequestedData } from '@restaurants/domain/auth/events/reset-password-requested.event'
 import { ResetPasswordTemplate } from '@restaurants/domain/auth/mailer/reset-password.template'
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'

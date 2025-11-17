@@ -1,3 +1,4 @@
+import { Loading } from '@menuxp/ui'
 import { ArrowLeftIcon, MinusIcon, PlusIcon, ShoppingCartIcon } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -10,7 +11,6 @@ import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { getRestaurantMenuCombo } from '@/services/menu/get-combo'
-import { Loading } from '@menuxp/ui'
 
 import { ChildBackButton as BackButton, ChildContainer as Container } from '../styles'
 import * as S from './styles'
@@ -123,10 +123,16 @@ export const RestaurantComboPage = () => {
       </BackButton>
       <S.ProductContainer>
         <S.ComboBadge $secondaryColor={restaurant?.style?.secondaryColor || '#FEBA0C'}>{t('COMBO')}</S.ComboBadge>
-        {combo.medias.length > 0 && <S.ProductImage src={combo.medias[0]} alt={combo.name} />}
+        {combo.medias.length > 0 && (
+          <S.ProductImage src={combo.medias[0]} alt={t(combo.name, { preferExternal: true, sourceLanguage: 'pt' })} />
+        )}
         <S.ProductInfo>
-          <S.ProductTitle>{combo.name}</S.ProductTitle>
-          {combo.description && <S.ProductDescription>{combo.description}</S.ProductDescription>}
+          <S.ProductTitle>{t(combo.name, { preferExternal: true, sourceLanguage: 'pt' })}</S.ProductTitle>
+          {combo.description && (
+            <S.ProductDescription>
+              {t(combo.description, { preferExternal: true, sourceLanguage: 'pt' })}
+            </S.ProductDescription>
+          )}
           <S.PriceContainer>
             <S.Price $primaryColor={restaurant?.style?.primaryColor || '#E53036'}>R$ {finalPrice.toFixed(2)}</S.Price>
             {hasDiscount && (

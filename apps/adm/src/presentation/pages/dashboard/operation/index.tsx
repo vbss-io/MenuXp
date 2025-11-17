@@ -1,3 +1,6 @@
+import { Loading } from '@menuxp/ui'
+import { useState } from 'react'
+
 import { OperationStatus } from '@/domain/enums/operation/operation-status.enum'
 import { OperationCharts } from '@/presentation/components/entities/operations/operation-charts'
 import { OperationControls } from '@/presentation/components/entities/operations/operation-controls'
@@ -6,8 +9,6 @@ import { OperationStatusCard } from '@/presentation/components/entities/operatio
 import { StartOperationDialog } from '@/presentation/components/entities/operations/start-operation-dialog'
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { useOperation } from '@/presentation/hooks/use-operation'
-import { Loading } from '@menuxp/ui'
-import { useState } from 'react'
 
 import * as S from '../styles'
 

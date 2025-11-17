@@ -1,8 +1,8 @@
+import { FormCheckbox, FormInput, useLayout } from '@menuxp/ui'
 import { useEffect, useState } from 'react'
 import { useTranslator } from 'vbss-translator'
 
 import type { Address } from '@/types/address'
-import { FormCheckbox, FormInput, useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 

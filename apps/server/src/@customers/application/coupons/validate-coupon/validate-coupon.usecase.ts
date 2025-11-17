@@ -1,5 +1,7 @@
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { ValidateCouponType } from '@customers/application/coupons/validate-coupon/validate-coupon.schema'
+
 import { Coupon } from '@restaurants/domain/coupons/coupon.entity'
 import { CouponRepository } from '@restaurants/infra/repositories/coupon.repository'
 

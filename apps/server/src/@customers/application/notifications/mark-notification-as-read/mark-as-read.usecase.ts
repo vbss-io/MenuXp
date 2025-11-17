@@ -1,6 +1,8 @@
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { MarkCustomerNotificationAsReadType } from '@customers/application/notifications/mark-notification-as-read/mark-as-read.schema'
+
 import { RecipientType } from '@restaurants/domain/notifications/enums/recipient-type.enum'
 import { NotificationRepository } from '@restaurants/infra/repositories/notifications.repository'
 

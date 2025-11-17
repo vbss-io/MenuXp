@@ -1,9 +1,10 @@
-import { OperationStatus } from '@/domain/enums/operation/operation-status.enum'
-import type { Operation } from '@/domain/models/operation.model'
 import { Button, ConfirmationDialog } from '@menuxp/ui'
 import { ClockIcon, PauseIcon, PlayIcon, StopIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
+
+import { OperationStatus } from '@/domain/enums/operation/operation-status.enum'
+import type { Operation } from '@/domain/models/operation.model'
 
 interface OperationStatusCardProps {
   operation: Operation | null

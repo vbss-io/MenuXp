@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { Restaurant } from '@restaurants/domain/restaurants/restaurant.entity'
 import { type RestaurantDocument, RestaurantModel } from '@restaurants/domain/restaurants/restaurant.schema'
 

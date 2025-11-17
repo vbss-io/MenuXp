@@ -1,3 +1,8 @@
+import { Button, Chip } from '@menuxp/ui'
+import { ArrowRightIcon, EyeIcon, GlobeIcon, PhoneIcon, QrCodeIcon, ShieldCheckIcon } from '@phosphor-icons/react'
+import { motion, useReducedMotion } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
+
 import {
   PhoneBadge,
   PhoneContent,
@@ -12,10 +17,6 @@ import {
 import { Section, SectionContent, SectionGrid, SectionTextContent, SectionVisualContent } from '@/components/ui/section'
 import { FeatureIcon, FeatureItem, FeatureList, FeatureText } from '@/pages/home/components/hero-features'
 import { Highlight } from '@/pages/home/components/hero-highlight'
-import { Button, Chip } from '@menuxp/ui'
-import { ArrowRightIcon, EyeIcon, GlobeIcon, PhoneIcon, QrCodeIcon, ShieldCheckIcon } from '@phosphor-icons/react'
-import { motion, useReducedMotion } from 'framer-motion'
-import React, { useEffect, useState } from 'react'
 
 import * as S from './styles'
 

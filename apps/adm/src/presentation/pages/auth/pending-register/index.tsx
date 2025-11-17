@@ -1,8 +1,9 @@
-import { ResentConfirmationEmailUsecase } from '@/application/auth/resent-confirmation-email.usecase'
 import { ClockIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useLocation, useNavigate } from 'react-router-dom'
+
+import { ResentConfirmationEmailUsecase } from '@/application/auth/resent-confirmation-email.usecase'
 
 import * as S from '../styles'
 

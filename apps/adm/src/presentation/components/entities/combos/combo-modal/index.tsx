@@ -1,9 +1,3 @@
-import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
-import { CreateComboUsecase } from '@/application/combos/create-combo.usecase'
-import { UpdateComboUsecase } from '@/application/combos/update-combo.usecase'
-import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
-import type { Combo, ComboItem, ComboOptional } from '@/domain/models/combo.model'
-import { useAuth } from '@/presentation/hooks/use-auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Button,
@@ -23,6 +17,13 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
+
+import { GetCategoriesNamesUsecase } from '@/application/categories/get-categories-names.usecase'
+import { CreateComboUsecase } from '@/application/combos/create-combo.usecase'
+import { UpdateComboUsecase } from '@/application/combos/update-combo.usecase'
+import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
+import type { Combo, ComboItem, ComboOptional } from '@/domain/models/combo.model'
+import { useAuth } from '@/presentation/hooks/use-auth'
 
 import * as S from './styles'
 

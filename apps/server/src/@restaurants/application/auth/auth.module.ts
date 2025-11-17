@@ -1,6 +1,7 @@
 import { Queue } from '@api/infra/adapters/queue/queue.adapter'
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { inject, Registry } from '@api/infra/dependency-injection/registry'
+
 import { AuthListenersController } from '@restaurants/application/auth/@listeners/auth-listeners.controller'
 import { ResetPasswordRequestedListener } from '@restaurants/application/auth/@listeners/reset-password-requested.listener'
 import { UserRegisteredListener } from '@restaurants/application/auth/@listeners/user-registered.listener'
@@ -24,6 +25,7 @@ import { UpdatePasswordSchema } from '@restaurants/application/auth/update-passw
 import { VerifyEmailController } from '@restaurants/application/auth/verify-email/verify-email.controller'
 import { VerifyEmailUsecase } from '@restaurants/application/auth/verify-email/verify-email.usecase'
 import { RESET_PASSWORD_REQUESTED, USER_REGISTERED } from '@restaurants/domain/auth/consts/auth-events.const'
+
 import { UpdatePasswordUsecase } from './update-password/update-password.usecase'
 
 export class AuthModule {

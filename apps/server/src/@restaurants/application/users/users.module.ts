@@ -1,5 +1,6 @@
 import { FormDataZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { UpdateUserProfileController } from '@restaurants/application/users/update-user-profile/update-user-profile.controller'
 import {
   type UpdateUserProfileInputType,

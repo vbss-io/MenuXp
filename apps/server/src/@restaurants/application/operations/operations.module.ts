@@ -1,5 +1,6 @@
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { GetCurrentOperationQuery } from '@restaurants/application/operations/@queries/get-current-operation.query'
 import { GetOperationStatisticsQuery } from '@restaurants/application/operations/@queries/get-operation-statistics.query'
 import { FinishOperationController } from '@restaurants/application/operations/finish-operation/finish-operation.controller'

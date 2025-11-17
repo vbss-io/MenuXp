@@ -1,5 +1,3 @@
-import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
-import type { MenuSection } from '@/domain/models/menu-layout.model'
 import {
   type DragEndEvent,
   closestCenter,
@@ -19,6 +17,9 @@ import {
 import { CSS } from '@dnd-kit/utilities'
 import { DotsSixVerticalIcon } from '@phosphor-icons/react'
 import styled from 'styled-components'
+
+import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
+import type { MenuSection } from '@/domain/models/menu-layout.model'
 
 interface ReorderSectionsProps {
   sections: MenuSection[]

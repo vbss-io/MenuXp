@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { Combo } from '@restaurants/domain/combos/combo.entity'
 import { type ComboDocument, ComboModel } from '@restaurants/domain/combos/combo.schema'
 

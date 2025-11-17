@@ -1,3 +1,8 @@
+import { Button, Loading } from '@menuxp/ui'
+import { DownloadSimple } from '@phosphor-icons/react'
+import { useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { CategoriesReport } from '@/presentation/components/entities/reports/categories-report'
 import { CouponsReport } from '@/presentation/components/entities/reports/coupons-report'
 import { CustomersReport } from '@/presentation/components/entities/reports/customers-report'
@@ -9,10 +14,6 @@ import { SummaryKpis } from '@/presentation/components/entities/reports/summary-
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { useReports } from '@/presentation/hooks/use-reports'
 import { exportReportsToXlsx } from '@/utils/export-reports-to-xlsx'
-import { Button, Loading } from '@menuxp/ui'
-import { DownloadSimple } from '@phosphor-icons/react'
-import { useState } from 'react'
-import toast from 'react-hot-toast'
 
 import * as S from '../styles'
 

@@ -1,8 +1,9 @@
-import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { Loading } from '@menuxp/ui'
+import { ChatIcon } from '@phosphor-icons/react'
 import { useState } from 'react'
 
-import { ChatIcon } from '@phosphor-icons/react'
+import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
+
 import * as S from '../styles'
 
 export const MessagesPage = () => {

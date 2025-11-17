@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import type { OperationStatus } from '@restaurants/domain/operations/enums/operation-status.enum'
 import { Operation } from '@restaurants/domain/operations/operation.entity'
 import { type OperationDocument, OperationModel } from '@restaurants/domain/operations/operation.schema'

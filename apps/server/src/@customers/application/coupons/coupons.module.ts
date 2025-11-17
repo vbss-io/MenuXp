@@ -1,5 +1,6 @@
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { UseCouponController } from '@customers/application/coupons/use-coupon/use-coupon.controller'
 import { UseCouponSchema } from '@customers/application/coupons/use-coupon/use-coupon.schema'
 import { UseCouponUsecase } from '@customers/application/coupons/use-coupon/use-coupon.usecase'

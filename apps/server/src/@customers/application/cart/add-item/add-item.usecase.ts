@@ -1,9 +1,11 @@
 import { NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { AddItemToCartType } from '@customers/application/cart/add-item/add-item.schema'
 import { Cart, type CartItem } from '@customers/domain/cart/cart.entity'
 import type { CartRepository } from '@customers/infra/repositories/cart.repository'
 import type { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'
+
 import type { ComboRepository } from '@restaurants/infra/repositories/combo.repository'
 import { MenuItemRepository } from '@restaurants/infra/repositories/menu-item.repository'
 

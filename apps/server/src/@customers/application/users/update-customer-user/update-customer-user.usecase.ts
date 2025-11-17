@@ -1,5 +1,6 @@
 import { NotFoundError } from '@api/domain/errors/not-found.error'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { UpdateCustomerUserType } from '@customers/application/users/update-customer-user/update-customer-user.schema'
 import { CustomerUser } from '@customers/domain/users/customer-user.entity'
 import type { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'

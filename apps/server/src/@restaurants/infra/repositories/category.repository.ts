@@ -1,4 +1,5 @@
 import { type BaseRepository, BaseRepositoryMongoose } from '@api/infra/repository/@base.repository'
+
 import { Category } from '@restaurants/domain/categories/category.entity'
 import { type CategoryDocument, CategoryModel } from '@restaurants/domain/categories/category.schema'
 

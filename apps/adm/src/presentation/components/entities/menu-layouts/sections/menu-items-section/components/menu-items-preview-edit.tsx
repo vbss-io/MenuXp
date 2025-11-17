@@ -1,11 +1,12 @@
-import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
-import type { MenuSection } from '@/domain/models/menu-layout.model'
-import { getMenuItemsConfig } from '@/presentation/hooks/use-menu-layouts'
-import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 import { Button } from '@menuxp/ui'
 import { PencilIcon, ShoppingCartIcon, TrashIcon } from '@phosphor-icons/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useEffect, useState } from 'react'
+
+import { GetMenuItemsUsecase } from '@/application/menu-items/get-menu-items.usecase'
+import type { MenuSection } from '@/domain/models/menu-layout.model'
+import { getMenuItemsConfig } from '@/presentation/hooks/use-menu-layouts'
+import { useRestaurant } from '@/presentation/hooks/use-restaurant'
 
 import * as S from '../styles'
 

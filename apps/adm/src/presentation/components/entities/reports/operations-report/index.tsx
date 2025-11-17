@@ -1,7 +1,8 @@
-import type { OperationsData } from '@/domain/models/reports.model'
 import { ClockCounterClockwise } from '@phosphor-icons/react'
 import type { ApexOptions } from 'apexcharts'
 import ReactApexChart from 'react-apexcharts'
+
+import type { OperationsData } from '@/domain/models/reports.model'
 
 import * as RS from '../orders-report/styles'
 

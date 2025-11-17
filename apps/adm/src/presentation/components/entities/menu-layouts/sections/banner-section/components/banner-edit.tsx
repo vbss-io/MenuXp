@@ -1,14 +1,15 @@
+import { Button, FormInput, Loading } from '@menuxp/ui'
+import { UploadIcon, WarningIcon } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { AddSectionUsecase } from '@/application/menu-layouts/sections/add-section.usecase'
 import { UpdateBannerSectionUsecase } from '@/application/menu-layouts/sections/update-banner-section.usecase'
 import { MenuSectionType } from '@/domain/enums/menu-layouts/menu-section-type.enum'
 import type { BannerConfig, MenuSection } from '@/domain/models/menu-layout.model'
 import type { MenuSectionDefinition } from '@/domain/models/menu-section-definition.model'
 import { validateSection } from '@/presentation/hooks/use-menu-layouts'
-import { Button, FormInput, Loading } from '@menuxp/ui'
-import { UploadIcon, WarningIcon } from '@phosphor-icons/react'
-import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
-import toast from 'react-hot-toast'
 
 import * as S from '../styles'
 

@@ -1,6 +1,7 @@
 import { ONE_DAY } from '@api/domain/consts/timeouts.const'
 import { Cache } from '@api/infra/adapters/cache/cache.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { RevokeSectionType } from '@restaurants/application/admin/revoke-section/revoke-section.schema'
 
 export class RevokeSectionUsecase {

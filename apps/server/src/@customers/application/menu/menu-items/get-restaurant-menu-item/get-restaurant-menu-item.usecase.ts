@@ -1,7 +1,9 @@
 import { NotFoundError } from '@api/domain/errors'
 import { FileUrl } from '@api/domain/vos/file-url.vo'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { GetRestaurantMenuItemType } from '@customers/application/menu/menu-items/get-restaurant-menu-item/get-restaurant-menu-item.schema'
+
 import type { MenuItem } from '@restaurants/domain/menu-items/menu-item.entity'
 import { CategoryRepository } from '@restaurants/infra/repositories/category.repository'
 import { MenuItemRepository } from '@restaurants/infra/repositories/menu-item.repository'

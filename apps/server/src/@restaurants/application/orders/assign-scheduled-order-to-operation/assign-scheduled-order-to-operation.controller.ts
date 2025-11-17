@@ -2,6 +2,7 @@ import { BaseController } from '@api/application/@base.controller'
 import { HttpCode, HttpMethod } from '@api/domain/enums/http.enum'
 import { InputValidate } from '@api/infra/adapters/validate/validate.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { AssignScheduledOrderToOperationType } from '@restaurants/application/orders/assign-scheduled-order-to-operation/assign-scheduled-order-to-operation.schema'
 import { AssignScheduledOrderToOperationUsecase } from '@restaurants/application/orders/assign-scheduled-order-to-operation/assign-scheduled-order-to-operation.usecase'
 

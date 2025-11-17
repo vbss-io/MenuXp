@@ -1,10 +1,10 @@
+import { Button } from '@menuxp/ui'
 import { PlusIcon } from '@phosphor-icons/react'
 import { useNavigate } from 'react-router-dom'
+import { useTranslator } from 'vbss-translator'
 
 import { useRestaurant } from '@/hooks/use-restaurant'
 import type { MenuItem } from '@/types/menu-item'
-import { Button } from '@menuxp/ui'
-import { useTranslator } from 'vbss-translator'
 
 import * as S from './styles'
 
@@ -13,16 +13,9 @@ interface MenuItemCardProps {
   onClick?: (item: MenuItem) => void
   onAddToCart?: (item: MenuItem) => void
   disabled?: boolean
-  translate?: boolean
 }
 
-export const MenuItemCard: React.FC<MenuItemCardProps> = ({
-  item,
-  onClick,
-  onAddToCart,
-  disabled = false,
-  translate = false
-}) => {
+export const MenuItemCard: React.FC<MenuItemCardProps> = ({ item, onClick, onAddToCart, disabled = false }) => {
   const { t } = useTranslator()
   const { layout } = useRestaurant()
   const navigate = useNavigate()
@@ -70,17 +63,19 @@ export const MenuItemCard: React.FC<MenuItemCardProps> = ({
       {item.medias && item.medias.length > 0 && (
         <S.MenuItemImage
           src={item.medias[0]}
-          alt={item.name}
+          alt={t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}
           className="menu-item-image"
           draggable={false}
           onDragStart={(e) => e.preventDefault()}
         />
       )}
       <S.MenuItemContent className="menu-item-content">
-        <S.MenuItemName className="menu-item-name">{item.name}</S.MenuItemName>
+        <S.MenuItemName className="menu-item-name">
+          {t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}
+        </S.MenuItemName>
         {item.description && (
           <S.MenuItemDescription className="menu-item-description">
-            {translate ? t(item.description, { preferExternal: true, sourceLanguage: 'pt' }) : item.description}
+            {t(item.description, { preferExternal: true, sourceLanguage: 'pt' })}
           </S.MenuItemDescription>
         )}
         <S.MenuItemFooter className="menu-item-footer">

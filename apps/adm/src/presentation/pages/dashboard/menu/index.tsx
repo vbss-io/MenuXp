@@ -1,3 +1,9 @@
+import { Button, Loading } from '@menuxp/ui'
+import { PlusIcon } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+import toast from 'react-hot-toast'
+
 import { ActivateMenuLayoutUsecase } from '@/application/menu-layouts/activate-menu-layout.usecase'
 import { DeleteMenuLayoutUsecase } from '@/application/menu-layouts/delete-menu-layout.usecase'
 import { RemoveSectionUsecase } from '@/application/menu-layouts/sections/remove-section.usecase'
@@ -17,11 +23,6 @@ import { MenuItemsSection } from '@/presentation/components/entities/menu-layout
 import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { useMenuLayouts } from '@/presentation/hooks/use-menu-layouts'
 import { useSectionReorder } from '@/presentation/hooks/use-section-reorder'
-import { Button, Loading } from '@menuxp/ui'
-import { PlusIcon } from '@phosphor-icons/react'
-import { motion } from 'framer-motion'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
-import toast from 'react-hot-toast'
 
 import * as Page from '../styles'
 import * as S from './styles'

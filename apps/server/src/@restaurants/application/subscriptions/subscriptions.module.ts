@@ -1,5 +1,6 @@
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { Registry } from '@api/infra/dependency-injection/registry'
+
 import { CancelSubscriptionController } from '@restaurants/application/subscriptions/cancel-subscription/cancel-subscription.controller'
 import { cancelSubscriptionSchema } from '@restaurants/application/subscriptions/cancel-subscription/cancel-subscription.schema'
 import { CancelSubscriptionUsecase } from '@restaurants/application/subscriptions/cancel-subscription/cancel-subscription.usecase'
@@ -11,12 +12,12 @@ import { createCheckoutSessionSchema } from '@restaurants/application/subscripti
 import { CreateCheckoutSessionUsecase } from '@restaurants/application/subscriptions/create-checkout-session/create-checkout-session.usecase'
 import { GetUserSubscriptionController } from '@restaurants/application/subscriptions/get-user-subscription/get-user-subscription.controller'
 import { GetUserSubscriptionUsecase } from '@restaurants/application/subscriptions/get-user-subscription/get-user-subscription.usecase'
-import { UpdateSubscriptionPlanController } from '@restaurants/application/subscriptions/update-subscription-plan/update-subscription-plan.controller'
-import { updateSubscriptionPlanSchema } from '@restaurants/application/subscriptions/update-subscription-plan/update-subscription-plan.schema'
-import { UpdateSubscriptionPlanUsecase } from '@restaurants/application/subscriptions/update-subscription-plan/update-subscription-plan.usecase'
 import { UpdateSubscriptionController } from '@restaurants/application/subscriptions/update-subscription/update-subscription.controller'
 import { updateSubscriptionSchema } from '@restaurants/application/subscriptions/update-subscription/update-subscription.schema'
 import { UpdateSubscriptionUsecase } from '@restaurants/application/subscriptions/update-subscription/update-subscription.usecase'
+import { UpdateSubscriptionPlanController } from '@restaurants/application/subscriptions/update-subscription-plan/update-subscription-plan.controller'
+import { updateSubscriptionPlanSchema } from '@restaurants/application/subscriptions/update-subscription-plan/update-subscription-plan.schema'
+import { UpdateSubscriptionPlanUsecase } from '@restaurants/application/subscriptions/update-subscription-plan/update-subscription-plan.usecase'
 
 export class SubscriptionsModule {
   constructor() {

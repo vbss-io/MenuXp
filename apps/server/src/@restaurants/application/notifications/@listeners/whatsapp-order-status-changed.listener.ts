@@ -1,6 +1,8 @@
 import type { Logger } from '@api/infra/adapters/logger/logger.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import type { CustomerUserRepository } from '@customers/infra/repositories/customer-user.repository'
+
 import { WhatsAppTemplateKey } from '@restaurants/application/notifications/@types/whatsapp-templates.type'
 import type { SendWhatsAppNotificationUsecase } from '@restaurants/application/whatsapp-notifications/send-whatsapp-notification/send-whatsapp-notification.usecase'
 import { OrderStatus } from '@restaurants/domain/orders/enums/order-status.enum'

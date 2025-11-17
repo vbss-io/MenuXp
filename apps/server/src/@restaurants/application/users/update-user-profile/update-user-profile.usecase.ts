@@ -2,6 +2,7 @@ import { NotFoundError } from '@api/domain/errors'
 import { FileStorage } from '@api/infra/adapters/storage/storage.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
 import { CustomFile, FileConverter } from '@api/infra/services/file-converter.service'
+
 import { UpdateUserProfileType } from '@restaurants/application/users/update-user-profile/update-user-profile.schema'
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'
 

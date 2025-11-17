@@ -1,16 +1,16 @@
-import { GetCurrentSubscriptionUsecase } from '@/application/subscriptions/get-current-subscription.usecase'
-import type { SubscriptionViewModel } from '@/domain/models/subscription.model'
-import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
 import { Button, Loading } from '@menuxp/ui'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useSearchParams } from 'react-router-dom'
 
+import { GetCurrentSubscriptionUsecase } from '@/application/subscriptions/get-current-subscription.usecase'
+import type { SubscriptionViewModel } from '@/domain/models/subscription.model'
+import { Breadcrumb } from '@/presentation/components/ui/breadcrumb'
+
+import * as S from '../styles'
 import { AvailablePlansCard } from './components/available-plans-card'
 import { CurrentSubscriptionCard } from './components/current-subscription-card'
 import { InvoicesList } from './components/invoices-list'
-
-import * as S from '../styles'
 
 export const SubscriptionPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()

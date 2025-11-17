@@ -1,5 +1,6 @@
 import { ForbiddenError, NotFoundError } from '@api/domain/errors'
 import { inject } from '@api/infra/dependency-injection/registry'
+
 import { UpdateRestaurantSettingsType } from '@restaurants/application/restaurants/update-restaurant-settings/update-restaurant-settings.schema'
 import { RestaurantRepository } from '@restaurants/infra/repositories/restaurant.repository'
 import { UserRepository } from '@restaurants/infra/repositories/user.repository'

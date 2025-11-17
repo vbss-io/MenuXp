@@ -1,3 +1,4 @@
+import { Loading } from '@menuxp/ui'
 import { ArrowLeftIcon, MinusIcon, PlusIcon, ShoppingCartIcon } from '@phosphor-icons/react'
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -9,7 +10,6 @@ import { useCart } from '@/hooks/use-cart'
 import { useClient } from '@/hooks/use-client'
 import { useRestaurant } from '@/hooks/use-restaurant'
 import { getRestaurantMenuItem } from '@/services/menu/get-menu-item'
-import { Loading } from '@menuxp/ui'
 
 import { ChildBackButton as BackButton, ChildContainer as Container } from '../styles'
 import * as S from './styles'
@@ -153,10 +153,19 @@ export const RestaurantProductPage = () => {
         {t('Voltar ao menu')}
       </BackButton>
       <S.ProductContainer>
-        {menuItem.medias.length > 0 && <S.ProductImage src={menuItem.medias[0]} alt={menuItem.name} />}
+        {menuItem.medias.length > 0 && (
+          <S.ProductImage
+            src={menuItem.medias[0]}
+            alt={t(menuItem.name, { preferExternal: true, sourceLanguage: 'pt' })}
+          />
+        )}
         <S.ProductInfo>
-          <S.ProductTitle>{menuItem.name}</S.ProductTitle>
-          {menuItem.description && <S.ProductDescription>{menuItem.description}</S.ProductDescription>}
+          <S.ProductTitle>{t(menuItem.name, { preferExternal: true, sourceLanguage: 'pt' })}</S.ProductTitle>
+          {menuItem.description && (
+            <S.ProductDescription>
+              {t(menuItem.description, { preferExternal: true, sourceLanguage: 'pt' })}
+            </S.ProductDescription>
+          )}
           <S.PriceContainer>
             <S.Price $primaryColor={restaurant?.style?.primaryColor || '#E53036'}>R$ {finalPrice.toFixed(2)}</S.Price>
             {hasDiscount && (
@@ -175,7 +184,7 @@ export const RestaurantProductPage = () => {
             {menuItem.optionals.map((optional) => (
               <S.OptionalItem key={optional.name}>
                 <S.OptionalInfo>
-                  <S.OptionalName>{optional.name}</S.OptionalName>
+                  <S.OptionalName>{t(optional.name, { preferExternal: true, sourceLanguage: 'pt' })}</S.OptionalName>
                   <S.OptionalPrice>R$ {optional.price.toFixed(2)}</S.OptionalPrice>
                 </S.OptionalInfo>
                 <S.OptionalControls>

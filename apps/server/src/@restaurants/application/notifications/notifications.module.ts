@@ -1,6 +1,7 @@
 import { Queue } from '@api/infra/adapters/queue/queue.adapter'
 import { ZodAdapter } from '@api/infra/adapters/validate/validate.adapter'
 import { inject, Registry } from '@api/infra/dependency-injection/registry'
+
 import { NotificationListenersController } from '@restaurants/application/notifications/@listeners/notification-listeners.controller'
 import { OrderCreatedListener } from '@restaurants/application/notifications/@listeners/order-created.listener'
 import { OrderStatusChangedListener } from '@restaurants/application/notifications/@listeners/order-status-changed.listener'

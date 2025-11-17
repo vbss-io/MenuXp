@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import importPlugin from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -12,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig([
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'src/translations/index.ts'] },
   {
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
@@ -28,6 +29,16 @@ export default defineConfig([
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'prettier': prettier,
+      'import': importPlugin,
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          projectService: true,
+          tsconfigRootDir: __dirname,
+          alwaysTryTypes: true,
+        },
+      },
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -83,6 +94,27 @@ export default defineConfig([
       'space-unary-ops': ['error', {
         words: true,
         nonwords: false
+      }],
+      'import/order': ['error', {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling', 'index']
+        ],
+        'newlines-between': 'always',
+        pathGroups: [
+          {
+            pattern: '@/**',
+            group: 'internal',
+            position: 'after'
+          }
+        ],
+        pathGroupsExcludedImportTypes: ['builtin'],
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true
+        }
       }],
     },
   }

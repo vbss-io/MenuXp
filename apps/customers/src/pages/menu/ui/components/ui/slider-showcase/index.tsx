@@ -1,8 +1,7 @@
+import { Button, FormInput, Slider } from '@menuxp/ui'
 import { GearIcon } from '@phosphor-icons/react'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-
-import { Button, FormInput, Slider } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

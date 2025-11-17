@@ -1,8 +1,8 @@
+import { useLayout } from '@menuxp/ui'
 import { CheckCircleIcon } from '@phosphor-icons/react'
 import { useTranslator } from 'vbss-translator'
 
 import type { ComboItem } from '@/types/combo'
-import { useLayout } from '@menuxp/ui'
 
 import * as S from './styles'
 
@@ -33,7 +33,7 @@ export const ComboItemsList: React.FC<ComboItemsListProps> = ({ items }) => {
             <S.ItemInfo className="combo-item-info">
               <S.ItemName className="combo-item-name">
                 {item.quantity > 1 && <S.ItemQuantity>{item.quantity}x</S.ItemQuantity>}
-                {item.name}
+                {t(item.name, { preferExternal: true, sourceLanguage: 'pt' })}
               </S.ItemName>
               <S.ItemPrice className="combo-item-price">{formatPrice(item.price * item.quantity)}</S.ItemPrice>
             </S.ItemInfo>
