@@ -23,7 +23,14 @@ export class CustomerUser {
   }
 
   static create(input: CreateCustomerUser): CustomerUser {
-    return new CustomerUser(undefined, input.phone, input.restaurantId, input.name, input.address, input.preferredLanguage)
+    return new CustomerUser(
+      undefined,
+      input.phone,
+      input.restaurantId,
+      input.name,
+      input.address,
+      input.preferredLanguage
+    )
   }
 
   static restore(input: RestoreCustomerUser): CustomerUser {

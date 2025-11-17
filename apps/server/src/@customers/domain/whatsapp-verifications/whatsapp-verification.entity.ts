@@ -132,7 +132,7 @@ export interface CreateWhatsAppVerification {
   userAgent?: string
 }
 
-type RestoreWhatsAppVerification = {
+interface RestoreWhatsAppVerification {
   id: string
   phone: string
   restaurantId: string
