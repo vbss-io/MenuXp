@@ -3,7 +3,11 @@
   "envMode": "loose",
   "tasks": {
     "build": {
-      "outputs": ["../../build/**"]
+      "outputs": [
+        "apps/adm/build/**",
+        "apps/customers/build/**",
+        "apps/server/build/**"
+      ]
     },
     "lint": {
       "dependsOn": ["^lint"]
