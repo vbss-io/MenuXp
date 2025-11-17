@@ -27,6 +27,10 @@ export class PlanRepositoryMongoose
       description: entity.description,
       monthlyPriceId: entity.monthlyPriceId,
       yearlyPriceId: entity.yearlyPriceId,
+      externalProductId: entity.externalProductId,
+      intervals: entity.intervals,
+      taxBehavior: entity.taxBehavior,
+      trialDays: entity.trialDays,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt
     })
