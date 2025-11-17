@@ -4,7 +4,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "dotenv -e .env -- turbo run dev --log-prefix=none --log-order=stream",
-    "lint": "turbo run lint"
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix"
   },
   "devDependencies": {
     "dotenv-cli": "^10.0.0",
