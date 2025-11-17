@@ -1,7 +1,5 @@
+import { Button, Dialog } from '@menuxp/ui'
 import React, { useState } from 'react'
-
-import { Button } from '@menuxp/ui'
-import { Dialog } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

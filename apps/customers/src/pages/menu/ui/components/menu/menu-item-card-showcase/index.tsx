@@ -103,9 +103,7 @@ const mockMenuItems: MenuItem[] = [
 ]
 
 export const MenuItemCardShowcase: React.FC = () => {
-  const handleItemClick = (item: MenuItem) => {
-    console.log('Item clicked:', item.name)
-  }
+  const handleItemClick = (_item: MenuItem) => {}
 
   return (
     <S.ShowcaseContainer>

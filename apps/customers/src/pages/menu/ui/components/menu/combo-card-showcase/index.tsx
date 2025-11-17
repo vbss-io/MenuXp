@@ -211,9 +211,7 @@ const mockCombos: Combo[] = [
 ]
 
 export const ComboCardShowcase: React.FC = () => {
-  const handleComboClick = (combo: Combo) => {
-    console.log('Combo clicked:', combo.name)
-  }
+  const handleComboClick = (_combo: Combo) => {}
 
   return (
     <S.ShowcaseContainer>

@@ -87,9 +87,7 @@ export const EditCartItemDialogShowcase: React.FC = () => {
     setSelectedItem(null)
   }
 
-  const handleSave = (editedItems: CartItem[]) => {
-    console.log('Saving edited items:', editedItems)
-  }
+  const handleSave = (_editedItems: CartItem[]) => {}
 
   return (
     <S.ShowcaseContainer>

@@ -51,13 +51,9 @@ export const ClientAddressFormShowcase: React.FC = () => {
   const [, setAddress3] = useState<Address>(completeAddress as Address)
   const [, setAddress4] = useState<Address>(errorAddress as Address)
 
-  const handleSubmit = (address: Address) => {
-    console.log('Address submitted:', address)
-  }
+  const handleSubmit = (_address: Address) => {}
 
-  const handleSaveForFuture = async () => {
-    console.log('Saving address for future orders')
-  }
+  const handleSaveForFuture = async () => {}
 
   return (
     <S.ShowcaseContainer>

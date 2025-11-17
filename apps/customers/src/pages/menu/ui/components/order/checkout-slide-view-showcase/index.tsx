@@ -48,7 +48,6 @@ export const CheckoutSlideViewShowcase: React.FC = () => {
   }
 
   const handleSuccess = () => {
-    console.log('Order created successfully')
     setActiveShowcase(null)
   }
 

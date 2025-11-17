@@ -104,9 +104,7 @@ const MockClientProvider: React.FC<MockClientProviderProps> = ({ client, childre
 }
 
 export const ClientProfileShowcase: React.FC = () => {
-  const handleLogout = () => {
-    console.log('Logout clicked')
-  }
+  const handleLogout = () => {}
 
   return (
     <S.ShowcaseContainer>

@@ -1,7 +1,5 @@
+import { Button, Tooltip } from '@menuxp/ui'
 import React from 'react'
-
-import { Button } from '@menuxp/ui'
-import { Tooltip } from '@menuxp/ui'
 
 import * as S from '../../styles'
 

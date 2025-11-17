@@ -9,12 +9,9 @@ export const ClientRegisterFormShowcase: React.FC = () => {
 
   const handleModeChange = (newMode: 'login' | 'register') => {
     setMode(newMode)
-    console.log('Mode changed to:', newMode)
   }
 
-  const handleSuccess = () => {
-    console.log('Registration successful!')
-  }
+  const handleSuccess = () => {}
 
   return (
     <S.ShowcaseContainer>

@@ -1,7 +1,7 @@
-import { useState } from 'react'
 import { AddressStep } from '@/components/order/checkout-slide-view/address-step'
 import type { Address } from '@/types/address'
 import type { Client } from '@/types/client'
+import { useState } from 'react'
 
 import * as S from '../../styles'
 
@@ -124,9 +124,7 @@ export const AddressStepShowcase = () => {
               customAddress={scenario.customAddress}
               onUseClientAddressChange={scenario.onUseClientAddressChange}
               onCustomAddressChange={scenario.onCustomAddressChange}
-              onSaveAddressForFuture={async () => {
-                console.log('Saving address for future...')
-              }}
+              onSaveAddressForFuture={async () => {}}
             />
           </S.ShowcaseCard>
         ))}

@@ -5,9 +5,7 @@ import { ClientForm } from '@/components/client/client-form'
 import * as S from '../../styles'
 
 export const ClientFormShowcase: React.FC = () => {
-  const handleSuccess = () => {
-    console.log('Authentication successful!')
-  }
+  const handleSuccess = () => {}
 
   return (
     <S.ShowcaseContainer>
