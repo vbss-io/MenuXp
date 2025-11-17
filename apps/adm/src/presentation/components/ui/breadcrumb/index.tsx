@@ -35,6 +35,7 @@ export const Breadcrumb = ({ lastPath }: BreadcrumbProps) => {
       missions: 'Missões',
       messages: 'Mensagens',
       settings: 'Configurações',
+      subscription: 'Assinatura',
       'create-restaurant': 'Criar Restaurante'
     }
     return titles[path] || path
@@ -50,6 +51,7 @@ export const Breadcrumb = ({ lastPath }: BreadcrumbProps) => {
       missions: 'Complete missões e ganhe recompensas',
       messages: 'Gerencie mensagens e comunicação com clientes',
       settings: 'Configure as preferências e configurações do sistema',
+      subscription: 'Gerencie seu plano, faturas e métodos de pagamento',
       'create-restaurant': 'Configure os dados básicos do seu estabelecimento'
     }
     return descriptions[path] || 'Informações sobre esta página'

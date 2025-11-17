@@ -1,6 +1,7 @@
 import {
   BowlFoodIcon,
   ChatCenteredDotsIcon,
+  CreditCardIcon,
   GameControllerIcon,
   GraphIcon,
   HouseIcon,
@@ -88,7 +89,8 @@ export const MobileHeader = ({ setShowMobile }: MobileHeaderProps) => {
     { icon: <ScrollIcon size={24} weight="fill" />, label: 'Aparência', path: '/dashboard/menu' },
     { icon: <GraphIcon size={24} weight="fill" />, label: 'Relatórios', path: '/dashboard/reports' },
     { icon: <GameControllerIcon size={24} weight="fill" />, label: 'Missões', path: '/dashboard/missions' },
-    { icon: <ChatCenteredDotsIcon size={24} weight="fill" />, label: 'Mensagens', path: '/dashboard/messages' }
+    { icon: <ChatCenteredDotsIcon size={24} weight="fill" />, label: 'Mensagens', path: '/dashboard/messages' },
+    { icon: <CreditCardIcon size={24} weight="fill" />, label: 'Assinatura', path: '/dashboard/subscription' }
   ]
 
   return (

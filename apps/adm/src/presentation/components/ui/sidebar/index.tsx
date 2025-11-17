@@ -4,6 +4,7 @@ import {
   BowlFoodIcon,
   CaretLeftIcon,
   ChatCenteredDotsIcon,
+  CreditCardIcon,
   GameControllerIcon,
   GearIcon,
   GraphIcon,
@@ -83,6 +84,12 @@ export const Sidebar = () => {
       label: 'Mensagens',
       path: '/dashboard/messages',
       isActive: location.pathname === '/dashboard/messages'
+    },
+    {
+      icon: <CreditCardIcon size={20} weight="fill" />,
+      label: 'Assinatura',
+      path: '/dashboard/subscription',
+      isActive: location.pathname === '/dashboard/subscription'
     },
     {
       icon: <GearIcon size={20} weight="fill" />,
