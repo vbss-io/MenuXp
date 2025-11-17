@@ -27,6 +27,7 @@ export interface OrderItem {
   price: number
   quantity: number
   itemType: 'menu-item' | 'combo'
+  categoryId?: string
   optionals?: OrderItemOptional[]
   note?: string
 }
@@ -53,6 +54,10 @@ export class Order {
     readonly isScheduled: boolean,
     readonly scheduledFor?: Date,
     cancelReason?: string,
+    readonly couponId?: string,
+    readonly couponCode?: string,
+    readonly couponDiscount?: number,
+    readonly couponAppliedAt?: Date,
     readonly createdAt?: Date,
     readonly updatedAt?: Date
   ) {
@@ -68,7 +73,8 @@ export class Order {
     const operationId = isScheduled ? undefined : input.operationId
     const subtotal = Order.calculateTotal(input.items)
     const deliveryFee = input.orderType === 'delivery' ? (input.deliveryFee ?? 0) : 0
-    const total = subtotal + deliveryFee
+    const total = subtotal + deliveryFee - (input.couponDiscount ?? 0)
+    const couponAppliedAt = input.couponId ? new Date() : undefined
     return new Order(
       undefined,
       input.restaurantId,
@@ -85,7 +91,11 @@ export class Order {
       code,
       isScheduled,
       input.scheduledFor,
-      undefined
+      undefined,
+      input.couponId,
+      input.couponCode,
+      input.couponDiscount,
+      couponAppliedAt
     )
   }
 
@@ -107,6 +117,10 @@ export class Order {
       !!input.scheduledFor,
       input.scheduledFor,
       input.cancelReason,
+      input.couponId,
+      input.couponCode,
+      input.couponDiscount,
+      input.couponAppliedAt,
       input.createdAt,
       input.updatedAt
     )
@@ -153,6 +167,9 @@ export interface CreateOrder {
   paymentMethod: PaymentMethod
   items: OrderItem[]
   scheduledFor?: Date
+  couponId?: string
+  couponCode?: string
+  couponDiscount?: number
 }
 
 type RestoreOrder = CreateOrder & {
@@ -165,6 +182,7 @@ type RestoreOrder = CreateOrder & {
   scheduledFor?: Date
   operationId?: string
   cancelReason?: string
+  couponAppliedAt?: Date
   createdAt: Date
   updatedAt: Date
 }

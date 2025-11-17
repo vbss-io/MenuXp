@@ -22,6 +22,10 @@ export interface OrderDocument extends Document {
   isScheduled: boolean
   scheduledFor?: Date
   cancelReason?: string
+  couponId?: string
+  couponCode?: string
+  couponDiscount?: number
+  couponAppliedAt?: Date
   createdAt: Date
   updatedAt: Date
 }
@@ -144,6 +148,10 @@ const orderSchema = new Schema<OrderDocument>(
           required: true,
           enum: ['menu-item', 'combo'],
           default: 'menu-item'
+        },
+        categoryId: {
+          type: String,
+          required: false
         }
       }
     ],
@@ -167,6 +175,24 @@ const orderSchema = new Schema<OrderDocument>(
       required: false,
       trim: true
     },
+    couponId: {
+      type: String,
+      required: false
+    },
+    couponCode: {
+      type: String,
+      required: false,
+      trim: true
+    },
+    couponDiscount: {
+      type: Number,
+      required: false,
+      min: 0
+    },
+    couponAppliedAt: {
+      type: Date,
+      required: false
+    },
     createdAt: {
       type: Date,
       default: Date.now
@@ -182,7 +208,8 @@ const orderSchema = new Schema<OrderDocument>(
     toJSON: {
       // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
       transform: (_, ret) => {
-        ret.id = ret._id as string
+        ret.id = ret._id
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         delete (ret as any)._id
         return ret
       }
@@ -197,5 +224,8 @@ orderSchema.index({ status: 1 })
 orderSchema.index({ createdAt: 1 })
 orderSchema.index({ isScheduled: 1 })
 orderSchema.index({ scheduledFor: 1 })
+orderSchema.index({ restaurantId: 1, createdAt: 1 })
+orderSchema.index({ restaurantId: 1, 'items.itemId': 1 })
+orderSchema.index({ restaurantId: 1, couponCode: 1, createdAt: 1 })
 
 export const OrderModel = model<OrderDocument>('Order', orderSchema)
