@@ -51,6 +51,11 @@ const Coupons = lazy(() =>
     default: module.Coupons
   }))
 )
+const Subscription = lazy(() =>
+  import('@/presentation/pages/dashboard/subscription').then((module) => ({
+    default: module.SubscriptionPage
+  }))
+)
 
 export const dashboardRoutes = [
   {
@@ -96,6 +101,10 @@ export const dashboardRoutes = [
       {
         path: 'profile',
         element: <Profile />
+      },
+      {
+        path: 'subscription',
+        element: <Subscription />
       }
     ]
   }
