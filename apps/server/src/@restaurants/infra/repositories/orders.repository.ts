@@ -35,6 +35,10 @@ export class OrderRepositoryMongoose
       isScheduled: entity.isScheduled,
       scheduledFor: entity.scheduledFor,
       cancelReason: entity.cancelReason,
+      couponId: entity.couponId,
+      couponCode: entity.couponCode,
+      couponDiscount: entity.couponDiscount,
+      couponAppliedAt: entity.couponAppliedAt,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt
     })
