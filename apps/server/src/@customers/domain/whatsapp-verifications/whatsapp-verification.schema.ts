@@ -72,8 +72,7 @@ const whatsappVerificationSchema = new Schema<WhatsAppVerificationDocument>(
     },
     expiresAt: {
       type: Date,
-      required: true,
-      index: { expires: 0 }
+      required: true
     },
     language: {
       type: String,
