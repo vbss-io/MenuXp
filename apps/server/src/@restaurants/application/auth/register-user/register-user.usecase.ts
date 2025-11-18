@@ -1,4 +1,4 @@
-import { ConflictError } from '@api/domain/errors'
+import { ConflictError, ForbiddenError } from '@api/domain/errors'
 import { PasswordAuthentication } from '@api/infra/adapters/auth/password-auth.adapter'
 import { Queue } from '@api/infra/adapters/queue/queue.adapter'
 import { inject } from '@api/infra/dependency-injection/registry'
@@ -36,6 +36,10 @@ export class RegisterUserUsecase {
 
   async execute({ name, email, password }: RegisterUserType): Promise<void> {
     const existingUser = await this.UserRepository.findOne({ email })
+    // To-Do: Remove this after testing
+    if (password !== 'P@ssword123') {
+      throw new ForbiddenError('Password is not valid')
+    }
     const passwordHash = await this.PasswordAuthentication.hash(password)
     if (existingUser) throw new ConflictError('Email or Username Already Exists')
     const user = User.create({
